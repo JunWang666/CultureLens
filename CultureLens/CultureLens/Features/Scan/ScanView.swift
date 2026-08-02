@@ -45,6 +45,7 @@ struct ScanView: View {
 
             if let preparedReview {
                 CaptureReviewLayer(
+                    imageID: preparedReview.id,
                     imageData: preparedReview.data,
                     imagePixelSize: preparedReview.pixelSize,
                     selection: $focusSelection
@@ -420,7 +421,11 @@ struct ScanView: View {
             try Task.checkCancellation()
             let pixelSize = try ImagePreprocessor.pixelSize(of: data)
             guard self.pendingReview?.id == pendingReview.id else { return }
-            preparedReview = PreparedReviewImage(data: data, pixelSize: pixelSize)
+            preparedReview = PreparedReviewImage(
+                id: pendingReview.id,
+                data: data,
+                pixelSize: pixelSize
+            )
             focusSelection = .defaultFocus
         } catch is CancellationError {
             return
@@ -485,6 +490,7 @@ private struct PendingScanImage: Identifiable {
 }
 
 private struct PreparedReviewImage {
+    let id: UUID
     let data: Data
     let pixelSize: CGSize
 }

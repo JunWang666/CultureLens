@@ -138,10 +138,8 @@ func validateRichText(value json.RawMessage) error {
 	var document struct {
 		SchemaVersion int `json:"schemaVersion"`
 		Blocks        []struct {
-			Type    string `json:"type"`
-			Text    string `json:"text"`
-			URL     string `json:"url"`
-			Caption string `json:"caption"`
+			Type string `json:"type"`
+			Text string `json:"text"`
 		} `json:"blocks"`
 	}
 	if err := json.Unmarshal(value, &document); err != nil {
@@ -151,27 +149,9 @@ func validateRichText(value json.RawMessage) error {
 		return errors.New("introduction must use schemaVersion 1 with blocks")
 	}
 	for _, block := range document.Blocks {
-		if block.Type == "image" {
-			// Image blocks reference externally hosted assets (Cloudflare R2);
-			// only the URL is stored, never the binary. The DB CHECK constraint
-			// (migration 003) only enforces schemaVersion=1 with a blocks array,
-			// so image blocks need no migration.
-			if err := validateImageBlockURL(block.URL); err != nil {
-				return err
-			}
-			continue
-		}
 		if strings.TrimSpace(block.Type) == "" || strings.TrimSpace(block.Text) == "" {
 			return errors.New("introduction blocks require type and text")
 		}
-	}
-	return nil
-}
-
-func validateImageBlockURL(raw string) error {
-	parsed, err := url.Parse(strings.TrimSpace(raw))
-	if err != nil || parsed.Host == "" || (parsed.Scheme != "https" && parsed.Scheme != "http") {
-		return errors.New("image blocks require an http(s) url")
 	}
 	return nil
 }

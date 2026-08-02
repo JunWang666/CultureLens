@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CultureLens 最近识别请求</title>
+  <style>
+    :root { color-scheme:light dark; --bg:#f4f0e8; --panel:#fffdf8; --ink:#172532; --muted:#66717a; --line:#d9d1c4; --accent:#a5482d; --ok:#24724d; --bad:#a12d2d; --warn:#9b6818; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.55 ui-sans-serif,system-ui,-apple-system,"PingFang SC",sans-serif; }
+    main { width:min(1380px,calc(100% - 28px)); margin:30px auto 64px; }
+    header { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:20px; }
+    h1 { margin:0; font:700 clamp(28px,4vw,44px)/1.08 ui-serif,serif; }
+    p { margin:5px 0; color:var(--muted); }
+    a { color:var(--accent); }
+    button,input,select { font:inherit; }
+    button { border:1px solid var(--accent); border-radius:999px; padding:9px 16px; background:var(--accent); color:#fff; cursor:pointer; }
+    button:disabled { opacity:.55; cursor:wait; }
+    .toolbar,.summary { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .toolbar { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px 16px; margin-bottom:14px; }
+    .toolbar input,.toolbar select { border:1px solid var(--line); border-radius:9px; padding:8px 10px; background:transparent; color:var(--ink); }
+    .toolbar input { min-width:min(360px,100%); flex:1; }
+    #status { margin-left:auto; color:var(--muted); }
+    .list { display:grid; gap:10px; }
+    .request { background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+    .request > summary { list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:100px minmax(180px,1fr) minmax(130px,.6fr) auto; gap:12px; align-items:center; }
+    .request > summary::-webkit-details-marker { display:none; }
+    .code { display:inline-flex; align-items:center; width:max-content; border-radius:999px; padding:4px 9px; font-weight:750; background:rgba(100,100,100,.11); }
+    .code.ok { color:var(--ok); } .code.bad { color:var(--bad); } .code.warn { color:var(--warn); }
+    .title { font-weight:750; font-size:16px; overflow-wrap:anywhere; }
+    .meta { color:var(--muted); font-size:12px; overflow-wrap:anywhere; }
+    .detail { border-top:1px solid var(--line); padding:16px; display:grid; gap:14px; }
+    .facts { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+    .fact { border:1px solid var(--line); border-radius:11px; padding:9px 10px; }
+    .fact small { display:block; color:var(--muted); }
+    .images { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    figure { margin:0; border:1px solid var(--line); border-radius:12px; padding:10px; background:rgba(100,100,100,.04); }
+    figcaption { color:var(--muted); margin-bottom:8px; }
+    img { display:block; width:100%; max-height:520px; object-fit:contain; border-radius:8px; background:#111; }
+    .jsons { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    h2 { margin:0 0 8px; font-size:15px; }
+    pre { margin:0; padding:12px; border-radius:11px; background:rgba(100,100,100,.09); overflow:auto; max-height:430px; white-space:pre-wrap; overflow-wrap:anywhere; font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .empty,.error { padding:40px 18px; text-align:center; border:1px dashed var(--line); border-radius:16px; color:var(--muted); }
+    .error { color:var(--bad); }
+    @media (max-width:900px) { .facts { grid-template-columns:repeat(2,1fr); } .request > summary { grid-template-columns:auto 1fr; } .request > summary > :nth-child(3),.request > summary > :nth-child(4) { grid-column:2; } }
+    @media (max-width:650px) { header { align-items:start; flex-direction:column; } .images,.jsons { grid-template-columns:1fr; } .facts { grid-template-columns:1fr; } #status { margin-left:0; width:100%; } }
+    @media (prefers-color-scheme:dark) { :root { --bg:#111820; --panel:#18222c; --ink:#f3eee5; --muted:#aeb7bf; --line:#35424c; --accent:#d77b5d; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><p>CultureLens Backend</p><h1>最近识别请求</h1><p>最近 100 条完整识别审计；图片仅在展开记录时加载。</p></div>
+    <div><a href="/admin">内容管理</a> · <a href="/debug">查询调试台</a></div>
+  </header>
+  <section class="toolbar">
+    <button id="refresh" type="button">刷新</button>
+    <select id="filter"><option value="all">全部状态</option><option value="ok">仅成功</option><option value="error">仅失败</option></select>
+    <input id="search" type="search" placeholder="搜索 Request ID、对象、错误码或模型">
+    <span id="status">准备读取…</span>
+  </section>
+  <section class="list" id="list"></section>
+</main>
+<script>
+  const state={requests:[]};
+  const $=selector=>document.querySelector(selector);
+  const escapeHTML=value=>String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+  const bytes=value=>{ const size=Number(value||0); if(size<1024)return `${size} B`; if(size<1048576)return `${(size/1024).toFixed(1)} KiB`; return `${(size/1048576).toFixed(1)} MiB`; };
+  const pretty=value=>JSON.stringify(value??null,null,2);
+  const statusClass=code=>code>=200&&code<300?'ok':code>=500?'bad':'warn';
+  const date=value=>new Intl.DateTimeFormat('zh-CN',{dateStyle:'medium',timeStyle:'medium'}).format(new Date(value));
+
+  async function refresh(){
+    const button=$('#refresh'); button.disabled=true; $('#status').textContent='读取中…';
+    try {
+      const response=await fetch('/v1/admin/recognition-requests?limit=100',{headers:{Accept:'application/json'}});
+      const body=await response.json();
+      if(!response.ok)throw new Error(body?.error?.message||`HTTP ${response.status}`);
+      state.requests=body.requests||[]; render(); $('#status').textContent=`${state.requests.length} 条 · ${date(new Date())}`;
+    } catch(error) { $('#list').innerHTML=`<div class="error">${escapeHTML(error.message)}</div>`; $('#status').textContent='读取失败'; }
+    finally { button.disabled=false; }
+  }
+
+  function visibleRequests(){
+    const filter=$('#filter').value, query=$('#search').value.trim().toLowerCase();
+    return state.requests.filter(item=>{
+      if(filter==='ok' && !(item.httpStatus>=200&&item.httpStatus<300))return false;
+      if(filter==='error' && item.httpStatus>=200&&item.httpStatus<300)return false;
+      if(!query)return true;
+      return [item.requestId,item.canonicalName,item.culturalElementKey,item.errorCode,item.modelIdentifier,item.promptVersion].some(value=>String(value||'').toLowerCase().includes(query));
+    });
+  }
+
+  function render(){
+    const items=visibleRequests();
+    if(!items.length){ $('#list').innerHTML='<div class="empty">没有符合条件的识别请求。</div>'; return; }
+    $('#list').innerHTML=items.map(item=>{
+      const ok=item.httpStatus>=200&&item.httpStatus<300;
+      const title=item.canonicalName||item.errorCode||(ok?'识别完成':'识别失败');
+      const context=item.contextImageBytes>0?`<figure><figcaption>整图 · ${bytes(item.contextImageBytes)}</figcaption><img data-src="/v1/admin/recognition-requests/${item.id}/images/context" alt="识别请求整图"></figure>`:'';
+      const focus=item.focusImageBytes>0?`<figure><figcaption>框选图 · ${bytes(item.focusImageBytes)}</figcaption><img data-src="/v1/admin/recognition-requests/${item.id}/images/focus" alt="识别请求框选图"></figure>`:'';
+      return `<details class="request">
+        <summary><span class="code ${statusClass(item.httpStatus)}">HTTP ${item.httpStatus}</span><span><span class="title">${escapeHTML(title)}</span><span class="meta">${escapeHTML(item.requestId)}</span></span><span><b>${escapeHTML(item.durationMilliseconds)} ms</b><span class="meta">${escapeHTML(item.modelIdentifier||'未调用模型')}</span></span><time class="meta">${escapeHTML(date(item.receivedAt))}</time></summary>
+        <div class="detail">
+          <div class="facts"><div class="fact"><small>记录 ID</small>${item.id}</div><div class="fact"><small>请求体</small>${bytes(item.requestBodyBytes)}</div><div class="fact"><small>Prompt</small>${escapeHTML(item.promptVersion||'—')}</div><div class="fact"><small>Schema</small>${escapeHTML(item.schemaVersion||'—')}</div><div class="fact"><small>解析状态</small>${escapeHTML(item.resolutionStatus||'—')}</div></div>
+          ${(context||focus)?`<div class="images">${context}${focus}</div>`:''}
+          <div class="jsons"><section><h2>请求（图片字段已分离）</h2><pre>${escapeHTML(pretty(item.requestPayload))}</pre></section><section><h2>响应 / 错误</h2><pre>${escapeHTML(pretty(item.responsePayload))}</pre></section></div>
+        </div></details>`;
+    }).join('');
+    document.querySelectorAll('details.request').forEach(node=>node.addEventListener('toggle',()=>{ if(!node.open)return; node.querySelectorAll('img[data-src]').forEach(image=>{ image.src=image.dataset.src; image.removeAttribute('data-src'); }); }));
+  }
+
+  $('#refresh').onclick=refresh; $('#filter').onchange=render; $('#search').oninput=render; refresh();
+</script>
+</body>
+</html>

@@ -373,3 +373,7 @@ Phase 3 位置感知视觉识别、用户框选与可复现效果评测。
 - 首批坐标来自开放结构化数据与地图节点，不是现场测绘入口点；推荐已可用，但上线面向游客前仍应人工逐点复核。
 - 尚无可用于比较识别准确率的授权标注集，当前只能确定工程策略，不能声称已测得最终最优模型。
 - 开发期 V1/V2 历史存储分别因 SwiftData/Core Data 的 `id` / `objectID` 冲突不再加载；文件保留但不迁入 V3。
+
+## 关联项目
+
+- 2026-08-02 立项 `CultureLens2/`（仓库根目录新工程）：把识别管线的数据库与 LLM 拼接逻辑搬到 iOS 端侧，App 仅依赖 Cloudflare AI Gateway（LLM，`dynamic/culturelens`）与 R2 图床 URL；西湖知识库整库成一个 ODR 包（tag `knowledge-base`）走 App Store Connect 分包分发，内置副本兜底。本工程（CultureLens + Go 后端）保持可运行不受影响；后端仅新增 `cmd/exportknowledge` 导出工具，并放宽 `contentadmin` 富文本校验以支持 image block。详见 `CultureLens2/agents/`。

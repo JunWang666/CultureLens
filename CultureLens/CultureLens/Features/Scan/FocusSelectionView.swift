@@ -10,7 +10,11 @@ struct CaptureReviewLayer: View {
     let imageID: UUID
     let imageData: Data
     let imagePixelSize: CGSize
-    @Binding var selection: NormalizedImageRegion
+    /// `nil` until the user draws a selection. The underlying image is never
+    /// touched while the user is adjusting this — it's purely an overlay UI
+    /// on top of the frozen preview. Only when the user taps a send button
+    /// does `ScanCoordinator` actually redraw the photo with this region.
+    @Binding var selection: NormalizedImageRegion?
 
     // Decoded once per `imageID` and cached, so dragging the focus region
     // does not re-decode the JPEG on every gesture update (this was the
@@ -96,47 +100,55 @@ struct CaptureReviewLayer: View {
 
 /// Lets the user pick the focus region by dragging one finger diagonally
 /// across the photo: the drag's start and end points become the two
-/// opposite corners of the selection rectangle. This replaces the previous
-/// move-the-box-plus-four-resize-handles interaction, which needed five
-/// separate gesture recognizers and felt heavy/laggy to use.
+/// opposite corners of the selection rectangle. No box is shown until the
+/// user draws one, and there is a single border (no separate handles or
+/// decorative brackets), so the selection reads unambiguously.
 struct FocusSelectionOverlay: View {
     let imageFrame: CGRect
-    @Binding var region: NormalizedImageRegion
+    @Binding var region: NormalizedImageRegion?
 
-    private let minimumSize = 0.18
-    private let cornerMarkLength: CGFloat = 18
+    // Small enough that framing a tiny inscription or detail doesn't get
+    // force-expanded to something much bigger than what was actually drawn
+    // (that "snap" on release was reading as imprecise).
+    private let minimumSize = 0.05
+    private let cornerRadius: CGFloat = 6
 
     var body: some View {
-        let selectionFrame = region
-            .clamped(minimumSize: minimumSize)
-            .rect(in: imageFrame)
-
         ZStack {
-            Path { path in
-                path.addRect(imageFrame)
-                path.addRoundedRect(
-                    in: selectionFrame,
-                    cornerSize: CGSize(width: 16, height: 16)
-                )
+            if let region {
+                let selectionFrame = region
+                    .clamped(minimumSize: minimumSize)
+                    .rect(in: imageFrame)
+
+                // Rendered as a single offscreen layer so repeated updates
+                // while dragging are composited on the GPU instead of
+                // re-rasterizing multiple Core Graphics shapes every frame.
+                ZStack {
+                    Path { path in
+                        path.addRect(imageFrame)
+                        path.addRoundedRect(
+                            in: selectionFrame,
+                            cornerSize: CGSize(width: cornerRadius, height: cornerRadius)
+                        )
+                    }
+                    .fill(
+                        Color.black.opacity(0.55),
+                        style: FillStyle(eoFill: true)
+                    )
+
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .stroke(CultureTheme.antiqueGold, lineWidth: 2)
+                        .frame(
+                            width: selectionFrame.width,
+                            height: selectionFrame.height
+                        )
+                        .position(x: selectionFrame.midX, y: selectionFrame.midY)
+                }
+                .drawingGroup()
+                .allowsHitTesting(false)
+            } else {
+                hint
             }
-            .fill(
-                Color.black.opacity(0.55),
-                style: FillStyle(eoFill: true)
-            )
-            .allowsHitTesting(false)
-
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(CultureTheme.antiqueGold, lineWidth: 2)
-                .frame(
-                    width: selectionFrame.width,
-                    height: selectionFrame.height
-                )
-                .position(x: selectionFrame.midX, y: selectionFrame.midY)
-                .allowsHitTesting(false)
-
-            cornerMarks(in: selectionFrame)
-                .stroke(.white, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                .allowsHitTesting(false)
 
             // Transparent hit area covering the whole photo so the diagonal
             // drag can start from anywhere on it, not just inside the box.
@@ -147,12 +159,24 @@ struct FocusSelectionOverlay: View {
                 .gesture(diagonalDragGesture)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("当前框选区域")
+        .accessibilityLabel("框选区域")
         .accessibilityValue(accessibilityValue)
-        .accessibilityHint("在图片上从一角滑动到另一角，即可重新框选；如不便调整，可使用下方的直接发送")
+        .accessibilityHint("在图片上从一角滑动到另一角，即可框选；不框选则识别整张图片")
+    }
+
+    private var hint: some View {
+        Text("在图片上画一条斜线即可框选，不选则识别整张图片")
+            .font(.caption.weight(.medium))
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background(.black.opacity(0.42), in: Capsule())
+            .foregroundStyle(.white)
+            .position(x: imageFrame.midX, y: imageFrame.minY + 28)
+            .allowsHitTesting(false)
     }
 
     private var accessibilityValue: String {
+        guard let region else { return "未框选，将识别整张图片" }
         let focus = region.clamped(minimumSize: minimumSize)
         return "左侧 \(Int((focus.x * 100).rounded()))%，顶部 \(Int((focus.y * 100).rounded()))%，宽 \(Int((focus.width * 100).rounded()))%，高 \(Int((focus.height * 100).rounded()))%"
     }
@@ -236,31 +260,6 @@ struct FocusSelectionOverlay: View {
             height: maxY - minY
         )
     }
-
-    /// Purely decorative corner brackets: they make the rectangle read as a
-    /// selection box without being separate hit-testable handles. Drawn
-    /// directly in the same absolute coordinate space as `selectionFrame`.
-    private func cornerMarks(in frame: CGRect) -> Path {
-        Path { path in
-            let length = cornerMarkLength
-
-            path.move(to: CGPoint(x: frame.minX, y: frame.minY + length))
-            path.addLine(to: CGPoint(x: frame.minX, y: frame.minY))
-            path.addLine(to: CGPoint(x: frame.minX + length, y: frame.minY))
-
-            path.move(to: CGPoint(x: frame.maxX - length, y: frame.minY))
-            path.addLine(to: CGPoint(x: frame.maxX, y: frame.minY))
-            path.addLine(to: CGPoint(x: frame.maxX, y: frame.minY + length))
-
-            path.move(to: CGPoint(x: frame.minX, y: frame.maxY - length))
-            path.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
-            path.addLine(to: CGPoint(x: frame.minX + length, y: frame.maxY))
-
-            path.move(to: CGPoint(x: frame.maxX - length, y: frame.maxY))
-            path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
-            path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY - length))
-        }
-    }
 }
 
 #Preview {
@@ -268,6 +267,6 @@ struct FocusSelectionOverlay: View {
         imageID: UUID(),
         imageData: SampleScanImage.jpegData(),
         imagePixelSize: CGSize(width: 1200, height: 1600),
-        selection: .constant(.defaultFocus)
+        selection: .constant(nil)
     )
 }

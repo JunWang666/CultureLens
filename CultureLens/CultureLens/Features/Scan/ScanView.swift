@@ -15,7 +15,9 @@ struct ScanView: View {
     @State private var helpSheetPresented = false
     @State private var pendingReview: PendingScanImage?
     @State private var preparedReview: PreparedReviewImage?
-    @State private var focusSelection = NormalizedImageRegion.defaultFocus
+    /// `nil` until the user draws a selection; sending with no selection
+    /// just sends the whole photo (same as "直接发送").
+    @State private var focusSelection: NormalizedImageRegion?
     @State private var reviewPrepareError: String?
 
     private var isReviewing: Bool {
@@ -377,7 +379,7 @@ struct ScanView: View {
     ) {
         preparedReview = nil
         reviewPrepareError = nil
-        focusSelection = .defaultFocus
+        focusSelection = nil
         coordinator.resetFailure()
         pendingReview = PendingScanImage(
             data: imageData,
@@ -389,7 +391,7 @@ struct ScanView: View {
         pendingReview = nil
         preparedReview = nil
         reviewPrepareError = nil
-        focusSelection = .defaultFocus
+        focusSelection = nil
     }
 
     private func confirmReview(useFocusRegion: Bool) {
@@ -397,7 +399,7 @@ struct ScanView: View {
         beginRecognition(
             preparedReview.data,
             focusRegion: useFocusRegion
-                ? focusSelection.clamped(minimumSize: 0.18)
+                ? focusSelection?.clamped(minimumSize: 0.05)
                 : nil,
             locationSource: pendingReview.locationSource
         )
@@ -426,7 +428,7 @@ struct ScanView: View {
                 data: data,
                 pixelSize: pixelSize
             )
-            focusSelection = .defaultFocus
+            focusSelection = nil
         } catch is CancellationError {
             return
         } catch {

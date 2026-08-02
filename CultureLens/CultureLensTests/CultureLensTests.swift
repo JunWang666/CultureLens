@@ -330,11 +330,13 @@ struct CultureLensTests {
     #expect(region.height == 0.3)
   }
 
-  @Test func productionAPIBaseURLIsConfiguredGlobally() {
+  @Test func llmGatewayEndpointIsConfiguredGlobally() {
     #expect(
-      CultureLensAPI.shared.baseURL.absoluteString
-        == "https://cl.codight.online"
+      LLMGatewayConfig.default.endpoint.absoluteString
+        == "https://gateway.ai.cloudflare.com/v1/b6fa8079d0ef1344774cb287040dc153/apps/compat/chat/completions"
     )
+    #expect(LLMGatewayConfig.default.model == "dynamic/culturelens")
+    #expect(LLMGatewayConfig.default.timeout == 55)
   }
 
   @Test func nearbyRecommendationsDecodeDatabaseContent() throws {

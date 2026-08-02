@@ -3,6 +3,7 @@ import SwiftUI
 
 enum RecognitionServiceError: LocalizedError {
   case invalidConfiguration
+  case localResourcesMissing
   case invalidResponse
   case server(statusCode: Int, message: String?)
   case transport(String)
@@ -11,6 +12,8 @@ enum RecognitionServiceError: LocalizedError {
     switch self {
     case .invalidConfiguration:
       "识别服务尚未配置。"
+    case .localResourcesMissing:
+      "应用内缺少知识库或提示词资源，无法进行识别。"
     case .invalidResponse:
       "识别服务返回了无法读取的数据。"
     case .server(let statusCode, let message):
@@ -29,7 +32,8 @@ struct RecognitionService: Sendable {
 
   private enum Backend: Sendable {
     case sample
-    case remote(RemoteRecognitionService)
+    case onDevice(OnDeviceRecognitionService)
+    case unavailable
   }
 
   let mode: Mode
@@ -39,20 +43,24 @@ struct RecognitionService: Sendable {
     switch backend {
     case .sample:
       try await Self.recognizeSample(input)
-    case .remote(let service):
+    case .onDevice(let service):
       try await service.recognize(input)
+    case .unavailable:
+      throw RecognitionServiceError.localResourcesMissing
     }
   }
 
   static let sample = RecognitionService(mode: .demo, backend: .sample)
 
   static func configured() -> RecognitionService {
-    RecognitionService(
-      mode: .remote,
-      backend: .remote(
-        RemoteRecognitionService(baseURL: CultureLensAPI.shared.baseURL)
+    do {
+      return RecognitionService(
+        mode: .remote,
+        backend: .onDevice(try OnDeviceRecognitionService())
       )
-    )
+    } catch {
+      return RecognitionService(mode: .remote, backend: .unavailable)
+    }
   }
 
   private static func recognizeSample(

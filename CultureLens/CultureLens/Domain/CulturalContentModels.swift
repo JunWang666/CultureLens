@@ -3,15 +3,47 @@ import Foundation
 nonisolated struct RichTextDocument: Codable, Hashable, Sendable {
   nonisolated struct Block: Codable, Hashable, Sendable {
     let type: String
-    let text: String
+    let text: String?
+    let url: String?
+    let caption: String?
+
+    init(
+      type: String,
+      text: String? = nil,
+      url: String? = nil,
+      caption: String? = nil
+    ) {
+      self.type = type
+      self.text = text
+      self.url = url
+      self.caption = caption
+    }
+
+    var imageURL: URL? {
+      guard type == "image", let url else { return nil }
+      return URL(string: url)
+    }
+
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(type, forKey: .type)
+      try container.encodeIfPresent(text, forKey: .text)
+      try container.encodeIfPresent(url, forKey: .url)
+      try container.encodeIfPresent(caption, forKey: .caption)
+    }
   }
 
   let schemaVersion: Int
   let blocks: [Block]
 
+  init(schemaVersion: Int, blocks: [Block]) {
+    self.schemaVersion = schemaVersion
+    self.blocks = blocks
+  }
+
   var plainText: String {
     blocks
-      .map(\.text)
+      .compactMap(\.text)
       .filter { !$0.isEmpty }
       .joined(separator: "\n")
   }

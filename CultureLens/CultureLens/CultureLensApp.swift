@@ -16,7 +16,7 @@ struct CultureLensApp: App {
         do {
             let schema = Schema([ScanHistoryRecord.self])
             let configuration = ModelConfiguration(
-                "CultureLensHistoryV4",
+                "CultureLensHistoryV1",
                 schema: schema
             )
             modelContainer = try ModelContainer(

@@ -26,61 +26,52 @@ struct CultureContentService: Sendable {
       _ limit: Int
     ) async throws -> NearbyRecommendationsResponse
 
-  static func live(
-    baseURL: URL = CultureLensAPI.shared.baseURL,
-    session: URLSession = .shared
-  ) -> CultureContentService {
+  /// Local implementation backed by the bundled knowledge pack; performs the
+  /// same Haversine query the Go backend ran in PostgreSQL.
+  static func live() -> CultureContentService {
     CultureContentService { latitude, longitude, radiusMeters, limit in
-      let endpoint = baseURL.appending(
-        path: "v1/attraction-introductions/recommendations"
-      )
-      guard
-        var components = URLComponents(
-          url: endpoint,
-          resolvingAgainstBaseURL: false
-        )
-      else {
-        throw CultureContentServiceError.invalidResponse
-      }
-      components.queryItems = [
-        URLQueryItem(name: "latitude", value: String(latitude)),
-        URLQueryItem(name: "longitude", value: String(longitude)),
-        URLQueryItem(name: "radiusMeters", value: String(radiusMeters)),
-        URLQueryItem(name: "limit", value: String(limit)),
-      ]
-      guard let url = components.url else {
-        throw CultureContentServiceError.invalidResponse
-      }
-
-      var request = URLRequest(url: url)
-      request.timeoutInterval = 20
-      request.setValue(UUID().uuidString, forHTTPHeaderField: "X-Request-ID")
-
-      let data: Data
-      let response: URLResponse
-      do {
-        (data, response) = try await session.data(for: request)
-      } catch is CancellationError {
-        throw CancellationError()
-      } catch {
-        throw CultureContentServiceError.transport(error.localizedDescription)
-      }
-
-      guard
-        let httpResponse = response as? HTTPURLResponse,
-        (200..<300).contains(httpResponse.statusCode)
-      else {
+      guard let store = await KnowledgePackLoader.shared.store() else {
         throw CultureContentServiceError.serverUnavailable
       }
-
+      let result: NearbyIntroductionResult
       do {
-        return try JSONDecoder().decode(
-          NearbyRecommendationsResponse.self,
-          from: data
+        result = try store.nearbyIntroductions(
+          latitude: latitude,
+          longitude: longitude,
+          radiusMeters: radiusMeters,
+          limit: limit
         )
       } catch {
         throw CultureContentServiceError.invalidResponse
       }
+      return NearbyRecommendationsResponse(
+        requestedLocation: RequestedRecommendationLocation(
+          latitude: latitude,
+          longitude: longitude,
+          radiusMeters: radiusMeters
+        ),
+        totalMatches: result.totalMatches,
+        introductions: result.introductions.map {
+          AttractionIntroductionRecommendation(
+            key: $0.key,
+            name: $0.name,
+            introduction: $0.introduction,
+            culturalElement: ContentReference(
+              key: $0.culturalElementKey,
+              name: $0.culturalElementName
+            ),
+            attraction: ContentReference(
+              key: $0.attractionKey,
+              name: $0.attractionName
+            ),
+            location: ContentCoordinate(
+              latitude: $0.latitude,
+              longitude: $0.longitude
+            ),
+            distanceMeters: $0.distanceMeters
+          )
+        }
+      )
     }
   }
 }

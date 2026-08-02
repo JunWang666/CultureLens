@@ -15,9 +15,7 @@ struct ScanView: View {
     @State private var helpSheetPresented = false
     @State private var pendingReview: PendingScanImage?
     @State private var preparedReview: PreparedReviewImage?
-    /// `nil` until the user draws a selection; sending with no selection
-    /// just sends the whole photo (same as "直接发送").
-    @State private var focusSelection: NormalizedImageRegion?
+    @State private var focusSelection = NormalizedImageRegion.defaultFocus
     @State private var reviewPrepareError: String?
 
     private var isReviewing: Bool {
@@ -47,7 +45,6 @@ struct ScanView: View {
 
             if let preparedReview {
                 CaptureReviewLayer(
-                    imageID: preparedReview.id,
                     imageData: preparedReview.data,
                     imagePixelSize: preparedReview.pixelSize,
                     selection: $focusSelection
@@ -379,7 +376,7 @@ struct ScanView: View {
     ) {
         preparedReview = nil
         reviewPrepareError = nil
-        focusSelection = nil
+        focusSelection = .defaultFocus
         coordinator.resetFailure()
         pendingReview = PendingScanImage(
             data: imageData,
@@ -391,7 +388,7 @@ struct ScanView: View {
         pendingReview = nil
         preparedReview = nil
         reviewPrepareError = nil
-        focusSelection = nil
+        focusSelection = .defaultFocus
     }
 
     private func confirmReview(useFocusRegion: Bool) {
@@ -399,7 +396,7 @@ struct ScanView: View {
         beginRecognition(
             preparedReview.data,
             focusRegion: useFocusRegion
-                ? focusSelection?.clamped(minimumSize: 0.05)
+                ? focusSelection.clamped(minimumSize: 0.18)
                 : nil,
             locationSource: pendingReview.locationSource
         )
@@ -423,12 +420,8 @@ struct ScanView: View {
             try Task.checkCancellation()
             let pixelSize = try ImagePreprocessor.pixelSize(of: data)
             guard self.pendingReview?.id == pendingReview.id else { return }
-            preparedReview = PreparedReviewImage(
-                id: pendingReview.id,
-                data: data,
-                pixelSize: pixelSize
-            )
-            focusSelection = nil
+            preparedReview = PreparedReviewImage(data: data, pixelSize: pixelSize)
+            focusSelection = .defaultFocus
         } catch is CancellationError {
             return
         } catch {
@@ -492,7 +485,6 @@ private struct PendingScanImage: Identifiable {
 }
 
 private struct PreparedReviewImage {
-    let id: UUID
     let data: Data
     let pixelSize: CGSize
 }

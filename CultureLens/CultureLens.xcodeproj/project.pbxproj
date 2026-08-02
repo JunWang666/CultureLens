@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C12E0D000000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000003 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-base"); }; };
+		C12E0D000000000000000002 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000004 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-base"); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E9464E703017572C00B357C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +29,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C12E0D000000000000000003 /* knowledge-pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "knowledge-pack.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000004 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
 		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C12E0D000000000000000005 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Resources/KnowledgePack/knowledge-pack.json",
+				"Resources/KnowledgePack/pack-manifest.json",
+			);
+			target = E9464E5F3017572B00B357C5 /* CultureLens */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E9464E623017572B00B357C5 /* CultureLens */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C12E0D000000000000000005 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+			);
 			path = CultureLens;
 			sourceTree = "<group>";
 		};
@@ -72,10 +93,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C12E0D000000000000000006 /* KnowledgePack ODR */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D000000000000000003 /* knowledge-pack.json */,
+				C12E0D000000000000000004 /* pack-manifest.json */,
+			);
+			name = "KnowledgePack ODR";
+			path = "CultureLens/Resources/KnowledgePack";
+			sourceTree = "<group>";
+		};
 		E9464E573017572B00B357C5 = {
 			isa = PBXGroup;
 			children = (
 				E9464E623017572B00B357C5 /* CultureLens */,
+				C12E0D000000000000000006 /* KnowledgePack ODR */,
 				E9464E723017572C00B357C5 /* CultureLensTests */,
 				E9464E7C3017572C00B357C5 /* CultureLensUITests */,
 				E9464E613017572B00B357C5 /* Products */,
@@ -212,6 +244,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C12E0D000000000000000001 /* knowledge-pack.json in Resources */,
+				C12E0D000000000000000002 /* pack-manifest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +434,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsLocalNetworking = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "用于拍摄建筑、器物与纹样，以识别和解释文化线索。";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "用于推荐附近的文化内容，并在拍照识别时使用系统当前可提供的位置。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -446,6 +481,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "用于拍摄建筑、器物与纹样，以识别和解释文化线索。";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "用于推荐附近的文化内容，并在拍照识别时使用系统当前可提供的位置。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

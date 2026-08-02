@@ -65,3 +65,31 @@ func TestValidateBundleRejectsMissingReference(t *testing.T) {
 		t.Fatal("expected missing element reference to be rejected")
 	}
 }
+
+func TestValidateRichTextAllowsImageBlocks(t *testing.T) {
+	document := json.RawMessage(`{
+		"schemaVersion": 1,
+		"blocks": [
+			{"type": "paragraph", "text": "正文"},
+			{"type": "image", "url": "https://pub-example.r2.dev/culture/dougong.jpg", "caption": "斗拱"},
+			{"type": "image", "url": "http://images.example.com/lienhuawen.png"}
+		]
+	}`)
+	if err := validateRichText(document); err != nil {
+		t.Fatalf("expected image blocks to pass: %v", err)
+	}
+}
+
+func TestValidateRichTextRejectsInvalidImageBlocks(t *testing.T) {
+	cases := map[string]string{
+		"missing url":  `{"schemaVersion":1,"blocks":[{"type":"image"}]}`,
+		"empty url":    `{"schemaVersion":1,"blocks":[{"type":"image","url":"  "}]}`,
+		"ftp scheme":   `{"schemaVersion":1,"blocks":[{"type":"image","url":"ftp://example.com/a.jpg"}]}`,
+		"relative url": `{"schemaVersion":1,"blocks":[{"type":"image","url":"/images/a.jpg"}]}`,
+	}
+	for name, document := range cases {
+		if err := validateRichText(json.RawMessage(document)); err == nil {
+			t.Fatalf("%s: expected rejection", name)
+		}
+	}
+}

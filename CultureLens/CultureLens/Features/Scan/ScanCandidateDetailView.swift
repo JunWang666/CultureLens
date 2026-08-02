@@ -142,10 +142,7 @@ struct ScanCandidateDetailView: View {
                             Text(introduction.name)
                                 .font(.headline)
                                 .foregroundStyle(CultureTheme.inkPrimary)
-                            Text(introduction.introduction.plainText)
-                                .font(.body)
-                                .foregroundStyle(CultureTheme.inkSecondary)
-                                .lineSpacing(5)
+                            RichTextBlocksView(document: introduction.introduction)
                         }
                         .padding(18)
                         .frame(maxWidth: .infinity, alignment: .leading)

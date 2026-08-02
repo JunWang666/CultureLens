@@ -1,71 +1,28 @@
-# CultureLens 项目概览
+# CultureLens 项目说明
 
-## 产品定位
+## 定位
 
-CultureLens 是面向文化现场的智能理解工具。用户拍摄眼前的建筑构件、器物纹样、展品符号或空间细节后，应用不只回答“这是什么”，还要解释它与历史时期、地域文化、使用功能、审美观念及相似对象之间的关系。
+与 CultureLens 相同的产品体验（扫描识别文化现场、附近推荐、知识图谱、历史），但识别管线完全在端侧运行：
 
-核心体验是：
+- 本地知识库（西湖内容包：34 元素 / 7 景点 / 44 关系 / 19 介绍）替代 PostgreSQL。
+- 本地完成候选挑选（Haversine 附近查询、优先级排序 top 12、BFS 图谱、景点绑定）与 prompt 拼接（v5 模板 + 候选 JSON），逻辑 1:1 移植自 Go 后端 `internal/knowledge`、`internal/recognition`、`internal/providers/googleai`。
+- LLM 调用直连 Cloudflare AI Gateway 的 OpenAI 兼容端点（`dynamic/culturelens`，中转 Gemini），key 硬编码于 `Services/LLM/LLMGatewayConfig.swift`（本期接受的安全取舍）。
+- 响应在端侧校验映射（key 校验、UUIDv5、富文本压平、SF Symbol），产出与旧版相同的 `RecognitionResult`，UI 层零改动。
 
-> 拍摄识别 -> 即时理解 -> 关联探索 -> 持续积累
+## 外部依赖（仅两个）
 
-## 参考效果
+1. **Cloudflare AI Gateway**：`https://gateway.ai.cloudflare.com/v1/<account>/apps/compat/chat/completions`，多模态 image_url 与 `response_format: json_schema` 已实测可用（实际模型 gemini-3.6-flash）。
+2. **Cloudflare R2 图床**：介绍富文本中的 `image` block 直接引用 R2 URL，本地库只存 URL 不存图片。后端 `contentadmin` 校验已放宽接受 image block。
 
-方案依据 `/Users/goudaijun/Downloads/CultureLens.pdf` 的 7 页效果稿整理。效果稿强调：
+## 知识包与 ODR 分包
 
-- 无需编号或关键词的拍摄即识别。
-- 以文化图谱组织背景、关系和延伸内容。
-- 根据用户已经理解、收藏或点亮的节点调整讲解深度。
-- 将一次参观沉淀为可回看、可继续探索的个人文化地图。
-- 后续可拓展 AR 标注、多语言、个性化路线与机构端能力。
+- 数据文件：`CultureLens/Resources/KnowledgePack/`（knowledge-pack.json + pack-manifest.json），打 ODR tag `knowledge-base`，App Store 托管。
+- 当前为 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`），随 App 首装下发；将来移除该设置即切换为按需下载，实现按地域拆包分发。
+- 内置回退：`Resources/KnowledgePackFallback/`（同内容副本，不打 tag），保证首启与离线可用。
+- 运行时：`Services/Knowledge/KnowledgePackLoader.swift` 用 `NSBundleResourceRequest` 优先取 ODR 包，失败回退内置副本。
+- 再生成：`CultureLensBackend/cmd/exportknowledge`（`export -out <dir> -version <bundle-version>`）从数据库导出。
+- 后续可按地域/主题拆多包（每包一个 ODR tag），结构已预留。
 
-## 当前工程状态
+## 不再使用的后端能力
 
-- 工程已经替换 SwiftUI 模板，形成探索、扫描、结果、文化关系与历史地图闭环。
-- 使用 SwiftData 保存扫描历史，图片单独保存在 Application Support。
-- 已接入系统相机/相册入口、图片规范化、原始可用精度位置和异步识别状态流；相册使用照片记录位置，
-  相机使用系统当前可提供的最佳精度位置。
-- 拍照或选图后支持用户移动、缩放框选区域，并把显眼目标框绘制到完整原图上，以单张带框图片请求识别。
-- 仓库包含可独立部署的视觉识别 BFF；App 不保存模型密钥。
-- 主 target 同时声明 iPhone、iPad、macOS 和 visionOS 平台。
-- iOS deployment target 当前为 18.0；iOS 26 继续启用 Liquid Glass 增强效果。
-- iPhone 是当前实现与验收重点；相机仍需真机验证。
-- 结果提供一个主候选和最多三个备选，由用户确认后再保存。
-- Go 后端默认使用 Gemini 3.6 Flash、v5 Prompt 和 JSON Schema；识别候选来自 PostgreSQL
-  `cultural_elements`，位置只用于附加附近景点介绍上下文；候选为空时继续开放集合识别。
-- 后端已实现识别请求全量审计：有效请求保留整图/框选图、位置与完整响应，失败请求保留公开错误与耗时；
-  Zero Trust 管理页可按需查看最近 100 条，图片不内嵌到列表响应。
-- 后端已建立独立的丝绸之路采集知识库：收录 SROM 公开藏品事实型元数据和固定修订版中文维基主题；所有记录先进入 `imported` 审核队列，不自动成为识别候选。
-
-## 首版边界
-
-首版以 iPhone 竖屏体验为主，完成一个可信的端到端演示：
-
-1. 首页进入拍摄或从相册选图。
-2. 展示识别中、识别成功、失败与重试状态。
-3. 展示对象名称、置信度、简要解释和来源。
-4. 展示历史、地域、功能、审美、相似对象等关系节点。
-5. 支持继续追问、收藏或点亮节点。
-6. 在“我的文化地图”中回看已识别对象和探索进度。
-
-首版不承诺：
-
-- 任意文化对象的生产级识别准确率。
-- 完整开放域知识图谱。
-- AR 空间锚定、实时视频识别、多语言或机构管理后台。
-- 无网络情况下的完整识别与讲解。
-
-## 产品原则
-
-- 先解释关系，再堆砌百科文本。
-- AI 结论必须有来源、置信度和不确定性表达。
-- 识别失败时允许用户补充场景、地点或手动选择候选项。
-- 用户照片默认按最小化原则处理，并明确上传与保留策略。
-- 样例演示数据与真实在线数据使用同一领域模型，避免后续重写 UI。
-
-## 已确认的 UI 方向
-
-- 延续效果稿的东方人文气息：米白纸感、深蓝墨色、克制朱橙、细线描与文化纹样。
-- 借鉴 Claude 的安静、留白、编辑感和对话感，但不复制其品牌资产或具体界面。
-- 使用系统原生导航和控件；iOS 26 启用 Liquid Glass，iOS 18–25 使用系统 material 与标准按钮样式降级，不自造一套脱离系统规范的交互。
-- Liquid Glass 只承担导航与操作层，文化内容保持纸张、照片、插画和实体卡片感。
-- 详细规范见 `design/0002-humanist-liquid-glass-ui.md`。
+自家后端 `/v1/recognitions` 与 `/v1/attraction-introductions/recommendations` 不再被调用（`RemoteRecognitionService`、`CultureLensAPI` 已删除）。Go 后端保持可运行，供旧版 App 与 admin 使用。

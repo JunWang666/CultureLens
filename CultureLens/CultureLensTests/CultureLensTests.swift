@@ -396,6 +396,25 @@ struct CultureLensTests {
     #expect(LLMGatewayConfig.default.timeout == 55)
     #expect(LLMGatewayConfig.chat.model == "dynamic/chat")
     #expect(LLMGatewayConfig.chat.endpoint == LLMGatewayConfig.default.endpoint)
+    #expect(LLMGatewayConfig.chat.timeout == 180)
+  }
+
+  @Test func explanationStreamingRequestUsesLowReasoningEffort() throws {
+    let data = try LLMGatewayClient.streamingRequestBody(
+      model: "dynamic/chat",
+      messages: [
+        ["role": "system", "content": "system"],
+        ["role": "user", "content": "user"],
+      ],
+      reasoningEffort: .low
+    )
+    let body = try #require(
+      JSONSerialization.jsonObject(with: data) as? [String: Any]
+    )
+
+    #expect(body["model"] as? String == "dynamic/chat")
+    #expect(body["stream"] as? Bool == true)
+    #expect(body["reasoning_effort"] as? String == "low")
   }
 
   @Test func chatAnswerSplitsCitationSectionIntoCards() {
@@ -416,6 +435,27 @@ struct CultureLensTests {
     #expect(parsed.citations[0].fragment.contains("湖中石塔"))
     #expect(parsed.citations[1].key == "three-pools-light-mechanism")
     #expect(!parsed.body.contains("引用来源"))
+  }
+
+  @Test func personalizedExplanationKeepsTwoSectionsAndExtractsCitations() {
+    let markdown = """
+      ## 文化背景
+      三潭印月把石塔、灯孔、水面与月色组织成一个夜间观看传统。
+
+      ## 下一步建议
+      - 观察灯孔与水面倒影如何重叠。
+
+      ## 引用来源
+      - key: `three-pools-mirroring-moon`, name: 三潭印月
+        - 原文摘录：由湖中石塔、灯孔、水面与月色共同构成。
+      """
+    let parsed = CultureChatService.parseAnswer(markdown)
+
+    #expect(parsed.body.contains("## 文化背景"))
+    #expect(parsed.body.contains("## 下一步建议"))
+    #expect(!parsed.body.contains("为什么是它"))
+    #expect(!parsed.body.contains("引用来源"))
+    #expect(parsed.citations.map(\.key) == ["three-pools-mirroring-moon"])
   }
 
   @Test func cultureCiteURLResolvesElementKey() throws {

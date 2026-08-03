@@ -1,14 +1,17 @@
+import SwiftStreamingMarkdown
 import SwiftUI
 
-/// Renders layered teaching text with optional knowledge-base citations.
-struct LayeredExplanationView: View {
-  let explanation: LayeredExplanation
+/// Renders a finished knowledge-aware explanation plus source cards.
+struct PersonalizedExplanationView: View {
+  let explanation: PersonalizedExplanation
+  let knowledgeContextSummary: String
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      section(title: "一句话结论", symbol: "text.quote", body: explanation.conclusion)
-      section(title: "为什么是它", symbol: "eye", body: explanation.why)
-      section(title: "向外延展", symbol: "arrow.triangle.branch", body: explanation.extensionText)
+      explanationHeader
+
+      MarkdownView(text: explanation.markdown, config: Self.markdownConfig)
+        .frame(maxWidth: .infinity, alignment: .leading)
 
       if !explanation.citations.isEmpty {
         KnowledgeCitationCardsView(citations: explanation.citations)
@@ -22,24 +25,51 @@ struct LayeredExplanationView: View {
     }
   }
 
-  private func section(title: String, symbol: String, body: String) -> some View {
-    VStack(alignment: .leading, spacing: 8) {
-      Label(title, systemImage: symbol)
-        .font(.headline)
-        .foregroundStyle(CultureTheme.inkPrimary)
-      Text(body)
-        .font(.body)
+  private var explanationHeader: some View {
+    Label(knowledgeContextSummary, systemImage: "person.text.rectangle")
+      .font(.caption.weight(.semibold))
+      .foregroundStyle(CultureTheme.inkSecondary)
+      .fixedSize(horizontal: false, vertical: true)
+  }
+
+  private static var markdownConfig: MarkdownRenderConfig {
+    .default.withShouldAnimateText(value: false)
+  }
+}
+
+/// Stable streaming surface used while explanation Markdown is arriving.
+struct StreamingPersonalizedExplanationView: View {
+  let source: GrowingMarkdownSource
+  let knowledgeContextSummary: String
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      Label(knowledgeContextSummary, systemImage: "person.text.rectangle")
+        .font(.caption.weight(.semibold))
         .foregroundStyle(CultureTheme.inkSecondary)
-        .lineSpacing(5)
         .fixedSize(horizontal: false, vertical: true)
+
+      StreamedMarkdownView(source: source, config: Self.markdownConfig)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
+    .padding(20)
+    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
+    .overlay {
+      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
+  }
+
+  private static var markdownConfig: MarkdownRenderConfig {
+    .default.withShouldAnimateText(value: true)
   }
 }
 
 enum ExplanationLoadState: Equatable {
   case idle
-  case loading
-  case loaded(LayeredExplanation)
+  case loading(isThinking: Bool)
+  case streaming
+  case loaded(PersonalizedExplanation)
+  case partial(PersonalizedExplanation, message: String)
   case failed(String)
 }

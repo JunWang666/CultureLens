@@ -14,8 +14,8 @@ enum CultureExplanationError: LocalizedError {
   }
 }
 
-/// Builds layered teaching explanations via `dynamic/chat`, constrained to
-/// local knowledge-pack fragments with citations.
+/// Streams knowledge-aware cultural background via `dynamic/chat`, constrained
+/// to local knowledge-pack fragments with citations.
 nonisolated struct CultureExplanationService: Sendable {
   let knowledgeStore: KnowledgeStore
   let promptAssembler: PromptAssembler
@@ -41,45 +41,57 @@ nonisolated struct CultureExplanationService: Sendable {
     try? CultureExplanationService()
   }
 
-  func explain(
+  func streamExplanation(
     result: RecognitionResult,
     userKnowledgeStates: [UserKnowledgeStateContext],
     siteContext: String?
-  ) async throws -> LayeredExplanation {
-    let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) ?? knowledgeStore
-    let rootKey = result.object.culturalElementKey
-    let neighbors = neighborContexts(rootKey: rootKey, store: store, object: result.object)
-    let fragments = knowledgeFragments(
-      rootKey: rootKey,
-      neighbors: neighbors,
-      store: store,
-      object: result.object,
-      siteContext: siteContext
-    )
-    guard !fragments.isEmpty || !result.object.summary.isEmpty else {
-      throw CultureExplanationError.knowledgeUnavailable
-    }
+  ) -> AsyncThrowingStream<ChatStreamEvent, Error> {
+    AsyncThrowingStream { continuation in
+      let task = Task {
+        do {
+          let store =
+            await KnowledgePackLoader.shared.store(fallback: self.knowledgeStore)
+            ?? self.knowledgeStore
+          let rootKey = result.object.culturalElementKey
+          let neighbors = self.neighborContexts(
+            rootKey: rootKey,
+            store: store,
+            object: result.object
+          )
+          let fragments = self.knowledgeFragments(
+            rootKey: rootKey,
+            neighbors: neighbors,
+            store: store,
+            object: result.object,
+            siteContext: siteContext
+          )
+          guard !fragments.isEmpty || !result.object.summary.isEmpty else {
+            throw CultureExplanationError.knowledgeUnavailable
+          }
 
-    let userText = try promptAssembler.explainUserText(
-      recognition: ExplanationRecognitionContext(result: result),
-      neighbors: neighbors,
-      knowledgeFragments: fragments,
-      userKnowledgeStates: userKnowledgeStates,
-      siteContext: siteContext
-    )
-    let (decision, modelIdentifier) = try await gatewayClient.explain(
-      systemPrompt: promptAssembler.explainSystemPrompt,
-      userText: userText
-    )
-    return LayeredExplanation(
-      conclusion: decision.conclusion.trimmingCharacters(in: .whitespacesAndNewlines),
-      why: decision.why.trimmingCharacters(in: .whitespacesAndNewlines),
-      extensionText: decision.extensionText.trimmingCharacters(in: .whitespacesAndNewlines),
-      citations: decision.citations.map {
-        KnowledgeCitation(key: $0.key, name: $0.name, fragment: $0.fragment)
-      },
-      modelIdentifier: modelIdentifier
-    )
+          let userText = try self.promptAssembler.explainUserText(
+            recognition: ExplanationRecognitionContext(result: result),
+            neighbors: neighbors,
+            knowledgeFragments: fragments,
+            userKnowledgeStates: userKnowledgeStates,
+            siteContext: siteContext
+          )
+          for try await event in self.gatewayClient.streamAsk(
+            systemPrompt: self.promptAssembler.explainSystemPrompt,
+            messages: [ChatTurn(role: .user, content: userText)],
+            reasoningEffort: .low
+          ) {
+            continuation.yield(event)
+          }
+          continuation.finish()
+        } catch {
+          continuation.finish(throwing: error)
+        }
+      }
+      continuation.onTermination = { _ in
+        task.cancel()
+      }
+    }
   }
 
   private func neighborContexts(

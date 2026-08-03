@@ -101,9 +101,11 @@ struct OnDeviceRecognitionTests {
         ],
         relations: [],
         introductions: [
-          introduction("i-near", element: "e1", attraction: "a1", latitude: 30.0, longitude: 120.001),
+          introduction(
+            "i-near", element: "e1", attraction: "a1", latitude: 30.0, longitude: 120.001),
           introduction("i-far", element: "e2", attraction: "a2", latitude: 30.0, longitude: 120.01),
-          introduction("i-outside", element: "e3", attraction: "a2", latitude: 31.0, longitude: 121.0),
+          introduction(
+            "i-outside", element: "e3", attraction: "a2", latitude: 31.0, longitude: 121.0),
         ]
       )
     )
@@ -137,9 +139,12 @@ struct OnDeviceRecognitionTests {
         ],
         relations: [],
         introductions: [
-          introduction("i1", element: "e15", attraction: "att-a", latitude: 30.0, longitude: 120.0005),
-          introduction("i2", element: "e13", attraction: "att-a", latitude: 30.0, longitude: 120.0010),
-          introduction("i3", element: "e14", attraction: "att-b", latitude: 30.0, longitude: 120.0020),
+          introduction(
+            "i1", element: "e15", attraction: "att-a", latitude: 30.0, longitude: 120.0005),
+          introduction(
+            "i2", element: "e13", attraction: "att-a", latitude: 30.0, longitude: 120.0010),
+          introduction(
+            "i3", element: "e14", attraction: "att-b", latitude: 30.0, longitude: 120.0020),
         ]
       )
     )
@@ -218,8 +223,10 @@ struct OnDeviceRecognitionTests {
         attractions: [KnowledgePack.Attraction(key: "att", name: "灵隐寺")],
         relations: [],
         introductions: [
-          introduction("i-root", element: "root", attraction: "att", latitude: 30.0, longitude: 120.0),
-          introduction("i-bound", element: "bound", attraction: "att", latitude: 30.0, longitude: 120.001),
+          introduction(
+            "i-root", element: "root", attraction: "att", latitude: 30.0, longitude: 120.0),
+          introduction(
+            "i-bound", element: "bound", attraction: "att", latitude: 30.0, longitude: 120.001),
         ]
       )
     )
@@ -308,7 +315,8 @@ struct OnDeviceRecognitionTests {
     var invalidCategory = decision()
     invalidCategory.category = "不存在类目"
     #expect(throws: LLMGatewayError.self) {
-      try RecognitionResponseMapper.validate(invalidCategory, candidates: candidates, attractions: [])
+      try RecognitionResponseMapper.validate(
+        invalidCategory, candidates: candidates, attractions: [])
     }
   }
 
@@ -600,8 +608,12 @@ struct OnDeviceRecognitionTests {
       ],
       siteContext: "三潭印月"
     )
-    #expect(explain.contains("分层讲解"))
+    #expect(explain.contains("按用户已有知识调整的文化背景讲解"))
     #expect(explain.contains("knowledge_fragments"))
     #expect(explain.contains("user_knowledge_states"))
+    #expect(assembler.explainSystemPrompt.contains("## 文化背景"))
+    #expect(assembler.explainSystemPrompt.contains("## 下一步建议"))
+    #expect(assembler.explainSystemPrompt.contains("`掌握`"))
+    #expect(assembler.explainSystemPrompt.contains("不要重复识别结论"))
   }
 }

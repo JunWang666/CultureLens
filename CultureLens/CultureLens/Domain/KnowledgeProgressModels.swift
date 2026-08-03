@@ -60,11 +60,9 @@ nonisolated struct KnowledgeCitation: Identifiable, Codable, Hashable, Sendable 
   let fragment: String
 }
 
-/// Layered on-site explanation constrained to knowledge-base fragments.
-nonisolated struct LayeredExplanation: Hashable, Sendable {
-  let conclusion: String
-  let why: String
-  let extensionText: String
+/// Knowledge-aware cultural background constrained to knowledge-base fragments.
+nonisolated struct PersonalizedExplanation: Hashable, Sendable {
+  let markdown: String
   let citations: [KnowledgeCitation]
   let modelIdentifier: String
 }

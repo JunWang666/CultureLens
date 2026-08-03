@@ -198,7 +198,8 @@ nonisolated struct LLMGatewayClient: Sendable {
   /// Streams assistant Markdown tokens from `dynamic/chat` (SSE).
   func streamAsk(
     systemPrompt: String,
-    messages: [ChatTurn]
+    messages: [ChatTurn],
+    reasoningEffort: LLMReasoningEffort? = nil
   ) -> AsyncThrowingStream<ChatStreamEvent, Error> {
     AsyncThrowingStream { continuation in
       let task = Task {
@@ -212,6 +213,7 @@ nonisolated struct LLMGatewayClient: Sendable {
           try await self.streamComplete(
             config: self.chatConfig,
             messages: payload,
+            reasoningEffort: reasoningEffort,
             continuation: continuation
           )
           continuation.finish()
@@ -228,6 +230,7 @@ nonisolated struct LLMGatewayClient: Sendable {
   private func streamComplete(
     config: LLMGatewayConfig,
     messages: [[String: Any]],
+    reasoningEffort: LLMReasoningEffort?,
     continuation: AsyncThrowingStream<ChatStreamEvent, Error>.Continuation
   ) async throws {
     var request = URLRequest(url: config.endpoint)
@@ -237,12 +240,11 @@ nonisolated struct LLMGatewayClient: Sendable {
     request.setValue("Bearer \(config.apiKey)", forHTTPHeaderField: "Authorization")
     request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
 
-    let body: [String: Any] = [
-      "model": config.model,
-      "stream": true,
-      "messages": messages,
-    ]
-    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+    request.httpBody = try Self.streamingRequestBody(
+      model: config.model,
+      messages: messages,
+      reasoningEffort: reasoningEffort
+    )
 
     let (bytes, response) = try await session.bytes(for: request)
     guard let httpResponse = response as? HTTPURLResponse else {
@@ -311,7 +313,8 @@ nonisolated struct LLMGatewayClient: Sendable {
         modelIdentifier = completion.model ?? modelIdentifier
         // Reveal progressively so the UI still streams when the gateway buffers.
         let step = max(8, content.count / 24)
-        var end = content.index(content.startIndex, offsetBy: step, limitedBy: content.endIndex)
+        var end =
+          content.index(content.startIndex, offsetBy: step, limitedBy: content.endIndex)
           ?? content.endIndex
         while true {
           try Task.checkCancellation()
@@ -331,6 +334,22 @@ nonisolated struct LLMGatewayClient: Sendable {
       throw LLMGatewayError.invalidProviderOutput
     }
     continuation.yield(.finished(modelIdentifier: modelIdentifier, content: assembled))
+  }
+
+  static func streamingRequestBody(
+    model: String,
+    messages: [[String: Any]],
+    reasoningEffort: LLMReasoningEffort?
+  ) throws -> Data {
+    var body: [String: Any] = [
+      "model": model,
+      "stream": true,
+      "messages": messages,
+    ]
+    if let reasoningEffort {
+      body["reasoning_effort"] = reasoningEffort.rawValue
+    }
+    return try JSONSerialization.data(withJSONObject: body)
   }
 
   private func complete(
@@ -407,6 +426,10 @@ nonisolated struct ChatTurn: Sendable, Hashable {
 
   let role: Role
   let content: String
+}
+
+nonisolated enum LLMReasoningEffort: String, Sendable {
+  case low
 }
 
 nonisolated enum ChatStreamEvent: Sendable {

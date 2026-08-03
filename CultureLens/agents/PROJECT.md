@@ -20,9 +20,9 @@
 - 当前为 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`），随 App 首装下发；将来移除该设置即切换为按需下载，实现按地域拆包分发。
 - 内置回退：`Resources/KnowledgePackFallback/`（同内容副本，不打 tag），保证首启与离线可用。
 - 运行时：`Services/Knowledge/KnowledgePackLoader.swift` 用 `NSBundleResourceRequest` 优先取 ODR 包，失败回退内置副本。
-- 再生成：`CultureLensBackend/cmd/exportknowledge`（`export -out <dir> -version <bundle-version>`）从数据库导出。
+- 知识包当前以仓库内 JSON 为源；需要更新时直接编辑 `Resources/KnowledgePack/`（及 fallback 副本）并同步 `pack-manifest.json`。
 - 后续可按地域/主题拆多包（每包一个 ODR tag），结构已预留。
 
-## 不再使用的后端能力
+## 已移除的后端
 
-自家后端 `/v1/recognitions` 与 `/v1/attraction-introductions/recommendations` 不再被调用（`RemoteRecognitionService`、`CultureLensAPI` 已删除）。Go 后端保持可运行，供旧版 App 与 admin 使用。
+Go BFF（`CultureLensBackend/`）已从仓库删除。识别与知识检索均在端侧完成；`RemoteRecognitionService`、`CultureLensAPI` 等远程调用路径亦已删除。

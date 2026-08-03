@@ -1,26 +1,15 @@
 # CultureLens
 
-Monorepo for CultureLens: an iOS culture exploration app and its Go recognition / knowledge BFF.
+SwiftUI iOS app for culture exploration: on-device scan recognition, nearby recommendations, knowledge graph, and history.
 
 ## Layout
 
 | Path | Description |
 | --- | --- |
-| [`CultureLens/`](CultureLens/) | SwiftUI iOS app (scan, explore, knowledge graph, history) |
-| [`CultureLensBackend/`](CultureLensBackend/) | Go recognition BFF, PostgreSQL cultural content APIs, admin tooling |
+| [`CultureLens/`](CultureLens/) | SwiftUI iOS app |
 
 ## Quick start
 
-### Backend
-
-```bash
-cd CultureLensBackend
-# see CultureLensBackend/README.md for Postgres, .env, and mock recognition
-MOCK_RECOGNITION=true go run ./cmd/api
-```
-
-### iOS
-
 Open `CultureLens/CultureLens.xcodeproj` in Xcode and run the `CultureLens` scheme.
 
-Agent design notes and project status live under `CultureLens/agents/`.
+Recognition runs on-device against a bundled knowledge pack (`CultureLens/Resources/KnowledgePack/`). Agent design notes and project status live under `CultureLens/agents/`.

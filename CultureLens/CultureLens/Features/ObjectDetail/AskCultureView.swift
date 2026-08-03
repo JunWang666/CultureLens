@@ -1,17 +1,24 @@
 import Combine
-import SwiftUI
+import PhotosUI
 import SwiftStreamingMarkdown
+import SwiftUI
 import UIKit
 
 struct AskCultureView: View {
   let object: CultureObject?
   var rationale: String = ""
+  var initialConversationID: UUID?
 
   @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
+  @Environment(ChatHistoryStore.self) private var chatHistoryStore
   @StateObject private var model = AskCultureChatModel()
   @FocusState private var isComposerFocused: Bool
   @State private var composerTextHeight: CGFloat = 36
   @State private var selectedCitationKey: String?
+  @State private var showHistorySheet = false
+  @State private var showAttachMenu = false
+  @State private var selectedPhoto: PhotosPickerItem?
+  @State private var isPickingPhoto = false
 
   private var isGeneralChat: Bool { object == nil }
   private let chatService = CultureChatService.live()
@@ -31,12 +38,32 @@ struct AskCultureView: View {
         ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
         : "知识库约束"
     )
+    .toolbar {
+      ToolbarItemGroup(placement: .topBarTrailing) {
+        Button {
+          model.startNewConversation()
+        } label: {
+          Image(systemName: "square.and.pencil")
+        }
+        .accessibilityLabel("新对话")
+        .disabled(model.isSending)
+
+        Button {
+          showHistorySheet = true
+        } label: {
+          Image(systemName: "clock")
+        }
+        .accessibilityLabel("历史对话")
+      }
+    }
     .onAppear {
       model.configure(
         object: object,
         rationale: rationale,
         chatService: chatService,
-        knowledgeProgressStore: knowledgeProgressStore
+        knowledgeProgressStore: knowledgeProgressStore,
+        chatHistoryStore: chatHistoryStore,
+        initialConversationID: initialConversationID
       )
     }
     .environment(\.openURL, OpenURLAction { url in
@@ -51,6 +78,50 @@ struct AskCultureView: View {
         ConceptDetailView(concept: concept, elementKey: key)
       } else {
         ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
+      }
+    }
+    .sheet(isPresented: $showHistorySheet) {
+      ChatHistorySheet(
+        objectID: object?.id,
+        activeConversationID: model.conversationID,
+        onSelect: { id in
+          showHistorySheet = false
+          model.loadConversation(id: id)
+        },
+        onDelete: { id in
+          model.deleteConversation(id: id)
+        },
+        onNew: {
+          showHistorySheet = false
+          model.startNewConversation()
+        }
+      )
+      .environment(chatHistoryStore)
+    }
+    .confirmationDialog("添加内容", isPresented: $showAttachMenu, titleVisibility: .visible) {
+      Button("从相册选择图片") {
+        isPickingPhoto = true
+      }
+      if model.pendingImageData != nil {
+        Button("移除已选图片", role: .destructive) {
+          model.clearPendingImage()
+        }
+      }
+      Button("取消", role: .cancel) {}
+    } message: {
+      Text("上传现场照片，结合知识库追问。")
+    }
+    .photosPicker(
+      isPresented: $isPickingPhoto,
+      selection: $selectedPhoto,
+      matching: .images,
+      preferredItemEncoding: .current
+    )
+    .onChange(of: selectedPhoto) { _, item in
+      guard let item else { return }
+      Task {
+        await model.attachPhoto(item)
+        selectedPhoto = nil
       }
     }
   }
@@ -100,8 +171,8 @@ struct AskCultureView: View {
 
       Text(
         isGeneralChat
-          ? "回答会流式渲染，引用整理成卡片展示。"
-          : "围绕当前对象与图谱邻居提问；内容约束在知识库片段内。"
+          ? "回答会流式渲染，可上传图片，历史对话会自动保存。"
+          : "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。"
       )
       .font(.subheadline)
       .foregroundStyle(CultureTheme.inkSecondary)
@@ -133,16 +204,29 @@ struct AskCultureView: View {
         Group {
           switch message.role {
           case .user:
-            Text(message.text)
-              .font(.body)
-              .foregroundStyle(.white)
-              .multilineTextAlignment(.leading)
-              .padding(.horizontal, 14)
-              .padding(.vertical, 10)
-              .background(
-                CultureTheme.cinnabar,
-                in: RoundedRectangle(cornerRadius: 18, style: .continuous)
-              )
+            VStack(alignment: .trailing, spacing: 8) {
+              if let imageData = message.imageData {
+                DataImageView(data: imageData)
+                  .frame(width: 168, height: 168)
+                  .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                  .overlay {
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                      .stroke(CultureTheme.hairline, lineWidth: 1)
+                  }
+              }
+              if !message.text.isEmpty {
+                Text(message.text)
+                  .font(.body)
+                  .foregroundStyle(.white)
+                  .multilineTextAlignment(.leading)
+                  .padding(.horizontal, 14)
+                  .padding(.vertical, 10)
+                  .background(
+                    CultureTheme.cinnabar,
+                    in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+                  )
+              }
+            }
           case .assistant:
             assistantContent(message)
               .padding(.horizontal, 14)
@@ -193,12 +277,45 @@ struct AskCultureView: View {
   /// ChatGPT-style pill composer: + | field | microphone | voice/send.
   private var composer: some View {
     VStack(spacing: 0) {
+      if let pending = model.pendingImageData {
+        HStack(spacing: 12) {
+          DataImageView(data: pending)
+            .frame(width: 56, height: 56)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay {
+              RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(CultureTheme.hairline, lineWidth: 1)
+            }
+
+          VStack(alignment: .leading, spacing: 2) {
+            Text("已附图片")
+              .font(.subheadline.weight(.medium))
+              .foregroundStyle(CultureTheme.inkPrimary)
+            Text("发送时一并交给知识库问答")
+              .font(.caption)
+              .foregroundStyle(CultureTheme.inkSecondary)
+          }
+
+          Spacer(minLength: 0)
+
+          Button {
+            model.clearPendingImage()
+          } label: {
+            Image(systemName: "xmark.circle.fill")
+              .font(.title3)
+              .foregroundStyle(CultureTheme.inkSecondary)
+          }
+          .buttonStyle(.plain)
+          .accessibilityLabel("移除图片")
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 4)
+      }
+
       HStack(alignment: .bottom, spacing: 8) {
         Button {
-          isComposerFocused = true
-          if model.draft.isEmpty, let first = model.suggestions.first {
-            model.draft = first
-          }
+          showAttachMenu = true
         } label: {
           Image(systemName: "plus")
             .font(.system(size: 21, weight: .regular))
@@ -207,7 +324,8 @@ struct AskCultureView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("快捷提问")
+        .disabled(chatService == nil || model.isSending)
+        .accessibilityLabel("添加图片")
 
         ChatComposerTextView(
           text: $model.draft,
@@ -305,6 +423,87 @@ private struct ChatVoiceWaveformIcon: View {
   }
 }
 
+// MARK: - History sheet
+
+private struct ChatHistorySheet: View {
+  let objectID: UUID?
+  let activeConversationID: UUID
+  let onSelect: (UUID) -> Void
+  let onDelete: (UUID) -> Void
+  let onNew: () -> Void
+
+  @Environment(ChatHistoryStore.self) private var chatHistoryStore
+  @Environment(\.dismiss) private var dismiss
+  @State private var refreshID = UUID()
+
+  private var records: [ChatConversationRecord] {
+    _ = refreshID
+    return chatHistoryStore.conversations(objectID: objectID)
+  }
+
+  var body: some View {
+    NavigationStack {
+      Group {
+        if records.isEmpty {
+          ContentUnavailableView(
+            "暂无历史对话",
+            systemImage: "bubble.left.and.bubble.right",
+            description: Text("发送第一条消息后，对话会出现在这里。")
+          )
+        } else {
+          List {
+            ForEach(records, id: \.conversationID) { record in
+              Button {
+                onSelect(record.conversationID)
+              } label: {
+                HStack(alignment: .top, spacing: 12) {
+                  VStack(alignment: .leading, spacing: 4) {
+                    Text(record.title)
+                      .font(.body.weight(.medium))
+                      .foregroundStyle(CultureTheme.inkPrimary)
+                      .lineLimit(2)
+                    Text(record.previewText)
+                      .font(.caption)
+                      .foregroundStyle(CultureTheme.inkSecondary)
+                      .lineLimit(1)
+                    Text(record.updatedAt, format: .dateTime.month().day().hour().minute())
+                      .font(.caption2)
+                      .foregroundStyle(CultureTheme.inkSecondary.opacity(0.8))
+                  }
+                  Spacer(minLength: 0)
+                  if record.conversationID == activeConversationID {
+                    Image(systemName: "checkmark.circle.fill")
+                      .foregroundStyle(CultureTheme.cinnabar)
+                  }
+                }
+              }
+              .buttonStyle(.plain)
+            }
+            .onDelete { indexSet in
+              for index in indexSet {
+                onDelete(records[index].conversationID)
+              }
+              refreshID = UUID()
+            }
+          }
+          .listStyle(.plain)
+        }
+      }
+      .navigationTitle("历史对话")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .cancellationAction) {
+          Button("关闭") { dismiss() }
+        }
+        ToolbarItem(placement: .primaryAction) {
+          Button("新对话", action: onNew)
+        }
+      }
+    }
+    .presentationDetents([.medium, .large])
+  }
+}
+
 // MARK: - Model
 
 @MainActor
@@ -314,11 +513,15 @@ final class AskCultureChatModel: ObservableObject {
   @Published var isSending = false
   @Published var errorMessage: String?
   @Published var scrollTick = 0
+  @Published var pendingImageData: Data?
+  @Published private(set) var conversationID = UUID()
 
   private var object: CultureObject?
   private var rationale = ""
   private var chatService: CultureChatService?
   private weak var knowledgeProgressStore: KnowledgeProgressStore?
+  private weak var chatHistoryStore: ChatHistoryStore?
+  private var didConfigure = false
   private var streamTask: Task<Void, Never>?
 
   var suggestions: [String] {
@@ -337,21 +540,87 @@ final class AskCultureChatModel: ObservableObject {
   }
 
   var canSend: Bool {
-    chatService != nil
-      && !isSending
-      && !draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    guard chatService != nil, !isSending else { return false }
+    let hasText = !draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    return hasText || pendingImageData != nil
   }
 
   func configure(
     object: CultureObject?,
     rationale: String,
     chatService: CultureChatService?,
-    knowledgeProgressStore: KnowledgeProgressStore
+    knowledgeProgressStore: KnowledgeProgressStore,
+    chatHistoryStore: ChatHistoryStore,
+    initialConversationID: UUID?
   ) {
     self.object = object
     self.rationale = rationale
     self.chatService = chatService
     self.knowledgeProgressStore = knowledgeProgressStore
+    self.chatHistoryStore = chatHistoryStore
+    guard !didConfigure else { return }
+    didConfigure = true
+    if let initialConversationID {
+      loadConversation(id: initialConversationID)
+    }
+  }
+
+  func startNewConversation() {
+    streamTask?.cancel()
+    conversationID = UUID()
+    messages = []
+    draft = ""
+    pendingImageData = nil
+    errorMessage = nil
+    isSending = false
+    bumpScroll()
+  }
+
+  func loadConversation(id: UUID) {
+    guard let record = chatHistoryStore?.conversation(id: id) else { return }
+    streamTask?.cancel()
+    isSending = false
+    errorMessage = nil
+    pendingImageData = nil
+    draft = ""
+    conversationID = record.conversationID
+    messages = record.messages.map { persisted in
+      AskChatMessage(
+        id: persisted.id,
+        role: persisted.role == .user ? .user : .assistant,
+        text: persisted.text,
+        imageRelativePath: persisted.imageRelativePath,
+        imageData: ChatMediaStoreSync.data(for: persisted.imageRelativePath),
+        citations: persisted.citations.map(\.asKnowledgeCitation)
+      )
+    }
+    bumpScroll()
+  }
+
+  func deleteConversation(id: UUID) {
+    chatHistoryStore?.delete(id: id)
+    if conversationID == id {
+      startNewConversation()
+    }
+  }
+
+  func clearPendingImage() {
+    pendingImageData = nil
+  }
+
+  func attachPhoto(_ item: PhotosPickerItem) async {
+    do {
+      guard let raw = try await item.loadTransferable(type: Data.self) else {
+        throw ImagePreprocessorError.unreadableImage
+      }
+      let jpeg = try ImagePreprocessor.normalizedJPEG(from: raw)
+      pendingImageData = jpeg
+      errorMessage = nil
+    } catch is CancellationError {
+      return
+    } catch {
+      errorMessage = error.localizedDescription
+    }
   }
 
   func send() async {
@@ -360,22 +629,43 @@ final class AskCultureChatModel: ObservableObject {
       return
     }
     let trimmed = draft.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !trimmed.isEmpty else { return }
+    let imageJPEG = pendingImageData
+    guard !trimmed.isEmpty || imageJPEG != nil else { return }
     guard !isSending else { return }
 
     errorMessage = nil
     isSending = true
     draft = ""
+    pendingImageData = nil
 
     let history = messages.compactMap { message -> ChatTurn? in
-      let text = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+      var text = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+      if message.imageRelativePath != nil || message.imageData != nil {
+        if text.isEmpty {
+          text = "（用户上传了一张图片）"
+        } else if !text.contains("图片") {
+          text += "（附图片）"
+        }
+      }
       guard !text.isEmpty else { return nil }
       return ChatTurn(
         role: message.role == .user ? .user : .assistant,
         content: text
       )
     }
-    messages.append(AskChatMessage(role: .user, text: trimmed))
+
+    var imageRelativePath: String?
+    if let imageJPEG {
+      imageRelativePath = try? await ChatMediaStore.shared.saveJPEG(imageJPEG)
+    }
+
+    let userMessage = AskChatMessage(
+      role: .user,
+      text: trimmed,
+      imageRelativePath: imageRelativePath,
+      imageData: imageJPEG
+    )
+    messages.append(userMessage)
     bumpScroll()
 
     let source = GrowingMarkdownSource()
@@ -402,7 +692,8 @@ final class AskCultureChatModel: ObservableObject {
           knowledgeStore: KnowledgeStore.shared
         ),
         history: history,
-        question: trimmed
+        question: trimmed,
+        imageJPEG: imageJPEG
       ) {
         switch event {
         case .thinking:
@@ -440,6 +731,8 @@ final class AskCultureChatModel: ObservableObject {
         }
       }
 
+      persistConversation()
+
       if let object, let key = object.culturalElementKey {
         let current = knowledgeProgressStore.level(for: object.id, elementKey: key)
         if current == nil || current == .contact {
@@ -459,11 +752,33 @@ final class AskCultureChatModel: ObservableObject {
         } else {
           messages[index].isStreaming = false
           messages[index].streamSource = nil
+          persistConversation()
         }
       }
       errorMessage = error.localizedDescription
     }
     isSending = false
+  }
+
+  private func persistConversation() {
+    let persisted = messages.compactMap { message -> PersistedChatMessage? in
+      guard !message.isStreaming else { return nil }
+      let text = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+      if text.isEmpty, message.imageRelativePath == nil { return nil }
+      return PersistedChatMessage(
+        id: message.id,
+        role: message.role == .user ? .user : .assistant,
+        text: message.text,
+        imageRelativePath: message.imageRelativePath,
+        citations: message.citations.map(PersistedKnowledgeCitation.init)
+      )
+    }
+    guard !persisted.isEmpty else { return }
+    chatHistoryStore?.upsert(
+      conversationID: conversationID,
+      object: object,
+      messages: persisted
+    )
   }
 
   private func updateAssistant(id: UUID, mutate: (inout AskChatMessage) -> Void) {
@@ -473,6 +788,27 @@ final class AskCultureChatModel: ObservableObject {
 
   private func bumpScroll() {
     scrollTick &+= 1
+  }
+}
+
+/// Sync helpers for reading chat media off the actor from the main thread.
+enum ChatMediaStoreSync {
+  static func data(for relativePath: String?) -> Data? {
+    guard let relativePath else { return nil }
+    let fileManager = FileManager.default
+    guard
+      let applicationSupport = try? fileManager.url(
+        for: .applicationSupportDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: false
+      )
+    else { return nil }
+    let url = applicationSupport
+      .appending(path: "CultureLens", directoryHint: .isDirectory)
+      .appending(path: "Chats", directoryHint: .isDirectory)
+      .appending(path: relativePath)
+    return try? Data(contentsOf: url)
   }
 }
 
@@ -489,6 +825,8 @@ struct AskChatMessage: Identifiable, Equatable {
   var isThinking: Bool
   var streamSource: GrowingMarkdownSource?
   var citations: [KnowledgeCitation]
+  var imageRelativePath: String?
+  var imageData: Data?
 
   init(
     id: UUID = UUID(),
@@ -497,7 +835,9 @@ struct AskChatMessage: Identifiable, Equatable {
     isStreaming: Bool = false,
     isThinking: Bool = false,
     streamSource: GrowingMarkdownSource? = nil,
-    citations: [KnowledgeCitation] = []
+    citations: [KnowledgeCitation] = [],
+    imageRelativePath: String? = nil,
+    imageData: Data? = nil
   ) {
     self.id = id
     self.role = role
@@ -506,6 +846,8 @@ struct AskChatMessage: Identifiable, Equatable {
     self.isThinking = isThinking
     self.streamSource = streamSource
     self.citations = citations
+    self.imageRelativePath = imageRelativePath
+    self.imageData = imageData
   }
 
   static func == (lhs: AskChatMessage, rhs: AskChatMessage) -> Bool {
@@ -517,6 +859,8 @@ struct AskChatMessage: Identifiable, Equatable {
       && (lhs.isStreaming || lhs.text == rhs.text)
       && lhs.citations == rhs.citations
       && (lhs.streamSource == nil) == (rhs.streamSource == nil)
+      && lhs.imageRelativePath == rhs.imageRelativePath
+      && (lhs.imageData == nil) == (rhs.imageData == nil)
   }
 }
 
@@ -721,6 +1065,7 @@ private struct FlowSuggestionRow: View {
     AskCultureView(object: SampleCultureData.featured)
   }
   .environment(KnowledgeProgressStore())
+  .environment(ChatHistoryStore())
 }
 
 #Preview("首页问答") {
@@ -728,4 +1073,5 @@ private struct FlowSuggestionRow: View {
     AskCultureView(object: nil)
   }
   .environment(KnowledgeProgressStore())
+  .environment(ChatHistoryStore())
 }

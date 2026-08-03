@@ -12,6 +12,7 @@ struct AppRootView: View {
     @State private var profilePath: [AppRoute] = []
     @State private var sessionStore = ScanSessionStore()
     @State private var knowledgeProgressStore = KnowledgeProgressStore()
+    @State private var chatHistoryStore = ChatHistoryStore()
     @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
     private var historyRecords: [ScanHistoryRecord]
 
@@ -61,9 +62,11 @@ struct AppRootView: View {
         .tint(CultureTheme.cinnabar)
         .environment(\.recognitionService, recognitionService)
         .environment(knowledgeProgressStore)
+        .environment(chatHistoryStore)
         .environment(sessionStore)
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
+            chatHistoryStore.configure(modelContext: modelContext)
         }
     }
 

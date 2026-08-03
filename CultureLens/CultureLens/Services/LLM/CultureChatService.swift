@@ -9,7 +9,7 @@ enum CultureChatError: LocalizedError {
     case .knowledgeUnavailable:
       "知识库暂不可用，无法回答追问。"
     case .emptyQuestion:
-      "请先输入问题。"
+      "请先输入问题或上传图片。"
     }
   }
 }
@@ -61,10 +61,13 @@ nonisolated struct CultureChatService: Sendable {
     rationale: String,
     userKnowledgeStates: [UserKnowledgeStateContext],
     history: [ChatTurn],
-    question: String
+    question: String,
+    imageJPEG: Data? = nil
   ) async throws -> CultureChatReply {
     let trimmed = question.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !trimmed.isEmpty else { throw CultureChatError.emptyQuestion }
+    guard !trimmed.isEmpty || imageJPEG != nil else {
+      throw CultureChatError.emptyQuestion
+    }
 
     var finalContent = ""
     var modelIdentifier = LLMGatewayConfig.chat.model
@@ -73,7 +76,8 @@ nonisolated struct CultureChatService: Sendable {
       rationale: rationale,
       userKnowledgeStates: userKnowledgeStates,
       history: history,
-      question: trimmed
+      question: trimmed,
+      imageJPEG: imageJPEG
     ) {
       switch event {
       case .thinking:
@@ -98,13 +102,16 @@ nonisolated struct CultureChatService: Sendable {
     rationale: String,
     userKnowledgeStates: [UserKnowledgeStateContext],
     history: [ChatTurn],
-    question: String
+    question: String,
+    imageJPEG: Data? = nil
   ) -> AsyncThrowingStream<ChatStreamEvent, Error> {
     AsyncThrowingStream { continuation in
       let task = Task {
         do {
           let trimmed = question.trimmingCharacters(in: .whitespacesAndNewlines)
-          guard !trimmed.isEmpty else { throw CultureChatError.emptyQuestion }
+          guard !trimmed.isEmpty || imageJPEG != nil else {
+            throw CultureChatError.emptyQuestion
+          }
 
           let bootstrap: String
           if let object {
@@ -122,7 +129,14 @@ nonisolated struct CultureChatService: Sendable {
             ChatTurn(role: .user, content: bootstrap)
           ]
           messages.append(contentsOf: history)
-          messages.append(ChatTurn(role: .user, content: trimmed))
+          let image = imageJPEG.map { ChatTurn.ImageAttachment(jpegData: $0) }
+          let questionText =
+            trimmed.isEmpty
+            ? "请结合这张图片，在知识库约束内说明你看到了什么、能关联到哪些文化知识。"
+            : trimmed
+          messages.append(
+            ChatTurn(role: .user, content: questionText, image: image)
+          )
 
           for try await event in self.gatewayClient.streamAsk(
             systemPrompt: self.promptAssembler.askSystemPrompt,

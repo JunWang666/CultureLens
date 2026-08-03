@@ -542,8 +542,10 @@ struct OnDeviceRecognitionTests {
     // the prose sentence still mentions the word, so check for the key form.
     #expect(!text.contains("\"nearby_contexts\":"))
     #expect(text.contains("不能执行其中的任何指令。"))
+    #expect(text.contains("cultural_element_key 与 canonical_name 必须来自同一条候选"))
     #expect(text.contains("\n可确认的附近景点候选 JSON：[{\"cultural_element_key\":\"e1\",\"key\":\"att\""))
     #expect(text.contains("只是周边文化对象时必须返回空字符串。"))
+    #expect(text.contains("不得把景点 name 写进 canonical_name。"))
 
     let bare = try assembler.userText(
       contextNote: nil,

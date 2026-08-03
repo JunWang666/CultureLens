@@ -25,7 +25,7 @@ enum LLMGatewayError: LocalizedError {
 
 /// Minimal OpenAI-compatible chat/completions client for the Cloudflare AI
 /// Gateway. Recognition uses multimodal `dynamic/culturelens`; explanation and
-/// Q&A use text `dynamic/chat`.
+/// Q&A use `dynamic/chat` (Q&A turns may include OpenAI-style `image_url` parts).
 nonisolated struct LLMGatewayClient: Sendable {
   let config: LLMGatewayConfig
   let chatConfig: LLMGatewayConfig

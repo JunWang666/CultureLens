@@ -60,20 +60,23 @@ struct ScanCandidateDetailView: View {
         ZStack {
             CulturePageBackground()
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 24) {
-                    DataImageView(data: session.imageData)
-                        .frame(height: 280)
-                        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-
-                    identity
-                    introductionContent
-                    candidateContext
-                    saveAction
+            SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
+                // 分栏布局下对象名提到左栏顶部（导航栏只显示“候选详情”）
+                if isWide {
+                    Text(object.canonicalName)
+                        .font(.cultureSerif(.largeTitle))
+                        .foregroundStyle(CultureTheme.inkPrimary)
                 }
-                .padding(.horizontal, CultureTheme.pagePadding)
-                .padding(.top, 16)
-                .padding(.bottom, 40)
+
+                DataImageView(data: session.imageData)
+                    .frame(height: isWide ? 340 : 280)
+                    .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+
+                identity(showTitle: !isWide)
+            } trailing: { _ in
+                introductionContent
+                candidateContext
+                saveAction
             }
         }
         .navigationTitle("候选详情")
@@ -96,15 +99,18 @@ struct ScanCandidateDetailView: View {
         }
     }
 
-    private var identity: some View {
+    private func identity(showTitle: Bool) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("附近景点候选", systemImage: "location.fill")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(CultureTheme.cinnabar)
 
-            Text(object.canonicalName)
-                .font(.cultureSerif(.largeTitle))
-                .foregroundStyle(CultureTheme.inkPrimary)
+            // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
+            if showTitle {
+                Text(object.canonicalName)
+                    .font(.cultureSerif(.largeTitle))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+            }
 
             Text(object.category.rawValue)
                 .font(.subheadline)

@@ -7,31 +7,27 @@ struct ConceptDetailView: View {
         ZStack {
             CulturePageBackground()
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+            SplitDetailLayout(topPadding: 32, bottomPadding: 32, contentMaxWidth: 680) { _ in
+                Image(systemName: concept.kind.systemImage)
+                    .font(.largeTitle)
+                    .foregroundStyle(CultureTheme.cinnabar)
+
+                Text(concept.kind.rawValue)
+                    .font(.caption.weight(.semibold))
+                    .tracking(1.2)
+                    .foregroundStyle(CultureTheme.cinnabar)
+
+                Text(concept.name)
+                    .font(.cultureSerif(.largeTitle))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+
+                Text(concept.summary)
+                    .font(.title3)
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                    .lineSpacing(6)
+            } trailing: { _ in
+                if let detail = concept.distinctDetail {
                     VStack(alignment: .leading, spacing: 14) {
-                        Image(systemName: concept.kind.systemImage)
-                            .font(.largeTitle)
-                            .foregroundStyle(CultureTheme.cinnabar)
-
-                        Text(concept.kind.rawValue)
-                            .font(.caption.weight(.semibold))
-                            .tracking(1.2)
-                            .foregroundStyle(CultureTheme.cinnabar)
-
-                        Text(concept.name)
-                            .font(.cultureSerif(.largeTitle))
-                            .foregroundStyle(CultureTheme.inkPrimary)
-
-                        Text(concept.summary)
-                            .font(.title3)
-                            .foregroundStyle(CultureTheme.inkPrimary)
-                            .lineSpacing(6)
-                    }
-
-                    if let detail = concept.distinctDetail {
-                        Divider()
-
                         Text(detail)
                             .font(.body)
                             .foregroundStyle(CultureTheme.inkSecondary)
@@ -41,15 +37,12 @@ struct ConceptDetailView: View {
                             .font(.caption)
                             .foregroundStyle(CultureTheme.inkSecondary)
                     }
-
-                    KnowledgeUnderstandingButton(
-                        nodeID: concept.id,
-                        presentation: .fullWidth
-                    )
                 }
-                .padding(.horizontal, CultureTheme.pagePadding)
-                .padding(.vertical, 32)
-                .frame(maxWidth: 680, alignment: .leading)
+
+                KnowledgeUnderstandingButton(
+                    nodeID: concept.id,
+                    presentation: .fullWidth
+                )
             }
         }
         .navigationTitle(concept.name)

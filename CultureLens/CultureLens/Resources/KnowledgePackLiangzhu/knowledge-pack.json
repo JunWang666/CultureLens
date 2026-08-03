@@ -1,0 +1,893 @@
+{
+  "version": "liangzhu-v1",
+  "elements": [
+    {
+      "key": "liangzhu-culture-overview",
+      "name": "良渚文化总览",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化距今5300年至4000年，是中国新石器时代考古学文化之一，出现并发展于长江下游环太湖地区，共发现500多处遗址，以良渚遗址附近的莫角山为中心区，被视为中国史前文明的重要摇篮。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化最主要的特征是玉器的使用和随葬，包括大件的玉琮、玉璧、玉钺；其中玉琮工艺最精、最具权威性，往往刻有精致的兽面纹，被视为神灵的图象，玉钺则是军权、王权的象征。良渚先民善用石犁耕作，稻米开始成为主要粮食来源，并有原始文字。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化的政治体为酋邦，亦有学者认为已出现国家雏形；它能动员大量劳动力，建造大型祭祀场所、城墙及防洪土墙，社会成员地位分化，形成贵族和普通平民阶层。良渚文化约在距今4000年时消失，其后的马桥文化在农业经济、玉器、聚落形态上都有显著倒退。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看良渚文物时，把目光落在玉琮、玉璧、玉钺的形制与兽面纹上，就能从一件件玉器里读出一个擅长组织劳动力、也崇尚玉礼的史前社会。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-chronology",
+      "name": "良渚的年代与分期",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化的年代，通行说法是距今5300年至4000年；遗址年代的标法则为公元前3300年至公元前2000年，馆内的标牌与书籍多采用这一主口径。"
+          },
+          {
+            "type": "paragraph",
+            "text": "学者意见并不一致：邵望平认为良渚存在于距今5300年至4000年或稍早，历时1200多年；许倬云认为存在于距今5300至4700年，延绵约600年左右；林巳奈夫则认为其繁盛于距今6000至5000年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚之后，马桥文化在农业经济、玉器、聚落形态上都显著倒退；良渚玉器的兽面纹与商代青铜器的饕餮纹有很多共同特点，李学勤认为虽不是直接承袭却有密切的联系，林巳奈夫则认为殷周时代的饕餮纹源自良渚文化的兽面纹。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看年代资料时不必纠结数字：记住“距今5300至4000年”这个约数，再看良渚早于商代、晚于河姆渡，就能在时间里给它排好位置。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-distribution",
+      "name": "环太湖的分布与遗址群",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化分布于长江下游环太湖地区，文化区总面积约36500平方公里，平原面积约占整体面积的六分之五，平均河道密度达每平方公里3至4公里。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚中心分布区为环太湖地区，南临杭州湾及钱塘江北岸，影响及于宁绍平原，东濒于海，向西止于镇江茅山和天目山山地，向北越过长江，极盛时抵达江苏淮北。在良渚文化中期，太湖南岸的良渚遗址群最具优势；到了后期，权力重心移到太湖北岸常州地区的寺墩遗址一带。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚遗址群大致由三个聚落群组成：一级聚落1处，为莫角山遗址；二级聚落9处，面积3至9万平方米；三级聚落30处以上，面积在2万平方米以下。江苏吴江梅堰龙南的一处早期村落，在两万平方米的范围内有12座房屋及18座墓葬。"
+          },
+          {
+            "type": "paragraph",
+            "text": "逛遗址或看展时，可以把“环太湖”作为一把标尺：你看到的每件玉器、每处台地，都来自这片河网密布的太湖平原。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "mojiaoshan-center",
+      "name": "莫角山：良渚的权力中心",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "莫角山遗址是良渚文化的中心所在，东西长670米、南北宽450米，面积达30余万平方米，相对高度约8米，整个良渚遗址群以它为中心、围绕它而分布，可说是政治权力中心。"
+          },
+          {
+            "type": "paragraph",
+            "text": "莫角山台地整体呈长方形覆斗状，高9至15米，为人工堆砌而成；以平台的工程而言，30万平方米的平台估计须用50万立方米的土方，至少要动员60万人日工，若以100日完工计，即须动员6000人连续工作，加上组织和给养人员，共须使用约一万人。"
+          },
+          {
+            "type": "paragraph",
+            "text": "严文明指出，莫角山遗址可能是一国之首都；莫角山台地上发现超过1400平方米的大型夯土基址及柱洞，周围34平方公里范围内密集出现各类大小遗址至少50余处。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在良渚古城遗址公园登上莫角山台地时，先看平台的大致范围，再对比它周围环绕的小遗址，就能体会这处由约一万人之力筑成的台地，为何被称为良渚的权力中心。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-ancient-city",
+      "name": "良渚古城与城墙",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚古城遗址是良渚文化最重要、最具代表性的遗址，被誉为“中华第一城”或“中华五千年文明实证”；城址是良渚古城遗址的核心，由宫殿区、内城与外城组成，占地面积881.45公顷。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宫殿区约0.39平方公里，包括位居内城中心的莫角山台地及其南侧的皇坟山台地、池中寺台地；内城呈圆角长方形，总面积约300公顷，由宽约20至60米的城墙围合而成；外城面积约500公顷，由17处断续分布的人工台地构成，堆筑高度从宫殿区、内城到外城逐步降低。"
+          },
+          {
+            "type": "paragraph",
+            "text": "莫角山、反山和周围的一些小遗址，被夯土城墙所环绕，总面积290万平方米。城墙北面一条长墙与天目山平行，长5公里、宽20-50米，部分用夯土建筑，部分用砂子和卵石堆筑，一些考古学家认为该墙用于防洪。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在遗址公园看城墙时，不妨把它想象成五千年前的工程边界：外城、内城、宫殿逐层收窄，一套秩序就藏在台地的高低里。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-water-system",
+      "name": "良渚水利系统",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚外围水利系统是良渚文化宏大工程中的一环，由谷口高坝、平原低坝与山前长堤组成，展现了中国最早的一批水利营建。"
+          },
+          {
+            "type": "paragraph",
+            "text": "谷口高坝位于城址西北的大遮山南麓，占地面积约136.41公顷，水坝共6条，分东西两组，坝体长度约50-200米，坝顶海拔高度25-40米；平原低坝位于谷口高坝南约3.5公里的山丘间，坝体长度约35-360米，坝顶海拔高度约10米；山前长堤又称塘山遗址，位于古城北侧，全长约5公里，坝宽20-50米。2015年，良渚古城外围水利工程的调查与发掘被评为全国十大考古新发现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "许倬云认为，良渚文化的复杂社会体系是因应集体合作治水的需求而产生，不是出于武力的征服。这套水利系统与莫角山、城墙等工程一起，说明良渚能够动员大量劳动力组织治水。"
+          },
+          {
+            "type": "paragraph",
+            "text": "到遗址公园时，别只在城内走，留意城北拉开的坝堤轮廓；它们与城墙、台地一起，构成了良渚人治水与聚居的完整图景。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "fanshan-cemetery",
+      "name": "反山贵族墓地",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "反山贵族墓地位于良渚古城附近，是一座人工堆筑修整过的高台墓地，东西约100米、南北约30米，各墓均有墓坑，随葬品以玉器为主，总计有千件。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山第20号墓随葬玉器总计达547件，应为最高首领的墓葬。反山第12号墓出土了重达3500克、刻有精致兽面纹的玉琮，被视为“琮王”，同时出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米、头尾两端安有玉件，是军权、王权的象征。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山、瑶山大墓出土的玉器都是真玉，与次一等墓地的用玉形成对比；严文明认为，反山和瑶山的贵族墓地可能就是良渚“王国”的王陵。反山遗址与瑶山遗址于1989年2月被评为“七五”期间全国十大考古新发现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在遗址公园的反山保护区，可以沿一处百来米的台地来回走走，体会随葬玉器在这里的高度集中——一座台地之下，埋着一位位首领与他们的玉礼世界。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "yaoshan-altar",
+      "name": "瑶山祭坛与墓葬",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "瑶山遗址位于良渚古城东北约5公里，占地约66.56公顷，有一座正南北方向、呈方形的祭坛，用于举行重大祭祀活动，祭坛废弃后成为一处高等级贵族墓地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "瑶山墓地原是一处20米见方、2米高的祭坛，从坛面上清理出12座殉玉墓。瑶山墓葬位于祭坛南侧，分两排排列，南排7座、北排6座，均为长方形竖穴土坑墓，头部朝向正南方；瑶山墓地亦与天文观象测年有关。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚的兽面纹与这场祭坛有紧密联系：玉琮、兽面、祭坛一同彰示着良渚的神权性质。瑶山遗址与反山遗址一样，于1989年2月被评为“七五”期间全国十大考古新发现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "走到瑶山祭坛，先看那方形的坛面与向南排列的墓坑，再想它从“祭坛到墓地”的身份转变，一处神权与权力交织的空间就浮现出来。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jade-cong-wang",
+      "name": "玉琮王",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "玉琮王出土于反山第12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，因体量与工艺均为良渚玉器之冠而被视为“琮王”，是良渚博物院与浙江省博物馆共同呈现的重要国宝。"
+          },
+          {
+            "type": "paragraph",
+            "text": "琮是祭地的礼器，外型方内洞圆。玉琮王满布的精雕兽面纹，体现出良渚玉器“在一毫米的间隔中需通过三道阴线”的细致工艺；正因如此，这类玉器必定由脱离农业劳动生产的专职、甚至是世袭的工匠制作。"
+          },
+          {
+            "type": "paragraph",
+            "text": "玉琮王被列入禁止出国（境）展览文物名录，也曾在《浙江一万年》等陈列中展出；它是良渚玉礼体系与神权色彩的集中体现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看玉琮王时，先看它整体的分量和外方内圆的形制，再看满布器面的兽面纹——它既是工艺的极致，也是一件首领墓里沟通天地的权力之物。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jade-cong-ritual",
+      "name": "琮：沟通天地的礼器",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型状似笔筒，外型方内洞圆；最早的玉琮见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”等。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚的玉琮内侧为圆柱形中空，中空部分被认为是连通天神与地神的通道。林巳奈夫认为琮上兽面代表日神或火神，李学勤则认为兽面是龙；而对琮用途的认识，甚至到清代乾隆皇帝时期都尚未定论，乾隆曾把出土的琮当作搬运重物的配重品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看馆中玉琮时，先记住“外方内圆”四个字：方为地、圆为天，一件琮就把古人对天地秩序的想象握在了手里。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jade-bi",
+      "name": "玉璧",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "玉璧是圆形、中有圆孔的扁玉器，与玉琮同为良渚最重要的礼器之一，常与玉琮配合出现在祭祀与随葬之中。"
+          },
+          {
+            "type": "paragraph",
+            "text": "玉璧用于祭祀及驱邪，也是财富的象征；良渚墓葬中常与玉琮、玉钺并见，如江苏武进寺墩出土的大墓随葬品多达124件，其中有33件玉琮、24件玉璧。古人以圆璧祭天。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚的玉璧有的光素无纹，有的刻有鸟纹，或刻有庄重而复杂、类似族徽的图案，反映出良渚玉器多样而制度化的用途。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看玉璧时，注意它与玉琮一圆一方的对比——“圆璧祭天、方琮祭地”，这套成对出现的玉礼器，就是良渚人宇宙观的一角。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jade-yue",
+      "name": "玉钺与军权王权",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "玉钺按武器石钺制成，在良渚是军权、王权的象征，是贵族墓葬中仅次于玉琮的权威玉器。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山第12号墓出土的一件玉钺制作精良，被视为“钺王”，有70-80厘米长、镶嵌玉粒的木柄，木柄头尾两端安有玉件，玉钺横嵌入柄中，是军权、王权的象征。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚的政治体为酋邦或早期国家，能动员大量劳动力；玉钺代表的军事权力，与玉琮所代表的神权并行，构成良渚权力体系的一对支柱。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在展厅找到玉钺时，先看它的刃部与孔眼特征，再想它原本嵌在镶玉的木柄上——这件玉器不只是权力的声明，也是持钺者地位的直接证明。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "god-man-beast-mask",
+      "name": "神人兽面纹",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "神人兽面纹（兽面纹）是良渚玉器上最经典的纹样，常刻在玉琮、玉钺的器面或玉饰上，被视为良渚“神灵的图象”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "兽面有猫头鹰卵形的眼睛，内外眼角下垂，头上覆盖着舒展开的羽冠，头呈倒梯形；一小部分兽面纹是人面与兽面组合而成，表现“人兽合一”。其精细程度极高，有的在一毫米的间隔中需通过三道阴线。"
+          },
+          {
+            "type": "paragraph",
+            "text": "林巳奈夫认为琮上兽面代表日神或火神，崇拜日神与稻作地区稻米离不开太阳的光热有关，羽冠代表鸟的翅膀，也象征太阳光线；李学勤则认为兽面是龙。这纹样与商代青铜器的饕餮纹有许多共同特点。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看神人兽面纹时，先找那对下垂的眼角与舒展的羽冠，再想这种“神灵图象”反复出现在玉琮上，它就是良渚神权在器物上最直观的落地。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jade-crafting",
+      "name": "良渚玉器工艺与玉料来源",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚玉器的玉材主要出自江苏溧阳天目山余脉小梅岭的透闪石矿；良渚遗址群的塘山背遗址及江苏句容丁沙地等遗址都发现有玉器加工作坊。"
+          },
+          {
+            "type": "paragraph",
+            "text": "余杭塘山遗址有玉器作坊，出土了400多件石质制玉工具，包括砺石、切磋石和雕刻用石，还有玉质残料100多件，大部分留有制作加工的痕迹，此外发现了三处石块砌筑的作坊遗址。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚玉器的制作极为繁复困难，特别是极为繁缛的兽面纹，一毫米的间隔中需通过三道阴线；这样的玉器必定由脱离农业劳动生产的专职、甚至是世袭的工匠生产，说明良渚社会已分化出专门的手工业者。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看玉器时，先想它从溧阳的矿到作坊里的多道工序——一块透闪石，正是良渚手工业专业化最有力的证据。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-pottery",
+      "name": "良渚陶器",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化的陶器以磨光黑陶著称，最能让人联想到它与山东龙山文化的呼应；这也是良渚考古一开始就引人注目的遗物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚陶器以灰黑陶为主，辅以夹砂红陶，盛行圈足和平底，制作使用了快轮技术；器形有壶、罐、豆、盘等，以磨光的黑陶最为引人注目。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化的遗物在1930年代发现，特征是一种磨光黑陶，曾被称“龙山文化的杭州湾区”“浙江龙山文化”；黑陶正是良渚前期被辨识的重要特征之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看良渚陶器时，先注意黑陶的磨光与快轮器形，再去对照陶器的圈足平底——一件灰黑陶器，往往比玉器更能说明良渚人日常的手艺。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "rice-agriculture",
+      "name": "稻作农业",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "稻作农业是良渚文化的经济基础，良渚先民善用石犁耕作，稻米开始成为主要粮食来源，使它成为中国史前稻作文明的重要代表。"
+          },
+          {
+            "type": "paragraph",
+            "text": "经济上良渚发展集约式稻作农业，出现三角形石犁和破土器等新农具，犁耕代替了耜耕；考古还发现一种名为“千篰”的工具，用来往水田放水和泥、平整田泥；良渚文化亦出现家猪等家畜。"
+          },
+          {
+            "type": "paragraph",
+            "text": "世界遗产委员会指出，良渚是“以稻作农业为经济基础”的早期区域国家；良渚文化的消亡，也有学者提出农业恶化说等解释。这种能满足大规模集约农业、同时治水防洪的经济，正是良渚复杂社会的基础。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看展时，把石犁、破土器、千篰这组农具与城墙、水利系统并读，就能明白良渚的玉权和王权，其实是建立在成片稻田之上的。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-society",
+      "name": "神权与社会分化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化属神权体制，社会成员地位分化，形成贵族和普通平民阶层，这正是良渚呈现“早期国家”形态的重要表现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化的政治体为酋邦，亦有学者认为已出现国家雏形；它能动员大量劳动力建造祭祀场所、城墙与防洪土墙。神权色彩浓厚，宗教是良渚社会运行的重要支柱。"
+          },
+          {
+            "type": "paragraph",
+            "text": "社会分层也体现在用玉制度上：反山、瑶山大墓出土的玉器都是真玉，福泉山真玉居多而杂有假玉，海宁荷叶地用玉基本上真假掺半；反山、瑶山的墓主是上层贵族，荷叶地发现的16座墓葬属次一等的贵族，陪葬玉器在数量和质量上都较逊色。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看墓葬出土的玉器时，把真假玉的等级、贵族与平民的差别在心里排一个序，良渚神权之下的社会金字塔就不言自明了。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "silk-and-weaving",
+      "name": "丝帛与纺织",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化的另一项成果是丝帛的问世，这是它留给后世的珍贵遗产，钱山漾的丝带与丝帛正是最直接的见证。"
+          },
+          {
+            "type": "paragraph",
+            "text": "考古工作者在钱山漾发现了装在竹篚中的丝带和丝帛，是中国早期养蚕缫织的重要实物，与良渚的稻作、家畜饲养一起构成当时较为多样的经济生活。"
+          },
+          {
+            "type": "paragraph",
+            "text": "此外，瑶山等墓地的随葬器物也透出纺织的影子：瑶山墓葬北列随葬玉璜、纺车，与南列随葬玉琮、玉钺相对，被视为男女性的差异。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看馆藏丝织品与相关随葬物时，可以想象那缕从竹篚里带到今天的丝帛：五千年前，江南的水乡就已经开始养蚕织丝。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-symbols",
+      "name": "刻符与原始文字",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化已有形成中的文字或原始文字，虽不是成熟的文字体系，但已出现可识的符号，是理解良渚“文明”进程的钥匙之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "李学勤曾释出“鸟”“炅”“封”“燕”“山”等14个字，有些符号与大汶口文化的陶器符号相似；2013年，考古学者徐新民在整理浙江平湖庄桥坟遗址文物时，又发现了更多文字符号。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这些刻符常出现在玉器、陶器等器物上，表明良渚人在造型之外也开始用符号表达事物，是中国早期文字的形态之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在展品上寻找那些刻画的鸟类、尖形符号时，不妨想：五千年前的人已经用线条在记录语言——这比许多地区迈出了更早的一步。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "shi-xingeng-discovery",
+      "name": "施昕更与良渚的发现",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "施昕更（1912年—1939年），生于浙江省杭县（今余杭区）良渚镇，是地质矿物学家、考古学家，也是良渚遗址最早的科考发掘者，被誉为“良渚文化探索先驱的杰出代表”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1936年5月31日，施昕更受西湖博物馆之命参与试掘古荡遗址，因注意到挖掘中搜集的一些石器“在我故乡已经司空见惯”，次日就回到良渚一带寻找新石器时代遗址的线索；1936年11月3日，他在良渚镇附近棋盘坟一个池底发现两件黑色有光的陶片。"
+          },
+          {
+            "type": "paragraph",
+            "text": "施昕更于1936年12月至1937年3月间在良渚一带进行了三次试掘，发现茅庵里、棋盘坟等12处遗址；1937年4月完成《良渚：杭县第二区黑陶文化遗址初步报告》一书，1938年8月由上海中国科学公司出版。1939年5月29日，施昕更因患猩红热并发腹膜炎去世，年仅28岁。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在良渚博物院看“发现求真”的部分时，这位28岁就病逝的青年考古者是这段历史的起点；他找到的那两片黑陶，竟揭开了一片江南史前文明。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-museum",
+      "name": "良渚博物院",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚博物院位于浙江省杭州市余杭区良渚街道美丽洲公园内，是一座展览、陈列、研究良渚文化的专题类博物馆，前身为1994年成立开馆的良渚文化博物馆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "新馆于2005年3月动工、2008年10月对外开放，由英国建筑师戴卫·奇普菲尔德设计，设计理念为“一把玉锥散落地面”，建筑由四个不完全平行的长条形体块组成。新馆占地约4万平方米，建筑面积约1万平方米，展览面积4000多平方米，设有3个常规展厅、1个临时展厅及文物库房。"
+          },
+          {
+            "type": "paragraph",
+            "text": "基本陈列总主题为“良渚文化实证中华五千年文明”，分“发现求真”“良渚古国”“良渚文明”三部分，展出良渚文化玉器、陶器、漆器等珍贵文物1000余件；2009年，该陈列获第八届全国博物馆十大陈列展览精品奖。2017年8月，馆方根据最新考古成果对基本陈列改造升级，于2018年6月重新开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "参观时按“发现求真—良渚古国—良渚文明”的顺序走，三个部分正好对应“考古发现—古国复原—文明价值”，是最顺的阅读路线。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "site-park",
+      "name": "良渚古城遗址公园",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚古城遗址公园是以良渚古城遗址为中心的考古遗址公园，你可以在这一片被列入世界遗产的土地上，直接看到五千年前的城、墙、水利与王陵。"
+          },
+          {
+            "type": "paragraph",
+            "text": "公园依托良渚古城遗址修建，涵盖宫殿区莫角山台地、内城外城、外围水利系统以及反山贵族墓地等核心区域；良渚遗址于2010年10月9日由国家文物局公布为首批国家考古遗址公园。这里是实证中华五千多年文明史的集中现场。"
+          },
+          {
+            "type": "paragraph",
+            "text": "游览时，提前把莫角山台地（约30公顷）与反山王陵的位置标在地图上，一边走一边对照城内外水系与宫殿区的位置，就能避免只看零散的台地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "走在这片原野上，试着把莫角山—外城—内城的台地高低看成一张肉眼可见的梯度：这恐怕是理解良渚“早期城市”最直观的方式。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "world-heritage-status",
+      "name": "世界遗产：中华五千年文明实证",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "2019年7月6日，良渚古城遗址因符合世界遗产基准（iii）、（iv），被联合国教科文组织列入《世界遗产名录》，是实证中华五千多年文明史的圣地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚遗址于1994年被列入中国申报世界文化遗产预备名单，1996年被列为第四批全国重点文物保护单位，2010年由国家文物局公布为首批国家考古遗址公园；2019年7月6日正式列入世界遗产名录，2020年起，每年7月6日（良渚列入世界遗产名录日）被定为“杭州良渚日”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "世界遗产委员会给出的理由：良渚是中国新石器时代晚期以稻作农业为经济基础、社会分化和信仰统一的早期区域国家的杰出见证，也完好展示了从新石器社会向大型综合政治单元的政治过渡。"
+          },
+          {
+            "type": "paragraph",
+            "text": "逛良渚时，常听到“五千年文明”的说法，这并非一句口号，而是联合国教科文组织对这片水乡遗址的正式认证；你脚下的土地，正在与中华文明的源头对话。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "hemudu-comparison",
+      "name": "良渚与河姆渡",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "河姆渡文化与良渚文化同为浙江新石器时代的重要考古学文化，但时间有先后：河姆渡大约距今6000年至7000年，良渚距今5300年至4000年，两者在时间上前后相接。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡以人工栽培的水稻、干栏式建筑、中国最早的木制饰品与漆器为代表，石器数量较少，多的是木器和骨器；良渚则以玉礼器、城墙水利、石犁稻耕和原始文字为代表，出现了专业化分工与阶级分化。"
+          },
+          {
+            "type": "paragraph",
+            "text": "如果把河姆渡看作“稻作的奠基”，良渚则是“稻作与王权的结合”；两者在农业传承与生活方式上，构成一条江南地区连续的发展线索。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在良渚展厅看到石犁、玉器时，试着想想河姆渡时期更朴素的骨耜与漆器——一段从“稻之家园”到“稻之城邦”的变化，就在你脑海里贯通了。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "contemporary-cultures",
+      "name": "同时期的中华文明星光",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚所处的时代，并非只有这一支文化；在中国北方和长江流域，同时活跃着红山文化、凌家滩文化等，共同构成中华文明起源阶段的“满天星光”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "红山文化是中国北方以农业为主的新石器时代文化，年代为公元前4700年至公元前2900年，其玉龙有“中华第一龙”之誉，为禁止出境展览文物；凌家滩文化分布于长江中下游的巢湖地区，凌家滩遗址约5000多年前为一处大型新石器时代晚期聚落，发现有祭坛与大型氏族墓地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这些文化在玉器、祭坛、神权上多有相似之处——如红山玉龙、凌家滩玉器与良渚玉琮，提醒我们“中华文明”是由多地相互影响、共同滋生的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看到良渚以外，不妨把视野拉到红山玉龙与凌家滩祭坛上：良渚只是这片星光里最亮的那一束，而并非唯一。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-in-zhejiang-museum",
+      "name": "浙博里的良渚",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在浙江省博物馆（之江馆区）的《浙江一万年》陈列中，良渚文化的若干重宝被放在显要位置，是浙江人的“玉礼”记忆最重要的开篇。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙博的收藏中有河姆渡的陶器、玉器和丝织品，也有良渚的玉器等；十大镇馆之宝中包括“良渚文化·玉琮”，而禁止出国（境）展览文物名录中，也包括浙江省文物考古研究所的良渚出土玉琮王。"
+          },
+          {
+            "type": "paragraph",
+            "text": "若你已逛过良渚博物院，就能在浙博里认出这些同出于墓地的玉器体系；若尚未去过，良渚古国也在这里作最友好的一站介绍。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博看良渚时，把它和《浙江一万年》的参观路线连在一起，从玉琮王到良渚玉琮，一条浙江最早的文明线索就铺出来了。"
+          }
+        ]
+      }
+    }
+  ],
+  "relations": [
+    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-chronology"},
+    {"elementKey": "liangzhu-chronology", "relatedElementKey": "liangzhu-culture-overview"},
+    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-distribution"},
+    {"elementKey": "liangzhu-distribution", "relatedElementKey": "liangzhu-culture-overview"},
+    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "world-heritage-status"},
+    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-culture-overview"},
+    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-society"},
+    {"elementKey": "liangzhu-society", "relatedElementKey": "liangzhu-culture-overview"},
+    {"elementKey": "liangzhu-chronology", "relatedElementKey": "rice-agriculture"},
+    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-chronology"},
+    {"elementKey": "liangzhu-chronology", "relatedElementKey": "shi-xingeng-discovery"},
+    {"elementKey": "shi-xingeng-discovery", "relatedElementKey": "liangzhu-chronology"},
+    {"elementKey": "liangzhu-chronology", "relatedElementKey": "contemporary-cultures"},
+    {"elementKey": "contemporary-cultures", "relatedElementKey": "liangzhu-chronology"},
+    {"elementKey": "liangzhu-distribution", "relatedElementKey": "mojiaoshan-center"},
+    {"elementKey": "mojiaoshan-center", "relatedElementKey": "liangzhu-distribution"},
+    {"elementKey": "mojiaoshan-center", "relatedElementKey": "liangzhu-ancient-city"},
+    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "mojiaoshan-center"},
+    {"elementKey": "mojiaoshan-center", "relatedElementKey": "site-park"},
+    {"elementKey": "site-park", "relatedElementKey": "mojiaoshan-center"},
+    {"elementKey": "mojiaoshan-center", "relatedElementKey": "fanshan-cemetery"},
+    {"elementKey": "fanshan-cemetery", "relatedElementKey": "mojiaoshan-center"},
+    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "liangzhu-water-system"},
+    {"elementKey": "liangzhu-water-system", "relatedElementKey": "liangzhu-ancient-city"},
+    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "world-heritage-status"},
+    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-ancient-city"},
+    {"elementKey": "liangzhu-water-system", "relatedElementKey": "rice-agriculture"},
+    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-water-system"},
+    {"elementKey": "liangzhu-water-system", "relatedElementKey": "world-heritage-status"},
+    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-water-system"},
+    {"elementKey": "liangzhu-water-system", "relatedElementKey": "liangzhu-society"},
+    {"elementKey": "liangzhu-society", "relatedElementKey": "liangzhu-water-system"},
+    {"elementKey": "fanshan-cemetery", "relatedElementKey": "yaoshan-altar"},
+    {"elementKey": "yaoshan-altar", "relatedElementKey": "fanshan-cemetery"},
+    {"elementKey": "fanshan-cemetery", "relatedElementKey": "jade-cong-wang"},
+    {"elementKey": "jade-cong-wang", "relatedElementKey": "fanshan-cemetery"},
+    {"elementKey": "fanshan-cemetery", "relatedElementKey": "site-park"},
+    {"elementKey": "site-park", "relatedElementKey": "fanshan-cemetery"},
+    {"elementKey": "yaoshan-altar", "relatedElementKey": "liangzhu-society"},
+    {"elementKey": "liangzhu-society", "relatedElementKey": "yaoshan-altar"},
+    {"elementKey": "yaoshan-altar", "relatedElementKey": "god-man-beast-mask"},
+    {"elementKey": "god-man-beast-mask", "relatedElementKey": "yaoshan-altar"},
+    {"elementKey": "jade-cong-wang", "relatedElementKey": "jade-cong-ritual"},
+    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-cong-wang"},
+    {"elementKey": "jade-cong-wang", "relatedElementKey": "liangzhu-museum"},
+    {"elementKey": "liangzhu-museum", "relatedElementKey": "jade-cong-wang"},
+    {"elementKey": "jade-cong-wang", "relatedElementKey": "liangzhu-in-zhejiang-museum"},
+    {"elementKey": "liangzhu-in-zhejiang-museum", "relatedElementKey": "jade-cong-wang"},
+    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-bi"},
+    {"elementKey": "jade-bi", "relatedElementKey": "jade-cong-ritual"},
+    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-crafting"},
+    {"elementKey": "jade-crafting", "relatedElementKey": "jade-cong-ritual"},
+    {"elementKey": "jade-bi", "relatedElementKey": "jade-yue"},
+    {"elementKey": "jade-yue", "relatedElementKey": "jade-bi"},
+    {"elementKey": "jade-yue", "relatedElementKey": "liangzhu-society"},
+    {"elementKey": "liangzhu-society", "relatedElementKey": "jade-yue"},
+    {"elementKey": "jade-crafting", "relatedElementKey": "god-man-beast-mask"},
+    {"elementKey": "god-man-beast-mask", "relatedElementKey": "jade-crafting"},
+    {"elementKey": "jade-crafting", "relatedElementKey": "liangzhu-symbols"},
+    {"elementKey": "liangzhu-symbols", "relatedElementKey": "jade-crafting"},
+    {"elementKey": "liangzhu-pottery", "relatedElementKey": "rice-agriculture"},
+    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-pottery"},
+    {"elementKey": "liangzhu-pottery", "relatedElementKey": "hemudu-comparison"},
+    {"elementKey": "hemudu-comparison", "relatedElementKey": "liangzhu-pottery"},
+    {"elementKey": "silk-and-weaving", "relatedElementKey": "rice-agriculture"},
+    {"elementKey": "rice-agriculture", "relatedElementKey": "silk-and-weaving"},
+    {"elementKey": "silk-and-weaving", "relatedElementKey": "hemudu-comparison"},
+    {"elementKey": "hemudu-comparison", "relatedElementKey": "silk-and-weaving"},
+    {"elementKey": "liangzhu-symbols", "relatedElementKey": "god-man-beast-mask"},
+    {"elementKey": "god-man-beast-mask", "relatedElementKey": "liangzhu-symbols"},
+    {"elementKey": "shi-xingeng-discovery", "relatedElementKey": "liangzhu-museum"},
+    {"elementKey": "liangzhu-museum", "relatedElementKey": "shi-xingeng-discovery"},
+    {"elementKey": "liangzhu-museum", "relatedElementKey": "site-park"},
+    {"elementKey": "site-park", "relatedElementKey": "liangzhu-museum"},
+    {"elementKey": "liangzhu-museum", "relatedElementKey": "liangzhu-in-zhejiang-museum"},
+    {"elementKey": "liangzhu-in-zhejiang-museum", "relatedElementKey": "liangzhu-museum"},
+    {"elementKey": "site-park", "relatedElementKey": "world-heritage-status"},
+    {"elementKey": "world-heritage-status", "relatedElementKey": "site-park"},
+    {"elementKey": "hemudu-comparison", "relatedElementKey": "contemporary-cultures"},
+    {"elementKey": "contemporary-cultures", "relatedElementKey": "hemudu-comparison"}
+  ],
+  "attractions": [
+    {"key": "liangzhu-museum", "name": "良渚博物院"},
+    {"key": "liangzhu-site-park", "name": "良渚古城遗址公园"},
+    {"key": "yaoshan-site-park", "name": "瑶山遗址公园"}
+  ],
+  "introductions": [
+    {
+      "key": "liangzhu-museum.cong-wang-hall",
+      "name": "玉琮王展厅",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在良渚博物院的展厅，把目光收拢到那件外方内圆的玉琮王上。看它时，先看它满布器面的兽面纹，再想这件仅从反山12号墓出土的重器，如何在玉礼体系中坐上“王”的位子。"
+          },
+          {
+            "type": "paragraph",
+            "text": "玉琮王出土于反山第12号墓，重达3500克，刻有极为精致的兽面纹，被学界视为“琮王”；与之同墓还出土了一件被视为“钺王”的玉钺。琮是祭地的礼器，外方内圆，良渚玉琮被视为连通天神与地神的通道。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这对“玉器之王”也见于浙江省博物馆的收藏体系，玉琮王更列入禁止出国（境）展览文物名录。在博物院看时，可同时留意展柜旁关于反山王陵的说明，把墓与器连起来读。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“外方为地、内圆为天”——如果你在博物院只记住一件，记住“玉琮王”三个字和它握住的天地方圆，也就把良渚最核心的玉礼记得差不多了。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-cong-wang",
+      "attractionKey": "liangzhu-museum",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "liangzhu-museum.discovery-history",
+      "name": "发现求真：考古历程",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚博物院的“发现求真”部分，对应“发现求真—良渚古国—良渚文明”三段陈列的开头，从这里可以一路读懂良渚是如何被“看见”的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚遗址发现于1936年，西湖博物馆的施昕更在余杭良渚附近棋盘坟发现黑色有光的陶片，并进行了三次试掘，1938年出版《良渚》；1959年，考古学家夏鼐将这一文化命名为“良渚文化”。其后反山、瑶山、莫角山的一次次发掘，构成了良渚认识的里程碑。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这段历程里有不少节点：1991年汇观山、1993年莫角山、2007年古城发现、2015年外围水利调查等，多次获评全国十大考古新发现。你走过的这几步展厅，对应的正是几十年的田野考古。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这段时，把“1936—1959—2019”几个年份在心里立成一支时间轴，那么从一片黑陶到世界遗产，这片江南土地的发掘故事就有了层次。"
+          }
+        ]
+      },
+      "culturalElementKey": "shi-xingeng-discovery",
+      "attractionKey": "liangzhu-museum",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "liangzhu-site-park.mojiaoshan",
+      "name": "莫角山台地",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "遗址公园的中心，是一座东西约670米、南北约450米的长方形高台——莫角山台地。站上它，可以清楚看到它比周围平地高出9至15米的轮廓。"
+          },
+          {
+            "type": "paragraph",
+            "text": "莫角山台地的面积约30公顷，为人工堆砌而成，估计须用50万立方米的土方、动员约一万人参与；严文明认为这里可能是良渚“王国”的都城。"
+          },
+          {
+            "type": "paragraph",
+            "text": "绕台地一圈，你可以在平原上用视线丈量出宫殿区—内城—外城逐级降低的形态，感受这座“中华第一城”都城的布局。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“既高且大的人工台地，正是一个需动员万人的早期国家的中心”——看着空旷台面上的草与风，你会慢慢读懂这句话。"
+          }
+        ]
+      },
+      "culturalElementKey": "mojiaoshan-center",
+      "attractionKey": "liangzhu-site-park",
+      "latitude": 30.39666667,
+      "longitude": 119.98527778
+    },
+    {
+      "key": "liangzhu-site-park.fanshan",
+      "name": "反山王陵",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "公园里的反山遗址，是良渚贵族墓地中王陵级别的高台墓地，东西约100米、南北约30米，是一处人工堆筑修整过的台地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山的随葬品以玉器为主，总计有千件，其中第20号墓随葬玉器达547件，应为最高首领的墓葬；第12号墓出土了玉琮王与玉钺王。严文明认为这里可能正是良渚王陵所在。"
+          },
+          {
+            "type": "paragraph",
+            "text": "参观时，可以把它与同公园里的莫角山台地对照：一座高台是都城宫殿，一座高台是贵族王陵，两者合起来，才构成“良渚王国”的立体图景。"
+          },
+          {
+            "type": "paragraph",
+            "text": "站在反山台地上，想一想那“547件玉器”——一座台地之下，就是一个由玉堆成的权力世界。"
+          }
+        ]
+      },
+      "culturalElementKey": "fanshan-cemetery",
+      "attractionKey": "liangzhu-site-park",
+      "latitude": 30.39666667,
+      "longitude": 119.98527778
+    },
+    {
+      "key": "yaoshan-site-park.altar",
+      "name": "瑶山祭坛与墓地",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "瑶山遗址公园位于良渚古城东北约5公里处，遗址中央是一座正南北方向、呈方形的祭坛，曾用于重大祭祀，祭坛废弃后成为贵族墓地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "祭坛原是一处20米见方、2米高的高台，从坛面上清理出12座殉玉墓，墓葬位于祭坛南侧分两排排列，均为长方形竖穴土坑墓，头部朝向正南方；瑶山墓地亦与天文观象测年有关。这是一处与神权、祭礼紧密相连的空间。"
+          },
+          {
+            "type": "paragraph",
+            "text": "瑶山与反山于1989年2月被评为“七五”期间全国十大考古新发现；作为祭坛兼墓地，它正体现了良渚社会“玉、祭、权”的结合。"
+          },
+          {
+            "type": "paragraph",
+            "text": "到访瑶山时，先找那方形的坛形轮廓，再南望排列整齐的墓坑——神坛与逝者同在一地，正是良渚神权最直接的一页。"
+          }
+        ]
+      },
+      "culturalElementKey": "yaoshan-altar",
+      "attractionKey": "yaoshan-site-park",
+      "latitude": 30.371,
+      "longitude": 119.936
+    }
+  ],
+  "manifest": {
+    "packVersion": "liangzhu-v1",
+    "generatedAt": "2026-08-03T16:00:00Z"
+  }
+}

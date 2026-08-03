@@ -1,0 +1,1745 @@
+{
+  "version": "zhejiang-museum-v1",
+  "elements": [
+    {
+      "key": "zhejiang-museum-history",
+      "name": "浙江省博物馆的历史沿革",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "浙江省博物馆始建于1929年11月，是中国最早的地方综合性博物馆之一，曾名“浙江省西湖博物馆”“浙江省立西湖博物馆”。它的起点就在西湖边，与近代西湖博览会的余绪紧紧相连。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1929年11月西湖博览会闭幕后，浙江省政府为保存博览会遗物，在孤山南麓的文澜阁、王阳明祠、圣因持罗汉堂及太乙分青室等处筹备设立浙江省西湖博物馆，聘陈屺怀为馆长；1930年2月更名“浙江省立西湖博物馆”；1949年5月由进入杭州的中国人民解放军接管；1993年9月29日新馆正式落成，占地2.04公顷，总建筑面积7360平方米，投资金额2000万元。"
+          },
+          {
+            "type": "paragraph",
+            "text": "此后它一直走在中国博物馆界前列：2004年1月1日率先在全国省级博物馆中实行常年免费开放；2008年被评定为首批“国家一级博物馆”；2009年被国家文物局和财政部评为“中央地方共建国家级博物馆”，同年12月武林馆区建成开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "把这段沿革记在心里再看展，馆中那些从1929年到2004年的节点——陈屺怀、孤山馆舍、免费开放，就构成了一条贯穿西湖百年文化生活的线索。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "gushan-campus",
+      "name": "孤山馆区与“园中馆、馆中园”",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "孤山馆区是浙江省博物馆最早的馆区，位于杭州西湖孤山南麓，东衔白堤和平湖秋月，西接西泠印社，于1993年秋竣工，占地面积20400平方米，馆舍形成“园中馆、馆中园”的格局。"
+          },
+          {
+            "type": "paragraph",
+            "text": "孤山馆区还包括浙江西湖美术馆和文澜阁。文澜阁位于孤山馆区西侧，建成于乾隆四十八年（1783年），为清代珍藏《四库全书》的七阁之一；咸丰十一年（1861年）遭焚毁，光绪六年（1880年）重建，是江南三阁中唯一幸存的一阁；2001年被国务院核定公布为全国重点文物保护单位，2006年经历建国后规模最大的一次修缮，2013年6月重新对外开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1993年9月29日落成的主馆与孤山原有园林共同构成了这座“馆中园”。参观时可以把“园中馆、馆中园”当作路线：先看主馆展厅里的陶瓷与书画，再走到文澜阁前，体会馆舍与西湖山水的边界几乎重合。"
+          },
+          {
+            "type": "paragraph",
+            "text": "如今大部分新展览迁往之江馆区，但孤山仍是浙博的精神起点；你若想理解一座博物馆如何与一片湖山共生，孤山馆区是最直观的答案。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhijiang-campus",
+      "name": "之江馆区与《浙江一万年》",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "之江馆区是浙江省博物馆的新主场，位于杭州之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。"
+          },
+          {
+            "type": "paragraph",
+            "text": "它的核心是常设展览“浙江一万年——浙江历史文化陈列”，位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，展览于2023年8月开幕；入选禁止出国（境）展览的五件（组）文物均位于这一展览之中。"
+          },
+          {
+            "type": "paragraph",
+            "text": "之江馆区三层还有常设展览“向东是大海——浙江海洋文化陈列”，展示面积约1000平方米。三层以下各展厅按时间顺序排列，是与“浙江一万年”互为补充的另一条线索。"
+          },
+          {
+            "type": "paragraph",
+            "text": "对多数参观者而言，之江馆是读懂浙江全史最顺的入口：沿三大展厅从史前走到近现代，再回头细看那些镇馆之宝与禁止出境文物，一条万年时间的脉络就很清晰了。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "wulin-campus-history",
+      "name": "武林馆区与西湖文化广场",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "武林馆区曾是浙江省博物馆的市区展区，位于杭州西湖文化广场E区，建筑面积20991平方米，陈列面积7600多平方米，2009年12月22日正式开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "西湖文化广场位于杭州市市中心，2009年7月28日正式落成；2002年2月开工、2009年7月建成，工程建设总投资约22亿元，广场占地200亩，总建筑面积36万余平方米，分为A、B、C、D、E五大区块，E区设有浙江省博物馆分馆等。"
+          },
+          {
+            "type": "paragraph",
+            "text": "随着之江馆区的落成，武林馆区已于2023年5月关闭，E区的浙江省博物馆分馆也于2023年5月4日关闭。它作为浙博在城中心的过渡性展区，完成了从孤山到之江迁转中的一段承接。"
+          },
+          {
+            "type": "paragraph",
+            "text": "你现在参观的是之江馆区；把孤山、武林、之江三段历史并在一起看，就能明白“从西湖孤山走向之江文化中心”正是浙博近年的馆区轨迹。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "museum-collection-system",
+      "name": "十万余件馆藏与收藏体系",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "浙江省博物馆收藏有十万余件文物，时间上几乎覆盖浙江历史的每一段，是一座靠本省考古与捐献积累起来的地方综合收藏。"
+          },
+          {
+            "type": "paragraph",
+            "text": "馆藏精华包括：河姆渡文化的陶器、漆器、木器和象牙制品，良渚文化的玉器和丝织品，越王剑，越窑、龙泉窑、南宋官窑等青瓷，会稽镜和湖州镜，以及吴昌硕、黄宾虹、沙孟海等著名书画家的作品和元朝画家黄公望的富春山居图。"
+          },
+          {
+            "type": "paragraph",
+            "text": "收藏也靠捐献壮大：1955年3月22日黄宾虹遗属捐赠文物，计图书1848部，另有信件2416、函手稿810份、族谱10册、故宫审画记录65本、古玺释文6册；1957年12月吴昌硕遗属捐献文物；1991年5月设立“马定祥中国钱币研究中心”；2012年1月曹其镛夫妇捐赠宋代至清代漆器160件。"
+          },
+          {
+            "type": "paragraph",
+            "text": "面对十余万件藏品，不必逐一看完；抓住“镇馆之宝”与“禁止出境文物”两条线索，再按自己的兴趣选一个门类深看，就是最省力的参观方式。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "top-ten-treasures",
+      "name": "十大镇馆之宝评选",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "2009年6月，浙江省博物馆推出“浙江省博物馆建馆80周年‘十大镇馆之宝’”评选活动，活动为期一个月，根据观众投票结合专家意见评选出馆藏中最有代表性的十件文物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "评选出的十大镇馆之宝为：战国·越王者旨於睗剑、民国·万工轿、五代·吴越鎏金银阿育王塔、良渚文化·玉琮、唐·“彩凤鸣岐”七弦琴、元·黄公望“富春山居图（剩山图）”、春秋·伎乐铜屋、河姆渡文化·双鸟朝阳纹牙雕、元·龙泉窑舟形砚滴、北宋·彩塑泥菩萨立像。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这十件的年代从新石器时代的河姆渡、良渚一路排到民国，恰好是博物馆收藏体系的一个缩影：玉、瓷、漆、书画、青铜、牙雕、泥塑，门类各异。"
+          },
+          {
+            "type": "paragraph",
+            "text": "观展时可以把这份榜单当作自选路线：在展厅里逐个找到它们，每找到一件，就多理解一种浙江的手艺与历史。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "no-overseas-treasures",
+      "name": "禁止出国（境）展览文物",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "中国有一部分极其重要的文物被国家列入禁止出国（境）展览名录，只能在境内展出、不得外借出境巡展。浙江省博物馆共有五件（组）文物入选。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2002年1月18日，国家文物局印发《首批禁止出国（境）展览文物目录》（共64件），其中浙江省博物馆有3件文物入选，包括浙江省文物考古研究所的良渚出土玉琮王；2013年8月19日公布的《第三批禁止出境展览文物目录》中，浙江省博物馆又有2件文物入选。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这五件（组）文物全部位于之江馆区的《浙江一万年——浙江历史文化陈列》展览中，也就是说，你只要走完这个展览，就能把五件禁止出境的国宝一次看齐。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看展时不妨把“禁止出境”当作一个重要提示：能进这份名录的，都是需要特别保护、也特别值得细看的核心文物。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "hemudu-culture",
+      "name": "河姆渡文化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "河姆渡文化是分布于中国浙江杭州湾南岸平原地区至舟山群岛的新石器时代文化，年代大约在距今6000年到7000年之前，因以余姚河姆渡遗址发掘最早而得名。"
+          },
+          {
+            "type": "paragraph",
+            "text": "遗址中发现了大量干栏式建筑的遗迹和人工栽培的水稻，植物残存还有葫芦、橡子、菱角、枣子等，动物则有猪、狗、水牛等家养牲畜；石器数量较少，多的是木器和骨器，其中出土了中国最早的木制饰品木雕鱼，也出土了中国境内所发现最早的漆器。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡文化最早在1973年发现，河姆渡遗址在1973—1974和1977—1978年两次发掘；在之江馆区的《浙江一万年》展里，河姆渡的陶器、骨耜与漆木器常常是最早登场的一批文物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "面对河姆渡展品，不妨想一个问题：干栏建筑、栽培水稻、家养牲畜同时出现，说明这里的人在六七千年前，已经懂得在杭州湾的水乡里经营自己的生活。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "hemudu-double-bird",
+      "name": "双鸟朝阳纹牙雕",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双鸟朝阳纹牙雕是河姆渡文化线雕的代表作，也是浙江省博物馆十大镇馆之宝之一，属于新石器时代距今约6000至7000年的河姆渡先民之手。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这件牙雕长16.6厘米，残宽5.9厘米，厚1.2厘米，中心由五个同心圆组成太阳纹，圆外有火焰纹，两侧有钩喙昂首相望的双鸟；它是河姆渡遗址线雕技艺的最高代表。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在同一批河姆渡象牙制品中，还有以“双火鸟”纹雕刻最为知名的一类作品，可见鸟与太阳是河姆渡人反复书写的主题。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在展厅里看到这件牙雕，先看中心的同心圆太阳，再看两侧昂首相望的双鸟——一种七千年前关于光明与飞鸟的想象，就通过几道刻线保留到了今天。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-culture",
+      "name": "良渚文化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化距今5300年至4000年，是中国新石器时代考古学文化之一，出现并发展于长江下游环太湖地区，共发现500多处遗址，以良渚遗址附近的莫角山为中心区。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化最主要的特征是玉器的使用和随葬，包括大件的玉琮、玉璧、玉钺；其中玉琮是工艺最精、最具权威性的玉器，往往刻有精致的兽面纹，被视为神灵的图象，玉钺则是军权、王权的象征。良渚先民还善用石犁耕作，稻米开始成为主要粮食来源，并有原始文字。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚文化的政治体为酋邦，也有学者认为已出现国家雏形；它能动员大量劳动力，建造大型祭祀场所、城墙及防洪土墙，社会成员地位分化，形成贵族和普通平民阶层。良渚玉器上的兽面纹与商代青铜器的饕餮纹有许多共同特点，学者李学勤认为虽不是直接承袭，却有密切的联系。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看良渚文物时，把目光落在玉琮、玉璧、玉钺的形制与兽面纹上，就能从一件件玉器里读出一个擅长组织劳动力、也崇尚玉礼的史前社会。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-cong-wang",
+      "name": "良渚玉琮王",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚玉琮王出自反山12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，被学界视为“琮王”，也是浙江省博物馆十大镇馆之宝之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山12号墓是良渚贵族墓地中最高等级的墓葬之一；除玉琮王外，该墓还出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米，头尾两端安有玉件，是军权、王权的象征。反山20号墓随葬玉器总计达547件，应为最高首领的墓葬。"
+          },
+          {
+            "type": "paragraph",
+            "text": "琮是用于祭地的礼器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地。良渚玉材出自江苏溧阳天目山余脉小梅岭的透闪石矿，而这样的玉琮王如今列入禁止出境（境）展览文物，展于之江馆区《浙江一万年》陈列。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看玉琮王时，先看它外方内圆、射出的四个角，再看每面刻的兽面纹，就能明白它既是良渚工艺的极致，也是一件沟通天地的礼器。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liangzhu-heritage",
+      "name": "良渚古城遗址与世界遗产",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚遗址位于中国浙江省杭州市余杭区良渚街道、瓶窑镇，部分位于湖州市德清县下渚湖街道，是以良渚古城遗址为中心的遗址群，总面积34平方公里，年代为公元前3300年至公元前2000年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚古城遗址是良渚文化最重要、最具代表性的遗址，被誉为“中华第一城”或“中华五千年文明实证”；2019年7月6日，良渚古城遗址因符合基准（iii）、（iv）被列入世界文化遗产。"
+          },
+          {
+            "type": "paragraph",
+            "text": "城址由宫殿区、内城与外城组成，占地面积881.45公顷；外围水利系统包括谷口高坝、平原低坝与山前长堤，山前长堤又称塘山遗址，全长约5公里。良渚遗址于1994年列入中国申报世界文化遗产预备名单，1996年被列为第四批全国重点文物保护单位，2010年10月9日由国家文物局公布为首批国家考古遗址公园之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在博物馆里看到的玉琮、玉璧，很多都来自这片被列入世界遗产的遗址群。看展时把这些玉器与“良渚古城”四个字连起来，就能从一件件文物跳到那片五千年文明实证的水乡城邦。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "cong-ritual-jade",
+      "name": "琮：祭地的礼器",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型方内洞圆，最早见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "有意思的是，乾隆皇帝时期出土的玉琮还无人知晓用途，乾隆自行考证认为它是古人搬运重物用的配重品，取名“杠头”并加装铜内胆作为笔筒、花瓶使用，直到乾隆去世90多年后才考证出它是礼器琮。"
+          },
+          {
+            "type": "paragraph",
+            "text": "再看展厅里的良渚玉琮，先记住“外方内圆”四个字：方为地、圆为天，一件琮就把古人对天地秩序的想象握在了手里。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "yue-bronze-swords",
+      "name": "越国青铜剑传统",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "越国是先秦金锡等冶炼原材料的主要产地之一，越人善治刀剑是西汉以前一般人公认的事实；《周礼》《庄子》《战国策》《淮南子》等书中都高度评价越国兵器质量，越国还有治剑名匠欧冶子、相剑家薛烛。"
+          },
+          {
+            "type": "paragraph",
+            "text": "《周礼·考工记》记载“吴越之剑……迁乎其地而弗能为良”，《庄子·刻意》也称“夫干越之剑者，柙而藏之，不敢用也，宝之至也”，可见吴越之剑在当时的贵重。今天出土的越王勾践剑已被证实采用了硫化铜防腐技术，越人当时已掌握复合金属工艺。"
+          },
+          {
+            "type": "paragraph",
+            "text": "不同于中原各国多重视车战，地处南方的吴越两国的战争形态多为近身格斗的阵战，军队多为步兵，步兵是越国军队的主力。现代发掘的越王勾践剑、越王者旨於睗剑等越国青铜器，正好印证了这一传统。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看越剑展柜时，不妨低头看看剑身的铭文与铜色——一支能“宝之至也”的剑，背后是整个吴越青铜铸造传统。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhejiang-yue-sword",
+      "name": "越王者旨於睗剑",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗剑是春秋时期越国君主者旨於睗时期铸造的铜剑，也是浙江省博物馆十大镇馆之宝之一；者旨於睗虽在位仅六年，但曾大量铸造铜剑。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗也就是《史记》中记载的越王勾践之子鼫与，其名在《越绝书》作“与夷”，《竹书纪年》作“鹿郢”；根据《竹书纪年》，鹿郢在位六年，其在位的年代按公元纪年为公元前464年至公元前459年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "此类越王剑从多个方面反映出吴越地区的青铜冶炼及铸造技术；带有铭文的越王剑出土数量较少，多为制作精湛的精品，已发现的越王剑有句践、者旨於睗、不寿、州句、不光和丌北古等越王的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这把剑，先认剑身或剑格上的铭文，再想它主人的身世——勾践之子、在位六年，却把剑大量铸到后世，一件兵器就这样连接起《史记》与实物。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "wuyue-state",
+      "name": "吴越国与保境安民",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "吴越（907年6月16日—978年6月9日）是五代十国时期的十国之一，由钱镠在907年所建，都城为西府杭州，是北宋开国战争期间唯一没有被宋朝使用武力攻下的国家。"
+          },
+          {
+            "type": "paragraph",
+            "text": "吴越国强盛时拥有13州疆域，约为现今浙江全省、江苏东南部和福建东北部；从天复二年（902年）唐昭宗封钱镠为越王，至北宋太平兴国三年（978年）钱俶投降北宋，吴越共传五王立国72年，978年6月9日钱弘俶纳土归宋，吴越政权结束。"
+          },
+          {
+            "type": "paragraph",
+            "text": "因受北方邻国吴国和南唐的陆上军事威胁，吴越国大力发展航海贸易，《五代史补》记载当时都城杭州“舟楫辐辏，望之不见其首尾”，北宋文学家苏轼称其“象犀珠玉之富，甲于天下”；吴越国采取保境安民的政策，经济繁荣，渔盐桑蚕之利甲于江南。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看《浙江一万年》里吴越两宋的展厅时，可以把雷峰塔、保俶塔和这一片西湖周边的遗迹想成吴越国的城市天际线——一个靠航海与安定繁荣起来的王国，正是浙江在五代时的写照。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "wuyue-buddhist-art",
+      "name": "吴越佛教与宝箧印式塔",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "佛教是吴越国文化的重要组成部分，历代吴越国王均笃信佛教；忠懿王时期境内佛塔达到8万4千座，有名的如今天杭州的保俶塔、雷峰塔。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宝箧印式塔也叫宝箧印塔、金涂塔、阿育王塔，是一类实心塔，造型平面四方，由塔基、塔身、塔檐与塔刹四部分组成，塔檐在塔身上四角向上翻挑，被称为“山花蕉叶”。这种形制由古印度的“窣堵坡”发展而来，经尼泊尔传入中国。"
+          },
+          {
+            "type": "paragraph",
+            "text": "五代时期，吴越国王钱弘俶仿阿育王造塔八万四千，使宝箧印式塔得到广泛发展，也保存下大量遗迹；受吴越国佛教氛围影响，杭州的雕版印刷业异常发达，仅忠懿王钱俶时期印刷的经书、佛像就达六十六万两千卷之多。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在展厅里看到鎏金银阿育王塔这样的宝箧印式塔时，先看塔顶的“山花蕉叶”四角，再想它背后那位“造塔八万四千”的吴越国王，一座小塔就藏着一个佛教王国的影子。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "asoka-pagoda",
+      "name": "五代鎏金银阿育王塔",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "五代·吴越鎏金银阿育王塔是浙江省博物馆十大镇馆之宝之一，是宝箧印式塔一类的小型塔式文物，出自雷峰塔遗址的发掘。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2001年3月11日开启的雷峰塔地宫为砖砌竖穴式，地宫内正中为铁舍利函，周边为象征“七宝”的供养物及其它佛教文物；地宫中共出土51组文物，其中最重要的一件就是鎏金纯银阿育王塔，塔身内盛金质容器并用薄金片包卷成棺状，应内奉佛螺髻发舍利，与纯银阿育王塔一起被列为遗址内最重要的文物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "两座阿育王塔均为方形，由塔座、塔身、四根蕉叶状山花和塔刹组成，塔身四面镂刻佛祖本生故事画面。2000年至2001年雷峰塔发掘出土的大量文物，现大部分收藏和展出在浙江省博物馆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这尊鎏金小塔时，先看四角蕉叶与塔身镂刻的画面，再回想它曾安放在雷峰塔地宫正中千年——它就是吴越佛国与杭州塔史最直接的一件物证。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "yue-kiln",
+      "name": "越窑与秘色瓷",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "越窑是唐朝、五代时浙江绍兴越州的瓷窑，窑址主要分布于慈溪的上林湖一带；隋朝、唐朝时绍兴叫“越州”，因此得名“越窑”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "唐代陆羽在《茶经》中写道“碗，越州为上。其瓷类玉、类冰”；晚唐、五代时最上品的越窑千峰翠色青瓷专门作为贡品，臣民不得用，因此称为“秘色”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1987年4月3日，法门寺真身宝塔的地宫被打开，出土十三件秘色瓷器，现存法门寺博物馆。北宋后期由于制瓷工艺粗糙，越窑走向衰落；南宋中期，越窑停烧。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看越窑青瓷时，可以对着器身体会“类玉、类冰”四个字，再想想它从盛唐到宋代的兴衰，一段中国青瓷的源头就这样铺在展柜里。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "longquan-kiln",
+      "name": "龙泉窑与粉青梅子青",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "龙泉青瓷是以浙江省龙泉市古代窑址为核心、分支广布周边的瓷窑系统，一般认为龙泉窑的鼎盛时期在南宋。"
+          },
+          {
+            "type": "paragraph",
+            "text": "龙泉窑改进釉料配方，创制出粉青、梅子青等前所未见的品种，被历来藏家激赏，列入宋代名窑；釉料分成石灰釉和石灰碱釉两种，北宋用石灰釉，南宋用石灰碱釉，因此可以多次上釉、釉层很厚，粉青釉即为石灰碱釉。"
+          },
+          {
+            "type": "paragraph",
+            "text": "龙泉窑烧成温度在1180℃—1230℃之间，梅子青要求温度最高，在1250℃—1280℃。2009年9月，龙泉青瓷传统烧制技艺入选人类非物质文化遗产代表作名录。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看龙泉青瓷时，把粉青和梅子青两只釉色放在一起对比，再用手势比一比“厚釉”的感觉，就能明白南宋工匠如何靠石灰碱釉把青色做得温润如玉。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "longquan-boat-drip",
+      "name": "元龙泉窑舟形砚滴",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "元·龙泉窑舟形砚滴是浙江省博物馆十大镇馆之宝之一，是一件龙泉窑系的青瓷文房器，属于书斋里用来盛水研墨的小器皿。"
+          },
+          {
+            "type": "paragraph",
+            "text": "龙泉窑的鼎盛时期在南宋，改进釉料配方后创制出粉青、梅子青等品种；这件舟形砚滴以小舟为造型，正属于龙泉青瓷中文房用器的精品，既实用，也带着文人书斋的雅趣。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在陶瓷展厅里看过龙泉的大件盘碗之后，再遇到这样一件掌上小舟，会格外体会到龙泉窑不只有大器，也有这样精致轻盈的一面。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看它时不妨想：砚滴虽小，却要兼具储水与滴水的功能，是一件把“器物之美”和“书写日常”叠在一起的青瓷。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "southern-song-guan-ware",
+      "name": "南宋官窑",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "杭州西湖博物馆总馆南宋官窑馆区（即原南宋官窑博物馆）位于浙江省杭州市，以郊坛下南宋官窑遗址为基础，是中国第一座依托古窑址建立的陶瓷专题博物馆，也是了解南宋官窑最直接的地方。"
+          },
+          {
+            "type": "paragraph",
+            "text": "南宋官窑博物馆占地面积约43000平方米，展馆面积10000平方米，1992年正式对外开放，2002年综合改造，2007年二期扩建，2010年三期扩建工程竣工；2020年4月，它与杭州西湖博物馆、杭州名人纪念馆整合为杭州西湖博物馆总馆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "南宋官窑依托杭州郊坛下窑址建立，与越窑、龙泉窑共同构成浙江青瓷谱系的关键环节；在浙江省博物馆的陶瓷类藏品中，南宋官窑青瓷也是重要的一项。"
+          },
+          {
+            "type": "paragraph",
+            "text": "若你参观完浙博仍想深入瓷史，可以专程去郊坛下窑址所在的南宋官窑馆区走走：那里把窑址与展厅放在一起，能让你从烧成温度、釉色一直看到窑炉遗址。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "fuchun-shanju-tu",
+      "name": "《富春山居图》与剩山图",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "《富春山居图》是宋末元初画家黄公望的作品，创作于1347年至1350年，以浙江富春江为背景，是黄公望的代表作，获后世赞誉为“画中之兰亭”“山水画第一神品”，为中国十大传世名画之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "清初顺治年间，画传至吴洪裕；吴洪裕过世前决定把画作当作陪葬，画被丢进火炉时，侄子吴贞度从火堆中抢救出来，但画卷已被火烧成一大一小两段。原卷首小段经过修补后称为“剩山图”，横51.4公分，高31.8公分，占原画1/14；后段称为“无用师卷”，横636.9公分，高33公分，占原画12/14。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙江省博物馆珍藏的正是“剩山图”这一段，它也入选了浙博十大镇馆之宝；2011年6月2日，“剩山图”与台北故宫的“无用师卷”在台北故宫博物院展出，两幅真迹同陈列在长16公尺的柜子内。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看“剩山图”时，先想它的身世：一场火把长卷分为两段，一段留在杭州、一段去了台湾，你面前这一小段，就是那段故事的起点。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "huang-gongwang",
+      "name": "黄公望与富春江",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "黄公望（1269年—1354年），字子久，号大痴、大痴道人、一峰道人，平江路常熟州（今江苏省苏州市常熟市）人，元朝画家，尊为“元四家”之首，与吴镇、倪瓒、王蒙并称“元四大家”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄公望50岁才开始学绘画，曾得到赵孟頫的指教，创立了浅绛山水，其水墨山水尤为出色；其代表作为《富春山居图》，著作有《山水诀》，是中国山水画的重要理论著作。"
+          },
+          {
+            "type": "paragraph",
+            "text": "延祐二年（1315年）九月，黄公望因张闾贪污事被牵连入狱，开释后入了全真教出家；至正十四年（1354年）十月二十五日，他在常熟逝世，葬虞山西麓。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博看过“剩山图”后，可以顺带想想这位50岁才学画、却把富春江画成“画中之兰亭”的画家：他的起点与晚成，本身就是一段值得慢慢读的故事。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "huang-binhong",
+      "name": "黄宾虹与浙博",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "黄宾虹（1865年1月27日—1955年3月25日），名质，字朴存、朴人，别号予向、虹庐、虹叟，中年更号宾虹，以号著称，祖籍安徽歙县西乡潭渡村，生于浙江金华，是中国近代山水画画家。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1955年3月22日，黄宾虹遗属捐赠文物，计图书1848部，另外信件2416、函手稿810份、族谱10册、故宫审画记录65本、古玺释文6册；另一史料记载，黄宾虹逝世后家属秉承其遗愿，将其存留的五千余件作品及一万余件文物、手稿等遗物悉数捐献给浙江省博物馆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1958年3月，浙江省博物馆成立了“黄宾虹纪念室”，位于杭州栖霞岭31号；1948年夏，85岁的黄宾虹应国立杭州艺专之聘请由北平南下，在这里走过人生的最后七年，纪念室于1988年正式向游人开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博的书画展区看到黄宾虹的大量作品与手稿时，不妨想一下：这位晚年以“浑厚华滋”为追求的画家，把毕生心血留给了浙江，也成就了浙博收藏的一大支柱。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "sha-menghai",
+      "name": "沙孟海与浙博",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "沙孟海（1900年6月11日—1992年10月10日），原名沙文若，字孟海，号沙邨、兰沙、石荒、决明等，浙江省鄞县（现宁波市鄞州区）塘溪镇沙村人，是中国书法家、篆刻家，也是与浙江省博物馆渊源很深的一位大家。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1953年8月，沙孟海兼任浙江省博物馆历史部主任；一说1984年8月任浙江省博物馆名誉馆长，另一史料称1981年任名誉馆长，同年当选中国书法家协会副主席；他还于1963年任浙江美术学院书法篆刻专业教授，1979年当选西泠印社社长，1980年任西泠书画院院长，1989年任浙江美术学院终身教授。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海旧居位于杭州龙游路15号，占地面积870平方米，总建筑面积601平方米，为砖木两层结构别墅，院内“沙孟海旧居”五字匾额为金石篆刻家钱君匋所书，2004年11月正式开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "参观浙博时，看到馆内以沙孟海为代表的书法与印章收藏，可以顺路想一想他与西泠印社、与孤山的关系——书法、篆刻与浙江的文化机构，在他身上是连在一起的。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "wu-changshuo",
+      "name": "吴昌硕与浙博",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "吴昌硕（1844年9月12日—1927年11月29日），浙江省湖州安吉县鄣吴村人，清末民初篆刻家，亦工书法、绘画。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1904年，吴昌硕担任在杭州孤山“西泠印社”社长，称自己“五湖印丐”；他曾说自己30岁时学写诗，50岁才学画，晚年定居于上海，被后世归于“海上画派”，著有《缶庐诗存》《缶庐印存》《吴昌硕画集》等。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1957年12月，吴昌硕遗属向浙江省博物馆捐献文物，使这位艺术家的作品成为浙博书画收藏的一部分。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看浙博的书画与印章藏品时，可以把吴昌硕的作品和他那句“50岁才学画”放在一起——晚成而不息，恰是海上画派与浙江书画传统共同的气质。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "guqin-world",
+      "name": "古琴与中国人的音韵世界",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "古琴是中国历史最悠久的乐器之一，也是中国人寄托音韵与心境的器物。2003年11月7日，古琴艺术被联合国教科文组织列入世界第二批人类非物质文化遗产代表作名录；2006年5月20日，国务院将古琴列入第一批国家级非物质文化遗产名录。"
+          },
+          {
+            "type": "paragraph",
+            "text": "斫琴在唐朝有巨大的发展，如四川雷氏家族为唐朝皇室斫造的“九霄环佩”和“大圣遗音”皆为传世名琴，唐琴在历代都被视为稀世之宝；在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今。论及形制，古有“唐圆”之说。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宋元时期古琴开始出现明确的流派传承，第一个古琴流派浙派出现于南宋晚期，创始人是郭沔。现存琴曲3360多首，琴谱130多部，琴歌300首。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博的古琴展柜前，不妨先安静下来，看琴身的断纹与题刻，再想它作为一种“从唐到宋、从雷氏到浙派”的器物，是如何把听觉的传统留在一张木胎漆面上。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "cai-feng-ming-qi",
+      "name": "唐“彩凤鸣岐”七弦琴",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "唐·“彩凤鸣岐”七弦琴是浙江省博物馆十大镇馆之宝之一，是一张唐代制作的传世古琴，也是浙博古琴收藏中的代表性藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世珍宝；“彩凤鸣岐”正属于这批流传至今的唐琴之列。"
+          },
+          {
+            "type": "paragraph",
+            "text": "古琴艺术于2003年11月7日被联合国教科文组织列入人类非物质文化遗产代表作名录，2006年5月20日列入第一批国家级非物质文化遗产名录，这批唐琴正是这一古老艺术至今仍可聆听的实物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看到这张唐琴时，先看琴名与琴面，再想它已经安静了近一千四百年——一张琴把唐代的音响传统一路带到了今天的展柜里。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "qi-lacquer-donation",
+      "name": "曹其镛夫妇捐赠的漆器",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这批漆器时间跨度从宋代到清代，是浙博漆器收藏的重要来源。"
+          },
+          {
+            "type": "paragraph",
+            "text": "经鉴定，这批捐赠漆器中一级文物21件、二级文物118件、三级文物15件；其中元代雕漆名家张成创作的剔红婴戏图盘堪称国宝级文物，是目前已知的4件“张成造”之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2012年1月，曹其镛夫妇向博物馆捐赠宋代至清代漆器160件；这批漆器在之江馆区的陈列中，与青铜、瓷器等一起，展示了浙江在手工艺上的另一个维度。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这批漆器时，可以留意“剔红”这样层层髹漆再雕刻的工艺，体会一件漆器从宋到清，是如何靠几十道工序和时间的累积才成形的。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "shili-hongzhuang",
+      "name": "十里红妆与宁绍婚俗",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "十里红妆是以浙江省宁海县为主的浙江东部地区存在的一种婚俗，得名于当地嫁女时嫁妆从床铺家具到针线头面一应俱全、迎送嫁妆的队伍绵延十里；婚俗始于南宋，盛于明清时期。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2008年，十里红妆婚俗被列入中国国家级非物质文化遗产名录。宁海当地的朱金木雕和泥金彩漆工艺为十里红妆嫁妆的精致制作提供了技术支持，宁海婚俗的嫁妆以朱金木雕为主，主要包括花轿、婚床、杠箱、器皿和各种装饰，有“千工床、万工轿”之说。"
+          },
+          {
+            "type": "paragraph",
+            "text": "相传北宋末年，康王赵构在浙东逃避金兵追捕时为一乡间女子所救，后赵构登基成为宋高宗，下旨称浙东女子均可封王，出嫁时能乘坐龙凤花轿。文化大革命时期，十里红妆器物被当作“四旧”破坏严重；改革开放初不少西方人前往宁海抢购，文物流失严重，宁海古玩商人何晓道开始搜集十里红妆文物，2003年十里红妆博物馆开张。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博看到十里红妆的婚床、轿子与器皿时，可以把它们想成一场流动的嫁妆队伍：从宁海到杭州，朱金木雕与泥金彩漆，把婚姻的喜庆和工匠的手艺一并抬进了博物馆。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "wan-gong-jiao",
+      "name": "民国万工轿",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "民国·万工轿是浙江省博物馆十大镇馆之宝之一，是宁绍“十里红妆”婚俗中最华重的一件嫁妆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宁海婚俗的嫁妆以朱金木雕为主，有“千工床、万工轿”之说；花轿常常采用梓木、香樟、银杏等木材制成，轻巧而有韧性，表面雕刻大量吉祥喜庆的图案，是朱金木雕工艺的代表作。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“万工”是极言其用工之多。看这顶轿子时，可以凑近看轿身上密密层层的木雕人物与吉祥纹样，再退后看整顶轿子的轮廓，想象一支绵延十里的红妆队伍。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhejiang-culture-center",
+      "name": "之江文化中心",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "之江文化中心位于杭州市西湖区之江国家旅游度假区，于2023年8月29日正式启用，是浙江省博物馆之江新馆所在的公共文化聚落。"
+          },
+          {
+            "type": "paragraph",
+            "text": "之江文化中心包括浙江省博物馆之江新馆、浙江图书馆之江新馆、浙江省非物质文化遗产馆、浙江文学馆以及配套的公共服务中心，占地面积258亩，总建筑面积32.1万平米。"
+          },
+          {
+            "type": "paragraph",
+            "text": "4座场馆为开放的“合院式”布局，建筑外观为传统江南粉墙黛瓦风格，“四馆一中心”构成一座“公共文化共同体”；它是浙江省“十三五”规划中的重要文化建设项目，由浙江省文化和旅游厅负责管理。"
+          },
+          {
+            "type": "paragraph",
+            "text": "参观浙博之余，可以把一整天留给之江文化中心：先看博物馆的《浙江一万年》，再顺路走进非遗馆、文学馆或图书馆，四座场馆互相补充，正是这组建筑想给你的“共同体”体验。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhejiang-marine-culture",
+      "name": "向东是大海：浙江海洋文化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "“向东是大海——浙江海洋文化陈列”是浙江省博物馆之江馆区的常设展览，位于馆区三层，展示面积约1000平方米，专门讲述浙江面向海洋的一面。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙江的海洋文化由来已久：吴越国因受北方邻国吴国和南唐的陆上军事威胁，大力发展航海贸易，《五代史补》记载当时都城杭州“舟楫辐辏，望之不见其首尾”，苏轼称其“象犀珠玉之富，甲于天下”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "从史前的舟楫到近代的港口，这一展览把“海”作为理解浙江的另一把钥匙，与《浙江一万年》的陆地视角互为补充。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这一层时，不妨把《浙江一万年》里的吴越展厅与它对照：一条线讲陆地文明，一条线讲海洋贸易，两条线合起来，才是完整的浙江。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "song-yun-culture",
+      "name": "宋·韵与宋韵文化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "宋韵指的是宋代审美与文化生活的气质，在浙江省博物馆里，它具体落在南宋官窑的青瓷、宋元以来的漆器，以及两宋时期的文房与音乐器物上。"
+          },
+          {
+            "type": "paragraph",
+            "text": "南宋官窑位于杭州，以郊坛下窑址为基础，是浙江青瓷谱系中重要的一环；龙泉窑一般认为其鼎盛时期也在南宋，创制的粉青、梅子青正是宋代釉色审美的代表。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宋韵也藏在声音里：第一个古琴流派浙派出现于南宋晚期，创始人是郭沔。宋徽宗御制名琴松石间意在2010年以1.3664亿元拍卖，成为当时拍卖价格最高的古琴、世界最贵乐器之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在浙博逛到宋代文物时，可以把青瓷、漆器、古琴连起来想：一件器物、一张琴，都是宋人如何过日子、如何追求雅致的具体答案。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "ancient-kiln-specimen-center",
+      "name": "浙江古窑址标本中心",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "浙江省文保科研基地位于杭州天目山路古荡桥20号，内设全国首个以本地窑业遗存为依托的古窑址标本中心——浙江古窑址标本中心。"
+          },
+          {
+            "type": "paragraph",
+            "text": "该中心分越窑、龙泉窑、瓯窑、婺州窑、南宋官窑等区块，收藏本地各窑口的窑址标本，对外预约免费开放，是研究浙江青瓷体系的第一手材料库。"
+          },
+          {
+            "type": "paragraph",
+            "text": "如果说博物馆展厅里是烧成后的“作品”，标本中心则是窑业生产的“原料与废料”；两处对照，能看出越窑、龙泉窑等瓷窑从原料到成品的完整过程。"
+          },
+          {
+            "type": "paragraph",
+            "text": "如果你在浙博陶瓷厅看完越窑、龙泉窑、南宋官窑后仍想深入，可以提前预约到标本中心看看窑址标本，那里把浙江瓷业的窑火一步步还原给你看。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "shi-xingeng-discovery",
+      "name": "施昕更与良渚的发现",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚文化的发现，与浙江省博物馆（当时称西湖博物馆）的一位绘图员施昕更密切相关。1936年12月，施昕更在余杭良渚镇考古，发掘出“良渚文化”遗址。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1936年，施昕更在余杭良渚镇附近棋盘坟发现一两片黑色有光的陶片，同年开始在良渚镇附近发掘，发现更多黑陶和石器；1937年春，他写作《良渚》（又名《杭县第二区黑陶文化遗址的初步报告》），使良渚文化受到考古学界关注。"
+          },
+          {
+            "type": "paragraph",
+            "text": "另一史料记载，施昕更1936年12月至1937年3月间在良渚一带进行了三次试掘，发现茅庵里、棋盘坟等12处遗址；1959年，考古学家夏鼐将这一文化类型命名为“良渚文化”。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看良渚玉器时，不妨想一想：这些精美玉器的起点，是一位博物馆绘图员在1936年从几片黑色陶片开始的探访——博物馆与考古，正是这样互相成就的。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "jiyue-bronze-house",
+      "name": "春秋伎乐铜屋",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "春秋·伎乐铜屋是浙江省博物馆十大镇馆之宝之一，是一件以房屋与乐人为主题的青铜器，出自越国所在的绍兴一带。"
+          },
+          {
+            "type": "paragraph",
+            "text": "据史料记载，绍兴出土的伎乐铜屋内，有鼓师、琴师、瑟师和歌伎的陶俑，再现了当时越国人组合演唱的场景；它把一场两千多年前的“小型音乐会”凝固在青铜之中。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越国是先秦金锡等冶炼原材料的主要产地之一，越人善治刀剑是西汉以前一般人公认的事实，青铜铸造传统深厚；伎乐铜屋正是这一传统中少见的表现音乐场景的作品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这间小铜屋时，先数一数屋里的乐人与乐器，再想它所在的越国青铜世界——原来两千多年前的浙江人，就已经把鼓、琴、瑟组合在一起合奏了。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "caisu-mud-bodhisattva",
+      "name": "北宋彩塑泥菩萨立像",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "北宋·彩塑泥菩萨立像是浙江省博物馆十大镇馆之宝之一，是一件宋代泥质彩塑的菩萨造像。"
+          },
+          {
+            "type": "paragraph",
+            "text": "比起青铜或瓷器，泥塑佛像更难保存；能有一件北宋的彩塑泥菩萨流传至今，本身就十分不易。它与五代吴越的佛教遗存一样，提醒你在浙博看造像时，注意宋代雕塑在材料与造型上的另一条路线。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhejiang-art-gallery",
+      "name": "浙江西湖美术馆与国立艺术院旧址",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "浙江西湖美术馆位于孤山馆区东侧，1999年10月落成，原为我国第一所高等美术学府——国立艺术院的旧址。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这里是原我国第一所高等美术学府、即国立艺术院的旧址；今天的西湖美术馆沿用这处文化旧址，常设展示书画等美术类藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "把美术馆放在孤山馆区里看，它与文澜阁、主馆一起构成了孤山“馆中园”的文化组合：一边是古代典籍与书画，一边是中国现代美术教育的起点。"
+          },
+          {
+            "type": "paragraph",
+            "text": "游览孤山时，在西湖美术馆门口停一停：这里既是浙博的一部分，也是中国第一所高等美术学府曾经办学的地方，一栋楼连着两段历史。"
+          }
+        ]
+      }
+    }
+  ],
+  "relations": [
+    {
+      "elementKey": "ancient-kiln-specimen-center",
+      "relatedElementKey": "longquan-boat-drip"
+    },
+    {
+      "elementKey": "ancient-kiln-specimen-center",
+      "relatedElementKey": "longquan-kiln"
+    },
+    {
+      "elementKey": "ancient-kiln-specimen-center",
+      "relatedElementKey": "southern-song-guan-ware"
+    },
+    {
+      "elementKey": "ancient-kiln-specimen-center",
+      "relatedElementKey": "yue-kiln"
+    },
+    {
+      "elementKey": "asoka-pagoda",
+      "relatedElementKey": "cai-feng-ming-qi"
+    },
+    {
+      "elementKey": "asoka-pagoda",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "asoka-pagoda",
+      "relatedElementKey": "wuyue-buddhist-art"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "asoka-pagoda"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "guqin-world"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "qi-lacquer-donation"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "caisu-mud-bodhisattva",
+      "relatedElementKey": "wuyue-buddhist-art"
+    },
+    {
+      "elementKey": "cong-ritual-jade",
+      "relatedElementKey": "liangzhu-cong-wang"
+    },
+    {
+      "elementKey": "cong-ritual-jade",
+      "relatedElementKey": "liangzhu-heritage"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "huang-gongwang"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "zhijiang-campus"
+    },
+    {
+      "elementKey": "guqin-world",
+      "relatedElementKey": "cai-feng-ming-qi"
+    },
+    {
+      "elementKey": "guqin-world",
+      "relatedElementKey": "song-yun-culture"
+    },
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "hemudu-double-bird"
+    },
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "huang-binhong"
+    },
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "zhejiang-art-gallery"
+    },
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "zhejiang-museum-history"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-double-bird"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "liangzhu-culture"
+    },
+    {
+      "elementKey": "hemudu-double-bird",
+      "relatedElementKey": "gushan-campus"
+    },
+    {
+      "elementKey": "hemudu-double-bird",
+      "relatedElementKey": "hemudu-culture"
+    },
+    {
+      "elementKey": "hemudu-double-bird",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "gushan-campus"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "huang-gongwang"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "museum-collection-system"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "sha-menghai"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "zhejiang-art-gallery"
+    },
+    {
+      "elementKey": "huang-gongwang",
+      "relatedElementKey": "fuchun-shanju-tu"
+    },
+    {
+      "elementKey": "huang-gongwang",
+      "relatedElementKey": "huang-binhong"
+    },
+    {
+      "elementKey": "jiyue-bronze-house",
+      "relatedElementKey": "shili-hongzhuang"
+    },
+    {
+      "elementKey": "jiyue-bronze-house",
+      "relatedElementKey": "yue-bronze-swords"
+    },
+    {
+      "elementKey": "liangzhu-cong-wang",
+      "relatedElementKey": "cong-ritual-jade"
+    },
+    {
+      "elementKey": "liangzhu-cong-wang",
+      "relatedElementKey": "liangzhu-culture"
+    },
+    {
+      "elementKey": "liangzhu-cong-wang",
+      "relatedElementKey": "no-overseas-treasures"
+    },
+    {
+      "elementKey": "liangzhu-culture",
+      "relatedElementKey": "hemudu-culture"
+    },
+    {
+      "elementKey": "liangzhu-culture",
+      "relatedElementKey": "liangzhu-cong-wang"
+    },
+    {
+      "elementKey": "liangzhu-culture",
+      "relatedElementKey": "liangzhu-heritage"
+    },
+    {
+      "elementKey": "liangzhu-culture",
+      "relatedElementKey": "shi-xingeng-discovery"
+    },
+    {
+      "elementKey": "liangzhu-heritage",
+      "relatedElementKey": "cong-ritual-jade"
+    },
+    {
+      "elementKey": "liangzhu-heritage",
+      "relatedElementKey": "liangzhu-culture"
+    },
+    {
+      "elementKey": "liangzhu-heritage",
+      "relatedElementKey": "shi-xingeng-discovery"
+    },
+    {
+      "elementKey": "longquan-boat-drip",
+      "relatedElementKey": "ancient-kiln-specimen-center"
+    },
+    {
+      "elementKey": "longquan-boat-drip",
+      "relatedElementKey": "longquan-kiln"
+    },
+    {
+      "elementKey": "longquan-boat-drip",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "longquan-kiln",
+      "relatedElementKey": "ancient-kiln-specimen-center"
+    },
+    {
+      "elementKey": "longquan-kiln",
+      "relatedElementKey": "longquan-boat-drip"
+    },
+    {
+      "elementKey": "longquan-kiln",
+      "relatedElementKey": "yue-kiln"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "huang-binhong"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "qi-lacquer-donation"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "wu-changshuo"
+    },
+    {
+      "elementKey": "no-overseas-treasures",
+      "relatedElementKey": "liangzhu-cong-wang"
+    },
+    {
+      "elementKey": "no-overseas-treasures",
+      "relatedElementKey": "zhijiang-campus"
+    },
+    {
+      "elementKey": "qi-lacquer-donation",
+      "relatedElementKey": "cai-feng-ming-qi"
+    },
+    {
+      "elementKey": "qi-lacquer-donation",
+      "relatedElementKey": "museum-collection-system"
+    },
+    {
+      "elementKey": "qi-lacquer-donation",
+      "relatedElementKey": "shili-hongzhuang"
+    },
+    {
+      "elementKey": "sha-menghai",
+      "relatedElementKey": "huang-binhong"
+    },
+    {
+      "elementKey": "sha-menghai",
+      "relatedElementKey": "wu-changshuo"
+    },
+    {
+      "elementKey": "sha-menghai",
+      "relatedElementKey": "zhejiang-museum-history"
+    },
+    {
+      "elementKey": "shi-xingeng-discovery",
+      "relatedElementKey": "liangzhu-culture"
+    },
+    {
+      "elementKey": "shi-xingeng-discovery",
+      "relatedElementKey": "liangzhu-heritage"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "jiyue-bronze-house"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "qi-lacquer-donation"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "wan-gong-jiao"
+    },
+    {
+      "elementKey": "song-yun-culture",
+      "relatedElementKey": "guqin-world"
+    },
+    {
+      "elementKey": "song-yun-culture",
+      "relatedElementKey": "southern-song-guan-ware"
+    },
+    {
+      "elementKey": "song-yun-culture",
+      "relatedElementKey": "zhejiang-marine-culture"
+    },
+    {
+      "elementKey": "southern-song-guan-ware",
+      "relatedElementKey": "ancient-kiln-specimen-center"
+    },
+    {
+      "elementKey": "southern-song-guan-ware",
+      "relatedElementKey": "song-yun-culture"
+    },
+    {
+      "elementKey": "southern-song-guan-ware",
+      "relatedElementKey": "yue-kiln"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "asoka-pagoda"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "cai-feng-ming-qi"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "fuchun-shanju-tu"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "hemudu-double-bird"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "longquan-boat-drip"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "museum-collection-system"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "zhejiang-yue-sword"
+    },
+    {
+      "elementKey": "wan-gong-jiao",
+      "relatedElementKey": "shili-hongzhuang"
+    },
+    {
+      "elementKey": "wu-changshuo",
+      "relatedElementKey": "museum-collection-system"
+    },
+    {
+      "elementKey": "wu-changshuo",
+      "relatedElementKey": "sha-menghai"
+    },
+    {
+      "elementKey": "wulin-campus-history",
+      "relatedElementKey": "zhejiang-museum-history"
+    },
+    {
+      "elementKey": "wulin-campus-history",
+      "relatedElementKey": "zhijiang-campus"
+    },
+    {
+      "elementKey": "wuyue-buddhist-art",
+      "relatedElementKey": "asoka-pagoda"
+    },
+    {
+      "elementKey": "wuyue-buddhist-art",
+      "relatedElementKey": "caisu-mud-bodhisattva"
+    },
+    {
+      "elementKey": "wuyue-buddhist-art",
+      "relatedElementKey": "wuyue-state"
+    },
+    {
+      "elementKey": "wuyue-state",
+      "relatedElementKey": "wuyue-buddhist-art"
+    },
+    {
+      "elementKey": "wuyue-state",
+      "relatedElementKey": "yue-bronze-swords"
+    },
+    {
+      "elementKey": "wuyue-state",
+      "relatedElementKey": "zhejiang-marine-culture"
+    },
+    {
+      "elementKey": "wuyue-state",
+      "relatedElementKey": "zhejiang-yue-sword"
+    },
+    {
+      "elementKey": "yue-bronze-swords",
+      "relatedElementKey": "jiyue-bronze-house"
+    },
+    {
+      "elementKey": "yue-bronze-swords",
+      "relatedElementKey": "wuyue-state"
+    },
+    {
+      "elementKey": "yue-bronze-swords",
+      "relatedElementKey": "zhejiang-yue-sword"
+    },
+    {
+      "elementKey": "yue-kiln",
+      "relatedElementKey": "ancient-kiln-specimen-center"
+    },
+    {
+      "elementKey": "yue-kiln",
+      "relatedElementKey": "longquan-kiln"
+    },
+    {
+      "elementKey": "yue-kiln",
+      "relatedElementKey": "southern-song-guan-ware"
+    },
+    {
+      "elementKey": "yue-kiln",
+      "relatedElementKey": "zhejiang-marine-culture"
+    },
+    {
+      "elementKey": "zhejiang-art-gallery",
+      "relatedElementKey": "gushan-campus"
+    },
+    {
+      "elementKey": "zhejiang-art-gallery",
+      "relatedElementKey": "huang-binhong"
+    },
+    {
+      "elementKey": "zhejiang-culture-center",
+      "relatedElementKey": "zhejiang-marine-culture"
+    },
+    {
+      "elementKey": "zhejiang-culture-center",
+      "relatedElementKey": "zhijiang-campus"
+    },
+    {
+      "elementKey": "zhejiang-marine-culture",
+      "relatedElementKey": "song-yun-culture"
+    },
+    {
+      "elementKey": "zhejiang-marine-culture",
+      "relatedElementKey": "wuyue-state"
+    },
+    {
+      "elementKey": "zhejiang-marine-culture",
+      "relatedElementKey": "yue-kiln"
+    },
+    {
+      "elementKey": "zhejiang-marine-culture",
+      "relatedElementKey": "zhejiang-culture-center"
+    },
+    {
+      "elementKey": "zhejiang-museum-history",
+      "relatedElementKey": "gushan-campus"
+    },
+    {
+      "elementKey": "zhejiang-museum-history",
+      "relatedElementKey": "sha-menghai"
+    },
+    {
+      "elementKey": "zhejiang-museum-history",
+      "relatedElementKey": "wulin-campus-history"
+    },
+    {
+      "elementKey": "zhejiang-museum-history",
+      "relatedElementKey": "zhijiang-campus"
+    },
+    {
+      "elementKey": "zhejiang-yue-sword",
+      "relatedElementKey": "top-ten-treasures"
+    },
+    {
+      "elementKey": "zhejiang-yue-sword",
+      "relatedElementKey": "wuyue-state"
+    },
+    {
+      "elementKey": "zhejiang-yue-sword",
+      "relatedElementKey": "yue-bronze-swords"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "fuchun-shanju-tu"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "no-overseas-treasures"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "wulin-campus-history"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "zhejiang-culture-center"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "zhejiang-museum-history"
+    }
+  ],
+  "attractions": [
+    { "key": "zhijiang-campus", "name": "之江馆区" },
+    { "key": "gushan-campus", "name": "孤山馆区" },
+    { "key": "huang-binhong-memorial", "name": "黄宾虹纪念室" },
+    { "key": "sha-menghai-residence", "name": "沙孟海旧居" }
+  ],
+  "introductions": [
+    {
+      "key": "zhijiang-campus.zhejiang-wannian-guobao",
+      "name": "《浙江一万年》与五件国宝",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在之江馆区，把《浙江一万年——浙江历史文化陈列》当作读懂浙江全史的主线索。走进它时，不妨先记住“三大展厅、一条一万年的路”，再从一楼的史前一路走到二楼近现代，最后特意回头看清五件禁止出境的国宝，就能把整条参观串起来了。"
+          },
+          {
+            "type": "paragraph",
+            "text": "之江馆区是浙江省博物馆的新主场，位于之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。常设展览“浙江一万年——浙江历史文化陈列”位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，于2023年8月开幕。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙江省博物馆入选禁止出国（境）展览文物的全部五件（组）文物，都位于这一展览之中。换句话说，只要走完《浙江一百年》，就能把五件禁止出境的国宝一次看齐。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhejiang-museum-history",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhijiang-campus.fuchun-shanshui",
+      "name": "山水之间：富春山居图数字展",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在之江馆的这段导览里，把目光收回到一件画上：《富春山居图》的“剩山图”。看它时，先看卷首那一段火烧后的短卷，再看旁边的文本与数字重建，想象一条本来完整的富春江长卷曾经的模样。"
+          },
+          {
+            "type": "paragraph",
+            "text": "《富春山居图》是宋末元初画家黄公望的作品，创作于1347年至1350年，以浙江富春江为背景，是黄公望的代表作，获后世赞誉为“画中之兰亭”“山水画第一神品”，为中国十大传世名画之一。原卷首小段经过修补后称为“剩山图”，横51.4公分，高31.8公分，占原画1/14；后段画幅较长，称为“无用师卷”，横636.9公分，高33公分，占原画12/14。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“剩山图”与“无用师卷”于2011年6月2日在台北故宫博物院展出，但合璧亮相的两幅真迹并没有连接在一起，而是同陈列在长16公尺的柜子内。浙江省博物馆珍藏的正是“剩山图”这一段，它也入选了浙博十大镇馆之宝。"
+          }
+        ]
+      },
+      "culturalElementKey": "fuchun-shanju-tu",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhijiang-campus.taigu-guqin",
+      "name": "太古之音：古琴展厅",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "走到古琴展柜前，不必急着看标牌，先安静下来：看琴身的断纹、题刻与琴名，再听展柜旁若有若无的音韵提示，就能体会到古琴作为一种“听的传统”是如何被保存在一张木胎漆面上的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "古琴艺术于2003年11月7日被联合国教科文组织列入世界第二批人类非物质文化遗产代表作名录；2006年5月20日，国务院将古琴列入第一批国家级非物质文化遗产名录，划分在“民间音乐”类，编号Ⅱ—34。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世之宝；宋元时期古琴开始出现明确的流派传承，第一个古琴流派浙派出现于南宋晚期，创始人是郭沔。浙博十大镇馆之宝中的唐“彩凤鸣岐”七弦琴，正属于这批流传至今的唐琴之列。"
+          }
+        ]
+      },
+      "culturalElementKey": "guqin-world",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "gushan-campus.zhongyuan-wenge",
+      "name": "园中馆、馆中园与文澜阁",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "到孤山馆区，先把它当作一座“馆中园”来逛：往西走到文澜阁下，站在湖山与楼阁交界处，看看一座博物馆如何与西湖山水几乎无边界地共生。"
+          },
+          {
+            "type": "paragraph",
+            "text": "孤山馆区是浙江省博物馆最早的馆区，位于杭州西湖孤山南麓，东衔白堤和平湖秋月，西接西泠印社，于1993年秋竣工，占地20400平方米，馆舍形成“园中馆、馆中园”的格局；它还包括浙江西湖美术馆和文澜阁。"
+          },
+          {
+            "type": "paragraph",
+            "text": "文澜阁位于孤山馆区西侧，建成于乾隆四十八年（1783年），为清代珍藏《四库全书》的七阁之一；咸丰十一年（1861年）遭焚毁，光绪六年（1880年）重建，是江南三阁中唯一幸存的一阁；2001年被国务院核定公布为全国重点文物保护单位，2006年经历建国后规模最大的一次修缮，2013年6月重新对外开放。"
+          }
+        ]
+      },
+      "culturalElementKey": "gushan-campus",
+      "attractionKey": "gushan-campus",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "gushan-campus.kunshan-pianyu",
+      "name": "昆山片玉：陶瓷陈列",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在孤山主楼的陶瓷馆里，把“昆山片玉”四个字当作逛这条展线的提示：从越窑的“类玉、类冰”，到龙泉的粉青、梅子青，一路对照着釉色看，就是理解浙江青瓷的一条捷径。"
+          },
+          {
+            "type": "paragraph",
+            "text": "常设展览“昆山片玉——中国古代陶瓷陈列”位于孤山馆区主楼陶瓷馆，展示面积1200多平方米，展出陶瓷文物近400件。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越窑是唐朝、五代时浙江绍兴越州的瓷窑，窑址主要分布于慈溪的上林湖一带；唐代陆羽在《茶经》中写道“碗，越州为上。其瓷类玉、类冰”，晚唐五代时最上品的越窑千峰翠色青瓷专门作为贡品，臣民不得用，因此称为“秘色”。龙泉窑改进釉料配方，创制出粉青、梅子青等前所未见的品种，一般认为其鼎盛时期在南宋。"
+          }
+        ]
+      },
+      "culturalElementKey": "yue-kiln",
+      "attractionKey": "gushan-campus",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "gushan-campus.leifeng-ta-wenwu",
+      "name": "雷峰塔文物陈列",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在孤山馆的雷峰塔文物陈列里，把目光先落在那几件小而精的阿育王塔上：先看四角的“山花蕉叶”与塔身上镂刻的画面，再想它们曾经安放在雷峰塔地宫正中，一座小塔就是一段吴越佛国史。"
+          },
+          {
+            "type": "paragraph",
+            "text": "雷峰塔由五代吴越王钱俶主持修建，塔内奉藏释迦牟尼佛“佛螺髻发”舍利；雷峰塔地宫位于塔心室正下方，2001年3月11日开启，为砖砌竖穴式，地宫内正中为铁舍利函。塔中地宫出土51组文物，其中鎏金纯银阿育王塔是遗址内最重要的文物之一，塔身内盛金质容器，应奉藏佛螺髻发舍利。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2000年至2001年雷峰塔发掘出土的大量文物，现在大部分收藏和展出于浙江省博物馆。两座阿育王塔均为方形，由塔座、塔身、四根蕉叶状山花和塔刹组成，塔身四面镂刻佛祖本生故事画面。"
+          }
+        ]
+      },
+      "culturalElementKey": "asoka-pagoda",
+      "attractionKey": "gushan-campus",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "huang-binhong-memorial.qixialing",
+      "name": "栖霞岭的黄宾虹晚年",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "站在栖霞岭31号的纪念室前，先想一位85岁的老人在1948年夏天南下的情景：他就是在这里走完人生最后的七年。看室内的画作与题字，把这些作品与“最后七年”连起来，就能体会他晚年的创作心境。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹纪念室位于杭州栖霞岭31号；1948年夏，85岁的黄宾虹应国立杭州艺专之聘请，由北平南下，在这里走过了他人生的最后七年。纪念室于1988年正式向游人开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹（1865年1月27日—1955年3月25日）是中国近代山水画画家，1955年3月25日病逝，葬于杭州南山公墓；现在栖霞岭下设有黄宾虹纪念馆，在金华建有黄宾虹艺术馆和黄宾虹公园。"
+          }
+        ]
+      },
+      "culturalElementKey": "huang-binhong",
+      "attractionKey": "huang-binhong-memorial",
+      "latitude": 30.2589,
+      "longitude": 120.1344
+    },
+    {
+      "key": "huang-binhong-memorial.wuqian-zuoping",
+      "name": "五千件作品与纪念室",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "面对纪念室里这位老画家留下的数量惊人的作品，不妨先想一想数量本身意味着什么：他把自己的一生心血留在了浙江，也成了浙江省博物馆收藏的一大支柱。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹逝世后，家属秉承其遗愿，将其存留的五千余件作品及一万余件文物、手稿等遗物悉数捐献给浙江省博物馆，构成浙博书画收藏的重要来源。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1955年3月22日，黄宾虹遗属向博物馆捐赠文物，计图书1848部，另信件2416、函手稿810份、族谱10册、故宫审画记录65本、古玺释文6册；1958年3月，浙江省博物馆成立了“黄宾虹纪念室”。"
+          }
+        ]
+      },
+      "culturalElementKey": "huang-binhong",
+      "attractionKey": "huang-binhong-memorial",
+      "latitude": 30.2589,
+      "longitude": 120.1344
+    },
+    {
+      "key": "sha-menghai-residence.longlu-du",
+      "name": "龙游路的沙孟海旧居",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "走到沙孟海旧居门口，先看院内石墙上那五个字匾额，再看这栋两层小别墅的砖木结构。一位书法家、篆刻家的旧居，往往如其刀笔——院子里的一草一木都显得安静而讲究。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海旧居位于杭州龙游路15号，占地面积870平方米，总建筑面积601平方米，为砖木两层结构别墅，院内“沙孟海旧居”五字匾额为金石篆刻家钱君匋所书，2004年11月正式开放，供游人参观。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海（1900年6月11日—1992年10月10日）是中国著名书法家、篆刻家，原名沙文若，字孟海，浙江省鄞县（现宁波市鄞州区）塘溪镇沙村人。他晚年与浙江省博物馆渊源很深，旧居正位于杭州龙游路一处安静的院落之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "sha-menghai",
+      "attractionKey": "sha-menghai-residence",
+      "latitude": 30.2622,
+      "longitude": 120.1519
+    },
+    {
+      "key": "sha-menghai-residence.shufa-zhuanke",
+      "name": "书法、篆刻与浙博",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "站在沙孟海旧居前，再把视野放宽到浙江博物馆：这位老先生的书法、篆刻与这家博物馆的关系，看他一生多职多任的履历就能读明白。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海与浙江省博物馆渊源很深：1953年8月，沙孟海兼任该馆历史部主任；1984年8月，沙孟海任名誉馆长。他还于1963年任浙江美术学院书法篆刻专业教授，1979年当选西泠印社社长，1980年任西泠书画院院长。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海与其他浙博名门交往密切，他先后与黄宾虹、吴昌硕等的作品一起构成浙博的书画与印章收藏。看馆内书法、篆刻藏品时，便知这是把书法、篆刻与浙江文化机构连在一起的一段因缘。"
+          }
+        ]
+      },
+      "culturalElementKey": "sha-menghai",
+      "attractionKey": "sha-menghai-residence",
+      "latitude": 30.2622,
+      "longitude": 120.1519
+    }
+  ],
+  "manifest": {
+    "packVersion": "zhejiang-museum-v1",
+    "generatedAt": "2026-08-03T15:00:00Z"
+  }
+}

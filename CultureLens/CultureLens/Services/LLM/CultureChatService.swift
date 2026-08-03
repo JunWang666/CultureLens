@@ -48,7 +48,8 @@ nonisolated struct CultureChatService: Sendable {
     let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) ?? knowledgeStore
     let neighbors = neighborContexts(object: object, store: store)
     let fragments = knowledgeFragments(object: object, neighbors: neighbors, store: store)
-    return try promptAssembler.askContextUserText(
+    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+    return try assembler.askContextUserText(
       object: ExplanationRecognitionContext(object: object, rationale: rationale),
       neighbors: neighbors,
       knowledgeFragments: fragments,
@@ -125,7 +126,8 @@ nonisolated struct CultureChatService: Sendable {
           messages.append(ChatTurn(role: .user, content: trimmed))
 
           for try await event in self.gatewayClient.streamAsk(
-            systemPrompt: self.promptAssembler.askSystemPrompt,
+            systemPrompt: self.promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+              .askSystemPrompt,
             messages: messages
           ) {
             continuation.yield(event)
@@ -142,14 +144,13 @@ nonisolated struct CultureChatService: Sendable {
   }
 
   /// Splits streamed Markdown into display body + structured citation cards.
-  /// The trailing「引用来源」section is removed from the body so it is not
-  /// rendered twice (once as Markdown, once as cards).
+  /// The trailing sources section (「引用来源」/ Sources / …) is removed from
+  /// the body so it is not rendered twice (once as Markdown, once as cards).
   static func parseAnswer(_ markdown: String) -> (body: String, citations: [KnowledgeCitation]) {
     let normalized = markdown.replacingOccurrences(of: "\r\n", with: "\n")
-    // Match a standalone "## 引用来源" heading (any level 1–3).
     guard
       let regex = try? NSRegularExpression(
-        pattern: #"(?m)^#{1,3}\s*引用来源\s*$"#,
+        pattern: CitationMarkup.sourceHeadingPattern(),
         options: []
       ),
       let match = regex.firstMatch(
@@ -232,7 +233,8 @@ nonisolated struct CultureChatService: Sendable {
         continue
       }
 
-      if line.contains("原文摘录") || line.hasPrefix("摘录：") || line.hasPrefix("摘录:")
+      if CitationMarkup.lineLooksLikeExcerpt(line)
+        || line.hasPrefix("摘录：") || line.hasPrefix("摘录:")
         || line.hasPrefix("- 摘录")
       {
         let value =
@@ -321,10 +323,24 @@ nonisolated struct CultureChatService: Sendable {
 
     guard !fragments.isEmpty else { throw CultureChatError.knowledgeUnavailable }
 
+    let topicCanonicalName: String
+    let topicSummary: String
+    let topicRationale: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      topicCanonicalName = "Cultural Q&A"
+      topicSummary = "Ask freely about the knowledge base and nodes you already know."
+      topicRationale =
+        "The user opened cultural Q&A from the home screen without a single recognition target."
+    case .zhHans:
+      topicCanonicalName = "文化问答"
+      topicSummary = "围绕知识库与用户已了解节点自由提问。"
+      topicRationale = "用户从首页直接进入文化问答，没有指定单一识别对象。"
+    }
     let topic = CultureObject(
       id: DeterministicID.v5(name: "culturelens:general-chat"),
-      canonicalName: "文化问答",
-      summary: "围绕知识库与用户已了解节点自由提问。",
+      canonicalName: topicCanonicalName,
+      summary: topicSummary,
       category: .other,
       timePeriod: nil,
       region: nil,
@@ -334,10 +350,11 @@ nonisolated struct CultureChatService: Sendable {
       relations: [],
       sources: []
     )
-    return try promptAssembler.askContextUserText(
+    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+    return try assembler.askContextUserText(
       object: ExplanationRecognitionContext(
         object: topic,
-        rationale: "用户从首页直接进入文化问答，没有指定单一识别对象。"
+        rationale: topicRationale
       ),
       neighbors: userKnowledgeStates.prefix(8).map {
         ExplanationNeighborContext(

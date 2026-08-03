@@ -103,7 +103,7 @@ final class ScanCoordinator {
                         contextNote,
                         hasFocusAnnotation: focusRegion != nil
                     ),
-                    localeIdentifier: Locale.current.identifier,
+                    localeIdentifier: AppLanguageStore.currentLanguage().localeIdentifier,
                     userKnowledgeStates: userKnowledgeStates
                 )
                 let result = try await service.recognize(input)

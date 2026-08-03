@@ -222,11 +222,12 @@
 				};
 			};
 			buildConfigurationList = E9464E5B3017572B00B357C5 /* Build configuration list for PBXProject "CultureLens" */;
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = E9464E573017572B00B357C5;
 			minimizedProjectReferenceProxies = 1;

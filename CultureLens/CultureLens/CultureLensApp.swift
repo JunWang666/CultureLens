@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct CultureLensApp: App {
     private let modelContainer: ModelContainer
+    @State private var languageStore = AppLanguageStore()
 
     init() {
         do {
@@ -34,6 +35,8 @@ struct CultureLensApp: App {
     var body: some Scene {
         WindowGroup {
             AppRootView()
+                .environment(languageStore)
+                .environment(\.locale, languageStore.locale)
         }
         .modelContainer(modelContainer)
     }

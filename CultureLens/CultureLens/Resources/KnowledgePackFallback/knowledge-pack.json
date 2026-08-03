@@ -1,5 +1,6 @@
 {
   "version": "hangzhou-west-lake-v3",
+  "source_language": "zh-Hans",
   "elements": [
     {
       "key": "west-lake-pagoda-landscape",
@@ -2174,8 +2175,5 @@
       "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
     }
   ],
-  "manifest": {
-    "packVersion": "hangzhou-west-lake-v4",
-    "generatedAt": "2026-08-03T07:14:02Z"
-  }
+  "locales": {}
 }

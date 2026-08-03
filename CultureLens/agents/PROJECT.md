@@ -14,6 +14,12 @@
 1. **Cloudflare AI Gateway**：`https://gateway.ai.cloudflare.com/v1/<account>/apps/compat/chat/completions`，多模态 image_url 与 `response_format: json_schema` 已实测可用（实际模型 gemini-3.6-flash）。
 2. **Cloudflare R2 图床**：介绍富文本中的 `image` block 直接引用 R2 URL，本地库只存 URL 不存图片。后端 `contentadmin` 校验已放宽接受 image block。
 
+## 多语言
+
+- UI 文案：`Localizable.xcstrings`（zh-Hans / en），语言偏好在「我的」页。
+- LLM（识别 `dynamic/culturelens`、讲解/问答 `dynamic/chat`）：按目标语言直接生成；见 `PromptLanguagePolicy`。
+- 知识包：`source_language` + `locales` overlay；译文暂缺时详情页用 `dynamic/chat` 即时翻译（`KnowledgeTranslationService`）。设计见 `agents/design/0005`。
+
 ## 知识包与 ODR 分包
 
 - 数据文件：`CultureLens/Resources/KnowledgePack/`（knowledge-pack.json + pack-manifest.json），打 ODR tag `knowledge-base`，App Store 托管。

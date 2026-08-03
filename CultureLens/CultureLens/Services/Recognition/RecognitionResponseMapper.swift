@@ -137,7 +137,7 @@ nonisolated enum RecognitionResponseMapper {
 
     let uncertainty =
       decision.uncertainty.isEmpty
-      ? "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
+      ? Self.defaultUncertainty()
       : decision.uncertainty
 
     var alternatives: [RecognitionCandidate] = []
@@ -298,16 +298,32 @@ nonisolated enum RecognitionResponseMapper {
   ) -> LocationInfluence? {
     guard usedPlaceContext else { return nil }
     if knowledge.locationMatched {
+      let summary: String
+      switch AppLanguageStore.currentLanguage() {
+      case .english:
+        summary =
+          "Matched \(knowledge.nearbyContextCount) nearby attraction introductions and produced \(knowledge.attractionCandidates.count) attraction candidates; cultural elements are explanatory only."
+      case .zhHans:
+        summary =
+          "位置匹配到 \(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。"
+      }
       return LocationInfluence(
         effect: .reordered,
-        summary:
-          "位置匹配到 \(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。"
+        summary: summary
       )
+    }
+    let summary: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      summary =
+        "No nearby attraction introductions matched; the model still judged from the image and \(knowledge.elements.count) cultural-element candidates."
+    case .zhHans:
+      summary =
+        "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
     }
     return LocationInfluence(
       effect: .none,
-      summary:
-        "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
+      summary: summary
     )
   }
 
@@ -320,6 +336,15 @@ nonisolated enum RecognitionResponseMapper {
     case "展品": "photo.on.rectangle.angled"
     case "空间": "map.fill"
     default: "sparkles"
+    }
+  }
+
+  private static func defaultUncertainty() -> String {
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      "This judgment is based on visible features; verify with on-site labels or catalog records when possible."
+    case .zhHans:
+      "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
     }
   }
 }

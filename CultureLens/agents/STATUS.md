@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-03 多语言基础设施：`Localizable.xcstrings`（zh-Hans / en）固化 UI 文案；「我的」页语言偏好；识别 / 讲解 / 问答经 `PromptLanguagePolicy` 直接输出目标语言；知识包增加 `source_language` + `locales` overlay（内容暂空），详情页缺译文时用 `dynamic/chat` 即时翻译并缓存。见 `design/0005`。
 - 2026-08-03 文化问答页输入框调整为 ChatGPT 风格紧凑单胶囊布局：空输入保持 48pt 单行高度，输入换行后才按内容增长；左侧快捷入口、中部多行输入、麦克风入口，以及随输入状态切换的蓝色语音波形 / 发送按钮；保留中文输入法候选确认与发送键语义。
 - 2026-08-03 聊天 UI 换成 Messages 风格气泡 + Microsoft `SwiftStreamingMarkdown` 流式 Markdown 渲染；问答改为 SSE `stream: true`（`dynamic/chat`）。未采用 ExyteChat：其强制依赖 Giphy SDK，体积与审核成本过高。
 - 2026-08-03 讲解生成（`CultureExplanationService` + `explain` prompt / `dynamic/chat`）与多轮追问（`AskCultureView` + `CultureChatService`）；PromptAssembler / v5 增加用户知识状态与「跳过已知、锚定已知、补缺」；对象 / 概念 / 扫描结果详情用 `RichTextBlocksView`；用户状态升级为接触 / 理解 / 掌握（SwiftData 存时间戳与来源）。

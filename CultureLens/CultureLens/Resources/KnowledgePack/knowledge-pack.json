@@ -1,5 +1,5 @@
 {
-  "version": "hangzhou-west-lake-v2",
+  "version": "hangzhou-west-lake-v3",
   "elements": [
     {
       "key": "west-lake-pagoda-landscape",
@@ -442,6 +442,292 @@
           }
         ]
       }
+    },
+    {
+      "key": "west-lake-winter-snow",
+      "name": "西湖冬雪与断桥",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "雪后的西湖常常变成黑白灰的平面：结冰的水面、未化的积雪与裸露的堤岸互相对照。断桥残雪的关键不在于把“断”当成破损，而是观察石桥阳面积雪先融、背阴残雪留存时，桥身在白色背景下若隐若现的视觉张力。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "quyuan-lotus-summer",
+      "name": "曲院风荷与荷塘夏日",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "曲院风荷以大片荷塘、临水廊桥与岸上亭台组织夏季湖景。风过荷叶时波光与深色叶片相互流动，观看的重点是塘面尺度、花影、风感与水下结构，而不只是识别单独一朵花。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "huagang-fish-viewing",
+      "name": "花港观鱼与园林观鱼",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "花港观鱼把曲池、鱼影、水草与岸边回廊编成连续观看。观鱼介于凝视与游走之间：人停步时鱼游动，人移动时倒影变形，池水的清澈程度决定画面的疏密。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liulang-wenying-soundscape",
+      "name": "柳浪闻莺与春景声景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "柳浪闻莺提示西湖十景中也包含声音与季节。春日新柳成排，鸟鸣与行人、车流、湖浪连成一片；理解这处景名需要把植物、光线、鸟声与城市环境放在一起聆听，而不是只看垂枝。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "shuangfeng-cloud-peaks",
+      "name": "双峰插云与南北高峰",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双峰插云看重云雾、高度与观看位置的关系。南北两峰在雨雪、晨昏、雾中忽隐忽现，可远观而不必登顶；其价值在于山、雾、天与想象之间的层次，而非一个固定的观景台。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "lingyin-zen-grove",
+      "name": "灵隐的山林禅寺",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "灵隐寺以大殿、庭院、溪泉与古树把宗教空间与自然山林叠合。从山门进入，建筑逐层升高、林木逐渐围合。参访时注意中轴线的秩序与两侧溪泉、岩刻对空间的松动。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "feilai-grotto-carving",
+      "name": "飞来峰摩崖造像",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "飞来峰山岩上以宋元石刻为主体，造像依天然岩石开凿，与灵隐寺、冷泉共同构成宗教景观。可换几个角度比较崖面、洞穴与泉流的关系，体会山体如何被雕刻成一部露天经卷。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "longjing-tea-terrace",
+      "name": "龙井茶山与茶文化",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "龙井茶把茶园、泉水、炒制与品饮组织成一套江南茶文化。茶山随坡起伏，茶与云雾、山泉相邻，茶树与季候互为表里；看茶山要同时看村落、坡向与茶园的边界。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "hupao-spring-tea",
+      "name": "虎跑泉与泉水",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "虎跑以泉亭、石崖和泉水泡茶的传统知名。泉水经岩层过滤、口感清冽，和茶形成“泉茶相配”的范例；春夏水位与口感不同，用于冲泡时的温度与器具变化也值得留意。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "liuhe-pagoda-river",
+      "name": "六和塔与钱塘江",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "钱塘江在六和塔一带折向开阔，塔、江、潮与地平线连成一体。塔身为高度标尺，江面为运动界面；重点观塔与观江相互生成，是理解塔如何对水域起作用的上佳点位。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "qiantang-tide",
+      "name": "钱塘江潮与观潮",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "钱塘江在农历八月十八前后最盛，潮头沿江自东向西推动，在宽阔江面形成一条高举的白浪。观潮既是地方天文地理知识，也涉及安全边界：关键在于稳定地点分时观看，而不在奔走追逐潮线。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "xiling-seal-art",
+      "name": "西泠印社与孤山篆刻",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社以印学与孤山庭园亭阁相连，是西湖文人传统的方寸之地。印章把文字、石料与金石观念压缩在一方空间；在孤山上看印，山色与印的叙事互文并呈。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "west-lake-new-ten-scenes",
+      "name": "1985 西湖新十景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "1985 年重新评出西湖新十景，延续南宋西湖十景的构景传统，把观看方式从湖岸延伸到山林与泉声：云栖竹径、九溪烟树、满陇桂雨、黄龙吐翠、虎跑梦泉、龙井问茶、阮墩环碧、玉皇飞云、吴山天风、宝石流霞。它提示人们：西湖不只是湖面，山、溪、泉与城头同样参与构景。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "westlake-revalued-scenes-2007",
+      "name": "三评西湖十景（2007）",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "区别于南宋十景与新十景，2007 年推出三评西湖十景，把西湖十景的评选从古额延伸到当代城市栖居：灵隐谈禅、岳门桂雨、杨堤夜色、北街寻梦等，体现年年改造的西湖如何在旧额之外继续生长新名。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "yuan-qiantang-scenes",
+      "name": "元代钱塘八景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "元代以『钱塘』替代『西湖』统称西湖与江景，形成钱塘八景（如葛岭朝霞、孤山雪约、马钮云近、鹫丽朝云、赵湾垂钓等戏曲），湖与江、山中与城外并置，是西湖景观在朝代更替间典型的一次改名。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "lakeside-old-city-interface",
+      "name": "湖滨、老城与湖山边界",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西湖东岸的湖滨路与老城是湖山与城市的交界：一批城门、骑楼与广场，让湖在城墙拆除前后有了截然不同的亲近。湖滨夜色与早茶，是市民观看西湖的日常入口。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "osmanthus-autumn-fragrance",
+      "name": "桂花与满觉陇",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "桂花为杭州市花，满觉陇一带栽满桂树，秋日用香气代替视觉来构景。满陇桂雨把嗅觉纳入西湖十景类，提醒游人观察时节如何以味道改写山水。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "meijiawu-tea-village",
+      "name": "梅家坞与茶村生活",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "梅家坞位于西湖西南山谷，是龙井茶的主要产村。明代以来茶、竹、桂与溪涧共同组成山村肌理，春季采茶、品茶、晒茶构成与山中寺院不同的日常景观。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "baochu-leifeng-twin-tower",
+      "name": "保俶雷峰对塔与湖山南北对景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "保俶塔在北岸宝石山、雷峰塔在南岸夕照山，两塔隔着湖面形成南北对景：一瘦一圆、一阳一阴，像西湖前景里两座站立的句号。古称『保俶如美人，雷峰如老衲』。两塔对望是西湖塔影构图最基本的轴线。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "chinese-zodiac-city-gate",
+      "name": "湖滨城墙与城门记忆",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "明代以前的杭州城墙在湖滨一线，湖滨一带曾是旧城最西的边界；古城门的名字（涌金门、清波门、钱塘门）出现在至今的街名里。城墙拆除后，湖面与城市第一次真正无阻地相接。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "causeway-willow-peach",
+      "name": "堤上桃柳与烟堤",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤与白堤历来以桃柳间植闻名：春日一边桃花粉、一边柳丝绿，行走在两排树影里，堤于是由被行者的双脚读成一长条转动的景观。堤上植树最初是护岸求固，却误打误撞长成最有名的西湖春天。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "misty-rain-lake-scape",
+      "name": "烟雨空蒙的水墨湖",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏轼『水光漍潋滟晴方好，山色空蒙雨亦奇』写的是西湖最常出现的两种脸：晴与雨。雨的湖让山色退成墨痕，柳、堤、塔都浸入一层灰底，恰如一幅转动的山水长卷。"
+          }
+        ]
+      }
     }
   ],
   "attractions": [
@@ -472,6 +758,50 @@
     {
       "key": "three-pools-mirroring-moon",
       "name": "三潭印月"
+    },
+    {
+      "key": "broken-bridge",
+      "name": "断桥"
+    },
+    {
+      "key": "pinghu-autumn-moon",
+      "name": "平湖秋月"
+    },
+    {
+      "key": "quyuan-feng-he",
+      "name": "曲院风荷"
+    },
+    {
+      "key": "huagang-guan-yu",
+      "name": "花港观鱼"
+    },
+    {
+      "key": "liulang-wen-ying",
+      "name": "柳浪闻莺"
+    },
+    {
+      "key": "shuang-feng-cha-yun",
+      "name": "双峰插云"
+    },
+    {
+      "key": "ling-yin-temple",
+      "name": "灵隐寺·飞来峰"
+    },
+    {
+      "key": "longjing-village",
+      "name": "龙井村"
+    },
+    {
+      "key": "hupao-park",
+      "name": "虎跑公园"
+    },
+    {
+      "key": "liu-he-pagoda",
+      "name": "六和塔"
+    },
+    {
+      "key": "xiling-seal",
+      "name": "西泠印社·孤山"
     }
   ],
   "relations": [
@@ -650,6 +980,206 @@
     {
       "elementKey": "leifeng-pagoda-and-evening-glow",
       "relatedElementKey": "nanping-evening-bell"
+    },
+    {
+      "elementKey": "west-lake-winter-snow",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "west-lake-winter-snow",
+      "relatedElementKey": "legend-of-the-white-snake"
+    },
+    {
+      "elementKey": "west-lake-winter-snow",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "quyuan-lotus-summer",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "quyuan-lotus-summer",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "huagang-fish-viewing",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "huagang-fish-viewing",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "liulang-wenying-soundscape",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "liulang-wenying-soundscape",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "shuangfeng-cloud-peaks",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "shuangfeng-cloud-peaks",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "lingyin-zen-grove",
+      "relatedElementKey": "west-lake-buddhist-culture"
+    },
+    {
+      "elementKey": "feilai-grotto-carving",
+      "relatedElementKey": "west-lake-buddhist-culture"
+    },
+    {
+      "elementKey": "feilai-grotto-carving",
+      "relatedElementKey": "lingyin-zen-grove"
+    },
+    {
+      "elementKey": "longjing-tea-terrace",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "longjing-tea-terrace",
+      "relatedElementKey": "hupao-spring-tea"
+    },
+    {
+      "elementKey": "hupao-spring-tea",
+      "relatedElementKey": "longjing-tea-terrace"
+    },
+    {
+      "elementKey": "hupao-spring-tea",
+      "relatedElementKey": "west-lake-ten-scenes-system"
+    },
+    {
+      "elementKey": "liuhe-pagoda-river",
+      "relatedElementKey": "west-lake-pagoda-landscape"
+    },
+    {
+      "elementKey": "liuhe-pagoda-river",
+      "relatedElementKey": "qiantang-tide"
+    },
+    {
+      "elementKey": "qiantang-tide",
+      "relatedElementKey": "liuhe-pagoda-river"
+    },
+    {
+      "elementKey": "xiling-seal-art",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "xiling-seal-art",
+      "relatedElementKey": "siku-quanshu-library"
+    },
+    {
+      "elementKey": "liuhe-pagoda-river",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "west-lake-ten-scenes",
+      "relatedElementKey": "west-lake-new-ten-scenes"
+    },
+    {
+      "elementKey": "west-lake-new-ten-scenes",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "west-lake-new-ten-scenes",
+      "relatedElementKey": "song-landscape-aesthetics"
+    },
+    {
+      "elementKey": "westlake-revalued-scenes-2007",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "westlake-revalued-scenes-2007",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "yuan-qiantang-scenes",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "yuan-qiantang-scenes",
+      "relatedElementKey": "qiantang-tide"
+    },
+    {
+      "elementKey": "lakeside-old-city-interface",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "lakeside-old-city-interface",
+      "relatedElementKey": "liulang-wenying-soundscape"
+    },
+    {
+      "elementKey": "osmanthus-autumn-fragrance",
+      "relatedElementKey": "west-lake-new-ten-scenes"
+    },
+    {
+      "elementKey": "osmanthus-autumn-fragrance",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "meijiawu-tea-village",
+      "relatedElementKey": "longjing-tea-terrace"
+    },
+    {
+      "elementKey": "meijiawu-tea-village",
+      "relatedElementKey": "west-lake-new-ten-scenes"
+    },
+    {
+      "elementKey": "osmanthus-autumn-fragrance",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "baochu-leifeng-twin-tower",
+      "relatedElementKey": "west-lake-pagoda-landscape"
+    },
+    {
+      "elementKey": "baochu-leifeng-twin-tower",
+      "relatedElementKey": "leifeng-pagoda-and-evening-glow"
+    },
+    {
+      "elementKey": "chinese-zodiac-city-gate",
+      "relatedElementKey": "lakeside-old-city-interface"
+    },
+    {
+      "elementKey": "chinese-zodiac-city-gate",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "causeway-willow-peach",
+      "relatedElementKey": "west-lake-causeway-waterworks"
+    },
+    {
+      "elementKey": "causeway-willow-peach",
+      "relatedElementKey": "bai-juyi-and-west-lake"
+    },
+    {
+      "elementKey": "causeway-willow-peach",
+      "relatedElementKey": "su-causeway-spring-dawn"
+    },
+    {
+      "elementKey": "causeway-willow-peach",
+      "relatedElementKey": "west-lake-cultural-landscape"
+    },
+    {
+      "elementKey": "misty-rain-lake-scape",
+      "relatedElementKey": "west-lake-ten-scenes"
+    },
+    {
+      "elementKey": "misty-rain-lake-scape",
+      "relatedElementKey": "poetic-landscape-naming"
+    },
+    {
+      "elementKey": "misty-rain-lake-scape",
+      "relatedElementKey": "song-landscape-aesthetics"
+    },
+    {
+      "elementKey": "misty-rain-lake-scape",
+      "relatedElementKey": "west-lake-cultural-landscape"
     }
   ],
   "introductions": [
@@ -994,6 +1524,658 @@
       "latitude": 30.240833,
       "longitude": 120.140278,
       "coordinateSourceUrl": "https://www.ehangzhou.gov.cn/2018-06/14/c_271616.htm"
+    },
+    {
+      "key": "broken-bridge.snow",
+      "name": "断桥残雪的观看方式",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "断桥所在的观看不是看桥体本身，而是看雪后黑白灰的湖面：桥面部分融化、部分存留时，桥身像被切开的断面。站在白堤东端，石桥、残雪和北里湖、外西湖的空间层次同时进入画面。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-winter-snow",
+      "attractionKey": "broken-bridge",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥残雪"
+    },
+    {
+      "key": "broken-bridge.whitesnake",
+      "name": "断桥与《白蛇传》",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "《白蛇传》把断桥写成许仙与白娘子的相遇、相离与重逢的地点。故事与桥的石拱和湖水的呼应互相投射，使桥既是一座交通构筑，也成为戏曲游湖的舞台。"
+          }
+        ]
+      },
+      "culturalElementKey": "legend-of-the-white-snake",
+      "attractionKey": "broken-bridge",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥"
+    },
+    {
+      "key": "pinghu-autumn-moon.moon",
+      "name": "平湖秋月的秋夜月色",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月位于白堤西端的孤山之塘，面向外湖展开。秋夜湖面平静时月亮倒影完整，湖面的尺度成为观看主题。到平台或步道边体会湖、月、倒影三者顺序。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-moon-viewing",
+      "attractionKey": "pinghu-autumn-moon",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "key": "quyuan-feng-he.lotus",
+      "name": "曲院风荷的夏日荷风",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "曲院风荷的荷塘沿湖面展开，盛夏时荷叶与游船同时运动。过曲廊、过桥，荷叶之间不断变换层次，风成为最重要的介质：先体会风，再看叶与光，最后才指认具体植物。"
+          }
+        ]
+      },
+      "culturalElementKey": "quyuan-lotus-summer",
+      "attractionKey": "quyuan-feng-he",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "key": "huagang-guan-yu.fish",
+      "name": "花港观鱼的池边观看",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "花港观鱼看的是鱼与池、人行与倒影互相交织的关系。站在回廊上让鱼群在池中聚散，再沿池走一圈，体会水底、鱼影与步道的节奏同步，从而理解“观”字包含的活动性。"
+          }
+        ]
+      },
+      "culturalElementKey": "huagang-fish-viewing",
+      "attractionKey": "huagang-guan-yu",
+      "latitude": 30.230233,
+      "longitude": 120.139095,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "liulang-wen-ying.spring",
+      "name": "柳浪闻莺的春声",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "柳浪闻莺以排柳与鸟鸣闻名，是西湖少见的以听为主的景点。春天站在柳下听鸟鸣与湖浪，向西朝南山、北山两个方向辨认声音来源，把观察从视觉扩展到听觉与季节。"
+          }
+        ]
+      },
+      "culturalElementKey": "liulang-wenying-soundscape",
+      "attractionKey": "liulang-wen-ying",
+      "latitude": 30.240389,
+      "longitude": 120.156326,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "shuang-feng-cha-yun.cloud",
+      "name": "双峰插云的远观方式",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双峰插云不宜近看，适合在洪春桥、苏堤等能同时看到南北两峰的远点。云薄薄遮住峰顶时，“插云”的形态最明显——先定方位，再看云雾变化，最后才找山峰的高度。"
+          }
+        ]
+      },
+      "culturalElementKey": "shuangfeng-cloud-peaks",
+      "attractionKey": "shuang-feng-cha-yun",
+      "latitude": 30.247511,
+      "longitude": 120.122581,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B025E0"
+    },
+    {
+      "key": "ling-yin-temple.grove",
+      "name": "灵隐寺的山林法度",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "灵隐寺的观看不是第一眼看到大殿，而是从入口到殿前越来越静的过程。转崖壁与山泉，中轴建筑与古树交叠，寺院真正把山林当作背景与骨架，观寺需要顺着路径逐层而上。"
+          }
+        ]
+      },
+      "culturalElementKey": "lingyin-zen-grove",
+      "attractionKey": "ling-yin-temple",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0DA1F"
+    },
+    {
+      "key": "ling-yin-temple.grotto",
+      "name": "飞来峰的摩崖造像",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "飞来峰在灵隐寺门前溪对岸，岩体上遍布宋元造像。造像是刻在天然岩面上的，沿着洞窟与山径走动，在各个角度仰望，比较岩、泉、寺、塔在视线里的配合，才能体会山体作为“经卷”的属性。"
+          }
+        ]
+      },
+      "culturalElementKey": "feilai-grotto-carving",
+      "attractionKey": "ling-yin-temple",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0DA1F"
+    },
+    {
+      "key": "longjing-village.tea",
+      "name": "龙井山村的茶山",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "龙井的泉水与茶相配，茶园与村舍沿坡展开。走到茶山上，体会茶树与山泉的对应，再把视线拉回村落——龙井既是地名也是一种制茶体系，茶山是山林与农事同时成立的场所。"
+          }
+        ]
+      },
+      "culturalElementKey": "longjing-tea-terrace",
+      "attractionKey": "longjing-village",
+      "latitude": 30.218481,
+      "longitude": 120.106683,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "hupao-park.spring",
+      "name": "虎跑的泉水与茶",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "虎跑的泉池与石崖、亭廊结合，饮用传统让泉水被写进茶文化。看水时先感受流入泉池的节奏，再端杯于亭中试泡，能体会泉水与水的差别；它与龙井一侧共同构成“山水+茶”的连线。"
+          }
+        ]
+      },
+      "culturalElementKey": "hupao-spring-tea",
+      "attractionKey": "hupao-park",
+      "latitude": 30.208087,
+      "longitude": 120.1299,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "liu-he-pagoda.river",
+      "name": "六和塔与钱塘江",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "六和塔立在钱塘江岸边，塔、江、潮与地平线合成秩序。逐层向上时江面渐远，观塔与观江互证：塔是垂直的度量，江是水平的界面，二者在同一处高差下生成塔和江的关系。"
+          }
+        ]
+      },
+      "culturalElementKey": "liuhe-pagoda-river",
+      "attractionKey": "liu-he-pagoda",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "liu-he-pagoda.tide",
+      "name": "六和塔下的观潮",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "钱塘江潮在农历八月前后最盛，江面能被一道高耸水线压过。在六和塔一带远观潮线，先听见声、再看见潮，潮、江、塔与风在彼此呼应；观潮要选择稳定观察点，不必贴近追逐。"
+          }
+        ]
+      },
+      "culturalElementKey": "qiantang-tide",
+      "attractionKey": "liu-he-pagoda",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "xiling-seal.society",
+      "name": "西泠印社的孤山空间",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社把印章、金石与孤山庭园连成一体，是西湖文人传统的方寸之地。穿过亭廊看湖山，再回看石印与碑刻，体会“方寸之间见天地”的观看方式。"
+          }
+        ]
+      },
+      "culturalElementKey": "xiling-seal-art",
+      "attractionKey": "xiling-seal",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
+    },
+    {
+      "key": "wenlan-pavilion.manuscript-route",
+      "name": "文澜阁的四库故事",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "文澜阁是《四库全书》七大书阁之一，咸丰年间损毁后重修，书与阁的命运曲折。早晨光线平射入阁时，书架与叠布透出整个藏书楼的空间层次。"
+          }
+        ]
+      },
+      "culturalElementKey": "siku-quanshu-library",
+      "attractionKey": "wenlan-pavilion",
+      "latitude": 30.253303,
+      "longitude": 120.137856,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Wenlan_Pavilion"
+    },
+    {
+      "key": "yue-fei-temple.apple-blossom",
+      "name": "岳庙里的祠与柏",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳王庙里古柏参天、铁铸秦桧跪像，正殿气场沉雄。从入园到正祠再到殿后墓园，叙事的尺度从纪念广场收进忠烈坟土。"
+          }
+        ]
+      },
+      "culturalElementKey": "yue-fei-memorial-culture",
+      "attractionKey": "yue-fei-temple",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://www.wikidata.org/wiki/Q579874"
+    },
+    {
+      "key": "pinghu-autumn-moon.stone-terrace",
+      "name": "平湖秋月的平台与月光",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月有一块伸向湖面的石台，站在石台上，月色从湖面水平灌注进视野。平台把建筑与湖之间的距离压缩到一条石沿，是观看入湖月景的绝佳取景器。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-moon-viewing",
+      "attractionKey": "pinghu-autumn-moon",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "key": "quirrefeng-he.winter",
+      "name": "曲院荷塘的季节另一面",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "曲院风荷秋后荷枯、冬来残荷，看惯了满塘绿荷后转看瘦荷清影：荷塘不只在盛夏抢面，枯荷的线条与雪线同样构景。"
+          }
+        ]
+      },
+      "culturalElementKey": "quyuan-lotus-summer",
+      "attractionKey": "quyuan-feng-he",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "key": "huagang-guan-yu.pond-edge-sit",
+      "name": "花港观鱼的池边观看",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "花港观鱼的重点在池与人的距离：池边石栏与曲桥让游鱼凑近脚边，重心既在人又在鱼。观察看与被看的视线交换，是一把理解园水关系的钥匙。"
+          }
+        ]
+      },
+      "culturalElementKey": "huagang-fish-viewing",
+      "attractionKey": "huagang-guan-yu",
+      "latitude": 30.230233,
+      "longitude": 120.139095,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "liu-he-pagoda.landscape-score",
+      "name": "六和塔内外的层次",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "六和塔同时面向江、山与城市：中层看舟、上层见江天。塔内的螺旋扶梯把江岸风景切片成一级级的镜头，为登高者提供不断重组的画面。"
+          }
+        ]
+      },
+      "culturalElementKey": "liuhe-pagoda-river",
+      "attractionKey": "liu-he-pagoda",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "su-causeway.iodine-bridges",
+      "name": "苏堤六桥与移步",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤由六桥（映波、锁澜、望山、压堤、东浦、跨虹）串起的六处停顿；每过一座桥，湖面与山影随桥孔切出一格新的画面。苏堤真正的『春晓』是一场沿堤而行的步移景异。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-causeway-waterworks",
+      "attractionKey": "su-causeway",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "key": "su-causeway.urn",
+      "name": "苏堤的水利与植柳",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤本来是苏轼挖湖泥筑成，堤上植柳与桃花，既挡浪又护岸，行人的行走与水的治理合而为一。水利营造与湖岸景观在苏堤上是同一条路线。"
+          }
+        ]
+      },
+      "culturalElementKey": "su-shi-and-west-lake",
+      "attractionKey": "su-causeway",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "key": "liulang-wen-ying.evening-feel",
+      "name": "柳浪闻莺的黄昏",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "傍晚的柳浪闻莺最懂行人：垂柳沿湖岸压低视线，黄黄昏光线穿过柳丝，把散步道染成一条金色河岸。柳浪与莺啼消歇后，湖面就交给夜月。"
+          }
+        ]
+      },
+      "culturalElementKey": "lakeside-old-city-interface",
+      "attractionKey": "liulang-wen-ying",
+      "latitude": 30.240389,
+      "longitude": 120.156326,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "shuang-feng-cha-yun.poetic",
+      "name": "双峰插云的诗意远望",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双峰插云的看点不在登顶，而在从湖岸回望两峰时那种云端相加的意象。诗人们把南北高峰当成一对远山中的句子，一高一下、一深一浅，构出西湖东面的天际线。"
+          }
+        ]
+      },
+      "culturalElementKey": "poetic-landscape-naming",
+      "attractionKey": "shuang-feng-cha-yun",
+      "latitude": 30.247511,
+      "longitude": 120.122581,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B025E0"
+    },
+    {
+      "key": "longjing-village.harvest",
+      "name": "龙井村的一场春采",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "清明春雨过后，龙井村的茶垄里满是弯腰身影。晴天的山布把茶田收拢成一小片青绿的收束，炒茶灶的烟火味从屋巷里飘出——产茶村落的日常即是这座西湖山的另一面。"
+          }
+        ]
+      },
+      "culturalElementKey": "meijiawu-tea-village",
+      "attractionKey": "longjing-village",
+      "latitude": 30.218481,
+      "longitude": 120.106683,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "hupao-park.new-ten-scene",
+      "name": "虎跑梦泉的泉水与新十景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "虎跑泉涌乌拉关系灵隐，泉水掬起来可泡龙井。1985年又把泉水定为‘虎跑梦泉’，进入新十景之名：泉水不再只是饮品，而是西湖山水记忆的一个短句。"
+          }
+        ]
+      },
+      "culturalElementKey": "hupao-spring-tea",
+      "attractionKey": "hupao-park",
+      "latitude": 30.208087,
+      "longitude": 120.1299,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "xiling-seal.studio-sign",
+      "name": "西泠印社的嵌印与篆刻",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社以研究金石篆刻闻名，社内摩崖与嵌印遍布孤山。从印谱到拓片，社里的观看方式是中式的‘认字’：把湖山读成一枚枚可刻的篆印。"
+          }
+        ]
+      },
+      "culturalElementKey": "xiling-seal-art",
+      "attractionKey": "xiling-seal",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
+    },
+    {
+      "key": "jingci-temple.evening-bell-tone",
+      "name": "净慈寺的晚钟",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "净慈寺是南屏晚钟的所在地，寺内钟楼的大钟在黄昏敲响时，钟声贴着南屏山的崖壁滚向湖面。听钟的位置常选在湖心，钟在山与湖之间来回，是西湖最慢的一件声音景观。"
+          }
+        ]
+      },
+      "culturalElementKey": "nanping-evening-bell",
+      "attractionKey": "jingci-temple",
+      "latitude": 30.23113,
+      "longitude": 120.14434,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "leifeng-pagoda.sunlight-and-shadow",
+      "name": "雷峰夕照的光线时刻",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "雷峰塔受两:一亮一暗。阳光贴塔身以西的斜光拉出长影，塔影一直伸进湖面，与湖水波光相叠，让夕照从塔身一路浸到对岸。色温转橙的那一刻，是观看这座塔的最佳窗口。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-pagoda-landscape",
+      "attractionKey": "leifeng-pagoda",
+      "latitude": 30.233889,
+      "longitude": 120.145,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/雷峰塔"
+    },
+    {
+      "key": "broken-bridge.snow-again",
+      "name": "断桥残雪与桥的名字",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "为什么叫断桥？雪后阳光先到桥面北坡，露出碧绿的青石与雪线忽断，或指向段家桥的谐音。两种解释都成立：文字与景色的偶然重叠，把一座普通的低桥写进修辞史。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-winter-snow",
+      "attractionKey": "broken-bridge",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥"
+    },
+    {
+      "key": "pinghu-autumn-moon.platform",
+      "name": "平湖秋月的平台与御碑",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月刻康熙题字与御碑耸立，面对湖心的平台让月光水平涌入。月到中秋最亮，平台的石栏正好把月光截成一个观众的框，人能进入的画面里。"
+          }
+        ]
+      },
+      "culturalElementKey": "mid-autumn-west-lake",
+      "attractionKey": "pinghu-autumn-moon",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "key": "yue-fei-temple.entrance-border",
+      "name": "岳庙前广场的边界",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳庙前广场以两行松柏和石羊守望着外围，庙门朝西湖方向微微偏向，把祠的空间与湖岸的日常隔成两层：外面车马，里面凛冽。门与栏杆之间是忠烈祠礼仪感的起点。"
+          }
+        ]
+      },
+      "culturalElementKey": "yue-fei-memorial-culture",
+      "attractionKey": "yue-fei-temple",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://en.wikipedia.org/wiki/Yue_F%C3%A4ng_Tempel"
+    },
+    {
+      "key": "quyuan-fenghe.moon-of-summer",
+      "name": "曲院风荷的夏日纵深",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "盛夏曲院风荷里最凉快的不是水，而是荷影屏蔽的斜光线。沿着回廊走到池畔，荷花把湖面占全，风从鳞山入，把一阵阵荷香送过眼前的绿海。"
+          }
+        ]
+      },
+      "culturalElementKey": "west-lake-new-ten-scenes",
+      "attractionKey": "quyuan-feng-he",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "key": "yue-fei-temple.alley",
+      "name": "岳望着孤山的公共绿地",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳庙之东利用山脚斜坡铺了一片公共绿地，下班后孩子与老人混在一起放风筝。祠堂的庄严与公园的日常只隔一道院墙，是西湖边少有的古庙对人的拉近之处。"
+          }
+        ]
+      },
+      "culturalElementKey": "lakeside-old-city-interface",
+      "attractionKey": "yue-fei-temple",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/岳王庙"
+    },
+    {
+      "key": "ling-yin-temple.kai-after-rain",
+      "name": "雨后的灵隐山气",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "灵隐寺在飞来峰与灵隐峰之间夹出一线，雨后雾从峰腰升起，寺瓦与香氛就埋进湿润的山气里。这一带的湿润与青苔使佛寺斯地显得古老而近山，是山中寺院的呼吸节奏。"
+          }
+        ]
+      },
+      "culturalElementKey": "lingyin-zen-grove",
+      "attractionKey": "ling-yin-temple",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "key": "xiling-seal.duan-po",
+      "name": "西泠印社的山石与摩崖",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社以摩崖刻石布满孤山西麓，社名「西泠」来自冷泉与林社的旧名。沿着石阶上溯，摩崖像把篆刻史展开成一条立体的路，走完就到顶上的竹阁。"
+          }
+        ]
+      },
+      "culturalElementKey": "xiling-seal-art",
+      "attractionKey": "xiling-seal",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
     }
-  ]
+  ],
+  "manifest": {
+    "packVersion": "hangzhou-west-lake-v4",
+    "generatedAt": "2026-08-03T07:14:02Z"
+  }
 }

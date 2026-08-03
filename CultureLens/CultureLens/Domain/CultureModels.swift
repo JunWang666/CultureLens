@@ -112,17 +112,20 @@ nonisolated struct RecognitionInput: Sendable {
   var place: PlaceContext?
   var contextNote: String?
   var localeIdentifier: String
+  var userKnowledgeStates: [UserKnowledgeStateContext]
 
   init(
     imageData: Data,
     place: PlaceContext?,
     contextNote: String?,
-    localeIdentifier: String
+    localeIdentifier: String,
+    userKnowledgeStates: [UserKnowledgeStateContext] = []
   ) {
     imageBase64 = imageData.base64EncodedString()
     self.place = place
     self.contextNote = contextNote
     self.localeIdentifier = localeIdentifier
+    self.userKnowledgeStates = userKnowledgeStates
   }
 }
 

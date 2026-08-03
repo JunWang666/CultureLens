@@ -52,6 +52,7 @@ final class ScanCoordinator {
         focusRegion: NormalizedImageRegion?,
         locationSource: ScanLocationSource,
         contextNote: String,
+        userKnowledgeStates: [UserKnowledgeStateContext] = [],
         service: RecognitionService,
         onSuccess: @escaping @MainActor @Sendable (ScanSession) -> Void
     ) {
@@ -102,7 +103,8 @@ final class ScanCoordinator {
                         contextNote,
                         hasFocusAnnotation: focusRegion != nil
                     ),
-                    localeIdentifier: Locale.current.identifier
+                    localeIdentifier: Locale.current.identifier,
+                    userKnowledgeStates: userKnowledgeStates
                 )
                 let result = try await service.recognize(input)
 

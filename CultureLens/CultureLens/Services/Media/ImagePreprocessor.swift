@@ -145,7 +145,10 @@ enum ImagePreprocessor {
     context.interpolationQuality = .high
     context.draw(image, in: pixelBounds)
 
-    let focus = region.clamped(minimumSize: 0.05)
+    // The selection UI already enforces a small screen-space minimum. Keep
+    // annotation clamping at the model's 1% safety floor so the transmitted
+    // frame continues to match what the user saw on every device size.
+    let focus = region.clamped()
     let shortEdge = min(pixelBounds.width, pixelBounds.height)
     let outerLineWidth = max(8, shortEdge * 0.012)
     let innerLineWidth = max(5, shortEdge * 0.007)

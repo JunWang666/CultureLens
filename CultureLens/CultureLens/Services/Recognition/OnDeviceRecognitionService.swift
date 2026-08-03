@@ -38,7 +38,8 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     let userText = try promptAssembler.userText(
       contextNote: input.contextNote,
       knowledgeCandidates: knowledgeCandidates,
-      attractionCandidates: attractionCandidates
+      attractionCandidates: attractionCandidates,
+      userKnowledgeStates: input.userKnowledgeStates
     )
 
     let (rawDecision, modelIdentifier) = try await gatewayClient.recognize(

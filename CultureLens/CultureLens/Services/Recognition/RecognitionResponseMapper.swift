@@ -244,8 +244,7 @@ nonisolated enum RecognitionResponseMapper {
     CultureConcept(
       id: DeterministicID.culturalElement(element.key),
       name: element.name,
-      kind: ConceptKind(rawValue: graphConceptKind(key: element.key, name: element.name))
-        ?? .foundation,
+      kind: CulturalElementPresentation.conceptKind(key: element.key, name: element.name),
       summary: KnowledgeStore.richTextPlainText(element.introduction),
       detail: ""
     )
@@ -310,21 +309,6 @@ nonisolated enum RecognitionResponseMapper {
       summary:
         "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
     )
-  }
-
-  /// `graphConceptKind` in pipeline.go.
-  private static func graphConceptKind(key: String, name: String) -> String {
-    let key = key.lowercased()
-    if key.contains("su-shi") || key.contains("bai-juyi") {
-      return "人物"
-    }
-    if key.contains("song") || name.contains("朝") || name.contains("临安") {
-      return "历史"
-    }
-    if key.contains("garden") || key.contains("landscape") || key.contains("moon") {
-      return "审美"
-    }
-    return "基础知识"
   }
 
   /// `artworkSymbol` in pipeline.go.

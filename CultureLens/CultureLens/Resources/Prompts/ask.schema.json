@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "answer": {
+      "type": "string",
+      "description": "针对用户问题的回答，严格基于知识库片段。"
+    },
+    "citations": {
+      "type": "array",
+      "description": "支撑回答的知识库原文摘录。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string" },
+          "name": { "type": "string" },
+          "fragment": { "type": "string" }
+        },
+        "required": ["key", "name", "fragment"]
+      }
+    }
+  },
+  "required": ["answer", "citations"]
+}

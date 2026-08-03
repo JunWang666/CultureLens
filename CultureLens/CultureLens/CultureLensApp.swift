@@ -14,7 +14,10 @@ struct CultureLensApp: App {
 
     init() {
         do {
-            let schema = Schema([ScanHistoryRecord.self])
+            let schema = Schema([
+                ScanHistoryRecord.self,
+                KnowledgeProgressRecord.self,
+            ])
             let configuration = ModelConfiguration(
                 "CultureLensHistoryV1",
                 schema: schema

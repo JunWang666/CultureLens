@@ -7,6 +7,7 @@
 
 import Foundation
 import ImageIO
+import SwiftData
 import Testing
 import UniformTypeIdentifiers
 
@@ -330,6 +331,62 @@ struct CultureLensTests {
     #expect(region.height == 0.3)
   }
 
+  @Test func focusSelectionMapsIPhoneLetterboxedCoordinatesToImage() {
+    let imageFrame = FocusSelectionGeometry.aspectFitFrame(
+      imageSize: CGSize(width: 1_200, height: 1_600),
+      in: CGRect(x: 0, y: 0, width: 393, height: 852)
+    )
+    let region = FocusSelectionGeometry.region(
+      from: CGPoint(
+        x: imageFrame.minX + imageFrame.width * 0.10,
+        y: imageFrame.minY + imageFrame.height * 0.15
+      ),
+      to: CGPoint(
+        x: imageFrame.minX + imageFrame.width * 0.80,
+        y: imageFrame.minY + imageFrame.height * 0.75
+      ),
+      in: imageFrame,
+      enforceMinimumSize: true
+    )
+
+    #expect(abs(region.x - 0.10) < 0.000_001)
+    #expect(abs(region.y - 0.15) < 0.000_001)
+    #expect(abs(region.width - 0.70) < 0.000_001)
+    #expect(abs(region.height - 0.60) < 0.000_001)
+  }
+
+  @Test func focusSelectionReachesIPadImageEdgesWithTopLetterbox() {
+    let imageFrame = FocusSelectionGeometry.aspectFitFrame(
+      imageSize: CGSize(width: 1_600, height: 1_200),
+      in: CGRect(x: 0, y: 0, width: 1_032, height: 1_376)
+    )
+    let region = FocusSelectionGeometry.region(
+      from: CGPoint(x: imageFrame.minX - 20, y: imageFrame.minY - 20),
+      to: CGPoint(x: imageFrame.maxX + 20, y: imageFrame.maxY + 20),
+      in: imageFrame,
+      enforceMinimumSize: true
+    )
+
+    #expect(imageFrame.minY > 0)
+    #expect(region == NormalizedImageRegion(x: 0, y: 0, width: 1, height: 1))
+  }
+
+  @Test func focusSelectionMinimumSizeUsesScreenPoints() {
+    let imageFrame = CGRect(x: 100, y: 200, width: 800, height: 1_000)
+    let region = FocusSelectionGeometry.region(
+      from: CGPoint(x: 500, y: 700),
+      to: CGPoint(x: 502, y: 703),
+      in: imageFrame,
+      enforceMinimumSize: true
+    )
+
+    #expect(abs(region.width * imageFrame.width - 16) < 0.000_001)
+    #expect(abs(region.height * imageFrame.height - 16) < 0.000_001)
+    #expect(region.x >= 0 && region.y >= 0)
+    #expect(region.x + region.width <= 1)
+    #expect(region.y + region.height <= 1)
+  }
+
   @Test func llmGatewayEndpointIsConfiguredGlobally() {
     #expect(
       LLMGatewayConfig.default.endpoint.absoluteString
@@ -337,6 +394,8 @@ struct CultureLensTests {
     )
     #expect(LLMGatewayConfig.default.model == "dynamic/culturelens")
     #expect(LLMGatewayConfig.default.timeout == 55)
+    #expect(LLMGatewayConfig.chat.model == "dynamic/chat")
+    #expect(LLMGatewayConfig.chat.endpoint == LLMGatewayConfig.default.endpoint)
   }
 
   @Test func nearbyRecommendationsDecodeDatabaseContent() throws {
@@ -392,25 +451,135 @@ struct CultureLensTests {
     #expect(recommendation.distanceMeters == 1_147.2)
   }
 
-  @Test func knowledgeUnderstandingPersistsAndCanBeReverted() throws {
+  @Test func graphMembershipReusesLegacyStorageAndCanBeReverted() throws {
     let suiteName = "KnowledgeProgressStoreTests.\(UUID().uuidString)"
     let userDefaults = try #require(UserDefaults(suiteName: suiteName))
     defer {
       userDefaults.removePersistentDomain(forName: suiteName)
     }
     let nodeID = UUID()
+    userDefaults.set(
+      [nodeID.uuidString],
+      forKey: KnowledgeProgressStore.defaultStorageKey
+    )
+    let schema = Schema([KnowledgeProgressRecord.self])
+    let configuration = ModelConfiguration(
+      "KnowledgeProgressStoreTests",
+      schema: schema,
+      isStoredInMemoryOnly: true
+    )
+    let container = try ModelContainer(
+      for: schema,
+      configurations: [configuration]
+    )
     let store = KnowledgeProgressStore(userDefaults: userDefaults)
+    store.configure(modelContext: container.mainContext)
 
-    #expect(!store.isUnderstood(nodeID))
-
-    store.toggleUnderstanding(nodeID)
-    #expect(store.isUnderstood(nodeID))
+    #expect(store.isInGraph(nodeID))
+    #expect(store.level(for: nodeID) == .understand)
+    store.toggleGraphMembership(nodeID)
+    #expect(!store.isInGraph(nodeID))
 
     let restoredStore = KnowledgeProgressStore(userDefaults: userDefaults)
-    #expect(restoredStore.isUnderstood(nodeID))
+    restoredStore.configure(modelContext: container.mainContext)
+    #expect(!restoredStore.isInGraph(nodeID))
 
-    restoredStore.toggleUnderstanding(nodeID)
-    #expect(!restoredStore.isUnderstood(nodeID))
+    restoredStore.toggleGraphMembership(nodeID)
+    #expect(restoredStore.isInGraph(nodeID))
+
+    let reloadedStore = KnowledgeProgressStore(userDefaults: userDefaults)
+    reloadedStore.configure(modelContext: container.mainContext)
+    #expect(reloadedStore.isInGraph(nodeID))
+    #expect(reloadedStore.level(for: nodeID) == .contact)
+  }
+
+  @Test func userGraphKeepsJoinedNodesAndExpandsExactlyThreeHops() throws {
+    let store = makeGraphStore(
+      keys: (0...5).map { "e\($0)" },
+      edges: (0..<5).map { ("e\($0)", "e\($0 + 1)") }
+    )
+    let rootID = DeterministicID.culturalElement("e0")
+    let fourthHopID = DeterministicID.culturalElement("e4")
+    let snapshot = store.userKnowledgeGraph(
+      centerID: rootID,
+      joinedSeeds: [
+        UserKnowledgeGraphSeed(id: rootID, name: "节点 0", summary: ""),
+        UserKnowledgeGraphSeed(id: fourthHopID, name: "节点 4", summary: ""),
+      ]
+    )
+
+    let nodesByKey = Dictionary(
+      uniqueKeysWithValues: snapshot.nodes.compactMap { node in
+        node.elementKey.map { ($0, node) }
+      }
+    )
+    #expect(Set(nodesByKey.keys) == Set((0...4).map { "e\($0)" }))
+    #expect(nodesByKey["e0"]?.hop == 0)
+    #expect(nodesByKey["e1"]?.hop == 1)
+    #expect(nodesByKey["e2"]?.hop == 2)
+    #expect(nodesByKey["e3"]?.hop == 3)
+    #expect(nodesByKey["e4"]?.hop == 4)
+    #expect(nodesByKey["e4"]?.isJoined == true)
+    #expect(nodesByKey["e5"] == nil)
+    #expect(snapshot.edges.count == 4)
+
+    let recentered = store.userKnowledgeGraph(
+      centerID: DeterministicID.culturalElement("e2"),
+      joinedSeeds: [
+        UserKnowledgeGraphSeed(id: rootID, name: "节点 0", summary: ""),
+        UserKnowledgeGraphSeed(id: fourthHopID, name: "节点 4", summary: ""),
+      ]
+    )
+    #expect(recentered.centerID == DeterministicID.culturalElement("e2"))
+    #expect(recentered.nodes.first { $0.elementKey == "e2" }?.hop == 0)
+    #expect(recentered.nodes.first { $0.elementKey == "e5" }?.hop == 3)
+  }
+
+  @Test func userGraphExpansionHonorsNodeBudget() {
+    let store = makeGraphStore(
+      keys: (0...8).map { "e\($0)" },
+      edges: (1...8).map { ("e0", "e\($0)") }
+    )
+    let rootID = DeterministicID.culturalElement("e0")
+    let snapshot = store.userKnowledgeGraph(
+      centerID: rootID,
+      joinedSeeds: [UserKnowledgeGraphSeed(id: rootID, name: "中心", summary: "")],
+      maximumDepth: 3,
+      maximumExpandedNodes: 4
+    )
+
+    #expect(snapshot.nodes.count == 4)
+    #expect(snapshot.isExpansionTruncated)
+    #expect(snapshot.nodes.first { $0.id == rootID }?.hop == 0)
+  }
+
+  @Test func userGraphLayoutPlacesShortestHopLayersOutward() throws {
+    let store = makeGraphStore(
+      keys: (0...4).map { "e\($0)" },
+      edges: (0..<4).map { ("e\($0)", "e\($0 + 1)") }
+    )
+    let rootID = DeterministicID.culturalElement("e0")
+    let fourthHopID = DeterministicID.culturalElement("e4")
+    let snapshot = store.userKnowledgeGraph(
+      centerID: rootID,
+      joinedSeeds: [
+        UserKnowledgeGraphSeed(id: rootID, name: "节点 0", summary: ""),
+        UserKnowledgeGraphSeed(id: fourthHopID, name: "节点 4", summary: ""),
+      ]
+    )
+    let layout = UserKnowledgeGraphLayout(snapshot: snapshot)
+    let center = try #require(layout.positions[rootID])
+
+    func radius(for key: String) throws -> CGFloat {
+      let point = try #require(layout.positions[DeterministicID.culturalElement(key)])
+      return hypot(point.x - center.x, point.y - center.y)
+    }
+
+    #expect(try radius(for: "e1") < radius(for: "e2"))
+    #expect(try radius(for: "e2") < radius(for: "e3"))
+    #expect(try radius(for: "e3") < radius(for: "e4"))
+    #expect(center.x == layout.size.width / 2)
+    #expect(center.y == layout.size.height / 2)
   }
 
   @Test func graphLayoutUsesUndirectedShortestHopRings() throws {
@@ -472,6 +641,61 @@ struct CultureLensTests {
     #expect(center.y == layout.size.height / 2)
   }
 
+  @Test func graphZoomClampsAndStepsWithinSupportedRange() {
+    #expect(GraphZoom.clamped(0.1) == 0.5)
+    #expect(GraphZoom.clamped(1.4) == 1.4)
+    #expect(GraphZoom.clamped(4) == 2.5)
+    #expect(GraphZoom.decreased(from: 0.6) == 0.5)
+    #expect(GraphZoom.increased(from: 2.4) == 2.5)
+    #expect(GraphZoom.percentageText(for: 1.25) == "125%")
+  }
+
+  @Test func graphZoomFitsContentWithoutAutomaticallyUpscaling() {
+    #expect(
+      GraphZoom.fittedScale(
+        contentSize: CGSize(width: 1_000, height: 800),
+        viewportSize: CGSize(width: 500, height: 600)
+      ) == 0.5
+    )
+    #expect(
+      GraphZoom.fittedScale(
+        contentSize: CGSize(width: 100, height: 80),
+        viewportSize: CGSize(width: 500, height: 600)
+      ) == 1
+    )
+    #expect(
+      GraphZoom.fittedScale(
+        contentSize: CGSize(width: 1_000, height: 800),
+        viewportSize: CGSize(width: 100, height: 100),
+        minimum: 0.05
+      ) == 0.1
+    )
+  }
+
+}
+
+private func makeGraphStore(
+  keys: [String],
+  edges: [(String, String)]
+) -> KnowledgeStore {
+  let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+  return KnowledgeStore(
+    pack: KnowledgePack(
+      version: "graph-test",
+      elements: keys.map {
+        KnowledgePack.Element(
+          key: $0,
+          name: "节点 \($0)",
+          introduction: emptyIntroduction
+        )
+      },
+      attractions: [],
+      relations: edges.map {
+        KnowledgePack.Relation(elementKey: $0.0, relatedElementKey: $0.1)
+      },
+      introductions: []
+    )
+  )
 }
 
 private func jpegWithGPS(

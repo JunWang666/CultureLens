@@ -3,7 +3,12 @@ import SwiftUI
 struct ObjectDetailView: View {
     let object: CultureObject
 
-    @State private var isBookmarked = false
+    private var introductionDocument: RichTextDocument? {
+        if let key = object.culturalElementKey {
+            return KnowledgeStore.shared?.introductionDocument(elementKey: key)
+        }
+        return KnowledgeStore.shared?.introductionDocument(nodeID: object.id)
+    }
 
     var body: some View {
         ZStack {
@@ -32,8 +37,9 @@ struct ObjectDetailView: View {
                 .tint(CultureTheme.inkPrimary)
                 .controlSize(.large)
 
-                KnowledgeUnderstandingButton(
+                KnowledgeGraphMembershipButton(
                     nodeID: object.id,
+                    elementKey: object.culturalElementKey,
                     presentation: .fullWidth
                 )
             }
@@ -42,15 +48,9 @@ struct ObjectDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                Button {
-                    isBookmarked.toggle()
-                } label: {
-                    Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
-                }
-                .accessibilityLabel(isBookmarked ? "取消收藏" : "收藏")
-
-                KnowledgeUnderstandingButton(
+                KnowledgeGraphMembershipButton(
                     nodeID: object.id,
+                    elementKey: object.culturalElementKey,
                     presentation: .toolbar
                 )
 
@@ -79,10 +79,18 @@ struct ObjectDetailView: View {
                 .font(.subheadline)
                 .foregroundStyle(CultureTheme.inkSecondary)
 
-            Text(object.summary)
-                .font(.title3)
-                .foregroundStyle(CultureTheme.inkPrimary)
-                .lineSpacing(6)
+            if let introductionDocument, !introductionDocument.blocks.isEmpty {
+                RichTextBlocksView(
+                    document: introductionDocument,
+                    textFont: .title3,
+                    textColor: CultureTheme.inkPrimary
+                )
+            } else {
+                Text(object.summary)
+                    .font(.title3)
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                    .lineSpacing(6)
+            }
         }
     }
 

@@ -2,6 +2,18 @@ import SwiftUI
 
 struct ConceptDetailView: View {
     let concept: CultureConcept
+    var elementKey: String? = nil
+
+    private var resolvedElementKey: String? {
+        elementKey
+            ?? KnowledgeStore.shared?.elementKey(for: concept.id)
+    }
+
+    private var introductionDocument: RichTextDocument? {
+        resolvedElementKey.flatMap {
+            KnowledgeStore.shared?.introductionDocument(elementKey: $0)
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -21,12 +33,20 @@ struct ConceptDetailView: View {
                     .font(.cultureSerif(.largeTitle))
                     .foregroundStyle(CultureTheme.inkPrimary)
 
-                Text(concept.summary)
-                    .font(.title3)
-                    .foregroundStyle(CultureTheme.inkPrimary)
-                    .lineSpacing(6)
+                if let introductionDocument, !introductionDocument.blocks.isEmpty {
+                    RichTextBlocksView(
+                        document: introductionDocument,
+                        textFont: .title3,
+                        textColor: CultureTheme.inkPrimary
+                    )
+                } else {
+                    Text(concept.summary)
+                        .font(.title3)
+                        .foregroundStyle(CultureTheme.inkPrimary)
+                        .lineSpacing(6)
+                }
             } trailing: { _ in
-                if let detail = concept.distinctDetail {
+                if introductionDocument == nil, let detail = concept.distinctDetail {
                     VStack(alignment: .leading, spacing: 14) {
                         Text(detail)
                             .font(.body)
@@ -39,8 +59,9 @@ struct ConceptDetailView: View {
                     }
                 }
 
-                KnowledgeUnderstandingButton(
+                KnowledgeGraphMembershipButton(
                     nodeID: concept.id,
+                    elementKey: resolvedElementKey,
                     presentation: .fullWidth
                 )
             }

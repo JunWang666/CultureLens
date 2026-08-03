@@ -1,9 +1,14 @@
+import Foundation
 import Observation
 
 @MainActor
 @Observable
 final class ScanSessionStore {
     private(set) var sessions: [ScanSession.ID: ScanSession] = [:]
+
+    var sessionIDs: [ScanSession.ID] {
+        sessions.keys.sorted { $0.uuidString < $1.uuidString }
+    }
 
     func insert(_ session: ScanSession) {
         sessions[session.id] = session

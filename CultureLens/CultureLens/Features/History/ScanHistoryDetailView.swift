@@ -57,10 +57,18 @@ struct ScanHistoryDetailView: View {
                             .foregroundStyle(CultureTheme.inkPrimary)
                     }
 
-                    Text(record.summary)
-                        .font(.title3)
-                        .foregroundStyle(CultureTheme.inkPrimary)
-                        .lineSpacing(6)
+                    if let document = introductionDocument(for: record) {
+                        RichTextBlocksView(
+                            document: document,
+                            textFont: .title3,
+                            textColor: CultureTheme.inkPrimary
+                        )
+                    } else {
+                        Text(record.summary)
+                            .font(.title3)
+                            .foregroundStyle(CultureTheme.inkPrimary)
+                            .lineSpacing(6)
+                    }
 
                     HStack {
                         Label {
@@ -154,6 +162,14 @@ struct ScanHistoryDetailView: View {
 
     private func resultSnapshot(for record: ScanHistoryRecord) -> RecognitionResult? {
         record.historySnapshot?.result ?? record.legacyResultSnapshot
+    }
+
+    private func introductionDocument(for record: ScanHistoryRecord) -> RichTextDocument? {
+        let object = resultSnapshot(for: record)?.object
+        if let key = object?.culturalElementKey {
+            return KnowledgeStore.shared?.introductionDocument(elementKey: key)
+        }
+        return KnowledgeStore.shared?.introductionDocument(nodeID: record.cultureObjectID)
     }
 }
 

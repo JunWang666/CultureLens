@@ -5,6 +5,7 @@ struct ScanResultView: View {
     let session: ScanSession
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var isSaving = false
     @State private var isSaved = false
     @State private var saveError: String?
@@ -50,8 +51,32 @@ struct ScanResultView: View {
                 saveAction
             }
         }
-        .navigationTitle("扫描结果")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        // 两个坑：1) Button 和 Text 不能混在一个 HStack 里做 toolbar item（iOS 18+
+        // 布局 bug，后面的子视图不渲染）；2) iOS 26 会把相邻 toolbar item 合并进同一个
+        // 玻璃共享背景，标题需要用 sharedBackgroundVisibility(.hidden) 摘出来保持纯文本样式。
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("返回", systemImage: "chevron.backward")
+                        .labelStyle(.iconOnly)
+                        .font(.body.weight(.semibold))
+                }
+            }
+            if #available(iOS 26.0, *) {
+                ToolbarItem(placement: .topBarLeading) {
+                    leadingTitle
+                }
+                .sharedBackgroundVisibility(.hidden)
+            } else {
+                ToolbarItem(placement: .topBarLeading) {
+                    leadingTitle
+                }
+            }
+        }
         .alert(
             "无法保存",
             isPresented: Binding(
@@ -65,6 +90,15 @@ struct ScanResultView: View {
         } message: {
             Text(saveError ?? "")
         }
+    }
+
+    // fixedSize 是必须的：iOS 26 toolbar item 可能分到比内容小的宽度导致文字被截断
+    private var leadingTitle: some View {
+        Text("扫描结果")
+            .font(.headline)
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .accessibilityIdentifier("result.title")
+            .fixedSize()
     }
 
     private func imageHeader(height: CGFloat) -> some View {

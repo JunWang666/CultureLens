@@ -6,9 +6,12 @@ struct ScanResultView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
     @State private var isSaving = false
     @State private var isSaved = false
     @State private var saveError: String?
+    @State private var explanationState: ExplanationLoadState = .idle
+    private let explanationService = CultureExplanationService.live()
 
     private var object: CultureObject {
         session.result.object
@@ -30,6 +33,13 @@ struct ScanResultView: View {
         return session.result.resolutionStatus
     }
 
+    private var introductionDocument: RichTextDocument? {
+        if let key = object.culturalElementKey {
+            return KnowledgeStore.shared?.introductionDocument(elementKey: key)
+        }
+        return KnowledgeStore.shared?.introductionDocument(nodeID: object.id)
+    }
+
     var body: some View {
         ZStack {
             CulturePageBackground()
@@ -45,9 +55,20 @@ struct ScanResultView: View {
                 imageHeader(height: isWide ? 340 : 280)
                 identity(showTitle: !isWide)
             } trailing: { _ in
-                CultureRelationGraphView(object: primaryObject)
+                explanationSection
+                CultureRelationGraphView(
+                    object: primaryObject,
+                    presentation: .expandablePreview
+                )
                 alternatives
                 evidenceCard
+                NavigationLink(value: AppRoute.ask(object.id)) {
+                    Label("继续追问这个对象", systemImage: "text.bubble")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(CultureTheme.inkPrimary)
+                .controlSize(.large)
                 saveAction
             }
         }
@@ -89,6 +110,9 @@ struct ScanResultView: View {
             }
         } message: {
             Text(saveError ?? "")
+        }
+        .task(id: session.id) {
+            await loadExplanation()
         }
     }
 
@@ -145,10 +169,51 @@ struct ScanResultView: View {
             .font(.subheadline)
             .foregroundStyle(CultureTheme.inkSecondary)
 
-            Text(object.summary)
-                .font(.title3)
-                .foregroundStyle(CultureTheme.inkPrimary)
-                .lineSpacing(6)
+            if let introductionDocument, !introductionDocument.blocks.isEmpty {
+                RichTextBlocksView(
+                    document: introductionDocument,
+                    textFont: .title3,
+                    textColor: CultureTheme.inkPrimary
+                )
+            } else {
+                Text(object.summary)
+                    .font(.title3)
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                    .lineSpacing(6)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var explanationSection: some View {
+        switch explanationState {
+        case .idle, .loading:
+            HStack(spacing: 10) {
+                ProgressView()
+                Text("正在生成分层讲解…")
+                    .font(.subheadline)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(16)
+            .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
+        case .loaded(let explanation):
+            LayeredExplanationView(explanation: explanation)
+        case .failed(let message):
+            VStack(alignment: .leading, spacing: 10) {
+                Label("讲解暂不可用", systemImage: "exclamationmark.bubble")
+                    .font(.headline)
+                    .foregroundStyle(CultureTheme.cinnabar)
+                Text(message)
+                    .font(.footnote)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+                Button("重试") {
+                    Task { await loadExplanation() }
+                }
+                .buttonStyle(.bordered)
+            }
+            .padding(16)
+            .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
         }
     }
 
@@ -355,6 +420,66 @@ struct ScanResultView: View {
             isSaving = false
         }
     }
+
+    @MainActor
+    private func loadExplanation() async {
+        guard let explanationService else {
+            explanationState = .failed("讲解服务暂不可用。")
+            return
+        }
+        // Demo / sample recognition should not call the live chat gateway.
+        if session.isDemo {
+            explanationState = .loaded(
+                LayeredExplanation(
+                    conclusion: object.canonicalName,
+                    why: rationale,
+                    extensionText: object.concepts.prefix(2).map(\.name).joined(separator: "、")
+                        .isEmpty
+                        ? "可从关系图继续探索相邻概念。"
+                        : "可继续了解：" + object.concepts.prefix(2).map(\.name).joined(separator: "、"),
+                    citations: [
+                        KnowledgeCitation(
+                            key: object.culturalElementKey ?? object.id.uuidString,
+                            name: object.canonicalName,
+                            fragment: object.summary
+                        )
+                    ],
+                    modelIdentifier: "local-demo"
+                )
+            )
+            return
+        }
+
+        explanationState = .loading
+        do {
+            let explanation = try await explanationService.explain(
+                result: session.result,
+                userKnowledgeStates: knowledgeProgressStore.userKnowledgeStates(
+                    knowledgeStore: KnowledgeStore.shared
+                ),
+                siteContext: [
+                    session.place?.displayName,
+                    session.result.locationInfluence?.summary,
+                ]
+                .compactMap { $0 }
+                .filter { !$0.isEmpty }
+                .joined(separator: "；")
+            )
+            explanationState = .loaded(explanation)
+            if let key = object.culturalElementKey,
+               knowledgeProgressStore.level(for: object.id) == nil
+            {
+                knowledgeProgressStore.setLevel(
+                    .contact,
+                    for: object.id,
+                    source: .explanation,
+                    elementKey: key
+                )
+            }
+        } catch {
+            explanationState = .failed(error.localizedDescription)
+        }
+    }
 }
 
 #Preview {
@@ -380,5 +505,6 @@ struct ScanResultView: View {
     NavigationStack {
         ScanResultView(session: session)
     }
+    .environment(KnowledgeProgressStore())
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
 }

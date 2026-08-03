@@ -1,7 +1,7 @@
 import Foundation
 
 enum LLMGatewayError: LocalizedError {
-  case schemaMissing
+  case schemaMissing(String)
   case invalidResponse
   case invalidProviderOutput
   case server(statusCode: Int, message: String?)
@@ -9,8 +9,8 @@ enum LLMGatewayError: LocalizedError {
 
   var errorDescription: String? {
     switch self {
-    case .schemaMissing:
-      "应用内缺少识别响应结构资源。"
+    case .schemaMissing(let name):
+      "应用内缺少响应结构资源（\(name)）。"
     case .invalidResponse:
       "识别服务返回了无法读取的数据。"
     case .invalidProviderOutput:
@@ -24,16 +24,20 @@ enum LLMGatewayError: LocalizedError {
 }
 
 /// Minimal OpenAI-compatible chat/completions client for the Cloudflare AI
-/// Gateway. Sends the system prompt, assembled user text and the photo as
-/// multimodal content parts, constrained by the bundled JSON schema.
+/// Gateway. Recognition uses multimodal `dynamic/culturelens`; explanation and
+/// Q&A use text `dynamic/chat`.
 nonisolated struct LLMGatewayClient: Sendable {
   let config: LLMGatewayConfig
+  let chatConfig: LLMGatewayConfig
   /// Raw contents of `Resources/Prompts/v5.schema.json`.
   private let responseSchemaData: Data
+  private let explainSchemaData: Data
+  private let askSchemaData: Data
   private let session: URLSession
 
   init(
     config: LLMGatewayConfig = .default,
+    chatConfig: LLMGatewayConfig = .chat,
     bundle: Bundle = .main,
     session: URLSession = .shared
   ) throws {
@@ -46,14 +50,53 @@ nonisolated struct LLMGatewayClient: Sendable {
       ),
       let data = try? Data(contentsOf: url)
     else {
-      throw LLMGatewayError.schemaMissing
+      throw LLMGatewayError.schemaMissing("v5.schema.json")
     }
-    self.init(config: config, responseSchemaData: data, session: session)
+    guard
+      let explainURL = bundledResourceURL(
+        "explain.schema",
+        "json",
+        subdirectory: "Prompts",
+        bundle: bundle
+      ),
+      let explainData = try? Data(contentsOf: explainURL)
+    else {
+      throw LLMGatewayError.schemaMissing("explain.schema.json")
+    }
+    guard
+      let askURL = bundledResourceURL(
+        "ask.schema",
+        "json",
+        subdirectory: "Prompts",
+        bundle: bundle
+      ),
+      let askData = try? Data(contentsOf: askURL)
+    else {
+      throw LLMGatewayError.schemaMissing("ask.schema.json")
+    }
+    self.init(
+      config: config,
+      chatConfig: chatConfig,
+      responseSchemaData: data,
+      explainSchemaData: explainData,
+      askSchemaData: askData,
+      session: session
+    )
   }
 
-  init(config: LLMGatewayConfig, responseSchemaData: Data, session: URLSession = .shared) {
+  init(
+    config: LLMGatewayConfig,
+    chatConfig: LLMGatewayConfig = .chat,
+    responseSchemaData: Data,
+    explainSchemaData: Data = Data(),
+    askSchemaData: Data = Data(),
+    session: URLSession = .shared
+  ) {
     self.config = config
+    self.chatConfig = chatConfig
     self.responseSchemaData = responseSchemaData
+    self.explainSchemaData = explainSchemaData
+    self.askSchemaData = askSchemaData
     self.session = session
   }
 
@@ -65,32 +108,197 @@ nonisolated struct LLMGatewayClient: Sendable {
     imageBase64: String,
     mimeType: String = "image/jpeg"
   ) async throws -> (decision: ProviderRecognition, modelIdentifier: String) {
+    let messages: [[String: Any]] = [
+      ["role": "system", "content": systemPrompt],
+      [
+        "role": "user",
+        "content": [
+          ["type": "text", "text": userText],
+          [
+            "type": "image_url",
+            "image_url": ["url": "data:\(mimeType);base64,\(imageBase64)"],
+          ],
+        ],
+      ],
+    ]
+    let content = try await complete(
+      config: config,
+      messages: messages,
+      schemaName: "provider_recognition",
+      schemaData: responseSchemaData
+    )
+    do {
+      let decision = try JSONDecoder().decode(
+        ProviderRecognition.self,
+        from: Data(content.content.utf8)
+      )
+      return (decision, content.modelIdentifier)
+    } catch {
+      #if DEBUG
+        print(
+          "LLMGatewayClient: decode failure \(error)\ncontent: \(content.content.prefix(1200))"
+        )
+      #endif
+      throw LLMGatewayError.invalidProviderOutput
+    }
+  }
+
+  func explain(
+    systemPrompt: String,
+    userText: String
+  ) async throws -> (decision: ProviderLayeredExplanation, modelIdentifier: String) {
+    let messages: [[String: Any]] = [
+      ["role": "system", "content": systemPrompt],
+      ["role": "user", "content": userText],
+    ]
+    let content = try await complete(
+      config: chatConfig,
+      messages: messages,
+      schemaName: "layered_explanation",
+      schemaData: explainSchemaData
+    )
+    do {
+      let decision = try JSONDecoder().decode(
+        ProviderLayeredExplanation.self,
+        from: Data(content.content.utf8)
+      )
+      return (decision, content.modelIdentifier)
+    } catch {
+      throw LLMGatewayError.invalidProviderOutput
+    }
+  }
+
+  func ask(
+    systemPrompt: String,
+    messages: [ChatTurn]
+  ) async throws -> (decision: ProviderChatAnswer, modelIdentifier: String) {
+    var payload: [[String: Any]] = [
+      ["role": "system", "content": systemPrompt]
+    ]
+    for turn in messages {
+      payload.append(["role": turn.role.rawValue, "content": turn.content])
+    }
+    let content = try await complete(
+      config: chatConfig,
+      messages: payload,
+      schemaName: "culture_chat_answer",
+      schemaData: askSchemaData
+    )
+    do {
+      let decision = try JSONDecoder().decode(
+        ProviderChatAnswer.self,
+        from: Data(content.content.utf8)
+      )
+      return (decision, content.modelIdentifier)
+    } catch {
+      throw LLMGatewayError.invalidProviderOutput
+    }
+  }
+
+  /// Streams assistant Markdown tokens from `dynamic/chat` (SSE).
+  func streamAsk(
+    systemPrompt: String,
+    messages: [ChatTurn]
+  ) -> AsyncThrowingStream<ChatStreamEvent, Error> {
+    AsyncThrowingStream { continuation in
+      let task = Task {
+        do {
+          var payload: [[String: Any]] = [
+            ["role": "system", "content": systemPrompt]
+          ]
+          for turn in messages {
+            payload.append(["role": turn.role.rawValue, "content": turn.content])
+          }
+          try await self.streamComplete(
+            config: self.chatConfig,
+            messages: payload,
+            continuation: continuation
+          )
+          continuation.finish()
+        } catch {
+          continuation.finish(throwing: error)
+        }
+      }
+      continuation.onTermination = { _ in
+        task.cancel()
+      }
+    }
+  }
+
+  private func streamComplete(
+    config: LLMGatewayConfig,
+    messages: [[String: Any]],
+    continuation: AsyncThrowingStream<ChatStreamEvent, Error>.Continuation
+  ) async throws {
+    var request = URLRequest(url: config.endpoint)
+    request.httpMethod = "POST"
+    request.timeoutInterval = max(config.timeout, 90)
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("Bearer \(config.apiKey)", forHTTPHeaderField: "Authorization")
+    request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+
+    let body: [String: Any] = [
+      "model": config.model,
+      "stream": true,
+      "messages": messages,
+    ]
+    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+    let (bytes, response) = try await session.bytes(for: request)
+    guard let httpResponse = response as? HTTPURLResponse else {
+      throw LLMGatewayError.invalidResponse
+    }
+    guard (200..<300).contains(httpResponse.statusCode) else {
+      throw LLMGatewayError.server(statusCode: httpResponse.statusCode, message: nil)
+    }
+
+    var modelIdentifier = config.model
+    var assembled = ""
+    for try await line in bytes.lines {
+      try Task.checkCancellation()
+      let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard trimmed.hasPrefix("data:") else { continue }
+      let payload = trimmed.dropFirst(5).trimmingCharacters(in: .whitespaces)
+      if payload == "[DONE]" { break }
+      guard let data = payload.data(using: .utf8) else { continue }
+      guard let chunk = try? JSONDecoder().decode(ChatStreamChunk.self, from: data) else {
+        continue
+      }
+      if let model = chunk.model, !model.isEmpty {
+        modelIdentifier = model
+      }
+      let delta = chunk.choices.first?.delta.content ?? ""
+      guard !delta.isEmpty else { continue }
+      assembled += delta
+      continuation.yield(.delta(assembled))
+    }
+
+    if assembled.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+      throw LLMGatewayError.invalidProviderOutput
+    }
+    continuation.yield(.finished(modelIdentifier: modelIdentifier, content: assembled))
+  }
+
+  private func complete(
+    config: LLMGatewayConfig,
+    messages: [[String: Any]],
+    schemaName: String,
+    schemaData: Data
+  ) async throws -> (content: String, modelIdentifier: String) {
     var request = URLRequest(url: config.endpoint)
     request.httpMethod = "POST"
     request.timeoutInterval = config.timeout
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     request.setValue("Bearer \(config.apiKey)", forHTTPHeaderField: "Authorization")
 
-    let schema = try JSONSerialization.jsonObject(with: responseSchemaData)
+    let schema = try JSONSerialization.jsonObject(with: schemaData)
     let body: [String: Any] = [
       "model": config.model,
-      "messages": [
-        ["role": "system", "content": systemPrompt],
-        [
-          "role": "user",
-          "content": [
-            ["type": "text", "text": userText],
-            [
-              "type": "image_url",
-              "image_url": ["url": "data:\(mimeType);base64,\(imageBase64)"],
-            ],
-          ],
-        ],
-      ],
+      "messages": messages,
       "response_format": [
         "type": "json_schema",
         "json_schema": [
-          "name": "provider_recognition",
+          "name": schemaName,
           "strict": true,
           "schema": schema,
         ],
@@ -127,23 +335,54 @@ nonisolated struct LLMGatewayClient: Sendable {
     }
     guard let content = completion.choices.first?.message.content, !content.isEmpty else {
       #if DEBUG
-        print("LLMGatewayClient: empty content in gateway response: \(String(decoding: data.prefix(800), as: UTF8.self))")
+        print(
+          "LLMGatewayClient: empty content in gateway response: \(String(decoding: data.prefix(800), as: UTF8.self))"
+        )
       #endif
       throw LLMGatewayError.invalidProviderOutput
     }
-    do {
-      let decision = try JSONDecoder().decode(
-        ProviderRecognition.self,
-        from: Data(content.utf8)
-      )
-      return (decision, completion.model ?? config.model)
-    } catch {
-      #if DEBUG
-        print("LLMGatewayClient: decode failure \(error)\ncontent: \(content.prefix(1200))")
-      #endif
-      throw LLMGatewayError.invalidProviderOutput
-    }
+    return (content, completion.model ?? config.model)
   }
+}
+
+nonisolated struct ChatTurn: Sendable, Hashable {
+  enum Role: String, Sendable {
+    case user
+    case assistant
+  }
+
+  let role: Role
+  let content: String
+}
+
+nonisolated enum ChatStreamEvent: Sendable {
+  case delta(String)
+  case finished(modelIdentifier: String, content: String)
+}
+
+nonisolated struct ProviderLayeredExplanation: Decodable, Sendable {
+  let conclusion: String
+  let why: String
+  let extensionText: String
+  let citations: [ProviderCitation]
+
+  enum CodingKeys: String, CodingKey {
+    case conclusion
+    case why
+    case extensionText = "extension"
+    case citations
+  }
+}
+
+nonisolated struct ProviderChatAnswer: Decodable, Sendable {
+  let answer: String
+  let citations: [ProviderCitation]
+}
+
+nonisolated struct ProviderCitation: Decodable, Sendable {
+  let key: String
+  let name: String
+  let fragment: String
 }
 
 /// `choices[].message` carries extra gateway fields (e.g. `extra_content`,
@@ -157,6 +396,19 @@ private nonisolated struct ChatCompletionResponse: Decodable {
   }
 
   struct Message: Decodable {
+    let content: String?
+  }
+}
+
+private nonisolated struct ChatStreamChunk: Decodable {
+  let model: String?
+  let choices: [Choice]
+
+  struct Choice: Decodable {
+    let delta: Delta
+  }
+
+  struct Delta: Decodable {
     let content: String?
   }
 }

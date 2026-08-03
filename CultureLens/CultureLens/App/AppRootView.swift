@@ -4,6 +4,7 @@ import SwiftData
 struct AppRootView: View {
     private let recognitionService: RecognitionService
 
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedTab: AppTab = .explore
     @State private var explorePath: [AppRoute] = []
     @State private var scanPath: [AppRoute] = []
@@ -45,7 +46,7 @@ struct AppRootView: View {
 
             Tab(AppTab.graph.title, systemImage: AppTab.graph.systemImage, value: .graph) {
                 appStack(path: $graphPath) {
-                    UnderstoodGraphView()
+                    UserKnowledgeGraphView()
                 }
             }
 
@@ -60,6 +61,10 @@ struct AppRootView: View {
         .tint(CultureTheme.cinnabar)
         .environment(\.recognitionService, recognitionService)
         .environment(knowledgeProgressStore)
+        .environment(sessionStore)
+        .task {
+            knowledgeProgressStore.configure(modelContext: modelContext)
+        }
     }
 
     private func appStack<Root: View>(
@@ -95,12 +100,21 @@ struct AppRootView: View {
             } else {
                 ContentUnavailableView("未找到文化关系", systemImage: "point.3.connected.trianglepath.dotted")
             }
+        case .knowledgeElement(let key):
+            if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
+                ConceptDetailView(concept: concept, elementKey: key)
+            } else {
+                ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
+            }
         case .ask(let objectID):
             AskCultureView(
                 object: sessionStore.object(id: objectID)
                     ?? historyObject(id: objectID)
-                    ?? SampleCultureData.object(id: objectID)
+                    ?? SampleCultureData.object(id: objectID),
+                rationale: askRationale(for: objectID)
             )
+        case .chat:
+            AskCultureView(object: nil)
         case .scanResult(let id):
             if let session = sessionStore.session(id: id) {
                 ScanResultView(session: session)
@@ -134,6 +148,21 @@ struct AppRootView: View {
             .compactMap { $0.historySnapshot?.result.object ?? $0.legacyResultSnapshot?.object }
             .flatMap(\.concepts)
             .first { $0.id == id }
+    }
+
+    private func askRationale(for objectID: UUID) -> String {
+        if let session = sessionStore.sessions.values.first(where: {
+            $0.result.object.id == objectID
+        }) {
+            return session.result.rationale
+        }
+        if let record = historyRecords.first(where: { $0.cultureObjectID == objectID }),
+           let rationale = record.historySnapshot?.result.rationale
+            ?? record.legacyResultSnapshot?.rationale
+        {
+            return rationale
+        }
+        return ""
     }
 
 }

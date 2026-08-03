@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10000000000000000000006 /* SwiftStreamingMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = A10000000000000000000004 /* SwiftStreamingMarkdown */; };
 		C12E0D000000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000003 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 		C12E0D000000000000000002 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000004 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000000000000000000006 /* SwiftStreamingMarkdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +146,7 @@
 			);
 			name = CultureLens;
 			packageProductDependencies = (
+				A10000000000000000000004 /* SwiftStreamingMarkdown */,
 			);
 			productName = CultureLens;
 			productReference = E9464E603017572B00B357C5 /* CultureLens.app */;
@@ -227,6 +230,9 @@
 			);
 			mainGroup = E9464E573017572B00B357C5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A10000000000000000000002 /* XCRemoteSwiftPackageReference "SwiftStreamingMarkdown" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E9464E613017572B00B357C5 /* Products */;
 			projectDirPath = "";
@@ -656,6 +662,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A10000000000000000000002 /* XCRemoteSwiftPackageReference "SwiftStreamingMarkdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/SwiftStreamingMarkdown";
+			requirement = {
+				kind = branch;
+				branch = main;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A10000000000000000000004 /* SwiftStreamingMarkdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A10000000000000000000002 /* XCRemoteSwiftPackageReference "SwiftStreamingMarkdown" */;
+			productName = SwiftStreamingMarkdown;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E9464E583017572B00B357C5 /* Project object */;
 }

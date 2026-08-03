@@ -553,5 +553,55 @@ struct OnDeviceRecognitionTests {
       attractionCandidates: []
     )
     #expect(bare == "识别这张文化现场图片。")
+
+    let withKnowledge = try assembler.userText(
+      contextNote: nil,
+      knowledgeCandidates: [],
+      attractionCandidates: [],
+      userKnowledgeStates: [
+        UserKnowledgeStateContext(key: "e1", name: "元素一", level: .understand)
+      ]
+    )
+    #expect(withKnowledge.contains("用户知识状态 JSON："))
+    #expect(withKnowledge.contains("\"level\":\"理解\""))
+    #expect(withKnowledge.contains("跳过已知、锚定已知、补缺"))
+
+    let explain = try assembler.explainUserText(
+      recognition: ExplanationRecognitionContext(
+        object: CultureObject(
+          id: UUID(),
+          culturalElementKey: "e1",
+          canonicalName: "元素一",
+          summary: "简介",
+          category: .space,
+          timePeriod: nil,
+          region: nil,
+          confidence: 0.9,
+          artworkSymbol: "sparkles",
+          concepts: [],
+          relations: [],
+          sources: []
+        ),
+        rationale: "可见石塔"
+      ),
+      neighbors: [
+        ExplanationNeighborContext(
+          key: "e2",
+          name: "邻居",
+          relationKind: "解释",
+          explanation: "相关"
+        )
+      ],
+      knowledgeFragments: [
+        ExplanationFragmentContext(key: "e1", name: "元素一", text: "审核介绍。")
+      ],
+      userKnowledgeStates: [
+        UserKnowledgeStateContext(key: "e2", name: "邻居", level: .master)
+      ],
+      siteContext: "三潭印月"
+    )
+    #expect(explain.contains("分层讲解"))
+    #expect(explain.contains("knowledge_fragments"))
+    #expect(explain.contains("user_knowledge_states"))
   }
 }

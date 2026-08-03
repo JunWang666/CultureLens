@@ -2,6 +2,12 @@ import Foundation
 import SwiftUI
 
 struct CultureRelationGraphView: View {
+  enum Presentation {
+    case inlineInteractive
+    case expandablePreview
+    case fullscreen
+  }
+
   enum DisplayMode: String, CaseIterable, Identifiable {
     case graph = "图谱"
     case list = "列表"
@@ -9,7 +15,15 @@ struct CultureRelationGraphView: View {
   }
 
   let object: CultureObject
+  var presentation: Presentation = .inlineInteractive
+
+  @Environment(\.dismiss) private var dismiss
   @State private var displayMode: DisplayMode = .graph
+  @State private var isFullscreenPresented = false
+  @State private var zoomScale: CGFloat = 1
+  @State private var fittedZoomScale: CGFloat = 1
+  @State private var didInitializeZoom = false
+  @GestureState private var transientMagnification: CGFloat = 1
 
   private var prerequisiteCount: Int {
     object.relations.count {
@@ -17,17 +31,33 @@ struct CultureRelationGraphView: View {
     }
   }
 
+  @ViewBuilder
   var body: some View {
+    switch presentation {
+    case .inlineInteractive:
+      interactiveContent
+    case .expandablePreview:
+      expandablePreview
+        .fullScreenCover(isPresented: $isFullscreenPresented) {
+          NavigationStack {
+            CultureRelationGraphView(object: object, presentation: .fullscreen)
+              .navigationDestination(for: AppRoute.self) { route in
+                fullscreenDestination(for: route)
+              }
+          }
+          .tint(CultureTheme.cinnabar)
+        }
+    case .fullscreen:
+      fullscreenContent
+    }
+  }
+
+  private var interactiveContent: some View {
     VStack(alignment: .leading, spacing: 16) {
-      header
+      header(showsDisplayModePicker: true)
 
       if object.relations.isEmpty {
-        ContentUnavailableView(
-          "关系资料不足",
-          systemImage: "point.3.connected.trianglepath.dotted",
-          description: Text("当前结果还没有可验证的关系边。")
-        )
-        .frame(minHeight: 220)
+        unavailableGraph
       } else if displayMode == .graph {
         graph
       } else {
@@ -36,7 +66,99 @@ struct CultureRelationGraphView: View {
     }
   }
 
-  private var header: some View {
+  private var expandablePreview: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      header(showsDisplayModePicker: false)
+
+      if object.relations.isEmpty {
+        unavailableGraph
+      } else {
+        Button {
+          isFullscreenPresented = true
+        } label: {
+          staticGraphPreview
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("全屏查看\(object.canonicalName)文化知识图谱")
+        .accessibilityHint("全屏后可以拖动、缩放并打开概念详情")
+      }
+    }
+  }
+
+  private var fullscreenContent: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      header(showsDisplayModePicker: true)
+
+      if object.relations.isEmpty {
+        unavailableGraph
+      } else if displayMode == .graph {
+        zoomableGraph
+      } else {
+        ScrollView {
+          relationList
+        }
+      }
+    }
+    .padding(.horizontal, 20)
+    .padding(.bottom, 20)
+    .background {
+      CulturePageBackground()
+        .ignoresSafeArea()
+    }
+    .navigationTitle("文化知识图谱")
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .topBarLeading) {
+        Button {
+          dismiss()
+        } label: {
+          Label("关闭", systemImage: "xmark")
+            .labelStyle(.iconOnly)
+        }
+      }
+
+      if displayMode == .graph, !object.relations.isEmpty {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+          Button {
+            zoomScale = GraphZoom.decreased(from: zoomScale)
+          } label: {
+            Label("缩小", systemImage: "minus.magnifyingglass")
+              .labelStyle(.iconOnly)
+          }
+          .disabled(zoomScale <= GraphZoom.minimumScale)
+
+          Button {
+            zoomScale = fittedZoomScale
+          } label: {
+            Text(GraphZoom.percentageText(for: zoomScale))
+              .font(.caption.monospacedDigit().weight(.semibold))
+              .frame(minWidth: 42)
+          }
+          .accessibilityLabel("恢复适合屏幕大小")
+          .accessibilityValue(GraphZoom.percentageText(for: zoomScale))
+
+          Button {
+            zoomScale = GraphZoom.increased(from: zoomScale)
+          } label: {
+            Label("放大", systemImage: "plus.magnifyingglass")
+              .labelStyle(.iconOnly)
+          }
+          .disabled(zoomScale >= GraphZoom.maximumScale)
+        }
+      }
+    }
+  }
+
+  private var unavailableGraph: some View {
+    ContentUnavailableView(
+      "关系资料不足",
+      systemImage: "point.3.connected.trianglepath.dotted",
+      description: Text("当前结果还没有可验证的关系边。")
+    )
+    .frame(minHeight: 220)
+  }
+
+  private func header(showsDisplayModePicker: Bool) -> some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 4) {
@@ -50,13 +172,15 @@ struct CultureRelationGraphView: View {
 
         Spacer(minLength: 12)
 
-        Picker("显示方式", selection: $displayMode) {
-          ForEach(DisplayMode.allCases) { mode in
-            Text(mode.rawValue).tag(mode)
+        if showsDisplayModePicker {
+          Picker("显示方式", selection: $displayMode) {
+            ForEach(DisplayMode.allCases) { mode in
+              Text(mode.rawValue).tag(mode)
+            }
           }
+          .labelsHidden()
+          .pickerStyle(.menu)
         }
-        .labelsHidden()
-        .pickerStyle(.menu)
       }
 
       if prerequisiteCount > 0 {
@@ -76,36 +200,7 @@ struct CultureRelationGraphView: View {
     return VStack(alignment: .leading, spacing: 10) {
       ScrollViewReader { proxy in
         ScrollView([.horizontal, .vertical]) {
-          ZStack {
-            ForEach(object.relations) { relation in
-              if let source = layout.positions[relation.sourceID],
-                let target = layout.positions[relation.targetID]
-              {
-                relationEdge(
-                  relation,
-                  source: source,
-                  target: target,
-                  showsLabel: relation.sourceID == object.id
-                    || relation.targetID == object.id
-                )
-              }
-            }
-
-            objectNode
-              .id(object.id)
-              .position(layout.positions[object.id] ?? .zero)
-
-            ForEach(object.concepts) { concept in
-              if let position = layout.positions[concept.id] {
-                NavigationLink(value: AppRoute.concept(concept.id)) {
-                  conceptNode(concept)
-                }
-                .buttonStyle(.plain)
-                .position(position)
-              }
-            }
-          }
-          .frame(width: layout.size.width, height: layout.size.height)
+          graphCanvas(layout: layout, linksEnabled: true)
           .padding(18)
         }
         .onAppear {
@@ -135,6 +230,145 @@ struct CultureRelationGraphView: View {
       .font(.caption2)
       .foregroundStyle(CultureTheme.inkSecondary)
     }
+  }
+
+  private var staticGraphPreview: some View {
+    let layout = GraphLayout(object: object)
+    let contentSize = CGSize(width: layout.size.width + 36, height: layout.size.height + 36)
+
+    return GeometryReader { proxy in
+      let availableSize = CGSize(
+        width: max(proxy.size.width - 24, 1),
+        height: max(proxy.size.height - 24, 1)
+      )
+      let previewScale = GraphZoom.fittedScale(
+        contentSize: contentSize,
+        viewportSize: availableSize,
+        minimum: 0.05
+      )
+
+      ZStack {
+        graphCanvas(layout: layout, linksEnabled: false)
+          .padding(18)
+          .scaleEffect(previewScale)
+          .frame(
+            width: contentSize.width * previewScale,
+            height: contentSize.height * previewScale
+          )
+          .accessibilityHidden(true)
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    .frame(height: 270)
+    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 28))
+    .overlay {
+      RoundedRectangle(cornerRadius: 28)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
+    .overlay(alignment: .bottomTrailing) {
+      Label("点击全屏查看", systemImage: "arrow.up.left.and.arrow.down.right")
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkPrimary)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(.ultraThinMaterial, in: Capsule())
+        .padding(12)
+        .accessibilityHidden(true)
+    }
+    .clipShape(RoundedRectangle(cornerRadius: 28))
+  }
+
+  private var zoomableGraph: some View {
+    let layout = GraphLayout(object: object)
+    let contentSize = CGSize(width: layout.size.width + 36, height: layout.size.height + 36)
+    let effectiveScale = GraphZoom.clamped(zoomScale * transientMagnification)
+
+    return GeometryReader { proxy in
+      let scaledSize = CGSize(
+        width: contentSize.width * effectiveScale,
+        height: contentSize.height * effectiveScale
+      )
+
+      ScrollView([.horizontal, .vertical]) {
+        ZStack {
+          graphCanvas(layout: layout, linksEnabled: true)
+            .padding(18)
+            .scaleEffect(effectiveScale)
+            .frame(width: scaledSize.width, height: scaledSize.height)
+        }
+        .frame(
+          width: max(scaledSize.width, proxy.size.width),
+          height: max(scaledSize.height, proxy.size.height)
+        )
+      }
+      .scrollIndicators(.visible)
+      .simultaneousGesture(
+        MagnifyGesture()
+          .updating($transientMagnification) { value, state, _ in
+            state = value.magnification
+          }
+          .onEnded { value in
+            zoomScale = GraphZoom.clamped(zoomScale * value.magnification)
+          }
+      )
+      .onAppear {
+        configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
+      }
+      .onChange(of: proxy.size) {
+        updateFittedZoom(contentSize: contentSize, viewportSize: proxy.size)
+      }
+      .onChange(of: object.id) {
+        didInitializeZoom = false
+        configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
+      }
+      .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 28))
+      .overlay {
+        RoundedRectangle(cornerRadius: 28)
+          .stroke(CultureTheme.hairline, lineWidth: 1)
+      }
+      .accessibilityElement(children: .contain)
+      .accessibilityLabel("\(object.canonicalName)可缩放有向文化知识图谱")
+      .accessibilityHint("双指缩放，单指拖动画布")
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+  }
+
+  private func graphCanvas(layout: GraphLayout, linksEnabled: Bool) -> some View {
+    ZStack {
+      ForEach(object.relations) { relation in
+        if let source = layout.positions[relation.sourceID],
+          let target = layout.positions[relation.targetID]
+        {
+          relationEdge(
+            relation,
+            source: source,
+            target: target,
+            showsLabel: relation.sourceID == object.id
+              || relation.targetID == object.id
+          )
+        }
+      }
+
+      objectNode
+        .id(object.id)
+        .position(layout.positions[object.id] ?? .zero)
+
+      ForEach(object.concepts) { concept in
+        if let position = layout.positions[concept.id] {
+          if linksEnabled {
+            NavigationLink(value: AppRoute.concept(concept.id)) {
+              conceptNode(concept)
+            }
+            .buttonStyle(.plain)
+            .position(position)
+          } else {
+            conceptNode(concept)
+              .position(position)
+          }
+        }
+      }
+    }
+    .frame(width: layout.size.width, height: layout.size.height)
   }
 
   private var relationList: some View {
@@ -251,6 +485,37 @@ struct CultureRelationGraphView: View {
   private func centerGraph(using proxy: ScrollViewProxy) {
     DispatchQueue.main.async {
       proxy.scrollTo(object.id, anchor: .center)
+    }
+  }
+
+  private func configureInitialZoom(contentSize: CGSize, viewportSize: CGSize) {
+    updateFittedZoom(contentSize: contentSize, viewportSize: viewportSize)
+    guard !didInitializeZoom else { return }
+    zoomScale = fittedZoomScale
+    didInitializeZoom = true
+  }
+
+  private func updateFittedZoom(contentSize: CGSize, viewportSize: CGSize) {
+    fittedZoomScale = GraphZoom.fittedScale(
+      contentSize: contentSize,
+      viewportSize: viewportSize
+    )
+  }
+
+  @ViewBuilder
+  private func fullscreenDestination(for route: AppRoute) -> some View {
+    switch route {
+    case .concept(let id):
+      if let concept = object.concepts.first(where: { $0.id == id }) {
+        ConceptDetailView(concept: concept)
+      } else {
+        ContentUnavailableView(
+          "未找到文化关系",
+          systemImage: "point.3.connected.trianglepath.dotted"
+        )
+      }
+    default:
+      ContentUnavailableView("当前入口不可用", systemImage: "questionmark.circle")
     }
   }
 
@@ -418,6 +683,48 @@ struct GraphLayout {
     positions = result
     hops = shortestHops
     size = CGSize(width: center.x * 2, height: center.y * 2)
+  }
+}
+
+nonisolated enum GraphZoom {
+  static let minimumScale: CGFloat = 0.5
+  static let maximumScale: CGFloat = 2.5
+  static let step: CGFloat = 0.25
+
+  static func clamped(_ scale: CGFloat) -> CGFloat {
+    min(max(scale, minimumScale), maximumScale)
+  }
+
+  static func increased(from scale: CGFloat) -> CGFloat {
+    clamped(scale + step)
+  }
+
+  static func decreased(from scale: CGFloat) -> CGFloat {
+    clamped(scale - step)
+  }
+
+  static func fittedScale(
+    contentSize: CGSize,
+    viewportSize: CGSize,
+    minimum: CGFloat = minimumScale,
+    maximum: CGFloat = 1
+  ) -> CGFloat {
+    guard
+      contentSize.width > 0,
+      contentSize.height > 0,
+      viewportSize.width > 0,
+      viewportSize.height > 0
+    else {
+      return min(max(1, minimum), maximum)
+    }
+
+    let widthScale = viewportSize.width / contentSize.width
+    let heightScale = viewportSize.height / contentSize.height
+    return min(max(min(widthScale, heightScale, maximum), minimum), maximum)
+  }
+
+  static func percentageText(for scale: CGFloat) -> String {
+    "\(Int((clamped(scale) * 100).rounded()))%"
   }
 }
 

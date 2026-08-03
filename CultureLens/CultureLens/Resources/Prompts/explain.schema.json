@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "conclusion": {
+      "type": "string",
+      "description": "一句话结论：眼前对象是什么。"
+    },
+    "why": {
+      "type": "string",
+      "description": "为什么是它：仅依据知识库片段与识别证据。"
+    },
+    "extension": {
+      "type": "string",
+      "description": "向外延展：连接到用户尚未掌握的相关节点。"
+    },
+    "citations": {
+      "type": "array",
+      "description": "支撑讲解的知识库原文摘录。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "知识库元素或介绍的稳定 key。"
+          },
+          "name": {
+            "type": "string",
+            "description": "对应名称。"
+          },
+          "fragment": {
+            "type": "string",
+            "description": "知识库原文连续摘录，不得改写。"
+          }
+        },
+        "required": ["key", "name", "fragment"]
+      }
+    }
+  },
+  "required": ["conclusion", "why", "extension", "citations"]
+}

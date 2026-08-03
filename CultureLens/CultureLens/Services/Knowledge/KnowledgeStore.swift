@@ -47,6 +47,7 @@ enum KnowledgeStoreError: LocalizedError {
 nonisolated struct KnowledgeStore: Sendable {
   static let defaultCandidateLimit = 12
   static let maximumObjectLimit = 20
+  static let maximumGraphExpansionNodes = 48
   static let defaultRadiusMeters = 50_000.0
 
   let pack: KnowledgePack
@@ -54,9 +55,11 @@ nonisolated struct KnowledgeStore: Sendable {
   /// Element keys in `ListCulturalElements` order (`ORDER BY name, key`).
   private let orderedElementKeys: [String]
   private let elementsByKey: [String: KnowledgePack.Element]
+  private let elementKeysByID: [UUID: String]
   /// Undirected relations normalized like `ListCulturalElementRelations`:
   /// each edge stored as (min, max) and sorted lexicographically.
   private let relations: [KnowledgePack.Relation]
+  private let adjacency: [String: [String]]
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
 
   init(pack: KnowledgePack) {
@@ -65,10 +68,14 @@ nonisolated struct KnowledgeStore: Sendable {
       pack.elements.map { ($0.key, $0) },
       uniquingKeysWith: { first, _ in first }
     )
+    elementKeysByID = Dictionary(
+      pack.elements.map { (DeterministicID.culturalElement($0.key), $0.key) },
+      uniquingKeysWith: { first, _ in first }
+    )
     orderedElementKeys = pack.elements
       .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
       .map(\.key)
-    relations = pack.relations
+    let normalizedRelations = pack.relations
       .map {
         KnowledgePack.Relation(
           elementKey: min($0.elementKey, $0.relatedElementKey),
@@ -76,6 +83,13 @@ nonisolated struct KnowledgeStore: Sendable {
         )
       }
       .sorted { ($0.elementKey, $0.relatedElementKey) < ($1.elementKey, $1.relatedElementKey) }
+    relations = normalizedRelations
+    var adjacencySets: [String: Set<String>] = [:]
+    for relation in normalizedRelations {
+      adjacencySets[relation.elementKey, default: []].insert(relation.relatedElementKey)
+      adjacencySets[relation.relatedElementKey, default: []].insert(relation.elementKey)
+    }
+    adjacency = adjacencySets.mapValues { $0.sorted() }
     introductionsByKey = Dictionary(
       pack.introductions.map { ($0.key, $0) },
       uniquingKeysWith: { first, _ in first }
@@ -117,8 +131,152 @@ nonisolated struct KnowledgeStore: Sendable {
     elementsByKey[key]
   }
 
+  func elementKey(for nodeID: UUID) -> String? {
+    elementKeysByID[nodeID]
+  }
+
+  func element(id: UUID) -> KnowledgePack.Element? {
+    elementKeysByID[id].flatMap { elementsByKey[$0] }
+  }
+
   func introduction(key: String) -> KnowledgePack.IntroductionRecord? {
     introductionsByKey[key]
+  }
+
+  func cultureConcept(elementKey: String) -> CultureConcept? {
+    guard let element = elementsByKey[elementKey] else { return nil }
+    return CultureConcept(
+      id: DeterministicID.culturalElement(element.key),
+      name: element.name,
+      kind: CulturalElementPresentation.conceptKind(key: element.key, name: element.name),
+      summary: Self.richTextPlainText(element.introduction),
+      detail: ""
+    )
+  }
+
+  /// Rich introduction for detail pages; falls back to `nil` when unresolved.
+  func introductionDocument(elementKey: String) -> RichTextDocument? {
+    elementsByKey[elementKey]?.introduction
+  }
+
+  func introductionDocument(nodeID: UUID) -> RichTextDocument? {
+    element(id: nodeID)?.introduction
+  }
+
+  // MARK: - User knowledge graph
+
+  /// Builds the graph shown in the Graph tab. Every joined node remains
+  /// visible, while knowledge-pack expansion is limited to three shortest-hop
+  /// rings and a fixed node budget.
+  func userKnowledgeGraph(
+    centerID requestedCenterID: UUID?,
+    joinedSeeds: [UserKnowledgeGraphSeed],
+    maximumDepth: Int = 3,
+    maximumExpandedNodes: Int = KnowledgeStore.maximumGraphExpansionNodes
+  ) -> UserKnowledgeGraphSnapshot {
+    let depthLimit = max(0, maximumDepth)
+    let expansionLimit = max(1, maximumExpandedNodes)
+    let seedByID = Dictionary(
+      joinedSeeds.map { ($0.id, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
+    let joinedIDs = Set(seedByID.keys)
+    let joinedElementKeys = Set(joinedIDs.compactMap { elementKeysByID[$0] })
+
+    let defaultCenterID = orderedElementKeys
+      .first { joinedElementKeys.contains($0) }
+      .map(DeterministicID.culturalElement)
+      ?? joinedSeeds.sorted {
+        if $0.name != $1.name { return $0.name.localizedCompare($1.name) == .orderedAscending }
+        return $0.id.uuidString < $1.id.uuidString
+      }.first?.id
+    let requestedCenterIsAvailable = requestedCenterID.map {
+      elementKeysByID[$0] != nil || joinedIDs.contains($0)
+    } ?? false
+    let centerID = requestedCenterIsAvailable ? requestedCenterID : defaultCenterID
+    let centerKey = centerID.flatMap { elementKeysByID[$0] }
+
+    var hops: [String: Int] = [:]
+    var queue: [String] = []
+    var queueIndex = 0
+    var isTruncated = false
+    if let centerKey {
+      hops[centerKey] = 0
+      queue.append(centerKey)
+    }
+
+    while queueIndex < queue.count {
+      let current = queue[queueIndex]
+      queueIndex += 1
+      let currentDepth = hops[current] ?? 0
+      guard currentDepth < depthLimit else { continue }
+
+      for neighbor in adjacency[current, default: []] where hops[neighbor] == nil {
+        guard hops.count < expansionLimit else {
+          isTruncated = true
+          continue
+        }
+        hops[neighbor] = currentDepth + 1
+        queue.append(neighbor)
+      }
+    }
+
+    var visibleElementKeys = joinedElementKeys
+    visibleElementKeys.formUnion(hops.keys)
+    var nodes = visibleElementKeys.compactMap { key -> UserKnowledgeGraphNode? in
+      guard let element = elementsByKey[key] else { return nil }
+      let id = DeterministicID.culturalElement(key)
+      return UserKnowledgeGraphNode(
+        id: id,
+        elementKey: key,
+        name: element.name,
+        summary: Self.richTextPlainText(element.introduction),
+        kind: CulturalElementPresentation.conceptKind(key: key, name: element.name),
+        hop: hops[key] ?? depthLimit + 1,
+        isJoined: joinedIDs.contains(id)
+      )
+    }
+
+    for seed in joinedSeeds where elementKeysByID[seed.id] == nil {
+      nodes.append(
+        UserKnowledgeGraphNode(
+          id: seed.id,
+          elementKey: nil,
+          name: seed.name,
+          summary: seed.summary,
+          kind: .foundation,
+          hop: seed.id == centerID ? 0 : depthLimit + 1,
+          isJoined: true
+        )
+      )
+    }
+    nodes.sort {
+      if $0.hop != $1.hop { return $0.hop < $1.hop }
+      if $0.name != $1.name { return $0.name.localizedCompare($1.name) == .orderedAscending }
+      return $0.id.uuidString < $1.id.uuidString
+    }
+
+    let edges = relations.compactMap { relation -> UserKnowledgeGraphEdge? in
+      guard
+        visibleElementKeys.contains(relation.elementKey),
+        visibleElementKeys.contains(relation.relatedElementKey)
+      else { return nil }
+      return UserKnowledgeGraphEdge(
+        id: DeterministicID.v5(
+          name: "culturelens:user-graph:\(relation.elementKey):\(relation.relatedElementKey)"
+        ),
+        sourceID: DeterministicID.culturalElement(relation.elementKey),
+        targetID: DeterministicID.culturalElement(relation.relatedElementKey)
+      )
+    }
+
+    return UserKnowledgeGraphSnapshot(
+      centerID: centerID,
+      nodes: nodes,
+      edges: edges,
+      maximumDepth: depthLimit,
+      isExpansionTruncated: isTruncated
+    )
   }
 
   /// Undirected related elements, mirroring `ListRelatedCulturalElements`

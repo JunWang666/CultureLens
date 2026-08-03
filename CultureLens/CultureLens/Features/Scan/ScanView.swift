@@ -5,6 +5,7 @@ struct ScanView: View {
     let onRecognized: @MainActor @Sendable (ScanSession) -> Void
 
     @Environment(\.recognitionService) private var recognitionService
+    @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
     @State private var coordinator = ScanCoordinator()
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var lastScanInput: LastScanInput?
@@ -399,7 +400,7 @@ struct ScanView: View {
         beginRecognition(
             preparedReview.data,
             focusRegion: useFocusRegion
-                ? focusSelection?.clamped(minimumSize: 0.05)
+                ? focusSelection?.clamped()
                 : nil,
             locationSource: pendingReview.locationSource
         )
@@ -465,6 +466,9 @@ struct ScanView: View {
             focusRegion: focusRegion,
             locationSource: locationSource,
             contextNote: "",
+            userKnowledgeStates: knowledgeProgressStore.userKnowledgeStates(
+                knowledgeStore: KnowledgeStore.shared
+            ),
             service: recognitionService,
             onSuccess: { @MainActor @Sendable session in
                 cancelReview()

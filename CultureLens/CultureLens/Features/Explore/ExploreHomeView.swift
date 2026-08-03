@@ -29,6 +29,8 @@ struct ExploreHomeView: View {
             message: "留意一处屋檐、一件器物或一段纹样。文化的线索，常从细节开始。"
           )
 
+          chatInvitation
+
           sectionTitle("基于位置推荐", subtitle: "发现附近值得理解的文化线索")
 
           recommendationContent
@@ -139,6 +141,41 @@ struct ExploreHomeView: View {
     } catch {
       recommendationState = .failed(error.localizedDescription)
     }
+  }
+
+  private var chatInvitation: some View {
+    NavigationLink(value: AppRoute.chat) {
+      HStack(alignment: .center, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
+          Text("文化问答")
+            .font(.cultureSerif(.title2))
+            .foregroundStyle(CultureTheme.inkPrimary)
+          Text("不必先扫描。直接问知识库与你的文化图谱，回答会标注引用来源。")
+            .font(.subheadline)
+            .foregroundStyle(CultureTheme.inkSecondary)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+
+        Spacer(minLength: 8)
+
+        Image(systemName: "chevron.right")
+          .font(.body.weight(.semibold))
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .accessibilityHidden(true)
+      }
+      .padding(20)
+      .background(
+        CultureTheme.surface,
+        in: RoundedRectangle(cornerRadius: 24, style: .continuous)
+      )
+      .overlay {
+        RoundedRectangle(cornerRadius: 24, style: .continuous)
+          .stroke(CultureTheme.hairline, lineWidth: 1)
+      }
+    }
+    .buttonStyle(.plain)
+    .accessibilityIdentifier("explore.openChat")
+    .accessibilityLabel("进入文化问答")
   }
 
   private var scanInvitation: some View {

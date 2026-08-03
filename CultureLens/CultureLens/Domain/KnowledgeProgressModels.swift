@@ -58,6 +58,20 @@ nonisolated struct KnowledgeCitation: Identifiable, Codable, Hashable, Sendable 
   let key: String
   let name: String
   let fragment: String
+  /// External trusted sources (Wikipedia, Amap, …) for this knowledge node.
+  let sources: [KnowledgeSource]
+
+  init(
+    key: String,
+    name: String,
+    fragment: String,
+    sources: [KnowledgeSource] = []
+  ) {
+    self.key = key
+    self.name = name
+    self.fragment = fragment
+    self.sources = sources
+  }
 }
 
 /// Knowledge-aware cultural background constrained to knowledge-base fragments.

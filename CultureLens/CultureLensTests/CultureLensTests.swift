@@ -427,7 +427,7 @@ struct CultureLensTests {
       - key: `three-pools-light-mechanism`, name: “印月”的光影原理
         - 原文摘录：常见解释包括灯光、倒影与错觉。
       """
-    let parsed = CultureChatService.parseAnswer(markdown)
+    let parsed = CultureChatService.parseAnswer(markdown, store: nil)
     #expect(parsed.body == "三潭印月是西湖夜景的代表。")
     #expect(parsed.citations.count == 2)
     #expect(parsed.citations[0].key == "three-pools-mirroring-moon")
@@ -435,6 +435,50 @@ struct CultureLensTests {
     #expect(parsed.citations[0].fragment.contains("湖中石塔"))
     #expect(parsed.citations[1].key == "three-pools-light-mechanism")
     #expect(!parsed.body.contains("引用来源"))
+  }
+
+  @Test func citationCardsEnrichExternalTrustedSources() {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "cite-test",
+        elements: [
+          KnowledgePack.Element(
+            key: "three-pools-mirroring-moon",
+            name: "三潭印月",
+            introduction: emptyIntroduction
+          )
+        ],
+        attractions: [
+          KnowledgePack.Attraction(key: "three-pools", name: "三潭印月")
+        ],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "three-pools.view",
+            name: "三潭观看",
+            introduction: emptyIntroduction,
+            culturalElementKey: "three-pools-mirroring-moon",
+            attractionKey: "three-pools",
+            latitude: 30.24,
+            longitude: 120.14,
+            coordinateSourceUrl: "https://zh.wikipedia.org/zh-cn/三潭印月"
+          )
+        ]
+      )
+    )
+    let markdown = """
+      正文。
+
+      ## 引用来源
+      - key: `three-pools-mirroring-moon`, name: 三潭印月
+        - 原文摘录：湖中石塔。
+      """
+    let parsed = CultureChatService.parseAnswer(markdown, store: store)
+    #expect(parsed.citations.count == 1)
+    #expect(parsed.citations[0].sources.count == 1)
+    #expect(parsed.citations[0].sources.first?.publisher == "维基百科")
+    #expect(parsed.citations[0].sources.first?.url != nil)
   }
 
   @Test func personalizedExplanationKeepsTwoSectionsAndExtractsCitations() {
@@ -449,7 +493,7 @@ struct CultureLensTests {
       - key: `three-pools-mirroring-moon`, name: 三潭印月
         - 原文摘录：由湖中石塔、灯孔、水面与月色共同构成。
       """
-    let parsed = CultureChatService.parseAnswer(markdown)
+    let parsed = CultureChatService.parseAnswer(markdown, store: nil)
 
     #expect(parsed.body.contains("## 文化背景"))
     #expect(parsed.body.contains("## 下一步建议"))

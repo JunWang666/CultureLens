@@ -464,7 +464,8 @@ struct ScanResultView: View {
             KnowledgeCitation(
               key: object.culturalElementKey ?? object.id.uuidString,
               name: object.canonicalName,
-              fragment: object.summary
+              fragment: object.summary,
+              sources: object.sources
             )
           ],
           modelIdentifier: "local-demo"

@@ -390,8 +390,204 @@ struct OnDeviceRecognitionTests {
 
     #expect(pack.version == "test-v1")
     #expect(pack.elements.first?.introduction.plainText == "介绍一。")
+    #expect(pack.elements.first?.sources.isEmpty == true)
     #expect(pack.introductions.first?.culturalElementKey == "e1")
+    #expect(pack.introductions.first?.coordinateSourceUrl == "https://example.com/source")
+    #expect(pack.introductions.first?.sources.count == 1)
+    #expect(pack.introductions.first?.sources.first?.url == "https://example.com/source")
+    #expect(pack.introductions.first?.sources.first?.publisher == "example.com")
     #expect(pack.relations.first?.relatedElementKey == "e2")
+  }
+
+  @Test func introductionSourcesPreferExplicitArrayOverCoordinateUrl() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "test-v1",
+        "elements": [
+          {
+            "key": "e1",
+            "name": "元素一",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "介绍一。" }]
+            },
+            "sources": [
+              {
+                "title": "西湖文化景观",
+                "publisher": "UNESCO",
+                "url": "https://whc.unesco.org/en/list/1334/"
+              }
+            ]
+          }
+        ],
+        "attractions": [],
+        "relations": [],
+        "introductions": [
+          {
+            "key": "i1",
+            "name": "介绍一",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "现场介绍。" }]
+            },
+            "culturalElementKey": "e1",
+            "attractionKey": "a1",
+            "latitude": 30.23,
+            "longitude": 120.14,
+            "coordinateSourceUrl": "https://example.com/ignored",
+            "sources": [
+              {
+                "title": "雷峰塔",
+                "publisher": "维基百科",
+                "url": "https://zh.wikipedia.org/zh-cn/雷峰塔"
+              }
+            ]
+          }
+        ]
+      }
+      """#.utf8
+    )
+
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    #expect(pack.elements.first?.sources.first?.publisher == "UNESCO")
+    #expect(pack.introductions.first?.sources.count == 1)
+    #expect(pack.introductions.first?.sources.first?.publisher == "维基百科")
+    #expect(
+      pack.introductions.first?.sources.first?.url
+        == "https://zh.wikipedia.org/zh-cn/雷峰塔"
+    )
+  }
+
+  @Test func trustedSourcesAggregateElementAndIntroductionProvenance() throws {
+    let pack = KnowledgePack(
+      version: "test-v1",
+      elements: [
+        element("e1", "元素一", intro: "介绍一。"),
+        KnowledgePack.Element(
+          key: "e2",
+          name: "元素二",
+          introduction: doc(["介绍二。"]),
+          sources: [
+            KnowledgePack.Source(
+              title: "西湖文化景观",
+              publisher: "UNESCO",
+              url: "https://whc.unesco.org/en/list/1334/"
+            )
+          ]
+        ),
+      ],
+      attractions: [KnowledgePack.Attraction(key: "a1", name: "景点一")],
+      relations: [],
+      introductions: [
+        KnowledgePack.IntroductionRecord(
+          key: "i1",
+          name: "介绍一",
+          introduction: doc(["现场。"]),
+          culturalElementKey: "e1",
+          attractionKey: "a1",
+          latitude: 30.233889,
+          longitude: 120.145,
+          coordinateSourceUrl: "https://zh.wikipedia.org/zh-cn/雷峰塔"
+        ),
+        KnowledgePack.IntroductionRecord(
+          key: "i2",
+          name: "介绍二",
+          introduction: doc(["现场二。"]),
+          culturalElementKey: "e2",
+          attractionKey: "a1",
+          latitude: 30.24,
+          longitude: 120.15,
+          coordinateSourceUrl: "https://ditu.amap.com/place/B023B0E7F4"
+        ),
+      ]
+    )
+    let store = KnowledgeStore(pack: pack)
+
+    let e1Sources = store.trustedSources(forElementKey: "e1")
+    #expect(e1Sources.count == 1)
+    #expect(e1Sources.first?.publisher == "维基百科")
+    #expect(e1Sources.first?.url?.absoluteString == "https://zh.wikipedia.org/zh-cn/雷峰塔")
+
+    let e2Sources = store.trustedSources(forElementKey: "e2")
+    #expect(e2Sources.count == 2)
+    #expect(e2Sources.map(\.publisher).contains("UNESCO"))
+    #expect(e2Sources.map(\.publisher).contains("高德地图"))
+  }
+
+  @Test func recognitionMapperPopulatesTrustedSources() throws {
+    let knowledge = RecognitionKnowledgeSet(
+      version: "test",
+      elements: [
+        RecognitionElement(
+          key: "e1",
+          name: "元素一",
+          introduction: doc(["介绍。"]),
+          nearbyContexts: [],
+          relatedElements: [],
+          graphElements: [],
+          graphRelations: [],
+          sources: [
+            KnowledgePack.Source(
+              title: "维基百科",
+              publisher: "维基百科",
+              url: "https://zh.wikipedia.org/zh-cn/雷峰塔"
+            )
+          ]
+        )
+      ],
+      attractionCandidates: [
+        AttractionCandidate(
+          key: "a1",
+          name: "景点一",
+          culturalElementKey: "e1",
+          summary: "主景点",
+          distanceMeters: 12,
+          sources: [
+            KnowledgePack.Source(
+              title: "高德地图",
+              publisher: "高德地图",
+              url: "https://ditu.amap.com/place/B023B0E7F4"
+            )
+          ]
+        ),
+        AttractionCandidate(
+          key: "a2",
+          name: "景点二",
+          culturalElementKey: "e1",
+          summary: "附近景点",
+          distanceMeters: 40,
+          sources: [
+            KnowledgePack.Source(
+              title: "高德地图",
+              publisher: "高德地图",
+              url: "https://ditu.amap.com/place/B023B0DA1F"
+            )
+          ]
+        ),
+      ],
+      totalElements: 1,
+      nearbyContextCount: 1,
+      locationMatched: true
+    )
+
+    let result = RecognitionResponseMapper.mapResponse(
+      requestID: "req-1",
+      usedPlaceContext: true,
+      decision: decision(
+        culturalElementKey: "e1",
+        attractionKey: "a1",
+        canonicalName: "元素一"
+      ),
+      modelIdentifier: "test-model",
+      knowledge: knowledge
+    )
+
+    #expect(result.object.sources.count == 1)
+    #expect(result.object.sources.first?.publisher == "维基百科")
+    #expect(result.object.sources.first?.url != nil)
+    let nearby = try #require(result.alternatives.first { $0.attractionKey == "a2" })
+    #expect(nearby.sources?.contains { $0.publisher == "高德地图" } == true)
   }
 
   @Test func imageBlockDecodesAndRoundTrips() throws {

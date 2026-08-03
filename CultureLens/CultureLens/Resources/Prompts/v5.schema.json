@@ -8,11 +8,11 @@
     },
     "cultural_element_key": {
       "type": "string",
-      "description": "命中本次文化内容候选时返回其原始 key；未收录对象返回空字符串。"
+      "description": "命中本次文化内容候选时返回该候选原始 key，且必须与 canonical_name 来自同一条候选；未收录对象返回空字符串。"
     },
     "canonical_name": {
       "type": "string",
-      "description": "主候选的规范中文名称；无法识别时为“其他”。"
+      "description": "命中候选时必须逐字使用该候选 name；禁止用景点名或其他候选名顶替。未命中时可为自拟中文名，无法识别时为“其他”。"
     },
     "category": {
       "type": "string",
@@ -55,10 +55,11 @@
         "properties": {
           "cultural_element_key": {
             "type": "string",
-            "description": "命中本次文化内容候选时返回其原始 key；未收录对象返回空字符串。"
+            "description": "命中本次文化内容候选时返回该候选原始 key，且必须与该项 canonical_name 来自同一条候选；未收录对象返回空字符串。"
           },
           "canonical_name": {
-            "type": "string"
+            "type": "string",
+            "description": "命中候选时必须逐字使用该候选 name；禁止跨候选拼接或用景点名顶替。"
           },
           "category": {
             "type": "string",

@@ -53,10 +53,7 @@ struct ObjectDetailView: View {
                     presentation: .toolbar
                 )
 
-                ShareLink(item: "\(object.canonicalName)：\(object.summary)") {
-                    Image(systemName: "square.and.arrow.up")
-                }
-                .accessibilityLabel("分享")
+                ShareCultureCardButton(object: object, label: .icon)
             }
         }
     }

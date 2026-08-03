@@ -51,6 +51,14 @@ struct CultureMapView: View {
             }
         }
         .cultureNavigationTitle("我的", showsBackButton: false)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink(value: AppRoute.visitTrips) {
+                    Label("文化回顾", systemImage: "book.pages")
+                }
+                .accessibilityIdentifier("profile.openReview")
+            }
+        }
         .onChange(of: selectedRecordID) { _, newValue in
             guard let newValue else { return }
             path.append(.history(newValue))

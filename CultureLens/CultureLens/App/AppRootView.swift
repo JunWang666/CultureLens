@@ -134,6 +134,14 @@ struct AppRootView: View {
             }
         case .history(let id):
             ScanHistoryDetailView(recordID: id)
+        case .visitTrips:
+            VisitTripListView()
+        case .visitTrip(let id):
+            VisitTripDetailView(tripID: id)
+        case .themes:
+            ThemeExploreListView()
+        case .theme(let key):
+            ThemeDetailView(themeKey: key)
         }
     }
 

@@ -9,6 +9,8 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   let attractions: [Attraction]
   let relations: [Relation]
   let introductions: [IntroductionRecord]
+  /// Themed exploration tracks. Older packs may omit this field.
+  let themes: [Theme]
 
   nonisolated struct Element: Decodable, Sendable {
     let key: String
@@ -70,17 +72,65 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
+  /// A curated exploration path that binds a set of cultural element keys
+  /// and a completion threshold (`minContacted`).
+  nonisolated struct Theme: Decodable, Sendable, Identifiable, Hashable {
+    var id: String { key }
+
+    let key: String
+    let name: String
+    let summary: String
+    let elementKeys: [String]
+    /// Number of theme elements the user must have joined the graph for.
+    let minContacted: Int
+
+    init(
+      key: String,
+      name: String,
+      summary: String,
+      elementKeys: [String],
+      minContacted: Int
+    ) {
+      self.key = key
+      self.name = name
+      self.summary = summary
+      self.elementKeys = elementKeys
+      self.minContacted = minContacted
+    }
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case version
+    case elements
+    case attractions
+    case relations
+    case introductions
+    case themes
+  }
+
   init(
     version: String,
     elements: [Element],
     attractions: [Attraction],
     relations: [Relation],
-    introductions: [IntroductionRecord]
+    introductions: [IntroductionRecord],
+    themes: [Theme] = []
   ) {
     self.version = version
     self.elements = elements
     self.attractions = attractions
     self.relations = relations
     self.introductions = introductions
+    self.themes = themes
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    version = try container.decode(String.self, forKey: .version)
+    elements = try container.decode([Element].self, forKey: .elements)
+    attractions = try container.decode([Attraction].self, forKey: .attractions)
+    relations = try container.decode([Relation].self, forKey: .relations)
+    introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
+    themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
   }
 }

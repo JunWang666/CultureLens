@@ -31,6 +31,8 @@ struct ExploreHomeView: View {
 
           chatInvitation
 
+          playbooksSection
+
           sectionTitle("基于位置推荐", subtitle: "发现附近值得理解的文化线索")
 
           recommendationContent
@@ -175,6 +177,71 @@ struct ExploreHomeView: View {
     .buttonStyle(.plain)
     .accessibilityIdentifier("explore.openChat")
     .accessibilityLabel("进入文化问答")
+  }
+
+  private var playbooksSection: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      sectionTitle("继续探索", subtitle: "主题路径与参观回顾")
+
+      NavigationLink(value: AppRoute.themes) {
+        playbookRow(
+          title: "主题探索",
+          message: "沿着月影、十景、塔影等线索连续点亮节点。",
+          systemImage: "list.bullet.rectangle"
+        )
+      }
+      .buttonStyle(.plain)
+      .accessibilityIdentifier("explore.openThemes")
+
+      NavigationLink(value: AppRoute.visitTrips) {
+        playbookRow(
+          title: "文化回顾",
+          message: "把相近时间与地点的扫描收成一次参观汇总。",
+          systemImage: "book.pages"
+        )
+      }
+      .buttonStyle(.plain)
+      .accessibilityIdentifier("explore.openReview")
+    }
+  }
+
+  private func playbookRow(
+    title: String,
+    message: String,
+    systemImage: String
+  ) -> some View {
+    HStack(alignment: .center, spacing: 16) {
+      Image(systemName: systemImage)
+        .font(.title3)
+        .foregroundStyle(CultureTheme.antiqueGold)
+        .frame(width: 36)
+
+      VStack(alignment: .leading, spacing: 4) {
+        Text(title)
+          .font(.headline)
+          .foregroundStyle(CultureTheme.inkPrimary)
+        Text(message)
+          .font(.caption)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+
+      Spacer(minLength: 8)
+
+      Image(systemName: "chevron.right")
+        .font(.body.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .accessibilityHidden(true)
+    }
+    .padding(18)
+    .background(
+      CultureTheme.surface,
+      in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+    )
+    .overlay {
+      RoundedRectangle(cornerRadius: 20, style: .continuous)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
   }
 
   private var scanInvitation: some View {

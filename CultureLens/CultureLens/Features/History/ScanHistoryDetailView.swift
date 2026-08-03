@@ -90,6 +90,7 @@ struct ScanHistoryDetailView: View {
             } trailing: { _ in
                 if let result = resultSnapshot(for: record) {
                     CultureRelationGraphView(object: result.object)
+                    savedVisualAlternatives(result.displayVisualAlternatives)
                     savedCandidates(
                         result.displayAttractionCandidates,
                         selectedCandidateID: record.historySnapshot?.selectedCandidateID

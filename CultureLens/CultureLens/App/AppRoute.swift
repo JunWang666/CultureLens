@@ -10,4 +10,8 @@ enum AppRoute: Hashable {
     case scanResult(UUID)
     case scanCandidate(sessionID: UUID, candidateID: UUID)
     case history(UUID)
+    case visitTrips
+    case visitTrip(UUID)
+    case themes
+    case theme(String)
 }

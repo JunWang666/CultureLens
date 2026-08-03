@@ -14,7 +14,7 @@ struct KnowledgeGraphMembershipButton: View {
     private var progressStore
 
     private var currentLevel: KnowledgeLevel? {
-        progressStore.level(for: nodeID)
+        progressStore.level(for: nodeID, elementKey: elementKey)
     }
 
     private var isInGraph: Bool {
@@ -78,7 +78,7 @@ struct KnowledgeGraphMembershipButton: View {
             Divider()
             Button(role: .destructive) {
                 withAnimation(.snappy) {
-                    progressStore.remove(nodeID)
+                    progressStore.remove(nodeID, elementKey: elementKey)
                 }
             } label: {
                 Label("移出文化图谱", systemImage: "minus.circle")

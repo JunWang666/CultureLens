@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-03 文化问答页输入框调整为 ChatGPT 风格紧凑单胶囊布局：空输入保持 48pt 单行高度，输入换行后才按内容增长；左侧快捷入口、中部多行输入、麦克风入口，以及随输入状态切换的蓝色语音波形 / 发送按钮；保留中文输入法候选确认与发送键语义。
 - 2026-08-03 聊天 UI 换成 Messages 风格气泡 + Microsoft `SwiftStreamingMarkdown` 流式 Markdown 渲染；问答改为 SSE `stream: true`（`dynamic/chat`）。未采用 ExyteChat：其强制依赖 Giphy SDK，体积与审核成本过高。
 - 2026-08-03 讲解生成（`CultureExplanationService` + `explain` prompt / `dynamic/chat`）与多轮追问（`AskCultureView` + `CultureChatService`）；PromptAssembler / v5 增加用户知识状态与「跳过已知、锚定已知、补缺」；对象 / 概念 / 扫描结果详情用 `RichTextBlocksView`；用户状态升级为接触 / 理解 / 掌握（SwiftData 存时间戳与来源）。
 - 2026-08-03 真实用户文化图谱落地：所有已加入节点始终可见，并从可选中心按无向 BFS 向外展开 3 层；采用确定性同心最短路布局、48 节点扩展上限和单 `Canvas` 批量绘边控制开销。原「收藏」/「我已了解」统一为持久化「加入文化图谱」，旧 UserDefaults 状态迁移进 SwiftData。

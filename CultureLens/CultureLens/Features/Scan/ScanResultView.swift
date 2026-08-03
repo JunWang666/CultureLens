@@ -5,16 +5,21 @@ struct ScanResultView: View {
     let session: ScanSession
 
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
     @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
     @State private var isSaving = false
-    @State private var isSaved = false
     @State private var saveError: String?
     @State private var explanationState: ExplanationLoadState = .idle
     private let explanationService = CultureExplanationService.live()
 
     private var object: CultureObject {
         session.result.object
+    }
+
+    private var isInCultureGraph: Bool {
+        knowledgeProgressStore.isInGraph(
+            object.id,
+            elementKey: object.culturalElementKey
+        )
     }
 
     private var rationale: String {
@@ -54,6 +59,7 @@ struct ScanResultView: View {
 
                 imageHeader(height: isWide ? 340 : 280)
                 identity(showTitle: !isWide)
+                actionButtons
             } trailing: { _ in
                 explanationSection
                 CultureRelationGraphView(
@@ -62,42 +68,13 @@ struct ScanResultView: View {
                 )
                 alternatives
                 evidenceCard
-                NavigationLink(value: AppRoute.ask(object.id)) {
-                    Label("继续追问这个对象", systemImage: "text.bubble")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(CultureTheme.inkPrimary)
-                .controlSize(.large)
-                saveAction
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        // 两个坑：1) Button 和 Text 不能混在一个 HStack 里做 toolbar item（iOS 18+
-        // 布局 bug，后面的子视图不渲染）；2) iOS 26 会把相邻 toolbar item 合并进同一个
-        // 玻璃共享背景，标题需要用 sharedBackgroundVisibility(.hidden) 摘出来保持纯文本样式。
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("返回", systemImage: "chevron.backward")
-                        .labelStyle(.iconOnly)
-                        .font(.body.weight(.semibold))
-                }
-            }
-            if #available(iOS 26.0, *) {
-                ToolbarItem(placement: .topBarLeading) {
-                    leadingTitle
-                }
-                .sharedBackgroundVisibility(.hidden)
-            } else {
-                ToolbarItem(placement: .topBarLeading) {
-                    leadingTitle
-                }
-            }
-        }
+        .cultureNavigationTitle(
+            "扫描结果",
+            prefersLeadingTitle: true,
+            accessibilityIdentifier: "result.title"
+        )
         .alert(
             "无法保存",
             isPresented: Binding(
@@ -114,15 +91,6 @@ struct ScanResultView: View {
         .task(id: session.id) {
             await loadExplanation()
         }
-    }
-
-    // fixedSize 是必须的：iOS 26 toolbar item 可能分到比内容小的宽度导致文字被截断
-    private var leadingTitle: some View {
-        Text("扫描结果")
-            .font(.headline)
-            .foregroundStyle(CultureTheme.inkPrimary)
-            .accessibilityIdentifier("result.title")
-            .fixedSize()
     }
 
     private func imageHeader(height: CGFloat) -> some View {
@@ -322,39 +290,55 @@ struct ScanResultView: View {
         }
     }
 
-    private var saveAction: some View {
+    private var actionButtons: some View {
         VStack(spacing: 12) {
-            if isSaved {
-                Label("已加入扫描历史", systemImage: "checkmark.circle.fill")
+            if isInCultureGraph {
+                Label("已加入文化图谱", systemImage: "checkmark.circle.fill")
                     .foregroundStyle(.green)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
 
-                NavigationLink(value: AppRoute.object(object.id)) {
-                    Label("阅读完整解释", systemImage: "book.pages")
+            HStack(spacing: 12) {
+                NavigationLink(value: AppRoute.ask(object.id)) {
+                    Label("继续追问这个对象", systemImage: "text.bubble")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(CultureTheme.inkPrimary)
                 .controlSize(.large)
-            } else {
-                Button {
-                    save()
-                } label: {
-                    if isSaving {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                    } else {
-                        Label(
-                            "确认并保存到文化地图",
-                            systemImage: "map"
-                        )
+
+                if isInCultureGraph {
+                    NavigationLink(value: AppRoute.object(object.id)) {
+                        Label("阅读完整解释", systemImage: "book.pages")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
                             .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .tint(CultureTheme.inkPrimary)
+                    .controlSize(.large)
+                } else {
+                    Button {
+                        save()
+                    } label: {
+                        if isSaving {
+                            ProgressView()
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            Label("确认并保存到文化图谱", systemImage: "point.3.connected.trianglepath.dotted")
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.75)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(CultureTheme.cinnabar)
+                    .controlSize(.large)
+                    .disabled(isSaving)
+                    .accessibilityIdentifier("result.save")
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(CultureTheme.cinnabar)
-                .controlSize(.large)
-                .disabled(isSaving)
-                .accessibilityIdentifier("result.save")
             }
 
             if session.isDemo {
@@ -362,6 +346,7 @@ struct ScanResultView: View {
                     .font(.caption)
                     .foregroundStyle(CultureTheme.inkSecondary)
                     .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
             }
         }
     }
@@ -413,7 +398,12 @@ struct ScanResultView: View {
                 )
                 modelContext.insert(record)
                 try modelContext.save()
-                isSaved = true
+                knowledgeProgressStore.setLevel(
+                    .contact,
+                    for: object.id,
+                    source: .manual,
+                    elementKey: object.culturalElementKey
+                )
             } catch {
                 saveError = error.localizedDescription
             }
@@ -467,7 +457,7 @@ struct ScanResultView: View {
             )
             explanationState = .loaded(explanation)
             if let key = object.culturalElementKey,
-               knowledgeProgressStore.level(for: object.id) == nil
+               knowledgeProgressStore.level(for: object.id, elementKey: key) == nil
             {
                 knowledgeProgressStore.setLevel(
                     .contact,

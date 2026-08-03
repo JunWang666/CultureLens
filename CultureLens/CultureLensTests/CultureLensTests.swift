@@ -398,6 +398,66 @@ struct CultureLensTests {
     #expect(LLMGatewayConfig.chat.endpoint == LLMGatewayConfig.default.endpoint)
   }
 
+  @Test func chatAnswerSplitsCitationSectionIntoCards() {
+    let markdown = """
+      三潭印月是西湖夜景的代表。
+
+      ## 引用来源
+      - key: `three-pools-mirroring-moon`, name: 三潭印月
+        - 原文摘录：由湖中石塔、灯孔、水面与月色共同构成。
+      - key: `three-pools-light-mechanism`, name: “印月”的光影原理
+        - 原文摘录：常见解释包括灯光、倒影与错觉。
+      """
+    let parsed = CultureChatService.parseAnswer(markdown)
+    #expect(parsed.body == "三潭印月是西湖夜景的代表。")
+    #expect(parsed.citations.count == 2)
+    #expect(parsed.citations[0].key == "three-pools-mirroring-moon")
+    #expect(parsed.citations[0].name == "三潭印月")
+    #expect(parsed.citations[0].fragment.contains("湖中石塔"))
+    #expect(parsed.citations[1].key == "three-pools-light-mechanism")
+    #expect(!parsed.body.contains("引用来源"))
+  }
+
+  @Test func cultureCiteURLResolvesElementKey() throws {
+    let withKey = try #require(
+      URL(
+        string:
+          "https://culturelens.local/cite?citationMarker=9F742443&citationTitle=%E4%B8%89%E6%BD%AD%E5%8D%B0%E6%9C%88&citationA11yValue=%E4%B8%89%E6%BD%AD%E5%8D%B0%E6%9C%88&elementKey=three-pools-mirroring-moon"
+      )
+    )
+    #expect(CultureCiteURL.elementKey(from: withKey, store: nil) == "three-pools-mirroring-moon")
+
+    let fromA11y = try #require(
+      URL(
+        string:
+          "https://culturelens.local/cite?citationMarker=9F742443&citationTitle=West%20Lake&citationA11yValue=West%20Lake(west-lake-ten-scenes)"
+      )
+    )
+    #expect(CultureCiteURL.elementKey(from: fromA11y, store: nil) == "west-lake-ten-scenes")
+
+    let unrelated = try #require(URL(string: "https://example.com/docs"))
+    #expect(CultureCiteURL.elementKey(from: unrelated, store: nil) == nil)
+  }
+
+  @Test func cultureCiteSanitizerFixesBrokenInlineCitations() {
+    let broken = """
+      西湖十景不是标签，而是观看脚本。west-lake-ten-scenes
+      南屏晚钟偏重听觉。`nanping-evening-bell`
+      体系还会更新，如[west-lake-new-ten-scenes](https://culturelens.local/cite?citationMarker=west-lake-new-ten-scenes&citationTitle=1985 西湖新十景&citationA11yValue=1985 西湖新十景&elementKey=west-lake-new-ten-scenes)。
+      """
+    let cleaned = CultureCiteURL.sanitizeInlineCitations(broken, store: nil)
+    #expect(!cleaned.contains("`nanping-evening-bell`"))
+    #expect(!cleaned.contains("[west-lake-new-ten-scenes]("))
+    #expect(!cleaned.contains("citationTitle=1985 西湖新十景"))
+    #expect(!cleaned.contains("。west-lake-ten-scenes"))
+    #expect(cleaned.contains("[9F742443](https://culturelens.local/cite?citationMarker=9F742443&"))
+    #expect(cleaned.contains("elementKey=west-lake-new-ten-scenes"))
+    #expect(cleaned.contains("elementKey=west-lake-ten-scenes"))
+    #expect(cleaned.contains("elementKey=nanping-evening-bell"))
+    #expect(cleaned.contains("citationTitle=1985%20%E8%A5%BF%E6%B9%96%E6%96%B0%E5%8D%81%E6%99%AF"))
+    #expect(cleaned.contains("观看脚本。"))
+  }
+
   @Test func nearbyRecommendationsDecodeDatabaseContent() throws {
     let payload = Data(
       #"""
@@ -491,6 +551,41 @@ struct CultureLensTests {
     reloadedStore.configure(modelContext: container.mainContext)
     #expect(reloadedStore.isInGraph(nodeID))
     #expect(reloadedStore.level(for: nodeID) == .contact)
+  }
+
+  @Test func graphMembershipMatchesSameAttractionByElementKey() throws {
+    let suiteName = "KnowledgeProgressStoreElementKeyTests.\(UUID().uuidString)"
+    let userDefaults = try #require(UserDefaults(suiteName: suiteName))
+    defer {
+      userDefaults.removePersistentDomain(forName: suiteName)
+    }
+    let schema = Schema([KnowledgeProgressRecord.self])
+    let configuration = ModelConfiguration(
+      "KnowledgeProgressStoreElementKeyTests",
+      schema: schema,
+      isStoredInMemoryOnly: true
+    )
+    let container = try ModelContainer(
+      for: schema,
+      configurations: [configuration]
+    )
+    let store = KnowledgeProgressStore(userDefaults: userDefaults)
+    store.configure(modelContext: container.mainContext)
+
+    let joinedID = UUID()
+    let rescannedID = UUID()
+    store.setLevel(
+      .contact,
+      for: joinedID,
+      source: .manual,
+      elementKey: "three-pools-mirroring-moon"
+    )
+
+    #expect(store.isInGraph(rescannedID, elementKey: "three-pools-mirroring-moon"))
+    #expect(
+      store.level(for: rescannedID, elementKey: "three-pools-mirroring-moon") == .contact
+    )
+    #expect(!store.isInGraph(rescannedID, elementKey: "broken-bridge"))
   }
 
   @Test func userGraphKeepsJoinedNodesAndExpandsExactlyThreeHops() throws {

@@ -76,6 +76,8 @@ nonisolated struct CultureChatService: Sendable {
       question: trimmed
     ) {
       switch event {
+      case .thinking:
+        break
       case .delta(let snapshot):
         finalContent = snapshot
       case .finished(let model, let content):
@@ -139,27 +141,140 @@ nonisolated struct CultureChatService: Sendable {
     }
   }
 
-  /// Pull simple key/name/fragment triples from a trailing “引用来源” section.
-  static func extractCitations(from markdown: String) -> [KnowledgeCitation] {
-    guard let range = markdown.range(of: "## 引用来源") ?? markdown.range(of: "##引用来源")
-    else { return [] }
-    let section = String(markdown[range.upperBound...])
-    var citations: [KnowledgeCitation] = []
-    for line in section.split(separator: "\n") {
-      let text = line.trimmingCharacters(in: .whitespacesAndNewlines)
-      guard text.hasPrefix("-") || text.hasPrefix("*") else { continue }
-      let body = text.drop(while: { $0 == "-" || $0 == "*" || $0.isWhitespace })
-      let parts = body.split(separator: "：", maxSplits: 1).map(String.init)
-      let head = parts.first ?? String(body)
-      let fragment = parts.count > 1 ? parts[1] : String(body)
-      let keyName = head.split(separator: "·").map {
-        $0.trimmingCharacters(in: .whitespacesAndNewlines)
-      }
-      let name = keyName.first ?? head
-      let key = keyName.count > 1 ? keyName[1] : name
-      citations.append(KnowledgeCitation(key: key, name: name, fragment: fragment))
+  /// Splits streamed Markdown into display body + structured citation cards.
+  /// The trailing「引用来源」section is removed from the body so it is not
+  /// rendered twice (once as Markdown, once as cards).
+  static func parseAnswer(_ markdown: String) -> (body: String, citations: [KnowledgeCitation]) {
+    let normalized = markdown.replacingOccurrences(of: "\r\n", with: "\n")
+    // Match a standalone "## 引用来源" heading (any level 1–3).
+    guard
+      let regex = try? NSRegularExpression(
+        pattern: #"(?m)^#{1,3}\s*引用来源\s*$"#,
+        options: []
+      ),
+      let match = regex.firstMatch(
+        in: normalized,
+        options: [],
+        range: NSRange(normalized.startIndex..., in: normalized)
+      ),
+      let headerRange = Range(match.range, in: normalized)
+    else {
+      return (
+        body: CultureCiteURL.sanitizeInlineCitations(
+          normalized.trimmingCharacters(in: .whitespacesAndNewlines)
+        ),
+        citations: []
+      )
     }
-    return citations
+
+    let body = CultureCiteURL.sanitizeInlineCitations(
+      String(normalized[..<headerRange.lowerBound])
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+    )
+    let section = String(normalized[headerRange.upperBound...])
+    return (body, parseCitationSection(section))
+  }
+
+  static func displayBody(from markdown: String) -> String {
+    parseAnswer(markdown).body
+  }
+
+  static func extractCitations(from markdown: String) -> [KnowledgeCitation] {
+    parseAnswer(markdown).citations
+  }
+
+  private static func parseCitationSection(_ section: String) -> [KnowledgeCitation] {
+    var citations: [KnowledgeCitation] = []
+    var current: (key: String, name: String, fragment: String)?
+
+    func commit() {
+      guard let current else { return }
+      let key = current.key.trimmingCharacters(in: .whitespacesAndNewlines)
+      let name = current.name.trimmingCharacters(in: .whitespacesAndNewlines)
+      let fragment = current.fragment.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !key.isEmpty || !name.isEmpty else { return }
+      citations.append(
+        KnowledgeCitation(
+          key: key.isEmpty ? name : key,
+          name: name.isEmpty ? key : name,
+          fragment: fragment
+        )
+      )
+    }
+
+    let keyNamePattern = #/(?:[-*]\s*)?key:\s*`?([^`,\n]+)`?\s*,\s*name:\s*(.+)/#
+    let pipePattern = #/(?:[-*]\s*)?(.+?)\s*\|\s*(.+?)\s*\|\s*(.+)/#
+    let bulletNamePattern = #/^[-*]\s+(.+?)(?:\s*[·•]\s*|\s+)([a-z0-9][\w.-]*|[0-9A-F-]{20,})$/#
+
+    for rawLine in section.split(separator: "\n", omittingEmptySubsequences: false) {
+      let line = rawLine.trimmingCharacters(in: .whitespacesAndNewlines)
+      if line.isEmpty { continue }
+
+      if line.hasPrefix("#") { continue }
+
+      if let match = line.firstMatch(of: keyNamePattern) {
+        commit()
+        current = (
+          key: String(match.1).trimmingCharacters(in: .whitespacesAndNewlines),
+          name: String(match.2).trimmingCharacters(in: .whitespacesAndNewlines),
+          fragment: ""
+        )
+        continue
+      }
+
+      if line.contains("|"), let match = line.firstMatch(of: pipePattern) {
+        commit()
+        current = (
+          key: String(match.1).trimmingCharacters(in: .whitespacesAndNewlines),
+          name: String(match.2).trimmingCharacters(in: .whitespacesAndNewlines),
+          fragment: String(match.3).trimmingCharacters(in: .whitespacesAndNewlines)
+        )
+        continue
+      }
+
+      if line.contains("原文摘录") || line.hasPrefix("摘录：") || line.hasPrefix("摘录:")
+        || line.hasPrefix("- 摘录")
+      {
+        let value =
+          line.split(whereSeparator: { $0 == "：" || $0 == ":" }).dropFirst().joined(
+            separator: ":"
+          )
+        let fragment = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        if current != nil, !fragment.isEmpty {
+          if !current!.fragment.isEmpty { current!.fragment += " " }
+          current!.fragment += fragment
+        }
+        continue
+      }
+
+      if line.hasPrefix("-") || line.hasPrefix("*") {
+        let body = line.drop(while: { $0 == "-" || $0 == "*" || $0.isWhitespace })
+        if let match = String(body).firstMatch(of: bulletNamePattern) {
+          commit()
+          current = (key: String(match.2), name: String(match.1), fragment: "")
+          continue
+        }
+        // Nested fragment under current item.
+        if current != nil {
+          let text = String(body)
+          if !current!.fragment.isEmpty { current!.fragment += " " }
+          current!.fragment += text
+        }
+        continue
+      }
+
+      if current != nil {
+        if !current!.fragment.isEmpty { current!.fragment += " " }
+        current!.fragment += line
+      }
+    }
+    commit()
+
+    // Deduplicate by key while preserving order.
+    var seen = Set<String>()
+    return citations.filter { citation in
+      seen.insert(citation.key).inserted
+    }
   }
 
   /// Home-entry chat: seed from joined nodes, then a small pack sample.

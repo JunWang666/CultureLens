@@ -40,8 +40,7 @@ struct UserKnowledgeGraphView: View {
                 ProgressView("正在生成文化图谱…")
             }
         }
-        .navigationTitle("图谱")
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle("图谱", showsBackButton: false)
         .task {
             guard knowledgeStore == nil else { return }
             knowledgeStore = await KnowledgePackLoader.shared.store()

@@ -254,10 +254,24 @@ nonisolated struct LLMGatewayClient: Sendable {
 
     var modelIdentifier = config.model
     var assembled = ""
+    var sawSSE = false
+    var sawThinking = false
+    var rawBuffer = Data()
+
     for try await line in bytes.lines {
       try Task.checkCancellation()
       let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+
+      // Some gateways ignore stream=true and return one JSON object.
+      if !sawSSE, !trimmed.hasPrefix("data:"), !trimmed.isEmpty {
+        if let chunkData = (trimmed + "\n").data(using: .utf8) {
+          rawBuffer.append(chunkData)
+        }
+        continue
+      }
+
       guard trimmed.hasPrefix("data:") else { continue }
+      sawSSE = true
       let payload = trimmed.dropFirst(5).trimmingCharacters(in: .whitespaces)
       if payload == "[DONE]" { break }
       guard let data = payload.data(using: .utf8) else { continue }
@@ -267,10 +281,50 @@ nonisolated struct LLMGatewayClient: Sendable {
       if let model = chunk.model, !model.isEmpty {
         modelIdentifier = model
       }
-      let delta = chunk.choices.first?.delta.content ?? ""
-      guard !delta.isEmpty else { continue }
-      assembled += delta
+
+      let delta = chunk.choices.first?.delta
+      let contentDelta = delta?.content ?? ""
+      let reasoningDelta = delta?.reasoningContent ?? ""
+
+      // DeepSeek-style models stream reasoning before answer content.
+      if assembled.isEmpty, !reasoningDelta.isEmpty, !sawThinking {
+        sawThinking = true
+        continuation.yield(.thinking)
+      }
+
+      guard !contentDelta.isEmpty else { continue }
+      assembled += contentDelta
       continuation.yield(.delta(assembled))
+    }
+
+    if assembled.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+      !rawBuffer.isEmpty
+    {
+      // Non-SSE fallback: whole completion JSON arrived as buffered lines.
+      if let completion = try? JSONDecoder().decode(
+        ChatCompletionResponse.self,
+        from: rawBuffer
+      ),
+        let content = completion.choices.first?.message.content,
+        !content.isEmpty
+      {
+        modelIdentifier = completion.model ?? modelIdentifier
+        // Reveal progressively so the UI still streams when the gateway buffers.
+        let step = max(8, content.count / 24)
+        var end = content.index(content.startIndex, offsetBy: step, limitedBy: content.endIndex)
+          ?? content.endIndex
+        while true {
+          try Task.checkCancellation()
+          let snapshot = String(content[content.startIndex..<end])
+          continuation.yield(.delta(snapshot))
+          if end == content.endIndex { break }
+          try await Task.sleep(for: .milliseconds(18))
+          end =
+            content.index(end, offsetBy: step, limitedBy: content.endIndex)
+            ?? content.endIndex
+        }
+        assembled = content
+      }
     }
 
     if assembled.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -356,6 +410,8 @@ nonisolated struct ChatTurn: Sendable, Hashable {
 }
 
 nonisolated enum ChatStreamEvent: Sendable {
+  /// Upstream is producing reasoning tokens; answer content has not started yet.
+  case thinking
   case delta(String)
   case finished(modelIdentifier: String, content: String)
 }
@@ -410,6 +466,12 @@ private nonisolated struct ChatStreamChunk: Decodable {
 
   struct Delta: Decodable {
     let content: String?
+    let reasoningContent: String?
+
+    enum CodingKeys: String, CodingKey {
+      case content
+      case reasoningContent = "reasoning_content"
+    }
   }
 }
 

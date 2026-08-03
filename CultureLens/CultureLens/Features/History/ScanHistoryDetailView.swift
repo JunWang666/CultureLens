@@ -20,8 +20,7 @@ struct ScanHistoryDetailView: View {
                 ContentUnavailableView("找不到扫描记录", systemImage: "clock.badge.questionmark")
             }
         }
-        .navigationTitle(record?.canonicalName ?? "历史扫描")
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle(record?.canonicalName ?? "历史扫描")
         .task(id: record?.imageRelativePath) {
             imageData = await ScanMediaStore.shared.data(for: record?.imageRelativePath)
         }

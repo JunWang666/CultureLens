@@ -66,8 +66,7 @@ struct ConceptDetailView: View {
                 )
             }
         }
-        .navigationTitle(concept.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle(concept.name)
     }
 }
 

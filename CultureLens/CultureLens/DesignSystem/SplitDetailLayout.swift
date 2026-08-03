@@ -34,14 +34,16 @@ struct SplitDetailLayout<Leading: View, Trailing: View>: View {
                             VStack(alignment: .leading, spacing: 24) {
                                 trailing(true)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            // minWidth: 0 lets wide children (e.g. graph canvas)
+                            // compress instead of pushing the trailing column off-screen.
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 24) {
                             leading(false)
                             trailing(false)
                         }
-                        .frame(maxWidth: contentMaxWidth ?? .infinity, alignment: .leading)
+                        .frame(minWidth: 0, maxWidth: contentMaxWidth ?? .infinity, alignment: .leading)
                     }
                 }
                 .padding(.horizontal, CultureTheme.pagePadding)

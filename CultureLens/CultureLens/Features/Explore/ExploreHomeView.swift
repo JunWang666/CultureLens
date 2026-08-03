@@ -42,8 +42,7 @@ struct ExploreHomeView: View {
         .padding(.bottom, 40)
       }
     }
-    .navigationTitle("探索")
-    .navigationBarTitleDisplayMode(.inline)
+    .cultureNavigationTitle("探索", showsBackButton: false)
     .task(id: reloadID) {
       await loadRecommendations()
     }

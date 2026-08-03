@@ -66,22 +66,28 @@ final class KnowledgeProgressStore {
     reload()
   }
 
-  func isInGraph(_ nodeID: UUID) -> Bool {
-    entriesByID[nodeID] != nil
+  func isInGraph(_ nodeID: UUID, elementKey: String? = nil) -> Bool {
+    entry(for: nodeID, elementKey: elementKey) != nil
   }
 
-  func level(for nodeID: UUID) -> KnowledgeLevel? {
-    entriesByID[nodeID]?.level
+  func level(for nodeID: UUID, elementKey: String? = nil) -> KnowledgeLevel? {
+    entry(for: nodeID, elementKey: elementKey)?.level
   }
 
-  func entry(for nodeID: UUID) -> KnowledgeProgressEntry? {
-    entriesByID[nodeID]
+  /// Resolves by node ID first, then by shared knowledge-pack element key so the
+  /// same attraction is treated as one graph node across scans.
+  func entry(for nodeID: UUID, elementKey: String? = nil) -> KnowledgeProgressEntry? {
+    if let entry = entriesByID[nodeID] {
+      return entry
+    }
+    guard let elementKey, !elementKey.isEmpty else { return nil }
+    return entriesByID.values.first { $0.elementKey == elementKey }
   }
 
   /// Binary join/leave kept for graph UI; joining defaults to `.contact`.
   func toggleGraphMembership(_ nodeID: UUID, elementKey: String? = nil) {
-    if isInGraph(nodeID) {
-      remove(nodeID)
+    if isInGraph(nodeID, elementKey: elementKey) {
+      remove(nodeID, elementKey: elementKey)
     } else {
       setLevel(.contact, for: nodeID, source: .manual, elementKey: elementKey)
     }
@@ -94,9 +100,11 @@ final class KnowledgeProgressStore {
     elementKey: String? = nil
   ) {
     let now = Date()
-    var entry = entriesByID[nodeID]
+    let existing = entry(for: nodeID, elementKey: elementKey)
+    let storedID = existing?.nodeID ?? nodeID
+    var entry = existing
       ?? KnowledgeProgressEntry(
-        nodeID: nodeID,
+        nodeID: storedID,
         level: level,
         updatedAt: now,
         source: source,
@@ -108,14 +116,15 @@ final class KnowledgeProgressStore {
     if let elementKey {
       entry.elementKey = elementKey
     }
-    entriesByID[nodeID] = entry
+    entriesByID[storedID] = entry
     persist(entry)
   }
 
-  func remove(_ nodeID: UUID) {
-    entriesByID.removeValue(forKey: nodeID)
+  func remove(_ nodeID: UUID, elementKey: String? = nil) {
+    let storedID = entry(for: nodeID, elementKey: elementKey)?.nodeID ?? nodeID
+    entriesByID.removeValue(forKey: storedID)
     guard let modelContext else { return }
-    let predicate = #Predicate<KnowledgeProgressRecord> { $0.nodeID == nodeID }
+    let predicate = #Predicate<KnowledgeProgressRecord> { $0.nodeID == storedID }
     var descriptor = FetchDescriptor<KnowledgeProgressRecord>(predicate: predicate)
     descriptor.fetchLimit = 1
     if let existing = try? modelContext.fetch(descriptor).first {

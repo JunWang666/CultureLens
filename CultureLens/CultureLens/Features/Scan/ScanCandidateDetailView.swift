@@ -7,8 +7,8 @@ struct ScanCandidateDetailView: View {
     private let contentService: CultureContentService
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
     @State private var isSaving = false
-    @State private var isSaved = false
     @State private var saveError: String?
     @State private var introductionState: CandidateIntroductionState = .idle
 
@@ -28,6 +28,17 @@ struct ScanCandidateDetailView: View {
             result.summary = displaySummary
         }
         return result
+    }
+
+    private var attractionElementKey: String? {
+        candidate.attractionKey ?? object.culturalElementKey
+    }
+
+    private var isInCultureGraph: Bool {
+        knowledgeProgressStore.isInGraph(
+            object.id,
+            elementKey: attractionElementKey
+        )
     }
 
     private var loadedIntroductions: [AttractionIntroductionRecommendation] {
@@ -79,8 +90,7 @@ struct ScanCandidateDetailView: View {
                 saveAction
             }
         }
-        .navigationTitle("候选详情")
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle("候选详情")
         .alert(
             "无法保存",
             isPresented: Binding(
@@ -241,16 +251,18 @@ struct ScanCandidateDetailView: View {
                     .frame(maxWidth: .infinity)
             } else {
                 Label(
-                    isSaved ? "已加入扫描历史" : "确认候选并保存",
-                    systemImage: isSaved ? "checkmark.circle.fill" : "map"
+                    isInCultureGraph ? "已加入文化图谱" : "确认候选并加入文化图谱",
+                    systemImage: isInCultureGraph
+                        ? "checkmark.circle.fill"
+                        : "point.3.connected.trianglepath.dotted"
                 )
                 .frame(maxWidth: .infinity)
             }
         }
         .buttonStyle(.borderedProminent)
-        .tint(isSaved ? .green : CultureTheme.cinnabar)
+        .tint(isInCultureGraph ? .green : CultureTheme.cinnabar)
         .controlSize(.large)
-        .disabled(isSaving || isSaved || displaySummary == nil)
+        .disabled(isSaving || isInCultureGraph || displaySummary == nil)
         .accessibilityIdentifier("candidate.save")
     }
 
@@ -289,7 +301,12 @@ struct ScanCandidateDetailView: View {
                 )
                 modelContext.insert(record)
                 try modelContext.save()
-                isSaved = true
+                knowledgeProgressStore.setLevel(
+                    .contact,
+                    for: object.id,
+                    source: .manual,
+                    elementKey: attractionElementKey
+                )
             } catch {
                 saveError = error.localizedDescription
             }
@@ -350,5 +367,6 @@ private enum CandidateIntroductionState {
             }
         )
     }
+    .environment(KnowledgeProgressStore())
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
 }

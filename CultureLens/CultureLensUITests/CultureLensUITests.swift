@@ -53,7 +53,7 @@ final class CultureLensUITests: XCTestCase {
         XCTAssertTrue(save.waitForExistence(timeout: 3))
         XCTAssertTrue(save.isHittable)
         save.tap()
-        XCTAssertTrue(app.staticTexts["已加入扫描历史"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["已加入文化图谱"].waitForExistence(timeout: 3))
     }
 
     @MainActor

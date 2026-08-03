@@ -154,6 +154,17 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
+  /// Best-effort reverse lookup when a citation URL only carries a display name.
+  func elementKey(matchingName name: String) -> String? {
+    let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty else { return nil }
+    if let exact = elementsByKey.first(where: { $0.value.name == trimmed })?.key {
+      return exact
+    }
+    return elementsByKey.first(where: { $0.value.name.contains(trimmed) || trimmed.contains($0.value.name) })?
+      .key
+  }
+
   /// Rich introduction for detail pages; falls back to `nil` when unresolved.
   func introductionDocument(elementKey: String) -> RichTextDocument? {
     elementsByKey[elementKey]?.introduction

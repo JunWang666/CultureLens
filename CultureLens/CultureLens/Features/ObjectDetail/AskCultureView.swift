@@ -1,6 +1,7 @@
 import Combine
 import SwiftUI
 import SwiftStreamingMarkdown
+import UIKit
 
 struct AskCultureView: View {
   let object: CultureObject?
@@ -9,6 +10,8 @@ struct AskCultureView: View {
   @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
   @StateObject private var model = AskCultureChatModel()
   @FocusState private var isComposerFocused: Bool
+  @State private var composerTextHeight: CGFloat = 36
+  @State private var selectedCitationKey: String?
 
   private var isGeneralChat: Bool { object == nil }
   private let chatService = CultureChatService.live()
@@ -22,19 +25,12 @@ struct AskCultureView: View {
         composer
       }
     }
-    .navigationTitle(isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"))
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      ToolbarItem(placement: .principal) {
-        VStack(spacing: 2) {
-          Text(isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"))
-            .font(.headline)
-          Text("知识库约束 · 流式回答")
-            .font(.caption2)
-            .foregroundStyle(CultureTheme.inkSecondary)
-        }
-      }
-    }
+    .cultureNavigationTitle(
+      isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"),
+      subtitle: model.isSending
+        ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
+        : "知识库约束"
+    )
     .onAppear {
       model.configure(
         object: object,
@@ -42,6 +38,20 @@ struct AskCultureView: View {
         chatService: chatService,
         knowledgeProgressStore: knowledgeProgressStore
       )
+    }
+    .environment(\.openURL, OpenURLAction { url in
+      if let key = CultureCiteURL.elementKey(from: url) {
+        selectedCitationKey = key
+        return .handled
+      }
+      return .systemAction(url)
+    })
+    .navigationDestination(item: $selectedCitationKey) { key in
+      if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
+        ConceptDetailView(concept: concept, elementKey: key)
+      } else {
+        ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
+      }
     }
   }
 
@@ -75,7 +85,7 @@ struct AskCultureView: View {
       }
       .scrollDismissesKeyboard(.interactively)
       .onChange(of: model.scrollTick) { _, _ in
-        withAnimation(.easeOut(duration: 0.2)) {
+        withAnimation(.easeOut(duration: 0.18)) {
           proxy.scrollTo("bottom", anchor: .bottom)
         }
       }
@@ -90,7 +100,7 @@ struct AskCultureView: View {
 
       Text(
         isGeneralChat
-          ? "回答会流式渲染，并尽量标注知识库引用来源。"
+          ? "回答会流式渲染，引用整理成卡片展示。"
           : "围绕当前对象与图谱邻居提问；内容约束在知识库片段内。"
       )
       .font(.subheadline)
@@ -119,7 +129,7 @@ struct AskCultureView: View {
     HStack(alignment: .bottom, spacing: 8) {
       if message.role == .user { Spacer(minLength: 36) }
 
-      VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 6) {
+      VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 8) {
         Group {
           switch message.role {
           case .user:
@@ -127,38 +137,32 @@ struct AskCultureView: View {
               .font(.body)
               .foregroundStyle(.white)
               .multilineTextAlignment(.leading)
+              .padding(.horizontal, 14)
+              .padding(.vertical, 10)
+              .background(
+                CultureTheme.cinnabar,
+                in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+              )
           case .assistant:
-            if let source = message.streamSource, message.isStreaming {
-              StreamedMarkdownView(source: source, config: Self.markdownConfig)
-            } else if !message.text.isEmpty {
-              MarkdownView(text: message.text, config: Self.markdownConfig)
-            } else {
-              HStack(spacing: 8) {
-                ProgressView()
-                Text("正在组织回答…")
-                  .font(.subheadline)
-                  .foregroundStyle(CultureTheme.inkSecondary)
+            assistantContent(message)
+              .padding(.horizontal, 14)
+              .padding(.vertical, 10)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .background(
+                CultureTheme.surface,
+                in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+              )
+              .overlay {
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                  .stroke(CultureTheme.hairline, lineWidth: 1)
               }
-            }
-          }
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .background(
-          message.role == .user
-            ? CultureTheme.cinnabar
-            : CultureTheme.surface,
-          in: RoundedRectangle(cornerRadius: 18, style: .continuous)
-        )
-        .overlay {
-          if message.role == .assistant {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-              .stroke(CultureTheme.hairline, lineWidth: 1)
           }
         }
 
         if message.role == .assistant, !message.citations.isEmpty, !message.isStreaming {
-          citationStrip(message.citations)
+          KnowledgeCitationCardsView(citations: message.citations) { citation in
+            selectedCitationKey = citation.key
+          }
         }
       }
 
@@ -166,72 +170,138 @@ struct AskCultureView: View {
     }
   }
 
-  private func citationStrip(_ citations: [KnowledgeCitation]) -> some View {
-    VStack(alignment: .leading, spacing: 6) {
-      Text("引用来源")
-        .font(.caption.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkSecondary)
-      ForEach(citations.prefix(4)) { citation in
-        Text("\(citation.name) · \(citation.key)")
-          .font(.caption2.weight(.semibold))
-        Text(citation.fragment)
-          .font(.caption2)
+  @ViewBuilder
+  private func assistantContent(_ message: AskChatMessage) -> some View {
+    if message.isStreaming, message.isThinking {
+      ThinkingStatusView()
+    } else if let source = message.streamSource, message.isStreaming {
+      // Stable identity: do not recreate this view while tokens arrive.
+      StreamedMarkdownView(source: source, config: Self.markdownConfig)
+        .id("stream-\(message.id)")
+    } else if !message.text.isEmpty {
+      MarkdownView(text: message.text, config: Self.markdownConfig)
+    } else {
+      HStack(spacing: 8) {
+        ProgressView()
+        Text("正在组织回答…")
+          .font(.subheadline)
           .foregroundStyle(CultureTheme.inkSecondary)
-          .lineLimit(3)
       }
     }
-    .padding(10)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.antiqueGold.opacity(0.08),
-      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-    )
   }
 
+  /// ChatGPT-style pill composer: + | field | microphone | voice/send.
   private var composer: some View {
     VStack(spacing: 0) {
-      Divider().overlay(CultureTheme.hairline)
-      HStack(alignment: .bottom, spacing: 10) {
-        TextField(
-          isGeneralChat ? "问一个文化问题" : "问一个关于它的问题",
-          text: $model.draft,
-          axis: .vertical
-        )
-        .focused($isComposerFocused)
-        .lineLimit(1...5)
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .background(
-          CultureTheme.surface,
-          in: RoundedRectangle(cornerRadius: 20, style: .continuous)
-        )
-        .overlay {
-          RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .stroke(CultureTheme.hairline, lineWidth: 1)
+      HStack(alignment: .bottom, spacing: 8) {
+        Button {
+          isComposerFocused = true
+          if model.draft.isEmpty, let first = model.suggestions.first {
+            model.draft = first
+          }
+        } label: {
+          Image(systemName: "plus")
+            .font(.system(size: 21, weight: .regular))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .frame(width: 34, height: 36)
+            .contentShape(Rectangle())
         }
-        .disabled(chatService == nil || model.isSending)
+        .buttonStyle(.plain)
+        .accessibilityLabel("快捷提问")
+
+        ChatComposerTextView(
+          text: $model.draft,
+          isFocused: Binding(
+            get: { isComposerFocused },
+            set: { isComposerFocused = $0 }
+          ),
+          measuredHeight: $composerTextHeight,
+          placeholder: isGeneralChat ? "询问 CultureLens" : "继续追问…",
+          isEnabled: chatService != nil && !model.isSending,
+          onSend: {
+            Task { await model.send() }
+          }
+        )
+        .frame(height: composerTextHeight)
 
         Button {
-          Task { await model.send() }
+          isComposerFocused = true
         } label: {
-          Image(systemName: "arrow.up.circle.fill")
-            .font(.system(size: 32))
-            .symbolRenderingMode(.hierarchical)
-            .foregroundStyle(
-              model.canSend ? CultureTheme.cinnabar : CultureTheme.inkSecondary.opacity(0.35)
-            )
+          Image(systemName: "mic")
+            .font(.system(size: 20, weight: .medium))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .frame(width: 34, height: 36)
+            .contentShape(Rectangle())
         }
-        .disabled(!model.canSend)
-        .accessibilityLabel("发送")
+        .buttonStyle(.plain)
+        .disabled(chatService == nil || model.isSending)
+        .accessibilityLabel("语音输入")
+        .accessibilityHint("打开输入框后可使用系统听写")
+
+        Button {
+          if model.canSend {
+            Task { await model.send() }
+          } else {
+            isComposerFocused = true
+          }
+        } label: {
+          ZStack {
+            Circle()
+              .fill(Color(red: 0.02, green: 0.47, blue: 0.98))
+
+            if model.canSend {
+              Image(systemName: "arrow.up")
+                .font(.system(size: 17, weight: .bold))
+                .foregroundStyle(.white)
+                .transition(.opacity.combined(with: .scale(scale: 0.8)))
+            } else {
+              ChatVoiceWaveformIcon()
+                .transition(.opacity.combined(with: .scale(scale: 0.8)))
+            }
+          }
+          .frame(width: 36, height: 36)
+          .contentShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .disabled(chatService == nil || model.isSending)
+        .accessibilityLabel(model.canSend ? "发送" : "语音对话")
       }
-      .padding(.horizontal, CultureTheme.pagePadding)
-      .padding(.vertical, 10)
-      .background(.ultraThinMaterial)
+      .animation(.easeOut(duration: 0.16), value: model.canSend)
+      .padding(.leading, 8)
+      .padding(.trailing, 7)
+      .padding(.vertical, 6)
+      .background(
+        CultureTheme.surface,
+        in: RoundedRectangle(cornerRadius: 24, style: .continuous)
+      )
+      .overlay {
+        RoundedRectangle(cornerRadius: 24, style: .continuous)
+          .stroke(CultureTheme.inkPrimary.opacity(0.16), lineWidth: 1)
+      }
+      .padding(.horizontal, 12)
+      .padding(.top, 8)
+      .padding(.bottom, 10)
     }
+    .background(.ultraThinMaterial)
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
     .default.withShouldAnimateText(value: true)
+  }
+}
+
+private struct ChatVoiceWaveformIcon: View {
+  private let barHeights: [CGFloat] = [10, 17, 24, 17, 10]
+
+  var body: some View {
+    HStack(spacing: 3) {
+      ForEach(Array(barHeights.enumerated()), id: \.offset) { _, height in
+        Capsule()
+          .fill(.white)
+          .frame(width: 2.5, height: height)
+      }
+    }
+    .accessibilityHidden(true)
   }
 }
 
@@ -249,6 +319,7 @@ final class AskCultureChatModel: ObservableObject {
   private var rationale = ""
   private var chatService: CultureChatService?
   private weak var knowledgeProgressStore: KnowledgeProgressStore?
+  private var streamTask: Task<Void, Never>?
 
   var suggestions: [String] {
     if object == nil {
@@ -290,13 +361,19 @@ final class AskCultureChatModel: ObservableObject {
     }
     let trimmed = draft.trimmingCharacters(in: .whitespacesAndNewlines)
     guard !trimmed.isEmpty else { return }
+    guard !isSending else { return }
 
     errorMessage = nil
     isSending = true
     draft = ""
 
-    let history = messages.map {
-      ChatTurn(role: $0.role == .user ? .user : .assistant, content: $0.text)
+    let history = messages.compactMap { message -> ChatTurn? in
+      let text = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !text.isEmpty else { return nil }
+      return ChatTurn(
+        role: message.role == .user ? .user : .assistant,
+        content: text
+      )
     }
     messages.append(AskChatMessage(role: .user, text: trimmed))
     bumpScroll()
@@ -309,13 +386,15 @@ final class AskCultureChatModel: ObservableObject {
         role: .assistant,
         text: "",
         isStreaming: true,
+        isThinking: false,
         streamSource: source
       )
     )
     bumpScroll()
 
     do {
-      var finalText = ""
+      var lastScrollCount = 0
+      var hasContent = false
       for try await event in chatService.streamAsk(
         object: object,
         rationale: rationale,
@@ -326,29 +405,43 @@ final class AskCultureChatModel: ObservableObject {
         question: trimmed
       ) {
         switch event {
-        case .delta(let snapshot):
-          finalText = snapshot
-          source.yield(snapshot)
+        case .thinking:
           updateAssistant(id: assistantID) { message in
-            message.text = snapshot
+            message.isThinking = true
           }
           bumpScroll()
+        case .delta(let snapshot):
+          // Only push into the markdown source — mutating message.text
+          // would recreate StreamedMarkdownView and kill the stream.
+          if !hasContent {
+            hasContent = true
+            updateAssistant(id: assistantID) { message in
+              message.isThinking = false
+            }
+          }
+          let body = CultureChatService.displayBody(from: snapshot)
+          source.yield(body.isEmpty ? snapshot : body)
+          if snapshot.count - lastScrollCount > 24 {
+            lastScrollCount = snapshot.count
+            bumpScroll()
+          }
         case .finished(_, let content):
-          finalText = content
-          source.yield(content)
+          let parsed = CultureChatService.parseAnswer(content)
+          source.yield(parsed.body)
           source.finish()
           updateAssistant(id: assistantID) { message in
-            message.text = content
+            message.text = parsed.body
             message.isStreaming = false
+            message.isThinking = false
             message.streamSource = nil
-            message.citations = CultureChatService.extractCitations(from: content)
+            message.citations = parsed.citations
           }
           bumpScroll()
         }
       }
 
       if let object, let key = object.culturalElementKey {
-        let current = knowledgeProgressStore.level(for: object.id)
+        let current = knowledgeProgressStore.level(for: object.id, elementKey: key)
         if current == nil || current == .contact {
           knowledgeProgressStore.setLevel(
             .understand,
@@ -358,10 +451,16 @@ final class AskCultureChatModel: ObservableObject {
           )
         }
       }
-      _ = finalText
     } catch {
       source.finish()
-      messages.removeAll { $0.id == assistantID && $0.text.isEmpty }
+      if let index = messages.firstIndex(where: { $0.id == assistantID }) {
+        if messages[index].text.isEmpty {
+          messages.remove(at: index)
+        } else {
+          messages[index].isStreaming = false
+          messages[index].streamSource = nil
+        }
+      }
       errorMessage = error.localizedDescription
     }
     isSending = false
@@ -387,6 +486,7 @@ struct AskChatMessage: Identifiable, Equatable {
   let role: Role
   var text: String
   var isStreaming: Bool
+  var isThinking: Bool
   var streamSource: GrowingMarkdownSource?
   var citations: [KnowledgeCitation]
 
@@ -395,6 +495,7 @@ struct AskChatMessage: Identifiable, Equatable {
     role: Role,
     text: String,
     isStreaming: Bool = false,
+    isThinking: Bool = false,
     streamSource: GrowingMarkdownSource? = nil,
     citations: [KnowledgeCitation] = []
   ) {
@@ -402,16 +503,189 @@ struct AskChatMessage: Identifiable, Equatable {
     self.role = role
     self.text = text
     self.isStreaming = isStreaming
+    self.isThinking = isThinking
     self.streamSource = streamSource
     self.citations = citations
   }
 
   static func == (lhs: AskChatMessage, rhs: AskChatMessage) -> Bool {
+    // Ignore text while streaming so token updates don't rebuild the bubble.
     lhs.id == rhs.id
       && lhs.role == rhs.role
-      && lhs.text == rhs.text
       && lhs.isStreaming == rhs.isStreaming
+      && lhs.isThinking == rhs.isThinking
+      && (lhs.isStreaming || lhs.text == rhs.text)
       && lhs.citations == rhs.citations
+      && (lhs.streamSource == nil) == (rhs.streamSource == nil)
+  }
+}
+
+/// Animated “正在思考…” while the model streams reasoning_content.
+private struct ThinkingStatusView: View {
+  var body: some View {
+    TimelineView(.animation(minimumInterval: 0.35, paused: false)) { context in
+      let phase = Int(context.date.timeIntervalSinceReferenceDate / 0.35) % 4
+      let dots = String(repeating: ".", count: phase)
+      HStack(spacing: 10) {
+        ThinkingPulseDots()
+        Text("正在思考\(dots)")
+          .font(.subheadline)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .monospacedDigit()
+          .animation(nil, value: phase)
+      }
+      .accessibilityLabel("正在思考")
+    }
+  }
+}
+
+private struct ThinkingPulseDots: View {
+  var body: some View {
+    TimelineView(.animation(minimumInterval: 0.28, paused: false)) { context in
+      let t = context.date.timeIntervalSinceReferenceDate
+      HStack(spacing: 4) {
+        ForEach(0..<3, id: \.self) { index in
+          let wave = (sin(t * 5.2 + Double(index) * 0.85) + 1) / 2
+          Circle()
+            .fill(CultureTheme.cinnabar.opacity(0.35 + 0.55 * wave))
+            .frame(width: 6, height: 6)
+            .scaleEffect(0.75 + 0.45 * wave)
+        }
+      }
+    }
+  }
+}
+
+/// UIKit field so Return/发送 works with Chinese IME (confirm candidate ≠ send).
+private struct ChatComposerTextView: UIViewRepresentable {
+  @Binding var text: String
+  @Binding var isFocused: Bool
+  @Binding var measuredHeight: CGFloat
+  var placeholder: String
+  var isEnabled: Bool
+  var onSend: () -> Void
+
+  func makeCoordinator() -> Coordinator {
+    Coordinator(self)
+  }
+
+  func makeUIView(context: Context) -> UITextView {
+    let view = UITextView()
+    view.delegate = context.coordinator
+    view.backgroundColor = .clear
+    view.textContainerInset = UIEdgeInsets(top: 6, left: 2, bottom: 6, right: 2)
+    view.textContainer.lineFragmentPadding = 0
+    view.font = UIFont.preferredFont(forTextStyle: .body)
+    view.adjustsFontForContentSizeCategory = true
+    view.returnKeyType = .send
+    view.enablesReturnKeyAutomatically = true
+    view.autocorrectionType = .yes
+    view.spellCheckingType = .no
+    view.isScrollEnabled = false
+    view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    view.setContentHuggingPriority(.required, for: .vertical)
+    context.coordinator.placeholderLabel.text = placeholder
+    context.coordinator.placeholderLabel.font = view.font
+    context.coordinator.placeholderLabel.textColor = UIColor.placeholderText
+    context.coordinator.placeholderLabel.numberOfLines = 1
+    view.addSubview(context.coordinator.placeholderLabel)
+    context.coordinator.placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      context.coordinator.placeholderLabel.leadingAnchor.constraint(
+        equalTo: view.leadingAnchor,
+        constant: 2
+      ),
+      context.coordinator.placeholderLabel.topAnchor.constraint(
+        equalTo: view.topAnchor,
+        constant: 6
+      ),
+      context.coordinator.placeholderLabel.trailingAnchor.constraint(
+        lessThanOrEqualTo: view.trailingAnchor,
+        constant: -2
+      ),
+    ])
+    context.coordinator.scheduleHeightUpdate(for: view)
+    return view
+  }
+
+  func updateUIView(_ uiView: UITextView, context: Context) {
+    context.coordinator.parent = self
+    if uiView.text != text {
+      uiView.text = text
+    }
+    uiView.isEditable = isEnabled
+    uiView.isUserInteractionEnabled = isEnabled
+    context.coordinator.placeholderLabel.text = placeholder
+    context.coordinator.placeholderLabel.isHidden = !text.isEmpty
+    context.coordinator.syncFocus(uiView)
+    context.coordinator.scheduleHeightUpdate(for: uiView)
+  }
+
+  final class Coordinator: NSObject, UITextViewDelegate {
+    var parent: ChatComposerTextView
+    let placeholderLabel = UILabel()
+
+    init(_ parent: ChatComposerTextView) {
+      self.parent = parent
+    }
+
+    func syncFocus(_ view: UITextView) {
+      if parent.isFocused {
+        if !view.isFirstResponder { view.becomeFirstResponder() }
+      } else if view.isFirstResponder {
+        view.resignFirstResponder()
+      }
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+      parent.isFocused = true
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+      parent.isFocused = false
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+      parent.text = textView.text ?? ""
+      placeholderLabel.isHidden = !(textView.text ?? "").isEmpty
+      updateHeight(for: textView)
+    }
+
+    func scheduleHeightUpdate(for textView: UITextView) {
+      DispatchQueue.main.async { [weak self, weak textView] in
+        guard let self, let textView else { return }
+        self.updateHeight(for: textView)
+      }
+    }
+
+    private func updateHeight(for textView: UITextView) {
+      guard textView.bounds.width > 0 else { return }
+      textView.isScrollEnabled = false
+      let contentHeight = textView.sizeThatFits(
+        CGSize(width: textView.bounds.width, height: .greatestFiniteMagnitude)
+      ).height
+      let nextHeight = min(max(contentHeight, 36), 96)
+      textView.isScrollEnabled = contentHeight > 96
+
+      if abs(parent.measuredHeight - nextHeight) > 0.5 {
+        parent.measuredHeight = nextHeight
+      }
+    }
+
+    func textView(
+      _ textView: UITextView,
+      shouldChangeTextIn range: NSRange,
+      replacementText text: String
+    ) -> Bool {
+      // Return / 发送: send when not composing IME candidates.
+      if text == "\n" {
+        if textView.markedTextRange == nil {
+          parent.onSend()
+        }
+        return false
+      }
+      return true
+    }
   }
 }
 

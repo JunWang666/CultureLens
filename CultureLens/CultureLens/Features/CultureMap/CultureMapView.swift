@@ -50,8 +50,7 @@ struct CultureMapView: View {
                 .padding(.bottom, 40)
             }
         }
-        .navigationTitle("我的")
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle("我的", showsBackButton: false)
         .onChange(of: selectedRecordID) { _, newValue in
             guard let newValue else { return }
             path.append(.history(newValue))

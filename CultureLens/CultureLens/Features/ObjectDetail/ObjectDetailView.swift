@@ -44,8 +44,7 @@ struct ObjectDetailView: View {
                 )
             }
         }
-        .navigationTitle(object.canonicalName)
-        .navigationBarTitleDisplayMode(.inline)
+        .cultureNavigationTitle(object.canonicalName)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 KnowledgeGraphMembershipButton(

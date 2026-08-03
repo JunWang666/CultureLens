@@ -530,7 +530,7 @@ private struct ScanHelpSheet: View {
                     .accessibilityIdentifier("scan.useSampleImage")
                 }
             }
-            .navigationTitle("扫描帮助")
+            .cultureNavigationTitle("扫描帮助", showsBackButton: false)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完成") {

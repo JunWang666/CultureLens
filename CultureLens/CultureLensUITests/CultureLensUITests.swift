@@ -44,7 +44,7 @@ final class CultureLensUITests: XCTestCase {
         XCTAssertTrue(confirmFocus.waitForExistence(timeout: 5))
         confirmFocus.tap()
 
-        XCTAssertTrue(app.navigationBars["扫描结果"].waitForExistence(timeout: 7))
+        XCTAssertTrue(app.staticTexts["result.title"].waitForExistence(timeout: 7))
 
         let save = app.buttons["result.save"]
         for _ in 0..<8 where !save.isHittable {

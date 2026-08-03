@@ -23,7 +23,7 @@ CultureLens 的识别链路为 App → Go BFF →（PostgreSQL 候选 + prompt �
 
 ## 知识包与分包分发
 
-- 包格式 = 后端 `contentadmin.Bundle` JSON（与 `content/hangzhou-west-lake.v1.json` 同构），由 `CultureLensBackend/cmd/exportknowledge` 从数据库导出，附带 `pack-manifest.json`（packVersion / generatedAt / recordCounts / sha256）。
+- 包格式 = 原后端 `contentadmin.Bundle` JSON 同构；现以仓库内 `Resources/KnowledgePack/` 为源，附带 `pack-manifest.json`（packVersion / generatedAt / recordCounts / sha256）。
 - 分发 = 整库一个 ODR asset pack，tag `knowledge-base`，App Store Connect 托管；**当前为 initial-install 随首装下发**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`），将来移除该 build setting 即切换为按需下载。运行时 `KnowledgePackLoader` 用 `NSBundleResourceRequest` 访问。
 - 回退 = App 内置同内容副本（`Resources/KnowledgePackFallback/`），ODR 不可用或未完成下载时使用，保证离线与首启可用。
 - 多包扩展 = 后续按地域拆分（如 `knowledge-hangzhou`、`knowledge-silkroad` 各自成 tag），loader 按请求地拉取；manifest 字段已预留。

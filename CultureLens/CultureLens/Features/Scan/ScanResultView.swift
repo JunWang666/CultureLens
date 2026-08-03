@@ -33,18 +33,21 @@ struct ScanResultView: View {
         ZStack {
             CulturePageBackground()
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 24) {
-                    imageHeader
-                    identity
-                    CultureRelationGraphView(object: primaryObject)
-                    alternatives
-                    evidenceCard
-                    saveAction
+            SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
+                // 分栏布局下对象名提到左栏顶部（导航栏只显示“扫描结果”）
+                if isWide {
+                    Text(object.canonicalName)
+                        .font(.cultureSerif(.largeTitle))
+                        .foregroundStyle(CultureTheme.inkPrimary)
                 }
-                .padding(.horizontal, CultureTheme.pagePadding)
-                .padding(.top, 16)
-                .padding(.bottom, 40)
+
+                imageHeader(height: isWide ? 340 : 280)
+                identity(showTitle: !isWide)
+            } trailing: { _ in
+                CultureRelationGraphView(object: primaryObject)
+                alternatives
+                evidenceCard
+                saveAction
             }
         }
         .navigationTitle("扫描结果")
@@ -64,9 +67,9 @@ struct ScanResultView: View {
         }
     }
 
-    private var imageHeader: some View {
+    private func imageHeader(height: CGFloat) -> some View {
         DataImageView(data: session.imageData)
-            .frame(height: 280)
+            .frame(height: height)
             .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
             .overlay(alignment: .topLeading) {
                 Label(
@@ -81,7 +84,7 @@ struct ScanResultView: View {
             }
     }
 
-    private var identity: some View {
+    private func identity(showTitle: Bool) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Label(confidenceText, systemImage: confidenceSymbol)
                 .font(.subheadline.weight(.semibold))
@@ -93,9 +96,12 @@ struct ScanResultView: View {
                     .foregroundStyle(CultureTheme.inkSecondary)
             }
 
-            Text(object.canonicalName)
-                .font(.cultureSerif(.largeTitle))
-                .foregroundStyle(CultureTheme.inkPrimary)
+            // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
+            if showTitle {
+                Text(object.canonicalName)
+                    .font(.cultureSerif(.largeTitle))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+            }
 
             Text(
                 [object.category.rawValue, object.timePeriod, object.region]

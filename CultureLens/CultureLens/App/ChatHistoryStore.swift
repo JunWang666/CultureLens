@@ -80,7 +80,7 @@ final class ChatHistoryStore {
     delete(record)
   }
 
-  static func makeTitle(from messages: [PersistedChatMessage], object: CultureObject?) -> String {
+  nonisolated static func makeTitle(from messages: [PersistedChatMessage], object: CultureObject?) -> String {
     if let firstUser = messages.first(where: { $0.role == .user }) {
       let trimmed = firstUser.text.trimmingCharacters(in: .whitespacesAndNewlines)
       if !trimmed.isEmpty {

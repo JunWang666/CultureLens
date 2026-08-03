@@ -25,6 +25,20 @@ nonisolated struct KnowledgeGraphElement: Sendable, Equatable {
   let key: String
   let name: String
   let introduction: RichTextDocument
+  /// Optional `ConceptKind.rawValue` from the knowledge pack.
+  let conceptKind: String?
+
+  init(
+    key: String,
+    name: String,
+    introduction: RichTextDocument,
+    conceptKind: String? = nil
+  ) {
+    self.key = key
+    self.name = name
+    self.introduction = introduction
+    self.conceptKind = conceptKind
+  }
 }
 
 nonisolated struct KnowledgeGraphRelation: Sendable, Equatable {

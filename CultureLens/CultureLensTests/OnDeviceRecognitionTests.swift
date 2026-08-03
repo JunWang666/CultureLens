@@ -390,8 +390,63 @@ struct OnDeviceRecognitionTests {
 
     #expect(pack.version == "test-v1")
     #expect(pack.elements.first?.introduction.plainText == "介绍一。")
+    #expect(pack.elements.first?.conceptKind == nil)
     #expect(pack.introductions.first?.culturalElementKey == "e1")
     #expect(pack.relations.first?.relatedElementKey == "e2")
+    #expect(pack.relations.first?.kind == nil)
+    #expect(pack.relations.first?.explanation == nil)
+  }
+
+  @Test func knowledgePackDecodesOptionalRelationAndConceptTyping() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "test-typed-v1",
+        "elements": [
+          {
+            "key": "e1",
+            "name": "元素一",
+            "conceptKind": "人物",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "介绍一。" }]
+            }
+          },
+          {
+            "key": "e2",
+            "name": "元素二",
+            "conceptKind": "历史",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "介绍二。" }]
+            }
+          }
+        ],
+        "attractions": [],
+        "relations": [
+          {
+            "elementKey": "e1",
+            "relatedElementKey": "e2",
+            "kind": "产生于",
+            "explanation": "元素一的治理实践催生了元素二的历史形态。"
+          }
+        ],
+        "introductions": []
+      }
+      """#.utf8
+    )
+
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    let store = KnowledgeStore(pack: pack)
+    let set = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 6)
+    let root = try #require(set.elements.first { $0.key == "e1" })
+    let edge = try #require(root.graphRelations.first)
+
+    #expect(pack.elements.first?.conceptKind == "人物")
+    #expect(store.cultureConcept(elementKey: "e1")?.kind == .people)
+    #expect(edge.kind == "产生于")
+    #expect(edge.explanation.contains("治理实践"))
+    #expect(root.relatedElements.first?.conceptKind == "历史")
   }
 
   @Test func imageBlockDecodesAndRoundTrips() throws {

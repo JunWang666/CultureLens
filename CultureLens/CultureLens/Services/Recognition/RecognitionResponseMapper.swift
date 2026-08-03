@@ -244,7 +244,7 @@ nonisolated enum RecognitionResponseMapper {
     CultureConcept(
       id: DeterministicID.culturalElement(element.key),
       name: element.name,
-      kind: CulturalElementPresentation.conceptKind(key: element.key, name: element.name),
+      kind: CulturalElementPresentation.conceptKind(element.conceptKind),
       summary: KnowledgeStore.richTextPlainText(element.introduction),
       detail: ""
     )

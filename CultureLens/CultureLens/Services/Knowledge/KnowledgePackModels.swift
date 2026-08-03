@@ -14,11 +14,19 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let key: String
     let name: String
     let introduction: RichTextDocument
+    /// Optional `ConceptKind.rawValue`; omitted in older packs.
+    let conceptKind: String?
 
-    init(key: String, name: String, introduction: RichTextDocument) {
+    init(
+      key: String,
+      name: String,
+      introduction: RichTextDocument,
+      conceptKind: String? = nil
+    ) {
       self.key = key
       self.name = name
       self.introduction = introduction
+      self.conceptKind = conceptKind
     }
   }
 
@@ -35,10 +43,21 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   nonisolated struct Relation: Decodable, Sendable {
     let elementKey: String
     let relatedElementKey: String
+    /// Optional `RelationKind.rawValue`; omitted in older packs.
+    let kind: String?
+    /// Human-readable edge gloss; omitted in older packs.
+    let explanation: String?
 
-    init(elementKey: String, relatedElementKey: String) {
+    init(
+      elementKey: String,
+      relatedElementKey: String,
+      kind: String? = nil,
+      explanation: String? = nil
+    ) {
       self.elementKey = elementKey
       self.relatedElementKey = relatedElementKey
+      self.kind = kind
+      self.explanation = explanation
     }
   }
 

@@ -2,6 +2,7 @@ import MapKit
 import SwiftData
 import SwiftUI
 
+/// Scan footprint map + timeline, edge-to-edge under the system navigation toolbar.
 struct CultureMapView: View {
     enum DisplayMode: String, CaseIterable, Identifiable {
         case map = "地图"
@@ -9,7 +10,7 @@ struct CultureMapView: View {
         var id: Self { self }
     }
 
-    @Binding var path: [AppRoute]
+    var showsBackButton: Bool = false
     let startScan: () -> Void
 
     @Environment(\.modelContext) private var modelContext
@@ -27,45 +28,42 @@ struct CultureMapView: View {
     var body: some View {
         ZStack {
             CulturePageBackground()
+                .ignoresSafeArea()
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 16) {
-                    LanguageSettingsSection()
-
-                    Picker("显示方式", selection: $displayMode) {
-                        ForEach(DisplayMode.allCases) { mode in
-                            Text(LocalizedStringKey(mode.rawValue)).tag(mode)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-
-                    if records.isEmpty {
-                        emptyState
-                    } else if displayMode == .map {
-                        historyMap
-                    } else {
-                        timeline
-                    }
+            Group {
+                if records.isEmpty {
+                    emptyState
+                } else if displayMode == .map {
+                    historyMap
+                        .ignoresSafeArea()
+                } else {
+                    timelineScroll
                 }
-                .padding(.horizontal, CultureTheme.pagePadding)
-                .padding(.top, 16)
-                .padding(.bottom, 40)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .cultureNavigationTitle("我的", showsBackButton: false)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(!showsBackButton)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(value: AppRoute.visitTrips) {
-                    Label("文化回顾", systemImage: "book.pages")
-                }
-                .accessibilityIdentifier("profile.openReview")
+            ToolbarItem(placement: .primaryAction) {
+                displayModePicker
+                    .frame(minWidth: 160, maxWidth: 220)
             }
         }
-        .onChange(of: selectedRecordID) { _, newValue in
-            guard let newValue else { return }
-            path.append(.history(newValue))
-            selectedRecordID = nil
+        .navigationDestination(item: $selectedRecordID) { id in
+            ScanHistoryDetailView(recordID: id)
         }
+    }
+
+    private var displayModePicker: some View {
+        Picker("显示方式", selection: $displayMode) {
+            ForEach(DisplayMode.allCases) { mode in
+                Text(LocalizedStringKey(mode.rawValue)).tag(mode)
+            }
+        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .accessibilityLabel("显示方式")
     }
 
     private var emptyState: some View {
@@ -78,7 +76,7 @@ struct CultureMapView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(CultureTheme.cinnabar)
         }
-        .frame(minHeight: 320)
+        .padding(CultureTheme.pagePadding)
     }
 
     @ViewBuilder
@@ -89,55 +87,49 @@ struct CultureMapView: View {
                 systemImage: "location.slash",
                 description: Text("没有位置的扫描仍可在时间线中查看。")
             )
-            .frame(minHeight: 320)
+            .padding(CultureTheme.pagePadding)
         } else {
-            VStack(alignment: .leading, spacing: 14) {
-                Map(position: $mapPosition, selection: $selectedRecordID) {
-                    ForEach(locatedRecords) { record in
-                        if let latitude = record.latitude, let longitude = record.longitude {
-                            Marker(
-                                record.canonicalName,
-                                systemImage: symbol(for: record),
-                                coordinate: CLLocationCoordinate2D(
-                                    latitude: latitude,
-                                    longitude: longitude
-                                )
+            Map(position: $mapPosition, selection: $selectedRecordID) {
+                ForEach(locatedRecords) { record in
+                    if let latitude = record.latitude, let longitude = record.longitude {
+                        Marker(
+                            record.canonicalName,
+                            systemImage: symbol(for: record),
+                            coordinate: CLLocationCoordinate2D(
+                                latitude: latitude,
+                                longitude: longitude
                             )
-                            .tint(CultureTheme.cinnabar)
-                            .tag(record.recordID)
-                        }
+                        )
+                        .tint(CultureTheme.cinnabar)
+                        .tag(record.recordID)
                     }
                 }
-                .mapStyle(.standard(elevation: .realistic))
-                .frame(height: 390)
-                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .stroke(CultureTheme.hairline, lineWidth: 1)
-                }
-                .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
-
-                Text("点击标记可直接查看对应的扫描记录。")
-                    .font(.caption)
-                    .foregroundStyle(CultureTheme.inkSecondary)
             }
+            .mapStyle(.standard(elevation: .realistic))
+            .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
         }
     }
 
-    private var timeline: some View {
-        LazyVStack(spacing: 14) {
-            ForEach(records) { record in
-                NavigationLink(value: AppRoute.history(record.recordID)) {
-                    historyCard(record)
-                }
-                .buttonStyle(.plain)
-                .contextMenu {
-                    Button("删除记录", role: .destructive) {
-                        delete(record)
+    private var timelineScroll: some View {
+        ScrollView {
+            LazyVStack(spacing: 14) {
+                ForEach(records) { record in
+                    NavigationLink(value: AppRoute.history(record.recordID)) {
+                        historyCard(record)
+                    }
+                    .buttonStyle(.plain)
+                    .contextMenu {
+                        Button("删除记录", role: .destructive) {
+                            delete(record)
+                        }
                     }
                 }
             }
+            .padding(.horizontal, CultureTheme.pagePadding)
+            .padding(.top, 8)
+            .padding(.bottom, 40)
         }
+        .safeAreaPadding(.top, 4)
     }
 
     private func historyCard(_ record: ScanHistoryRecord) -> some View {
@@ -208,7 +200,7 @@ struct CultureMapView: View {
 
 #Preview {
     NavigationStack {
-        CultureMapView(path: .constant([])) {}
+        CultureMapView(showsBackButton: false) {}
     }
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
     .environment(AppLanguageStore())

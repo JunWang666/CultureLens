@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 struct ExploreHomeView: View {
+  let openChat: () -> Void
   let startScan: () -> Void
   private let contentService: CultureContentService
 
@@ -11,9 +12,11 @@ struct ExploreHomeView: View {
 
   init(
     contentService: CultureContentService = .live(),
+    openChat: @escaping () -> Void = {},
     startScan: @escaping () -> Void
   ) {
     self.contentService = contentService
+    self.openChat = openChat
     self.startScan = startScan
   }
 
@@ -145,7 +148,7 @@ struct ExploreHomeView: View {
   }
 
   private var chatInvitation: some View {
-    NavigationLink(value: AppRoute.chat) {
+    Button(action: openChat) {
       HStack(alignment: .center, spacing: 16) {
         VStack(alignment: .leading, spacing: 8) {
           Text("文化问答")
@@ -388,7 +391,9 @@ private struct NearbyIntroductionCard: View {
             )
           ]
         )
-      }
-    ) {}
+      },
+      openChat: {},
+      startScan: {}
+    )
   }
 }

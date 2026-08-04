@@ -53,7 +53,12 @@ struct LocalizedKnowledgeBlocksView: View {
     let language = languageStore.language
     let localization = KnowledgeLocalization(pack: store.pack)
     let introduction = store.introductionDocument(elementKey: elementKey)
-    let sourcePlain = introduction.map { KnowledgeStore.richTextPlainText($0) } ?? ""
+    let sourcePlain: String
+    if let introduction {
+      sourcePlain = KnowledgeStore.richTextPlainText(introduction)
+    } else {
+      sourcePlain = ""
+    }
     let sourceName =
       store.pack.elements.first(where: { $0.key == elementKey })?.name ?? fallbackName
 

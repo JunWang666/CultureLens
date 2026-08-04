@@ -5,17 +5,26 @@ struct AppRootView: View {
     private let recognitionService: RecognitionService
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(AppLanguageStore.self) private var languageStore
     @State private var selectedTab: AppTab = .explore
     @State private var explorePath: [AppRoute] = []
+    @State private var chatPath: [AppRoute] = []
     @State private var scanPath: [AppRoute] = []
     @State private var graphPath: [AppRoute] = []
-    @State private var profilePath: [AppRoute] = []
+    @State private var historyPath: [AppRoute] = []
+    @State private var reviewPath: [AppRoute] = []
+    @State private var settingsPath: [AppRoute] = []
+    @State private var morePath: [AppRoute] = []
     @State private var sessionStore = ScanSessionStore()
     @State private var knowledgeProgressStore = KnowledgeProgressStore()
     @State private var chatHistoryStore = ChatHistoryStore()
     @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
     private var historyRecords: [ScanHistoryRecord]
+
+    private var showsSecondaryTabsInline: Bool {
+        horizontalSizeClass == .regular
+    }
 
     init(recognitionService: RecognitionService? = nil) {
         if let recognitionService {
@@ -31,9 +40,16 @@ struct AppRootView: View {
         TabView(selection: $selectedTab) {
             Tab(AppTab.explore.title, systemImage: AppTab.explore.systemImage, value: .explore) {
                 appStack(path: $explorePath) {
-                    ExploreHomeView {
-                        selectedTab = .scan
-                    }
+                    ExploreHomeView(
+                        openChat: { selectedTab = .chat },
+                        startScan: { selectedTab = .scan }
+                    )
+                }
+            }
+
+            Tab(AppTab.chat.title, systemImage: AppTab.chat.systemImage, value: .chat) {
+                appStack(path: $chatPath) {
+                    AskCultureView(object: nil)
                 }
             }
 
@@ -52,14 +68,25 @@ struct AppRootView: View {
                 }
             }
 
-            Tab(AppTab.profile.title, systemImage: AppTab.profile.systemImage, value: .profile) {
-                appStack(path: $profilePath) {
-                    CultureMapView(path: $profilePath) {
-                        selectedTab = .scan
+            if showsSecondaryTabsInline {
+                // Peer tabs so 足迹 / 文化回顾 / 设置 all stay in the top tab bar.
+                historyTab
+                reviewTab
+                settingsTab
+            } else {
+                // iPhone: only a custom「更多」hub — do not register hidden secondary
+                // tabs, or UIKit synthesizes its own More list.
+                Tab(AppTab.more.title, systemImage: AppTab.more.systemImage, value: .more) {
+                    appStack(path: $morePath) {
+                        MoreHomeView()
                     }
                 }
             }
         }
+        // iPadOS: top tab bar that can expand into a sidebar when width allows.
+        .tabViewStyle(.sidebarAdaptable)
+        .defaultAdaptableTabBarPlacement(.tabBar)
+        .focusedSceneValue(\.selectedAppTab, $selectedTab)
         .tint(CultureTheme.cinnabar)
         .environment(\.recognitionService, recognitionService)
         .environment(knowledgeProgressStore)
@@ -67,8 +94,67 @@ struct AppRootView: View {
         .environment(sessionStore)
         .environment(\.locale, languageStore.locale)
         .id(languageStore.language.rawValue)
+        .onChange(of: horizontalSizeClass) { _, newValue in
+            adaptSelection(for: newValue)
+        }
+        .onChange(of: selectedTab) { _, newValue in
+            guard !showsSecondaryTabsInline, AppTab.secondaryTabs.contains(newValue) else {
+                return
+            }
+            if let route = route(forSecondary: newValue) {
+                morePath = [route]
+            }
+            selectedTab = .more
+        }
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
+        }
+    }
+
+    private var historyTab: some TabContent<AppTab> {
+        Tab(AppTab.history.title, systemImage: AppTab.history.systemImage, value: .history) {
+            appStack(path: $historyPath) {
+                CultureMapView(showsBackButton: false) {
+                    selectedTab = .scan
+                }
+            }
+        }
+    }
+
+    private var reviewTab: some TabContent<AppTab> {
+        Tab(AppTab.review.title, systemImage: AppTab.review.systemImage, value: .review) {
+            appStack(path: $reviewPath) {
+                VisitTripListView(showsBackButton: false)
+            }
+        }
+    }
+
+    private var settingsTab: some TabContent<AppTab> {
+        Tab(AppTab.settings.title, systemImage: AppTab.settings.systemImage, value: .settings) {
+            appStack(path: $settingsPath) {
+                SettingsView(showsBackButton: false)
+            }
+        }
+    }
+
+    private func adaptSelection(for sizeClass: UserInterfaceSizeClass?) {
+        if sizeClass == .compact {
+            if AppTab.secondaryTabs.contains(selectedTab) {
+                morePath = [route(forSecondary: selectedTab)].compactMap { $0 }
+                selectedTab = .more
+            }
+        } else if selectedTab == .more {
+            selectedTab = .history
+            morePath = []
+        }
+    }
+
+    private func route(forSecondary tab: AppTab) -> AppRoute? {
+        switch tab {
+        case .history: .footprint
+        case .review: .visitTrips
+        case .settings: .settings
+        default: nil
         }
     }
 
@@ -139,14 +225,20 @@ struct AppRootView: View {
             }
         case .history(let id):
             ScanHistoryDetailView(recordID: id)
+        case .footprint:
+            CultureMapView(showsBackButton: true) {
+                selectedTab = .scan
+            }
         case .visitTrips:
-            VisitTripListView()
+            VisitTripListView(showsBackButton: true)
         case .visitTrip(let id):
             VisitTripDetailView(tripID: id)
         case .themes:
             ThemeExploreListView()
         case .theme(let key):
             ThemeDetailView(themeKey: key)
+        case .settings:
+            SettingsView(showsBackButton: true)
         }
     }
 

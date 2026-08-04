@@ -6,7 +6,7 @@ CultureLens 是 CultureLens 的端侧化版本：知识库与 LLM prompt 拼接�
 
 - `PROJECT.md`：产品定位、端侧架构与约束。
 - `STATUS.md`：当前阶段、已完成事项、下一步和阻塞项。
-- `design/`：架构与数据流设计文档（含 `0005` 多语言）。
+- `design/`：架构与数据流设计文档（`0005` 多语言；`0006` 抽象阶梯与前置知识讲解、`0007` 图谱渲染整备为待实现计划）。
 - `APP_STORE.md`：App Store Connect 上架与 ODR 分包分发要点。
 
 ## 工作规则

@@ -16,7 +16,7 @@
 
 ## 数据与接口
 
-1. SwiftData `ChatConversationRecord`：会话元数据 + `messagesData`（`[PersistedChatMessage]` JSON）。
+1. `ChatConversationRecord` JSON 列表：会话元数据 + `[PersistedChatMessage]`（文件：Application Support `CultureLens/ChatHistory/conversations.json`）。不走 SwiftData，避免与扫描历史 store 混用导致的 `SIGABRT`。
 2. `ChatMediaStore`：Application Support `CultureLens/Chats/*.jpg`。
 3. `ChatHistoryStore`：按 `objectID?` 查询 / upsert / 删除（删会话时顺带清图片）。
 4. `ChatTurn` 增加可选 `ImageAttachment`；`asAPIMessage()` 产出 OpenAI 多模态 `content` 数组。

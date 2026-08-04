@@ -530,7 +530,7 @@ nonisolated struct ChatTurn: Sendable, Hashable {
     }
     let text =
       content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-      ? "请结合这张图片，在知识库约束内回答。"
+      ? "请结合这张图片，在已提供资料范围内回答。"
       : content
     return [
       "role": role.rawValue,

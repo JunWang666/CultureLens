@@ -2,7 +2,6 @@ import Combine
 import PhotosUI
 import SwiftStreamingMarkdown
 import SwiftUI
-import UIKit
 
 struct AskCultureView: View {
   let object: CultureObject?
@@ -13,7 +12,6 @@ struct AskCultureView: View {
   @Environment(ChatHistoryStore.self) private var chatHistoryStore
   @StateObject private var model = AskCultureChatModel()
   @FocusState private var isComposerFocused: Bool
-  @State private var composerTextHeight: CGFloat = 36
   @State private var selectedCitationKey: String?
   @State private var showHistorySheet = false
   @State private var showAttachMenu = false
@@ -36,7 +34,7 @@ struct AskCultureView: View {
       isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"),
       subtitle: model.isSending
         ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
-        : "知识库约束"
+        : nil
     )
     .toolbar {
       ToolbarItemGroup(placement: .topBarTrailing) {
@@ -97,19 +95,6 @@ struct AskCultureView: View {
         }
       )
       .environment(chatHistoryStore)
-    }
-    .confirmationDialog("添加内容", isPresented: $showAttachMenu, titleVisibility: .visible) {
-      Button("从相册选择图片") {
-        isPickingPhoto = true
-      }
-      if model.pendingImageData != nil {
-        Button("移除已选图片", role: .destructive) {
-          model.clearPendingImage()
-        }
-      }
-      Button("取消", role: .cancel) {}
-    } message: {
-      Text("上传现场照片，结合知识库追问。")
     }
     .photosPicker(
       isPresented: $isPickingPhoto,
@@ -228,18 +213,20 @@ struct AskCultureView: View {
               }
             }
           case .assistant:
-            assistantContent(message)
-              .padding(.horizontal, 14)
-              .padding(.vertical, 10)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .background(
-                CultureTheme.surface,
-                in: RoundedRectangle(cornerRadius: 18, style: .continuous)
-              )
-              .overlay {
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                  .stroke(CultureTheme.hairline, lineWidth: 1)
-              }
+            if assistantHasVisibleBody(message) {
+              assistantContent(message)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                  CultureTheme.surface,
+                  in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+                )
+                .overlay {
+                  RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(CultureTheme.hairline, lineWidth: 1)
+                }
+            }
           }
         }
 
@@ -252,6 +239,13 @@ struct AskCultureView: View {
 
       if message.role == .assistant { Spacer(minLength: 36) }
     }
+  }
+
+  private func assistantHasVisibleBody(_ message: AskChatMessage) -> Bool {
+    if message.isStreaming { return true }
+    if !message.text.isEmpty { return true }
+    // Finished with citations only — skip the empty "正在组织回答…" bubble.
+    return message.citations.isEmpty
   }
 
   @ViewBuilder
@@ -278,7 +272,7 @@ struct AskCultureView: View {
   private var composer: some View {
     VStack(spacing: 0) {
       if let pending = model.pendingImageData {
-        HStack(spacing: 12) {
+        HStack {
           DataImageView(data: pending)
             .frame(width: 56, height: 56)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -286,31 +280,27 @@ struct AskCultureView: View {
               RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(CultureTheme.hairline, lineWidth: 1)
             }
-
-          VStack(alignment: .leading, spacing: 2) {
-            Text("已附图片")
-              .font(.subheadline.weight(.medium))
-              .foregroundStyle(CultureTheme.inkPrimary)
-            Text("发送时一并交给知识库问答")
-              .font(.caption)
-              .foregroundStyle(CultureTheme.inkSecondary)
-          }
+            .overlay(alignment: .topTrailing) {
+              Button {
+                model.clearPendingImage()
+              } label: {
+                Image(systemName: "xmark")
+                  .font(.system(size: 11, weight: .bold))
+                  .foregroundStyle(CultureTheme.inkPrimary)
+                  .frame(width: 24, height: 24)
+                  .background(.regularMaterial, in: Circle())
+              }
+              .buttonStyle(.plain)
+              .accessibilityLabel("移除图片")
+              .offset(x: 8, y: -8)
+            }
 
           Spacer(minLength: 0)
-
-          Button {
-            model.clearPendingImage()
-          } label: {
-            Image(systemName: "xmark.circle.fill")
-              .font(.title3)
-              .foregroundStyle(CultureTheme.inkSecondary)
-          }
-          .buttonStyle(.plain)
-          .accessibilityLabel("移除图片")
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 10)
+        .padding(.horizontal, 14)
+        .padding(.top, 12)
         .padding(.bottom, 4)
+        .transition(.opacity.combined(with: .scale(scale: 0.96, anchor: .bottomLeading)))
       }
 
       HStack(alignment: .bottom, spacing: 8) {
@@ -326,21 +316,63 @@ struct AskCultureView: View {
         .buttonStyle(.plain)
         .disabled(chatService == nil || model.isSending)
         .accessibilityLabel("添加图片")
+        .popover(
+          isPresented: $showAttachMenu,
+          attachmentAnchor: .rect(.bounds),
+          arrowEdge: .bottom
+        ) {
+          VStack(alignment: .leading, spacing: 4) {
+            Button {
+              showAttachMenu = false
+              Task { @MainActor in
+                await Task.yield()
+                isPickingPhoto = true
+              }
+            } label: {
+              Label("从相册选择", systemImage: "photo.on.rectangle")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding(10)
 
-        ChatComposerTextView(
-          text: $model.draft,
-          isFocused: Binding(
-            get: { isComposerFocused },
-            set: { isComposerFocused = $0 }
-          ),
-          measuredHeight: $composerTextHeight,
-          placeholder: isGeneralChat ? "询问 CultureLens" : "继续追问…",
-          isEnabled: chatService != nil && !model.isSending,
-          onSend: {
-            Task { await model.send() }
+            if model.pendingImageData != nil {
+              Divider()
+
+              Button(role: .destructive) {
+                model.clearPendingImage()
+                showAttachMenu = false
+              } label: {
+                Label("移除已选图片", systemImage: "trash")
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                  .contentShape(Rectangle())
+              }
+              .buttonStyle(.plain)
+              .padding(10)
+            }
           }
+          .font(.body)
+          .frame(width: 210)
+          .padding(6)
+          .presentationCompactAdaptation(.popover)
+        }
+
+        TextField(
+          isGeneralChat ? "询问 CultureLens" : "继续追问…",
+          text: $model.draft,
+          axis: .vertical
         )
-        .frame(height: composerTextHeight)
+        .focused($isComposerFocused)
+        .font(.body)
+        .textFieldStyle(.plain)
+        .lineLimit(1...4)
+        .submitLabel(.send)
+        .onSubmit {
+          guard model.canSend else { return }
+          Task { await model.send() }
+        }
+        .frame(minHeight: 36)
+        .disabled(chatService == nil || model.isSending)
 
         Button {
           isComposerFocused = true
@@ -388,23 +420,36 @@ struct AskCultureView: View {
       .padding(.leading, 8)
       .padding(.trailing, 7)
       .padding(.vertical, 6)
-      .background(
-        CultureTheme.surface,
-        in: RoundedRectangle(cornerRadius: 24, style: .continuous)
-      )
-      .overlay {
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-          .stroke(CultureTheme.inkPrimary.opacity(0.16), lineWidth: 1)
-      }
-      .padding(.horizontal, 12)
-      .padding(.top, 8)
-      .padding(.bottom, 10)
     }
-    .background(.ultraThinMaterial)
+    .modifier(ChatComposerGlassStyle())
+    .animation(.easeOut(duration: 0.2), value: model.pendingImageData != nil)
+    .padding(.horizontal, 12)
+    .padding(.top, 8)
+    .padding(.bottom, 10)
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
     .default.withShouldAnimateText(value: true)
+  }
+}
+
+private struct ChatComposerGlassStyle: ViewModifier {
+  @ViewBuilder
+  func body(content: Content) -> some View {
+    if #available(iOS 26.0, *) {
+      content
+        .glassEffect(.regular, in: .rect(cornerRadius: 24))
+    } else {
+      content
+        .background(
+          .ultraThinMaterial,
+          in: RoundedRectangle(cornerRadius: 24, style: .continuous)
+        )
+        .overlay {
+          RoundedRectangle(cornerRadius: 24, style: .continuous)
+            .stroke(CultureTheme.inkPrimary.opacity(0.14), lineWidth: 1)
+        }
+    }
   }
 }
 
@@ -635,6 +680,7 @@ final class AskCultureChatModel: ObservableObject {
 
     errorMessage = nil
     isSending = true
+    defer { isSending = false }
     draft = ""
     pendingImageData = nil
 
@@ -718,10 +764,16 @@ final class AskCultureChatModel: ObservableObject {
           }
         case .finished(_, let content):
           let parsed = CultureChatService.parseAnswer(content)
-          source.yield(parsed.body)
+          // Prefer parsed body; if the model only emitted the citation
+          // section, keep whatever the stream already displayed.
+          let body =
+            parsed.body.isEmpty
+            ? CultureChatService.displayBody(from: source.latest.isEmpty ? content : source.latest)
+            : parsed.body
+          source.yield(body)
           source.finish()
           updateAssistant(id: assistantID) { message in
-            message.text = parsed.body
+            message.text = body
             message.isStreaming = false
             message.isThinking = false
             message.streamSource = nil
@@ -731,6 +783,9 @@ final class AskCultureChatModel: ObservableObject {
         }
       }
 
+      // Clear sending state before SwiftData work so a save failure / debugger
+      // breakpoint cannot leave the subtitle stuck on「正在流式回答…」.
+      isSending = false
       persistConversation()
 
       if let object, let key = object.culturalElementKey {
@@ -747,24 +802,27 @@ final class AskCultureChatModel: ObservableObject {
     } catch {
       source.finish()
       if let index = messages.firstIndex(where: { $0.id == assistantID }) {
-        if messages[index].text.isEmpty {
+        if messages[index].text.isEmpty, messages[index].citations.isEmpty {
           messages.remove(at: index)
         } else {
           messages[index].isStreaming = false
           messages[index].streamSource = nil
+          isSending = false
           persistConversation()
         }
       }
       errorMessage = error.localizedDescription
     }
-    isSending = false
   }
 
   private func persistConversation() {
     let persisted = messages.compactMap { message -> PersistedChatMessage? in
       guard !message.isStreaming else { return nil }
       let text = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
-      if text.isEmpty, message.imageRelativePath == nil { return nil }
+      // Keep assistant turns that only have citation cards.
+      if text.isEmpty, message.imageRelativePath == nil, message.citations.isEmpty {
+        return nil
+      }
       return PersistedChatMessage(
         id: message.id,
         role: message.role == .user ? .user : .assistant,
@@ -774,11 +832,16 @@ final class AskCultureChatModel: ObservableObject {
       )
     }
     guard !persisted.isEmpty else { return }
-    chatHistoryStore?.upsert(
-      conversationID: conversationID,
-      object: object,
-      messages: persisted
-    )
+    guard let chatHistoryStore else { return }
+    do {
+      try chatHistoryStore.upsert(
+        conversationID: conversationID,
+        object: object,
+        messages: persisted
+      )
+    } catch {
+      errorMessage = "对话保存失败：\(error.localizedDescription)"
+    }
   }
 
   private func updateAssistant(id: UUID, mutate: (inout AskChatMessage) -> Void) {
@@ -896,139 +959,6 @@ private struct ThinkingPulseDots: View {
             .scaleEffect(0.75 + 0.45 * wave)
         }
       }
-    }
-  }
-}
-
-/// UIKit field so Return/发送 works with Chinese IME (confirm candidate ≠ send).
-private struct ChatComposerTextView: UIViewRepresentable {
-  @Binding var text: String
-  @Binding var isFocused: Bool
-  @Binding var measuredHeight: CGFloat
-  var placeholder: String
-  var isEnabled: Bool
-  var onSend: () -> Void
-
-  func makeCoordinator() -> Coordinator {
-    Coordinator(self)
-  }
-
-  func makeUIView(context: Context) -> UITextView {
-    let view = UITextView()
-    view.delegate = context.coordinator
-    view.backgroundColor = .clear
-    view.textContainerInset = UIEdgeInsets(top: 6, left: 2, bottom: 6, right: 2)
-    view.textContainer.lineFragmentPadding = 0
-    view.font = UIFont.preferredFont(forTextStyle: .body)
-    view.adjustsFontForContentSizeCategory = true
-    view.returnKeyType = .send
-    view.enablesReturnKeyAutomatically = true
-    view.autocorrectionType = .yes
-    view.spellCheckingType = .no
-    view.isScrollEnabled = false
-    view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    view.setContentHuggingPriority(.required, for: .vertical)
-    context.coordinator.placeholderLabel.text = placeholder
-    context.coordinator.placeholderLabel.font = view.font
-    context.coordinator.placeholderLabel.textColor = UIColor.placeholderText
-    context.coordinator.placeholderLabel.numberOfLines = 1
-    view.addSubview(context.coordinator.placeholderLabel)
-    context.coordinator.placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      context.coordinator.placeholderLabel.leadingAnchor.constraint(
-        equalTo: view.leadingAnchor,
-        constant: 2
-      ),
-      context.coordinator.placeholderLabel.topAnchor.constraint(
-        equalTo: view.topAnchor,
-        constant: 6
-      ),
-      context.coordinator.placeholderLabel.trailingAnchor.constraint(
-        lessThanOrEqualTo: view.trailingAnchor,
-        constant: -2
-      ),
-    ])
-    context.coordinator.scheduleHeightUpdate(for: view)
-    return view
-  }
-
-  func updateUIView(_ uiView: UITextView, context: Context) {
-    context.coordinator.parent = self
-    if uiView.text != text {
-      uiView.text = text
-    }
-    uiView.isEditable = isEnabled
-    uiView.isUserInteractionEnabled = isEnabled
-    context.coordinator.placeholderLabel.text = placeholder
-    context.coordinator.placeholderLabel.isHidden = !text.isEmpty
-    context.coordinator.syncFocus(uiView)
-    context.coordinator.scheduleHeightUpdate(for: uiView)
-  }
-
-  final class Coordinator: NSObject, UITextViewDelegate {
-    var parent: ChatComposerTextView
-    let placeholderLabel = UILabel()
-
-    init(_ parent: ChatComposerTextView) {
-      self.parent = parent
-    }
-
-    func syncFocus(_ view: UITextView) {
-      if parent.isFocused {
-        if !view.isFirstResponder { view.becomeFirstResponder() }
-      } else if view.isFirstResponder {
-        view.resignFirstResponder()
-      }
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-      parent.isFocused = true
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-      parent.isFocused = false
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-      parent.text = textView.text ?? ""
-      placeholderLabel.isHidden = !(textView.text ?? "").isEmpty
-      updateHeight(for: textView)
-    }
-
-    func scheduleHeightUpdate(for textView: UITextView) {
-      DispatchQueue.main.async { [weak self, weak textView] in
-        guard let self, let textView else { return }
-        self.updateHeight(for: textView)
-      }
-    }
-
-    private func updateHeight(for textView: UITextView) {
-      guard textView.bounds.width > 0 else { return }
-      textView.isScrollEnabled = false
-      let contentHeight = textView.sizeThatFits(
-        CGSize(width: textView.bounds.width, height: .greatestFiniteMagnitude)
-      ).height
-      let nextHeight = min(max(contentHeight, 36), 96)
-      textView.isScrollEnabled = contentHeight > 96
-
-      if abs(parent.measuredHeight - nextHeight) > 0.5 {
-        parent.measuredHeight = nextHeight
-      }
-    }
-
-    func textView(
-      _ textView: UITextView,
-      shouldChangeTextIn range: NSRange,
-      replacementText text: String
-    ) -> Bool {
-      // Return / 发送: send when not composing IME candidates.
-      if text == "\n" {
-        if textView.markedTextRange == nil {
-          parent.onSend()
-        }
-        return false
-      }
-      return true
     }
   }
 }

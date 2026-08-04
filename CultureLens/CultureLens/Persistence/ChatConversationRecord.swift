@@ -1,9 +1,10 @@
 import Foundation
-import SwiftData
 
-@Model
-final class ChatConversationRecord {
-  @Attribute(.unique) var conversationID: UUID
+/// One persisted cultural Q&A thread (general or object-scoped).
+nonisolated struct ChatConversationRecord: Codable, Hashable, Sendable, Identifiable {
+  var id: UUID { conversationID }
+
+  var conversationID: UUID
   var createdAt: Date
   var updatedAt: Date
   /// Derived from the first user message (or a fixed fallback).
@@ -11,7 +12,7 @@ final class ChatConversationRecord {
   /// `nil` = general home chat; otherwise object-scoped follow-up.
   var objectID: UUID?
   var objectName: String?
-  var messagesData: Data
+  var messages: [PersistedChatMessage]
 
   init(
     conversationID: UUID = UUID(),
@@ -20,7 +21,7 @@ final class ChatConversationRecord {
     title: String,
     objectID: UUID? = nil,
     objectName: String? = nil,
-    messagesData: Data = Data()
+    messages: [PersistedChatMessage] = []
   ) {
     self.conversationID = conversationID
     self.createdAt = createdAt
@@ -28,16 +29,7 @@ final class ChatConversationRecord {
     self.title = title
     self.objectID = objectID
     self.objectName = objectName
-    self.messagesData = messagesData
-  }
-
-  var messages: [PersistedChatMessage] {
-    get {
-      (try? JSONDecoder().decode([PersistedChatMessage].self, from: messagesData)) ?? []
-    }
-    set {
-      messagesData = (try? JSONEncoder().encode(newValue)) ?? Data()
-    }
+    self.messages = messages
   }
 
   var previewText: String {
@@ -79,6 +71,26 @@ nonisolated struct PersistedChatMessage: Codable, Hashable, Sendable, Identifiab
     self.imageRelativePath = imageRelativePath
     self.citations = citations
     self.createdAt = createdAt
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case id
+    case role
+    case text
+    case imageRelativePath
+    case citations
+    case createdAt
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(UUID.self, forKey: .id)
+    role = try container.decode(Role.self, forKey: .role)
+    text = try container.decode(String.self, forKey: .text)
+    imageRelativePath = try container.decodeIfPresent(String.self, forKey: .imageRelativePath)
+    // Older rows predate citations — default to empty rather than failing decode.
+    citations = try container.decodeIfPresent([PersistedKnowledgeCitation].self, forKey: .citations) ?? []
+    createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? .now
   }
 }
 

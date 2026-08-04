@@ -14,23 +14,7 @@ struct CultureLensApp: App {
     @State private var languageStore = AppLanguageStore()
 
     init() {
-        do {
-            let schema = Schema([
-                ScanHistoryRecord.self,
-                KnowledgeProgressRecord.self,
-                ChatConversationRecord.self,
-            ])
-            let configuration = ModelConfiguration(
-                "CultureLensHistoryV1",
-                schema: schema
-            )
-            modelContainer = try ModelContainer(
-                for: schema,
-                configurations: [configuration]
-            )
-        } catch {
-            fatalError("Unable to create CultureLens model container: \(error)")
-        }
+        modelContainer = CultureLensModelContainer.make()
     }
 
     var body: some Scene {
@@ -40,5 +24,68 @@ struct CultureLensApp: App {
                 .environment(\.locale, languageStore.locale)
         }
         .modelContainer(modelContainer)
+    }
+}
+
+/// Shared SwiftData stack for scan history + knowledge progress.
+/// Chat history is file-backed (`ChatHistoryStore`) and intentionally excluded —
+/// embedding it here previously caused uncatchable `SIGABRT` on fetch/save.
+enum CultureLensModelContainer {
+    static let storeName = "CultureLensHistoryV3"
+
+    static func make() -> ModelContainer {
+        let schema = Schema([
+            ScanHistoryRecord.self,
+            KnowledgeProgressRecord.self,
+        ])
+
+        do {
+            return try makeContainer(schema: schema, storeName: storeName)
+        } catch {
+            removeStoreFiles(named: storeName)
+            do {
+                return try makeContainer(schema: schema, storeName: storeName)
+            } catch {
+                fatalError("Unable to create CultureLens model container: \(error)")
+            }
+        }
+    }
+
+    private static func makeContainer(schema: Schema, storeName: String) throws -> ModelContainer {
+        let configuration = ModelConfiguration(storeName, schema: schema)
+        return try ModelContainer(for: schema, configurations: [configuration])
+    }
+
+    private static func removeStoreFiles(named storeName: String) {
+        let fileManager = FileManager.default
+        guard
+            let appSupport = try? fileManager.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+            )
+        else { return }
+
+        let candidates = [
+            appSupport.appending(path: storeName),
+            appSupport.appending(path: "\(storeName).store"),
+            appSupport.appending(path: "default.store"),
+        ]
+
+        for url in candidates {
+            try? fileManager.removeItem(at: url)
+            try? fileManager.removeItem(at: URL(fileURLWithPath: url.path + "-shm"))
+            try? fileManager.removeItem(at: URL(fileURLWithPath: url.path + "-wal"))
+        }
+
+        if let contents = try? fileManager.contentsOfDirectory(
+            at: appSupport,
+            includingPropertiesForKeys: nil
+        ) {
+            for url in contents where url.lastPathComponent.contains(storeName) {
+                try? fileManager.removeItem(at: url)
+            }
+        }
     }
 }

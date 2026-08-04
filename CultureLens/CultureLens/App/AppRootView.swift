@@ -69,7 +69,6 @@ struct AppRootView: View {
         .id(languageStore.language.rawValue)
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
-            chatHistoryStore.configure(modelContext: modelContext)
         }
     }
 

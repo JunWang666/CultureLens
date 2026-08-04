@@ -79,21 +79,25 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let name: String
     let introduction: RichTextDocument
     let sources: [Source]
+    /// Optional `ConceptKind.rawValue`; omitted in older packs.
+    let conceptKind: String?
 
     init(
       key: String,
       name: String,
       introduction: RichTextDocument,
-      sources: [Source] = []
+      sources: [Source] = [],
+      conceptKind: String? = nil
     ) {
       self.key = key
       self.name = name
       self.introduction = introduction
       self.sources = sources
+      self.conceptKind = conceptKind
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources
+      case key, name, introduction, sources, conceptKind
     }
 
     init(from decoder: Decoder) throws {
@@ -102,6 +106,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       name = try container.decode(String.self, forKey: .name)
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
+      conceptKind = try container.decodeIfPresent(String.self, forKey: .conceptKind)
     }
   }
 
@@ -118,10 +123,21 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   nonisolated struct Relation: Decodable, Sendable {
     let elementKey: String
     let relatedElementKey: String
+    /// Optional `RelationKind.rawValue`; omitted in older packs.
+    let kind: String?
+    /// Human-readable edge gloss; omitted in older packs.
+    let explanation: String?
 
-    init(elementKey: String, relatedElementKey: String) {
+    init(
+      elementKey: String,
+      relatedElementKey: String,
+      kind: String? = nil,
+      explanation: String? = nil
+    ) {
       self.elementKey = elementKey
       self.relatedElementKey = relatedElementKey
+      self.kind = kind
+      self.explanation = explanation
     }
   }
 

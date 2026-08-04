@@ -56,8 +56,9 @@ nonisolated struct KnowledgeStore: Sendable {
   private let orderedElementKeys: [String]
   private let elementsByKey: [String: KnowledgePack.Element]
   private let elementKeysByID: [UUID: String]
-  /// Undirected relations normalized like `ListCulturalElementRelations`:
-  /// each edge stored as (min, max) and sorted lexicographically.
+  /// Directed pack relations in stable lexicographic order. Endpoint order and
+  /// optional `kind` / `explanation` are preserved so typed edges stay usable
+  /// downstream; adjacency treats them as undirected for BFS.
   private let relations: [KnowledgePack.Relation]
   private let adjacency: [String: [String]]
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
@@ -76,12 +77,6 @@ nonisolated struct KnowledgeStore: Sendable {
       .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
       .map(\.key)
     let normalizedRelations = pack.relations
-      .map {
-        KnowledgePack.Relation(
-          elementKey: min($0.elementKey, $0.relatedElementKey),
-          relatedElementKey: max($0.elementKey, $0.relatedElementKey)
-        )
-      }
       .sorted { ($0.elementKey, $0.relatedElementKey) < ($1.elementKey, $1.relatedElementKey) }
     relations = normalizedRelations
     var adjacencySets: [String: Set<String>] = [:]
@@ -148,7 +143,7 @@ nonisolated struct KnowledgeStore: Sendable {
     return CultureConcept(
       id: DeterministicID.culturalElement(element.key),
       name: element.name,
-      kind: CulturalElementPresentation.conceptKind(key: element.key, name: element.name),
+      kind: CulturalElementPresentation.conceptKind(element.conceptKind),
       summary: Self.richTextPlainText(element.introduction),
       detail: ""
     )
@@ -273,7 +268,7 @@ nonisolated struct KnowledgeStore: Sendable {
         elementKey: key,
         name: element.name,
         summary: Self.richTextPlainText(element.introduction),
-        kind: CulturalElementPresentation.conceptKind(key: key, name: element.name),
+        kind: CulturalElementPresentation.conceptKind(element.conceptKind),
         hop: hops[key] ?? depthLimit + 1,
         isJoined: joinedIDs.contains(id)
       )
@@ -347,7 +342,14 @@ nonisolated struct KnowledgeStore: Sendable {
       .compactMap { elementsByKey[$0] }
       .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
       .prefix(limit)
-      .map { KnowledgeGraphElement(key: $0.key, name: $0.name, introduction: $0.introduction) }
+      .map {
+        KnowledgeGraphElement(
+          key: $0.key,
+          name: $0.name,
+          introduction: $0.introduction,
+          conceptKind: $0.conceptKind
+        )
+      }
   }
 
   // MARK: - Nearby introductions (Haversine, content.sql:209-267)
@@ -584,15 +586,23 @@ nonisolated struct KnowledgeStore: Sendable {
     let graphElements = sortedKeys
       .filter { $0 != rootKey }
       .compactMap { elementsByKey[$0] }
-      .map { KnowledgeGraphElement(key: $0.key, name: $0.name, introduction: $0.introduction) }
+      .map {
+        KnowledgeGraphElement(
+          key: $0.key,
+          name: $0.name,
+          introduction: $0.introduction,
+          conceptKind: $0.conceptKind
+        )
+      }
     let graphRelations = relations.compactMap { relation -> KnowledgeGraphRelation? in
       guard depths[relation.elementKey] != nil, depths[relation.relatedElementKey] != nil
       else { return nil }
       return KnowledgeGraphRelation(
         elementKey: relation.elementKey,
         relatedElementKey: relation.relatedElementKey,
-        kind: "解释",
-        explanation: "文化内容库记录了两个概念之间的显式关联。"
+        kind: relation.kind ?? "解释",
+        explanation: relation.explanation
+          ?? "文化内容库记录了两个概念之间的显式关联。"
       )
     }
     return (graphElements, graphRelations)
@@ -626,7 +636,8 @@ nonisolated struct KnowledgeStore: Sendable {
             KnowledgeGraphElement(
               key: element.key,
               name: element.name,
-              introduction: element.introduction
+              introduction: element.introduction,
+              conceptKind: element.conceptKind
             )
           )
           seenElements.insert(boundKey)

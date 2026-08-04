@@ -46,20 +46,13 @@ nonisolated struct UserKnowledgeGraphSnapshot: Hashable {
 /// Shared presentation rules for knowledge-pack elements. Recognition results
 /// and the global graph use the same classification and text mapping.
 nonisolated enum CulturalElementPresentation {
-  static func conceptKind(key: String, name: String) -> ConceptKind {
-    let normalizedKey = key.lowercased()
-    if normalizedKey.contains("su-shi") || normalizedKey.contains("bai-juyi") {
-      return .people
+  /// Maps an optional pack `conceptKind` string to `ConceptKind`.
+  /// Unknown or missing values fall back to `.foundation` for older packs.
+  static func conceptKind(_ raw: String?) -> ConceptKind {
+    guard let raw, let kind = ConceptKind(rawValue: raw) else {
+      return .foundation
     }
-    if normalizedKey.contains("song") || name.contains("朝") || name.contains("临安") {
-      return .history
-    }
-    if normalizedKey.contains("garden") || normalizedKey.contains("landscape")
-      || normalizedKey.contains("moon")
-    {
-      return .aesthetics
-    }
-    return .foundation
+    return kind
   }
 }
 

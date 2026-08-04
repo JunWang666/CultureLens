@@ -43,6 +43,12 @@
 			membershipExceptions = (
 				"Resources/KnowledgePack/knowledge-pack.json",
 				"Resources/KnowledgePack/pack-manifest.json",
+				"Resources/KnowledgePackChineseHistory/knowledge-pack.json",
+				"Resources/KnowledgePackChineseHistory/pack-manifest.json",
+				"Resources/KnowledgePackLiangzhu/knowledge-pack.json",
+				"Resources/KnowledgePackLiangzhu/pack-manifest.json",
+				"Resources/KnowledgePackZhejiangMuseum/knowledge-pack.json",
+				"Resources/KnowledgePackZhejiangMuseum/pack-manifest.json",
 			);
 			target = E9464E5F3017572B00B357C5 /* CultureLens */;
 		};
@@ -53,6 +59,9 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				C12E0D000000000000000005 /* Exceptions for "CultureLens" folder in "CultureLens" target */,
+			);
+			explicitFolders = (
+				Resources/KnowledgePackFallback,
 			);
 			path = CultureLens;
 			sourceTree = "<group>";

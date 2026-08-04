@@ -332,6 +332,41 @@
     "%@示意图" : {
 
     },
+    "%lld 个相关节点 · 完成需点亮 %lld 个" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld 个相关节点 · 完成需点亮 %2$lld 个"
+          }
+        }
+      }
+    },
+    "%lld 关系" : {
+
+    },
+    "%lld 景点" : {
+
+    },
+    "%lld 次识别" : {
+
+    },
+    "%lld 节点" : {
+
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "CultureLens" : {
+
+    },
     "English" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -348,6 +383,9 @@
           }
         }
       }
+    },
+    "一次参观里，识别被聚合成可回看的文化路径。" : {
+
     },
     "三层关系" : {
       "extractionState" : "manual",
@@ -450,6 +488,9 @@
           }
         }
       }
+    },
+    "不必先扫描。直接问知识库与你的文化图谱；可上传图片，历史对话会保留。" : {
+
     },
     "东亚多地" : {
       "extractionState" : "manual",
@@ -569,6 +610,12 @@
           }
         }
       }
+    },
+    "主题暂不可用" : {
+
+    },
+    "也可能是" : {
+
     },
     "产生于" : {
       "extractionState" : "manual",
@@ -1188,6 +1235,9 @@
         }
       }
     },
+    "其他视觉猜测" : {
+
+    },
     "最终确认" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1238,6 +1288,9 @@
           }
         }
       }
+    },
+    "分享文化卡片" : {
+
     },
     "列表" : {
       "extractionState" : "manual",
@@ -1426,6 +1479,9 @@
         }
       }
     },
+    "历史对话" : {
+
+    },
     "历史扫描" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1530,6 +1586,9 @@
           }
         }
       }
+    },
+    "发送第一条消息后，对话会出现在这里。" : {
+
     },
     "取消" : {
       "extractionState" : "manual",
@@ -1735,6 +1794,9 @@
         }
       }
     },
+    "回答会流式渲染，可上传图片，历史对话会自动保存。" : {
+
+    },
     "回答会流式渲染，引用整理成卡片展示。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1768,6 +1830,9 @@
           }
         }
       }
+    },
+    "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。" : {
+
     },
     "围绕知识库与用户已了解节点自由提问。" : {
       "extractionState" : "manual",
@@ -1956,6 +2021,9 @@
         }
       }
     },
+    "在现场扫描并加入文化图谱，即可推进主题进度。" : {
+
+    },
     "地图" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2041,6 +2109,9 @@
         }
       }
     },
+    "外部资料" : {
+
+    },
     "好" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2125,6 +2196,9 @@
           }
         }
       }
+    },
+    "完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。" : {
+
     },
     "完成一次扫描并确认结果，它会出现在这里。" : {
       "extractionState" : "manual",
@@ -2496,6 +2570,9 @@
     "已识别 · %@" : {
 
     },
+    "已达到完成条件。可以继续点亮其余节点，加深理解。" : {
+
+    },
     "应用内缺少响应结构资源（\\(name)）。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2771,6 +2848,9 @@
     "当前对象，%@" : {
 
     },
+    "当前知识包尚未定义探索主题。" : {
+
+    },
     "当前结果还没有可验证的关系边。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2958,6 +3038,9 @@
         }
       }
     },
+    "打开外部资料：%@" : {
+
+    },
     "打开手电筒" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2991,6 +3074,9 @@
           }
         }
       }
+    },
+    "打开本次参观回顾" : {
+
     },
     "打开概念详情" : {
       "extractionState" : "manual",
@@ -3144,6 +3230,9 @@
           }
         }
       }
+    },
+    "找不到这次参观" : {
+
     },
     "承托出檐与传力" : {
       "extractionState" : "manual",
@@ -3383,6 +3472,9 @@
         }
       }
     },
+    "文化回顾" : {
+
+    },
     "文化图谱状态：\\(currentLevel.rawValue)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3621,6 +3713,9 @@
         }
       }
     },
+    "新对话" : {
+
+    },
     "无法保存" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3790,6 +3885,12 @@
           }
         }
       }
+    },
+    "暂无主题" : {
+
+    },
+    "暂无历史对话" : {
+
     },
     "暂无可展示的景点介绍。" : {
       "extractionState" : "manual",
@@ -4012,6 +4113,9 @@
         }
       }
     },
+    "本次点亮的对象，可直接分享。" : {
+
+    },
     "来源" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4028,6 +4132,9 @@
           }
         }
       }
+    },
+    "来自识别模型的备选判断，与画面特征相关。" : {
+
     },
     "查看候选详情" : {
       "extractionState" : "manual",
@@ -4591,6 +4698,9 @@
           }
         }
       }
+    },
+    "添加图片" : {
+
     },
     "清净象征" : {
       "extractionState" : "manual",
@@ -5230,6 +5340,12 @@
           }
         }
       }
+    },
+    "移除图片" : {
+
+    },
+    "移除已选图片" : {
+
     },
     "空间" : {
       "extractionState" : "manual",
@@ -5963,6 +6079,9 @@
         }
       }
     },
+    "还没有文化回顾" : {
+
+    },
     "这些术语描述斗拱的组合层次、向外挑出的步数与尺度关系。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6064,6 +6183,9 @@
           }
         }
       }
+    },
+    "进度" : {
+
     },
     "连接中断，已保留收到的内容。\\(message)" : {
       "extractionState" : "manual",

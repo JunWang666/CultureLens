@@ -14,6 +14,33 @@ nonisolated struct NearbyAttractionIntroduction: Sendable, Equatable {
   let latitude: Double
   let longitude: Double
   let distanceMeters: Double
+  let sources: [KnowledgePack.Source]
+
+  init(
+    key: String,
+    name: String,
+    introduction: RichTextDocument,
+    culturalElementKey: String,
+    culturalElementName: String,
+    attractionKey: String,
+    attractionName: String,
+    latitude: Double,
+    longitude: Double,
+    distanceMeters: Double,
+    sources: [KnowledgePack.Source] = []
+  ) {
+    self.key = key
+    self.name = name
+    self.introduction = introduction
+    self.culturalElementKey = culturalElementKey
+    self.culturalElementName = culturalElementName
+    self.attractionKey = attractionKey
+    self.attractionName = attractionName
+    self.latitude = latitude
+    self.longitude = longitude
+    self.distanceMeters = distanceMeters
+    self.sources = sources
+  }
 }
 
 nonisolated struct NearbyIntroductionResult: Sendable, Equatable {
@@ -42,6 +69,29 @@ nonisolated struct RecognitionElement: Sendable {
   let relatedElements: [KnowledgeGraphElement]
   let graphElements: [KnowledgeGraphElement]
   let graphRelations: [KnowledgeGraphRelation]
+  /// Trusted external sources for this element (pack `sources` plus linked
+  /// introduction provenance such as Wikipedia / Amap URLs).
+  let sources: [KnowledgePack.Source]
+
+  init(
+    key: String,
+    name: String,
+    introduction: RichTextDocument,
+    nearbyContexts: [NearbyAttractionIntroduction],
+    relatedElements: [KnowledgeGraphElement],
+    graphElements: [KnowledgeGraphElement],
+    graphRelations: [KnowledgeGraphRelation],
+    sources: [KnowledgePack.Source] = []
+  ) {
+    self.key = key
+    self.name = name
+    self.introduction = introduction
+    self.nearbyContexts = nearbyContexts
+    self.relatedElements = relatedElements
+    self.graphElements = graphElements
+    self.graphRelations = graphRelations
+    self.sources = sources
+  }
 }
 
 nonisolated struct AttractionCandidate: Sendable {
@@ -50,6 +100,23 @@ nonisolated struct AttractionCandidate: Sendable {
   let culturalElementKey: String
   let summary: String
   let distanceMeters: Double
+  let sources: [KnowledgePack.Source]
+
+  init(
+    key: String,
+    name: String,
+    culturalElementKey: String,
+    summary: String,
+    distanceMeters: Double,
+    sources: [KnowledgePack.Source] = []
+  ) {
+    self.key = key
+    self.name = name
+    self.culturalElementKey = culturalElementKey
+    self.summary = summary
+    self.distanceMeters = distanceMeters
+    self.sources = sources
+  }
 }
 
 nonisolated struct RecognitionKnowledgeSet: Sendable {

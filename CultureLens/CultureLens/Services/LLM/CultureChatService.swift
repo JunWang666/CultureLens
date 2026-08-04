@@ -158,7 +158,10 @@ nonisolated struct CultureChatService: Sendable {
   /// Splits streamed Markdown into display body + structured citation cards.
   /// The trailing「引用来源」section is removed from the body so it is not
   /// rendered twice (once as Markdown, once as cards).
-  static func parseAnswer(_ markdown: String) -> (body: String, citations: [KnowledgeCitation]) {
+  static func parseAnswer(
+    _ markdown: String,
+    store: KnowledgeStore? = .shared
+  ) -> (body: String, citations: [KnowledgeCitation]) {
     let normalized = markdown.replacingOccurrences(of: "\r\n", with: "\n")
     // Match a standalone "## 引用来源" heading (any level 1–3).
     guard
@@ -175,7 +178,8 @@ nonisolated struct CultureChatService: Sendable {
     else {
       return (
         body: CultureCiteURL.sanitizeInlineCitations(
-          normalized.trimmingCharacters(in: .whitespacesAndNewlines)
+          normalized.trimmingCharacters(in: .whitespacesAndNewlines),
+          store: store
         ),
         citations: []
       )
@@ -183,21 +187,28 @@ nonisolated struct CultureChatService: Sendable {
 
     let body = CultureCiteURL.sanitizeInlineCitations(
       String(normalized[..<headerRange.lowerBound])
-        .trimmingCharacters(in: .whitespacesAndNewlines)
+        .trimmingCharacters(in: .whitespacesAndNewlines),
+      store: store
     )
     let section = String(normalized[headerRange.upperBound...])
-    return (body, parseCitationSection(section))
+    return (body, parseCitationSection(section, store: store))
   }
 
-  static func displayBody(from markdown: String) -> String {
-    parseAnswer(markdown).body
+  static func displayBody(from markdown: String, store: KnowledgeStore? = .shared) -> String {
+    parseAnswer(markdown, store: store).body
   }
 
-  static func extractCitations(from markdown: String) -> [KnowledgeCitation] {
-    parseAnswer(markdown).citations
+  static func extractCitations(
+    from markdown: String,
+    store: KnowledgeStore? = .shared
+  ) -> [KnowledgeCitation] {
+    parseAnswer(markdown, store: store).citations
   }
 
-  private static func parseCitationSection(_ section: String) -> [KnowledgeCitation] {
+  private static func parseCitationSection(
+    _ section: String,
+    store: KnowledgeStore?
+  ) -> [KnowledgeCitation] {
     var citations: [KnowledgeCitation] = []
     var current: (key: String, name: String, fragment: String)?
 
@@ -207,11 +218,13 @@ nonisolated struct CultureChatService: Sendable {
       let name = current.name.trimmingCharacters(in: .whitespacesAndNewlines)
       let fragment = current.fragment.trimmingCharacters(in: .whitespacesAndNewlines)
       guard !key.isEmpty || !name.isEmpty else { return }
+      let resolvedKey = key.isEmpty ? name : key
       citations.append(
         KnowledgeCitation(
-          key: key.isEmpty ? name : key,
+          key: resolvedKey,
           name: name.isEmpty ? key : name,
-          fragment: fragment
+          fragment: fragment,
+          sources: store?.trustedSources(forElementKey: resolvedKey) ?? []
         )
       )
     }

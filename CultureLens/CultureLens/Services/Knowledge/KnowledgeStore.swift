@@ -174,6 +174,37 @@ nonisolated struct KnowledgeStore: Sendable {
     element(id: nodeID)?.introduction
   }
 
+  /// Trusted external sources for an element: pack-level `sources` plus
+  /// provenance URLs from linked on-site introductions (Wikipedia, Amap, …).
+  func trustedSources(forElementKey key: String) -> [KnowledgeSource] {
+    packSources(forElementKey: key).map { $0.asKnowledgeSource() }
+  }
+
+  func packSources(forElementKey key: String) -> [KnowledgePack.Source] {
+    var result: [KnowledgePack.Source] = []
+    var seen = Set<String>()
+
+    func append(_ sources: [KnowledgePack.Source]) {
+      for source in sources {
+        let identity =
+          (source.url ?? "\(source.publisher)|\(source.title)")
+          .trimmingCharacters(in: .whitespacesAndNewlines)
+          .lowercased()
+        guard !identity.isEmpty, seen.insert(identity).inserted else { continue }
+        result.append(source)
+      }
+    }
+
+    if let element = elementsByKey[key] {
+      append(element.sources)
+    }
+    for record in pack.introductions
+    where record.culturalElementKey.caseInsensitiveCompare(key) == .orderedSame {
+      append(record.sources)
+    }
+    return result
+  }
+
   // MARK: - User knowledge graph
 
   /// Builds the graph shown in the Graph tab. Every joined node remains
@@ -377,7 +408,8 @@ nonisolated struct KnowledgeStore: Sendable {
         attractionName: attraction.name,
         latitude: record.latitude,
         longitude: record.longitude,
-        distanceMeters: distance
+        distanceMeters: distance,
+        sources: record.sources
       )
     }
     .sorted {
@@ -461,18 +493,31 @@ nonisolated struct KnowledgeStore: Sendable {
         graphElements: graph.elements,
         graphRelations: graph.relations
       )
+      let contexts = nearbyContexts[key] ?? []
+      var elementSources = packSources(forElementKey: key)
+      var seenSourceURLs = Set(
+        elementSources.compactMap { $0.url?.lowercased() }
+      )
+      for context in contexts {
+        for source in context.sources {
+          let identity = (source.url ?? source.title).lowercased()
+          guard seenSourceURLs.insert(identity).inserted else { continue }
+          elementSources.append(source)
+        }
+      }
       elements.append(
         RecognitionElement(
           key: element.key,
           name: element.name,
           introduction: element.introduction,
-          nearbyContexts: nearbyContexts[key] ?? [],
+          nearbyContexts: contexts,
           relatedElements: relatedElements(
             forKey: key,
             limit: Self.maximumObjectLimit
           ),
           graphElements: graph.elements,
-          graphRelations: graph.relations
+          graphRelations: graph.relations,
+          sources: elementSources
         )
       )
     }
@@ -487,7 +532,8 @@ nonisolated struct KnowledgeStore: Sendable {
           culturalElementKey: attractionRoots[introduction.attractionKey]
             ?? introduction.culturalElementKey,
           summary: Self.richTextPlainText(introduction.introduction, separator: "\n\n"),
-          distanceMeters: introduction.distanceMeters
+          distanceMeters: introduction.distanceMeters,
+          sources: introduction.sources
         )
       )
     }

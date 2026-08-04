@@ -236,7 +236,7 @@ nonisolated enum RecognitionResponseMapper {
       artworkSymbol: artworkSymbol(for: decision.category),
       concepts: graphElements.map(graphConcept),
       relations: graphRelations.map(graphRelation),
-      sources: []
+      sources: element.sources.map { $0.asKnowledgeSource() }
     )
   }
 
@@ -288,6 +288,7 @@ nonisolated enum RecognitionResponseMapper {
       confidence: 0,
       rationale: "根据当前位置列出的附近景点，仍需结合画面确认。",
       summary: attraction.summary,
+      sources: attraction.sources.map { $0.asKnowledgeSource() },
       resolutionStatus: "attraction"
     )
   }

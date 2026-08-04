@@ -6,6 +6,8 @@
 
 ## 已完成
 
+- 2026-08-04 统一文化问答系统提示词结构，强化正文行内引用与文末来源列表的一一对应、编码和原文摘录规则；面向用户的回答改用“现有资料”等自然表述，不再暴露内部资料系统称谓。
+- 2026-08-04 修复文化问答作曲器：恢复系统原生多行 `TextField` 以避免中文输入法候选态丢失焦点；去掉底部整条材质背景和闲置副标题，输入区改为 Liquid Glass 容器（旧系统回退材质），附件缩略图收进同一容器并在有图时向上扩展，关闭键紧贴图片，添加菜单锚定在 `+` 按钮。
 - 2026-08-03 文化问答增强：SwiftData 持久化历史会话（首页 / 对象追问分作用域）、工具栏新对话与历史列表、相册图片上传（归一化 JPEG + 多模态 `image_url`）；历史轮用文字标注避免重复传图。见 `agents/design/0005-chat-history-and-image-upload.md`。
 - 2026-08-03 P1 玩法：文化回顾（按时间+地点聚合成「行程」汇总页）、主题探索（知识包 `themes` + 进度）、文化卡片分享（复用 `CultureObjectCard`，与回顾合并）；识别结果保留模型视觉 alternatives，不再只展示附近景点候选。
 - 2026-08-03 多语言基础设施：`Localizable.xcstrings`（zh-Hans / en）固化 UI 文案；「我的」页语言偏好；识别 / 讲解 / 问答经 `PromptLanguagePolicy` 直接输出目标语言；知识包增加 `source_language` + `locales` overlay（内容暂空），详情页缺译文时用 `dynamic/chat` 即时翻译并缓存。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
@@ -14,6 +16,7 @@
 - 2026-08-03 讲解生成（`CultureExplanationService` + `explain` prompt / `dynamic/chat`）与多轮追问（`AskCultureView` + `CultureChatService`）；PromptAssembler / v5 增加用户知识状态与「跳过已知、锚定已知、补缺」；对象 / 概念 / 扫描结果详情用 `RichTextBlocksView`；用户状态升级为接触 / 理解 / 掌握（SwiftData 存时间戳与来源）。
 - 2026-08-03 真实用户文化图谱落地：所有已加入节点始终可见，并从可选中心按无向 BFS 向外展开 3 层；采用确定性同心最短路布局、48 节点扩展上限和单 `Canvas` 批量绘边控制开销。原「收藏」/「我已了解」统一为持久化「加入文化图谱」，旧 UserDefaults 状态迁移进 SwiftData。
 - 2026-08-03 修复照片框选在 iPhone 与 13 英寸 iPad 上的坐标漂移：手势统一到预览命名坐标系，并扣除 aspect-fit 黑边偏移；最小框改为 16pt 屏幕尺寸，发送标注与屏幕框保持一致，补充跨设备坐标映射单测。
+- 2026-08-04 问答历史改出 SwiftData，改为 `ChatHistoryStore` JSON 文件持久化（修复 `ChatConversationRecord` fetch/save `SIGABRT`）；主库升为 `CultureLensHistoryV3`（仅扫描历史 + 知识进度）。
 - 2026-08-02 工程从 CultureLens 复制重命名（bundle ID `com.junwei.CultureLens`，SwiftData 配置 `CultureLensHistoryV1`），模拟器构建通过。
 - 2026-08-02 端侧识别管线移植完成：`Services/Knowledge`（KnowledgeStore / Haversine / 候选挑选 / BFS 图谱）、`Services/LLM`（PromptAssembler / LLMGatewayClient，CF AI Gateway `dynamic/culturelens`）、`Services/Recognition`（ResponseMapper / OnDeviceRecognitionService / UUIDv5）。`RemoteRecognitionService`、`CultureLensAPI` 已删除；`CultureContentService` 改本地查询。
 - 2026-08-02 知识包落地：`Resources/KnowledgePack/`（西湖包 + manifest），ODR tag `knowledge-base` 接线完成，`KnowledgePackLoader` ODR 优先、内置 fallback 兜底。

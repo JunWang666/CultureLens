@@ -133,7 +133,7 @@ nonisolated struct CultureChatService: Sendable {
           let image = imageJPEG.map { ChatTurn.ImageAttachment(jpegData: $0) }
           let questionText =
             trimmed.isEmpty
-            ? "请结合这张图片，在知识库约束内说明你看到了什么、能关联到哪些文化知识。"
+            ? "请结合这张图片，根据已提供资料说明你看到了什么、能关联到哪些文化内容。"
             : trimmed
           messages.append(
             ChatTurn(role: .user, content: questionText, image: image)

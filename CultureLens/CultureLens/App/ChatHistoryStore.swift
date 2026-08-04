@@ -1,38 +1,59 @@
 import Foundation
 import Observation
-import SwiftData
 
-/// Persists cultural Q&A threads (general + object-scoped) via SwiftData.
+/// Persists cultural Q&A threads (general + object-scoped) as JSON on disk.
+///
+/// Chat history intentionally does **not** use SwiftData: mixing
+/// `ChatConversationRecord` into the shared history store caused uncatchable
+/// `SIGABRT` on both `fetch` and `save` after the model was added.
 @MainActor
 @Observable
 final class ChatHistoryStore {
-  @ObservationIgnored private var modelContext: ModelContext?
+  private var records: [ChatConversationRecord] = []
+  @ObservationIgnored private let fileURL: URL
+  @ObservationIgnored private let encoder: JSONEncoder
+  @ObservationIgnored private let decoder: JSONDecoder
 
-  func configure(modelContext: ModelContext) {
-    self.modelContext = modelContext
+  init(fileManager: FileManager = .default) {
+    let appSupport =
+      (try? fileManager.url(
+        for: .applicationSupportDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+      ))
+      ?? fileManager.temporaryDirectory
+    let directory = appSupport
+      .appending(path: "CultureLens", directoryHint: .isDirectory)
+      .appending(path: "ChatHistory", directoryHint: .isDirectory)
+    try? fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
+    fileURL = directory.appending(path: "conversations.json")
+
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys]
+    encoder.dateEncodingStrategy = .iso8601
+    self.encoder = encoder
+
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    self.decoder = decoder
+
+    records = Self.loadRecords(from: fileURL, decoder: decoder)
   }
 
   func conversations(objectID: UUID?) -> [ChatConversationRecord] {
-    guard let modelContext else { return [] }
-    let descriptor = FetchDescriptor<ChatConversationRecord>(
-      sortBy: [SortDescriptor(\.updatedAt, order: .reverse)]
-    )
-    let all = (try? modelContext.fetch(descriptor)) ?? []
-    return all.filter { record in
-      if let objectID {
-        return record.objectID == objectID
+    records
+      .filter { record in
+        if let objectID {
+          return record.objectID == objectID
+        }
+        return record.objectID == nil
       }
-      return record.objectID == nil
-    }
+      .sorted { $0.updatedAt > $1.updatedAt }
   }
 
   func conversation(id: UUID) -> ChatConversationRecord? {
-    guard let modelContext else { return nil }
-    var descriptor = FetchDescriptor<ChatConversationRecord>(
-      predicate: #Predicate { $0.conversationID == id }
-    )
-    descriptor.fetchLimit = 1
-    return try? modelContext.fetch(descriptor).first
+    records.first { $0.conversationID == id }
   }
 
   @discardableResult
@@ -40,36 +61,36 @@ final class ChatHistoryStore {
     conversationID: UUID,
     object: CultureObject?,
     messages: [PersistedChatMessage]
-  ) -> ChatConversationRecord? {
-    guard let modelContext else { return nil }
+  ) throws -> ChatConversationRecord {
     let title = Self.makeTitle(from: messages, object: object)
-    if let existing = conversation(id: conversationID) {
-      existing.updatedAt = .now
-      existing.title = title
-      existing.messages = messages
-      existing.objectID = object?.id
-      existing.objectName = object?.canonicalName
-      try? modelContext.save()
-      return existing
+    let record: ChatConversationRecord
+    if let index = records.firstIndex(where: { $0.conversationID == conversationID }) {
+      var updated = records[index]
+      updated.updatedAt = .now
+      updated.title = title
+      updated.messages = messages
+      updated.objectID = object?.id
+      updated.objectName = object?.canonicalName
+      records[index] = updated
+      record = updated
+    } else {
+      record = ChatConversationRecord(
+        conversationID: conversationID,
+        title: title,
+        objectID: object?.id,
+        objectName: object?.canonicalName,
+        messages: messages
+      )
+      records.append(record)
     }
-
-    let record = ChatConversationRecord(
-      conversationID: conversationID,
-      title: title,
-      objectID: object?.id,
-      objectName: object?.canonicalName,
-      messagesData: (try? JSONEncoder().encode(messages)) ?? Data()
-    )
-    modelContext.insert(record)
-    try? modelContext.save()
+    try persist()
     return record
   }
 
   func delete(_ record: ChatConversationRecord) {
-    guard let modelContext else { return }
     let imagePaths = record.messages.compactMap(\.imageRelativePath)
-    modelContext.delete(record)
-    try? modelContext.save()
+    records.removeAll { $0.conversationID == record.conversationID }
+    try? persist()
     Task {
       await ChatMediaStore.shared.deleteAll(relativePaths: imagePaths)
     }
@@ -91,5 +112,34 @@ final class ChatHistoryStore {
       }
     }
     return object?.canonicalName ?? "文化问答"
+  }
+
+  private func persist() throws {
+    do {
+      let data = try encoder.encode(records)
+      try data.write(to: fileURL, options: [.atomic])
+    } catch {
+      throw ChatHistoryStoreError.saveFailed(error)
+    }
+  }
+
+  private static func loadRecords(from url: URL, decoder: JSONDecoder) -> [ChatConversationRecord] {
+    guard
+      FileManager.default.fileExists(atPath: url.path),
+      let data = try? Data(contentsOf: url),
+      !data.isEmpty
+    else { return [] }
+    return (try? decoder.decode([ChatConversationRecord].self, from: data)) ?? []
+  }
+}
+
+enum ChatHistoryStoreError: LocalizedError {
+  case saveFailed(Error)
+
+  var errorDescription: String? {
+    switch self {
+    case .saveFailed(let error):
+      "对话写入失败：\(error.localizedDescription)"
+    }
   }
 }

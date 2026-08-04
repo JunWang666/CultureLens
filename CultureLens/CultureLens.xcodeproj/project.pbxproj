@@ -60,6 +60,9 @@
 			exceptions = (
 				C12E0D000000000000000005 /* Exceptions for "CultureLens" folder in "CultureLens" target */,
 			);
+			explicitFolders = (
+				Resources/KnowledgePackFallback,
+			);
 			path = CultureLens;
 			sourceTree = "<group>";
 		};

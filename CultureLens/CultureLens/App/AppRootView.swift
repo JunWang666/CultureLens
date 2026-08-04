@@ -108,7 +108,6 @@ struct AppRootView: View {
         }
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
-            chatHistoryStore.configure(modelContext: modelContext)
         }
     }
 

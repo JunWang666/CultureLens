@@ -589,9 +589,9 @@ final class AskCultureChatModel: ObservableObject {
         id: persisted.id,
         role: persisted.role == .user ? .user : .assistant,
         text: persisted.text,
+        citations: persisted.citations.map(\.asKnowledgeCitation),
         imageRelativePath: persisted.imageRelativePath,
-        imageData: ChatMediaStoreSync.data(for: persisted.imageRelativePath),
-        citations: persisted.citations.map(\.asKnowledgeCitation)
+        imageData: ChatMediaStoreSync.data(for: persisted.imageRelativePath)
       )
     }
     bumpScroll()

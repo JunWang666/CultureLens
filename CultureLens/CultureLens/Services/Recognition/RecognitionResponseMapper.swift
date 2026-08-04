@@ -141,6 +141,21 @@ nonisolated enum RecognitionResponseMapper {
       : decision.uncertainty
 
     var alternatives: [RecognitionCandidate] = []
+
+    // Preserve the model's own 2nd/3rd visual guesses — already validated above.
+    for (index, candidate) in decision.alternatives.enumerated() {
+      alternatives.append(
+        visualCandidate(
+          candidate,
+          requestID: requestID,
+          index: index,
+          elements: elementsByKey
+        )
+      )
+    }
+
+    // Append nearby attraction candidates (geographic, not visual).
+    var attractionCount = 0
     for attraction in knowledge.attractionCandidates {
       if !decision.attractionKey.isEmpty,
         attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame
@@ -148,7 +163,8 @@ nonisolated enum RecognitionResponseMapper {
         continue
       }
       alternatives.append(attractionCandidate(attraction))
-      if alternatives.count == 3 { break }
+      attractionCount += 1
+      if attractionCount == 3 { break }
     }
 
     return RecognitionResult(
@@ -274,6 +290,43 @@ nonisolated enum RecognitionResponseMapper {
         explanation: "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
       )
     }
+  }
+
+  private static func visualCandidate(
+    _ candidate: ProviderCandidate,
+    requestID: String,
+    index: Int,
+    elements: [String: RecognitionElement]
+  ) -> RecognitionCandidate {
+    let category = ObjectCategory(rawValue: candidate.category) ?? .other
+    let symbol = artworkSymbol(for: candidate.category)
+    var summary: String? = nil
+    var resolutionStatus = "visual"
+
+    if !candidate.culturalElementKey.isEmpty,
+      let element = elements[candidate.culturalElementKey.lowercased()]
+    {
+      let plain = KnowledgeStore.richTextPlainText(element.introduction)
+      summary = plain.isEmpty ? nil : plain
+      resolutionStatus = "resolved"
+    }
+
+    return RecognitionCandidate(
+      id: DeterministicID.v5(
+        name: requestID + ":visual:" + String(index) + ":"
+          + candidate.canonicalName.lowercased()
+      ),
+      culturalElementKey: candidate.culturalElementKey.isEmpty
+        ? nil
+        : candidate.culturalElementKey,
+      canonicalName: candidate.canonicalName,
+      category: category,
+      confidence: candidate.confidence,
+      rationale: candidate.rationale,
+      summary: summary,
+      artworkSymbol: symbol,
+      resolutionStatus: resolutionStatus
+    )
   }
 
   private static func attractionCandidate(

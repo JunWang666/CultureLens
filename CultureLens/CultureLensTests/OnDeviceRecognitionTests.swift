@@ -723,7 +723,10 @@ struct OnDeviceRecognitionTests {
     #expect(attractionResult.object.summary == "库内审核介绍。")
     #expect(attractionResult.object.concepts.map(\.name) == ["关联元素"])
     #expect(attractionResult.object.relations.first?.kind == .explains)
-    #expect(attractionResult.alternatives.isEmpty)
+    #expect(attractionResult.displayAttractionCandidates.isEmpty)
+    #expect(attractionResult.displayVisualAlternatives.count == 1)
+    #expect(attractionResult.displayVisualAlternatives.first?.canonicalName == "备选对象")
+    #expect(attractionResult.displayVisualAlternatives.first?.resolutionStatus == "visual")
     #expect(attractionResult.locationInfluence?.effect == .reordered)
     #expect(attractionResult.catalogVersion == "test-v9")
     #expect(attractionResult.catalogCandidateCount == 2)
@@ -742,12 +745,14 @@ struct OnDeviceRecognitionTests {
     )
     #expect(resolvedResult.resolutionStatus == "resolved")
     #expect(resolvedResult.object.summary == "库内审核介绍。")
-    #expect(resolvedResult.alternatives.map(\.resolutionStatus) == ["attraction"])
-    #expect(resolvedResult.alternatives.first?.category == .space)
+    #expect(resolvedResult.displayAttractionCandidates.map(\.resolutionStatus) == ["attraction"])
+    #expect(resolvedResult.displayAttractionCandidates.first?.category == .space)
     #expect(
-      resolvedResult.alternatives.first?.id
+      resolvedResult.displayAttractionCandidates.first?.id
         == DeterministicID.v5(name: "attraction:att")
     )
+    #expect(resolvedResult.displayVisualAlternatives.count == 1)
+    #expect(resolvedResult.displayVisualAlternatives.first?.canonicalName == "备选对象")
 
     // Unresolved branch: LLM text passes through with a deterministic ID.
     let unresolvedResult = RecognitionResponseMapper.mapResponse(

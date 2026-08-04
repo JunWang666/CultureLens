@@ -210,12 +210,21 @@ struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
   var catalogVersion: String? = nil
   var catalogCandidateCount: Int? = nil
 
+  /// Nearby place candidates derived from GPS / introductions (not model guesses).
   var displayAttractionCandidates: [RecognitionCandidate] {
     alternatives.filter { candidate in
       guard candidate.resolutionStatus == "attraction" else { return false }
       guard resolutionStatus == "attraction" else { return true }
       return Self.normalizedName(candidate.canonicalName)
         != Self.normalizedName(object.canonicalName)
+    }
+  }
+
+  /// Model visual alternatives (2nd/3rd guesses), excluding geographic candidates.
+  var displayVisualAlternatives: [RecognitionCandidate] {
+    alternatives.filter { candidate in
+      let status = candidate.resolutionStatus
+      return status != "attraction"
     }
   }
 

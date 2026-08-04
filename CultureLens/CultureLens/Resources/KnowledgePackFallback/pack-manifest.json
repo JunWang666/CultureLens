@@ -1,11 +1,12 @@
 {
   "packVersion": "hangzhou-west-lake-v7",
-  "generatedAt": "2026-08-04T08:40:00Z",
+  "generatedAt": "2026-08-04T08:45:00Z",
   "recordCounts": {
     "elements": 70,
     "relations": 182,
     "introductions": 65,
-    "attractions": 23
+    "attractions": 23,
+    "themes": 4
   },
-  "sha256": "b3ac96e31871b226bb7d17eec8aa2a22f26d4d0d02f1bde064f1feedaa88f4b9"
+  "sha256": "5a6d111cb60c665e16fcb5f2b6007343bc0a42104e02766546eae62bfa423fe0"
 }

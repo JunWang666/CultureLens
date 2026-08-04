@@ -36,6 +36,10 @@ struct ScanResultView: View {
     session.result.displayAttractionCandidates
   }
 
+  private var visualAlternatives: [RecognitionCandidate] {
+    session.result.displayVisualAlternatives
+  }
+
   private var currentResolutionStatus: String? {
     return session.result.resolutionStatus
   }
@@ -263,6 +267,22 @@ struct ScanResultView: View {
 
   @ViewBuilder
   private var alternatives: some View {
+    if !visualAlternatives.isEmpty {
+      VStack(alignment: .leading, spacing: 12) {
+        Text(object.confidence < 0.8 ? "也可能是" : "其他视觉猜测")
+          .font(.cultureSerif(.title2))
+          .foregroundStyle(CultureTheme.inkPrimary)
+
+        Text("来自识别模型的备选判断，与画面特征相关。")
+          .font(.caption)
+          .foregroundStyle(CultureTheme.inkSecondary)
+
+        ForEach(visualAlternatives) { candidate in
+          visualAlternativeRow(candidate)
+        }
+      }
+    }
+
     if !attractionCandidates.isEmpty {
       VStack(alignment: .leading, spacing: 12) {
         Text("附近景点候选")
@@ -285,6 +305,45 @@ struct ScanResultView: View {
         }
       }
     }
+  }
+
+  private func visualAlternativeRow(_ candidate: RecognitionCandidate) -> some View {
+    VStack(alignment: .leading, spacing: 6) {
+      HStack(alignment: .firstTextBaseline) {
+        Text(candidate.canonicalName)
+          .font(.headline)
+          .foregroundStyle(CultureTheme.inkPrimary)
+        Spacer()
+        Text(
+          candidate.confidence,
+          format: .percent.precision(.fractionLength(0))
+        )
+        .font(.caption.monospacedDigit())
+        .foregroundStyle(CultureTheme.cinnabar)
+      }
+      Text(candidate.rationale)
+        .font(.subheadline)
+        .foregroundStyle(CultureTheme.inkSecondary)
+      if let summary = candidate.informativeSummary {
+        Text(summary)
+          .font(.caption)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .lineLimit(2)
+      }
+      Label(candidate.category.rawValue, systemImage: "eye")
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkSecondary)
+    }
+    .padding(16)
+    .background(
+      CultureTheme.surface,
+      in: RoundedRectangle(cornerRadius: 18)
+    )
+    .overlay {
+      RoundedRectangle(cornerRadius: 18)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
+    .accessibilityElement(children: .combine)
   }
 
   private func candidateRow(

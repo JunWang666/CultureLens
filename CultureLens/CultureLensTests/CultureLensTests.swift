@@ -222,7 +222,9 @@ struct CultureLensTests {
     #expect(decoded.locationInfluence?.effect == LocationInfluence.Effect.none)
     #expect(decoded.resolutionStatus == "resolved")
     #expect(decoded.catalogCandidateCount == 3)
-    #expect(decoded.alternatives.first?.resolutionStatus == "resolved")
+    #expect(decoded.alternatives.first?.resolutionStatus == "visual")
+    #expect(decoded.displayVisualAlternatives.count == 1)
+    #expect(decoded.displayAttractionCandidates.isEmpty)
     let alternativeSources = try #require(decoded.alternatives.first?.sources)
     #expect(!alternativeSources.isEmpty)
     #expect(!decoded.object.concepts.isEmpty)
@@ -913,6 +915,165 @@ struct CultureLensTests {
         minimum: 0.05
       ) == 0.1
     )
+  }
+
+  @Test func visitTripClustersByTimeAndPlace() {
+    let base = Date(timeIntervalSince1970: 1_700_000_000)
+    let objectA = CultureObject(
+      id: UUID(),
+      culturalElementKey: "three-pools-mirroring-moon",
+      canonicalName: "三潭印月",
+      summary: "湖中石塔",
+      category: .space,
+      confidence: 0.9,
+      artworkSymbol: "map.fill",
+      concepts: [],
+      relations: [
+        CultureRelation(
+          id: UUID(),
+          sourceID: UUID(),
+          targetID: UUID(),
+          kind: .explains,
+          explanation: "关联"
+        )
+      ],
+      sources: []
+    )
+    let objectB = CultureObject(
+      id: UUID(),
+      culturalElementKey: "leifeng-pagoda-and-evening-glow",
+      canonicalName: "雷峰塔",
+      summary: "夕照",
+      category: .space,
+      confidence: 0.8,
+      artworkSymbol: "building.columns.fill",
+      concepts: [],
+      relations: [],
+      sources: []
+    )
+
+    let sameVisit = [
+      ScanHistoryRecordSnapshot(
+        recordID: UUID(),
+        createdAt: base,
+        cultureObjectID: objectA.id,
+        canonicalName: objectA.canonicalName,
+        placeName: "西湖",
+        latitude: 30.25,
+        longitude: 120.14,
+        culturalElementKey: objectA.culturalElementKey,
+        object: objectA
+      ),
+      ScanHistoryRecordSnapshot(
+        recordID: UUID(),
+        createdAt: base.addingTimeInterval(30 * 60),
+        cultureObjectID: objectB.id,
+        canonicalName: objectB.canonicalName,
+        placeName: "西湖",
+        latitude: 30.231,
+        longitude: 120.148,
+        culturalElementKey: objectB.culturalElementKey,
+        object: objectB
+      ),
+    ]
+    let trips = VisitTripBuilder.cluster(sameVisit)
+    #expect(trips.count == 1)
+    #expect(trips[0].scanCount == 2)
+    #expect(trips[0].litNodeCount == 2)
+    #expect(trips[0].attractionNames == ["西湖"])
+    #expect(trips[0].newRelationCount == 1)
+    #expect(trips[0].objects.map(\.canonicalName) == ["三潭印月", "雷峰塔"])
+
+    let split = [
+      sameVisit[0],
+      ScanHistoryRecordSnapshot(
+        recordID: UUID(),
+        createdAt: base.addingTimeInterval(5 * 60 * 60),
+        cultureObjectID: objectB.id,
+        canonicalName: objectB.canonicalName,
+        placeName: "西湖",
+        latitude: 30.231,
+        longitude: 120.148,
+        culturalElementKey: objectB.culturalElementKey,
+        object: objectB
+      ),
+    ]
+    #expect(VisitTripBuilder.cluster(split).count == 2)
+  }
+
+  @Test func themeProgressUsesMinContactedThreshold() {
+    let theme = KnowledgePack.Theme(
+      key: "demo",
+      name: "演示主题",
+      summary: "摘要",
+      elementKeys: ["a", "b", "c", "d"],
+      minContacted: 3
+    )
+    let partial = ThemeProgressCalculator.progress(
+      for: theme,
+      contactedElementKeys: ["a", "c"]
+    )
+    #expect(partial.contactedCount == 2)
+    #expect(partial.requiredCount == 3)
+    #expect(!partial.isComplete)
+    #expect(partial.remainingKeys == ["b", "d"])
+
+    let done = ThemeProgressCalculator.progress(
+      for: theme,
+      contactedElementKeys: ["a", "b", "d"]
+    )
+    #expect(done.isComplete)
+    #expect(done.fractionComplete == 1)
+  }
+
+  @Test func knowledgePackDecodesThemesAndAllowsMissingThemes() throws {
+    let withThemes = """
+      {
+        "version": "t1",
+        "elements": [],
+        "attractions": [],
+        "relations": [],
+        "introductions": [],
+        "themes": [
+          {
+            "key": "moon",
+            "name": "月影",
+            "summary": "摘要",
+            "elementKeys": ["a"],
+            "minContacted": 1
+          }
+        ]
+      }
+      """.data(using: .utf8)!
+    let decoded = try JSONDecoder().decode(KnowledgePack.self, from: withThemes)
+    #expect(decoded.themes.count == 1)
+    #expect(decoded.themes[0].name == "月影")
+
+    let withoutThemes = """
+      {
+        "version": "t1",
+        "elements": [],
+        "attractions": [],
+        "relations": [],
+        "introductions": []
+      }
+      """.data(using: .utf8)!
+    let legacy = try JSONDecoder().decode(KnowledgePack.self, from: withoutThemes)
+    #expect(legacy.themes.isEmpty)
+  }
+
+  @Test func bundledKnowledgePackIncludesThemes() throws {
+    let store = try KnowledgeStore.load(
+      bundle: Bundle(for: KnowledgeProgressStore.self)
+    )
+    #expect(!store.pack.themes.isEmpty)
+    for theme in store.pack.themes {
+      #expect(!theme.elementKeys.isEmpty)
+      #expect(theme.minContacted > 0)
+      for key in theme.elementKeys {
+        #expect(store.element(key: key) != nil)
+      }
+    }
   }
 
 }

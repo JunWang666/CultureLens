@@ -19,7 +19,7 @@ struct ShareCultureCardButton: View {
           item: shareItem,
           preview: SharePreview(
             object.canonicalName,
-            image: shareItem.image.map(Image.init(uiImage:))
+            image: Image(uiImage: shareItem.image ?? UIImage())
           )
         ) {
           labelView

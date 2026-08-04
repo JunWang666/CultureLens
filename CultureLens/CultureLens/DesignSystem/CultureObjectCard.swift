@@ -57,8 +57,8 @@ struct CultureObjectCard: View {
 }
 
 /// Renders `CultureObjectCard` for the system share sheet.
-@MainActor
 enum CultureCardShareRenderer {
+  @MainActor
   static func image(for object: CultureObject, width: CGFloat = 360) -> UIImage? {
     let card = CultureObjectCard(object: object, showsBrandMark: true, artworkHeight: 160)
       .frame(width: width)
@@ -69,7 +69,8 @@ enum CultureCardShareRenderer {
     return renderer.uiImage
   }
 
-  static func shareText(for object: CultureObject) -> String {
+  /// Plain-text fallback for share/drag; safe outside the main actor.
+  nonisolated static func shareText(for object: CultureObject) -> String {
     let meta = [object.category.rawValue, object.timePeriod, object.region]
       .compactMap { $0 }
       .joined(separator: " · ")

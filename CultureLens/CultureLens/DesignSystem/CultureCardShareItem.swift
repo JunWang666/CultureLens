@@ -18,6 +18,6 @@ struct CultureCardShareItem: Transferable {
       }
       return data
     }
-    ProxyRepresentation(\.text)
+    ProxyRepresentation(exporting: \.text)
   }
 }

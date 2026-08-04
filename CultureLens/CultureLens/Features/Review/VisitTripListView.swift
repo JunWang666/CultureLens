@@ -2,6 +2,8 @@ import SwiftData
 import SwiftUI
 
 struct VisitTripListView: View {
+  var showsBackButton: Bool = true
+
   @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
   private var records: [ScanHistoryRecord]
 
@@ -41,7 +43,7 @@ struct VisitTripListView: View {
         }
       }
     }
-    .cultureNavigationTitle("文化回顾")
+    .cultureNavigationTitle("文化回顾", showsBackButton: showsBackButton)
   }
 
   private func tripRow(_ trip: VisitTrip) -> some View {

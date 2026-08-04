@@ -10,8 +10,11 @@ enum AppRoute: Hashable {
     case scanResult(UUID)
     case scanCandidate(sessionID: UUID, candidateID: UUID)
     case history(UUID)
+    /// Scan footprint map + timeline (pushed from「更多」on compact).
+    case footprint
     case visitTrips
     case visitTrip(UUID)
     case themes
     case theme(String)
+    case settings
 }

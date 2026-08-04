@@ -36,7 +36,7 @@ struct AskCultureView: View {
       isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"),
       subtitle: model.isSending
         ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
-        : "知识库约束"
+        : nil
     )
     .toolbar {
       ToolbarItemGroup(placement: .topBarTrailing) {

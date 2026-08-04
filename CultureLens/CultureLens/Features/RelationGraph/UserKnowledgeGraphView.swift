@@ -3,6 +3,7 @@ import SwiftUI
 
 /// The user's real knowledge graph: all joined nodes plus three shortest-hop
 /// layers from a user-selectable center in the bundled knowledge pack.
+/// Presented edge-to-edge like `CultureRelationGraphView` fullscreen.
 struct UserKnowledgeGraphView: View {
     @Environment(KnowledgeProgressStore.self)
     private var progressStore
@@ -25,22 +26,47 @@ struct UserKnowledgeGraphView: View {
     var body: some View {
         ZStack {
             CulturePageBackground()
+                .ignoresSafeArea()
 
-            if progressStore.graphNodeIDs.isEmpty {
-                emptyState
-            } else if let renderState {
-                graphContent(renderState)
-            } else if didAttemptLoad {
-                ContentUnavailableView(
-                    "知识图谱暂不可用",
-                    systemImage: "externaldrive.badge.exclamationmark",
-                    description: Text("知识包没有成功载入，请稍后再试。")
-                )
-            } else {
-                ProgressView("正在生成文化图谱…")
+            Group {
+                if progressStore.graphNodeIDs.isEmpty {
+                    emptyState
+                } else if let renderState {
+                    graphViewport(renderState)
+                } else if didAttemptLoad {
+                    ContentUnavailableView(
+                        "知识图谱暂不可用",
+                        systemImage: "externaldrive.badge.exclamationmark",
+                        description: Text("知识包没有成功载入，请稍后再试。")
+                    )
+                } else {
+                    ProgressView("正在生成文化图谱…")
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+
+            if let renderState, !progressStore.graphNodeIDs.isEmpty {
+                VStack {
+                    Spacer(minLength: 0)
+                    HStack {
+                        Spacer(minLength: 0)
+                        graphLegendChip(renderState.snapshot)
+                    }
+                }
+                .padding(.trailing, 16)
+                .padding(.bottom, 16)
+                .allowsHitTesting(false)
             }
         }
-        .cultureNavigationTitle("图谱", showsBackButton: false)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if let renderState, !progressStore.graphNodeIDs.isEmpty {
+                ToolbarItem(placement: .primaryAction) {
+                    centerMenu(renderState.snapshot)
+                }
+            }
+        }
         .task {
             guard knowledgeStore == nil else { return }
             knowledgeStore = await KnowledgePackLoader.shared.store()
@@ -67,34 +93,6 @@ struct UserKnowledgeGraphView: View {
         .padding(CultureTheme.pagePadding)
     }
 
-    private func graphContent(_ state: RenderState) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            graphHeader(state.snapshot)
-            graphViewport(state)
-            graphLegend(state.snapshot)
-        }
-        .padding(.horizontal, CultureTheme.pagePadding)
-        .padding(.top, 12)
-        .padding(.bottom, 10)
-    }
-
-    private func graphHeader(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("我的文化图谱")
-                    .font(.cultureSerif(.title2))
-                    .foregroundStyle(CultureTheme.inkPrimary)
-                Text("已加入 \(progressStore.graphNodeIDs.count) 个 · 展示 \(snapshot.nodes.count) 个 · 向外 3 层")
-                    .font(.caption)
-                    .foregroundStyle(CultureTheme.inkSecondary)
-            }
-
-            Spacer(minLength: 8)
-
-            centerMenu(snapshot)
-        }
-    }
-
     private func centerMenu(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
         Menu {
             let joinedNodes = snapshot.nodes.filter(\.isJoined)
@@ -112,9 +110,7 @@ struct UserKnowledgeGraphView: View {
             }
         } label: {
             Label("选择中心", systemImage: "scope")
-                .font(.subheadline.weight(.semibold))
         }
-        .buttonStyle(.bordered)
         .accessibilityHint("选择一个节点作为三层关系展开的中心")
     }
 
@@ -158,14 +154,30 @@ struct UserKnowledgeGraphView: View {
                 scrollToCenter(state.snapshot.centerID, proxy: proxy)
             }
         }
-        .frame(maxHeight: .infinity)
-        .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 24))
-        .overlay {
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("以可选择节点为中心的三层文化知识图谱")
+    }
+
+    private func graphLegendChip(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("\(progressStore.graphNodeIDs.count) 已加入 · \(snapshot.nodes.count) 展示")
+                .font(.caption2)
+                .foregroundStyle(CultureTheme.inkSecondary)
+                .lineLimit(1)
+
+            HStack(spacing: 8) {
+                legendItem("中心", color: CultureTheme.cinnabar)
+                legendItem("已加入", color: CultureTheme.antiqueGold)
+                legendItem("关系", color: CultureTheme.inkSecondary)
+            }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "已加入 \(progressStore.graphNodeIDs.count) 个，展示 \(snapshot.nodes.count) 个，向外 3 层"
+        )
     }
 
     private func edgeCanvas(_ state: RenderState) -> some View {
@@ -303,33 +315,16 @@ struct UserKnowledgeGraphView: View {
         }
     }
 
-    private func graphLegend(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
-        HStack(spacing: 14) {
-            legendItem("中心", color: CultureTheme.cinnabar)
-            legendItem("已加入", color: CultureTheme.antiqueGold)
-            legendItem("关系节点", color: CultureTheme.inkSecondary)
-            Spacer(minLength: 4)
-            Label("拖动画布", systemImage: "hand.draw")
-        }
-        .font(.caption2)
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .overlay(alignment: .topLeading) {
-            if snapshot.isExpansionTruncated {
-                Text("关系节点较多，已限制本次展开数量")
-                    .font(.caption2)
-                    .foregroundStyle(CultureTheme.cinnabar)
-                    .offset(y: -22)
-            }
-        }
-    }
-
     private func legendItem(_ title: String, color: Color) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 3) {
             Circle()
                 .fill(color)
-                .frame(width: 6, height: 6)
+                .frame(width: 5, height: 5)
             Text(title)
+                .font(.caption2)
+                .foregroundStyle(CultureTheme.inkSecondary)
         }
+        .fixedSize()
     }
 
     private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {

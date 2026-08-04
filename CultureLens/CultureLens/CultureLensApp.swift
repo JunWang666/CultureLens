@@ -40,5 +40,8 @@ struct CultureLensApp: App {
                 .environment(\.locale, languageStore.locale)
         }
         .modelContainer(modelContainer)
+        .commands {
+            AppTabCommands()
+        }
     }
 }

@@ -109,7 +109,8 @@ final class AppLanguageStore {
     self.preference = preference
   }
 
-  static func loadPreference() -> AppLanguagePreference {
+  /// Safe to call from default arguments and other nonisolated contexts.
+  nonisolated static func loadPreference() -> AppLanguagePreference {
     guard let raw = UserDefaults.standard.string(forKey: preferenceKey),
       let value = AppLanguagePreference(rawValue: raw)
     else {

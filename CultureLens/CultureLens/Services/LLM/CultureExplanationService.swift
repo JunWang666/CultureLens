@@ -69,7 +69,8 @@ nonisolated struct CultureExplanationService: Sendable {
             throw CultureExplanationError.knowledgeUnavailable
           }
 
-          let userText = try self.promptAssembler.explainUserText(
+          let assembler = self.promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+          let userText = try assembler.explainUserText(
             recognition: ExplanationRecognitionContext(result: result),
             neighbors: neighbors,
             knowledgeFragments: fragments,
@@ -77,7 +78,7 @@ nonisolated struct CultureExplanationService: Sendable {
             siteContext: siteContext
           )
           for try await event in self.gatewayClient.streamAsk(
-            systemPrompt: self.promptAssembler.explainSystemPrompt,
+            systemPrompt: assembler.explainSystemPrompt,
             messages: [ChatTurn(role: .user, content: userText)],
             reasoningEffort: .low
           ) {

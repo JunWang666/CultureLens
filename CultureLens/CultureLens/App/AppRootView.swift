@@ -5,6 +5,7 @@ struct AppRootView: View {
     private let recognitionService: RecognitionService
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppLanguageStore.self) private var languageStore
     @State private var selectedTab: AppTab = .explore
     @State private var explorePath: [AppRoute] = []
     @State private var scanPath: [AppRoute] = []
@@ -64,6 +65,8 @@ struct AppRootView: View {
         .environment(knowledgeProgressStore)
         .environment(chatHistoryStore)
         .environment(sessionStore)
+        .environment(\.locale, languageStore.locale)
+        .id(languageStore.language.rawValue)
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
             chatHistoryStore.configure(modelContext: modelContext)
@@ -180,4 +183,5 @@ struct AppRootView: View {
 
 #Preview {
     AppRootView()
+        .environment(AppLanguageStore())
 }

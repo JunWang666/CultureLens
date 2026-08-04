@@ -30,9 +30,11 @@ struct CultureMapView: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
+                    LanguageSettingsSection()
+
                     Picker("显示方式", selection: $displayMode) {
                         ForEach(DisplayMode.allCases) { mode in
-                            Text(mode.rawValue).tag(mode)
+                            Text(LocalizedStringKey(mode.rawValue)).tag(mode)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -209,4 +211,5 @@ struct CultureMapView: View {
         CultureMapView(path: .constant([])) {}
     }
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
+    .environment(AppLanguageStore())
 }

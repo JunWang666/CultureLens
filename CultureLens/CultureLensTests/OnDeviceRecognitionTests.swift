@@ -769,8 +769,22 @@ struct OnDeviceRecognitionTests {
         == DeterministicID.v5(name: "req-3:unresolved:陌生纹样")
     )
     #expect(unresolvedResult.locationInfluence == nil)
+    UserDefaults.standard.set(
+      AppLanguagePreference.zhHans.rawValue,
+      forKey: AppLanguageStore.preferenceKey
+    )
+    defer {
+      UserDefaults.standard.removeObject(forKey: AppLanguageStore.preferenceKey)
+    }
+    let unresolvedZH = RecognitionResponseMapper.mapResponse(
+      requestID: "req-3-zh",
+      usedPlaceContext: false,
+      decision: decision(canonicalName: "陌生纹样"),
+      modelIdentifier: "dynamic/culturelens",
+      knowledge: knowledge
+    )
     #expect(
-      unresolvedResult.uncertainty
+      unresolvedZH.uncertainty
         == "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
     )
   }
@@ -778,7 +792,28 @@ struct OnDeviceRecognitionTests {
   // MARK: - Prompt assembly (googleai/client.go)
 
   @Test func promptAssemblerBuildsUserTextLikeGoProvider() throws {
-    let assembler = PromptAssembler(systemPrompt: "SYS")
+    let assembler = PromptAssembler(
+      systemPrompt: "SYS",
+      explainSystemPrompt: """
+        你是讲解助手。不要重复识别结论。
+        - `掌握`：不复述基础定义。
+        输出格式（严格按此 Markdown 结构，不要包在 JSON 或代码块里）：
+
+        ## 文化背景
+        正文
+
+        ## 下一步建议
+        - 建议一
+
+        ## 引用来源
+        - key: `k`, name: n
+          - 原文摘录：quote
+
+        所有文字使用简体中文。
+        """,
+      askSystemPrompt: "ASK\n所有文字使用简体中文 Markdown（可用标题、列表、加粗；不要用代码块包住整篇回答）。",
+      languagePolicy: PromptLanguagePolicy(language: .zhHans)
+    )
     let candidate = KnowledgeCandidateContext(
       key: "e1",
       name: "元素一",
@@ -827,7 +862,7 @@ struct OnDeviceRecognitionTests {
       ]
     )
     #expect(withKnowledge.contains("用户知识状态 JSON："))
-    #expect(withKnowledge.contains("\"level\":\"理解\""))
+    #expect(withKnowledge.contains("\"level\":\"理解|understand\""))
     #expect(withKnowledge.contains("跳过已知、锚定已知、补缺"))
 
     let explain = try assembler.explainUserText(

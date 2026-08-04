@@ -5,12 +5,17 @@ import Foundation
 /// `content/hangzhou-west-lake.v1.json` export format.
 nonisolated struct KnowledgePack: Decodable, Sendable {
   let version: String
+  /// BCP-47 tag for the primary text fields (name / introduction). Defaults to zh-Hans.
+  let sourceLanguage: String?
   let elements: [Element]
   let attractions: [Attraction]
   let relations: [Relation]
   let introductions: [IntroductionRecord]
   /// Themed exploration tracks. Older packs may omit this field.
   let themes: [Theme]
+  /// Optional translated overlays keyed by BCP-47 tag (e.g. "en"). May be empty
+  /// until multilingual packs ship; runtime falls back to `dynamic/chat` translation.
+  let locales: [String: LocaleOverlay]?
 
   /// External trusted reference attached to an element or on-site introduction.
   nonisolated struct Source: Codable, Sendable, Hashable {
@@ -239,36 +244,44 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
 
   enum CodingKeys: String, CodingKey {
     case version
+    case sourceLanguage = "source_language"
     case elements
     case attractions
     case relations
     case introductions
     case themes
+    case locales
   }
 
   init(
     version: String,
+    sourceLanguage: String? = "zh-Hans",
     elements: [Element],
     attractions: [Attraction],
     relations: [Relation],
     introductions: [IntroductionRecord],
-    themes: [Theme] = []
+    themes: [Theme] = [],
+    locales: [String: LocaleOverlay]? = nil
   ) {
     self.version = version
+    self.sourceLanguage = sourceLanguage
     self.elements = elements
     self.attractions = attractions
     self.relations = relations
     self.introductions = introductions
     self.themes = themes
+    self.locales = locales
   }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
+    sourceLanguage = try container.decodeIfPresent(String.self, forKey: .sourceLanguage)
     elements = try container.decode([Element].self, forKey: .elements)
     attractions = try container.decode([Attraction].self, forKey: .attractions)
     relations = try container.decode([Relation].self, forKey: .relations)
     introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
     themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
+    locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
   }
 }

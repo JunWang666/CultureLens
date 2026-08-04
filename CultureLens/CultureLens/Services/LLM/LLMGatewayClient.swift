@@ -195,6 +195,24 @@ nonisolated struct LLMGatewayClient: Sendable {
     }
   }
 
+  /// Free-text completion via `dynamic/chat` (no JSON schema). Used for
+  /// on-demand knowledge-pack translation when a locale overlay is missing.
+  func completeText(
+    systemPrompt: String,
+    userText: String,
+    reasoningEffort: LLMReasoningEffort? = .low
+  ) async throws -> (content: String, modelIdentifier: String) {
+    let messages: [[String: Any]] = [
+      ["role": "system", "content": systemPrompt],
+      ["role": "user", "content": userText],
+    ]
+    return try await completeFreeform(
+      config: chatConfig,
+      messages: messages,
+      reasoningEffort: reasoningEffort
+    )
+  }
+
   /// Streams assistant Markdown tokens from `dynamic/chat` (SSE).
   /// Turns may include OpenAI-style `image_url` parts for photo follow-ups.
   func streamAsk(
@@ -351,6 +369,59 @@ nonisolated struct LLMGatewayClient: Sendable {
       body["reasoning_effort"] = reasoningEffort.rawValue
     }
     return try JSONSerialization.data(withJSONObject: body)
+  }
+
+  private func completeFreeform(
+    config: LLMGatewayConfig,
+    messages: [[String: Any]],
+    reasoningEffort: LLMReasoningEffort?
+  ) async throws -> (content: String, modelIdentifier: String) {
+    var request = URLRequest(url: config.endpoint)
+    request.httpMethod = "POST"
+    request.timeoutInterval = min(config.timeout, 60)
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("Bearer \(config.apiKey)", forHTTPHeaderField: "Authorization")
+
+    var body: [String: Any] = [
+      "model": config.model,
+      "messages": messages,
+    ]
+    if let reasoningEffort {
+      body["reasoning_effort"] = reasoningEffort.rawValue
+    }
+    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+    let data: Data
+    let response: URLResponse
+    do {
+      (data, response) = try await session.data(for: request)
+    } catch is CancellationError {
+      throw CancellationError()
+    } catch {
+      throw LLMGatewayError.transport(error.localizedDescription)
+    }
+
+    guard let httpResponse = response as? HTTPURLResponse else {
+      throw LLMGatewayError.invalidResponse
+    }
+    guard (200..<300).contains(httpResponse.statusCode) else {
+      let payload = try? JSONDecoder().decode(GatewayErrorPayload.self, from: data)
+      throw LLMGatewayError.server(
+        statusCode: httpResponse.statusCode,
+        message: payload?.error?.message
+      )
+    }
+
+    let completion: ChatCompletionResponse
+    do {
+      completion = try JSONDecoder().decode(ChatCompletionResponse.self, from: data)
+    } catch {
+      throw LLMGatewayError.invalidResponse
+    }
+    guard let content = completion.choices.first?.message.content, !content.isEmpty else {
+      throw LLMGatewayError.invalidProviderOutput
+    }
+    return (content, completion.model ?? config.model)
   }
 
   private func complete(

@@ -158,7 +158,7 @@ struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
       id: id,
       culturalElementKey: culturalElementKey,
       canonicalName: canonicalName,
-      summary: informativeSummary ?? "暂无可展示的景点介绍。",
+      summary: informativeSummary ?? Self.missingIntroductionSummary,
       category: category,
       timePeriod: timePeriod,
       region: region,
@@ -178,6 +178,15 @@ struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
     case .exhibit: "photo.artframe"
     case .space: "square.3.layers.3d"
     case .other: "sparkles"
+    }
+  }
+
+  private static var missingIntroductionSummary: String {
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      "No attraction introduction available."
+    case .zhHans:
+      "暂无可展示的景点介绍。"
     }
   }
 

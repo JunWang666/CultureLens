@@ -1,5 +1,6 @@
 {
   "version": "hangzhou-west-lake-v3",
+  "source_language": "zh-Hans",
   "elements": [
     {
       "key": "west-lake-pagoda-landscape",
@@ -4110,5 +4111,6 @@
       ],
       "minContacted": 3
     }
-  ]
+  ],
+  "locales": {}
 }

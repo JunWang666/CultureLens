@@ -41,7 +41,8 @@ nonisolated struct UserKnowledgeStateContext: Codable, Hashable, Sendable {
   init(key: String, name: String, level: KnowledgeLevel) {
     self.key = key
     self.name = name
-    self.level = level.rawValue
+    // Keep Chinese label for legacy prompts; append stable code for i18n prompts.
+    self.level = "\(level.rawValue)|\(level.promptCode)"
   }
 
   init(key: String, name: String, level: String) {

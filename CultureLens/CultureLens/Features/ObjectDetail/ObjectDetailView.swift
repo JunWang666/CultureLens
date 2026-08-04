@@ -3,13 +3,6 @@ import SwiftUI
 struct ObjectDetailView: View {
     let object: CultureObject
 
-    private var introductionDocument: RichTextDocument? {
-        if let key = object.culturalElementKey {
-            return KnowledgeStore.shared?.introductionDocument(elementKey: key)
-        }
-        return KnowledgeStore.shared?.introductionDocument(nodeID: object.id)
-    }
-
     var body: some View {
         ZStack {
             CulturePageBackground()
@@ -71,22 +64,19 @@ struct ObjectDetailView: View {
                     .foregroundStyle(CultureTheme.inkPrimary)
             }
 
-            Text([object.category.rawValue, object.timePeriod, object.region].compactMap { $0 }.joined(separator: " · "))
+            Text(
+                [object.category.localizedTitle, object.timePeriod, object.region]
+                    .compactMap { $0 }
+                    .joined(separator: " · ")
+            )
                 .font(.subheadline)
                 .foregroundStyle(CultureTheme.inkSecondary)
 
-            if let introductionDocument, !introductionDocument.blocks.isEmpty {
-                RichTextBlocksView(
-                    document: introductionDocument,
-                    textFont: .title3,
-                    textColor: CultureTheme.inkPrimary
-                )
-            } else {
-                Text(object.summary)
-                    .font(.title3)
-                    .foregroundStyle(CultureTheme.inkPrimary)
-                    .lineSpacing(6)
-            }
+            LocalizedKnowledgeBlocksView(
+                elementKey: object.culturalElementKey,
+                fallbackName: object.canonicalName,
+                fallbackSummary: object.summary
+            )
         }
     }
 
@@ -101,4 +91,5 @@ struct ObjectDetailView: View {
         ObjectDetailView(object: SampleCultureData.featured)
     }
     .environment(KnowledgeProgressStore())
+    .environment(AppLanguageStore())
 }

@@ -10,10 +10,10 @@ enum AppTab: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .explore: "探索"
-        case .scan: "扫描"
-        case .graph: "图谱"
-        case .profile: "我的"
+        case .explore: String(localized: "探索")
+        case .scan: String(localized: "扫描")
+        case .graph: String(localized: "图谱")
+        case .profile: String(localized: "我的")
         }
     }
 

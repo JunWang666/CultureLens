@@ -74,7 +74,7 @@ struct ExploreHomeView: View {
     case .empty:
       recommendationNotice(
         title: "附近暂无已收录内容",
-        message: "这里只显示数据库返回的内容，不再使用本地样例补位。",
+        message: String(localized: "这里只显示数据库返回的内容，不再使用本地样例补位。"),
         systemImage: "mappin.slash"
       )
 
@@ -95,7 +95,7 @@ struct ExploreHomeView: View {
   }
 
   private func recommendationNotice(
-    title: String,
+    title: LocalizedStringKey,
     message: String,
     systemImage: String
   ) -> some View {
@@ -209,8 +209,8 @@ struct ExploreHomeView: View {
   }
 
   private func playbookRow(
-    title: String,
-    message: String,
+    title: LocalizedStringKey,
+    message: LocalizedStringKey,
     systemImage: String
   ) -> some View {
     HStack(alignment: .center, spacing: 16) {
@@ -294,7 +294,7 @@ struct ExploreHomeView: View {
     .clipped()
   }
 
-  private func sectionTitle(_ title: String, subtitle: String) -> some View {
+  private func sectionTitle(_ title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
     VStack(alignment: .leading, spacing: 4) {
       Text(title)
         .font(.cultureSerif(.title2))
@@ -352,11 +352,12 @@ private struct NearbyIntroductionCard: View {
     .accessibilityElement(children: .combine)
   }
 
-  private var distanceText: String {
+  private var distanceText: LocalizedStringKey {
     if recommendation.distanceMeters < 1_000 {
       return "\(Int(recommendation.distanceMeters.rounded())) 米"
     }
-    return String(format: "%.1f 公里", recommendation.distanceMeters / 1_000)
+    let kilometers = String(format: "%.1f", recommendation.distanceMeters / 1_000)
+    return "\(kilometers) 公里"
   }
 }
 

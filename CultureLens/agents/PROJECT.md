@@ -17,9 +17,9 @@
 
 ## 多语言
 
-- UI 文案：`Localizable.xcstrings`（zh-Hans / en），语言偏好在「我的」页。
+- UI 文案：`Localizable.xcstrings`（zh-Hans / en），语言偏好在「我的」页。纯 `String` 文案经 `String(localized:)` / `LocalizedStringKey` 接入目录；构建后用 `xcstringstool sync`（配合 DerivedData 里的 `.stringsdata`）同步新 key。
 - LLM（识别 `dynamic/culturelens`、讲解/问答 `dynamic/chat`）：按目标语言直接生成；见 `PromptLanguagePolicy`。
-- 知识包：`source_language` + `locales` overlay；译文暂缺时详情页用 `dynamic/chat` 即时翻译（`KnowledgeTranslationService`）。设计见 `agents/design/0005`。
+- 知识包：`source_language` + `locales` overlay；译文暂缺时详情页用 `dynamic/chat` 即时翻译（`KnowledgeTranslationService`，`reasoning_effort: none`），翻译期间显示骨架屏（`SkeletonViews`），译好后直接展示，不再先显示原文再替换。设计见 `agents/design/0005`。
 
 ## 知识包与 ODR 分包
 

@@ -7,9 +7,9 @@ enum CultureChatError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .knowledgeUnavailable:
-      "知识库暂不可用，无法回答追问。"
+      String(localized: "知识库暂不可用，无法回答追问。")
     case .emptyQuestion:
-      "请先输入问题或上传图片。"
+      String(localized: "请先输入问题或上传图片。")
     }
   }
 }

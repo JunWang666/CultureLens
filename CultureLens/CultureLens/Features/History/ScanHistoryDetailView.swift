@@ -20,7 +20,7 @@ struct ScanHistoryDetailView: View {
                 ContentUnavailableView("找不到扫描记录", systemImage: "clock.badge.questionmark")
             }
         }
-        .cultureNavigationTitle(record?.canonicalName ?? "历史扫描")
+        .cultureNavigationTitle(record.map { LocalizedStringKey($0.canonicalName) } ?? "历史扫描")
         .task(id: record?.imageRelativePath) {
             imageData = await ScanMediaStore.shared.data(for: record?.imageRelativePath)
         }
@@ -80,7 +80,7 @@ struct ScanHistoryDetailView: View {
                         }
                         Spacer()
                         Label(
-                            record.placeName ?? "未记录位置",
+                            record.placeName ?? String(localized: "未记录位置"),
                             systemImage: record.place == nil ? "location.slash" : "location"
                         )
                     }
@@ -101,7 +101,7 @@ struct ScanHistoryDetailView: View {
                     Text("识别记录")
                         .font(.headline)
                     Text("模型：\(record.modelIdentifier)")
-                    Text("位置：\(record.placeName ?? "未使用")")
+                    Text("位置：\(record.placeName ?? String(localized: "未使用"))")
                     Text("类别：\(record.categoryRawValue)")
                 }
                 .font(.subheadline)

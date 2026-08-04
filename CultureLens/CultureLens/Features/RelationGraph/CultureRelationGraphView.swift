@@ -216,7 +216,7 @@ struct CultureRelationGraphView: View {
   private var displayModePicker: some View {
     Picker("显示方式", selection: $displayMode) {
       ForEach(DisplayMode.allCases) { mode in
-        Text(mode.rawValue).tag(mode)
+        Text(LocalizedStringKey(mode.rawValue)).tag(mode)
       }
     }
     .labelsHidden()
@@ -590,7 +590,7 @@ struct CultureRelationGraphView: View {
     if id == object.id {
       return object.canonicalName
     }
-    return object.concepts.first { $0.id == id }?.name ?? "未知节点"
+    return object.concepts.first { $0.id == id }?.name ?? String(localized: "未知节点")
   }
 
   private func navigableConcept(for relation: CultureRelation) -> CultureConcept? {
@@ -620,7 +620,7 @@ struct CultureRelationGraphView: View {
     }
   }
 
-  private func legendItem(_ title: String, color: Color) -> some View {
+  private func legendItem(_ title: LocalizedStringKey, color: Color) -> some View {
     HStack(spacing: 4) {
       Circle()
         .fill(color)

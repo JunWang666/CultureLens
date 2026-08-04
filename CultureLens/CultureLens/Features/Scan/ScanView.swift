@@ -442,7 +442,7 @@ struct ScanView: View {
         captureRequestID = nil
         isTorchOn = false
         guard let data else {
-            coordinator.showFailure("无法读取拍摄的照片，请重试。")
+            coordinator.showFailure(String(localized: "无法读取拍摄的照片，请重试。"))
             return
         }
         presentReview(

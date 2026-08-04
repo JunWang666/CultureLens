@@ -53,7 +53,7 @@ struct ConceptDetailView: View {
                 )
             }
         }
-        .cultureNavigationTitle(concept.name)
+        .cultureNavigationTitle(LocalizedStringKey(concept.name))
     }
 }
 

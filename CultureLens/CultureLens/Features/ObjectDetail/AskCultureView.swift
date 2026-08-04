@@ -31,7 +31,9 @@ struct AskCultureView: View {
       }
     }
     .cultureNavigationTitle(
-      isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"),
+      isGeneralChat
+        ? "文化问答"
+        : (object.map { LocalizedStringKey($0.canonicalName) } ?? "继续追问"),
       subtitle: model.isSending
         ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
         : nil
@@ -572,15 +574,15 @@ final class AskCultureChatModel: ObservableObject {
   var suggestions: [String] {
     if object == nil {
       return [
-        "西湖十景是怎样被命名的？",
-        "三潭映月和苏轼有什么关系？",
-        "我已经了解的节点还能怎样串联？",
+        String(localized: "西湖十景是怎样被命名的？"),
+        String(localized: "三潭映月和苏轼有什么关系？"),
+        String(localized: "我已经了解的节点还能怎样串联？"),
       ]
     }
     return [
-      "它为什么会形成这样的结构？",
-      "在不同地区有什么变化？",
-      "我还能在哪里看到相似对象？",
+      String(localized: "它为什么会形成这样的结构？"),
+      String(localized: "在不同地区有什么变化？"),
+      String(localized: "我还能在哪里看到相似对象？"),
     ]
   }
 
@@ -670,7 +672,7 @@ final class AskCultureChatModel: ObservableObject {
 
   func send() async {
     guard let chatService, let knowledgeProgressStore else {
-      errorMessage = "追问服务暂不可用。"
+      errorMessage = String(localized: "追问服务暂不可用。")
       return
     }
     let trimmed = draft.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -840,7 +842,7 @@ final class AskCultureChatModel: ObservableObject {
         messages: persisted
       )
     } catch {
-      errorMessage = "对话保存失败：\(error.localizedDescription)"
+      errorMessage = String(localized: "对话保存失败：\(error.localizedDescription)")
     }
   }
 

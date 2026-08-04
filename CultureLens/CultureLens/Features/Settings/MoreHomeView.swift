@@ -63,8 +63,8 @@ struct MoreHomeView: View {
 private extension MoreHomeView {
   struct Destination: Identifiable {
     let id: String
-    let title: String
-    let message: String
+    let title: LocalizedStringKey
+    let message: LocalizedStringKey
     let systemImage: String
     let route: AppRoute
     let accessibilityID: String
@@ -73,24 +73,24 @@ private extension MoreHomeView {
   static let destinations: [Destination] = [
     Destination(
       id: "history",
-      title: String(localized: "足迹"),
-      message: String(localized: "在地图与时间线里回看扫描记录。"),
+      title: "足迹",
+      message: "在地图与时间线里回看扫描记录。",
       systemImage: "map",
       route: .footprint,
       accessibilityID: "more.openHistory"
     ),
     Destination(
       id: "review",
-      title: String(localized: "文化回顾"),
-      message: String(localized: "把相近时间与地点的扫描收成一次参观汇总。"),
+      title: "文化回顾",
+      message: "把相近时间与地点的扫描收成一次参观汇总。",
       systemImage: "book.pages",
       route: .visitTrips,
       accessibilityID: "more.openReview"
     ),
     Destination(
       id: "settings",
-      title: String(localized: "设置"),
-      message: String(localized: "语言偏好与其他选项。"),
+      title: "设置",
+      message: "语言偏好与其他选项。",
       systemImage: "gearshape",
       route: .settings,
       accessibilityID: "more.openSettings"

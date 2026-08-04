@@ -60,7 +60,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       if host.contains("unesco.org") { return "UNESCO" }
       if host.contains("ehangzhou.gov.cn") { return "杭州政府网" }
       if host.contains("moj.gov.cn") { return "司法部" }
-      if host.isEmpty { return "外部资料" }
+      if host.isEmpty { return String(localized: "外部资料") }
       return host.replacingOccurrences(of: "www.", with: "")
     }
 

@@ -177,7 +177,7 @@ struct ScanCandidateDetailView: View {
             }
 
         case .failed(let message):
-            contentUnavailable(message)
+            contentUnavailableText(message)
         }
     }
 
@@ -196,8 +196,17 @@ struct ScanCandidateDetailView: View {
         )
     }
 
-    private func contentUnavailable(_ message: String) -> some View {
-        Label(message, systemImage: "exclamationmark.circle")
+    private func contentUnavailable(_ message: LocalizedStringKey) -> some View {
+        contentUnavailableBody(Label(message, systemImage: "exclamationmark.circle"))
+    }
+
+    /// Runtime strings arrive already localized (or from the service); show verbatim.
+    private func contentUnavailableText(_ message: String) -> some View {
+        contentUnavailableBody(Label(message, systemImage: "exclamationmark.circle"))
+    }
+
+    private func contentUnavailableBody(_ label: some View) -> some View {
+        label
             .font(.subheadline)
             .foregroundStyle(CultureTheme.inkSecondary)
             .padding(16)
@@ -214,7 +223,7 @@ struct ScanCandidateDetailView: View {
             let place = session.place,
             let attractionKey = candidate.attractionKey
         else {
-            introductionState = .failed("本次扫描缺少位置或景点标识，无法读取现场介绍。")
+            introductionState = .failed(String(localized: "本次扫描缺少位置或景点标识，无法读取现场介绍。"))
             return
         }
 

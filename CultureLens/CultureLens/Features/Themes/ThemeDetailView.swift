@@ -89,7 +89,7 @@ struct ThemeDetailView: View {
         ContentUnavailableView("主题暂不可用", systemImage: "list.bullet.rectangle")
       }
     }
-    .cultureNavigationTitle(theme?.name ?? "主题")
+    .cultureNavigationTitle(theme.map { LocalizedStringKey($0.name) } ?? "主题")
   }
 
   private func sectionTitle(_ title: String) -> some View {

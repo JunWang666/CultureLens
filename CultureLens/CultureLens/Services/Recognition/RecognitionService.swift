@@ -11,15 +11,15 @@ enum RecognitionServiceError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .invalidConfiguration:
-      "识别服务尚未配置。"
+      String(localized: "识别服务尚未配置。")
     case .localResourcesMissing:
-      "应用内缺少知识库或提示词资源，无法进行识别。"
+      String(localized: "应用内缺少知识库或提示词资源，无法进行识别。")
     case .invalidResponse:
-      "识别服务返回了无法读取的数据。"
+      String(localized: "识别服务返回了无法读取的数据。")
     case .server(let statusCode, let message):
-      message ?? "识别服务暂时不可用（\(statusCode)）。"
+      message ?? String(localized: "识别服务暂时不可用（\(statusCode)）。")
     case .transport(let message):
-      "无法连接识别服务：\(message)"
+      String(localized: "无法连接识别服务：\(message)")
     }
   }
 }

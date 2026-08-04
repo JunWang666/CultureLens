@@ -291,9 +291,9 @@ struct UserKnowledgeGraphView: View {
                     }
                 } label: {
                     if progressStore.level(for: node.id) == level {
-                        Label(level.rawValue, systemImage: "checkmark")
+                        Label(level.displayName, systemImage: "checkmark")
                     } else {
-                        Text(level.rawValue)
+                        Text(level.displayName)
                     }
                 }
             }
@@ -315,7 +315,7 @@ struct UserKnowledgeGraphView: View {
         }
     }
 
-    private func legendItem(_ title: String, color: Color) -> some View {
+    private func legendItem(_ title: LocalizedStringKey, color: Color) -> some View {
         HStack(spacing: 3) {
             Circle()
                 .fill(color)
@@ -327,12 +327,18 @@ struct UserKnowledgeGraphView: View {
         .fixedSize()
     }
 
+    // Stays `String` because it is also interpolated into the accessibility
+    // label above, where a `LocalizedStringKey` cannot be nested.
     private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {
-        if isCenter { return "当前中心" }
+        if isCenter { return String(localized: "当前中心") }
         if let level = progressStore.level(for: node.id) {
-            return level.rawValue
+            switch level {
+            case .contact: return String(localized: "接触")
+            case .understand: return String(localized: "理解")
+            case .master: return String(localized: "掌握")
+            }
         }
-        return "\(node.hop) 跳"
+        return String(localized: "\(node.hop) 跳")
     }
 
     private func nodeAccent(_ node: UserKnowledgeGraphNode) -> Color {
@@ -402,8 +408,8 @@ struct UserKnowledgeGraphView: View {
             }
             return UserKnowledgeGraphSeed(
                 id: id,
-                name: "已加入的文化节点",
-                summary: "该节点来自旧记录或其他版本的知识包。"
+                name: String(localized: "已加入的文化节点"),
+                summary: String(localized: "该节点来自旧记录或其他版本的知识包。")
             )
         }
     }

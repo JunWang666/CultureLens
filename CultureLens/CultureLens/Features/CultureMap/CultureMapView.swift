@@ -156,7 +156,7 @@ struct CultureMapView: View {
                     .foregroundStyle(CultureTheme.inkSecondary)
 
                 Label(
-                    record.placeName ?? "未记录位置",
+                    record.placeName ?? String(localized: "未记录位置"),
                     systemImage: record.place == nil ? "location.slash" : "location"
                 )
                 .font(.caption)

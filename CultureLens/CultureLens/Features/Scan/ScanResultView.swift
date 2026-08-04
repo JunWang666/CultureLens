@@ -10,7 +10,7 @@ struct ScanResultView: View {
   @State private var saveError: String?
   @State private var explanationState: ExplanationLoadState = .idle
   @State private var explanationStreamSource: GrowingMarkdownSource?
-  @State private var knowledgeContextSummary = "从你的文化图谱调整解释深度"
+  @State private var knowledgeContextSummary: LocalizedStringKey = "从你的文化图谱调整解释深度"
   private let explanationService = CultureExplanationService.live()
 
   private var object: CultureObject {
@@ -42,13 +42,6 @@ struct ScanResultView: View {
 
   private var currentResolutionStatus: String? {
     return session.result.resolutionStatus
-  }
-
-  private var introductionDocument: RichTextDocument? {
-    if let key = object.culturalElementKey {
-      return KnowledgeStore.shared?.introductionDocument(elementKey: key)
-    }
-    return KnowledgeStore.shared?.introductionDocument(nodeID: object.id)
   }
 
   var body: some View {
@@ -143,18 +136,13 @@ struct ScanResultView: View {
       .font(.subheadline)
       .foregroundStyle(CultureTheme.inkSecondary)
 
-      if let introductionDocument, !introductionDocument.blocks.isEmpty {
-        RichTextBlocksView(
-          document: introductionDocument,
-          textFont: .title3,
-          textColor: CultureTheme.inkPrimary
-        )
-      } else {
-        Text(object.summary)
-          .font(.title3)
-          .foregroundStyle(CultureTheme.inkPrimary)
-          .lineSpacing(6)
-      }
+      LocalizedKnowledgeBlocksView(
+        elementKey: object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id),
+        fallbackName: object.canonicalName,
+        fallbackSummary: object.summary,
+        textFont: .title3,
+        textColor: CultureTheme.inkPrimary
+      )
     }
   }
 
@@ -162,8 +150,7 @@ struct ScanResultView: View {
   private var explanationSection: some View {
     switch explanationState {
     case .idle, .loading(_):
-      HStack(spacing: 10) {
-        ProgressView()
+      VStack(alignment: .leading, spacing: 12) {
         VStack(alignment: .leading, spacing: 3) {
           Text("正在整理文化背景…")
             .font(.subheadline.weight(.semibold))
@@ -171,6 +158,7 @@ struct ScanResultView: View {
             .font(.caption)
         }
         .foregroundStyle(CultureTheme.inkSecondary)
+        SkeletonTextBlock()
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding(16)
@@ -246,8 +234,8 @@ struct ScanResultView: View {
       HStack {
         Label(
           session.result.usedPlaceContext
-            ? (session.place?.displayName ?? "使用位置")
-            : "未使用位置",
+            ? (session.place?.displayName ?? String(localized: "使用位置"))
+            : String(localized: "未使用位置"),
           systemImage: session.result.usedPlaceContext ? "location.fill" : "location.slash"
         )
         Spacer()
@@ -441,12 +429,14 @@ struct ScanResultView: View {
     }
   }
 
-  private var confidenceText: String {
-    let prefix = object.confidence >= 0.8 ? "较高可信度" : "可能是"
+  private var confidenceText: LocalizedStringKey {
     let percentage = object.confidence.formatted(
       .percent.precision(.fractionLength(0))
     )
-    return "\(prefix) · \(percentage)"
+    if object.confidence >= 0.8 {
+      return "较高可信度 · \(percentage)"
+    }
+    return "可能是 · \(percentage)"
   }
 
   private var confidenceSymbol: String {
@@ -511,7 +501,7 @@ struct ScanResultView: View {
     knowledgeContextSummary = knowledgeContextSummary(for: userKnowledgeStates)
 
     guard let explanationService else {
-      explanationState = .failed("讲解服务暂不可用。")
+      explanationState = .failed(String(localized: "讲解服务暂不可用。"))
       return
     }
     // Demo / sample recognition should not call the live chat gateway.
@@ -608,7 +598,7 @@ struct ScanResultView: View {
 
   private func knowledgeContextSummary(
     for states: [UserKnowledgeStateContext]
-  ) -> String {
+  ) -> LocalizedStringKey {
     guard !states.isEmpty else {
       return "你的文化图谱暂无已有节点，将从必要背景讲起"
     }
@@ -623,13 +613,13 @@ struct ScanResultView: View {
     let relatedNames = object.concepts.prefix(2).map(\.name).joined(separator: "、")
     let nextStep =
       relatedNames.isEmpty
-      ? "- 从关系图选择一个相邻概念继续探索。"
-      : "- 继续观察或追问它与\(relatedNames)的关系。"
+      ? "- \(String(localized: "从关系图选择一个相邻概念继续探索。"))"
+      : "- \(String(localized: "继续观察或追问它与\(relatedNames)的关系。"))"
     return """
-      ## 文化背景
+      ## \(String(localized: "文化背景"))
       \(object.summary)
 
-      ## 下一步建议
+      ## \(String(localized: "下一步建议"))
       \(nextStep)
       """
   }

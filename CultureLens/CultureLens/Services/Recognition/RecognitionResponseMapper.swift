@@ -282,12 +282,20 @@ nonisolated enum RecognitionResponseMapper {
     elementKey: String,
     related: [KnowledgeGraphElement]
   ) -> [KnowledgeGraphRelation] {
-    related.map {
+    let explanation: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      explanation =
+        "The culture content library records an explicit link between this object and the concept; the relation type is not yet refined."
+    case .zhHans:
+      explanation = "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
+    }
+    return related.map {
       KnowledgeGraphRelation(
         elementKey: elementKey,
         relatedElementKey: $0.key,
         kind: "解释",
-        explanation: "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
+        explanation: explanation
       )
     }
   }
@@ -332,14 +340,22 @@ nonisolated enum RecognitionResponseMapper {
   private static func attractionCandidate(
     _ attraction: AttractionCandidate
   ) -> RecognitionCandidate {
-    RecognitionCandidate(
+    let rationale: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      rationale =
+        "Listed as a nearby attraction from this scan's location; not yet confirmed by the image."
+    case .zhHans:
+      rationale = "根据当前位置列出的附近景点，仍需结合画面确认。"
+    }
+    return RecognitionCandidate(
       id: DeterministicID.v5(name: "attraction:" + attraction.key),
       attractionKey: attraction.key,
       culturalElementKey: attraction.culturalElementKey,
       canonicalName: attraction.name,
       category: .space,
       confidence: 0,
-      rationale: "根据当前位置列出的附近景点，仍需结合画面确认。",
+      rationale: rationale,
       summary: attraction.summary,
       sources: attraction.sources.map { $0.asKnowledgeSource() },
       resolutionStatus: "attraction"

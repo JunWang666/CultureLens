@@ -7,9 +7,9 @@ enum CultureExplanationError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .knowledgeUnavailable:
-      "知识库暂不可用，无法生成讲解。"
+      String(localized: "知识库暂不可用，无法生成讲解。")
     case .emptyObject:
-      "缺少识别对象，无法生成讲解。"
+      String(localized: "缺少识别对象，无法生成讲解。")
     }
   }
 }

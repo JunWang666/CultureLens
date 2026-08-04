@@ -68,9 +68,9 @@ struct KnowledgeGraphMembershipButton: View {
                 }
             } label: {
                 if currentLevel == level {
-                    Label(level.rawValue, systemImage: "checkmark")
+                    Label(level.displayName, systemImage: "checkmark")
                 } else {
-                    Text(level.rawValue)
+                    Text(level.displayName)
                 }
             }
         }
@@ -86,16 +86,24 @@ struct KnowledgeGraphMembershipButton: View {
         }
     }
 
-    private var fullWidthTitle: String {
+    private var fullWidthTitle: LocalizedStringKey {
         if let currentLevel {
-            return "图谱 · \(currentLevel.rawValue)"
+            switch currentLevel {
+            case .contact: return "图谱 · 接触"
+            case .understand: return "图谱 · 理解"
+            case .master: return "图谱 · 掌握"
+            }
         }
         return "加入文化图谱"
     }
 
-    private var accessibilityLabel: String {
+    private var accessibilityLabel: LocalizedStringKey {
         if let currentLevel {
-            return "文化图谱状态：\(currentLevel.rawValue)"
+            switch currentLevel {
+            case .contact: return "文化图谱状态：接触"
+            case .understand: return "文化图谱状态：理解"
+            case .master: return "文化图谱状态：掌握"
+            }
         }
         return "加入文化图谱"
     }

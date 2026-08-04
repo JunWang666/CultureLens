@@ -108,10 +108,11 @@ final class ChatHistoryStore {
         return String(trimmed.prefix(36))
       }
       if firstUser.imageRelativePath != nil {
-        return object.map { "关于\($0.canonicalName)的图片提问" } ?? "图片提问"
+        return object.map { String(localized: "关于\($0.canonicalName)的图片提问") }
+          ?? String(localized: "图片提问")
       }
     }
-    return object?.canonicalName ?? "文化问答"
+    return object?.canonicalName ?? String(localized: "文化问答")
   }
 
   private func persist() throws {
@@ -139,7 +140,7 @@ enum ChatHistoryStoreError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .saveFailed(let error):
-      "对话写入失败：\(error.localizedDescription)"
+      String(localized: "对话写入失败：\(error.localizedDescription)")
     }
   }
 }

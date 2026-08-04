@@ -37,7 +37,7 @@ struct ObjectDetailView: View {
                 )
             }
         }
-        .cultureNavigationTitle(object.canonicalName)
+        .cultureNavigationTitle(LocalizedStringKey(object.canonicalName))
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 KnowledgeGraphMembershipButton(

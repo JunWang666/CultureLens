@@ -88,7 +88,7 @@ struct VisitTripDetailView: View {
         ContentUnavailableView("找不到这次参观", systemImage: "book.closed")
       }
     }
-    .cultureNavigationTitle(trip?.title ?? "文化回顾")
+    .cultureNavigationTitle(trip.map { LocalizedStringKey($0.title) } ?? "文化回顾")
   }
 
   private func summaryHeader(_ trip: VisitTrip) -> some View {
@@ -127,7 +127,7 @@ struct VisitTripDetailView: View {
     }
   }
 
-  private func statCell(value: String, label: String) -> some View {
+  private func statCell(value: String, label: LocalizedStringKey) -> some View {
     VStack(spacing: 4) {
       Text(value)
         .font(.title2.monospacedDigit().weight(.semibold))
@@ -139,7 +139,7 @@ struct VisitTripDetailView: View {
     .frame(maxWidth: .infinity)
   }
 
-  private func sectionTitle(_ title: String) -> some View {
+  private func sectionTitle(_ title: LocalizedStringKey) -> some View {
     Text(title)
       .font(.cultureSerif(.title2))
       .foregroundStyle(CultureTheme.inkPrimary)

@@ -417,6 +417,70 @@ struct CultureLensTests {
     #expect(body["reasoning_effort"] as? String == "low")
   }
 
+  @Test func chatTurnEncodesMultimodalImageURLParts() throws {
+    let turn = ChatTurn(
+      role: .user,
+      content: "这是什么塔？",
+      image: .init(base64JPEG: "abc123", mimeType: "image/jpeg")
+    )
+    let message = turn.asAPIMessage()
+    #expect(message["role"] as? String == "user")
+    let parts = try #require(message["content"] as? [[String: Any]])
+    #expect(parts.count == 2)
+    #expect(parts[0]["type"] as? String == "text")
+    #expect(parts[0]["text"] as? String == "这是什么塔？")
+    #expect(parts[1]["type"] as? String == "image_url")
+    let imageURL = try #require(parts[1]["image_url"] as? [String: Any])
+    #expect(imageURL["url"] as? String == "data:image/jpeg;base64,abc123")
+
+    let textOnly = ChatTurn(role: .assistant, content: "答复").asAPIMessage()
+    #expect(textOnly["content"] as? String == "答复")
+  }
+
+  @Test func chatTurnImageOnlyUsesFallbackPromptText() throws {
+    let turn = ChatTurn(
+      role: .user,
+      content: "   ",
+      image: .init(base64JPEG: "xyz", mimeType: "image/jpeg")
+    )
+    let parts = try #require(turn.asAPIMessage()["content"] as? [[String: Any]])
+    let text = try #require(parts[0]["text"] as? String)
+    #expect(text.contains("图片"))
+  }
+
+  @Test func chatHistoryTitleUsesFirstUserQuestion() {
+    let messages = [
+      PersistedChatMessage(role: .user, text: "三潭印月和苏轼有什么关系？"),
+      PersistedChatMessage(role: .assistant, text: "……"),
+    ]
+    #expect(
+      ChatHistoryStore.makeTitle(from: messages, object: nil)
+        == "三潭印月和苏轼有什么关系？"
+    )
+    let imageOnly = [PersistedChatMessage(role: .user, text: "", imageRelativePath: "a.jpg")]
+    #expect(ChatHistoryStore.makeTitle(from: imageOnly, object: nil) == "图片提问")
+  }
+
+  @Test func persistedChatMessageRoundTripsCitations() throws {
+    let original = PersistedChatMessage(
+      role: .assistant,
+      text: "正文",
+      citations: [
+        PersistedKnowledgeCitation(
+          key: "three-pools-mirroring-moon",
+          name: "三潭印月",
+          fragment: "湖中石塔"
+        )
+      ]
+    )
+    let data = try JSONEncoder().encode([original])
+    let decoded = try JSONDecoder().decode([PersistedChatMessage].self, from: data)
+    #expect(decoded.count == 1)
+    #expect(decoded[0].text == "正文")
+    #expect(decoded[0].citations[0].key == "three-pools-mirroring-moon")
+    #expect(decoded[0].citations[0].asKnowledgeCitation.name == "三潭印月")
+  }
+
   @Test func chatAnswerSplitsCitationSectionIntoCards() {
     let markdown = """
       三潭印月是西湖夜景的代表。

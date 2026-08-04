@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-03 文化问答增强：SwiftData 持久化历史会话（首页 / 对象追问分作用域）、工具栏新对话与历史列表、相册图片上传（归一化 JPEG + 多模态 `image_url`）；历史轮用文字标注避免重复传图。见 `agents/design/0005-chat-history-and-image-upload.md`。
 - 2026-08-03 文化问答页输入框调整为 ChatGPT 风格紧凑单胶囊布局：空输入保持 48pt 单行高度，输入换行后才按内容增长；左侧快捷入口、中部多行输入、麦克风入口，以及随输入状态切换的蓝色语音波形 / 发送按钮；保留中文输入法候选确认与发送键语义。
 - 2026-08-03 聊天 UI 换成 Messages 风格气泡 + Microsoft `SwiftStreamingMarkdown` 流式 Markdown 渲染；问答改为 SSE `stream: true`（`dynamic/chat`）。未采用 ExyteChat：其强制依赖 Giphy SDK，体积与审核成本过高。
 - 2026-08-03 讲解生成（`CultureExplanationService` + `explain` prompt / `dynamic/chat`）与多轮追问（`AskCultureView` + `CultureChatService`）；PromptAssembler / v5 增加用户知识状态与「跳过已知、锚定已知、补缺」；对象 / 概念 / 扫描结果详情用 `RichTextBlocksView`；用户状态升级为接触 / 理解 / 掌握（SwiftData 存时间戳与来源）。
@@ -21,10 +22,10 @@
 
 ## 下一步
 
-1. 真机验证：扫描识别三态、分层讲解、多轮追问、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback。
+1. 真机验证：扫描识别三态、分层讲解、多轮追问（含历史恢复与图片上传）、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback。
 2. 归档 + 导出 ipa，确认 OnDemandResources 拆分；按 `APP_STORE.md` 检查单准备上架。
 3. R2 bucket 开通公开读并补内容图片 URL；admin 侧维护含 image block 的介绍。
-4. 补 App 图标与隐私清单（照片经 AI Gateway 发 Google 需如实声明）。
+4. 补 App 图标与隐私清单（照片经 AI Gateway 发 Google 需如实声明；问答上传图片同属此声明）。
 
 ## 已知取舍与阻塞
 

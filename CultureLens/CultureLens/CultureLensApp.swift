@@ -17,6 +17,7 @@ struct CultureLensApp: App {
             let schema = Schema([
                 ScanHistoryRecord.self,
                 KnowledgeProgressRecord.self,
+                ChatConversationRecord.self,
             ])
             let configuration = ModelConfiguration(
                 "CultureLensHistoryV1",

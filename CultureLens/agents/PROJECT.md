@@ -6,7 +6,8 @@
 
 - 本地知识库（西湖内容包：34 元素 / 7 景点 / 44 关系 / 19 介绍）替代 PostgreSQL。
 - 本地完成候选挑选（Haversine 附近查询、优先级排序 top 12、BFS 图谱、景点绑定）与 prompt 拼接（v5 模板 + 候选 JSON），逻辑 1:1 移植自 Go 后端 `internal/knowledge`、`internal/recognition`、`internal/providers/googleai`。
-- LLM 调用直连 Cloudflare AI Gateway 的 OpenAI 兼容端点：识别用 `dynamic/culturelens`（多模态），讲解与追问用 `dynamic/chat`；key 硬编码于 `Services/LLM/LLMGatewayConfig.swift`（本期接受的安全取舍）。
+- LLM 调用直连 Cloudflare AI Gateway 的 OpenAI 兼容端点：识别用 `dynamic/culturelens`（多模态），讲解与追问用 `dynamic/chat`（追问可附现场照片，同样走 `image_url`）；key 硬编码于 `Services/LLM/LLMGatewayConfig.swift`（本期接受的安全取舍）。
+- 文化问答会话经 SwiftData（`ChatConversationRecord`）本地持久化，图片落盘于 Application Support `CultureLens/Chats/`。
 - 响应在端侧校验映射（key 校验、UUIDv5、富文本压平用于识别摘要、SF Symbol），产出与旧版相同的 `RecognitionResult`；详情页优先用 `RichTextBlocksView` 渲染知识库原文。
 
 ## 外部依赖（仅两个）

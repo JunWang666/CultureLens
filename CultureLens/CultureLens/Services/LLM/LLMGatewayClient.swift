@@ -25,7 +25,7 @@ enum LLMGatewayError: LocalizedError {
 
 /// Minimal OpenAI-compatible chat/completions client for the Cloudflare AI
 /// Gateway. Recognition uses multimodal `dynamic/culturelens`; explanation and
-/// Q&A use text `dynamic/chat`.
+/// Q&A use `dynamic/chat` (Q&A turns may include OpenAI-style `image_url` parts).
 nonisolated struct LLMGatewayClient: Sendable {
   let config: LLMGatewayConfig
   let chatConfig: LLMGatewayConfig
@@ -176,7 +176,7 @@ nonisolated struct LLMGatewayClient: Sendable {
       ["role": "system", "content": systemPrompt]
     ]
     for turn in messages {
-      payload.append(["role": turn.role.rawValue, "content": turn.content])
+      payload.append(turn.asAPIMessage())
     }
     let content = try await complete(
       config: chatConfig,
@@ -196,6 +196,7 @@ nonisolated struct LLMGatewayClient: Sendable {
   }
 
   /// Streams assistant Markdown tokens from `dynamic/chat` (SSE).
+  /// Turns may include OpenAI-style `image_url` parts for photo follow-ups.
   func streamAsk(
     systemPrompt: String,
     messages: [ChatTurn],
@@ -208,7 +209,7 @@ nonisolated struct LLMGatewayClient: Sendable {
             ["role": "system", "content": systemPrompt]
           ]
           for turn in messages {
-            payload.append(["role": turn.role.rawValue, "content": turn.content])
+            payload.append(turn.asAPIMessage())
           }
           try await self.streamComplete(
             config: self.chatConfig,
@@ -424,8 +425,53 @@ nonisolated struct ChatTurn: Sendable, Hashable {
     case assistant
   }
 
+  struct ImageAttachment: Sendable, Hashable {
+    let base64JPEG: String
+    let mimeType: String
+
+    init(base64JPEG: String, mimeType: String = "image/jpeg") {
+      self.base64JPEG = base64JPEG
+      self.mimeType = mimeType
+    }
+
+    init(jpegData: Data, mimeType: String = "image/jpeg") {
+      self.base64JPEG = jpegData.base64EncodedString()
+      self.mimeType = mimeType
+    }
+  }
+
   let role: Role
   let content: String
+  let image: ImageAttachment?
+
+  init(role: Role, content: String, image: ImageAttachment? = nil) {
+    self.role = role
+    self.content = content
+    self.image = image
+  }
+
+  var hasImage: Bool { image != nil }
+
+  /// OpenAI-compatible message dict; multimodal when `image` is set.
+  func asAPIMessage() -> [String: Any] {
+    guard let image else {
+      return ["role": role.rawValue, "content": content]
+    }
+    let text =
+      content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+      ? "请结合这张图片，在知识库约束内回答。"
+      : content
+    return [
+      "role": role.rawValue,
+      "content": [
+        ["type": "text", "text": text] as [String: Any],
+        [
+          "type": "image_url",
+          "image_url": ["url": "data:\(image.mimeType);base64,\(image.base64JPEG)"],
+        ] as [String: Any],
+      ],
+    ]
+  }
 }
 
 nonisolated enum LLMReasoningEffort: String, Sendable {

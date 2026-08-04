@@ -149,7 +149,7 @@ struct ExploreHomeView: View {
           Text("文化问答")
             .font(.cultureSerif(.title2))
             .foregroundStyle(CultureTheme.inkPrimary)
-          Text("不必先扫描。直接问知识库与你的文化图谱，回答会标注引用来源。")
+          Text("不必先扫描。直接问知识库与你的文化图谱；可上传图片，历史对话会保留。")
             .font(.subheadline)
             .foregroundStyle(CultureTheme.inkSecondary)
             .fixedSize(horizontal: false, vertical: true)

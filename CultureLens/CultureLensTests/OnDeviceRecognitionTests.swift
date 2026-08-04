@@ -391,12 +391,67 @@ struct OnDeviceRecognitionTests {
     #expect(pack.version == "test-v1")
     #expect(pack.elements.first?.introduction.plainText == "介绍一。")
     #expect(pack.elements.first?.sources.isEmpty == true)
+    #expect(pack.elements.first?.conceptKind == nil)
     #expect(pack.introductions.first?.culturalElementKey == "e1")
     #expect(pack.introductions.first?.coordinateSourceUrl == "https://example.com/source")
     #expect(pack.introductions.first?.sources.count == 1)
     #expect(pack.introductions.first?.sources.first?.url == "https://example.com/source")
     #expect(pack.introductions.first?.sources.first?.publisher == "example.com")
     #expect(pack.relations.first?.relatedElementKey == "e2")
+    #expect(pack.relations.first?.kind == nil)
+    #expect(pack.relations.first?.explanation == nil)
+  }
+
+  @Test func knowledgePackDecodesOptionalRelationAndConceptTyping() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "test-typed-v1",
+        "elements": [
+          {
+            "key": "e1",
+            "name": "元素一",
+            "conceptKind": "人物",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "介绍一。" }]
+            }
+          },
+          {
+            "key": "e2",
+            "name": "元素二",
+            "conceptKind": "历史",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "介绍二。" }]
+            }
+          }
+        ],
+        "attractions": [],
+        "relations": [
+          {
+            "elementKey": "e1",
+            "relatedElementKey": "e2",
+            "kind": "产生于",
+            "explanation": "元素一的治理实践催生了元素二的历史形态。"
+          }
+        ],
+        "introductions": []
+      }
+      """#.utf8
+    )
+
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    let store = KnowledgeStore(pack: pack)
+    let set = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 6)
+    let root = try #require(set.elements.first { $0.key == "e1" })
+    let edge = try #require(root.graphRelations.first)
+
+    #expect(pack.elements.first?.conceptKind == "人物")
+    #expect(store.cultureConcept(elementKey: "e1")?.kind == .people)
+    #expect(edge.kind == "产生于")
+    #expect(edge.explanation.contains("治理实践"))
+    #expect(root.relatedElements.first?.conceptKind == "历史")
   }
 
   @Test func introductionSourcesPreferExplicitArrayOverCoordinateUrl() throws {
@@ -668,7 +723,10 @@ struct OnDeviceRecognitionTests {
     #expect(attractionResult.object.summary == "库内审核介绍。")
     #expect(attractionResult.object.concepts.map(\.name) == ["关联元素"])
     #expect(attractionResult.object.relations.first?.kind == .explains)
-    #expect(attractionResult.alternatives.isEmpty)
+    #expect(attractionResult.displayAttractionCandidates.isEmpty)
+    #expect(attractionResult.displayVisualAlternatives.count == 1)
+    #expect(attractionResult.displayVisualAlternatives.first?.canonicalName == "备选对象")
+    #expect(attractionResult.displayVisualAlternatives.first?.resolutionStatus == "visual")
     #expect(attractionResult.locationInfluence?.effect == .reordered)
     #expect(attractionResult.catalogVersion == "test-v9")
     #expect(attractionResult.catalogCandidateCount == 2)
@@ -687,12 +745,14 @@ struct OnDeviceRecognitionTests {
     )
     #expect(resolvedResult.resolutionStatus == "resolved")
     #expect(resolvedResult.object.summary == "库内审核介绍。")
-    #expect(resolvedResult.alternatives.map(\.resolutionStatus) == ["attraction"])
-    #expect(resolvedResult.alternatives.first?.category == .space)
+    #expect(resolvedResult.displayAttractionCandidates.map(\.resolutionStatus) == ["attraction"])
+    #expect(resolvedResult.displayAttractionCandidates.first?.category == .space)
     #expect(
-      resolvedResult.alternatives.first?.id
+      resolvedResult.displayAttractionCandidates.first?.id
         == DeterministicID.v5(name: "attraction:att")
     )
+    #expect(resolvedResult.displayVisualAlternatives.count == 1)
+    #expect(resolvedResult.displayVisualAlternatives.first?.canonicalName == "备选对象")
 
     // Unresolved branch: LLM text passes through with a deterministic ID.
     let unresolvedResult = RecognitionResponseMapper.mapResponse(
@@ -709,8 +769,22 @@ struct OnDeviceRecognitionTests {
         == DeterministicID.v5(name: "req-3:unresolved:陌生纹样")
     )
     #expect(unresolvedResult.locationInfluence == nil)
+    UserDefaults.standard.set(
+      AppLanguagePreference.zhHans.rawValue,
+      forKey: AppLanguageStore.preferenceKey
+    )
+    defer {
+      UserDefaults.standard.removeObject(forKey: AppLanguageStore.preferenceKey)
+    }
+    let unresolvedZH = RecognitionResponseMapper.mapResponse(
+      requestID: "req-3-zh",
+      usedPlaceContext: false,
+      decision: decision(canonicalName: "陌生纹样"),
+      modelIdentifier: "dynamic/culturelens",
+      knowledge: knowledge
+    )
     #expect(
-      unresolvedResult.uncertainty
+      unresolvedZH.uncertainty
         == "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
     )
   }
@@ -718,7 +792,28 @@ struct OnDeviceRecognitionTests {
   // MARK: - Prompt assembly (googleai/client.go)
 
   @Test func promptAssemblerBuildsUserTextLikeGoProvider() throws {
-    let assembler = PromptAssembler(systemPrompt: "SYS")
+    let assembler = PromptAssembler(
+      systemPrompt: "SYS",
+      explainSystemPrompt: """
+        你是讲解助手。不要重复识别结论。
+        - `掌握`：不复述基础定义。
+        输出格式（严格按此 Markdown 结构，不要包在 JSON 或代码块里）：
+
+        ## 文化背景
+        正文
+
+        ## 下一步建议
+        - 建议一
+
+        ## 引用来源
+        - key: `k`, name: n
+          - 原文摘录：quote
+
+        所有文字使用简体中文。
+        """,
+      askSystemPrompt: "ASK\n所有文字使用简体中文 Markdown（可用标题、列表、加粗；不要用代码块包住整篇回答）。",
+      languagePolicy: PromptLanguagePolicy(language: .zhHans)
+    )
     let candidate = KnowledgeCandidateContext(
       key: "e1",
       name: "元素一",
@@ -767,7 +862,7 @@ struct OnDeviceRecognitionTests {
       ]
     )
     #expect(withKnowledge.contains("用户知识状态 JSON："))
-    #expect(withKnowledge.contains("\"level\":\"理解\""))
+    #expect(withKnowledge.contains("\"level\":\"理解|understand\""))
     #expect(withKnowledge.contains("跳过已知、锚定已知、补缺"))
 
     let explain = try assembler.explainUserText(

@@ -158,7 +158,7 @@ struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
       id: id,
       culturalElementKey: culturalElementKey,
       canonicalName: canonicalName,
-      summary: informativeSummary ?? "暂无可展示的景点介绍。",
+      summary: informativeSummary ?? Self.missingIntroductionSummary,
       category: category,
       timePeriod: timePeriod,
       region: region,
@@ -178,6 +178,15 @@ struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
     case .exhibit: "photo.artframe"
     case .space: "square.3.layers.3d"
     case .other: "sparkles"
+    }
+  }
+
+  private static var missingIntroductionSummary: String {
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      "No attraction introduction available."
+    case .zhHans:
+      "暂无可展示的景点介绍。"
     }
   }
 
@@ -210,12 +219,21 @@ struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
   var catalogVersion: String? = nil
   var catalogCandidateCount: Int? = nil
 
+  /// Nearby place candidates derived from GPS / introductions (not model guesses).
   var displayAttractionCandidates: [RecognitionCandidate] {
     alternatives.filter { candidate in
       guard candidate.resolutionStatus == "attraction" else { return false }
       guard resolutionStatus == "attraction" else { return true }
       return Self.normalizedName(candidate.canonicalName)
         != Self.normalizedName(object.canonicalName)
+    }
+  }
+
+  /// Model visual alternatives (2nd/3rd guesses), excluding geographic candidates.
+  var displayVisualAlternatives: [RecognitionCandidate] {
+    alternatives.filter { candidate in
+      let status = candidate.resolutionStatus
+      return status != "attraction"
     }
   }
 

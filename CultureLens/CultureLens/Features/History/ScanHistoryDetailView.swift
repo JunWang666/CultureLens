@@ -90,6 +90,7 @@ struct ScanHistoryDetailView: View {
             } trailing: { _ in
                 if let result = resultSnapshot(for: record) {
                     CultureRelationGraphView(object: result.object)
+                    savedVisualAlternatives(result.displayVisualAlternatives)
                     savedCandidates(
                         result.displayAttractionCandidates,
                         selectedCandidateID: record.historySnapshot?.selectedCandidateID
@@ -108,6 +109,43 @@ struct ScanHistoryDetailView: View {
                 .padding(18)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 20))
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func savedVisualAlternatives(_ candidates: [RecognitionCandidate]) -> some View {
+        if !candidates.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("其他视觉猜测")
+                    .font(.cultureSerif(.title2))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+
+                ForEach(candidates) { candidate in
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Text(candidate.canonicalName)
+                                .font(.headline)
+                                .foregroundStyle(CultureTheme.inkPrimary)
+                            Spacer()
+                            Text(
+                                candidate.confidence,
+                                format: .percent.precision(.fractionLength(0))
+                            )
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(CultureTheme.cinnabar)
+                        }
+                        Text(candidate.rationale)
+                            .font(.subheadline)
+                            .foregroundStyle(CultureTheme.inkSecondary)
+                    }
+                    .padding(16)
+                    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 18))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(CultureTheme.hairline, lineWidth: 1)
+                    }
+                }
             }
         }
     }

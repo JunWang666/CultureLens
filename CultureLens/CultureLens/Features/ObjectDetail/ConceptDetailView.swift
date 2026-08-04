@@ -9,12 +9,6 @@ struct ConceptDetailView: View {
             ?? KnowledgeStore.shared?.elementKey(for: concept.id)
     }
 
-    private var introductionDocument: RichTextDocument? {
-        resolvedElementKey.flatMap {
-            KnowledgeStore.shared?.introductionDocument(elementKey: $0)
-        }
-    }
-
     var body: some View {
         ZStack {
             CulturePageBackground()
@@ -24,7 +18,7 @@ struct ConceptDetailView: View {
                     .font(.largeTitle)
                     .foregroundStyle(CultureTheme.cinnabar)
 
-                Text(concept.kind.rawValue)
+                Text(concept.kind.localizedTitle)
                     .font(.caption.weight(.semibold))
                     .tracking(1.2)
                     .foregroundStyle(CultureTheme.cinnabar)
@@ -33,20 +27,13 @@ struct ConceptDetailView: View {
                     .font(.cultureSerif(.largeTitle))
                     .foregroundStyle(CultureTheme.inkPrimary)
 
-                if let introductionDocument, !introductionDocument.blocks.isEmpty {
-                    RichTextBlocksView(
-                        document: introductionDocument,
-                        textFont: .title3,
-                        textColor: CultureTheme.inkPrimary
-                    )
-                } else {
-                    Text(concept.summary)
-                        .font(.title3)
-                        .foregroundStyle(CultureTheme.inkPrimary)
-                        .lineSpacing(6)
-                }
+                LocalizedKnowledgeBlocksView(
+                    elementKey: resolvedElementKey,
+                    fallbackName: concept.name,
+                    fallbackSummary: concept.summary
+                )
             } trailing: { _ in
-                if introductionDocument == nil, let detail = concept.distinctDetail {
+                if resolvedElementKey == nil, let detail = concept.distinctDetail {
                     VStack(alignment: .leading, spacing: 14) {
                         Text(detail)
                             .font(.body)
@@ -75,4 +62,5 @@ struct ConceptDetailView: View {
         ConceptDetailView(concept: SampleCultureData.featured.concepts[0])
     }
     .environment(KnowledgeProgressStore())
+    .environment(AppLanguageStore())
 }

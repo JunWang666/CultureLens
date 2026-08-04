@@ -5,10 +5,17 @@ import Foundation
 /// `content/hangzhou-west-lake.v1.json` export format.
 nonisolated struct KnowledgePack: Decodable, Sendable {
   let version: String
+  /// BCP-47 tag for the primary text fields (name / introduction). Defaults to zh-Hans.
+  let sourceLanguage: String?
   let elements: [Element]
   let attractions: [Attraction]
   let relations: [Relation]
   let introductions: [IntroductionRecord]
+  /// Themed exploration tracks. Older packs may omit this field.
+  let themes: [Theme]
+  /// Optional translated overlays keyed by BCP-47 tag (e.g. "en"). May be empty
+  /// until multilingual packs ship; runtime falls back to `dynamic/chat` translation.
+  let locales: [String: LocaleOverlay]?
 
   /// External trusted reference attached to an element or on-site introduction.
   nonisolated struct Source: Codable, Sendable, Hashable {
@@ -79,21 +86,25 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let name: String
     let introduction: RichTextDocument
     let sources: [Source]
+    /// Optional `ConceptKind.rawValue`; omitted in older packs.
+    let conceptKind: String?
 
     init(
       key: String,
       name: String,
       introduction: RichTextDocument,
-      sources: [Source] = []
+      sources: [Source] = [],
+      conceptKind: String? = nil
     ) {
       self.key = key
       self.name = name
       self.introduction = introduction
       self.sources = sources
+      self.conceptKind = conceptKind
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources
+      case key, name, introduction, sources, conceptKind
     }
 
     init(from decoder: Decoder) throws {
@@ -102,6 +113,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       name = try container.decode(String.self, forKey: .name)
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
+      conceptKind = try container.decodeIfPresent(String.self, forKey: .conceptKind)
     }
   }
 
@@ -118,10 +130,21 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   nonisolated struct Relation: Decodable, Sendable {
     let elementKey: String
     let relatedElementKey: String
+    /// Optional `RelationKind.rawValue`; omitted in older packs.
+    let kind: String?
+    /// Human-readable edge gloss; omitted in older packs.
+    let explanation: String?
 
-    init(elementKey: String, relatedElementKey: String) {
+    init(
+      elementKey: String,
+      relatedElementKey: String,
+      kind: String? = nil,
+      explanation: String? = nil
+    ) {
       self.elementKey = elementKey
       self.relatedElementKey = relatedElementKey
+      self.kind = kind
+      self.explanation = explanation
     }
   }
 
@@ -192,17 +215,73 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
+  /// A curated exploration path that binds a set of cultural element keys
+  /// and a completion threshold (`minContacted`).
+  nonisolated struct Theme: Decodable, Sendable, Identifiable, Hashable {
+    var id: String { key }
+
+    let key: String
+    let name: String
+    let summary: String
+    let elementKeys: [String]
+    /// Number of theme elements the user must have joined the graph for.
+    let minContacted: Int
+
+    init(
+      key: String,
+      name: String,
+      summary: String,
+      elementKeys: [String],
+      minContacted: Int
+    ) {
+      self.key = key
+      self.name = name
+      self.summary = summary
+      self.elementKeys = elementKeys
+      self.minContacted = minContacted
+    }
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case version
+    case sourceLanguage = "source_language"
+    case elements
+    case attractions
+    case relations
+    case introductions
+    case themes
+    case locales
+  }
+
   init(
     version: String,
+    sourceLanguage: String? = "zh-Hans",
     elements: [Element],
     attractions: [Attraction],
     relations: [Relation],
-    introductions: [IntroductionRecord]
+    introductions: [IntroductionRecord],
+    themes: [Theme] = [],
+    locales: [String: LocaleOverlay]? = nil
   ) {
     self.version = version
+    self.sourceLanguage = sourceLanguage
     self.elements = elements
     self.attractions = attractions
     self.relations = relations
     self.introductions = introductions
+    self.themes = themes
+    self.locales = locales
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    version = try container.decode(String.self, forKey: .version)
+    sourceLanguage = try container.decodeIfPresent(String.self, forKey: .sourceLanguage)
+    elements = try container.decode([Element].self, forKey: .elements)
+    attractions = try container.decode([Attraction].self, forKey: .attractions)
+    relations = try container.decode([Relation].self, forKey: .relations)
+    introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
+    themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
+    locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
   }
 }

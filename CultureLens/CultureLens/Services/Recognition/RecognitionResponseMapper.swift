@@ -137,10 +137,25 @@ nonisolated enum RecognitionResponseMapper {
 
     let uncertainty =
       decision.uncertainty.isEmpty
-      ? "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
+      ? Self.defaultUncertainty()
       : decision.uncertainty
 
     var alternatives: [RecognitionCandidate] = []
+
+    // Preserve the model's own 2nd/3rd visual guesses — already validated above.
+    for (index, candidate) in decision.alternatives.enumerated() {
+      alternatives.append(
+        visualCandidate(
+          candidate,
+          requestID: requestID,
+          index: index,
+          elements: elementsByKey
+        )
+      )
+    }
+
+    // Append nearby attraction candidates (geographic, not visual).
+    var attractionCount = 0
     for attraction in knowledge.attractionCandidates {
       if !decision.attractionKey.isEmpty,
         attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame
@@ -148,7 +163,8 @@ nonisolated enum RecognitionResponseMapper {
         continue
       }
       alternatives.append(attractionCandidate(attraction))
-      if alternatives.count == 3 { break }
+      attractionCount += 1
+      if attractionCount == 3 { break }
     }
 
     return RecognitionResult(
@@ -244,7 +260,7 @@ nonisolated enum RecognitionResponseMapper {
     CultureConcept(
       id: DeterministicID.culturalElement(element.key),
       name: element.name,
-      kind: CulturalElementPresentation.conceptKind(key: element.key, name: element.name),
+      kind: CulturalElementPresentation.conceptKind(element.conceptKind),
       summary: KnowledgeStore.richTextPlainText(element.introduction),
       detail: ""
     )
@@ -276,6 +292,43 @@ nonisolated enum RecognitionResponseMapper {
     }
   }
 
+  private static func visualCandidate(
+    _ candidate: ProviderCandidate,
+    requestID: String,
+    index: Int,
+    elements: [String: RecognitionElement]
+  ) -> RecognitionCandidate {
+    let category = ObjectCategory(rawValue: candidate.category) ?? .other
+    let symbol = artworkSymbol(for: candidate.category)
+    var summary: String? = nil
+    var resolutionStatus = "visual"
+
+    if !candidate.culturalElementKey.isEmpty,
+      let element = elements[candidate.culturalElementKey.lowercased()]
+    {
+      let plain = KnowledgeStore.richTextPlainText(element.introduction)
+      summary = plain.isEmpty ? nil : plain
+      resolutionStatus = "resolved"
+    }
+
+    return RecognitionCandidate(
+      id: DeterministicID.v5(
+        name: requestID + ":visual:" + String(index) + ":"
+          + candidate.canonicalName.lowercased()
+      ),
+      culturalElementKey: candidate.culturalElementKey.isEmpty
+        ? nil
+        : candidate.culturalElementKey,
+      canonicalName: candidate.canonicalName,
+      category: category,
+      confidence: candidate.confidence,
+      rationale: candidate.rationale,
+      summary: summary,
+      artworkSymbol: symbol,
+      resolutionStatus: resolutionStatus
+    )
+  }
+
   private static func attractionCandidate(
     _ attraction: AttractionCandidate
   ) -> RecognitionCandidate {
@@ -299,16 +352,32 @@ nonisolated enum RecognitionResponseMapper {
   ) -> LocationInfluence? {
     guard usedPlaceContext else { return nil }
     if knowledge.locationMatched {
+      let summary: String
+      switch AppLanguageStore.currentLanguage() {
+      case .english:
+        summary =
+          "Matched \(knowledge.nearbyContextCount) nearby attraction introductions and produced \(knowledge.attractionCandidates.count) attraction candidates; cultural elements are explanatory only."
+      case .zhHans:
+        summary =
+          "位置匹配到 \(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。"
+      }
       return LocationInfluence(
         effect: .reordered,
-        summary:
-          "位置匹配到 \(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。"
+        summary: summary
       )
+    }
+    let summary: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      summary =
+        "No nearby attraction introductions matched; the model still judged from the image and \(knowledge.elements.count) cultural-element candidates."
+    case .zhHans:
+      summary =
+        "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
     }
     return LocationInfluence(
       effect: .none,
-      summary:
-        "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
+      summary: summary
     )
   }
 
@@ -321,6 +390,15 @@ nonisolated enum RecognitionResponseMapper {
     case "展品": "photo.on.rectangle.angled"
     case "空间": "map.fill"
     default: "sparkles"
+    }
+  }
+
+  private static func defaultUncertainty() -> String {
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      "This judgment is based on visible features; verify with on-site labels or catalog records when possible."
+    case .zhHans:
+      "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
     }
   }
 }

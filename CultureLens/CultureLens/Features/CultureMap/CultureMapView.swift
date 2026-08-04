@@ -30,9 +30,11 @@ struct CultureMapView: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
+                    LanguageSettingsSection()
+
                     Picker("显示方式", selection: $displayMode) {
                         ForEach(DisplayMode.allCases) { mode in
-                            Text(mode.rawValue).tag(mode)
+                            Text(LocalizedStringKey(mode.rawValue)).tag(mode)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -51,6 +53,14 @@ struct CultureMapView: View {
             }
         }
         .cultureNavigationTitle("我的", showsBackButton: false)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink(value: AppRoute.visitTrips) {
+                    Label("文化回顾", systemImage: "book.pages")
+                }
+                .accessibilityIdentifier("profile.openReview")
+            }
+        }
         .onChange(of: selectedRecordID) { _, newValue in
             guard let newValue else { return }
             path.append(.history(newValue))
@@ -201,4 +211,5 @@ struct CultureMapView: View {
         CultureMapView(path: .constant([])) {}
     }
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
+    .environment(AppLanguageStore())
 }

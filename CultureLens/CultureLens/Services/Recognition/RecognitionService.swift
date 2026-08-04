@@ -85,7 +85,7 @@ struct RecognitionService: Sendable {
           region: alternative.region,
           artworkSymbol: alternative.artworkSymbol,
           sources: alternative.sources,
-          resolutionStatus: "resolved"
+          resolutionStatus: "visual"
         )
       ],
       rationale: input.place == nil

@@ -397,13 +397,47 @@ nonisolated struct KnowledgeStore: Sendable {
     return result
   }
 
+  // MARK: - Attraction points (POI map)
+
+  /// All attractions in the bundled packs as map points, aggregated from the
+  /// on-site introduction records (which carry the coordinates). Deterministic
+  /// `(name, key)` ordering.
+  func attractionPoints() -> [AttractionPoint] {
+    var nameByAttraction: [String: String] = [:]
+    for attraction in pack.attractions {
+      nameByAttraction[attraction.key] = attraction.name
+    }
+    var firstRecordByAttraction: [String: KnowledgePack.IntroductionRecord] = [:]
+    for record in pack.introductions where firstRecordByAttraction[record.attractionKey] == nil {
+      firstRecordByAttraction[record.attractionKey] = record
+    }
+    return firstRecordByAttraction.compactMap { key, record in
+      let name = nameByAttraction[key] ?? record.name
+      guard !name.isEmpty else { return nil }
+      let elementKey = elementsByKey[record.culturalElementKey] != nil
+        ? record.culturalElementKey
+        : nil
+      return AttractionPoint(
+        key: key,
+        name: name,
+        culturalElementKey: elementKey,
+        latitude: record.latitude,
+        longitude: record.longitude
+      )
+    }
+    .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+  }
+
   // MARK: - User knowledge graph
 
   /// Builds the graph shown in the Graph tab. Every joined node remains
   /// visible, while knowledge-pack expansion is limited to three shortest-hop
-  /// rings and a fixed node budget.
+  /// rings and a fixed node budget. Expansion radiates from every center:
+  /// each requested center starts at hop 0 and hops are the shortest distance
+  /// to any of them. An empty `centerIDs` defaults to all joined nodes that
+  /// are backed by a pack element.
   func userKnowledgeGraph(
-    centerID requestedCenterID: UUID?,
+    centerIDs requestedCenterIDs: [UUID],
     joinedSeeds: [UserKnowledgeGraphSeed],
     maximumDepth: Int = 3,
     maximumExpandedNodes: Int = KnowledgeStore.maximumGraphExpansionNodes
@@ -417,26 +451,33 @@ nonisolated struct KnowledgeStore: Sendable {
     let joinedIDs = Set(seedByID.keys)
     let joinedElementKeys = Set(joinedIDs.compactMap { elementKeysByID[$0] })
 
-    let defaultCenterID = orderedElementKeys
-      .first { joinedElementKeys.contains($0) }
-      .map(DeterministicID.culturalElement)
-      ?? joinedSeeds.sorted {
+    let defaultCenterIDs: [UUID] = {
+      let packBacked = orderedElementKeys
+        .filter { joinedElementKeys.contains($0) }
+        .map(DeterministicID.culturalElement)
+      if !packBacked.isEmpty { return packBacked }
+      return joinedSeeds.sorted {
         if $0.name != $1.name { return $0.name.localizedCompare($1.name) == .orderedAscending }
         return $0.id.uuidString < $1.id.uuidString
-      }.first?.id
-    let requestedCenterIsAvailable = requestedCenterID.map {
-      elementKeysByID[$0] != nil || joinedIDs.contains($0)
-    } ?? false
-    let centerID = requestedCenterIsAvailable ? requestedCenterID : defaultCenterID
-    let centerKey = centerID.flatMap { elementKeysByID[$0] }
+      }.prefix(1).map(\.id)
+    }()
+    var seenCenterIDs = Set<UUID>()
+    let requestedCenters = requestedCenterIDs.filter { id in
+      (elementKeysByID[id] != nil || joinedIDs.contains(id))
+        && seenCenterIDs.insert(id).inserted
+    }
+    let centerIDs = requestedCenters.isEmpty ? defaultCenterIDs : requestedCenters
+    var seenCenterKeys = Set<String>()
+    let centerKeys = centerIDs.compactMap { elementKeysByID[$0] }
+      .filter { seenCenterKeys.insert($0).inserted }
 
     var hops: [String: Int] = [:]
     var queue: [String] = []
     var queueIndex = 0
     var isTruncated = false
-    if let centerKey {
-      hops[centerKey] = 0
-      queue.append(centerKey)
+    for key in centerKeys {
+      hops[key] = 0
+      queue.append(key)
     }
 
     while queueIndex < queue.count {
@@ -479,7 +520,7 @@ nonisolated struct KnowledgeStore: Sendable {
           name: seed.name,
           summary: seed.summary,
           kind: .foundation,
-          hop: seed.id == centerID ? 0 : depthLimit + 1,
+          hop: centerIDs.contains(seed.id) ? 0 : depthLimit + 1,
           isJoined: true
         )
       )
@@ -507,11 +548,27 @@ nonisolated struct KnowledgeStore: Sendable {
     }
 
     return UserKnowledgeGraphSnapshot(
-      centerID: centerID,
+      centerID: centerIDs.first,
+      centerIDs: centerIDs,
       nodes: nodes,
       edges: edges,
       maximumDepth: depthLimit,
       isExpansionTruncated: isTruncated
+    )
+  }
+
+  /// Single-center convenience overload kept for existing callers and tests.
+  func userKnowledgeGraph(
+    centerID requestedCenterID: UUID?,
+    joinedSeeds: [UserKnowledgeGraphSeed],
+    maximumDepth: Int = 3,
+    maximumExpandedNodes: Int = KnowledgeStore.maximumGraphExpansionNodes
+  ) -> UserKnowledgeGraphSnapshot {
+    userKnowledgeGraph(
+      centerIDs: requestedCenterID.map { [$0] } ?? [],
+      joinedSeeds: joinedSeeds,
+      maximumDepth: maximumDepth,
+      maximumExpandedNodes: maximumExpandedNodes
     )
   }
 
@@ -615,6 +672,22 @@ nonisolated struct KnowledgeStore: Sendable {
   func lateral(key: String) -> [DirectedRelationEdge] {
     outgoingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
       + incomingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+  }
+
+  /// Outgoing + incoming edges of `key` filtered to the given relation kinds,
+  /// direction-agnostic (`edge.key` is always the *other* endpoint). Used by
+  /// the explanation contract's relation dimensions (历史时期/地域文化/…),
+  /// where the edge's `explanation` text carries the semantics and direction
+  /// is deliberately not interpreted (`产生于` is still orientation-pending).
+  func edges(key: String, kinds: Set<RelationKind>) -> [DirectedRelationEdge] {
+    var seen = Set<String>()
+    var result: [DirectedRelationEdge] = []
+    for edge in outgoingEdges[key, default: []] + incomingEdges[key, default: []] {
+      guard let kind = edge.kind, kinds.contains(kind), seen.insert(edge.key).inserted
+      else { continue }
+      result.append(edge)
+    }
+    return result
   }
 
   /// BFS over upward edges, grouped by first-arrival level. A node reached

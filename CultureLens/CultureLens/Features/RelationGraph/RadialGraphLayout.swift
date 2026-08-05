@@ -69,6 +69,7 @@ nonisolated struct RadialGraphLayout {
   let positions: [UUID: CGPoint]
   let size: CGSize
 
+  /// Single-center convenience initializer (object graph, existing tests).
   init(
     centerID: UUID,
     nodes: [Node],
@@ -76,9 +77,62 @@ nonisolated struct RadialGraphLayout {
     directionOf: [UUID: AbstractionDirection] = [:],
     metrics: Metrics
   ) {
+    self.init(
+      centerIDs: [centerID],
+      nodes: nodes,
+      edges: edges,
+      directionOf: directionOf,
+      metrics: metrics
+    )
+  }
+
+  /// Multi-center variant: every center participates in barycenter ordering.
+  /// A single center sits at the exact middle; multiple centers are spaced
+  /// evenly on a small inner circle so their expansion rings radiate around
+  /// the cluster.
+  init(
+    centerIDs: [UUID],
+    nodes: [Node],
+    edges: [(UUID, UUID)],
+    directionOf: [UUID: AbstractionDirection] = [:],
+    metrics: Metrics
+  ) {
+    let centerIDs = centerIDs.reduce(into: (ids: [UUID](), seen: Set<UUID>())) { partial, id in
+      if partial.seen.insert(id).inserted { partial.ids.append(id) }
+    }.ids
+    guard let firstCenterID = centerIDs.first else {
+      positions = [:]
+      size = .zero
+      return
+    }
+
+    // Inner circle radius for the center cluster (0 for a single center).
+    // Each center gets a full `circumferenceSpacing` arc so adjacent centers
+    // never overlap, no matter how many joined nodes become centers.
+    let centerCircleRadius: CGFloat =
+      centerIDs.count <= 1
+      ? 0
+      : max(
+        CGFloat(centerIDs.count) * metrics.circumferenceSpacing / (2 * .pi),
+        metrics.nodeSize.width
+      )
+
+    func centerAngle(at index: Int) -> CGFloat {
+      -.pi / 2 + 2 * .pi * CGFloat(index) / CGFloat(centerIDs.count)
+    }
+
     guard !nodes.isEmpty else {
-      positions = [centerID: CGPoint(x: metrics.margin, y: metrics.margin)]
-      size = CGSize(width: metrics.margin * 2, height: metrics.margin * 2)
+      var result: [UUID: CGPoint] = [firstCenterID: CGPoint(x: metrics.margin, y: metrics.margin)]
+      for (index, id) in centerIDs.enumerated() where index > 0 {
+        let angle = centerAngle(at: index)
+        result[id] = CGPoint(
+          x: metrics.margin + cos(angle) * centerCircleRadius,
+          y: metrics.margin + sin(angle) * centerCircleRadius
+        )
+      }
+      let extent = metrics.margin + centerCircleRadius
+      positions = result
+      size = CGSize(width: extent * 2, height: extent * 2)
       return
     }
 
@@ -86,7 +140,8 @@ nonisolated struct RadialGraphLayout {
     let orderedRings = nodesByRing.keys.sorted()
 
     var radiusByRing: [Int: CGFloat] = [:]
-    var previousRadius: CGFloat = 0
+    // Rings start outside the center cluster.
+    var previousRadius: CGFloat = centerCircleRadius
     for ring in orderedRings {
       let count = CGFloat(nodesByRing[ring]?.count ?? 0)
       let circumferenceRadius = count * metrics.circumferenceSpacing / (2 * .pi)
@@ -97,7 +152,11 @@ nonisolated struct RadialGraphLayout {
       previousRadius = radius
     }
 
-    let maximumRadius = max(radiusByRing.values.max() ?? metrics.initialRadius, metrics.initialRadius)
+    let maximumRadius = max(
+      radiusByRing.values.max() ?? metrics.initialRadius,
+      metrics.initialRadius,
+      centerCircleRadius
+    )
     let center = CGPoint(
       x: maximumRadius * metrics.horizontalStretch + metrics.margin,
       y: maximumRadius * metrics.verticalStretch + metrics.margin
@@ -109,10 +168,14 @@ nonisolated struct RadialGraphLayout {
       adjacency[edge.1, default: []].insert(edge.0)
     }
 
-    // Ring 0: the center participates in barycenters but has no fixed angle;
-    // use straight up so ring-1 nodes connected only to the center stay
-    // deterministic through the (name, id) tie-break.
-    var angleByID: [UUID: CGFloat] = [centerID: -.pi / 2]
+    // Ring 0: centers participate in barycenters but have fixed angles on the
+    // inner cluster circle (straight up for a single center), so ring-1 nodes
+    // connected only to a center stay deterministic through the (name, id)
+    // tie-break.
+    var angleByID: [UUID: CGFloat] = [:]
+    for (index, id) in centerIDs.enumerated() {
+      angleByID[id] = centerAngle(at: index)
+    }
 
     func barycenterAngle(of node: Node) -> CGFloat? {
       var sumX: CGFloat = 0
@@ -164,7 +227,14 @@ nonisolated struct RadialGraphLayout {
       }
     }
 
-    var result: [UUID: CGPoint] = [centerID: center]
+    var result: [UUID: CGPoint] = [:]
+    for (index, id) in centerIDs.enumerated() {
+      let angle = centerAngle(at: index)
+      result[id] = CGPoint(
+        x: center.x + cos(angle) * centerCircleRadius * metrics.horizontalStretch,
+        y: center.y + sin(angle) * centerCircleRadius * metrics.verticalStretch
+      )
+    }
     for node in nodes {
       guard let angle = angleByID[node.id] else { continue }
       let radius = radiusByRing[node.ring] ?? metrics.initialRadius

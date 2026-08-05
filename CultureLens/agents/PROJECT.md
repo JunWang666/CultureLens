@@ -36,8 +36,10 @@
 - 关系抽象方向：`RelationKind.abstractionDirection`（上行 / 下行 / 横向 / 前置），`产生于` 因数据中存在反向边暂不纳入默认上行集合。
 - 有向遍历：`KnowledgeStore.upward/downward/lateral/ancestors/siblings/missingPrerequisites`，含环检测与层级去重，全部为纯函数（`AbstractionAxisTests` 以真实西湖包断言「三潭印月 → 宋代山水审美」可达）。
 - 讲解契约：`explainUserText` payload 新增 `abstraction_path` / `missing_prerequisites` / `preference_profile` / `user_knowledge_total_count`，邻居按轴分配名额；`explain.txt` 输出扩为三节（「先理解」仅当前置缺失时出现），旧两节格式讲解仍可正常解析展示。
-- 抽象阶梯：`DesignSystem/AbstractionLadderView`（纵向祖先链 + 同级 chips），接入扫描结果页、对象详情、概念详情（点节点即以它为起点重排）。
-- 图谱渲染：`RadialGraphLayout` 共享内核（重心排序 + 方向分层偏置，确定性 O(V+E)），对象图谱与用户图谱共用；边按 5 个语义族着色/线型/图标，图例可点选筛选；用户图谱接入捏合缩放、搜索筛选、列表模式、可搜索中心选择、截断提示与前置未掌握标记。
+- 关联脉络：讲解契约再增 `relation_dimensions`（`KnowledgeStore.edges(key:kinds:)` 按 kind 取边、方向不解释，每维上限 2 条），覆盖五个固定维度——历史时期（产生于）、地域文化（位于）、使用功能（用于）、审美观念（体现/象征/受到影响）、相似对象（相似于）；维度邻居的 introduction 并入 `knowledge_fragments` 供引用。输出在「文化背景」后新增「关联脉络」节，仅写有数据的维度；注意输出骨架由 `PromptLanguagePolicy.explainMarkdownSkeleton` 在运行时重写（英文为「Connections」），`explain.txt` 文末模板仅作同步文档。
+- 抽象阶梯：`DesignSystem/AbstractionLadderView`（纵向祖先链 + 同级 chips），曾接入扫描结果页（对象/概念详情复用该页）；因展示价值有限当前已在 `ScanResultView` 隐藏，组件保留，恢复时还原该处调用即可。
+- 图谱渲染：`RadialGraphLayout` 共享内核（重心排序 + 方向分层偏置，确定性 O(V+E)），对象图谱与用户图谱共用，内核支持多中心（中心簇均布内圈小圆，各自向外发散）；边按 5 个语义族着色/线型/图标，图例可点选筛选；用户图谱接入捏合缩放、搜索筛选、列表模式、可搜索多选中心（默认全部已加入节点为中心）、截断提示、前置未掌握标记与扫描已记录朱砂徽章。
+- 足迹三模式：`CultureMapView` 分段切换「地图足迹 / 时间线足迹 / 兴趣点」；兴趣点来自 `KnowledgeStore.attractionPoints()`（按 knowledge pack 现场介绍聚合坐标），已到访（命中扫描记录的 `culturalElementKey`）用朱砂 checkmark 标记，可跳转知识节点详情。
 - 未实施：0006 阶段 2（补 kind / conceptKind / 前置边覆盖、`产生于` 取向审计、多包合并与 UUID 迁移）——属于内容与数据迁移工作，需单独评估。
 
 ## 已移除的后端

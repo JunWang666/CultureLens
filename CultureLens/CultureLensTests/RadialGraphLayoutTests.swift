@@ -169,6 +169,7 @@ struct RadialGraphLayoutTests {
     let layout = UserKnowledgeGraphLayout(
       snapshot: UserKnowledgeGraphSnapshot(
         centerID: nil,
+        centerIDs: [],
         nodes: [],
         edges: [],
         maximumDepth: 3,
@@ -177,5 +178,48 @@ struct RadialGraphLayoutTests {
     )
     #expect(layout.positions.isEmpty)
     #expect(layout.size == .zero)
+  }
+
+  @Test func multiCenterLayoutIsDeterministicAndRadiatesAroundCenters() {
+    let centerA = UUID()
+    let centerB = UUID()
+    let nodesAndIDs = [
+      makeNode("甲", ring: 1), makeNode("乙", ring: 1), makeNode("丙", ring: 2),
+    ]
+    let nodes = nodesAndIDs.map(\.0)
+    let edges: [(UUID, UUID)] = [
+      (centerA, nodesAndIDs[0].1),
+      (centerB, nodesAndIDs[1].1),
+      (nodesAndIDs[0].1, nodesAndIDs[2].1),
+    ]
+    let metrics = RadialGraphLayout.Metrics(
+      nodeSize: CGSize(width: 146, height: 86),
+      initialRadius: 210,
+      ringSpacing: 178,
+      circumferenceSpacing: 170,
+      margin: 100
+    )
+    let first = RadialGraphLayout(
+      centerIDs: [centerA, centerB], nodes: nodes, edges: edges, metrics: metrics
+    )
+    let second = RadialGraphLayout(
+      centerIDs: [centerA, centerB], nodes: nodes, edges: edges, metrics: metrics
+    )
+    #expect(first.positions == second.positions)
+    #expect(first.size == second.size)
+
+    let pointA = first.positions[centerA] ?? .zero
+    let pointB = first.positions[centerB] ?? .zero
+    // Two centers occupy distinct spots on the inner cluster circle.
+    #expect(hypot(pointA.x - pointB.x, pointA.y - pointB.y) > 0)
+
+    // Ring-1 nodes sit outside the center cluster.
+    let middle = CGPoint(x: first.size.width / 2, y: first.size.height / 2)
+    let clusterRadius = hypot(pointA.x - middle.x, pointA.y - middle.y)
+    let ringOneRadius = hypot(
+      (first.positions[nodesAndIDs[0].1] ?? .zero).x - middle.x,
+      (first.positions[nodesAndIDs[0].1] ?? .zero).y - middle.y
+    )
+    #expect(ringOneRadius > clusterRadius)
   }
 }

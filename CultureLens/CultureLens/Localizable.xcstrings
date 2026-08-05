@@ -361,12 +361,19 @@
         }
       }
     },
-    "%@，%@，前置知识尚未掌握" : {
+    "%@，已到访" : {
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@, visited"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@，%2$@，前置知识尚未掌握"
+            "state" : "translated",
+            "value" : "%@，已到访"
           }
         }
       }
@@ -1494,6 +1501,23 @@
         }
       }
     },
+    "兴趣点" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Places"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兴趣点"
+          }
+        }
+      }
+    },
     "其他" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1719,6 +1743,23 @@
         }
       }
     },
+    "前置知识尚未掌握" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prerequisite not yet learned"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前置知识尚未掌握"
+          }
+        }
+      }
+    },
     "功能" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1938,6 +1979,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
+          }
+        }
+      }
+    },
+    "取消中心" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove as center"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消中心"
+          }
+        }
+      }
+    },
+    "取消该中心" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove this center"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消该中心"
           }
         }
       }
@@ -2491,6 +2566,23 @@
         }
       }
     },
+    "地图足迹" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图足迹"
+          }
+        }
+      }
+    },
     "地域" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2961,6 +3053,23 @@
         }
       }
     },
+    "已到访" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visited"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已到访"
+          }
+        }
+      }
+    },
     "已加入" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3138,6 +3247,40 @@
         }
       }
     },
+    "已记录" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recorded"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已记录"
+          }
+        }
+      }
+    },
+    "已记录位置" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location recorded at"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已记录位置"
+          }
+        }
+      }
+    },
     "已识别 · \\(object.confidence, format: .percent.precision(.fractionLength(0)))" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3172,6 +3315,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Completion goal reached. You can keep lighting up the remaining nodes to deepen your understanding."
+          }
+        }
+      }
+    },
+    "已选择 %lld 个中心，各自向外发散三层。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld centers selected, each expanding three hops outward."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已选择 %lld 个中心，各自向外发散三层。"
           }
         }
       }
@@ -3477,6 +3637,23 @@
         }
       }
     },
+    "当前知识包没有带位置信息的景点。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The current knowledge pack has no attractions with location data."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前知识包没有带位置信息的景点。"
+          }
+        }
+      }
+    },
     "当前结果还没有可验证的关系边。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3496,6 +3673,23 @@
     },
     "当前结果还没有绑定到知识库中的文化元素，因此没有可展示的关系。" : {
 
+    },
+    "当前默认以全部已加入节点为中心向外发散。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By default the graph expands outward from every joined node."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前默认以全部已加入节点为中心向外发散。"
+          }
+        }
+      }
     },
     "快捷提问" : {
       "extractionState" : "manual",
@@ -3646,6 +3840,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "所有文字使用简体中文。"
+          }
+        }
+      }
+    },
+    "打开兴趣点详情" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open place details"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开兴趣点详情"
           }
         }
       }
@@ -4650,6 +4861,23 @@
         }
       }
     },
+    "时间线足迹" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时间线足迹"
+          }
+        }
+      }
+    },
     "显示地图" : {
 
     },
@@ -4920,74 +5148,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未记录位置"
-          }
-        }
-      }
-    },
-    "已记录位置" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location recorded at"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已记录位置"
-          }
-        }
-      }
-    },
-    "该位置的扫描记录" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scans at this spot"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "该位置的扫描记录"
-          }
-        }
-      }
-    },
-    "重叠的扫描记录" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Overlapping scan records"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重叠的扫描记录"
-          }
-        }
-      }
-    },
-    "轻点查看记录列表" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to browse these records"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "轻点查看记录列表"
           }
         }
       }
@@ -5600,6 +5760,23 @@
         }
       }
     },
+    "正在载入兴趣点…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading places…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在载入兴趣点…"
+          }
+        }
+      }
+    },
     "正在辨认文化线索…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6073,8 +6250,76 @@
         }
       }
     },
+    "知识包中没有兴趣点" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No places in the knowledge pack"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识包中没有兴趣点"
+          }
+        }
+      }
+    },
+    "知识包兴趣点地图，包含 %lld 个景点" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knowledge pack places map with %lld attractions"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识包兴趣点地图，包含 %lld 个景点"
+          }
+        }
+      }
+    },
+    "知识包暂不可用" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knowledge pack unavailable"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识包暂不可用"
+          }
+        }
+      }
+    },
     "知识包未载入" : {
 
+    },
+    "知识包没有成功载入，兴趣点地图暂时不可用。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The knowledge pack failed to load, so the places map is unavailable for now."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识包没有成功载入，兴趣点地图暂时不可用。"
+          }
+        }
+      }
     },
     "知识包没有成功载入，请稍后再试。" : {
       "extractionState" : "manual",
@@ -6886,6 +7131,23 @@
         }
       }
     },
+    "该位置的扫描记录" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scans at this spot"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该位置的扫描记录"
+          }
+        }
+      }
+    },
     "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7153,6 +7415,23 @@
         }
       }
     },
+    "轻点查看记录列表" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to browse these records"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轻点查看记录列表"
+          }
+        }
+      }
+    },
     "较高可信度" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7397,6 +7676,23 @@
         }
       }
     },
+    "选择一个或多个节点作为关系展开的中心" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose one or more nodes as expansion centers"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择一个或多个节点作为关系展开的中心"
+          }
+        }
+      }
+    },
     "选择一个节点作为三层关系展开的中心" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7414,9 +7710,6 @@
         }
       }
     },
-    "选择一个节点作为关系展开的中心" : {
-
-    },
     "选择中心" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7430,6 +7723,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择中心"
+          }
+        }
+      }
+    },
+    "重叠的扫描记录" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overlapping scan records"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重叠的扫描记录"
           }
         }
       }
@@ -7464,6 +7774,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新选择"
+          }
+        }
+      }
+    },
+    "重置为全部已加入" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset to all joined"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置为全部已加入"
           }
         }
       }

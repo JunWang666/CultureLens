@@ -2,11 +2,13 @@ import MapKit
 import SwiftData
 import SwiftUI
 
-/// Scan footprint map + timeline, edge-to-edge under the system navigation toolbar.
+/// Scan footprint map + timeline + all knowledge-pack points of interest,
+/// edge-to-edge under the system navigation toolbar.
 struct CultureMapView: View {
     enum DisplayMode: String, CaseIterable, Identifiable {
-        case map = "地图"
-        case timeline = "时间线"
+        case map = "地图足迹"
+        case timeline = "时间线足迹"
+        case pois = "兴趣点"
         var id: Self { self }
     }
 
@@ -23,8 +25,22 @@ struct CultureMapView: View {
     @State private var visibleSpan: MKCoordinateSpan?
     @State private var clusterPicker: RecordCluster?
 
+    @State private var knowledgeStore: KnowledgeStore?
+    @State private var didAttemptStoreLoad = false
+    @State private var poiCameraPosition: MapCameraPosition = .automatic
+
     private var locatedRecords: [ScanHistoryRecord] {
         records.filter { $0.latitude != nil && $0.longitude != nil }
+    }
+
+    /// All pack attractions as map points ("所有兴趣点").
+    private var poiPoints: [AttractionPoint] {
+        knowledgeStore?.attractionPoints() ?? []
+    }
+
+    /// Element keys the user has already scanned — visited POIs.
+    private var recordedElementKeys: Set<String> {
+        Set(records.compactMap { $0.savedObject?.culturalElementKey })
     }
 
     /// A group of records too close to tap individually at the current zoom.
@@ -85,7 +101,10 @@ struct CultureMapView: View {
                 .ignoresSafeArea()
 
             Group {
-                if records.isEmpty {
+                if displayMode == .pois {
+                    poiContent
+                        .ignoresSafeArea()
+                } else if records.isEmpty {
                     emptyState
                 } else if displayMode == .map {
                     historyMap
@@ -101,11 +120,16 @@ struct CultureMapView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 displayModePicker
-                    .frame(minWidth: 160, maxWidth: 220)
+                    .frame(minWidth: 200, maxWidth: 280)
             }
         }
         .navigationDestination(item: $selectedRecordID) { id in
             ScanHistoryDetailView(recordID: id)
+        }
+        .task {
+            guard knowledgeStore == nil, !didAttemptStoreLoad else { return }
+            knowledgeStore = await KnowledgePackLoader.shared.store()
+            didAttemptStoreLoad = true
         }
     }
 
@@ -173,6 +197,84 @@ struct CultureMapView: View {
                     .presentationDetents([.medium, .large])
             }
             .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
+        }
+    }
+
+    // MARK: - All points of interest (knowledge pack)
+
+    @ViewBuilder
+    private var poiContent: some View {
+        if knowledgeStore == nil {
+            if didAttemptStoreLoad {
+                ContentUnavailableView(
+                    "知识包暂不可用",
+                    systemImage: "externaldrive.badge.exclamationmark",
+                    description: Text("知识包没有成功载入，兴趣点地图暂时不可用。")
+                )
+                .padding(CultureTheme.pagePadding)
+            } else {
+                ProgressView("正在载入兴趣点…")
+            }
+        } else if poiPoints.isEmpty {
+            ContentUnavailableView(
+                "知识包中没有兴趣点",
+                systemImage: "mappin.slash",
+                description: Text("当前知识包没有带位置信息的景点。")
+            )
+            .padding(CultureTheme.pagePadding)
+        } else {
+            poiMap
+        }
+    }
+
+    private var poiMap: some View {
+        Map(position: $poiCameraPosition) {
+            ForEach(poiPoints) { point in
+                Annotation(
+                    point.name,
+                    coordinate: CLLocationCoordinate2D(
+                        latitude: point.latitude,
+                        longitude: point.longitude
+                    ),
+                    anchor: .bottom
+                ) {
+                    poiAnnotation(point)
+                }
+            }
+        }
+        .mapStyle(.standard(elevation: .realistic))
+        .accessibilityLabel("知识包兴趣点地图，包含 \(poiPoints.count) 个景点")
+    }
+
+    @ViewBuilder
+    private func poiAnnotation(_ point: AttractionPoint) -> some View {
+        let visited = point.culturalElementKey.map { recordedElementKeys.contains($0) } ?? false
+        let label = VStack(spacing: 3) {
+            Image(systemName: visited ? "checkmark.seal.fill" : "mappin.circle.fill")
+                .font(.title2)
+                .foregroundStyle(visited ? CultureTheme.cinnabar : CultureTheme.inkPrimary)
+                .background(CultureTheme.canvas, in: Circle())
+                .shadow(radius: 2, y: 1)
+            Text(point.name)
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(CultureTheme.inkPrimary)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(.ultraThinMaterial, in: Capsule())
+                .lineLimit(1)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(visited ? "\(point.name)，已到访" : point.name)
+
+        if let elementKey = point.culturalElementKey,
+           knowledgeStore?.element(key: elementKey) != nil {
+            NavigationLink(value: AppRoute.knowledgeElement(elementKey)) {
+                label
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("打开兴趣点详情")
+        } else {
+            label
         }
     }
 

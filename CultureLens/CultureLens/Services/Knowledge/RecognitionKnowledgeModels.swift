@@ -108,6 +108,34 @@ nonisolated struct RecognitionElement: Sendable {
   }
 }
 
+/// A bundled-pack attraction as a map point ("所有兴趣点"足迹地图), aggregated
+/// from the pack's on-site introduction records which carry the coordinates.
+nonisolated struct AttractionPoint: Sendable, Hashable, Identifiable {
+  /// Attraction key from the pack.
+  let key: String
+  let name: String
+  /// Root cultural element for detail navigation, when resolvable.
+  let culturalElementKey: String?
+  let latitude: Double
+  let longitude: Double
+
+  var id: String { key }
+
+  init(
+    key: String,
+    name: String,
+    culturalElementKey: String?,
+    latitude: Double,
+    longitude: Double
+  ) {
+    self.key = key
+    self.name = name
+    self.culturalElementKey = culturalElementKey
+    self.latitude = latitude
+    self.longitude = longitude
+  }
+}
+
 nonisolated struct AttractionCandidate: Sendable {
   let key: String
   let name: String

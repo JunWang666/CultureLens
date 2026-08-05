@@ -913,6 +913,114 @@ struct CultureLensTests {
     #expect(snapshot.nodes.first { $0.id == rootID }?.hop == 0)
   }
 
+  @Test func userGraphExpandsFromMultipleCenters() throws {
+    let store = makeGraphStore(
+      keys: (0...4).map { "e\($0)" },
+      edges: (0..<4).map { ("e\($0)", "e\($0 + 1)") }
+    )
+    let firstCenter = DeterministicID.culturalElement("e0")
+    let secondCenter = DeterministicID.culturalElement("e4")
+    let snapshot = store.userKnowledgeGraph(
+      centerIDs: [firstCenter, secondCenter],
+      joinedSeeds: [
+        UserKnowledgeGraphSeed(id: firstCenter, name: "节点 0", summary: ""),
+        UserKnowledgeGraphSeed(id: secondCenter, name: "节点 4", summary: ""),
+      ]
+    )
+
+    #expect(snapshot.centerIDs == [firstCenter, secondCenter])
+    #expect(snapshot.centerID == firstCenter)
+    let hopByKey = Dictionary(
+      uniqueKeysWithValues: snapshot.nodes.compactMap { node in
+        node.elementKey.map { ($0, node.hop) }
+      }
+    )
+    // Hops are the shortest distance to *any* center.
+    #expect(hopByKey["e0"] == 0)
+    #expect(hopByKey["e4"] == 0)
+    #expect(hopByKey["e1"] == 1)
+    #expect(hopByKey["e3"] == 1)
+    #expect(hopByKey["e2"] == 2)
+  }
+
+  @Test func userGraphDefaultsToAllJoinedNodesAsCenters() {
+    let store = makeGraphStore(
+      keys: (0...2).map { "e\($0)" },
+      edges: [("e0", "e1"), ("e1", "e2")]
+    )
+    let firstJoined = DeterministicID.culturalElement("e0")
+    let secondJoined = DeterministicID.culturalElement("e2")
+    let snapshot = store.userKnowledgeGraph(
+      centerIDs: [],
+      joinedSeeds: [
+        UserKnowledgeGraphSeed(id: firstJoined, name: "节点 0", summary: ""),
+        UserKnowledgeGraphSeed(id: secondJoined, name: "节点 2", summary: ""),
+      ]
+    )
+
+    #expect(Set(snapshot.centerIDs) == Set([firstJoined, secondJoined]))
+    #expect(snapshot.nodes.first { $0.elementKey == "e0" }?.hop == 0)
+    #expect(snapshot.nodes.first { $0.elementKey == "e2" }?.hop == 0)
+    #expect(snapshot.nodes.first { $0.elementKey == "e1" }?.hop == 1)
+  }
+
+  @Test func attractionPointsAggregateIntroductionRecords() {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "poi-test",
+        elements: [
+          KnowledgePack.Element(key: "e0", name: "元素 0", introduction: emptyIntroduction)
+        ],
+        attractions: [
+          KnowledgePack.Attraction(key: "a1", name: "景点一"),
+          KnowledgePack.Attraction(key: "a2", name: "景点二"),
+        ],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "i1",
+            name: "介绍一",
+            introduction: emptyIntroduction,
+            culturalElementKey: "e0",
+            attractionKey: "a1",
+            latitude: 30.24,
+            longitude: 120.14
+          ),
+          // Second record of the same attraction: merged, first wins.
+          KnowledgePack.IntroductionRecord(
+            key: "i2",
+            name: "介绍二",
+            introduction: emptyIntroduction,
+            culturalElementKey: "e0",
+            attractionKey: "a1",
+            latitude: 30.25,
+            longitude: 120.15
+          ),
+          // Unresolvable cultural element: point stays, navigation key drops.
+          KnowledgePack.IntroductionRecord(
+            key: "i3",
+            name: "介绍三",
+            introduction: emptyIntroduction,
+            culturalElementKey: "unknown",
+            attractionKey: "a2",
+            latitude: 31,
+            longitude: 121
+          ),
+        ]
+      )
+    )
+
+    let points = store.attractionPoints()
+    #expect(points.map(\.key) == ["a1", "a2"])
+    #expect(points[0].name == "景点一")
+    #expect(points[0].latitude == 30.24)
+    #expect(points[0].longitude == 120.14)
+    #expect(points[0].culturalElementKey == "e0")
+    #expect(points[1].name == "景点二")
+    #expect(points[1].culturalElementKey == nil)
+  }
+
   @Test func userGraphLayoutPlacesShortestHopLayersOutward() throws {
     let store = makeGraphStore(
       keys: (0...4).map { "e\($0)" },

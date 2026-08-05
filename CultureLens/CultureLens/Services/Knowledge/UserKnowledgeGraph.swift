@@ -50,7 +50,10 @@ nonisolated struct UserKnowledgeGraphEdge: Identifiable, Hashable {
 }
 
 nonisolated struct UserKnowledgeGraphSnapshot: Hashable {
+  /// Primary center (first of `centerIDs`); used for scroll targeting.
   let centerID: UUID?
+  /// All expansion centers — each radiates outward at hop 0.
+  let centerIDs: [UUID]
   let nodes: [UserKnowledgeGraphNode]
   let edges: [UserKnowledgeGraphEdge]
   let maximumDepth: Int
@@ -84,15 +87,17 @@ nonisolated struct UserKnowledgeGraphLayout {
   let size: CGSize
 
   init(snapshot: UserKnowledgeGraphSnapshot) {
-    guard let centerID = snapshot.centerID, !snapshot.nodes.isEmpty else {
+    let centerIDs = snapshot.centerIDs
+    guard !centerIDs.isEmpty, !snapshot.nodes.isEmpty else {
       positions = [:]
       size = .zero
       return
     }
+    let centerIDSet = Set(centerIDs)
 
     let outerJoinedHop = snapshot.maximumDepth + 1
     let nodes = snapshot.nodes
-      .filter { $0.id != centerID }
+      .filter { !centerIDSet.contains($0.id) }
       .map {
         RadialGraphLayout.Node(
           id: $0.id,
@@ -105,7 +110,7 @@ nonisolated struct UserKnowledgeGraphLayout {
     // edge connecting it to the lowest-hop neighbor it touches.
     let hopByID = Dictionary(uniqueKeysWithValues: snapshot.nodes.map { ($0.id, $0.hop) })
     var directionOf: [UUID: AbstractionDirection] = [:]
-    for node in snapshot.nodes where node.id != centerID {
+    for node in snapshot.nodes where !centerIDSet.contains(node.id) {
       let nodeHop = hopByID[node.id] ?? 0
       let candidates = snapshot.edges
         .filter { edge in
@@ -136,7 +141,7 @@ nonisolated struct UserKnowledgeGraphLayout {
     }
 
     let layout = RadialGraphLayout(
-      centerID: centerID,
+      centerIDs: centerIDs,
       nodes: nodes,
       edges: snapshot.edges.map { ($0.sourceID, $0.targetID) },
       directionOf: directionOf,

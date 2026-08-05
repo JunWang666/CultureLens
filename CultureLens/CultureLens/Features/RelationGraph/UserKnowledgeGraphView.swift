@@ -21,7 +21,9 @@ struct UserKnowledgeGraphView: View {
     private var records: [ScanHistoryRecord]
 
     @State private var knowledgeStore: KnowledgeStore?
-    @State private var selectedCenterID: UUID?
+    /// User-picked expansion centers; empty means "every joined node" (the
+    /// store resolves the default set on each rebuild).
+    @State private var selectedCenterIDs: Set<UUID> = []
     @State private var renderState: RenderState?
     @State private var didAttemptLoad = false
 
@@ -112,7 +114,7 @@ struct UserKnowledgeGraphView: View {
                         } label: {
                             Label("选择中心", systemImage: "scope")
                         }
-                        .accessibilityHint("选择一个节点作为关系展开的中心")
+                        .accessibilityHint("选择一个或多个节点作为关系展开的中心")
                     }
                 }
             }
@@ -120,10 +122,14 @@ struct UserKnowledgeGraphView: View {
         .sheet(isPresented: $isCenterPickerPresented) {
             if let renderState {
                 CenterPickerSheet(
-                    snapshot: renderState.snapshot,
-                    onSelect: { id in
-                        selectCenter(id)
-                        isCenterPickerPresented = false
+                    snapshot: liveSnapshotBinding,
+                    selectedCenterIDs: $selectedCenterIDs,
+                    onToggle: { id in
+                        toggleCenter(id)
+                    },
+                    onReset: {
+                        selectedCenterIDs = []
+                        scheduleRebuild()
                     }
                 )
                 .presentationDetents([.medium, .large])
@@ -152,6 +158,15 @@ struct UserKnowledgeGraphView: View {
         }
     }
 
+    /// Live view of the current render snapshot so the center picker sheet
+    /// reflects graph rebuilds triggered by center toggles while it is open.
+    private var liveSnapshotBinding: Binding<UserKnowledgeGraphSnapshot?> {
+        Binding(
+            get: { renderState?.snapshot },
+            set: { _ in }
+        )
+    }
+
     private var emptyState: some View {
         ContentUnavailableView {
             Label("文化图谱还是空的", systemImage: "point.3.connected.trianglepath.dotted")
@@ -162,6 +177,14 @@ struct UserKnowledgeGraphView: View {
     }
 
     // MARK: - Filtering & selection
+
+    /// Nodes already captured in scan history get a prominent badge.
+    private var recordedNodeIDs: Set<UUID> {
+        Set(
+            records.compactMap { $0.savedObject?.culturalElementKey }
+                .map(DeterministicID.culturalElement)
+        )
+    }
 
     private func matchesFilters(_ node: UserKnowledgeGraphNode) -> Bool {
         if !searchText.isEmpty,
@@ -368,8 +391,8 @@ struct UserKnowledgeGraphView: View {
                 else { continue }
 
                 let touchesSelection = selectedNodeID == nil
-                    ? (edge.sourceID == state.snapshot.centerID
-                        || edge.targetID == state.snapshot.centerID)
+                    ? (state.snapshot.centerIDs.contains(edge.sourceID)
+                        || state.snapshot.centerIDs.contains(edge.targetID))
                     : highlight.contains(edge.sourceID) && highlight.contains(edge.targetID)
                     && (edge.sourceID == selectedNodeID || edge.targetID == selectedNodeID)
 
@@ -438,8 +461,9 @@ struct UserKnowledgeGraphView: View {
         } label: {
             graphNode(
                 node,
-                isCenter: node.id == snapshot.centerID,
+                isCenter: snapshot.centerIDs.contains(node.id),
                 isSelected: selectedNodeID == node.id,
+                isRecorded: recordedNodeIDs.contains(node.id),
                 isMissingPrerequisite: missingPrerequisiteIDs.contains(node.id)
             )
         }
@@ -464,6 +488,7 @@ struct UserKnowledgeGraphView: View {
         _ node: UserKnowledgeGraphNode,
         isCenter: Bool,
         isSelected: Bool,
+        isRecorded: Bool,
         isMissingPrerequisite: Bool
     ) -> some View {
         VStack(spacing: 5) {
@@ -499,6 +524,20 @@ struct UserKnowledgeGraphView: View {
                     lineWidth: isSelected || node.isJoined || isCenter ? 2 : 1
                 )
         }
+        .overlay(alignment: .topLeading) {
+            if isRecorded {
+                Image(systemName: "checkmark")
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 20, height: 20)
+                    .background(CultureTheme.cinnabar, in: Circle())
+                    .overlay {
+                        Circle().stroke(CultureTheme.canvas, lineWidth: 2)
+                    }
+                    .offset(x: -6, y: -6)
+                    .accessibilityHidden(true)
+            }
+        }
         .overlay(alignment: .topTrailing) {
             if isMissingPrerequisite, !isCenter {
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -511,9 +550,14 @@ struct UserKnowledgeGraphView: View {
         .contentShape(RoundedRectangle(cornerRadius: 19))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(
-            isMissingPrerequisite
-                ? "\(node.name)，\(nodeCaption(node, isCenter: isCenter))，前置知识尚未掌握"
-                : "\(node.name)，\(nodeCaption(node, isCenter: isCenter))"
+            [
+                node.name,
+                nodeCaption(node, isCenter: isCenter),
+                isRecorded ? String(localized: "已记录") : nil,
+                isMissingPrerequisite ? String(localized: "前置知识尚未掌握") : nil,
+            ]
+            .compactMap { $0 }
+            .joined(separator: "，")
         )
         .accessibilityHint("点按查看邻居；长按可设为中心")
     }
@@ -568,9 +612,10 @@ struct UserKnowledgeGraphView: View {
                 }
                 Button {
                     selectedNodeID = nil
-                    selectCenter(node.id)
+                    toggleCenter(node.id)
                 } label: {
-                    Label("设为中心", systemImage: "scope")
+                    let isCenter = renderState?.snapshot.centerIDs.contains(node.id) ?? false
+                    Label(isCenter ? "取消中心" : "设为中心", systemImage: "scope")
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                         .frame(maxWidth: .infinity)
@@ -593,9 +638,10 @@ struct UserKnowledgeGraphView: View {
         }
 
         Button {
-            selectCenter(node.id)
+            toggleCenter(node.id)
         } label: {
-            Label("设为中心", systemImage: "scope")
+            let isCenter = renderState?.snapshot.centerIDs.contains(node.id) ?? false
+            Label(isCenter ? "取消中心" : "设为中心", systemImage: "scope")
         }
 
         Menu {
@@ -745,11 +791,11 @@ struct UserKnowledgeGraphView: View {
                 ForEach(nodes) { node in
                     if let route = route(for: node) {
                         NavigationLink(value: route) {
-                            nodeListRow(node, centerID: snapshot.centerID)
+                            nodeListRow(node, snapshot: snapshot)
                         }
                         .buttonStyle(.plain)
                     } else {
-                        nodeListRow(node, centerID: snapshot.centerID)
+                        nodeListRow(node, snapshot: snapshot)
                     }
                 }
             }
@@ -760,8 +806,9 @@ struct UserKnowledgeGraphView: View {
         .scrollDismissesKeyboard(.interactively)
     }
 
-    private func nodeListRow(_ node: UserKnowledgeGraphNode, centerID: UUID?) -> some View {
-        HStack(spacing: 12) {
+    private func nodeListRow(_ node: UserKnowledgeGraphNode, snapshot: UserKnowledgeGraphSnapshot) -> some View {
+        let isCenter = snapshot.centerIDs.contains(node.id)
+        return HStack(spacing: 12) {
             Image(systemName: node.kind.systemImage)
                 .font(.headline)
                 .foregroundStyle(nodeAccent(node))
@@ -775,20 +822,29 @@ struct UserKnowledgeGraphView: View {
                 )
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(CultureTheme.inkPrimary)
-                Text(node.id == centerID ? "当前中心" : nodeCaption(node, isCenter: false))
+                Text(isCenter ? "当前中心" : nodeCaption(node, isCenter: false))
                     .font(.caption2)
                     .foregroundStyle(CultureTheme.inkSecondary)
             }
 
             Spacer(minLength: 8)
 
+            if recordedNodeIDs.contains(node.id) {
+                Label("已记录", systemImage: "checkmark.seal.fill")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(CultureTheme.cinnabar)
+                    .labelStyle(.iconOnly)
+                    .accessibilityLabel("已记录")
+            }
+
             Button {
-                selectCenter(node.id)
+                toggleCenter(node.id)
                 displayMode = .graph
             } label: {
                 Image(systemName: "scope")
+                    .foregroundStyle(isCenter ? CultureTheme.cinnabar : CultureTheme.inkPrimary)
             }
-            .accessibilityLabel("设为中心")
+            .accessibilityLabel(isCenter ? "取消中心" : "设为中心")
         }
         .padding(14)
         .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 16))
@@ -816,8 +872,12 @@ struct UserKnowledgeGraphView: View {
         return nil
     }
 
-    private func selectCenter(_ id: UUID) {
-        selectedCenterID = id
+    private func toggleCenter(_ id: UUID) {
+        if selectedCenterIDs.contains(id) {
+            selectedCenterIDs.remove(id)
+        } else {
+            selectedCenterIDs.insert(id)
+        }
         scheduleRebuild()
     }
 
@@ -838,20 +898,20 @@ struct UserKnowledgeGraphView: View {
             return
         }
         guard !progressStore.graphNodeIDs.isEmpty else {
-            selectedCenterID = nil
+            selectedCenterIDs = []
             renderState = nil
             return
         }
 
         let snapshot = knowledgeStore.userKnowledgeGraph(
-            centerID: selectedCenterID,
+            // Sorted so the layout stays deterministic across rebuilds.
+            centerIDs: selectedCenterIDs.sorted(by: { $0.uuidString < $1.uuidString }),
             joinedSeeds: joinedSeeds,
             maximumExpandedNodes: expansionLimit
         )
-        selectedCenterID = snapshot.centerID
 
-        // Missing prerequisites of the center: closure minus nodes the user
-        // already understands or masters.
+        // Missing prerequisites of the primary center: closure minus nodes
+        // the user already understands or masters.
         if let centerID = snapshot.centerID,
             let centerKey = knowledgeStore.elementKey(for: centerID)
         {
@@ -985,13 +1045,24 @@ struct UserKnowledgeGraphView: View {
     }
 }
 
-/// Searchable center picker replacing the flat 48-item Menu (design 0007).
+/// Searchable multi-select center picker (design 0007, 多中心发散).
+/// Empty selection means "every joined node"; tapping rows toggles centers.
 private struct CenterPickerSheet: View {
-    let snapshot: UserKnowledgeGraphSnapshot
-    let onSelect: (UUID) -> Void
+    /// Live binding to the current render snapshot — center toggles rebuild
+    /// the graph while the sheet is open, and the list must reflect that.
+    @Binding var snapshot: UserKnowledgeGraphSnapshot?
+    /// Resolved centers of the current render (defaults included), used to
+    /// show checkmarks; toggling goes through `onToggle`.
+    @Binding var selectedCenterIDs: Set<UUID>
+    let onToggle: (UUID) -> Void
+    let onReset: () -> Void
 
     @State private var searchText = ""
     @Environment(\.dismiss) private var dismiss
+
+    private var effectiveCenterIDs: Set<UUID> {
+        selectedCenterIDs.isEmpty ? Set(snapshot?.centerIDs ?? []) : selectedCenterIDs
+    }
 
     private func matches(_ node: UserKnowledgeGraphNode) -> Bool {
         searchText.isEmpty
@@ -1001,8 +1072,17 @@ private struct CenterPickerSheet: View {
     var body: some View {
         NavigationStack {
             List {
-                let joined = snapshot.nodes.filter(\.isJoined).filter(matches)
-                let discovered = snapshot.nodes.filter { !$0.isJoined }.filter(matches)
+                let joined = (snapshot?.nodes ?? []).filter(\.isJoined).filter(matches)
+                let discovered = (snapshot?.nodes ?? []).filter { !$0.isJoined }.filter(matches)
+                Section {
+                    Text(
+                        selectedCenterIDs.isEmpty
+                            ? "当前默认以全部已加入节点为中心向外发散。"
+                            : "已选择 \(selectedCenterIDs.count) 个中心，各自向外发散三层。"
+                    )
+                    .font(.caption)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+                }
                 if !joined.isEmpty {
                     Section("已加入") {
                         ForEach(joined) { node in
@@ -1029,7 +1109,11 @@ private struct CenterPickerSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("取消") { dismiss() }
+                    Button("重置为全部已加入", action: onReset)
+                        .disabled(selectedCenterIDs.isEmpty)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("完成") { dismiss() }
                 }
             }
         }
@@ -1037,18 +1121,21 @@ private struct CenterPickerSheet: View {
 
     private func centerRow(_ node: UserKnowledgeGraphNode) -> some View {
         Button {
-            onSelect(node.id)
+            onToggle(node.id)
         } label: {
             HStack {
                 Label(node.name, systemImage: node.kind.systemImage)
                 Spacer()
-                if node.id == snapshot.centerID {
-                    Image(systemName: "scope")
+                if effectiveCenterIDs.contains(node.id) {
+                    Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(CultureTheme.cinnabar)
                 }
             }
         }
         .foregroundStyle(CultureTheme.inkPrimary)
+        .accessibilityHint(
+            effectiveCenterIDs.contains(node.id) ? "取消该中心" : "设为中心"
+        )
     }
 }
 

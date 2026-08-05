@@ -61,6 +61,11 @@ nonisolated struct KnowledgeStore: Sendable {
   /// downstream; adjacency treats them as undirected for BFS.
   private let relations: [KnowledgePack.Relation]
   private let adjacency: [String: [String]]
+  /// Directed indexes keyed by endpoint. `outgoingEdges[k]` lists edges whose
+  /// source is `k` (target in `DirectedRelationEdge.key`); `incomingEdges[k]`
+  /// lists edges whose target is `k` (source in `.key`).
+  private let outgoingEdges: [String: [DirectedRelationEdge]]
+  private let incomingEdges: [String: [DirectedRelationEdge]]
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
 
   init(pack: KnowledgePack) {
@@ -85,6 +90,27 @@ nonisolated struct KnowledgeStore: Sendable {
       adjacencySets[relation.relatedElementKey, default: []].insert(relation.elementKey)
     }
     adjacency = adjacencySets.mapValues { $0.sorted() }
+    var outgoing: [String: [DirectedRelationEdge]] = [:]
+    var incoming: [String: [DirectedRelationEdge]] = [:]
+    for relation in normalizedRelations {
+      let kind = relation.kind.flatMap { RelationKind(rawValue: $0) }
+      outgoing[relation.elementKey, default: []].append(
+        DirectedRelationEdge(
+          key: relation.relatedElementKey,
+          kind: kind,
+          explanation: relation.explanation
+        )
+      )
+      incoming[relation.relatedElementKey, default: []].append(
+        DirectedRelationEdge(
+          key: relation.elementKey,
+          kind: kind,
+          explanation: relation.explanation
+        )
+      )
+    }
+    outgoingEdges = outgoing
+    incomingEdges = incoming
     introductionsByKey = Dictionary(
       pack.introductions.map { ($0.key, $0) },
       uniquingKeysWith: { first, _ in first }
@@ -303,7 +329,9 @@ nonisolated struct KnowledgeStore: Sendable {
           name: "culturelens:user-graph:\(relation.elementKey):\(relation.relatedElementKey)"
         ),
         sourceID: DeterministicID.culturalElement(relation.elementKey),
-        targetID: DeterministicID.culturalElement(relation.relatedElementKey)
+        targetID: DeterministicID.culturalElement(relation.relatedElementKey),
+        kind: relation.kind.flatMap { RelationKind(rawValue: $0) },
+        explanation: relation.explanation
       )
     }
 
@@ -350,6 +378,135 @@ nonisolated struct KnowledgeStore: Sendable {
           conceptKind: $0.conceptKind
         )
       }
+  }
+
+  // MARK: - Abstraction axis traversal (design 0006)
+
+  /// Edges whose other endpoint is more abstract than `key`: audited upward
+  /// outgoing edges (位于/体现/受到影响/受规制于/解释) plus incoming 组成 edges
+  /// (a 组成 source is the whole, hence the parent). `产生于` stays out until
+  /// its orientation audit lands; pass `includeUnaudited` to opt in.
+  func upward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    let outgoingUp = outgoingEdges[key, default: []].filter { edge in
+      guard edge.kind?.abstractionDirection == .up else { return false }
+      return includeUnaudited || edge.kind?.isAuditedUpward == true
+    }
+    let incomingDown = incomingEdges[key, default: []].filter {
+      $0.kind?.abstractionDirection == .down
+    }
+    return outgoingUp + incomingDown
+  }
+
+  /// Edges whose other endpoint is more concrete than `key`.
+  func downward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    let outgoingDown = outgoingEdges[key, default: []].filter {
+      $0.kind?.abstractionDirection == .down
+    }
+    let incomingUp = incomingEdges[key, default: []].filter { edge in
+      guard edge.kind?.abstractionDirection == .up else { return false }
+      return includeUnaudited || edge.kind?.isAuditedUpward == true
+    }
+    return outgoingDown + incomingUp
+  }
+
+  /// Same-level edges (相似于 plus the orientation-pending kinds treated as
+  /// lateral until audited: 用于/象征/制作采用).
+  func lateral(key: String) -> [DirectedRelationEdge] {
+    outgoingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+      + incomingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+  }
+
+  /// BFS over upward edges, grouped by first-arrival level. A node reached
+  /// again through a cycle keeps its earliest level, so results stay
+  /// deterministic even while the pack still contains unaudited edges.
+  func ancestors(key: String, maxLevels: Int = 5) -> [AbstractionLevel] {
+    var levelByKey: [String: Int] = [key: 0]
+    var edgeByKey: [String: DirectedRelationEdge] = [:]
+    var queue: [String] = [key]
+    var queueIndex = 0
+    while queueIndex < queue.count {
+      let current = queue[queueIndex]
+      queueIndex += 1
+      let currentLevel = levelByKey[current] ?? 0
+      guard currentLevel < maxLevels else { continue }
+      for edge in upward(key: current) {
+        guard elementsByKey[edge.key] != nil, levelByKey[edge.key] == nil else { continue }
+        levelByKey[edge.key] = currentLevel + 1
+        edgeByKey[edge.key] = edge
+        queue.append(edge.key)
+      }
+    }
+
+    var elementsByLevel: [Int: [AbstractionAncestor]] = [:]
+    for (ancestorKey, level) in levelByKey where level > 0 {
+      guard let element = elementsByKey[ancestorKey] else { continue }
+      let edge = edgeByKey[ancestorKey]
+      elementsByLevel[level, default: []].append(
+        AbstractionAncestor(
+          key: ancestorKey,
+          name: element.name,
+          kind: edge?.kind,
+          explanation: edge?.explanation
+        )
+      )
+    }
+    return elementsByLevel.keys.sorted().map { level in
+      AbstractionLevel(
+        level: level,
+        elements: (elementsByLevel[level] ?? []).sorted {
+          let lhsPriority = $0.kind?.abstractionBackbonePriority ?? .max
+          let rhsPriority = $1.kind?.abstractionBackbonePriority ?? .max
+          if lhsPriority != rhsPriority { return lhsPriority < rhsPriority }
+          return ($0.name, $0.key) < ($1.name, $1.key)
+        }
+      )
+    }
+  }
+
+  /// Nodes sharing at least one upward parent with `key` (同级相关).
+  func siblings(key: String) -> [String] {
+    var result = Set<String>()
+    for parent in upward(key: key) {
+      for child in downward(key: parent.key) where child.key != key {
+        if elementsByKey[child.key] != nil {
+          result.insert(child.key)
+        }
+      }
+    }
+    return result.sorted()
+  }
+
+  /// Transitive closure of `理解前先懂` edges pointing at `key` (an edge's
+  /// source is the prerequisite, its target the dependent), minus the `known`
+  /// element keys, in dependency order (nearest prerequisite first).
+  func missingPrerequisites(
+    key: String,
+    known: Set<String>,
+    maxCount: Int = 3
+  ) -> [MissingPrerequisite] {
+    var visited: Set<String> = [key]
+    var queue: [String] = [key]
+    var queueIndex = 0
+    var missing: [MissingPrerequisite] = []
+    while queueIndex < queue.count {
+      let current = queue[queueIndex]
+      queueIndex += 1
+      for edge in incomingEdges[current, default: []]
+      where edge.kind == .prerequisiteFor && visited.insert(edge.key).inserted {
+        queue.append(edge.key)
+        guard !known.contains(edge.key), let element = elementsByKey[edge.key]
+        else { continue }
+        missing.append(
+          MissingPrerequisite(
+            key: edge.key,
+            name: element.name,
+            excerpt: Self.richTextPlainText(element.introduction)
+          )
+        )
+        if missing.count >= maxCount { return missing }
+      }
+    }
+    return missing
   }
 
   // MARK: - Nearby introductions (Haversine, content.sql:209-267)

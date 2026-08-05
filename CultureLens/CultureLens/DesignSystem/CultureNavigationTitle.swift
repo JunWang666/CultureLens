@@ -8,11 +8,11 @@ import UIKit
 /// 布局 bug，后面的子视图不渲染）；2) iOS 26 会把相邻 toolbar item 合并进同一个
 /// 玻璃共享背景，标题需要用 sharedBackgroundVisibility(.hidden) 摘出来保持纯文本样式。
 struct CultureNavigationTitleModifier: ViewModifier {
-    let title: String
-    var subtitle: String? = nil
+    let title: LocalizedStringKey
+    var subtitle: LocalizedStringKey? = nil
     var showsBackButton: Bool = true
     var backSystemImage: String = "chevron.backward"
-    var backAccessibilityLabel: String = "返回"
+    var backAccessibilityLabel: LocalizedStringKey = "返回"
     /// `nil` 时仅 iPad 使用 leading 标题；`true` 强制全平台（如扫描结果页）。
     var prefersLeadingTitle: Bool? = nil
     var accessibilityIdentifier: String? = nil
@@ -121,11 +121,11 @@ private struct OptionalAccessibilityIdentifier: ViewModifier {
 extension View {
     /// 通用导航标题：iPad 在返回键右侧，iPhone 居中。
     func cultureNavigationTitle(
-        _ title: String,
-        subtitle: String? = nil,
+        _ title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
         showsBackButton: Bool = true,
         backSystemImage: String = "chevron.backward",
-        backAccessibilityLabel: String = "返回",
+        backAccessibilityLabel: LocalizedStringKey = "返回",
         prefersLeadingTitle: Bool? = nil,
         accessibilityIdentifier: String? = nil
     ) -> some View {

@@ -60,7 +60,7 @@ struct ThemeDetailView: View {
                 .tint(CultureTheme.cinnabar)
               Text(
                 progress.isComplete
-                  ? "已达到完成条件。可以继续点亮其余节点，加深理解。"
+                  ? LocalizedStringKey("已达到完成条件。可以继续点亮其余节点，加深理解。")
                   : "在现场扫描并加入文化图谱，即可推进主题进度。"
               )
               .font(.caption)
@@ -89,7 +89,7 @@ struct ThemeDetailView: View {
         ContentUnavailableView("主题暂不可用", systemImage: "list.bullet.rectangle")
       }
     }
-    .cultureNavigationTitle(theme?.name ?? "主题")
+    .cultureNavigationTitle(theme.map { LocalizedStringKey($0.name) } ?? "主题")
   }
 
   private func sectionTitle(_ title: String) -> some View {

@@ -474,11 +474,15 @@ struct UserKnowledgeGraphView: View {
             .font(.caption2.weight(.semibold))
             .foregroundStyle(isCenter ? CultureTheme.antiqueGold : nodeAccent(node))
 
-            Text(node.name)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(isCenter ? Color.white : CultureTheme.inkPrimary)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
+            LocalizedPackText(
+                source: node.name,
+                cacheNamespace: "element",
+                cacheKey: node.elementKey
+            )
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(isCenter ? Color.white : CultureTheme.inkPrimary)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
         }
         .frame(
             width: UserKnowledgeGraphLayout.nodeSize.width,
@@ -524,10 +528,14 @@ struct UserKnowledgeGraphView: View {
                     .foregroundStyle(nodeAccent(node))
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(node.name)
-                        .font(.headline)
-                        .foregroundStyle(CultureTheme.inkPrimary)
-                        .lineLimit(1)
+                    LocalizedPackText(
+                        source: node.name,
+                        cacheNamespace: "element",
+                        cacheKey: node.elementKey
+                    )
+                    .font(.headline)
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                    .lineLimit(1)
                     Text(nodeCaption(node, isCenter: false))
                         .font(.caption)
                         .foregroundStyle(CultureTheme.inkSecondary)
@@ -760,9 +768,13 @@ struct UserKnowledgeGraphView: View {
                 .frame(width: 28)
 
             VStack(alignment: .leading, spacing: 3) {
-                Text(node.name)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(CultureTheme.inkPrimary)
+                LocalizedPackText(
+                    source: node.name,
+                    cacheNamespace: "element",
+                    cacheKey: node.elementKey
+                )
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(CultureTheme.inkPrimary)
                 Text(node.id == centerID ? "当前中心" : nodeCaption(node, isCenter: false))
                     .font(.caption2)
                     .foregroundStyle(CultureTheme.inkSecondary)
@@ -954,11 +966,11 @@ struct UserKnowledgeGraphView: View {
     }
 
     private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {
-        if isCenter { return "当前中心" }
+        if isCenter { return String(localized: "当前中心") }
         if let level = progressStore.level(for: node.id) {
-            return level.rawValue
+            return level.localizedTitle
         }
-        return node.kind.rawValue
+        return node.kind.localizedTitle
     }
 
     private func nodeAccent(_ node: UserKnowledgeGraphNode) -> Color {

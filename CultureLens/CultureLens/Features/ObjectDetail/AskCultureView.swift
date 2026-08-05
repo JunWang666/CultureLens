@@ -31,7 +31,9 @@ struct AskCultureView: View {
       }
     }
     .cultureNavigationTitle(
-      isGeneralChat ? "文化问答" : (object?.canonicalName ?? "继续追问"),
+      isGeneralChat
+        ? "文化问答"
+        : (object.map { LocalizedStringKey($0.canonicalName) } ?? "继续追问"),
       subtitle: model.isSending
         ? (model.messages.last?.isThinking == true ? "正在思考…" : "正在流式回答…")
         : nil
@@ -150,13 +152,13 @@ struct AskCultureView: View {
 
   private var emptyState: some View {
     VStack(alignment: .leading, spacing: 16) {
-      Text(isGeneralChat ? "好奇什么，直接问" : "继续追问这个对象")
+      Text(isGeneralChat ? LocalizedStringKey("好奇什么，直接问") : "继续追问这个对象")
         .font(.cultureSerif(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(
         isGeneralChat
-          ? "从知识库与你的文化图谱里找答案，也可以附一张现场照片。"
+          ? LocalizedStringKey("从知识库与你的文化图谱里找答案，也可以附一张现场照片。")
           : "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。"
       )
       .font(.subheadline)
@@ -415,7 +417,7 @@ struct AskCultureView: View {
         }
         .buttonStyle(.plain)
         .disabled(chatService == nil || model.isSending)
-        .accessibilityLabel(model.canSend ? "发送" : "语音对话")
+        .accessibilityLabel(model.canSend ? LocalizedStringKey("发送") : "语音对话")
       }
       .animation(.easeOut(duration: 0.16), value: model.canSend)
       .padding(.leading, 8)
@@ -570,12 +572,29 @@ final class AskCultureChatModel: ObservableObject {
   private var didConfigure = false
   private var streamTask: Task<Void, Never>?
 
+  /// Suggestions double as the message sent on tap, so resolve against the
+  /// app language (not the device locale) like the chat service does.
   var suggestions: [String] {
+    let isEnglish = AppLanguageStore.currentLanguage() == .english
     if object == nil {
+      if isEnglish {
+        return [
+          "How were the Ten Scenes of West Lake named?",
+          "What connects Three Pools Mirroring the Moon and Su Shi?",
+          "How else can the nodes I already know be connected?",
+        ]
+      }
       return [
         "西湖十景是怎样被命名的？",
         "三潭映月和苏轼有什么关系？",
         "我已经了解的节点还能怎样串联？",
+      ]
+    }
+    if isEnglish {
+      return [
+        "Why did it develop this structure?",
+        "How does it vary across regions?",
+        "Where else can I see similar objects?",
       ]
     }
     return [
@@ -671,7 +690,7 @@ final class AskCultureChatModel: ObservableObject {
 
   func send() async {
     guard let chatService, let knowledgeProgressStore else {
-      errorMessage = "追问服务暂不可用。"
+      errorMessage = String(localized: "追问服务暂不可用。")
       return
     }
     let trimmed = draft.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -841,7 +860,7 @@ final class AskCultureChatModel: ObservableObject {
         messages: persisted
       )
     } catch {
-      errorMessage = "对话保存失败：\(error.localizedDescription)"
+      errorMessage = String(localized: "对话保存失败：\(error.localizedDescription)")
     }
   }
 

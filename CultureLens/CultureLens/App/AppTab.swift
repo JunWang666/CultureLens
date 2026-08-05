@@ -23,16 +23,17 @@ enum AppTab: String, CaseIterable, Identifiable {
     /// Entries for the system View menu (excludes the compact「更多」shell).
     static var menuTabs: [AppTab] { primaryTabs + secondaryTabs }
 
-    var title: String {
+    /// View-layer title key; resolves against the in-app locale, not the device locale.
+    var title: LocalizedStringKey {
         switch self {
-        case .explore: String(localized: "探索")
-        case .chat: String(localized: "问答")
-        case .scan: String(localized: "扫描")
-        case .graph: String(localized: "图谱")
-        case .history: String(localized: "足迹")
-        case .review: String(localized: "回顾")
-        case .settings: String(localized: "设置")
-        case .more: String(localized: "更多")
+        case .explore: "探索"
+        case .chat: "问答"
+        case .scan: "扫描"
+        case .graph: "图谱"
+        case .history: "足迹"
+        case .review: "回顾"
+        case .settings: "设置"
+        case .more: "更多"
         }
     }
 

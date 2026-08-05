@@ -20,16 +20,6 @@ final class ScanCoordinator {
         case recognizing
         case failed(String)
 
-        var message: String {
-            switch self {
-            case .idle: "准备扫描"
-            case .preparing: "正在保护隐私并整理图片…"
-            case .locating: "正在获取当前位置…"
-            case .recognizing: "正在辨认文化线索…"
-            case .failed(let message): message
-            }
-        }
-
         var isWorking: Bool {
             switch self {
             case .preparing, .locating, .recognizing: true
@@ -87,8 +77,8 @@ final class ScanCoordinator {
                 case .photoMetadata(let recordedPlace):
                     place = recordedPlace
                     locationNotice = recordedPlace == nil
-                        ? "照片未记录地理信息，将只根据图片识别。"
-                        : "将使用照片记录的位置。"
+                        ? String(localized: "照片未记录地理信息，将只根据图片识别。")
+                        : String(localized: "将使用照片记录的位置。")
                 case .none:
                     place = nil
                 }

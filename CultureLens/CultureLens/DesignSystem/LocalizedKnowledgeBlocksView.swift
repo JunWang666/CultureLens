@@ -2,6 +2,8 @@ import SwiftUI
 
 /// Loads knowledge-pack text for the active language: pack overlay first,
 /// then cached / live `dynamic/chat` translation when overlays are missing.
+/// While a translation is in flight a shimmering skeleton is shown instead of
+/// the untranslated fallback, so source-language content never flashes first.
 struct LocalizedKnowledgeBlocksView: View {
   let elementKey: String?
   let fallbackName: String
@@ -12,22 +14,18 @@ struct LocalizedKnowledgeBlocksView: View {
   @Environment(AppLanguageStore.self) private var languageStore
   @State private var title: String = ""
   @State private var document: RichTextDocument?
-  @State private var isTranslating = false
+  @State private var isLoading = false
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      if isTranslating {
-        Label("正在翻译知识库内容…", systemImage: "globe")
-          .font(.caption)
-          .foregroundStyle(CultureTheme.inkSecondary)
-      }
-
       if let document, !document.blocks.isEmpty {
         RichTextBlocksView(
           document: document,
           textFont: textFont,
           textColor: textColor
         )
+      } else if isLoading {
+        SkeletonTextBlock()
       } else {
         Text(fallbackSummary)
           .font(textFont)
@@ -49,6 +47,9 @@ struct LocalizedKnowledgeBlocksView: View {
     else {
       return
     }
+
+    isLoading = true
+    defer { isLoading = false }
 
     let language = languageStore.language
     let localization = KnowledgeLocalization(pack: store.pack)
@@ -76,8 +77,6 @@ struct LocalizedKnowledgeBlocksView: View {
       return
     }
 
-    isTranslating = true
-    defer { isTranslating = false }
     let localized = await KnowledgeTranslationService.shared.localizedElement(
       key: elementKey,
       sourceName: sourceName,
@@ -85,6 +84,7 @@ struct LocalizedKnowledgeBlocksView: View {
       language: language,
       localization: localization
     )
+    guard !localized.isSourceFallback else { return }
     title = localized.name
     document = localized.introduction
   }

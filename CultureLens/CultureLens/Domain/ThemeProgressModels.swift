@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Progress against a knowledge-pack theme's completion condition.
 nonisolated struct ThemeProgress: Hashable, Sendable {
@@ -19,7 +20,7 @@ nonisolated struct ThemeProgress: Hashable, Sendable {
     contactedCount >= requiredCount
   }
 
-  var statusText: String {
+  var statusText: LocalizedStringKey {
     if isComplete {
       return "已完成"
     }

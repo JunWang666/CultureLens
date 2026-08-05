@@ -118,6 +118,66 @@ nonisolated actor KnowledgeTranslationService {
     }
   }
 
+  /// Translates a plain-text fragment; falls back to the source on any failure.
+  func localizedText(
+    cacheNamespace: String,
+    key: String,
+    sourceText: String,
+    language: AppLanguage
+  ) async -> String {
+    if language.isKnowledgeSource { return sourceText }
+    // Distinct from the name-only cache entry: a cached name translation has
+    // an empty plainText and must not satisfy a fragment lookup.
+    let cacheKey = "\(cacheNamespace)|text:\(language.rawValue):\(key)"
+    if let cached = memoryCache[cacheKey] {
+      return cached.plainText
+    }
+    guard let gatewayClient else { return sourceText }
+    do {
+      let translated = try await translate(
+        client: gatewayClient,
+        name: "",
+        plainText: sourceText,
+        language: language
+      )
+      memoryCache[cacheKey] = translated
+      persistCache()
+      return translated.plainText
+    } catch {
+      return sourceText
+    }
+  }
+
+  /// One translate call resolving both name and text; falls back to source values.
+  func localizedNameAndText(
+    cacheNamespace: String,
+    key: String,
+    sourceName: String,
+    sourceText: String,
+    language: AppLanguage
+  ) async -> (name: String, text: String) {
+    if language.isKnowledgeSource { return (sourceName, sourceText) }
+    // Pair-specific key: name-only cache entries carry an empty plainText.
+    let cacheKey = "\(cacheNamespace)|pair:\(language.rawValue):\(key)"
+    if let cached = memoryCache[cacheKey] {
+      return (cached.name, cached.plainText)
+    }
+    guard let gatewayClient else { return (sourceName, sourceText) }
+    do {
+      let translated = try await translate(
+        client: gatewayClient,
+        name: sourceName,
+        plainText: sourceText,
+        language: language
+      )
+      memoryCache[cacheKey] = translated
+      persistCache()
+      return (translated.name, translated.plainText)
+    } catch {
+      return (sourceName, sourceText)
+    }
+  }
+
   private func translate(
     client: LLMGatewayClient,
     name: String,
@@ -135,7 +195,11 @@ nonisolated actor KnowledgeTranslationService {
       name: \(name)
       text: \(plainText)
       """
-    let (content, _) = try await client.completeText(systemPrompt: system, userText: user)
+    let (content, _) = try await client.completeText(
+      systemPrompt: system,
+      userText: user,
+      reasoningEffort: .none
+    )
     let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
     let jsonSlice = Self.extractJSONObject(from: trimmed) ?? trimmed
     guard let data = jsonSlice.data(using: .utf8),

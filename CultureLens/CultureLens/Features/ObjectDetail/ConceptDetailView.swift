@@ -23,9 +23,13 @@ struct ConceptDetailView: View {
                     .tracking(1.2)
                     .foregroundStyle(CultureTheme.cinnabar)
 
-                Text(concept.name)
-                    .font(.cultureSerif(.largeTitle))
-                    .foregroundStyle(CultureTheme.inkPrimary)
+                LocalizedPackText(
+                    source: concept.name,
+                    cacheNamespace: "element",
+                    cacheKey: resolvedElementKey
+                )
+                .font(.cultureSerif(.largeTitle))
+                .foregroundStyle(CultureTheme.inkPrimary)
 
                 LocalizedKnowledgeBlocksView(
                     elementKey: resolvedElementKey,
@@ -57,7 +61,7 @@ struct ConceptDetailView: View {
                 )
             }
         }
-        .cultureNavigationTitle(concept.name)
+        .cultureNavigationTitle(LocalizedStringKey(concept.name))
     }
 }
 

@@ -255,7 +255,7 @@ struct FocusSelectionOverlay: View {
             .allowsHitTesting(false)
     }
 
-    private var accessibilityValue: String {
+    private var accessibilityValue: LocalizedStringKey {
         guard let region else { return "未框选，将识别整张图片" }
         let focus = region.clamped()
         return "左侧 \(Int((focus.x * 100).rounded()))%，顶部 \(Int((focus.y * 100).rounded()))%，宽 \(Int((focus.width * 100).rounded()))%，高 \(Int((focus.height * 100).rounded()))%"

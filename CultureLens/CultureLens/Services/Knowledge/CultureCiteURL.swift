@@ -160,7 +160,7 @@ enum CultureCiteURL {
         ?? (looksLikeElementKey(linkText) ? "" : linkText)
     }
     if title.isEmpty {
-      title = displayName(for: key, store: store) ?? (key.isEmpty ? "来源" : key)
+      title = displayName(for: key, store: store) ?? (key.isEmpty ? String(localized: "来源") : key)
     }
 
     var a11y = (params["citationA11yValue"] ?? "")

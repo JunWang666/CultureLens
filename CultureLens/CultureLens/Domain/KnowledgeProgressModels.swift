@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Three-tier user knowledge of a culture graph node.
 enum KnowledgeLevel: String, Codable, Hashable, CaseIterable, Sendable {
@@ -19,6 +20,15 @@ enum KnowledgeLevel: String, Codable, Hashable, CaseIterable, Sendable {
     switch self {
     case .contact: false
     case .understand, .master: true
+    }
+  }
+
+  /// View-layer display name; `rawValue` stays the persisted/prompt code.
+  var displayName: LocalizedStringKey {
+    switch self {
+    case .contact: "接触"
+    case .understand: "理解"
+    case .master: "掌握"
     }
   }
 }

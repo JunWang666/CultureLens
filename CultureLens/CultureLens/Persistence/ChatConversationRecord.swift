@@ -38,7 +38,7 @@ nonisolated struct ChatConversationRecord: Codable, Hashable, Sendable, Identifi
       return text
     }
     if lastUser?.imageRelativePath != nil {
-      return "（附图片）"
+      return String(localized: "（附图片）")
     }
     return title
   }

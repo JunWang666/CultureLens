@@ -34,6 +34,10 @@ struct ScanCandidateDetailView: View {
         candidate.attractionKey ?? object.culturalElementKey
     }
 
+    private var objectElementKey: String? {
+        object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+    }
+
     private var isInCultureGraph: Bool {
         knowledgeProgressStore.isInGraph(
             object.id,
@@ -74,9 +78,13 @@ struct ScanCandidateDetailView: View {
             SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
                 // 分栏布局下对象名提到左栏顶部（导航栏只显示“候选详情”）
                 if isWide {
-                    Text(object.canonicalName)
-                        .font(.cultureSerif(.largeTitle))
-                        .foregroundStyle(CultureTheme.inkPrimary)
+                    LocalizedPackText(
+                        source: object.canonicalName,
+                        cacheNamespace: "element",
+                        cacheKey: objectElementKey
+                    )
+                    .font(.cultureSerif(.largeTitle))
+                    .foregroundStyle(CultureTheme.inkPrimary)
                 }
 
                 DataImageView(data: session.imageData)
@@ -117,12 +125,16 @@ struct ScanCandidateDetailView: View {
 
             // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
             if showTitle {
-                Text(object.canonicalName)
-                    .font(.cultureSerif(.largeTitle))
-                    .foregroundStyle(CultureTheme.inkPrimary)
+                LocalizedPackText(
+                    source: object.canonicalName,
+                    cacheNamespace: "element",
+                    cacheKey: objectElementKey
+                )
+                .font(.cultureSerif(.largeTitle))
+                .foregroundStyle(CultureTheme.inkPrimary)
             }
 
-            Text(object.category.rawValue)
+            Text(object.category.localizedTitle)
                 .font(.subheadline)
                 .foregroundStyle(CultureTheme.inkSecondary)
 
@@ -154,22 +166,7 @@ struct ScanCandidateDetailView: View {
                         .foregroundStyle(CultureTheme.inkPrimary)
 
                     ForEach(additionalIntroductions) { introduction in
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(introduction.name)
-                                .font(.headline)
-                                .foregroundStyle(CultureTheme.inkPrimary)
-                            RichTextBlocksView(document: introduction.introduction)
-                        }
-                        .padding(18)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            CultureTheme.surface,
-                            in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-                        )
-                        .overlay {
-                            RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-                                .stroke(CultureTheme.hairline, lineWidth: 1)
-                        }
+                        LocalizedIntroductionCard(introduction: introduction)
                     }
                 }
             } else if displaySummary == nil {
@@ -177,7 +174,7 @@ struct ScanCandidateDetailView: View {
             }
 
         case .failed(let message):
-            contentUnavailable(message)
+            contentUnavailableText(message)
         }
     }
 
@@ -196,8 +193,17 @@ struct ScanCandidateDetailView: View {
         )
     }
 
-    private func contentUnavailable(_ message: String) -> some View {
-        Label(message, systemImage: "exclamationmark.circle")
+    private func contentUnavailable(_ message: LocalizedStringKey) -> some View {
+        contentUnavailableBody(Label(message, systemImage: "exclamationmark.circle"))
+    }
+
+    /// Runtime strings arrive already localized (or from the service); show verbatim.
+    private func contentUnavailableText(_ message: String) -> some View {
+        contentUnavailableBody(Label(message, systemImage: "exclamationmark.circle"))
+    }
+
+    private func contentUnavailableBody(_ label: some View) -> some View {
+        label
             .font(.subheadline)
             .foregroundStyle(CultureTheme.inkSecondary)
             .padding(16)
@@ -214,7 +220,7 @@ struct ScanCandidateDetailView: View {
             let place = session.place,
             let attractionKey = candidate.attractionKey
         else {
-            introductionState = .failed("本次扫描缺少位置或景点标识，无法读取现场介绍。")
+            introductionState = .failed(String(localized: "本次扫描缺少位置或景点标识，无法读取现场介绍。"))
             return
         }
 
@@ -251,7 +257,7 @@ struct ScanCandidateDetailView: View {
                     .frame(maxWidth: .infinity)
             } else {
                 Label(
-                    isInCultureGraph ? "已加入文化图谱" : "确认候选并加入文化图谱",
+                    isInCultureGraph ? LocalizedStringKey("已加入文化图谱") : "确认候选并加入文化图谱",
                     systemImage: isInCultureGraph
                         ? "checkmark.circle.fill"
                         : "point.3.connected.trianglepath.dotted"
@@ -320,6 +326,75 @@ private enum CandidateIntroductionState {
     case loading
     case loaded([AttractionIntroductionRecommendation])
     case failed(String)
+}
+
+/// On-site introduction card that translates the pack name + body into the
+/// active app language, showing a skeleton while a translation is in flight.
+private struct LocalizedIntroductionCard: View {
+    let introduction: AttractionIntroductionRecommendation
+
+    @Environment(AppLanguageStore.self) private var languageStore
+    @State private var resolvedName: String?
+    @State private var resolvedText: String?
+
+    private var showsSourceDirectly: Bool {
+        languageStore.language.isKnowledgeSource
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if showsSourceDirectly {
+                sourceContent
+            } else if let resolvedName, let resolvedText {
+                Text(resolvedName)
+                    .font(.headline)
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                RichTextBlocksView(document: .plain(resolvedText))
+            } else {
+                SkeletonLine(height: 14, widthFraction: 0.45)
+                SkeletonTextBlock(widthFractions: [1.0, 0.9])
+            }
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            CultureTheme.surface,
+            in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+                .stroke(CultureTheme.hairline, lineWidth: 1)
+        }
+        .task(id: "\(introduction.key)|\(languageStore.language.rawValue)") {
+            await reload()
+        }
+    }
+
+    private var sourceContent: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(introduction.name)
+                .font(.headline)
+                .foregroundStyle(CultureTheme.inkPrimary)
+            RichTextBlocksView(document: introduction.introduction)
+        }
+    }
+
+    @MainActor
+    private func reload() async {
+        resolvedName = nil
+        resolvedText = nil
+        guard !languageStore.language.isKnowledgeSource else { return }
+        let translated = await KnowledgeTranslationService.shared.localizedNameAndText(
+            cacheNamespace: "introduction",
+            key: introduction.key,
+            sourceName: introduction.name,
+            sourceText: introduction.introduction.plainText,
+            language: languageStore.language
+        )
+        guard !Task.isCancelled else { return }
+        resolvedName = translated.name
+        resolvedText = translated.text
+    }
 }
 
 #Preview {

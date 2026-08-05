@@ -4,7 +4,7 @@ import SwiftUI
 /// Renders a finished knowledge-aware explanation plus source cards.
 struct PersonalizedExplanationView: View {
   let explanation: PersonalizedExplanation
-  let knowledgeContextSummary: String
+  let knowledgeContextSummary: LocalizedStringKey
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
@@ -40,7 +40,7 @@ struct PersonalizedExplanationView: View {
 /// Stable streaming surface used while explanation Markdown is arriving.
 struct StreamingPersonalizedExplanationView: View {
   let source: GrowingMarkdownSource
-  let knowledgeContextSummary: String
+  let knowledgeContextSummary: LocalizedStringKey
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {

@@ -3,6 +3,10 @@ import SwiftUI
 struct ObjectDetailView: View {
     let object: CultureObject
 
+    private var elementKey: String? {
+        object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+    }
+
     var body: some View {
         ZStack {
             CulturePageBackground()
@@ -10,9 +14,13 @@ struct ObjectDetailView: View {
             SplitDetailLayout(topPadding: 18, bottomPadding: 18) { isWide in
                 // 分栏布局下对象名提到左栏顶部
                 if isWide {
-                    Text(object.canonicalName)
-                        .font(.cultureSerif(.largeTitle))
-                        .foregroundStyle(CultureTheme.inkPrimary)
+                    LocalizedPackText(
+                        source: object.canonicalName,
+                        cacheNamespace: "element",
+                        cacheKey: elementKey
+                    )
+                    .font(.cultureSerif(.largeTitle))
+                    .foregroundStyle(CultureTheme.inkPrimary)
                 }
 
                 ObjectArtwork(object: object, height: isWide ? 340 : 280)
@@ -37,7 +45,7 @@ struct ObjectDetailView: View {
                 )
             }
         }
-        .cultureNavigationTitle(object.canonicalName)
+        .cultureNavigationTitle(LocalizedStringKey(object.canonicalName))
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 KnowledgeGraphMembershipButton(
@@ -59,9 +67,13 @@ struct ObjectDetailView: View {
 
             // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
             if showTitle {
-                Text(object.canonicalName)
-                    .font(.cultureSerif(.largeTitle))
-                    .foregroundStyle(CultureTheme.inkPrimary)
+                LocalizedPackText(
+                    source: object.canonicalName,
+                    cacheNamespace: "element",
+                    cacheKey: elementKey
+                )
+                .font(.cultureSerif(.largeTitle))
+                .foregroundStyle(CultureTheme.inkPrimary)
             }
 
             Text(

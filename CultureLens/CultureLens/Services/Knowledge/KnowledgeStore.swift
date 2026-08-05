@@ -32,11 +32,11 @@ enum KnowledgeStoreError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .packMissing:
-      "应用内缺少知识库数据包。"
+      String(localized: "应用内缺少知识库数据包。")
     case .packInvalid(let detail):
-      "知识库数据包无法读取：\(detail)"
+      String(localized: "知识库数据包无法读取：\(detail)")
     case .invalidQuery:
-      "附近内容查询参数无效。"
+      String(localized: "附近内容查询参数无效。")
     }
   }
 }
@@ -759,7 +759,7 @@ nonisolated struct KnowledgeStore: Sendable {
         relatedElementKey: relation.relatedElementKey,
         kind: relation.kind ?? "解释",
         explanation: relation.explanation
-          ?? "文化内容库记录了两个概念之间的显式关联。"
+          ?? String(localized: "文化内容库记录了两个概念之间的显式关联。")
       )
     }
     return (graphElements, graphRelations)
@@ -806,8 +806,9 @@ nonisolated struct KnowledgeStore: Sendable {
             elementKey: rootKey,
             relatedElementKey: boundKey,
             kind: "解释",
-            explanation:
-              "该文化元素通过“\(attractionNames[attractionKey] ?? "")”的现场介绍直接关联到当前景点。"
+            explanation: String(
+              localized: "该文化元素通过“\(attractionNames[attractionKey] ?? "")”的现场介绍直接关联到当前景点。"
+            )
           )
         )
         seenEdges.insert(edgeKey)

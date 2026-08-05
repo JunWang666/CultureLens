@@ -10,9 +10,9 @@ enum LocationContextError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .denied:
-            "未获得位置权限，将只根据图片识别。"
+            String(localized: "未获得位置权限，将只根据图片识别。")
         case .unavailable:
-            "暂时无法获取附近位置。"
+            String(localized: "暂时无法获取附近位置。")
         }
     }
 }

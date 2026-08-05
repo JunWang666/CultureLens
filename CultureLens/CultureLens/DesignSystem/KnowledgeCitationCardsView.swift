@@ -77,30 +77,7 @@ struct KnowledgeCitationCardsView: View {
   }
 
   private func cardLabel(_ citation: KnowledgeCitation) -> some View {
-    HStack(alignment: .top, spacing: 10) {
-      VStack(alignment: .leading, spacing: 6) {
-        Text(citation.name)
-          .font(.subheadline.weight(.semibold))
-          .foregroundStyle(CultureTheme.inkPrimary)
-          .multilineTextAlignment(.leading)
-          .fixedSize(horizontal: false, vertical: true)
-        if !citation.fragment.isEmpty {
-          Text(citation.fragment)
-            .font(.caption)
-            .foregroundStyle(CultureTheme.inkSecondary)
-            .lineSpacing(3)
-            .multilineTextAlignment(.leading)
-            .fixedSize(horizontal: false, vertical: true)
-        }
-      }
-      .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-
-      Image(systemName: "chevron.right")
-        .font(.caption.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkSecondary.opacity(0.75))
-        .padding(.top, 2)
-    }
-    .contentShape(Rectangle())
+    LocalizedCitationLabel(citation: citation)
   }
 
   private func externalSourcesRow(_ sources: [KnowledgeSource]) -> some View {
@@ -113,11 +90,11 @@ struct KnowledgeCitationCardsView: View {
         ForEach(sources) { source in
           if let url = source.url {
             Link(destination: url) {
-              sourceChip(title: source.title, publisher: source.publisher, isLink: true)
+              sourceChip(title: source.title, publisher: source.displayPublisher, isLink: true)
             }
-            .accessibilityLabel("打开外部资料：\(source.publisher)")
+            .accessibilityLabel("打开外部资料：\(source.displayPublisher)")
           } else {
-            sourceChip(title: source.title, publisher: source.publisher, isLink: false)
+            sourceChip(title: source.title, publisher: source.displayPublisher, isLink: false)
           }
         }
       }
@@ -140,6 +117,83 @@ struct KnowledgeCitationCardsView: View {
       CultureTheme.antiqueGold.opacity(0.14),
       in: RoundedRectangle(cornerRadius: 8, style: .continuous)
     )
+  }
+}
+
+/// Citation name + fragment resolved through `KnowledgeTranslationService`
+/// with one translate call per citation. A two-line skeleton is shown while a
+/// translation is in flight; failures fall back to the source text.
+private struct LocalizedCitationLabel: View {
+  let citation: KnowledgeCitation
+
+  @Environment(AppLanguageStore.self) private var languageStore
+  @State private var resolvedName: String?
+  @State private var resolvedFragment: String?
+
+  private var showsSourceDirectly: Bool {
+    languageStore.language.isKnowledgeSource
+  }
+
+  var body: some View {
+    HStack(alignment: .top, spacing: 10) {
+      VStack(alignment: .leading, spacing: 6) {
+        if showsSourceDirectly {
+          textContent(name: citation.name, fragment: citation.fragment)
+        } else if let resolvedName {
+          textContent(name: resolvedName, fragment: resolvedFragment ?? citation.fragment)
+        } else {
+          SkeletonLine(height: 13, widthFraction: 0.55)
+          if !citation.fragment.isEmpty {
+            SkeletonLine(height: 11, widthFraction: 0.9)
+          }
+        }
+      }
+      .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+
+      Image(systemName: "chevron.right")
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkSecondary.opacity(0.75))
+        .padding(.top, 2)
+    }
+    .contentShape(Rectangle())
+    .task(id: "\(citation.key)|\(languageStore.language.rawValue)") {
+      await reload()
+    }
+  }
+
+  private func textContent(name: String, fragment: String) -> some View {
+    VStack(alignment: .leading, spacing: 6) {
+      Text(name)
+        .font(.subheadline.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkPrimary)
+        .multilineTextAlignment(.leading)
+        .fixedSize(horizontal: false, vertical: true)
+      if !fragment.isEmpty {
+        Text(fragment)
+          .font(.caption)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .lineSpacing(3)
+          .multilineTextAlignment(.leading)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+    }
+  }
+
+  @MainActor
+  private func reload() async {
+    resolvedName = nil
+    resolvedFragment = nil
+    guard !languageStore.language.isKnowledgeSource else { return }
+    let translated = await KnowledgeTranslationService.shared.localizedNameAndText(
+      cacheNamespace: "element",
+      key: citation.key,
+      sourceName: citation.name,
+      sourceText: citation.fragment,
+      language: languageStore.language
+    )
+    guard !Task.isCancelled else { return }
+    resolvedName = translated.name
+    resolvedFragment = translated.text
   }
 }
 

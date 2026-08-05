@@ -10,7 +10,7 @@ struct ScanResultView: View {
   @State private var saveError: String?
   @State private var explanationState: ExplanationLoadState = .idle
   @State private var explanationStreamSource: GrowingMarkdownSource?
-  @State private var knowledgeContextSummary = "从你的文化图谱调整解释深度"
+  @State private var knowledgeContextSummary: LocalizedStringKey = "从你的文化图谱调整解释深度"
   private let explanationService = CultureExplanationService.live()
 
   private var object: CultureObject {
@@ -44,11 +44,8 @@ struct ScanResultView: View {
     return session.result.resolutionStatus
   }
 
-  private var introductionDocument: RichTextDocument? {
-    if let key = object.culturalElementKey {
-      return KnowledgeStore.shared?.introductionDocument(elementKey: key)
-    }
-    return KnowledgeStore.shared?.introductionDocument(nodeID: object.id)
+  private var objectElementKey: String? {
+    object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
   }
 
   var body: some View {
@@ -58,9 +55,13 @@ struct ScanResultView: View {
       SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
         // 分栏布局下对象名提到左栏顶部（导航栏只显示“扫描结果”）
         if isWide {
-          Text(object.canonicalName)
-            .font(.cultureSerif(.largeTitle))
-            .foregroundStyle(CultureTheme.inkPrimary)
+          LocalizedPackText(
+            source: object.canonicalName,
+            cacheNamespace: "element",
+            cacheKey: objectElementKey
+          )
+          .font(.cultureSerif(.largeTitle))
+          .foregroundStyle(CultureTheme.inkPrimary)
         }
 
         imageHeader(height: isWide ? 340 : 280)
@@ -108,7 +109,7 @@ struct ScanResultView: View {
       .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
       .overlay(alignment: .topLeading) {
         Label(
-          session.isDemo ? "演示结果" : "视觉模型结果",
+          session.isDemo ? LocalizedStringKey("演示结果") : "视觉模型结果",
           systemImage: session.isDemo ? "theatermasks" : "sparkles"
         )
         .font(.caption.weight(.semibold))
@@ -133,31 +134,30 @@ struct ScanResultView: View {
 
       // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
       if showTitle {
-        Text(object.canonicalName)
-          .font(.cultureSerif(.largeTitle))
-          .foregroundStyle(CultureTheme.inkPrimary)
+        LocalizedPackText(
+          source: object.canonicalName,
+          cacheNamespace: "element",
+          cacheKey: objectElementKey
+        )
+        .font(.cultureSerif(.largeTitle))
+        .foregroundStyle(CultureTheme.inkPrimary)
       }
 
       Text(
-        [object.category.rawValue, object.timePeriod, object.region]
+        [object.category.localizedTitle, object.timePeriod, object.region]
           .compactMap { $0 }
           .joined(separator: " · ")
       )
       .font(.subheadline)
       .foregroundStyle(CultureTheme.inkSecondary)
 
-      if let introductionDocument, !introductionDocument.blocks.isEmpty {
-        RichTextBlocksView(
-          document: introductionDocument,
-          textFont: .title3,
-          textColor: CultureTheme.inkPrimary
-        )
-      } else {
-        Text(object.summary)
-          .font(.title3)
-          .foregroundStyle(CultureTheme.inkPrimary)
-          .lineSpacing(6)
-      }
+      LocalizedKnowledgeBlocksView(
+        elementKey: objectElementKey,
+        fallbackName: object.canonicalName,
+        fallbackSummary: object.summary,
+        textFont: .title3,
+        textColor: CultureTheme.inkPrimary
+      )
     }
   }
 
@@ -165,8 +165,7 @@ struct ScanResultView: View {
   private var explanationSection: some View {
     switch explanationState {
     case .idle, .loading(_):
-      HStack(spacing: 10) {
-        ProgressView()
+      VStack(alignment: .leading, spacing: 12) {
         VStack(alignment: .leading, spacing: 3) {
           Text("正在整理文化背景…")
             .font(.subheadline.weight(.semibold))
@@ -174,6 +173,7 @@ struct ScanResultView: View {
             .font(.caption)
         }
         .foregroundStyle(CultureTheme.inkSecondary)
+        SkeletonTextBlock()
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding(16)
@@ -249,8 +249,8 @@ struct ScanResultView: View {
       HStack {
         Label(
           session.result.usedPlaceContext
-            ? (session.place?.displayName ?? "使用位置")
-            : "未使用位置",
+            ? (session.place?.displayName ?? String(localized: "使用位置"))
+            : String(localized: "未使用位置"),
           systemImage: session.result.usedPlaceContext ? "location.fill" : "location.slash"
         )
         Spacer()
@@ -299,10 +299,7 @@ struct ScanResultView: View {
               candidateID: candidate.id
             )
           ) {
-            candidateRow(
-              name: candidate.canonicalName,
-              summary: candidate.informativeSummary
-            )
+            candidateRow(candidate)
           }
           .buttonStyle(.plain)
         }
@@ -313,9 +310,13 @@ struct ScanResultView: View {
   private func visualAlternativeRow(_ candidate: RecognitionCandidate) -> some View {
     VStack(alignment: .leading, spacing: 6) {
       HStack(alignment: .firstTextBaseline) {
-        Text(candidate.canonicalName)
-          .font(.headline)
-          .foregroundStyle(CultureTheme.inkPrimary)
+        LocalizedPackText(
+          source: candidate.canonicalName,
+          cacheNamespace: "element",
+          cacheKey: candidate.culturalElementKey
+        )
+        .font(.headline)
+        .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(
           candidate.confidence,
@@ -328,12 +329,17 @@ struct ScanResultView: View {
         .font(.subheadline)
         .foregroundStyle(CultureTheme.inkSecondary)
       if let summary = candidate.informativeSummary {
-        Text(summary)
-          .font(.caption)
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .lineLimit(2)
+        LocalizedPackText(
+          source: summary,
+          cacheNamespace: "element",
+          cacheKey: candidate.culturalElementKey,
+          kind: .fragment
+        )
+        .font(.caption)
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .lineLimit(2)
       }
-      Label(candidate.category.rawValue, systemImage: "eye")
+      Label(candidate.category.localizedTitle, systemImage: "eye")
         .font(.caption.weight(.semibold))
         .foregroundStyle(CultureTheme.inkSecondary)
     }
@@ -349,24 +355,30 @@ struct ScanResultView: View {
     .accessibilityElement(children: .combine)
   }
 
-  private func candidateRow(
-    name: String,
-    summary: String?
-  ) -> some View {
+  private func candidateRow(_ candidate: RecognitionCandidate) -> some View {
     VStack(alignment: .leading, spacing: 6) {
       HStack {
-        Text(name)
-          .font(.headline)
-          .foregroundStyle(CultureTheme.inkPrimary)
+        LocalizedPackText(
+          source: candidate.canonicalName,
+          cacheNamespace: "attraction",
+          cacheKey: candidate.attractionKey
+        )
+        .font(.headline)
+        .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Image(systemName: "chevron.right")
           .font(.caption.weight(.semibold))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
-      if let summary {
-        Text(summary)
-          .font(.subheadline)
-          .foregroundStyle(CultureTheme.inkSecondary)
+      if let summary = candidate.informativeSummary {
+        LocalizedPackText(
+          source: summary,
+          cacheNamespace: "attraction",
+          cacheKey: candidate.attractionKey,
+          kind: .fragment
+        )
+        .font(.subheadline)
+        .foregroundStyle(CultureTheme.inkSecondary)
       }
       Label("查看候选详情", systemImage: "location.fill")
         .font(.caption.weight(.semibold))
@@ -444,12 +456,14 @@ struct ScanResultView: View {
     }
   }
 
-  private var confidenceText: String {
-    let prefix = object.confidence >= 0.8 ? "较高可信度" : "可能是"
+  private var confidenceText: LocalizedStringKey {
     let percentage = object.confidence.formatted(
       .percent.precision(.fractionLength(0))
     )
-    return "\(prefix) · \(percentage)"
+    if object.confidence >= 0.8 {
+      return "较高可信度 · \(percentage)"
+    }
+    return "可能是 · \(percentage)"
   }
 
   private var confidenceSymbol: String {
@@ -514,7 +528,7 @@ struct ScanResultView: View {
     knowledgeContextSummary = knowledgeContextSummary(for: userKnowledgeStates)
 
     guard let explanationService else {
-      explanationState = .failed("讲解服务暂不可用。")
+      explanationState = .failed(String(localized: "讲解服务暂不可用。"))
       return
     }
     // Demo / sample recognition should not call the live chat gateway.
@@ -611,7 +625,7 @@ struct ScanResultView: View {
 
   private func knowledgeContextSummary(
     for states: [UserKnowledgeStateContext]
-  ) -> String {
+  ) -> LocalizedStringKey {
     guard !states.isEmpty else {
       return "你的文化图谱暂无已有节点，将从必要背景讲起"
     }
@@ -626,13 +640,13 @@ struct ScanResultView: View {
     let relatedNames = object.concepts.prefix(2).map(\.name).joined(separator: "、")
     let nextStep =
       relatedNames.isEmpty
-      ? "- 从关系图选择一个相邻概念继续探索。"
-      : "- 继续观察或追问它与\(relatedNames)的关系。"
+      ? "- \(String(localized: "从关系图选择一个相邻概念继续探索。"))"
+      : "- \(String(localized: "继续观察或追问它与\(relatedNames)的关系。"))"
     return """
-      ## 文化背景
+      ## \(String(localized: "文化背景"))
       \(object.summary)
 
-      ## 下一步建议
+      ## \(String(localized: "下一步建议"))
       \(nextStep)
       """
   }

@@ -8,11 +8,11 @@ enum CultureContentServiceError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .invalidResponse:
-      "附近内容的数据格式无效，请稍后重试。"
+      String(localized: "附近内容的数据格式无效，请稍后重试。")
     case .serverUnavailable:
-      "附近内容暂时不可用，请稍后重试。"
+      String(localized: "附近内容暂时不可用，请稍后重试。")
     case .transport:
-      "无法连接文化内容服务，请检查网络后重试。"
+      String(localized: "无法连接文化内容服务，请检查网络后重试。")
     }
   }
 }

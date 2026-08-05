@@ -17,9 +17,9 @@ enum ImagePreprocessorError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .unreadableImage:
-      "无法读取所选图片。"
+      String(localized: "无法读取所选图片。")
     case .encodingFailed:
-      "无法准备识别图片。"
+      String(localized: "无法准备识别图片。")
     }
   }
 }

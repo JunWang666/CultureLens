@@ -2,8 +2,8 @@ import SwiftUI
 
 struct EditorialHeader: View {
     let eyebrow: String?
-    let title: String
-    let message: String
+    let title: LocalizedStringKey
+    let message: LocalizedStringKey
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

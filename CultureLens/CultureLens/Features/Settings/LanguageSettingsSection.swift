@@ -17,7 +17,7 @@ struct LanguageSettingsSection: View {
 
       Picker("语言", selection: Bindable(languageStore).preference) {
         ForEach(AppLanguagePreference.allCases) { preference in
-          Text(preference.title).tag(preference)
+          preferenceLabel(preference).tag(preference)
         }
       }
       .pickerStyle(.segmented)
@@ -26,5 +26,17 @@ struct LanguageSettingsSection: View {
     .padding(16)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(CultureTheme.surface.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
+  }
+
+  /// Only "跟随系统" localizes; language names stay in their native form.
+  private func preferenceLabel(_ preference: AppLanguagePreference) -> Text {
+    switch preference {
+    case .system:
+      Text("跟随系统")
+    case .zhHans:
+      Text(verbatim: AppLanguage.zhHans.nativeDisplayName)
+    case .english:
+      Text(verbatim: AppLanguage.english.nativeDisplayName)
+    }
   }
 }

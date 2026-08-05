@@ -24,12 +24,16 @@ struct CultureObjectCard: View {
       }
 
       VStack(alignment: .leading, spacing: 8) {
-        Text(object.canonicalName)
-          .font(.cultureSerif(.title3))
-          .foregroundStyle(CultureTheme.inkPrimary)
+        LocalizedPackText(
+          source: object.canonicalName,
+          cacheNamespace: "element",
+          cacheKey: object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+        )
+        .font(.cultureSerif(.title3))
+        .foregroundStyle(CultureTheme.inkPrimary)
 
         Text(
-          [object.category.rawValue, object.timePeriod, object.region]
+          [object.category.localizedTitle, object.timePeriod, object.region]
             .compactMap { $0 }
             .joined(separator: " · ")
         )
@@ -63,6 +67,7 @@ enum CultureCardShareRenderer {
     let card = CultureObjectCard(object: object, showsBrandMark: true, artworkHeight: 160)
       .frame(width: width)
       .environment(\.colorScheme, .light)
+      .environment(AppLanguageStore())
 
     let renderer = ImageRenderer(content: card)
     renderer.scale = 3
@@ -71,7 +76,7 @@ enum CultureCardShareRenderer {
 
   /// Plain-text fallback for share/drag; safe outside the main actor.
   nonisolated static func shareText(for object: CultureObject) -> String {
-    let meta = [object.category.rawValue, object.timePeriod, object.region]
+    let meta = [object.category.localizedTitle, object.timePeriod, object.region]
       .compactMap { $0 }
       .joined(separator: " · ")
     if meta.isEmpty {

@@ -135,9 +135,9 @@ nonisolated enum VisitTripBuilder {
     if let firstPlace = placeNames.first {
       title = firstPlace
     } else if let firstName = group.first?.canonicalName {
-      title = "围绕「\(firstName)」的参观"
+      title = String(localized: "围绕「\(firstName)」的参观")
     } else {
-      title = "文化参观"
+      title = String(localized: "文化参观")
     }
 
     return VisitTrip(

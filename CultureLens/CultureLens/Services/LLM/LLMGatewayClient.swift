@@ -10,15 +10,15 @@ enum LLMGatewayError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .schemaMissing(let name):
-      "应用内缺少响应结构资源（\(name)）。"
+      String(localized: "应用内缺少响应结构资源（\(name)）。")
     case .invalidResponse:
-      "识别服务返回了无法读取的数据。"
+      String(localized: "识别服务返回了无法读取的数据。")
     case .invalidProviderOutput:
-      "识别服务返回了无法校验的数据。"
+      String(localized: "识别服务返回了无法校验的数据。")
     case .server(let statusCode, let message):
-      message ?? "识别服务暂时不可用（\(statusCode)）。"
+      message ?? String(localized: "识别服务暂时不可用（\(statusCode)）。")
     case .transport(let message):
-      "无法连接识别服务：\(message)"
+      String(localized: "无法连接识别服务：\(message)")
     }
   }
 }
@@ -546,6 +546,7 @@ nonisolated struct ChatTurn: Sendable, Hashable {
 }
 
 nonisolated enum LLMReasoningEffort: String, Sendable {
+  case none
   case low
 }
 

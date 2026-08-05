@@ -33,6 +33,10 @@ struct ConceptDetailView: View {
                     fallbackSummary: concept.summary
                 )
             } trailing: { _ in
+                if let resolvedElementKey {
+                    AbstractionLadderView(rootKey: resolvedElementKey, rootName: concept.name)
+                }
+
                 if resolvedElementKey == nil, let detail = concept.distinctDetail {
                     VStack(alignment: .leading, spacing: 14) {
                         Text(detail)

@@ -323,6 +323,19 @@
         }
       }
     },
+    "%@，%@，前置知识尚未掌握" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@，%2$@，前置知识尚未掌握"
+          }
+        }
+      }
+    },
+    "%@关系" : {
+
+    },
     "%@可缩放有向文化知识图谱" : {
 
     },
@@ -464,9 +477,6 @@
           }
         }
       }
-    },
-    "上传现场照片，结合知识库追问。" : {
-
     },
     "下一步建议" : {
       "extractionState" : "manual",
@@ -698,6 +708,9 @@
         }
       }
     },
+    "从%@出发的文化脉络阶梯" : {
+
+    },
     "从你的文化图谱调整解释深度" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -749,8 +762,22 @@
         }
       }
     },
-    "从相册选择图片" : {
-
+    "从知识库与你的文化图谱里找答案，也可以附一张现场照片。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answers come from the knowledge base and your culture graph — you can attach a photo too."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从知识库与你的文化图谱里找答案，也可以附一张现场照片。"
+          }
+        }
+      }
     },
     "从知识库问起" : {
       "extractionState" : "manual",
@@ -819,6 +846,9 @@
           }
         }
       }
+    },
+    "以可选择节点为中心的可缩放文化知识图谱" : {
+
     },
     "传播不是简单复制。花瓣数量、构图方式与周边纹样会在不同地方发生变化，留下交流与再创造的痕迹。" : {
       "extractionState" : "manual",
@@ -1130,6 +1160,9 @@
       }
     },
     "全屏查看%@文化知识图谱" : {
+
+    },
+    "全部" : {
 
     },
     "关系节点" : {
@@ -1552,6 +1585,9 @@
         }
       }
     },
+    "双击切换显示" : {
+
+    },
     "双指缩放，单指拖动画布" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1568,6 +1604,9 @@
           }
         }
       }
+    },
+    "双指缩放，单指拖动画布，点按节点查看邻居" : {
+
     },
     "发现附近值得理解的文化线索" : {
       "extractionState" : "manual",
@@ -1602,9 +1641,6 @@
           }
         }
       }
-    },
-    "发送时一并交给知识库问答" : {
-
     },
     "发送第一条消息后，对话会出现在这里。" : {
 
@@ -1711,6 +1747,9 @@
         }
       }
     },
+    "同级相关 %@" : {
+
+    },
     "唐宋至明清" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1813,9 +1852,6 @@
         }
       }
     },
-    "回答会流式渲染，可上传图片，历史对话会自动保存。" : {
-
-    },
     "回答会流式渲染，引用整理成卡片展示。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1829,6 +1865,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "回答会流式渲染，引用整理成卡片展示。"
+          }
+        }
+      }
+    },
+    "回顾" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回顾"
           }
         }
       }
@@ -2043,6 +2096,9 @@
         }
       }
     },
+    "在对象或知识详情页点击“加入文化图谱”，这里会显示已加入节点，并从中心向外展开关系。" : {
+
+    },
     "在现场扫描并加入文化图谱，即可推进主题进度。" : {
 
     },
@@ -2147,6 +2203,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "好"
+          }
+        }
+      }
+    },
+    "好奇什么，直接问" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask whatever you're curious about"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好奇什么，直接问"
           }
         }
       }
@@ -2443,6 +2516,9 @@
         }
       }
     },
+    "展开关系" : {
+
+    },
     "已保存" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2494,16 +2570,6 @@
         }
       }
     },
-    "已加入 %lld 个，展示 %lld 个，向外 3 层" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "已加入 %1$lld 个，展示 %2$lld 个，向外 3 层"
-          }
-        }
-      }
-    },
     "已加入文化图谱" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2537,6 +2603,12 @@
           }
         }
       }
+    },
+    "已截断，展开更多" : {
+
+    },
+    "已显示" : {
+
     },
     "已结合文化图谱中 \\(states.count) 个接触过的节点补齐基础" : {
       "extractionState" : "manual",
@@ -2595,7 +2667,7 @@
     "已达到完成条件。可以继续点亮其余节点，加深理解。" : {
 
     },
-    "已附图片" : {
+    "已隐藏" : {
 
     },
     "应用内缺少响应结构资源（\\(name)）。" : {
@@ -2836,6 +2908,9 @@
         }
       }
     },
+    "当前只展示了部分节点，双击增加展示数量" : {
+
+    },
     "当前对象" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2852,6 +2927,9 @@
           }
         }
       }
+    },
+    "当前对象 %@" : {
+
     },
     "当前对象，\\(object.canonicalName)" : {
       "extractionState" : "manual",
@@ -2892,6 +2970,9 @@
           }
         }
       }
+    },
+    "当前结果还没有绑定到知识库中的文化元素，因此没有可展示的关系。" : {
+
     },
     "快捷提问" : {
       "extractionState" : "manual",
@@ -3136,6 +3217,9 @@
           }
         }
       }
+    },
+    "打开该节点详情，阶梯将以它为起点重新展开" : {
+
     },
     "打开详情；长按可设为中心" : {
       "extractionState" : "manual",
@@ -3415,6 +3499,9 @@
         }
       }
     },
+    "掌握程度" : {
+
+    },
     "探索" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3448,6 +3535,12 @@
           }
         }
       }
+    },
+    "搜索中心节点" : {
+
+    },
+    "搜索节点名称" : {
+
     },
     "数据库中没有匹配到这个景点的现场介绍。" : {
       "extractionState" : "manual",
@@ -3571,6 +3664,9 @@
         }
       }
     },
+    "文化类别" : {
+
+    },
     "文化背景" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3604,6 +3700,9 @@
           }
         }
       }
+    },
+    "文化脉络" : {
+
     },
     "文化问答" : {
       "extractionState" : "manual",
@@ -3917,6 +4016,9 @@
     "暂无主题" : {
 
     },
+    "暂无关系边" : {
+
+    },
     "暂无历史对话" : {
 
     },
@@ -4024,6 +4126,9 @@
           }
         }
       }
+    },
+    "未匹配到知识库对象" : {
+
     },
     "未找到对象" : {
       "extractionState" : "manual",
@@ -4200,6 +4305,9 @@
           }
         }
       }
+    },
+    "查看详情" : {
+
     },
     "查看这个文化关系" : {
       "extractionState" : "manual",
@@ -4730,7 +4838,7 @@
         }
       }
     },
-    "添加内容" : {
+    "没有匹配的节点" : {
 
     },
     "添加图片" : {
@@ -4752,6 +4860,9 @@
           }
         }
       }
+    },
+    "清除筛选" : {
+
     },
     "演示结果" : {
       "extractionState" : "manual",
@@ -4820,6 +4931,9 @@
           }
         }
       }
+    },
+    "点按查看邻居；长按可设为中心" : {
+
     },
     "照片未记录地理信息，将只根据图片识别。" : {
       "extractionState" : "manual",
@@ -5120,6 +5234,9 @@
         }
       }
     },
+    "知识包未载入" : {
+
+    },
     "知识包没有成功载入，请稍后再试。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5153,6 +5270,9 @@
           }
         }
       }
+    },
+    "知识库中该节点还没有记录可验证的关系边。" : {
+
     },
     "知识库已收录" : {
       "extractionState" : "manual",
@@ -5204,6 +5324,9 @@
           }
         }
       }
+    },
+    "知识库数据包没有成功载入，关系图谱暂时不可用。" : {
+
     },
     "知识库暂不可用，无法回答追问。" : {
       "extractionState" : "manual",
@@ -5398,6 +5521,9 @@
         }
       }
     },
+    "筛选节点" : {
+
+    },
     "简体中文" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5568,6 +5694,9 @@
           }
         }
       }
+    },
+    "脉络节点 %@" : {
+
     },
     "莲花常被赋予清净、生成与圆满的意味。" : {
       "extractionState" : "manual",
@@ -6000,6 +6129,9 @@
         }
       }
     },
+    "调整搜索或筛选条件后再试。" : {
+
+    },
     "象征" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6284,6 +6416,9 @@
         }
       }
     },
+    "选择一个节点作为关系展开的中心" : {
+
+    },
     "选择中心" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6399,6 +6534,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "长按可设为中心"
+          }
+        }
+      }
+    },
+    "问答" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q&A"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "问答"
           }
         }
       }

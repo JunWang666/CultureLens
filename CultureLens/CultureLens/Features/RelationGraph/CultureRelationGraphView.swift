@@ -24,7 +24,17 @@ struct CultureRelationGraphView: View {
   @State private var fittedZoomScale: CGFloat = 1
   @State private var didInitializeZoom = false
   @State private var centerRequest = 0
+  /// Layout is computed once per object instead of on every body evaluation,
+  /// so pinch-to-zoom frames never rerun the BFS.
+  @State private var layout: GraphLayout
+  @State private var hiddenFamilies: Set<RelationSemanticFamily> = []
   @GestureState private var transientMagnification: CGFloat = 1
+
+  init(object: CultureObject, presentation: Presentation = .inlineInteractive) {
+    self.object = object
+    self.presentation = presentation
+    _layout = State(initialValue: GraphLayout(object: object))
+  }
 
   private var prerequisiteCount: Int {
     object.relations.count {
@@ -112,6 +122,13 @@ struct CultureRelationGraphView: View {
       VStack(spacing: 0) {
         fullscreenFloatingToolbar
         Spacer(minLength: 0)
+        if displayMode == .graph, !object.relations.isEmpty {
+          familyLegend
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(.ultraThinMaterial, in: Capsule())
+            .padding(.bottom, 12)
+        }
       }
     }
     .toolbar(.hidden, for: .navigationBar)
@@ -179,13 +196,32 @@ struct CultureRelationGraphView: View {
     .padding(.bottom, 4)
   }
 
+  /// Empty-state attribution (design 0007): an object without relations is
+  /// either unmatched to the knowledge base, the pack failed to load, or the
+  /// node genuinely has no relation edges — three different messages.
   private var unavailableGraph: some View {
-    ContentUnavailableView(
-      "关系资料不足",
-      systemImage: "point.3.connected.trianglepath.dotted",
-      description: Text("当前结果还没有可验证的关系边。")
-    )
-    .frame(minHeight: 220)
+    if object.culturalElementKey == nil {
+      ContentUnavailableView(
+        "未匹配到知识库对象",
+        systemImage: "questionmark.circle",
+        description: Text("当前结果还没有绑定到知识库中的文化元素，因此没有可展示的关系。")
+      )
+      .frame(minHeight: 220)
+    } else if KnowledgeStore.shared == nil {
+      ContentUnavailableView(
+        "知识包未载入",
+        systemImage: "externaldrive.badge.exclamationmark",
+        description: Text("知识库数据包没有成功载入，关系图谱暂时不可用。")
+      )
+      .frame(minHeight: 220)
+    } else {
+      ContentUnavailableView(
+        "暂无关系边",
+        systemImage: "point.3.connected.trianglepath.dotted",
+        description: Text("知识库中该节点还没有记录可验证的关系边。")
+      )
+      .frame(minHeight: 220)
+    }
   }
 
   private func header(showsDisplayModePicker: Bool) -> some View {
@@ -224,9 +260,7 @@ struct CultureRelationGraphView: View {
   }
 
   private var graph: some View {
-    let layout = GraphLayout(object: object)
-
-    return VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 10) {
       ScrollViewReader { proxy in
         ScrollView([.horizontal, .vertical]) {
           graphCanvas(layout: layout, linksEnabled: true)
@@ -236,6 +270,7 @@ struct CultureRelationGraphView: View {
           centerGraph(using: proxy)
         }
         .onChange(of: object.id) {
+          layout = GraphLayout(object: object)
           centerGraph(using: proxy)
         }
       }
@@ -251,33 +286,60 @@ struct CultureRelationGraphView: View {
       .accessibilityElement(children: .contain)
       .accessibilityLabel("\(object.canonicalName)有向文化知识图谱")
 
-      HStack(spacing: 14) {
-        legendItem("前置知识", color: CultureTheme.cinnabar)
-        legendItem("制度与语境", color: CultureTheme.antiqueGold)
-        legendItem("其他关系", color: CultureTheme.inkSecondary)
-        Spacer()
-        Label("可拖动", systemImage: "hand.draw")
-      }
-      .font(.caption2)
-      .foregroundStyle(CultureTheme.inkSecondary)
+      familyLegend
     }
   }
 
+  /// Tappable semantic-family legend; tapping a family hides/shows its edges.
+  private var familyLegend: some View {
+    HStack(spacing: 12) {
+      ForEach(RelationSemanticFamily.allCases, id: \.self) { family in
+        Button {
+          withAnimation(.snappy) {
+            if hiddenFamilies.contains(family) {
+              hiddenFamilies.remove(family)
+            } else {
+              hiddenFamilies.insert(family)
+            }
+          }
+        } label: {
+          HStack(spacing: 4) {
+            Image(systemName: family.systemImage)
+              .font(.caption2)
+            Text(family.rawValue)
+          }
+          .foregroundStyle(
+            hiddenFamilies.contains(family) ? CultureTheme.inkSecondary.opacity(0.4) : family.color
+          )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(family.rawValue)关系")
+        .accessibilityValue(hiddenFamilies.contains(family) ? "已隐藏" : "已显示")
+        .accessibilityHint("双击切换显示")
+      }
+      Spacer()
+      Label("可拖动", systemImage: "hand.draw")
+        .foregroundStyle(CultureTheme.inkSecondary)
+    }
+    .font(.caption2)
+  }
+
   private var staticGraphPreview: some View {
-    let layout = GraphLayout(object: object)
     let contentSize = CGSize(width: layout.size.width + 36, height: layout.size.height + 36)
 
-    // Layout size comes from the clear frame (not the canvas), so the full-size
-    // 100% graph can be centered and clipped without expanding the parent.
-    return Color.clear
-      .frame(maxWidth: .infinity)
-      .frame(height: 270)
-      .overlay {
-        graphCanvas(layout: layout, linksEnabled: false)
-          .padding(18)
-          .frame(width: contentSize.width, height: contentSize.height)
-          .accessibilityHidden(true)
-      }
+    // Fit the whole graph into the keyhole frame instead of clipping it at
+    // 100% scale (design 0007: preview uses GraphZoom.fittedScale).
+    return GeometryReader { proxy in
+      let scale = GraphZoom.fittedScale(contentSize: contentSize, viewportSize: proxy.size)
+      graphCanvas(layout: layout, linksEnabled: false)
+        .padding(18)
+        .scaleEffect(scale)
+        .frame(width: contentSize.width * scale, height: contentSize.height * scale)
+        .frame(width: proxy.size.width, height: proxy.size.height)
+        .accessibilityHidden(true)
+    }
+    .frame(maxWidth: .infinity)
+    .frame(height: 270)
       .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 28))
       .overlay {
         RoundedRectangle(cornerRadius: 28)
@@ -297,7 +359,6 @@ struct CultureRelationGraphView: View {
   }
 
   private var zoomableGraph: some View {
-    let layout = GraphLayout(object: object)
     let contentSize = CGSize(width: layout.size.width + 36, height: layout.size.height + 36)
     let effectiveScale = GraphZoom.clamped(zoomScale * transientMagnification)
 
@@ -337,6 +398,7 @@ struct CultureRelationGraphView: View {
           updateFittedZoom(contentSize: contentSize, viewportSize: proxy.size)
         }
         .onChange(of: object.id) {
+          layout = GraphLayout(object: object)
           didInitializeZoom = false
           configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
           centerGraph(using: scrollProxy)
@@ -357,7 +419,8 @@ struct CultureRelationGraphView: View {
   private func graphCanvas(layout: GraphLayout, linksEnabled: Bool) -> some View {
     ZStack {
       ForEach(object.relations) { relation in
-        if let source = layout.positions[relation.sourceID],
+        if !hiddenFamilies.contains(RelationSemanticFamily(kind: relation.kind)),
+          let source = layout.positions[relation.sourceID],
           let target = layout.positions[relation.targetID]
         {
           relationEdge(
@@ -462,22 +525,16 @@ struct CultureRelationGraphView: View {
     target: CGPoint,
     showsLabel: Bool
   ) -> some View {
-    let geometry = EdgeGeometry(source: source, target: target)
-    let edgeColor = color(for: relation)
+    let geometry = GraphEdgeGeometry(source: source, target: target)
+    let family = RelationSemanticFamily(kind: relation.kind)
+    let edgeColor = family.color
 
     return ZStack {
       Path { path in
         path.move(to: geometry.start)
         path.addLine(to: geometry.end)
       }
-      .stroke(
-        edgeColor.opacity(0.76),
-        style: StrokeStyle(
-          lineWidth: relation.kind == .prerequisiteFor ? 2.2 : 1.6,
-          lineCap: .round,
-          dash: relation.kind == .prerequisiteFor ? [] : [6, 4]
-        )
-      )
+      .stroke(edgeColor.opacity(0.76), style: family.strokeStyle)
 
       Path { path in
         path.move(to: geometry.end)
@@ -540,28 +597,43 @@ struct CultureRelationGraphView: View {
           systemImage: "point.3.connected.trianglepath.dotted"
         )
       }
+    case .knowledgeElement(let key):
+      if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
+        ConceptDetailView(concept: concept, elementKey: key)
+      } else {
+        ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
+      }
+    case .object(let id):
+      if id == object.id {
+        ObjectDetailView(object: object)
+      } else if let sample = SampleCultureData.object(id: id) {
+        ObjectDetailView(object: sample)
+      } else {
+        ContentUnavailableView("未找到对象", systemImage: "questionmark.circle")
+      }
     default:
       ContentUnavailableView("当前入口不可用", systemImage: "questionmark.circle")
     }
   }
 
   private func relationRow(_ relation: CultureRelation) -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    let relationColor = RelationSemanticFamily(kind: relation.kind).color
+    return VStack(alignment: .leading, spacing: 10) {
       HStack(spacing: 8) {
         Text(name(for: relation.sourceID))
           .font(.subheadline.weight(.semibold))
         Image(systemName: "arrow.right")
           .font(.caption)
-          .foregroundStyle(color(for: relation))
+          .foregroundStyle(relationColor)
         Text(relation.kind.rawValue)
           .font(.caption.weight(.semibold))
-          .foregroundStyle(color(for: relation))
+          .foregroundStyle(relationColor)
           .padding(.horizontal, 8)
           .padding(.vertical, 4)
-          .background(color(for: relation).opacity(0.1), in: Capsule())
+          .background(relationColor.opacity(0.1), in: Capsule())
         Image(systemName: "arrow.right")
           .font(.caption)
-          .foregroundStyle(color(for: relation))
+          .foregroundStyle(relationColor)
         Text(name(for: relation.targetID))
           .font(.subheadline.weight(.semibold))
         Spacer(minLength: 0)
@@ -608,28 +680,11 @@ struct CultureRelationGraphView: View {
       CultureTheme.inkSecondary
     }
   }
-
-  private func color(for relation: CultureRelation) -> Color {
-    switch relation.kind {
-    case .prerequisiteFor:
-      CultureTheme.cinnabar
-    case .governedBy, .expresses, .explains:
-      CultureTheme.antiqueGold
-    default:
-      CultureTheme.inkSecondary
-    }
-  }
-
-  private func legendItem(_ title: String, color: Color) -> some View {
-    HStack(spacing: 4) {
-      Circle()
-        .fill(color)
-        .frame(width: 6, height: 6)
-      Text(title)
-    }
-  }
 }
 
+/// Object-graph layout: BFS hops from the object node, rendered through the
+/// shared `RadialGraphLayout` kernel (barycenter ordering + abstraction
+/// direction bias). Kept as a value type so views can cache it in `@State`.
 struct GraphLayout {
   let positions: [UUID: CGPoint]
   let hops: [UUID: Int]
@@ -646,6 +701,7 @@ struct GraphLayout {
     }
 
     var shortestHops: [UUID: Int] = [object.id: 0]
+    var parentByID: [UUID: UUID] = [:]
     var queue: [UUID] = [object.id]
     var queueIndex = 0
     while queueIndex < queue.count {
@@ -655,6 +711,7 @@ struct GraphLayout {
       for neighbor in adjacency[current, default: []]
       where shortestHops[neighbor] == nil {
         shortestHops[neighbor] = nextHop
+        parentByID[neighbor] = current
         queue.append(neighbor)
       }
     }
@@ -665,50 +722,58 @@ struct GraphLayout {
       shortestHops[conceptID] = disconnectedHop
     }
 
-    let conceptsByHop = Dictionary(grouping: object.concepts) {
-      shortestHops[$0.id] ?? disconnectedHop
-    }
-    let orderedHops = conceptsByHop.keys.sorted()
-    var radiusByHop: [Int: CGFloat] = [:]
-    var previousRadius: CGFloat = 0
-    for hop in orderedHops {
-      let count = CGFloat(conceptsByHop[hop]?.count ?? 0)
-      let circumferenceRadius = count * 172 / (2 * .pi)
-      let minimumRadius: CGFloat = previousRadius == 0 ? 220 : previousRadius + 190
-      let radius = max(minimumRadius, circumferenceRadius)
-      radiusByHop[hop] = radius
-      previousRadius = radius
-    }
-
-    let maximumRadius = radiusByHop.values.max() ?? 220
-    let horizontalRadius = maximumRadius * 1.14
-    let verticalRadius = maximumRadius * 0.86
-    let center = CGPoint(x: horizontalRadius + 108, y: verticalRadius + 86)
-    var result: [UUID: CGPoint] = [object.id: center]
-
-    for hop in orderedHops {
-      guard let concepts = conceptsByHop[hop], !concepts.isEmpty else { continue }
-      let radius = radiusByHop[hop] ?? 220
-      let orderedConcepts = concepts.sorted {
-        if $0.name != $1.name { return $0.name < $1.name }
-        return $0.id.uuidString < $1.id.uuidString
+    // Direction bias from the edge that connects each node to its BFS parent.
+    var directionOf: [UUID: AbstractionDirection] = [:]
+    for concept in object.concepts {
+      guard let parentID = parentByID[concept.id] else { continue }
+      guard
+        let relation = object.relations.first(where: {
+          ($0.sourceID == parentID && $0.targetID == concept.id)
+            || ($0.sourceID == concept.id && $0.targetID == parentID)
+        })
+      else { continue }
+      let direction = relation.kind.abstractionDirection
+      if relation.sourceID == parentID {
+        // parent → node: up means the node is the more abstract end.
+        directionOf[concept.id] = direction
+      } else {
+        // node → parent: invert the axis.
+        switch direction {
+        case .up: directionOf[concept.id] = .down
+        case .down: directionOf[concept.id] = .up
+        default: directionOf[concept.id] = direction
+        }
       }
-      let angleStep = 2 * CGFloat.pi / CGFloat(orderedConcepts.count)
-      let startingAngle =
-        -CGFloat.pi / 2
-        + (hop.isMultiple(of: 2) ? angleStep / 2 : 0)
-      for (index, concept) in orderedConcepts.enumerated() {
-        let angle = startingAngle + angleStep * CGFloat(index)
-        result[concept.id] = CGPoint(
-          x: center.x + cos(angle) * radius * 1.14,
-          y: center.y + sin(angle) * radius * 0.86
+    }
+
+    let layout = RadialGraphLayout(
+      centerID: object.id,
+      nodes: object.concepts.map {
+        RadialGraphLayout.Node(
+          id: $0.id,
+          ring: shortestHops[$0.id] ?? disconnectedHop,
+          name: $0.name
         )
-      }
-    }
+      },
+      edges: object.relations
+        .filter { nodeIDs.contains($0.sourceID) && nodeIDs.contains($0.targetID) }
+        .map { ($0.sourceID, $0.targetID) },
+      directionOf: directionOf,
+      metrics: RadialGraphLayout.Metrics(
+        nodeSize: CGSize(width: 138, height: 82),
+        initialRadius: 220,
+        ringSpacing: 190,
+        circumferenceSpacing: 172,
+        horizontalStretch: 1.14,
+        verticalStretch: 0.86,
+        margin: 100,
+        directionBiasWeight: 0.45
+      )
+    )
 
-    positions = result
+    positions = layout.positions
     hops = shortestHops
-    size = CGSize(width: center.x * 2, height: center.y * 2)
+    size = layout.size
   }
 }
 
@@ -751,50 +816,6 @@ nonisolated enum GraphZoom {
 
   static func percentageText(for scale: CGFloat) -> String {
     "\(Int((clamped(scale) * 100).rounded()))%"
-  }
-}
-
-private struct EdgeGeometry {
-  let start: CGPoint
-  let end: CGPoint
-  let arrowLeft: CGPoint
-  let arrowRight: CGPoint
-  let label: CGPoint
-
-  init(source: CGPoint, target: CGPoint) {
-    let dx = target.x - source.x
-    let dy = target.y - source.y
-    let distance = max(hypot(dx, dy), 1)
-    let unitX = dx / distance
-    let unitY = dy / distance
-    let sourceInset: CGFloat = 78
-    let targetInset: CGFloat = 78
-    let lineStart = CGPoint(
-      x: source.x + unitX * sourceInset,
-      y: source.y + unitY * sourceInset
-    )
-    let lineEnd = CGPoint(
-      x: target.x - unitX * targetInset,
-      y: target.y - unitY * targetInset
-    )
-    let arrowLength: CGFloat = 9
-    let perpendicularX = -unitY
-    let perpendicularY = unitX
-
-    start = lineStart
-    end = lineEnd
-    arrowLeft = CGPoint(
-      x: lineEnd.x - unitX * arrowLength + perpendicularX * 5,
-      y: lineEnd.y - unitY * arrowLength + perpendicularY * 5
-    )
-    arrowRight = CGPoint(
-      x: lineEnd.x - unitX * arrowLength - perpendicularX * 5,
-      y: lineEnd.y - unitY * arrowLength - perpendicularY * 5
-    )
-    label = CGPoint(
-      x: (lineStart.x + lineEnd.x) / 2 + perpendicularX * 12,
-      y: (lineStart.y + lineEnd.y) / 2 + perpendicularY * 12
-    )
   }
 }
 

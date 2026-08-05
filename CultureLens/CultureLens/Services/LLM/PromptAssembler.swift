@@ -132,7 +132,11 @@ nonisolated struct PromptAssembler: Sendable {
     neighbors: [ExplanationNeighborContext],
     knowledgeFragments: [ExplanationFragmentContext],
     userKnowledgeStates: [UserKnowledgeStateContext],
-    siteContext: String?
+    siteContext: String?,
+    abstractionPath: [AbstractionPathContext] = [],
+    missingPrerequisites: [MissingPrerequisiteContext] = [],
+    preferenceProfile: [PreferenceProfileContext] = [],
+    userKnowledgeTotalCount: Int? = nil
   ) throws -> String {
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys]
@@ -143,6 +147,18 @@ nonisolated struct PromptAssembler: Sendable {
       "user_knowledge_states": try jsonObject(encoder.encode(userKnowledgeStates)),
       "output_language": languagePolicy.language.rawValue,
     ]
+    if let userKnowledgeTotalCount {
+      payload["user_knowledge_total_count"] = userKnowledgeTotalCount
+    }
+    if !abstractionPath.isEmpty {
+      payload["abstraction_path"] = try jsonObject(encoder.encode(abstractionPath))
+    }
+    if !missingPrerequisites.isEmpty {
+      payload["missing_prerequisites"] = try jsonObject(encoder.encode(missingPrerequisites))
+    }
+    if !preferenceProfile.isEmpty {
+      payload["preference_profile"] = try jsonObject(encoder.encode(preferenceProfile))
+    }
     if let siteContext = siteContext?.trimmingCharacters(in: .whitespacesAndNewlines),
       !siteContext.isEmpty
     {
@@ -247,4 +263,28 @@ nonisolated struct ExplanationFragmentContext: Encodable, Sendable {
   let key: String
   let name: String
   let text: String
+}
+
+/// One rung of the abstraction ladder above the explained object
+/// (design 0006 阶段 3): nearest ancestor first, capped at five levels.
+nonisolated struct AbstractionPathContext: Encodable, Sendable {
+  let key: String
+  let name: String
+  /// Short verbatim excerpt from the element's introduction.
+  let excerpt: String
+}
+
+/// A prerequisite the user has not mastered yet, with its source fragment
+/// (the only legal content source for the「先理解」section).
+nonisolated struct MissingPrerequisiteContext: Encodable, Sendable {
+  let key: String
+  let name: String
+  let fragment: String
+}
+
+/// One entry of the user preference profile derived from the ConceptKind
+/// distribution of joined nodes (design 0006 设计六).
+nonisolated struct PreferenceProfileContext: Encodable, Sendable {
+  let kind: String
+  let count: Int
 }

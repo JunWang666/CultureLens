@@ -1,14 +1,21 @@
 import SwiftData
 import SwiftUI
 
-/// The user's real knowledge graph: all joined nodes plus three shortest-hop
-/// layers from a user-selectable center in the bundled knowledge pack.
-/// Presented edge-to-edge like `CultureRelationGraphView` fullscreen.
+/// The user's real knowledge graph: all joined nodes plus shortest-hop layers
+/// from a user-selectable center in the bundled knowledge pack.
+/// Presented edge-to-edge like `CultureRelationGraphView` fullscreen, sharing
+/// the same radial layout kernel, edge geometry, semantic-family legend, and
+/// zoom controls (design 0007).
 struct UserKnowledgeGraphView: View {
     @Environment(KnowledgeProgressStore.self)
     private var progressStore
     @Environment(ScanSessionStore.self)
     private var sessionStore
+
+    /// Popover content lives outside the NavigationStack, so detail
+    /// navigation from the node preview goes through this closure instead of
+    /// a `NavigationLink` (which is a no-op inside a popover).
+    var onNavigate: ((AppRoute) -> Void)? = nil
 
     @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
     private var records: [ScanHistoryRecord]
@@ -18,9 +25,38 @@ struct UserKnowledgeGraphView: View {
     @State private var renderState: RenderState?
     @State private var didAttemptLoad = false
 
+    @State private var displayMode: DisplayMode = .graph
+    @State private var zoomScale: CGFloat = 1
+    @State private var fittedZoomScale: CGFloat = 1
+    @State private var didInitializeZoom = false
+    @State private var centerRequest = 0
+    @GestureState private var transientMagnification: CGFloat = 1
+
+    @State private var searchText = ""
+    @State private var kindFilter: ConceptKind?
+    @State private var levelFilter: KnowledgeLevel?
+    @State private var hiddenFamilies: Set<RelationSemanticFamily> = []
+    @State private var selectedNodeID: UUID?
+    /// Missing prerequisites of the current center (design 0007 阶段 4):
+    /// rendered with a warning accent so users see what to learn first.
+    @State private var missingPrerequisiteIDs: Set<UUID> = []
+    @State private var isCenterPickerPresented = false
+    @State private var expansionLimit = Self.defaultExpansionLimit
+    @State private var rebuildTask: Task<Void, Never>?
+
+    private static let defaultExpansionLimit = 24
+    private static let expansionStep = 24
+    private static let maximumExpansionLimit = 120
+
     private struct RenderState {
         let snapshot: UserKnowledgeGraphSnapshot
         let layout: UserKnowledgeGraphLayout
+    }
+
+    private enum DisplayMode: String, CaseIterable, Identifiable {
+        case graph = "图谱"
+        case list = "列表"
+        var id: Self { self }
     }
 
     var body: some View {
@@ -32,7 +68,11 @@ struct UserKnowledgeGraphView: View {
                 if progressStore.graphNodeIDs.isEmpty {
                     emptyState
                 } else if let renderState {
-                    graphViewport(renderState)
+                    if displayMode == .graph {
+                        graphViewport(renderState)
+                    } else {
+                        nodeList(renderState.snapshot)
+                    }
                 } else if didAttemptLoad {
                     ContentUnavailableView(
                         "知识图谱暂不可用",
@@ -46,41 +86,69 @@ struct UserKnowledgeGraphView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
 
-            if let renderState, !progressStore.graphNodeIDs.isEmpty {
+            if let renderState, !progressStore.graphNodeIDs.isEmpty, displayMode == .graph {
                 VStack {
                     Spacer(minLength: 0)
-                    HStack {
-                        Spacer(minLength: 0)
+                    HStack(alignment: .bottom) {
                         graphLegendChip(renderState.snapshot)
+                        Spacer(minLength: 0)
+                        zoomControls
                     }
                 }
-                .padding(.trailing, 16)
+                .padding(.horizontal, 16)
                 .padding(.bottom, 16)
-                .allowsHitTesting(false)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText, prompt: "搜索节点名称")
         .toolbar {
-            if let renderState, !progressStore.graphNodeIDs.isEmpty {
+            if renderState != nil, !progressStore.graphNodeIDs.isEmpty {
                 ToolbarItem(placement: .primaryAction) {
-                    centerMenu(renderState.snapshot)
+                    HStack(spacing: 12) {
+                        filterMenu
+                        displayModePicker
+                        Button {
+                            isCenterPickerPresented = true
+                        } label: {
+                            Label("选择中心", systemImage: "scope")
+                        }
+                        .accessibilityHint("选择一个节点作为关系展开的中心")
+                    }
                 }
+            }
+        }
+        .sheet(isPresented: $isCenterPickerPresented) {
+            if let renderState {
+                CenterPickerSheet(
+                    snapshot: renderState.snapshot,
+                    onSelect: { id in
+                        selectCenter(id)
+                        isCenterPickerPresented = false
+                    }
+                )
+                .presentationDetents([.medium, .large])
             }
         }
         .task {
             guard knowledgeStore == nil else { return }
             knowledgeStore = await KnowledgePackLoader.shared.store()
             didAttemptLoad = true
-            rebuildGraph()
+            scheduleRebuild()
         }
         .onChange(of: progressStore.graphNodeIDs) {
-            rebuildGraph()
+            scheduleRebuild()
         }
         .onChange(of: records.map(\.recordID)) {
-            rebuildGraph()
+            scheduleRebuild()
         }
         .onChange(of: sessionStore.sessionIDs) {
-            rebuildGraph()
+            scheduleRebuild()
+        }
+        .onChange(of: expansionLimit) {
+            scheduleRebuild()
+        }
+        .onDisappear {
+            rebuildTask?.cancel()
         }
     }
 
@@ -88,123 +156,269 @@ struct UserKnowledgeGraphView: View {
         ContentUnavailableView {
             Label("文化图谱还是空的", systemImage: "point.3.connected.trianglepath.dotted")
         } description: {
-            Text("在对象或知识详情页点击“加入文化图谱”，这里会显示已加入节点，并从中心向外展开三层关系。")
+            Text("在对象或知识详情页点击“加入文化图谱”，这里会显示已加入节点，并从中心向外展开关系。")
         }
         .padding(CultureTheme.pagePadding)
     }
 
-    private func centerMenu(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
-        Menu {
-            let joinedNodes = snapshot.nodes.filter(\.isJoined)
-            let discoveredNodes = snapshot.nodes.filter { !$0.isJoined }
+    // MARK: - Filtering & selection
 
-            if !joinedNodes.isEmpty {
-                Section("已加入") {
-                    centerButtons(for: joinedNodes, centerID: snapshot.centerID)
-                }
-            }
-            if !discoveredNodes.isEmpty {
-                Section("三层关系") {
-                    centerButtons(for: discoveredNodes, centerID: snapshot.centerID)
+    private func matchesFilters(_ node: UserKnowledgeGraphNode) -> Bool {
+        if !searchText.isEmpty,
+            !node.name.localizedCaseInsensitiveContains(searchText)
+        {
+            return false
+        }
+        if let kindFilter, node.kind != kindFilter { return false }
+        if let levelFilter, progressStore.level(for: node.id) != levelFilter { return false }
+        return true
+    }
+
+    private var filtersActive: Bool {
+        !searchText.isEmpty || kindFilter != nil || levelFilter != nil
+    }
+
+    /// The selected node plus its direct neighbors; empty when nothing is
+    /// selected (no dimming applied).
+    private func highlightSet(in snapshot: UserKnowledgeGraphSnapshot) -> Set<UUID> {
+        guard let selectedNodeID else { return [] }
+        var ids: Set<UUID> = [selectedNodeID]
+        for edge in snapshot.edges {
+            if edge.sourceID == selectedNodeID { ids.insert(edge.targetID) }
+            if edge.targetID == selectedNodeID { ids.insert(edge.sourceID) }
+        }
+        return ids
+    }
+
+    private func nodeOpacity(
+        _ node: UserKnowledgeGraphNode,
+        snapshot: UserKnowledgeGraphSnapshot
+    ) -> Double {
+        if filtersActive, !matchesFilters(node) { return 0.12 }
+        let highlight = highlightSet(in: snapshot)
+        if !highlight.isEmpty, !highlight.contains(node.id) { return 0.3 }
+        return 1
+    }
+
+    // MARK: - Toolbar
+
+    private var displayModePicker: some View {
+        Menu {
+            ForEach(DisplayMode.allCases) { mode in
+                Button {
+                    displayMode = mode
+                } label: {
+                    if displayMode == mode {
+                        Label(mode.rawValue, systemImage: "checkmark")
+                    } else {
+                        Text(mode.rawValue)
+                    }
                 }
             }
         } label: {
-            Label("选择中心", systemImage: "scope")
+            Image(
+                systemName: displayMode == .graph
+                    ? "point.3.connected.trianglepath.dotted"
+                    : "list.bullet"
+            )
         }
-        .accessibilityHint("选择一个节点作为三层关系展开的中心")
+        .accessibilityLabel("显示方式")
+        .accessibilityValue(displayMode.rawValue)
     }
 
-    @ViewBuilder
-    private func centerButtons(
-        for nodes: [UserKnowledgeGraphNode],
-        centerID: UUID?
-    ) -> some View {
-        ForEach(nodes.sorted(by: nodeNameOrder)) { node in
-            Button {
-                selectCenter(node.id)
-            } label: {
-                if node.id == centerID {
-                    Label(node.name, systemImage: "scope")
-                } else {
-                    Text(node.name)
-                }
-            }
-        }
-    }
-
-    private func graphViewport(_ state: RenderState) -> some View {
-        ScrollViewReader { proxy in
-            ScrollView([.horizontal, .vertical]) {
-                ZStack {
-                    edgeCanvas(state)
-
-                    ForEach(state.snapshot.nodes) { node in
-                        graphNodeLink(node, centerID: state.snapshot.centerID)
-                            .id(node.id)
-                            .position(state.layout.positions[node.id] ?? .zero)
+    private var filterMenu: some View {
+        Menu {
+            Menu("文化类别") {
+                Button {
+                    kindFilter = nil
+                } label: {
+                    if kindFilter == nil {
+                        Label("全部", systemImage: "checkmark")
+                    } else {
+                        Text("全部")
                     }
                 }
-                .frame(width: state.layout.size.width, height: state.layout.size.height)
-                .padding(18)
+                ForEach(ConceptKind.allCases, id: \.self) { kind in
+                    Button {
+                        kindFilter = kind
+                    } label: {
+                        if kindFilter == kind {
+                            Label(kind.rawValue, systemImage: "checkmark")
+                        } else {
+                            Label(kind.rawValue, systemImage: kind.systemImage)
+                        }
+                    }
+                }
             }
-            .onAppear {
-                scrollToCenter(state.snapshot.centerID, proxy: proxy)
+            Menu("掌握程度") {
+                Button {
+                    levelFilter = nil
+                } label: {
+                    if levelFilter == nil {
+                        Label("全部", systemImage: "checkmark")
+                    } else {
+                        Text("全部")
+                    }
+                }
+                ForEach(KnowledgeLevel.allCases, id: \.self) { level in
+                    Button {
+                        levelFilter = level
+                    } label: {
+                        if levelFilter == level {
+                            Label(level.rawValue, systemImage: "checkmark")
+                        } else {
+                            Text(level.rawValue)
+                        }
+                    }
+                }
             }
-            .onChange(of: state.snapshot.centerID) {
-                scrollToCenter(state.snapshot.centerID, proxy: proxy)
+            if filtersActive {
+                Divider()
+                Button("清除筛选") {
+                    searchText = ""
+                    kindFilter = nil
+                    levelFilter = nil
+                }
+            }
+        } label: {
+            Image(systemName: filtersActive ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+        }
+        .accessibilityLabel("筛选节点")
+    }
+
+    // MARK: - Graph canvas
+
+    private func graphViewport(_ state: RenderState) -> some View {
+        let contentSize = CGSize(
+            width: state.layout.size.width + 36,
+            height: state.layout.size.height + 36
+        )
+        let effectiveScale = GraphZoom.clamped(zoomScale * transientMagnification)
+
+        return GeometryReader { proxy in
+            let scaledSize = CGSize(
+                width: contentSize.width * effectiveScale,
+                height: contentSize.height * effectiveScale
+            )
+
+            ScrollViewReader { scrollProxy in
+                ScrollView([.horizontal, .vertical]) {
+                    ZStack {
+                        edgeCanvas(state)
+
+                        ForEach(state.snapshot.nodes) { node in
+                            graphNodeButton(node, snapshot: state.snapshot)
+                                .id(node.id)
+                                .position(state.layout.positions[node.id] ?? .zero)
+                                .opacity(nodeOpacity(node, snapshot: state.snapshot))
+                        }
+                    }
+                    .frame(width: state.layout.size.width, height: state.layout.size.height)
+                    .padding(18)
+                    .scaleEffect(effectiveScale)
+                    .frame(width: scaledSize.width, height: scaledSize.height)
+                    .frame(
+                        width: max(scaledSize.width, proxy.size.width),
+                        height: max(scaledSize.height, proxy.size.height)
+                    )
+                }
+                .defaultScrollAnchor(.center)
+                .scrollIndicators(.visible)
+                .simultaneousGesture(
+                    MagnifyGesture()
+                        .updating($transientMagnification) { value, state, _ in
+                            state = value.magnification
+                        }
+                        .onEnded { value in
+                            zoomScale = GraphZoom.clamped(zoomScale * value.magnification)
+                        }
+                )
+                .onAppear {
+                    configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
+                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
+                }
+                .onChange(of: proxy.size) {
+                    fittedZoomScale = GraphZoom.fittedScale(
+                        contentSize: contentSize,
+                        viewportSize: proxy.size
+                    )
+                }
+                .onChange(of: state.snapshot.centerID) {
+                    selectedNodeID = nil
+                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
+                }
+                .onChange(of: centerRequest) {
+                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
+                }
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("以可选择节点为中心的三层文化知识图谱")
-    }
-
-    private func graphLegendChip(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text("\(progressStore.graphNodeIDs.count) 已加入 · \(snapshot.nodes.count) 展示")
-                .font(.caption2)
-                .foregroundStyle(CultureTheme.inkSecondary)
-                .lineLimit(1)
-
-            HStack(spacing: 8) {
-                legendItem("中心", color: CultureTheme.cinnabar)
-                legendItem("已加入", color: CultureTheme.antiqueGold)
-                legendItem("关系", color: CultureTheme.inkSecondary)
-            }
-        }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(
-            "已加入 \(progressStore.graphNodeIDs.count) 个，展示 \(snapshot.nodes.count) 个，向外 3 层"
-        )
+        .accessibilityLabel("以可选择节点为中心的可缩放文化知识图谱")
+        .accessibilityHint("双指缩放，单指拖动画布，点按节点查看邻居")
     }
 
     private func edgeCanvas(_ state: RenderState) -> some View {
-        Canvas { context, _ in
+        let highlight = highlightSet(in: state.snapshot)
+        return Canvas { context, _ in
             for edge in state.snapshot.edges {
-                guard
+                let family = RelationSemanticFamily(kind: edge.kind)
+                guard !hiddenFamilies.contains(family),
                     let source = state.layout.positions[edge.sourceID],
                     let target = state.layout.positions[edge.targetID]
                 else { continue }
 
+                let touchesSelection = selectedNodeID == nil
+                    ? (edge.sourceID == state.snapshot.centerID
+                        || edge.targetID == state.snapshot.centerID)
+                    : highlight.contains(edge.sourceID) && highlight.contains(edge.targetID)
+                    && (edge.sourceID == selectedNodeID || edge.targetID == selectedNodeID)
+
+                let geometry = GraphEdgeGeometry(
+                    source: source,
+                    target: target,
+                    inset: UserKnowledgeGraphLayout.nodeSize.width / 2 + 4
+                )
                 var path = Path()
-                path.move(to: source)
-                path.addLine(to: target)
-                let touchesCenter = edge.sourceID == state.snapshot.centerID
-                    || edge.targetID == state.snapshot.centerID
+                path.move(to: geometry.start)
+                path.addLine(to: geometry.end)
+                var style = family.strokeStyle
+                if !touchesSelection {
+                    style = StrokeStyle(
+                        lineWidth: max(style.lineWidth * 0.7, 1),
+                        lineCap: .round,
+                        dash: style.dash
+                    )
+                }
                 context.stroke(
                     path,
-                    with: .color(
-                        touchesCenter
-                            ? CultureTheme.cinnabar.opacity(0.66)
-                            : CultureTheme.inkSecondary.opacity(0.28)
-                    ),
-                    style: StrokeStyle(
-                        lineWidth: touchesCenter ? 2 : 1.2,
-                        lineCap: .round
-                    )
+                    with: .color(family.color.opacity(touchesSelection ? 0.8 : 0.24)),
+                    style: style
                 )
+
+                // Arrowhead along the typed direction.
+                var arrow = Path()
+                arrow.move(to: geometry.end)
+                arrow.addLine(to: geometry.arrowLeft)
+                arrow.move(to: geometry.end)
+                arrow.addLine(to: geometry.arrowRight)
+                context.stroke(
+                    arrow,
+                    with: .color(family.color.opacity(touchesSelection ? 0.9 : 0.3)),
+                    style: StrokeStyle(lineWidth: 1.8, lineCap: .round)
+                )
+
+                // Labels ride on the edges adjacent to the selected node (or
+                // the center when nothing is selected).
+                if touchesSelection, let kind = edge.kind {
+                    let label = Text(kind.rawValue)
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(family.color)
+                    context.draw(
+                        context.resolve(label),
+                        at: geometry.label,
+                        anchor: .center
+                    )
+                }
             }
         }
         .frame(width: state.layout.size.width, height: state.layout.size.height)
@@ -213,29 +427,44 @@ struct UserKnowledgeGraphView: View {
     }
 
     @ViewBuilder
-    private func graphNodeLink(
+    private func graphNodeButton(
         _ node: UserKnowledgeGraphNode,
-        centerID: UUID?
+        snapshot: UserKnowledgeGraphSnapshot
     ) -> some View {
-        if let route = route(for: node) {
-            NavigationLink(value: route) {
-                graphNode(node, isCenter: node.id == centerID)
+        Button {
+            withAnimation(.snappy) {
+                selectedNodeID = selectedNodeID == node.id ? nil : node.id
             }
-            .buttonStyle(.plain)
-            .contextMenu {
-                graphNodeActions(node)
-            }
-        } else {
-            graphNode(node, isCenter: node.id == centerID)
-                .contextMenu {
-                    graphNodeActions(node)
-                }
+        } label: {
+            graphNode(
+                node,
+                isCenter: node.id == snapshot.centerID,
+                isSelected: selectedNodeID == node.id,
+                isMissingPrerequisite: missingPrerequisiteIDs.contains(node.id)
+            )
+        }
+        .buttonStyle(.plain)
+        // System-style preview anchored at the node itself (like a long-press
+        // preview), instead of a detached bottom banner.
+        .popover(
+            isPresented: Binding(
+                get: { selectedNodeID == node.id },
+                set: { if !$0 { selectedNodeID = nil } }
+            ),
+            arrowEdge: .top
+        ) {
+            selectionPopup(node)
+        }
+        .contextMenu {
+            graphNodeActions(node)
         }
     }
 
     private func graphNode(
         _ node: UserKnowledgeGraphNode,
-        isCenter: Bool
+        isCenter: Bool,
+        isSelected: Bool,
+        isMissingPrerequisite: Bool
     ) -> some View {
         VStack(spacing: 5) {
             HStack(spacing: 5) {
@@ -261,17 +490,100 @@ struct UserKnowledgeGraphView: View {
         )
         .overlay {
             RoundedRectangle(cornerRadius: 19)
-                .stroke(nodeAccent(node), lineWidth: node.isJoined || isCenter ? 2 : 1)
+                .stroke(
+                    isSelected ? CultureTheme.cinnabar : nodeAccent(node),
+                    lineWidth: isSelected || node.isJoined || isCenter ? 2 : 1
+                )
+        }
+        .overlay(alignment: .topTrailing) {
+            if isMissingPrerequisite, !isCenter {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.caption2)
+                    .foregroundStyle(CultureTheme.cinnabar)
+                    .padding(6)
+            }
         }
         .shadow(color: .black.opacity(isCenter ? 0.13 : 0.04), radius: 8, y: 3)
         .contentShape(RoundedRectangle(cornerRadius: 19))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(node.name)，\(nodeCaption(node, isCenter: isCenter))")
-        .accessibilityHint(route(for: node) == nil ? "长按可设为中心" : "打开详情；长按可设为中心")
+        .accessibilityLabel(
+            isMissingPrerequisite
+                ? "\(node.name)，\(nodeCaption(node, isCenter: isCenter))，前置知识尚未掌握"
+                : "\(node.name)，\(nodeCaption(node, isCenter: isCenter))"
+        )
+        .accessibilityHint("点按查看邻居；长按可设为中心")
+    }
+
+    /// Popover preview shown at the node's own position: name, type/mastery,
+    /// a short summary, and the detail / re-center actions.
+    private func selectionPopup(_ node: UserKnowledgeGraphNode) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 10) {
+                Image(systemName: node.kind.systemImage)
+                    .font(.title3)
+                    .foregroundStyle(nodeAccent(node))
+
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(node.name)
+                        .font(.headline)
+                        .foregroundStyle(CultureTheme.inkPrimary)
+                        .lineLimit(1)
+                    Text(nodeCaption(node, isCenter: false))
+                        .font(.caption)
+                        .foregroundStyle(CultureTheme.inkSecondary)
+                }
+
+                Spacer(minLength: 8)
+            }
+
+            if !node.summary.isEmpty {
+                Text(node.summary)
+                    .font(.subheadline)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+                    .lineLimit(4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+
+            HStack(spacing: 10) {
+                if let route = route(for: node) {
+                    Button {
+                        selectedNodeID = nil
+                        onNavigate?(route)
+                    } label: {
+                        Label("查看详情", systemImage: "arrow.right.circle")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(CultureTheme.cinnabar)
+                }
+                Button {
+                    selectedNodeID = nil
+                    selectCenter(node.id)
+                } label: {
+                    Label("设为中心", systemImage: "scope")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+            }
+            .controlSize(.regular)
+        }
+        .padding(16)
+        .frame(width: 340)
+        .presentationCompactAdaptation(.popover)
     }
 
     @ViewBuilder
     private func graphNodeActions(_ node: UserKnowledgeGraphNode) -> some View {
+        if let route = route(for: node) {
+            NavigationLink(value: route) {
+                Label("查看详情", systemImage: "arrow.right.circle")
+            }
+        }
+
         Button {
             selectCenter(node.id)
         } label: {
@@ -315,34 +627,167 @@ struct UserKnowledgeGraphView: View {
         }
     }
 
-    private func legendItem(_ title: String, color: Color) -> some View {
-        HStack(spacing: 3) {
-            Circle()
-                .fill(color)
-                .frame(width: 5, height: 5)
-            Text(title)
-                .font(.caption2)
-                .foregroundStyle(CultureTheme.inkSecondary)
+    // MARK: - Legend & zoom
+
+    private func graphLegendChip(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Text("\(progressStore.graphNodeIDs.count) 已加入 · \(snapshot.nodes.count) 展示")
+                    .font(.caption2)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+                    .lineLimit(1)
+                if snapshot.isExpansionTruncated {
+                    Button {
+                        expansionLimit = min(
+                            expansionLimit + Self.expansionStep,
+                            Self.maximumExpansionLimit
+                        )
+                    } label: {
+                        Label("已截断，展开更多", systemImage: "ellipsis.circle")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(CultureTheme.cinnabar)
+                    }
+                    .accessibilityHint("当前只展示了部分节点，双击增加展示数量")
+                }
+            }
+
+            HStack(spacing: 8) {
+                ForEach(RelationSemanticFamily.allCases, id: \.self) { family in
+                    Button {
+                        withAnimation(.snappy) {
+                            if hiddenFamilies.contains(family) {
+                                hiddenFamilies.remove(family)
+                            } else {
+                                hiddenFamilies.insert(family)
+                            }
+                        }
+                    } label: {
+                        HStack(spacing: 3) {
+                            Image(systemName: family.systemImage)
+                            Text(family.rawValue)
+                        }
+                        .font(.caption2)
+                        .foregroundStyle(
+                            hiddenFamilies.contains(family)
+                                ? CultureTheme.inkSecondary.opacity(0.4)
+                                : family.color
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("\(family.rawValue)关系")
+                    .accessibilityValue(hiddenFamilies.contains(family) ? "已隐藏" : "已显示")
+                }
+            }
         }
-        .fixedSize()
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .accessibilityElement(children: .contain)
     }
 
-    private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {
-        if isCenter { return "当前中心" }
-        if let level = progressStore.level(for: node.id) {
-            return level.rawValue
+    private var zoomControls: some View {
+        HStack(spacing: 4) {
+            Button {
+                zoomScale = GraphZoom.decreased(from: zoomScale)
+            } label: {
+                Image(systemName: "minus.magnifyingglass")
+                    .frame(width: 32, height: 32)
+            }
+            .disabled(zoomScale <= GraphZoom.minimumScale)
+
+            Button {
+                zoomScale = fittedZoomScale
+                centerRequest += 1
+            } label: {
+                Text(GraphZoom.percentageText(for: zoomScale))
+                    .font(.caption.monospacedDigit().weight(.semibold))
+                    .frame(minWidth: 42)
+            }
+            .accessibilityLabel("恢复适合屏幕大小")
+            .accessibilityValue(GraphZoom.percentageText(for: zoomScale))
+
+            Button {
+                zoomScale = GraphZoom.increased(from: zoomScale)
+            } label: {
+                Image(systemName: "plus.magnifyingglass")
+                    .frame(width: 32, height: 32)
+            }
+            .disabled(zoomScale >= GraphZoom.maximumScale)
         }
-        return "\(node.hop) 跳"
+        .foregroundStyle(CultureTheme.inkPrimary)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(.ultraThinMaterial, in: Capsule())
     }
 
-    private func nodeAccent(_ node: UserKnowledgeGraphNode) -> Color {
-        if node.isJoined { return CultureTheme.antiqueGold }
-        switch node.hop {
-        case 1: return CultureTheme.cinnabar
-        case 2: return CultureTheme.antiqueGold
-        default: return CultureTheme.inkSecondary
+    // MARK: - List mode
+
+    private func nodeList(_ snapshot: UserKnowledgeGraphSnapshot) -> some View {
+        let nodes = snapshot.nodes.filter(matchesFilters)
+        return ScrollView {
+            LazyVStack(spacing: 12) {
+                if nodes.isEmpty {
+                    ContentUnavailableView(
+                        "没有匹配的节点",
+                        systemImage: "magnifyingglass",
+                        description: Text("调整搜索或筛选条件后再试。")
+                    )
+                    .padding(.top, 60)
+                }
+                ForEach(nodes) { node in
+                    if let route = route(for: node) {
+                        NavigationLink(value: route) {
+                            nodeListRow(node, centerID: snapshot.centerID)
+                        }
+                        .buttonStyle(.plain)
+                    } else {
+                        nodeListRow(node, centerID: snapshot.centerID)
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 16)
+            .padding(.bottom, 32)
         }
+        .scrollDismissesKeyboard(.interactively)
     }
+
+    private func nodeListRow(_ node: UserKnowledgeGraphNode, centerID: UUID?) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: node.kind.systemImage)
+                .font(.headline)
+                .foregroundStyle(nodeAccent(node))
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(node.name)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                Text(node.id == centerID ? "当前中心" : nodeCaption(node, isCenter: false))
+                    .font(.caption2)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+            }
+
+            Spacer(minLength: 8)
+
+            Button {
+                selectCenter(node.id)
+                displayMode = .graph
+            } label: {
+                Image(systemName: "scope")
+            }
+            .accessibilityLabel("设为中心")
+        }
+        .padding(14)
+        .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 16))
+        .overlay {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(CultureTheme.hairline, lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    // MARK: - Rebuild & resolution
 
     private func route(for node: UserKnowledgeGraphNode) -> AppRoute? {
         if let elementKey = node.elementKey {
@@ -359,7 +804,18 @@ struct UserKnowledgeGraphView: View {
 
     private func selectCenter(_ id: UUID) {
         selectedCenterID = id
-        rebuildGraph()
+        scheduleRebuild()
+    }
+
+    /// Coalesces rapid state changes (joins, history sync, center switches)
+    /// into a single graph rebuild (design 0007 性能).
+    private func scheduleRebuild() {
+        rebuildTask?.cancel()
+        rebuildTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(120))
+            guard !Task.isCancelled else { return }
+            rebuildGraph()
+        }
     }
 
     private func rebuildGraph() {
@@ -375,25 +831,74 @@ struct UserKnowledgeGraphView: View {
 
         let snapshot = knowledgeStore.userKnowledgeGraph(
             centerID: selectedCenterID,
-            joinedSeeds: joinedSeeds
+            joinedSeeds: joinedSeeds,
+            maximumExpandedNodes: expansionLimit
         )
         selectedCenterID = snapshot.centerID
+
+        // Missing prerequisites of the center: closure minus nodes the user
+        // already understands or masters.
+        if let centerID = snapshot.centerID,
+            let centerKey = knowledgeStore.elementKey(for: centerID)
+        {
+            let knownKeys = Set(
+                progressStore.entriesByID.values.compactMap { entry in
+                    entry.level == .contact ? nil : entry.elementKey
+                }
+            )
+            missingPrerequisiteIDs = Set(
+                knowledgeStore.missingPrerequisites(
+                    key: centerKey,
+                    known: knownKeys,
+                    maxCount: 12
+                )
+                .map { DeterministicID.culturalElement($0.key) }
+            )
+        } else {
+            missingPrerequisiteIDs = []
+        }
+
         renderState = RenderState(
             snapshot: snapshot,
             layout: UserKnowledgeGraphLayout(snapshot: snapshot)
         )
     }
 
+    /// Decoded history indexes, built once per rebuild so each record's JSON
+    /// snapshot is decoded at most once instead of once per joined node.
+    private struct HistoryIndexes {
+        let objectsByID: [UUID: CultureObject]
+        let conceptsByID: [UUID: CultureConcept]
+    }
+
+    private var historyIndexes: HistoryIndexes {
+        var objectsByID: [UUID: CultureObject] = [:]
+        var conceptsByID: [UUID: CultureConcept] = [:]
+        for record in records {
+            guard let object = record.savedObject else { continue }
+            objectsByID[object.id] = object
+            for concept in object.concepts {
+                conceptsByID[concept.id] = concept
+            }
+        }
+        return HistoryIndexes(objectsByID: objectsByID, conceptsByID: conceptsByID)
+    }
+
     private var joinedSeeds: [UserKnowledgeGraphSeed] {
-        progressStore.graphNodeIDs.map { id in
-            if let object = object(id: id) {
+        let indexes = historyIndexes
+        return progressStore.graphNodeIDs.map { id in
+            if let object = sessionStore.object(id: id) ?? indexes.objectsByID[id]
+                ?? SampleCultureData.object(id: id)
+            {
                 return UserKnowledgeGraphSeed(
                     id: id,
                     name: object.canonicalName,
                     summary: object.summary
                 )
             }
-            if let concept = concept(id: id) {
+            if let concept = sessionStore.concept(id: id) ?? indexes.conceptsByID[id]
+                ?? SampleCultureData.concept(id: id)
+            {
                 return UserKnowledgeGraphSeed(
                     id: id,
                     name: concept.name,
@@ -412,10 +917,8 @@ struct UserKnowledgeGraphView: View {
         if let sessionObject = sessionStore.object(id: id) {
             return sessionObject
         }
-        for record in records {
-            if let savedObject = record.savedObject, savedObject.id == id {
-                return savedObject
-            }
+        if let indexed = historyIndexes.objectsByID[id] {
+            return indexed
         }
         return SampleCultureData.object(id: id)
     }
@@ -424,14 +927,21 @@ struct UserKnowledgeGraphView: View {
         if let sessionConcept = sessionStore.concept(id: id) {
             return sessionConcept
         }
-        for record in records {
-            let savedObject = record.historySnapshot?.result.object
-                ?? record.legacyResultSnapshot?.object
-            if let savedConcept = savedObject?.concepts.first(where: { $0.id == id }) {
-                return savedConcept
-            }
+        if let indexed = historyIndexes.conceptsByID[id] {
+            return indexed
         }
         return SampleCultureData.concept(id: id)
+    }
+
+    private func configureInitialZoom(contentSize: CGSize, viewportSize: CGSize) {
+        fittedZoomScale = GraphZoom.fittedScale(
+            contentSize: contentSize,
+            viewportSize: viewportSize
+        )
+        guard !didInitializeZoom else { return }
+        zoomScale = fittedZoomScale
+        didInitializeZoom = true
+        centerRequest += 1
     }
 
     private func scrollToCenter(_ id: UUID?, proxy: ScrollViewProxy) {
@@ -443,14 +953,88 @@ struct UserKnowledgeGraphView: View {
         }
     }
 
-    private func nodeNameOrder(
-        _ lhs: UserKnowledgeGraphNode,
-        _ rhs: UserKnowledgeGraphNode
-    ) -> Bool {
-        if lhs.name != rhs.name {
-            return lhs.name.localizedCompare(rhs.name) == .orderedAscending
+    private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {
+        if isCenter { return "当前中心" }
+        if let level = progressStore.level(for: node.id) {
+            return level.rawValue
         }
-        return lhs.id.uuidString < rhs.id.uuidString
+        return node.kind.rawValue
+    }
+
+    private func nodeAccent(_ node: UserKnowledgeGraphNode) -> Color {
+        if node.isJoined { return CultureTheme.antiqueGold }
+        switch node.hop {
+        case 1: return CultureTheme.cinnabar
+        case 2: return CultureTheme.antiqueGold
+        default: return CultureTheme.inkSecondary
+        }
+    }
+}
+
+/// Searchable center picker replacing the flat 48-item Menu (design 0007).
+private struct CenterPickerSheet: View {
+    let snapshot: UserKnowledgeGraphSnapshot
+    let onSelect: (UUID) -> Void
+
+    @State private var searchText = ""
+    @Environment(\.dismiss) private var dismiss
+
+    private func matches(_ node: UserKnowledgeGraphNode) -> Bool {
+        searchText.isEmpty
+            || node.name.localizedCaseInsensitiveContains(searchText)
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                let joined = snapshot.nodes.filter(\.isJoined).filter(matches)
+                let discovered = snapshot.nodes.filter { !$0.isJoined }.filter(matches)
+                if !joined.isEmpty {
+                    Section("已加入") {
+                        ForEach(joined) { node in
+                            centerRow(node)
+                        }
+                    }
+                }
+                if !discovered.isEmpty {
+                    Section("展开关系") {
+                        ForEach(discovered) { node in
+                            centerRow(node)
+                        }
+                    }
+                }
+                if joined.isEmpty && discovered.isEmpty {
+                    ContentUnavailableView(
+                        "没有匹配的节点",
+                        systemImage: "magnifyingglass"
+                    )
+                }
+            }
+            .searchable(text: $searchText, prompt: "搜索中心节点")
+            .navigationTitle("选择中心")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private func centerRow(_ node: UserKnowledgeGraphNode) -> some View {
+        Button {
+            onSelect(node.id)
+        } label: {
+            HStack {
+                Label(node.name, systemImage: node.kind.systemImage)
+                Spacer()
+                if node.id == snapshot.centerID {
+                    Image(systemName: "scope")
+                        .foregroundStyle(CultureTheme.cinnabar)
+                }
+            }
+        }
+        .foregroundStyle(CultureTheme.inkPrimary)
     }
 }
 

@@ -150,13 +150,13 @@ struct AskCultureView: View {
 
   private var emptyState: some View {
     VStack(alignment: .leading, spacing: 16) {
-      Text(isGeneralChat ? "从知识库问起" : "继续追问这个对象")
+      Text(isGeneralChat ? "好奇什么，直接问" : "继续追问这个对象")
         .font(.cultureSerif(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(
         isGeneralChat
-          ? "回答会流式渲染，可上传图片，历史对话会自动保存。"
+          ? "从知识库与你的文化图谱里找答案，也可以附一张现场照片。"
           : "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。"
       )
       .font(.subheadline)
@@ -168,7 +168,7 @@ struct AskCultureView: View {
         Task { await model.send() }
       }
     }
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: 560, alignment: .leading)
     .padding(18)
     .background(
       CultureTheme.surface,
@@ -178,6 +178,7 @@ struct AskCultureView: View {
       RoundedRectangle(cornerRadius: 22, style: .continuous)
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
+    .frame(maxWidth: .infinity, alignment: .center)
   }
 
   @ViewBuilder

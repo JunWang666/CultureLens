@@ -1,5 +1,6 @@
 {
-  "version": "chinese-history-v1",
+  "version": "chinese-history-v2",
+  "source_language": "zh-Hans",
   "elements": [
     {
       "key": "chinese-dynasty-overview",
@@ -24,7 +25,8 @@
             "text": "1911年辛亥革命推翻清朝，1912年中华民国成立，延续两千余年的君主帝制结束。记朝代，可先按\"夏商周秦汉、三国两晋南北朝、隋唐五代宋元明清\"顺一遍，再依次填入每个朝代的大致纪年。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "xia-dynasty",
@@ -49,7 +51,8 @@
             "text": "记夏朝，记住\"约前2070年至前1600年\"\"世袭制朝代\"\"二里头遗址悬而未决\"三个关键词。它既是历史链条的开端，也是认识中国信史起点的一把钥匙。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "shang-dynasty",
@@ -74,7 +77,8 @@
             "text": "商朝末代君主帝辛在牧野之战被周武王击败后自焚而亡。记商，记住\"甲骨文、青铜器、盘庚迁殷\"三大标志。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "zhou-dynasty",
@@ -99,7 +103,8 @@
             "text": "东周时周王权威渐衰：齐桓公、宋襄公、晋文公、秦穆公与楚庄王先后崛起，《史记》称春秋五霸；此后历经三家分晋、田氏代齐，最后秦统一六国。记周，记住\"分封制、共和元年、平王东迁\"三件事，就能把西周东周连成一条线。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "spring-autumn-warring-states",
@@ -124,7 +129,8 @@
             "text": "春秋战国以秦统一六国收束。这段群雄并起、百家争鸣的时期，是中国政治制度与社会思想急剧转型的时代；记住\"春秋五霸、战国七雄、商鞅变法\"几个词，大致可勾勒其轮廓。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "qin-dynasty",
@@ -149,7 +155,8 @@
             "text": "前213年发生\"焚书\"，隔年又有\"坑儒\"；前209年陈胜、吴广在大泽乡揭竿而起，前207年秦王子婴向刘邦投降，秦朝在秦始皇死后3年灭亡。记秦，记住\"第一个大一统、皇帝制度、郡县制、万里长城\"。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "han-dynasty",
@@ -174,7 +181,8 @@
             "text": "184年爆发张角领导的黄巾之乱；220年曹操之子曹丕代汉，三国时代正式开始。记汉，记住\"文景之治、武帝开疆、光武中兴、东汉终于曹丕\"几个节点。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "three-kingdoms",
@@ -199,7 +207,8 @@
             "text": "三国时期，曹魏以九品中正制取代汉代察举制度，形成\"上品无寒门、下品无世族\"的局面；陈寿所著、裴松之作注的《三国志》是二十四史中评价较高的\"前四史\"之一，罗贯中撰写的《三国演义》成为中国四大名著之一。记三国，记住\"魏蜀吴、官渡、赤壁\"即可。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "jin-dynasty",
@@ -224,7 +233,8 @@
             "text": "420年刘裕废晋恭帝自立，建立刘宋，东晋灭亡，进入南北朝时期。记两晋，记住西晋统一短暂、八王之乱、衣冠南渡、淝水之战。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "southern-northern-dynasties",
@@ -249,7 +259,8 @@
             "text": "581年杨坚代北周建立隋朝，589年隋灭陈，自永嘉之乱以来中国分裂280年之久。记南北朝，记住南朝四代都建康、北朝五朝、隋一统。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "sui-dynasty",
@@ -274,7 +285,8 @@
             "text": "617年李渊于太原发动晋阳起兵，618年称帝建立唐朝，619年隋朝灭亡。记隋，记住文帝开皇之治、炀帝修运河与征高句丽、国祚仅38年。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "tang-dynasty",
@@ -299,7 +311,8 @@
             "text": "755年安禄山发动安史之乱，成为唐朝由盛转衰的转折点；907年朱温逼迫唐哀帝禅位建立后梁，唐朝灭亡，进入五代十国时期。记唐，记住贞观之治、开元盛世、安史之乱三个节点。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "five-dynasties-ten-kingdoms",
@@ -324,7 +337,8 @@
             "text": "979年北汉降宋，十国时期结束，正式进入宋朝时期。记五代十国，记住后梁后唐后晋后汉后周、燕云十六州、陈桥兵变。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "song-dynasty",
@@ -349,7 +363,8 @@
             "text": "1276年临安陷落，1279年崖山海战宋军全军覆灭，宋朝正式灭亡。记宋，记住重文抑武、澶渊之盟、靖康之变，以及经济与科技之盛。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "yuan-dynasty",
@@ -374,7 +389,8 @@
             "text": "1368年朱元璋建立明朝后派徐达北伐攻陷大都，元朝在中原的统治结束，元廷退居漠北，史称北元。记元，记住蒙古族建立、大元国号、行省制度、元曲。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "ming-dynasty",
@@ -399,7 +415,8 @@
             "text": "崇祯十七年（1644年），李自成建立大顺并攻克北京，崇祯帝在煤山自缢，明朝灭亡。记明，记住太祖废丞相、永乐迁都、郑和下西洋、一条鞭法。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "qing-dynasty",
@@ -424,7 +441,8 @@
             "text": "1911年武昌起义爆发，辛亥革命推翻清朝；1912年2月12日，隆裕太后以皇帝溥仪的名义颁布退位诏书，清朝正式灭亡，延续两千余年的君主帝制结束。记清，记住康雍乾盛世、鸦片战争、辛亥革命终结帝制。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "imperial-examination",
@@ -449,7 +467,8 @@
             "text": "1905年科举被慈禧太后废除，整个科举共持续1300多年。记科举，记住始于隋、盛于唐、止于清、状元榜眼探花。"
           }
         ]
-      }
+      },
+      "conceptKind": "制度"
     },
     {
       "key": "great-wall",
@@ -474,7 +493,8 @@
             "text": "1987年，长城被联合国教科文组织列为世界文化遗产。唐朝时因突厥在唐太宗时已被平定，此后三百年未修长城；清朝直到灭亡也未修长城。记长城，记住春秋始筑、名由秦始皇、现存多为明长城。"
           }
         ]
-      }
+      },
+      "conceptKind": "审美"
     },
     {
       "key": "silk-road",
@@ -499,7 +519,8 @@
             "text": "2014年6月22日，丝绸之路同京杭大运河一起，被联合国教科文组织列为世界遗产。记丝路，记住张骞凿空、班超打通、丝绸得名。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "grand-canal",
@@ -524,7 +545,8 @@
             "text": "1855年黄河改道后，运河山东段逐渐淤废；1911年津浦铁路全线通车，从此京杭大运河以及沿线城市的地位一落千丈。记大运河，记住北京通州到杭州、沟通五大水系、全长1794公里。"
           }
         ]
-      }
+      },
+      "conceptKind": "功能"
     },
     {
       "key": "four-great-inventions",
@@ -549,7 +571,8 @@
             "text": "中国在实用性火器的使用上早于欧洲五个世纪左右；指南针大约在十二世纪末十三世纪初传到阿拉伯，又由阿拉伯传入欧洲。记四大发明，记住造纸、指南针、火药、印刷术。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "twenty-four-histories",
@@ -574,7 +597,8 @@
             "text": "记二十四史，记住纪传体、前四史、乾隆钦定二十四部。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "confucius-and-confucianism",
@@ -599,7 +623,8 @@
             "text": "孔门尊之为圣人，历代朝廷尊崇为万世师表。记孔子，记住仁、有教无类、论语、六艺。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "laozi-and-taoism",
@@ -624,7 +649,8 @@
             "text": "1993年10月在湖北荆门郭店楚墓出土的804枚战国竹简，是《道德经》现行所见的最早文本。记老子，记住道德经、无为而治、老庄、道家奠基者。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "hundred-schools",
@@ -649,7 +675,8 @@
             "text": "秦朝焚书坑儒，汉武帝罢黜百家、独尊儒术；百家争鸣是中国历史上第一次大规模的思想解放运动。记诸子，记住儒道墨法等主要流派及其在中华文化中的基础地位。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "zhonghua-civilization",
@@ -674,7 +701,8 @@
             "text": "传统年代一般认为夏约存在于公元前2070年至前1600年。记中华文明五千年，记住探源工程、古国时代到王朝时代、良渚实证。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "qin-shi-huang",
@@ -699,7 +727,8 @@
             "text": "记秦始皇，记住千古一帝、书同文车同轨、郡县制、修长城建陵墓，也记住他功业与重役并存的另一面。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "han-wudi",
@@ -724,7 +753,8 @@
             "text": "征和元年（前92年）巫蛊之祸兴起，太子刘据兵败自杀；征和四年（前89年）汉武帝颁布《轮台诏》承认过错，此后基本不再出兵。记汉武帝，记住推恩令、张骞通西域、北击匈奴、盐铁国营。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "tang-taizong",
@@ -749,7 +779,8 @@
             "text": "记唐太宗，记住玄武门之变、贞观之治、天可汗、魏徵直谏四件事。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "zheng-he",
@@ -774,7 +805,8 @@
             "text": "自2005年起，每年7月11日被定为中国的航海节，取郑和首次下西洋之日期1405年7月11日。记郑和，记住七下西洋、三十多国、最远到非洲东岸。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "yue-fei",
@@ -799,7 +831,8 @@
             "text": "宋孝宗即位后为岳飞平反，淳熙五年（1178年）谥武穆，宋宁宗嘉泰四年（1204年）追封鄂王。记岳飞，记住岳家军、直捣朱仙镇、十二道金牌、风波亭之冤。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "wang-anshi",
@@ -824,7 +857,8 @@
             "text": "宋神宗死后，司马光任宰相推动元祐更化，几乎废除了所有法案；元祐元年（1086年）王安石在江宁府逝世，享年六十四岁。记王安石，记住青苗法、熙宁变法、两次罢相、唐宋八大家。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "kangxi",
@@ -849,7 +883,8 @@
             "text": "康熙帝共在位六十一年十个月，是中国历史上在位时间最长的皇帝。记康熙，记住擒鳌拜、平三藩、收台湾、三征噶尔丹。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "wenjing-prosperity",
@@ -874,7 +909,8 @@
             "text": "史称京师之钱累巨万、贯朽而不可校，太仓之粟陈陈相因、充溢露积于外。记文景之治，记住轻徭薄赋、三十税一、黄老无为。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "zhenguan-rule",
@@ -899,7 +935,8 @@
             "text": "贞观之治为后来的开元盛世奠定了重要基础。记贞观之治，记住一个年号用23年、房玄龄杜如晦魏征、天可汗。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "kaiyuan-flourishing",
@@ -924,7 +961,8 @@
             "text": "开元盛世是唐朝的鼎盛时期，也紧邻盛极而衰的转折点。记开元盛世，记住姚崇宋璟为相、人口约4891万、节度使埋下安史之乱祸根。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "an-lushan-rebellion",
@@ -949,7 +987,8 @@
             "text": "安史之乱被视为唐朝由盛转衰的关键事件；战乱虽最终由唐朝联合回纥平定，但战后唐朝汉族登记人口减少过半。记安史之乱，记住安禄山史思明、马嵬坡、755年到763年。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "jingkang-incident",
@@ -974,7 +1013,8 @@
             "text": "北宋灭亡后，康王赵构于应天府称帝，是为宋高宗，史称南宋；1141年宋金签订绍兴和议，以秦岭淮河线为边界。记靖康之变，记住1127年、汴京沦陷、徽钦二帝被掳。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "opium-war",
@@ -999,441 +1039,658 @@
             "text": "中国将香港主权割让给大英帝国，英国对该地区的控制一直持续到1997年。记鸦片战争，记住1840年、虎门销烟、南京条约、香港割让。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     }
   ],
   "relations": [
     {
       "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "zhonghua-civilization"
+      "relatedElementKey": "zhonghua-civilization",
+      "kind": "理解前先懂",
+      "explanation": "读中国朝代脉络前，先认识中华文明数千年的探源背景。"
     },
     {
       "elementKey": "zhonghua-civilization",
-      "relatedElementKey": "chinese-dynasty-overview"
+      "relatedElementKey": "chinese-dynasty-overview",
+      "kind": "解释",
+      "explanation": "中华文明探源研究的结论，最终落实到历代王朝兴衰的序列之中。"
     },
     {
       "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "qin-dynasty"
+      "relatedElementKey": "qin-dynasty",
+      "kind": "组成",
+      "explanation": "历代王朝脉络把秦朝作为首个大一统帝国的关键环节。"
     },
     {
       "elementKey": "qin-dynasty",
-      "relatedElementKey": "chinese-dynasty-overview"
+      "relatedElementKey": "chinese-dynasty-overview",
+      "kind": "解释",
+      "explanation": "理解秦朝的制度开创，就能读懂历代王朝脉络的开端。"
     },
     {
       "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "qing-dynasty"
+      "relatedElementKey": "qing-dynasty",
+      "kind": "组成",
+      "explanation": "清朝是历代王朝脉络的最后一环，也是帝制的终结。"
     },
     {
       "elementKey": "qing-dynasty",
-      "relatedElementKey": "chinese-dynasty-overview"
+      "relatedElementKey": "chinese-dynasty-overview",
+      "kind": "解释",
+      "explanation": "清朝的灭亡宣告帝制终结，为历代王朝脉络画上句号。"
     },
     {
       "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "twenty-four-histories"
+      "relatedElementKey": "twenty-four-histories",
+      "kind": "用于",
+      "explanation": "理解朝代脉络时，可借二十四史的正史记载印证更替序列。"
     },
     {
       "elementKey": "twenty-four-histories",
-      "relatedElementKey": "chinese-dynasty-overview"
+      "relatedElementKey": "chinese-dynasty-overview",
+      "kind": "解释",
+      "explanation": "二十四史以纪传体记录四千年王朝，正是历代脉络的史书版本。"
     },
     {
       "elementKey": "zhonghua-civilization",
-      "relatedElementKey": "xia-dynasty"
+      "relatedElementKey": "xia-dynasty",
+      "kind": "解释",
+      "explanation": "夏朝被视作中华文明由传说迈向信史王朝时代的开端。"
     },
     {
       "elementKey": "xia-dynasty",
-      "relatedElementKey": "zhonghua-civilization"
+      "relatedElementKey": "zhonghua-civilization",
+      "kind": "理解前先懂",
+      "explanation": "读夏朝需先了解中华文明探源工程的历史背景。"
     },
     {
       "elementKey": "xia-dynasty",
-      "relatedElementKey": "shang-dynasty"
+      "relatedElementKey": "shang-dynasty",
+      "kind": "受到影响",
+      "explanation": "商朝承继夏朝世袭制度，并发展出更成熟的青铜文明。"
     },
     {
       "elementKey": "shang-dynasty",
-      "relatedElementKey": "xia-dynasty"
+      "relatedElementKey": "xia-dynasty",
+      "kind": "解释",
+      "explanation": "商汤灭夏而兴，商朝的建立接续夏朝的覆亡。"
     },
     {
       "elementKey": "shang-dynasty",
-      "relatedElementKey": "zhou-dynasty"
+      "relatedElementKey": "zhou-dynasty",
+      "kind": "受到影响",
+      "explanation": "周武王灭商建周，制度文化多承商代而有所损益。"
     },
     {
       "elementKey": "zhou-dynasty",
-      "relatedElementKey": "shang-dynasty"
+      "relatedElementKey": "shang-dynasty",
+      "kind": "解释",
+      "explanation": "周朝取代商朝，是王朝更替链条中承上启下的一环。"
     },
     {
       "elementKey": "zhou-dynasty",
-      "relatedElementKey": "spring-autumn-warring-states"
+      "relatedElementKey": "spring-autumn-warring-states",
+      "kind": "解释",
+      "explanation": "春秋战国是东周王权衰落后的历史分期。"
     },
     {
       "elementKey": "spring-autumn-warring-states",
-      "relatedElementKey": "zhou-dynasty"
+      "relatedElementKey": "zhou-dynasty",
+      "kind": "理解前先懂",
+      "explanation": "春秋战国属东周时期，先懂周朝才能理解这段分裂。"
     },
     {
       "elementKey": "spring-autumn-warring-states",
-      "relatedElementKey": "qin-dynasty"
+      "relatedElementKey": "qin-dynasty",
+      "kind": "产生于",
+      "explanation": "秦朝产生于战国群雄并立的终结，完成统一大业。"
     },
     {
       "elementKey": "qin-dynasty",
-      "relatedElementKey": "spring-autumn-warring-states"
+      "relatedElementKey": "spring-autumn-warring-states",
+      "kind": "解释",
+      "explanation": "秦朝的统一结束了春秋战国数百年的分裂局面。"
     },
     {
       "elementKey": "qin-dynasty",
-      "relatedElementKey": "han-dynasty"
+      "relatedElementKey": "han-dynasty",
+      "kind": "受到影响",
+      "explanation": "汉朝承袭秦制，郡县与皇帝制度得以延续。"
     },
     {
       "elementKey": "han-dynasty",
-      "relatedElementKey": "qin-dynasty"
+      "relatedElementKey": "qin-dynasty",
+      "kind": "解释",
+      "explanation": "汉承秦制，秦朝开创的制度为汉朝所继承发展。"
     },
     {
       "elementKey": "han-dynasty",
-      "relatedElementKey": "three-kingdoms"
+      "relatedElementKey": "three-kingdoms",
+      "kind": "产生于",
+      "explanation": "三国产生于汉末黄巾之乱后的群雄割据。"
     },
     {
       "elementKey": "three-kingdoms",
-      "relatedElementKey": "han-dynasty"
+      "relatedElementKey": "han-dynasty",
+      "kind": "解释",
+      "explanation": "曹丕代汉建立曹魏，东汉灭亡后才进入三国。"
     },
     {
       "elementKey": "three-kingdoms",
-      "relatedElementKey": "jin-dynasty"
+      "relatedElementKey": "jin-dynasty",
+      "kind": "产生于",
+      "explanation": "西晋由司马氏代魏而立，结束三国鼎立局面。"
     },
     {
       "elementKey": "jin-dynasty",
-      "relatedElementKey": "three-kingdoms"
+      "relatedElementKey": "three-kingdoms",
+      "kind": "解释",
+      "explanation": "西晋灭吴统一天下，三国时期由此终结。"
     },
     {
       "elementKey": "jin-dynasty",
-      "relatedElementKey": "southern-northern-dynasties"
+      "relatedElementKey": "southern-northern-dynasties",
+      "kind": "产生于",
+      "explanation": "南北朝产生于东晋灭亡与南北并立之后。"
     },
     {
       "elementKey": "southern-northern-dynasties",
-      "relatedElementKey": "jin-dynasty"
+      "relatedElementKey": "jin-dynasty",
+      "kind": "解释",
+      "explanation": "刘宋代晋后进入南北朝，两晋时期宣告结束。"
     },
     {
       "elementKey": "southern-northern-dynasties",
-      "relatedElementKey": "sui-dynasty"
+      "relatedElementKey": "sui-dynasty",
+      "kind": "产生于",
+      "explanation": "隋朝产生于南北朝长期分裂的终结。"
     },
     {
       "elementKey": "sui-dynasty",
-      "relatedElementKey": "southern-northern-dynasties"
+      "relatedElementKey": "southern-northern-dynasties",
+      "kind": "解释",
+      "explanation": "隋灭陈统一南北，终结了数百年的分裂。"
     },
     {
       "elementKey": "sui-dynasty",
-      "relatedElementKey": "tang-dynasty"
+      "relatedElementKey": "tang-dynasty",
+      "kind": "受到影响",
+      "explanation": "唐朝制度多承隋制，三省六部与科举一脉相承。"
     },
     {
       "elementKey": "tang-dynasty",
-      "relatedElementKey": "sui-dynasty"
+      "relatedElementKey": "sui-dynasty",
+      "kind": "解释",
+      "explanation": "李唐代隋而立，延续了隋朝开创的制度格局。"
     },
     {
       "elementKey": "tang-dynasty",
-      "relatedElementKey": "five-dynasties-ten-kingdoms"
+      "relatedElementKey": "five-dynasties-ten-kingdoms",
+      "kind": "产生于",
+      "explanation": "五代十国产生于唐朝灭亡后的藩镇割据。"
     },
     {
       "elementKey": "five-dynasties-ten-kingdoms",
-      "relatedElementKey": "tang-dynasty"
+      "relatedElementKey": "tang-dynasty",
+      "kind": "解释",
+      "explanation": "朱温篡唐建立后梁，标志着五代十国的开始。"
     },
     {
       "elementKey": "five-dynasties-ten-kingdoms",
-      "relatedElementKey": "song-dynasty"
+      "relatedElementKey": "song-dynasty",
+      "kind": "产生于",
+      "explanation": "宋朝产生于陈桥兵变取代后周，结束五代纷争。"
     },
     {
       "elementKey": "song-dynasty",
-      "relatedElementKey": "five-dynasties-ten-kingdoms"
+      "relatedElementKey": "five-dynasties-ten-kingdoms",
+      "kind": "解释",
+      "explanation": "赵匡胤建宋终结五代，重新统一大部分汉地。"
     },
     {
       "elementKey": "song-dynasty",
-      "relatedElementKey": "yuan-dynasty"
+      "relatedElementKey": "yuan-dynasty",
+      "kind": "产生于",
+      "explanation": "元朝产生于蒙古灭宋，结束两宋并立的局面。"
     },
     {
       "elementKey": "yuan-dynasty",
-      "relatedElementKey": "song-dynasty"
+      "relatedElementKey": "song-dynasty",
+      "kind": "解释",
+      "explanation": "元灭南宋，宋朝三百余年的历史由此终结。"
     },
     {
       "elementKey": "yuan-dynasty",
-      "relatedElementKey": "ming-dynasty"
+      "relatedElementKey": "ming-dynasty",
+      "kind": "产生于",
+      "explanation": "明朝产生于元末群雄并起与元廷北退。"
     },
     {
       "elementKey": "ming-dynasty",
-      "relatedElementKey": "yuan-dynasty"
+      "relatedElementKey": "yuan-dynasty",
+      "kind": "解释",
+      "explanation": "明军北伐攻陷大都，结束了元朝在中原的统治。"
     },
     {
       "elementKey": "ming-dynasty",
-      "relatedElementKey": "qing-dynasty"
+      "relatedElementKey": "qing-dynasty",
+      "kind": "产生于",
+      "explanation": "清朝产生于清军入关取代明朝的统治。"
     },
     {
       "elementKey": "qing-dynasty",
-      "relatedElementKey": "ming-dynasty"
+      "relatedElementKey": "ming-dynasty",
+      "kind": "解释",
+      "explanation": "甲申之变明朝灭亡，清廷入关建立统治。"
     },
     {
       "elementKey": "qin-dynasty",
-      "relatedElementKey": "qin-shi-huang"
+      "relatedElementKey": "qin-shi-huang",
+      "kind": "体现",
+      "explanation": "秦朝的历史由秦始皇的统一功业与沉重徭役共同写成。"
     },
     {
       "elementKey": "qin-shi-huang",
-      "relatedElementKey": "qin-dynasty"
+      "relatedElementKey": "qin-dynasty",
+      "kind": "产生于",
+      "explanation": "秦始皇灭六国建立秦朝，是一统帝国的奠基人。"
     },
     {
       "elementKey": "qin-shi-huang",
-      "relatedElementKey": "great-wall"
+      "relatedElementKey": "great-wall",
+      "kind": "产生于",
+      "explanation": "秦始皇连接旧墙始有万里长城之称，为长城命名之始。"
     },
     {
       "elementKey": "great-wall",
-      "relatedElementKey": "qin-shi-huang"
+      "relatedElementKey": "qin-shi-huang",
+      "kind": "解释",
+      "explanation": "长城体系离不开秦始皇北击匈奴与连接旧墙的功业。"
     },
     {
       "elementKey": "han-dynasty",
-      "relatedElementKey": "han-wudi"
+      "relatedElementKey": "han-wudi",
+      "kind": "组成",
+      "explanation": "汉武帝是汉朝极盛时期最具代表性的帝王。"
     },
     {
       "elementKey": "han-wudi",
-      "relatedElementKey": "han-dynasty"
+      "relatedElementKey": "han-dynasty",
+      "kind": "体现",
+      "explanation": "汉武帝的推恩令与开疆拓土，体现了汉朝的鼎盛国力。"
     },
     {
       "elementKey": "han-dynasty",
-      "relatedElementKey": "wenjing-prosperity"
+      "relatedElementKey": "wenjing-prosperity",
+      "kind": "产生于",
+      "explanation": "文景之治产生于汉初与民休息、轻徭薄赋的方略。"
     },
     {
       "elementKey": "wenjing-prosperity",
-      "relatedElementKey": "han-dynasty"
+      "relatedElementKey": "han-dynasty",
+      "kind": "解释",
+      "explanation": "文景之治的积累，为汉朝走向鼎盛打下基础。"
     },
     {
       "elementKey": "han-wudi",
-      "relatedElementKey": "silk-road"
+      "relatedElementKey": "silk-road",
+      "kind": "产生于",
+      "explanation": "丝绸之路产生于汉武帝遣张骞出使西域。"
     },
     {
       "elementKey": "silk-road",
-      "relatedElementKey": "han-wudi"
+      "relatedElementKey": "han-wudi",
+      "kind": "解释",
+      "explanation": "张骞凿空西域，使丝绸之路在武帝时正式成形。"
     },
     {
       "elementKey": "wenjing-prosperity",
-      "relatedElementKey": "han-wudi"
+      "relatedElementKey": "han-wudi",
+      "kind": "理解前先懂",
+      "explanation": "理解汉武帝的鼎盛，先看文景之治打下的国力基础。"
     },
     {
       "elementKey": "han-wudi",
-      "relatedElementKey": "wenjing-prosperity"
+      "relatedElementKey": "wenjing-prosperity",
+      "kind": "解释",
+      "explanation": "汉武帝的功业建立在文景之治积累的国力之上。"
     },
     {
       "elementKey": "sui-dynasty",
-      "relatedElementKey": "imperial-examination"
+      "relatedElementKey": "imperial-examination",
+      "kind": "产生于",
+      "explanation": "科举制度产生于隋朝，由隋文帝首创、隋炀帝实施。"
     },
     {
       "elementKey": "imperial-examination",
-      "relatedElementKey": "sui-dynasty"
+      "relatedElementKey": "sui-dynasty",
+      "kind": "解释",
+      "explanation": "科举的源头在隋朝设进士科取士，始于605年。"
     },
     {
       "elementKey": "sui-dynasty",
-      "relatedElementKey": "grand-canal"
+      "relatedElementKey": "grand-canal",
+      "kind": "产生于",
+      "explanation": "大运河的大规模开凿产生于隋朝统一南北之后。"
     },
     {
       "elementKey": "grand-canal",
-      "relatedElementKey": "sui-dynasty"
+      "relatedElementKey": "sui-dynasty",
+      "kind": "解释",
+      "explanation": "隋代开挖南北大运河，奠定了后世运河格局。"
     },
     {
       "elementKey": "tang-dynasty",
-      "relatedElementKey": "tang-taizong"
+      "relatedElementKey": "tang-taizong",
+      "kind": "组成",
+      "explanation": "唐太宗是唐朝第二位皇帝与贞观之治的开创者。"
     },
     {
       "elementKey": "tang-taizong",
-      "relatedElementKey": "tang-dynasty"
+      "relatedElementKey": "tang-dynasty",
+      "kind": "体现",
+      "explanation": "唐太宗的治理，把唐朝带入第一个治世。"
     },
     {
       "elementKey": "tang-dynasty",
-      "relatedElementKey": "an-lushan-rebellion"
+      "relatedElementKey": "an-lushan-rebellion",
+      "kind": "产生于",
+      "explanation": "安史之乱产生于唐朝由盛转衰的关键转折点。"
     },
     {
       "elementKey": "an-lushan-rebellion",
-      "relatedElementKey": "tang-dynasty"
+      "relatedElementKey": "tang-dynasty",
+      "kind": "解释",
+      "explanation": "安史之乱标志着唐朝从鼎盛走向衰落。"
     },
     {
       "elementKey": "tang-taizong",
-      "relatedElementKey": "zhenguan-rule"
+      "relatedElementKey": "zhenguan-rule",
+      "kind": "产生于",
+      "explanation": "贞观之治产生于唐太宗在位二十三年的清明政治。"
     },
     {
       "elementKey": "zhenguan-rule",
-      "relatedElementKey": "tang-taizong"
+      "relatedElementKey": "tang-taizong",
+      "kind": "体现",
+      "explanation": "贞观之治正是唐太宗治国理念的集中体现。"
     },
     {
       "elementKey": "zhenguan-rule",
-      "relatedElementKey": "kaiyuan-flourishing"
+      "relatedElementKey": "kaiyuan-flourishing",
+      "kind": "受到影响",
+      "explanation": "开元盛世承继贞观之治打下的制度基础。"
     },
     {
       "elementKey": "kaiyuan-flourishing",
-      "relatedElementKey": "zhenguan-rule"
+      "relatedElementKey": "zhenguan-rule",
+      "kind": "解释",
+      "explanation": "开元盛世在贞观之治基础上达到唐朝顶峰。"
     },
     {
       "elementKey": "kaiyuan-flourishing",
-      "relatedElementKey": "an-lushan-rebellion"
+      "relatedElementKey": "an-lushan-rebellion",
+      "kind": "产生于",
+      "explanation": "节度使隐患在开元盛世后期埋下，孕育安史之乱。"
     },
     {
       "elementKey": "an-lushan-rebellion",
-      "relatedElementKey": "kaiyuan-flourishing"
+      "relatedElementKey": "kaiyuan-flourishing",
+      "kind": "解释",
+      "explanation": "安史之乱终结了开元盛世，唐朝由此由盛转衰。"
     },
     {
       "elementKey": "song-dynasty",
-      "relatedElementKey": "jingkang-incident"
+      "relatedElementKey": "jingkang-incident",
+      "kind": "产生于",
+      "explanation": "靖康之变产生于金军攻陷汴梁、北宋覆亡。"
     },
     {
       "elementKey": "jingkang-incident",
-      "relatedElementKey": "song-dynasty"
+      "relatedElementKey": "song-dynasty",
+      "kind": "解释",
+      "explanation": "靖康之变导致北宋灭亡，宋朝进入南宋时期。"
     },
     {
       "elementKey": "song-dynasty",
-      "relatedElementKey": "wang-anshi"
+      "relatedElementKey": "wang-anshi",
+      "kind": "位于",
+      "explanation": "王安石变法发生在北宋神宗年间，是王朝内政的重要一环。"
     },
     {
       "elementKey": "wang-anshi",
-      "relatedElementKey": "song-dynasty"
+      "relatedElementKey": "song-dynasty",
+      "kind": "解释",
+      "explanation": "王安石变法试图以新政挽救北宋的财政与积弊。"
     },
     {
       "elementKey": "jingkang-incident",
-      "relatedElementKey": "yue-fei"
+      "relatedElementKey": "yue-fei",
+      "kind": "受到影响",
+      "explanation": "岳飞立志抗金，深受靖康之耻亡国之痛的刺激。"
     },
     {
       "elementKey": "yue-fei",
-      "relatedElementKey": "jingkang-incident"
+      "relatedElementKey": "jingkang-incident",
+      "kind": "理解前先懂",
+      "explanation": "理解岳飞抗金的动力，先看靖康之变带来的国耻。"
     },
     {
       "elementKey": "wang-anshi",
-      "relatedElementKey": "imperial-examination"
+      "relatedElementKey": "imperial-examination",
+      "kind": "受到影响",
+      "explanation": "科举的取士标准深受王安石变法经义取士的影响。"
     },
     {
       "elementKey": "imperial-examination",
-      "relatedElementKey": "wang-anshi"
+      "relatedElementKey": "wang-anshi",
+      "kind": "理解前先懂",
+      "explanation": "理解王安石改革科举，先了解科举选官的基本制度。"
     },
     {
       "elementKey": "yue-fei",
-      "relatedElementKey": "wang-anshi"
+      "relatedElementKey": "wang-anshi",
+      "kind": "相似于",
+      "explanation": "同为两宋名臣，都经历报国无门与壮志难酬。"
     },
     {
       "elementKey": "wang-anshi",
-      "relatedElementKey": "yue-fei"
+      "relatedElementKey": "yue-fei",
+      "kind": "相似于",
+      "explanation": "两人同处宋代，一个变法受挫，一个蒙冤而亡。"
     },
     {
       "elementKey": "ming-dynasty",
-      "relatedElementKey": "zheng-he"
+      "relatedElementKey": "zheng-he",
+      "kind": "位于",
+      "explanation": "郑和远航发生在明朝永乐年间，展现王朝海权。"
     },
     {
       "elementKey": "zheng-he",
-      "relatedElementKey": "ming-dynasty"
+      "relatedElementKey": "ming-dynasty",
+      "kind": "象征",
+      "explanation": "七下西洋象征明朝鼎盛时的海洋开拓与国威。"
     },
     {
       "elementKey": "ming-dynasty",
-      "relatedElementKey": "great-wall"
+      "relatedElementKey": "great-wall",
+      "kind": "产生于",
+      "explanation": "现存明长城产生于明朝大规模修筑边防。"
     },
     {
       "elementKey": "great-wall",
-      "relatedElementKey": "ming-dynasty"
+      "relatedElementKey": "ming-dynasty",
+      "kind": "解释",
+      "explanation": "现存长城多为明长城，是明朝边防的遗存。"
     },
     {
       "elementKey": "zheng-he",
-      "relatedElementKey": "silk-road"
+      "relatedElementKey": "silk-road",
+      "kind": "位于",
+      "explanation": "郑和航线属于海上丝绸之路，连接西太平洋与印度洋。"
     },
     {
       "elementKey": "silk-road",
-      "relatedElementKey": "zheng-he"
+      "relatedElementKey": "zheng-he",
+      "kind": "解释",
+      "explanation": "郑和下西洋延续丝路交流传统，并转向海上。"
     },
     {
       "elementKey": "qing-dynasty",
-      "relatedElementKey": "kangxi"
+      "relatedElementKey": "kangxi",
+      "kind": "组成",
+      "explanation": "康熙帝是清朝入关后的第二位皇帝与盛世开创者。"
     },
     {
       "elementKey": "kangxi",
-      "relatedElementKey": "qing-dynasty"
+      "relatedElementKey": "qing-dynasty",
+      "kind": "体现",
+      "explanation": "康熙帝的武功文治，体现清朝极盛的康雍乾时期。"
     },
     {
       "elementKey": "qing-dynasty",
-      "relatedElementKey": "opium-war"
+      "relatedElementKey": "opium-war",
+      "kind": "产生于",
+      "explanation": "鸦片战争产生于清朝中后期的中外冲突与闭关失序。"
     },
     {
       "elementKey": "opium-war",
-      "relatedElementKey": "qing-dynasty"
+      "relatedElementKey": "qing-dynasty",
+      "kind": "解释",
+      "explanation": "鸦片战争揭开近代序幕，清朝统治从此走向衰落。"
     },
     {
       "elementKey": "kangxi",
-      "relatedElementKey": "silk-road"
+      "relatedElementKey": "silk-road",
+      "kind": "受到影响",
+      "explanation": "康熙三征噶尔丹安定西北，使丝路沿线重归稳定。"
     },
     {
       "elementKey": "silk-road",
-      "relatedElementKey": "kangxi"
+      "relatedElementKey": "kangxi",
+      "kind": "解释",
+      "explanation": "西北丝路走廊的安定，是康熙经略边疆的成果。"
     },
     {
       "elementKey": "opium-war",
-      "relatedElementKey": "grand-canal"
+      "relatedElementKey": "grand-canal",
+      "kind": "受到影响",
+      "explanation": "鸦片战争后通商口岸兴起，运河漕运地位逐渐衰落。"
     },
     {
       "elementKey": "grand-canal",
-      "relatedElementKey": "opium-war"
+      "relatedElementKey": "opium-war",
+      "kind": "相似于",
+      "explanation": "运河衰落与鸦片战争后的变局，同是近代转型的缩影。"
     },
     {
       "elementKey": "imperial-examination",
-      "relatedElementKey": "confucius-and-confucianism"
+      "relatedElementKey": "confucius-and-confucianism",
+      "kind": "体现",
+      "explanation": "科举以儒家经典取士，体现儒学在选官中的核心地位。"
     },
     {
       "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "imperial-examination"
+      "relatedElementKey": "imperial-examination",
+      "kind": "用于",
+      "explanation": "儒家经典被科举用作考试内容，成为读书入仕的阶梯。"
     },
     {
       "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "laozi-and-taoism"
+      "relatedElementKey": "laozi-and-taoism",
+      "kind": "相似于",
+      "explanation": "同为春秋思想大家，儒家重入世，道家贵无为。"
     },
     {
       "elementKey": "laozi-and-taoism",
-      "relatedElementKey": "confucius-and-confucianism"
+      "relatedElementKey": "confucius-and-confucianism",
+      "kind": "相似于",
+      "explanation": "老子与孔子同处春秋，一主无为而治，一主仁德教化。"
     },
     {
       "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "hundred-schools"
+      "relatedElementKey": "hundred-schools",
+      "kind": "组成",
+      "explanation": "儒家是诸子百家中影响最深远的流派之一。"
     },
     {
       "elementKey": "hundred-schools",
-      "relatedElementKey": "confucius-and-confucianism"
+      "relatedElementKey": "confucius-and-confucianism",
+      "kind": "解释",
+      "explanation": "百家争鸣中，儒家成为日后影响最大的学派。"
     },
     {
       "elementKey": "laozi-and-taoism",
-      "relatedElementKey": "hundred-schools"
+      "relatedElementKey": "hundred-schools",
+      "kind": "组成",
+      "explanation": "道家是诸子百家中与儒家并立的重要流派。"
     },
     {
       "elementKey": "hundred-schools",
-      "relatedElementKey": "laozi-and-taoism"
+      "relatedElementKey": "laozi-and-taoism",
+      "kind": "解释",
+      "explanation": "道家思想在百家争鸣中自成体系并延续至今。"
     },
     {
       "elementKey": "spring-autumn-warring-states",
-      "relatedElementKey": "hundred-schools"
+      "relatedElementKey": "hundred-schools",
+      "kind": "产生于",
+      "explanation": "诸子百家产生于春秋战国的社会剧变与思想解放。"
     },
     {
       "elementKey": "hundred-schools",
-      "relatedElementKey": "spring-autumn-warring-states"
+      "relatedElementKey": "spring-autumn-warring-states",
+      "kind": "解释",
+      "explanation": "百家争鸣是春秋战国思想解放的集中体现。"
     },
     {
       "elementKey": "spring-autumn-warring-states",
-      "relatedElementKey": "confucius-and-confucianism"
+      "relatedElementKey": "confucius-and-confucianism",
+      "kind": "产生于",
+      "explanation": "孔子思想产生于春秋乱世，回应礼崩乐坏。"
     },
     {
       "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "spring-autumn-warring-states"
+      "relatedElementKey": "spring-autumn-warring-states",
+      "kind": "解释",
+      "explanation": "孔子生于春秋，其思想是剧变时代的产物。"
     },
     {
       "elementKey": "four-great-inventions",
-      "relatedElementKey": "yuan-dynasty"
+      "relatedElementKey": "yuan-dynasty",
+      "kind": "受到影响",
+      "explanation": "火药与印刷术等经蒙元时期大量西传，影响世界。"
     },
     {
       "elementKey": "yuan-dynasty",
-      "relatedElementKey": "four-great-inventions"
+      "relatedElementKey": "four-great-inventions",
+      "kind": "解释",
+      "explanation": "元朝承继宋代科技积累，推动四大发明向外传播。"
     },
     {
       "elementKey": "four-great-inventions",
-      "relatedElementKey": "silk-road"
+      "relatedElementKey": "silk-road",
+      "kind": "用于",
+      "explanation": "四大发明沿丝绸之路传播到中亚与欧洲。"
     },
     {
       "elementKey": "silk-road",
-      "relatedElementKey": "four-great-inventions"
+      "relatedElementKey": "four-great-inventions",
+      "kind": "解释",
+      "explanation": "丝绸之路是四大发明西传世界的重要通道。"
     },
     {
       "elementKey": "twenty-four-histories",
-      "relatedElementKey": "three-kingdoms"
+      "relatedElementKey": "three-kingdoms",
+      "kind": "组成",
+      "explanation": "《三国志》位列二十四史，是记录三国的正史。"
     },
     {
       "elementKey": "three-kingdoms",
-      "relatedElementKey": "twenty-four-histories"
+      "relatedElementKey": "twenty-four-histories",
+      "kind": "解释",
+      "explanation": "三国的历史经由《三国志》纳入二十四史体系。"
     }
   ],
   "attractions": [
@@ -1564,8 +1821,1140 @@
       }
     }
   ],
+  "themes": [
+    {
+      "key": "dynasty-timeline",
+      "name": "朝代更迭的时间线",
+      "summary": "从夏商周的先声，到秦汉一统、唐宋盛世，再到元明清的更替，沿一条主线串起中国王朝的兴衰脉络。",
+      "elementKeys": [
+        "chinese-dynasty-overview",
+        "xia-dynasty",
+        "qin-dynasty",
+        "han-dynasty",
+        "tang-dynasty",
+        "song-dynasty",
+        "yuan-dynasty",
+        "ming-dynasty",
+        "qing-dynasty"
+      ],
+      "minContacted": 5
+    },
+    {
+      "key": "prosperity-and-decline",
+      "name": "盛世与落幕",
+      "summary": "从文景之治、贞观之治到开元盛世，再看安史之乱、靖康之变与鸦片战争，体会盛世如何兴起，又如何在转折中落幕。",
+      "elementKeys": [
+        "wenjing-prosperity",
+        "zhenguan-rule",
+        "kaiyuan-flourishing",
+        "an-lushan-rebellion",
+        "jingkang-incident",
+        "opium-war"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "hundred-schools-thought",
+      "name": "百家争鸣与思想之源",
+      "summary": "回到春秋战国的思想现场，认识儒道等诸子流派的诞生，以及它们如何塑造此后两千年的中华文明。",
+      "elementKeys": [
+        "hundred-schools",
+        "confucius-and-confucianism",
+        "laozi-and-taoism",
+        "spring-autumn-warring-states",
+        "zhonghua-civilization"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "institutions-and-exchanges",
+      "name": "制度、工程与文明往来",
+      "summary": "科举选官、运河漕运、丝路贸易与四大发明，看中国的制度与工程如何连接四方、塑造文明交流。",
+      "elementKeys": [
+        "imperial-examination",
+        "grand-canal",
+        "silk-road",
+        "four-great-inventions",
+        "twenty-four-histories",
+        "zheng-he"
+      ],
+      "minContacted": 3
+    }
+  ],
+  "locales": {
+    "en": {
+      "elements": {
+        "chinese-dynasty-overview": {
+          "name": "Timeline of Chinese Dynasties",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Chinese history conventionally runs from the age of legend all the way to the end of the imperial system. The Origins of Chinese Civilization research project holds that around 5,800 years ago, marked social stratification appeared one after another across several regions of China, an accelerating phase in the beginnings of civilization; after roughly 3,800 years ago, the Central Plains, exemplified by the Erlitou culture, entered the dynastic age, as early broad-based states ruled by royal power gradually took shape."
+              },
+              {
+                "type": "paragraph",
+                "text": "The major dynasties of Chinese history are traditionally ordered as Xia, Shang, Zhou, Qin, Han, the Three Kingdoms, the Western and Eastern Jin, the Northern and Southern Dynasties, Sui, Tang, the Five Dynasties and Ten Kingdoms, Song, Yuan, Ming and Qing: the Xia existed roughly from 2070 to 1600 BC; the Shang was founded around 1600 BC; the Zhou lasted about eight hundred years, from King Wu's conquest of the Shang in 1046 BC to the Qin's destruction of the Eastern Zhou royal house in 256 BC; and the Qin (221–207 BC) was the first unified, centrally governed empire in Chinese history."
+              },
+              {
+                "type": "paragraph",
+                "text": "The discovery of oracle bone inscriptions at Yinxu from the late Shang brought China into a stage of verifiable history supported by mature written materials; a continuously dated written record conventionally begins with the first year of the Gonghe regency of the Western Zhou in 841 BC. In 221 BC, Qin Shi Huang unified the six states, establishing the imperial institution and the commandery-county system, and standardizing script, weights and measures, and the legal code."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1911 the Xinhai Revolution overthrew the Qing dynasty, and in 1912 the Republic of China was founded, ending the imperial monarchy that had lasted more than two thousand years. To remember the dynasties, first recite them in order — Xia, Shang, Zhou, Qin, Han; Three Kingdoms, Western and Eastern Jin, Northern and Southern Dynasties; Sui, Tang, Five Dynasties, Song, Yuan, Ming, Qing — then fill in the approximate dates of each."
+              }
+            ]
+          }
+        },
+        "xia-dynasty": {
+          "name": "Xia dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Xia dynasty existed roughly from 2070 to 1600 BC and is the first hereditary dynastic state of the Central Plains recorded in Chinese history. According to historical records, Yu passed the throne to his son Qi, replacing the primitive practice of abdicating to a worthy successor; governance by a shared public realm gave way to rule passed down within one family, inaugurating nearly four thousand years of hereditary monarchy in China."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Xia is said to have passed through fourteen reigns and seventeen kings of the Si clan, with a duration sometimes given as 470 years, before being overthrown by the Shang. The sources also contain famous episodes such as 'Taikang Loses the State' and 'Shaokang's Restoration': Taikang neglected government for pleasure, and Yi, the leader of the Youqiong tribe of the eastern Yi peoples, seized the Xia government with the backing of the Xia people; Shaokang later defeated Hanzhuo's forces and restored the Xia realm."
+              },
+              {
+                "type": "paragraph",
+                "text": "Archeologically, the Erlitou site in western Henan and southern Shanxi broadly matches the dating and location expected of Xia culture, and many historians at home and abroad consider that the full sequence, or the first two phases, of the Erlitou site at Yanshi may be the remains of a Xia capital. Yet no contemporary written records like the oracle-bone divination texts of Yinxu have ever been unearthed, so the existence and precise dates of the Xia remain debated."
+              },
+              {
+                "type": "paragraph",
+                "text": "To remember the Xia, keep three keywords in mind: 'roughly 2070–1600 BC', 'hereditary dynasty', and 'the unresolved Erlitou site'. It is both the beginning of the dynastic chain and a key to understanding where China's verifiable history begins."
+              }
+            ]
+          }
+        },
+        "shang-dynasty": {
+          "name": "Shang dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Shang dynasty was founded around 1600 BC and was replaced by the Zhou around 1046 BC, lasting more than five hundred years. Because written records from the time survive to this day, it is also the earliest dynasty belonging to the verifiable historical period of China. The oracle bone script and bronze inscriptions that appeared under the Shang are the earliest writing found in China."
+              },
+              {
+                "type": "paragraph",
+                "text": "Around 1300 BC, Pan Geng moved the capital to Yin (present-day Anyang, Henan), after which the Shang did not shift its capital again for more than 250 years, entering the relatively stable late-Shang period. The Shang established a system of inner and outer service regions, and the Shang king concentrated military, religious, and clan authority in his own hands."
+              },
+              {
+                "type": "paragraph",
+                "text": "The most representative craft of the Shang era was bronze casting; the Houmuwu ding, weighing 875 kilograms, is considered a masterpiece of ancient China and indeed of the ancient world. The Shang used cowrie shells as currency, and copper shells appeared in its late period, pioneering metal coinage. The Shang and New Kingdom Egypt were the two largest states in the world at the time."
+              },
+              {
+                "type": "paragraph",
+                "text": "Di Xin, the last Shang ruler, burned himself to death after being defeated by King Wu of Zhou at the Battle of Muye. To remember the Shang, keep its three hallmarks: oracle bone inscriptions, bronze vessels, and Pan Geng's move to Yin."
+              }
+            ]
+          }
+        },
+        "zhou-dynasty": {
+          "name": "Zhou dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Zhou was the hereditary dynasty that succeeded the Shang, divided into the Western Zhou (1046–771 BC) and the Eastern Zhou (770–256 BC). The Western Zhou was founded when King Wu overthrew the Shang, with its capital at Haojing; the Eastern Zhou was based at Luoyi (present-day Luoyang, Henan)."
+              },
+              {
+                "type": "paragraph",
+                "text": "After conquering the Shang, King Wu instituted a system of enfeoffment, enfeofing royal kinsmen and meritorious ministers in the east to serve as shields for the royal house. In 841 BC the People's Riot broke out in Haojing, and King Li fled to Zhi; the ensuing regency is known as the Gonghe interregnum. Its first year, 841 BC, marks the beginning of clear, unbroken reign-year dating in Chinese history."
+              },
+              {
+                "type": "paragraph",
+                "text": "King You deposed his queen, the daughter of the Marquis of Western Shen, and the crown prince Yijiu, installing Bao Si as queen and her son Bofu as heir. In 771 BC the Quanrong tribes killed King You at Mount Li, an event known as the Quanrong Disaster, and the Western Zhou perished. In 770 BC King Ping moved the capital east to Luoyi, an event recorded as the Eastern Move of King Ping, marking the beginning of the Eastern Zhou."
+              },
+              {
+                "type": "paragraph",
+                "text": "During the Eastern Zhou the king's authority steadily declined: Duke Huan of Qi, Duke Xiang of Song, Duke Wen of Jin, Duke Mu of Qin, and King Zhuang of Chu rose in turn, remembered in the Records of the Grand Historian as the Five Hegemons of the Spring and Autumn period. Thereafter came the Partition of Jin among three houses and the Tian family's replacement of the Jiang clan in Qi, until Qin finally unified the six states. To remember the Zhou, recall three events — enfeoffment, the first Gonghe year, and King Ping's eastern move — and the Western and Eastern Zhou join into a single line."
+              }
+            ]
+          }
+        },
+        "spring-autumn-warring-states": {
+          "name": "Spring and Autumn & Warring States",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Spring and Autumn and Warring States periods are the historical subdivisions of the Eastern Zhou: the Spring and Autumn period generally refers to 770–476 BC; the start of the Warring States period is dated variously, with common markers being 475 BC or 403 BC, when the Zhou king formally recognized Han, Zhao, and Wei as feudal lords; the period ends with Qin's unification of the six states in 221 BC."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Spring and Autumn period takes its name from the Annals, the chronicle edited by Confucius. It was an age of drastic transformation in Chinese social institutions, marked by the widespread use of iron and a gradual entry into the Iron Age. Daoist, Confucian, and Mohist schools of thought had already appeared by the late Spring and Autumn period, and by the mid-Warring States the Hundred Schools of Thought contended freely."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 453 BC Han, Zhao, and Wei jointly destroyed the Zhi clan, and in 403 BC King Weilie of Zhou formally invested the three houses as feudal lords — the event known as the Partition of Jin. In 386 BC Tian He was recognized by the Zhou court as Marquis of Qi, and the Tian clan replaced the Jiang-surnamed house of Qi. Han, Zhao, Wei, Qi, Qin, Chu, and Yan are known together as the Seven Powers of the Warring States. In 356 BC Duke Xiao of Qin employed Shang Yang to carry out reforms, and in 260 BC the Battle of Changping between Qin and Zhao ended in a crushing defeat for Zhao."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Spring and Autumn and Warring States period closed with Qin's unification of the six states. It was an era of contending powers and a hundred schools of thought, a time of radical transformation in China's political institutions and social thought; remember the phrases 'Five Hegemons of the Spring and Autumn', 'Seven Powers of the Warring States', and 'Shang Yang's reforms' to sketch its outline."
+              }
+            ]
+          }
+        },
+        "qin-dynasty": {
+          "name": "Qin dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Qin dynasty (221–207 BC) was the first unified, centrally governed empire in Chinese history, whose royal house bore the Ying surname. From 230 to 221 BC, King Zheng of Qin successively conquered the six other major states, unifying the Central Plains and styling himself 'First Emperor', from which point China had the title of emperor."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Qin established a centralized system built on the imperial institution, the Three Dukes and Nine Ministers, and the commandery-county system, and standardized the currency (the Qin ban liang coin) and weights and measures. Li Si revised the Qin variant of the ancient seal script to create small seal script, which was adopted throughout the realm, while Cheng Miao further simplified it into clerical script. Its military system was notable for the twenty-rank nobility order devised by Shang Yang, and the Qin people were called 'the state that prizes merit in battle'."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 214 BC the First Emperor ordered Meng Tian to lead an army of 300,000 against the Xiongnu in the north, and to join the old walls of Qin, Zhao, and Yan into a line stretching ten thousand li from Lintao to Liaodong, hence the name 'the Great Wall of Ten Thousand Li'. The First Emperor undertook large-scale construction of palaces, mausoleums, roads, and the Great Wall, and the terracotta warriors have been inscribed on the World Heritage List."
+              },
+              {
+                "type": "paragraph",
+                "text": "The 'burning of books' took place in 213 BC, followed a year later by the 'burying of scholars'. In 209 BC Chen Sheng and Wu Guang rose in revolt at Dazexiang, and in 207 BC Ziying, the king of Qin, surrendered to Liu Bang; the Qin fell three years after the First Emperor's death. To remember the Qin, recall 'the first great unification, the imperial institution, the commandery-county system, and the Great Wall of Ten Thousand Li'."
+              }
+            ]
+          }
+        },
+        "han-dynasty": {
+          "name": "Han dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Han dynasty (202 BC–9 AD, 25–220 AD) was the second unified imperial dynasty in Chinese history, divided into the Western Han (202 BC–9 AD) and the Eastern Han (25–220 AD). Together the two Han saw 29 emperors over 406 years. The first emperor of the Western Han was Gaozu (Liu Bang), and the first of the Eastern Han was Emperor Guangwu (Liu Xiu)."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liu Bang ascended the throne in 202 BC and named his state 'Han'. Early in the dynasty, to pacify various regional powers, he pursued a parallel system in which commandery-county administration and enfeoffed kingdoms coexisted. Emperors Wen and Jing governed by the Huang-Lao principles of light levies and thrift, remembered as the 'Rule of Wen and Jing'. Emperor Wu reigned for 54 years and twice sent Zhang Qian on missions to the Western Regions; the Silk Road took shape in the late Western Han."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 9 AD Wang Mang formally usurped the throne and proclaimed the Xin dynasty, ending the Western Han. In 25 AD Liu Xiu, a scion of the Han house, declared himself emperor south of Hao county — Emperor Guangwu — and reunified the realm by 37 AD. Because Luoyang lay east of the old capital Chang'an, later historians called his dynasty the Eastern Han."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 184 the Yellow Turban rebellion led by Zhang Jiao broke out, and in 220 Cao Pi, son of Cao Cao, replaced the Han, formally opening the Three Kingdoms era. To remember the Han, hold onto these nodes: the Rule of Wen and Jing, Emperor Wu's territorial expansion, Guangwu's restoration, and the Han's end at the hands of Cao Pi."
+              }
+            ]
+          }
+        },
+        "three-kingdoms": {
+          "name": "Three Kingdoms",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Three Kingdoms (in the strict sense, 220–280 AD) was a period in which the states of Wei, Shu Han, and Wu stood side by side, with its prelude traced to the Yellow Turban rebellion of 184. In 200 Cao Cao defeated Yuan Shao, the strongest power of the north, at the Battle of Guandu; in 208 he was in turn defeated by the allied forces of Sun Quan and Liu Bei at the Battle of Red Cliffs, taking the first step toward the tripartite standoff."
+              },
+              {
+                "type": "paragraph",
+                "text": "Cao Cao died in 220, and that same year his son Cao Pi accepted the abdication of Emperor Xian of Han, taking the dynastic name 'Wei' — historically styled Cao Wei. The Eastern Han thus came to an end and the Three Kingdoms period formally began. In 221 Liu Bei proclaimed himself emperor at Chengdu under the name 'Han', styled Shu Han; and in 229 Sun Quan formally took the title of emperor under the name 'Wu', styled Sun Wu."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 263 Sima Zhao launched a campaign against Shu and Shu Han fell; in 265 Sima Yan accepted the abdication of Emperor Yuan of Wei and proclaimed himself emperor under the name 'Jin', styled the Western Jin, and Cao Wei perished; in 280 the Western Jin conquered Wu, bringing the Three Kingdoms period to an end."
+              },
+              {
+                "type": "paragraph",
+                "text": "During the Three Kingdoms, Cao Wei replaced the Han's system of recommendation with the Nine Ranks system, producing a situation in which 'the upper ranks had no families of humble origin and the lower ranks no great clans'. The Records of the Three Kingdoms, written by Chen Shou with annotations by Pei Songzhi, is one of the highly regarded 'Former Four Histories' among the Twenty-Four Histories, and the Romance of the Three Kingdoms by Luo Guanzhong became one of China's Four Great Classical Novels. To remember the Three Kingdoms, recall 'Wei, Shu, and Wu; Guandu; Red Cliffs'."
+              }
+            ]
+          }
+        },
+        "jin-dynasty": {
+          "name": "Western and Eastern Jin",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Jin was divided into the Western Jin and the Eastern Jin, together called the Two Jins. The Western Jin (265–316), founded by Emperor Wu (Sima Yan), had its capital at Luoyang; the Eastern Jin (317–420), founded by Emperor Yuan (Sima Rui), had its capital at Jiankang (present-day Nanjing, Jiangsu). Together the Two Jins lasted 154 years."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 280 the Western Jin conquered Sun Wu and unified the realm, but peace and stability lasted barely a decade. After Emperor Hui ascended the throne, the princely lords rebelled in what is known as the War of the Eight Princes; in 311 Liu Cong, Wang Mi, and Shi Le sacked Luoyang in the disaster known as the Yongjia catastrophe, and in 316 the Western Jin fell, plunging the north into the period of the Sixteen Kingdoms of the Five Barbarian peoples."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 317 Sima Rui proclaimed himself emperor at Jiankang, beginning the Eastern Jin; the aristocratic families and common people of the Central Plains migrated south in waves, an event recorded as the 'southern migration of robes and caps'. In 383, at the Battle of the Fei River, the Eastern Jin's 80,000-strong Beifu army routed the vast forces of Fu Jian of the Former Qin."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 420 Liu Yu deposed Emperor Gong of Jin and established himself as ruler of the Liu Song, ending the Eastern Jin and opening the Northern and Southern Dynasties period. To remember the Two Jins, recall the brief Western Jin unification, the War of the Eight Princes, the southern migration of the elite, and the Battle of the Fei River."
+              }
+            ]
+          }
+        },
+        "southern-northern-dynasties": {
+          "name": "Northern and Southern Dynasties",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Northern and Southern Dynasties period (420–589) runs from the Liu Song's replacement of the Jin in 420 to the Sui's conquest of Chen in 589. The Southern Dynasties comprised the Liu Song, Southern Qi, Liang, and Chen, all with capitals at Jiankang; the Northern Dynasties comprised the Northern Wei, Eastern Wei, Western Wei, Northern Qi, and Northern Zhou."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Northern Wei was founded by the Xianbei clan of Tuoba. In 439 Emperor Taiwu conquered the Northern Liang, ending the Sixteen Kingdoms period and confronting the Liu Song of the south. Emperor Xiaowen moved the capital to Luoyang in 493 and carried out a sinicization program, changing the Tuoba surname to Yuan and intermarrying with the great Chinese clans."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 523, at the end of the Northern Wei, the Rebellion of the Six Garrisons broke out, and in 534 the state split into the Eastern Wei and the Western Wei; the Northern Qi and Northern Zhou then rose in succession. In 550 the Western Wei and Northern Zhou created the fubing garrison-soldier system, and the Northern Zhou instituted six ministries after the Rites of Zhou — the origins of the Sui and Tang institutional framework."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 581 Yang Jian replaced the Northern Zhou with the Sui, and in 589 the Sui conquered Chen, ending a division of China that had lasted 280 years since the Yongjia catastrophe. To remember this period, recall the four Southern dynasties all centered on Jiankang, the five Northern dynasties, and the Sui's reunification."
+              }
+            ]
+          }
+        },
+        "sui-dynasty": {
+          "name": "Sui dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Sui dynasty (581–619) was founded by Emperor Wen (Yang Jian), who received the abdication of the Northern Zhou, and lasted a mere 38 years until Wang Shichong deposed Emperor Gong in 619. In 589 the Sui conquered the Chen of the south, ending the more than 280 years of north-south division that had followed the Yongjia catastrophe of the Western Jin."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Wen inaugurated the flourishing Kaihuang era, during which the registered population grew from about four million households to over eight million. He abolished the Northern Zhou's six ministries, established the Three Departments and Six Ministries, simplified the state-commandery-county hierarchy to state and county, and instituted the imperial examination system in 587; in 606 Emperor Yang added the jinshi (presented scholar) examination."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 605 Emperor Yang cut the Tongji Canal and drove forward the construction of the Sui-Tang Grand Canal; he also launched large-scale wars against Goguryeo in 612, 613, and 614. With corvée labor and military service weighing heavily on the people, rebellions broke out across the land."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 617 Li Yuan raised the standard of revolt at Jinyang (Taiyuan), proclaimed himself emperor and founded the Tang in 618, and the Sui fell in 619. To remember the Sui, recall Emperor Wen's Kaihuang rule, Emperor Yang's canal building and campaigns against Goguryeo, and the dynasty's brief 38-year span."
+              }
+            ]
+          }
+        },
+        "tang-dynasty": {
+          "name": "Tang dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Tang dynasty (618–907), founded by Emperor Gaozu (Li Yuan), lasted 289 years under 22 emperors (including Wu Zetian) and was one of the most powerful states in the world of its day. In 618 Li Yuan compelled Emperor Gong of Sui to abdicate and founded the Tang, renaming the capital Daxing as Chang'an."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 626 Li Shimin carried out the Xuanwu Gate Incident, killing the crown prince Li Jiancheng and Prince of Qi Li Yuanji, and then took the throne as Emperor Taizong, inaugurating the celebrated Zhenguan era. After the Eastern Turkic Khaganate fell in 630, the peoples of the north hailed Taizong as the 'Heavenly Khan'. In 641 the Tang court arranged for Princess Wencheng to marry Songtsen Gampo, the tsenpo of Tibet."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 690 Wu Zetian deposed Emperor Ruizong and took the imperial throne herself, changing the dynastic name to Zhou (the Wu Zhou), becoming the only female emperor in Chinese history; during her reign she introduced the palace examination and the military examination. After the Shenlong coup of 705 the Tang was restored. Under Emperor Xuanzong the government was clear and able, a time known as the Kaiyuan flourishing age, and by the Tianbao era the population reached 80 million."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 755 An Lushan launched the An Lushan Rebellion, the turning point at which the Tang shifted from prosperity to decline; in 907 Zhu Wen compelled Emperor Ai to abdicate and founded the Later Liang, ending the Tang and opening the Five Dynasties and Ten Kingdoms period. To remember the Tang, hold onto three nodes: the Zhenguan era, the Kaiyuan flourishing age, and the An Lushan Rebellion."
+              }
+            ]
+          }
+        },
+        "five-dynasties-ten-kingdoms": {
+          "name": "Five Dynasties and Ten Kingdoms",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Five Dynasties and Ten Kingdoms (in the strict sense, 907–960) began with the fall of the Tang and ended with the Song's reunification of most of the Chinese heartland; it was in essence a continuation of late-Tang politics and the fragmentation of military governorships. In 907 Zhu Wen, Prince of Liang, usurped the Tang and founded the Later Liang, marking the start of the period."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Five Dynasties were the Later Liang, Later Tang, Later Jin, Later Han, and Later Zhou. In 936 Shi Jingtang, using Khitan troops, founded the Later Jin and ceded the Sixteen Prefectures of Yan and Yun to the Khitan; in 947 Yelü Deguang changed the state name to Great Liao, formally establishing the Liao dynasty. Chai Rong, Emperor Shizong of the Later Zhou, is hailed as the finest ruler of the Five Dynasties and Ten Kingdoms."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Ten Kingdoms comprised Wu, Southern Tang, Wuyue, and Min in the Jiangnan region; Jingnan, Chu, and Southern Han in the Huguang region; Former Shu and Later Shu in the Sichuan lands; and Northern Han, the only one in the north. In 960 Zhao Kuangyin staged the Chenqiao mutiny, deposing Emperor Gong of the Later Zhou; the Five Dynasties ended, and Zhao Kuangyin founded the Song."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 979 Northern Han surrendered to the Song, ending the Ten Kingdoms and formally opening the Song period. To remember the Five Dynasties and Ten Kingdoms, recall the Later Liang, Later Tang, Later Jin, Later Han, and Later Zhou; the Sixteen Prefectures of Yan and Yun; and the Chenqiao mutiny."
+              }
+            ]
+          }
+        },
+        "song-dynasty": {
+          "name": "Song dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Song dynasty (960–1279), divided into the Northern Song and the Southern Song and together called the Two Songs, lasted 319 years — the longest-ruling Chinese dynasty since the establishment of the imperial institution. In 960 Zhao Kuangyin became emperor through the Chenqiao mutiny, taking the name Song Taizu, with the dynastic title Song and the capital at Kaifeng."
+              },
+              {
+                "type": "paragraph",
+                "text": "At the founding of the dynasty, Taizu reclaimed military power for the central court 'over a cup of wine' and pursued a national policy of elevating civilian culture while curbing the military. In 1004 the Song and Liao made peace at the walls of Chanzhou: the Song paid the Liao an annual tribute of 200,000 bolts of silk and 100,000 taels of silver, and the two states became 'brother nations' — an agreement known as the Treaty of Chanyuan."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1127 the Jin conquered the Northern Song in the Jingkang Incident; Prince Kang, Zhao Gou, took the throne at Yingtian Prefecture, beginning the Southern Song. According to the scholar Angus Maddison, the Song accounted for 22.7% of world economic output at the time; all Four Great Inventions were refined, and six of the Eight Masters of the Tang and Song came from the Song."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1276 Lin'an fell, and in 1279 the Song fleet was annihilated at the Battle of Yamen, ending the dynasty. To remember the Song, recall the policy of favoring civil over martial affairs, the Treaty of Chanyuan, the Jingkang Incident, and the age's economic and technological brilliance."
+              }
+            ]
+          }
+        },
+        "yuan-dynasty": {
+          "name": "Yuan dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Yuan dynasty (1260 or 1271–1368), whose official title was the Great Yuan, was founded by the Mongols in Chinese history and had 11 emperors over 98 years. In 1206 Temüjin was honored as Genghis Khan, founding the Mongol Empire; in 1271 Kublai adopted the Chinese dynastic title Great Yuan and fixed the capital at Dadu (present-day Beijing)."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Yuan was the first unified dynasty in Chinese history to include the word 'Great' in its official title. In 1279 the Yuan conquered the Southern Song, ending the division that had lasted over 520 years since the An Lushan Rebellion of the Tang. Kublai adopted Chinese administrative practices, establishing the Secretariat, the Bureau of Military Affairs, and the Censorate, in a political structure that blended Mongol and Chinese elements."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Yuan set up provincial secretariats and the Commission for Buddhist and Tibetan Affairs, among other institutions. Drama and performing arts aimed at commoners flourished, most notably Yuan opera (yuanqu); in 1312 Emperor Renzong restored the imperial examinations with Cheng-Zhu Neo-Confucianism as the subject matter, a revival known as the Yanyou examinations."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1368 Zhu Yuanzhang founded the Ming and sent Xu Da on a northern campaign that captured Dadu; the Yuan's rule over China ended, and the Yuan court retreated to the Mongolian steppe, remembered as the Northern Yuan. To remember the Yuan, recall its Mongol founders, the title Great Yuan, the provincial system, and Yuan opera."
+              }
+            ]
+          }
+        },
+        "ming-dynasty": {
+          "name": "Ming dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Ming dynasty (1368–1644) was the unified dynasty that followed the Yuan and the last unified dynasty founded by the Han Chinese, spanning 12 reigns and 16 emperors over 276 years. In 1368 Zhu Yuanzhang proclaimed himself emperor at Yingtian Prefecture (present-day Nanjing) as Ming Taizu, adopting the dynastic title Great Ming."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the thirteenth year of Hongwu (1380), Taizu executed his chancellor on charges of seizing power and building a faction, using the occasion to abolish both the chancellorship and the Secretariat, concentrating power in the emperor. Prince Yan, Zhu Di, seized the throne through the Jingnan campaign, becoming Emperor Chengzu; in the eighteenth year of Yongle (1420) he moved the capital to Shuntian Prefecture (present-day Beijing)."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Chengzu sent Zheng He on his voyages to the Western Ocean seven times, reaching as far as the Somalia region of East Africa, and commissioned the great encyclopedia the Yongle Dadian. In 1449 the Tumu Crisis saw Emperor Yingzong captured by the Oirat forces. As grand secretary, Zhang Juzheng created the assessment-of-performance law and, in the ninth year of Wanli (1581), carried out the Single Whip tax reform."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the seventeenth year of Chongzhen (1644), Li Zicheng established the Dashun state and took Beijing; the Chongzhen emperor hanged himself on Coal Hill, and the Ming fell. To remember the Ming, recall Taizu's abolition of the chancellorship, the Yongle emperor's move of the capital, Zheng He's voyages, and the Single Whip tax reform."
+              }
+            ]
+          }
+        },
+        "qing-dynasty": {
+          "name": "Qing dynasty",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Qing dynasty (1636 or 1644–1912), whose official title was the Great Qing, was the unified dynasty founded by the Manchus and the last imperial dynasty in Chinese history; it had 11 emperors from the time Hong Taiji fixed the name Great Qing. In 1616 Nurhaci founded the Later Jin khanate, and in 1636 Hong Taiji proclaimed himself emperor at Shengjing and changed the dynastic name to Great Qing."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1644 Li Zicheng took Beijing and the Ming fell; that same year Wu Sangui let the Qing forces through the pass, an event known as the Jiashen Transition, and the Qing army moved its capital to Beijing. Under the successive reigns of Kangxi, Yongzheng, and Qianlong the Qing entered the High Qing era; at its peak the territory it effectively controlled reached 13.1 million square kilometers."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Kangxi emperor reigned for sixty-one years and ten months, the longest reign in Chinese history; the Yongzheng emperor established the Grand Council to strengthen imperial authority. After the Opium War of 1840, China entered its modern age, as the Taiping Rebellion, the Self-Strengthening Movement, and the Hundred Days' Reform followed in turn."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1911 the Wuchang Uprising broke out and the Xinhai Revolution overthrew the Qing; on February 12, 1912, the Empress Dowager Longyu issued an abdication edict in the name of the emperor Puyi, and the Qing formally came to an end, closing more than two thousand years of imperial monarchy. To remember the Qing, recall the High Qing era of Kangxi, Yongzheng, and Qianlong; the Opium War; and the Xinhai Revolution's end of the imperial system."
+              }
+            ]
+          }
+        },
+        "imperial-examination": {
+          "name": "Imperial examination system",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The imperial examination (keju) was a system for selecting officials through competitive examinations. Originating in China, it spread to other countries of the Chinese-character cultural sphere and directly gave rise to a scholar-official class chosen by examination regardless of family background. The system began in the Sui in 605, first conceived by Emperor Wen and implemented by Emperor Yang, matured and was systematized during the Tang and the Wu Zhou, and continued until the end of the Qing."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the first year of the Daye era (605), Emperor Yang of Sui established the jinshi examination to select officials, and this became the imperial examination as later known. The Tang was the first dynasty to implement the examination on a systematic, large scale; it was divided into the regular examination (changke) and the special examination (zhike). Under Wu Zetian the palace examination, presided over by the emperor to verify the credentials of successful candidates, and the military examination for selecting generals were both pioneered."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the Ming and Qing dynasties, provincial graduates (juren) who passed the metropolitan examination became tribute scholars (gongshi), and those who then succeeded in the palace examination became presented scholars (jinshi). In the palace examination the top three candidates were, in order, the zhuangyuan (top scholar), the bangyan (second), and the tanhua (third). The Ming held 89 examination sessions and produced 24,536 jinshi; the Qing held 112 sessions and produced about 26,000 jinshi."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1905 the examination was abolished by the Empress Dowager Cixi, after a history spanning more than 1,300 years. To remember it, recall that it began in the Sui, flourished in the Tang, ended in the Qing, and produced the zhuangyuan, bangyan, and tanhua."
+              }
+            ]
+          }
+        },
+        "great-wall": {
+          "name": "Great Wall",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Great Wall is the collective name for the large-scale military walls built by successive dynasties across northern China. When its eastern and western sections and its successive passes are added up, it stretches over ten thousand li (roughly 4,500 to 6,000 kilometers), which is why it is also called the 'Wall of Ten Thousand Li'. Walls were already being built in the Spring and Autumn and Warring States periods; the Qi wall is the earliest wall in the history of the Central Plains."
+              },
+              {
+                "type": "paragraph",
+                "text": "The name 'Ten Thousand Li Wall' dates only from the First Emperor: in 221 BC he unified the Central Plains by conquering the six states, and in 214 BC sent General Meng Tian with 300,000 men against the Xiongnu, taking the Hetao region and linking the old walls built by Qin, Zhao, and Yan into a line stretching ten thousand li from Lintao to Liaodong. The Western Han also built the longest wall of its kind in history, the Han Wall."
+              },
+              {
+                "type": "paragraph",
+                "text": "The wall as it survives today is chiefly the Ming Great Wall, begun in the 14th century and running from Jiayuguan in the west to the Hushan wall in the east. Through 20 large-scale construction campaigns the Ming built a wall stretching 8,851.8 kilometers from Jiayuguan in Gansu in the west to Hushan in Liaoning in the east. The wall system consists chiefly of four parts: passes, walls and towers, and beacon towers."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1987 the Great Wall was inscribed as a UNESCO World Cultural Heritage site. In the Tang, since the Turks had been pacified under Emperor Taizong, no wall was built for the next three hundred years, and the Qing never built on it until its fall. To remember the Great Wall, recall that it began in the Spring and Autumn period, was named under the First Emperor, and survives today mostly as the Ming Wall."
+              }
+            ]
+          }
+        },
+        "silk-road": {
+          "name": "Silk Road",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Silk Road was the overland route leading from the ancient Han and Tang capitals of Chang'an or Luoyang, through Gansu and Xinjiang, to Central Asia, West Asia, and Europe, and linking the lands around the Mediterranean. It takes its name from silk, the most influential of the goods carried westward along it. The term 'Silk Road' first appeared in an atlas published in 1877 by the German geographer Baron Ferdinand von Richthofen."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the second year of Jianyuan (139 BC), Zhang Qian set out from Chang'an with more than a hundred attendants on a mission to the Western Regions; captured by the Xiongnu along the way, he finally returned to Chang'an in 126 BC after many hardships. Historians praise his first western journey as having 'opened a road through the void'. In the second year of Shenjue (60 BC) under Emperor Xuan, the Protectorate of the Western Regions was established, and in the Eastern Han, Ban Chao again traveled to the Western Regions, reopening the long-abandoned Silk Road."
+              },
+              {
+                "type": "paragraph",
+                "text": "The traditional Silk Road is divided into eastern, central, and western sections: the eastern section runs from Chang'an or Luoyang to the Yumen and Yangguan passes, the central section from beyond those passes to the Pamir mountains, and the western section from the Pamirs westward through Central and West Asia to Europe. In the Battle of Talas in 751, Chinese papermaking spread to the Islamic world through craftsmen taken prisoner."
+              },
+              {
+                "type": "paragraph",
+                "text": "On June 22, 2014, the Silk Road, together with the Beijing–Hangzhou Grand Canal, was inscribed as a UNESCO World Heritage site. To remember the Silk Road, recall Zhang Qian's pioneering journeys, Ban Chao's reopening of the route, and the origin of its name in silk."
+              }
+            ]
+          }
+        },
+        "grand-canal": {
+          "name": "Beijing–Hangzhou Grand Canal",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Beijing–Hangzhou Grand Canal runs from the confluence of five rivers at Tongzhou, Beijing, in the north to Hangzhou in the south, passing through Beijing, Tianjin, Hebei, Shandong, Jiangsu, and Zhejiang. It links the five great river systems of the Hai, Yellow, Huai, Yangtze, and Qiantang, and measures 1,794 kilometers in length."
+              },
+              {
+                "type": "paragraph",
+                "text": "The origins of the Grand Canal reach back to the end of the Spring and Autumn period: in 486 BC King Fuchai of Wu built Hancheng and cut a canal to Mokou, linking the Yangtze and the Huai; later known as the Hangou, it is the earliest stretch of the Grand Canal with a firmly dated beginning. After the Sui reunified north and south, several sections of canal centering on Luoyang were dug, known in history as the north-south Grand Canal, about 2,700 kilometers long."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Yuan emperor Kublai rebuilt the canal on the foundations of the Sui-Tang waterway, cutting straight through its bends; the Yuan astronomer Guo Shoujing oversaw the digging of the Tonghui River. With these major works complete, the Grand Canal took the form it has today. In 2014 the Beijing–Hangzhou Grand Canal was inscribed on the World Heritage List as part of the Grand Canal."
+              },
+              {
+                "type": "paragraph",
+                "text": "After the Yellow River changed course in 1855, the canal's Shandong section gradually silted up and fell out of use; in 1911 the Tianjin–Pukou Railway opened throughout, and from then on the Grand Canal and the cities along it lost their former importance. To remember the Grand Canal, recall that it runs from Tongzhou, Beijing, to Hangzhou, links five river systems, and stretches 1,794 kilometers."
+              }
+            ]
+          }
+        },
+        "four-great-inventions": {
+          "name": "Four Great Inventions",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The 'Four Great Inventions' is a concept in the history of Chinese science and technology referring to four inventions of ancient China: papermaking, the compass, gunpowder, and printing. The American scholar Thomas Francis Carter first set out the idea explicitly in the preface of his 1925 book The Invention of Printing in China and Its Spread Westward."
+              },
+              {
+                "type": "paragraph",
+                "text": "Papermaking is traditionally attributed to Cai Lun, a court eunuch of the Eastern Han, but archeological evidence shows that paper existed earlier; Cai Lun was an important improver and developer of the craft. The forerunner of the compass was the ancient Chinese south-pointing ladle (sinan); in his Dream Pool Essays of 1088, the Northern Song polymath Shen Kuo was the first to describe magnetic declination accurately."
+              },
+              {
+                "type": "paragraph",
+                "text": "The earliest known written record of a gunpowder formula appears in the Essentials of the Military Classics of 1044, from the Song dynasty. The earliest woodblock-printed work yet found is the Dharani Sutra published between 650 and 670; the Diamond Sutra, printed in 868 during the Tang, is the earliest known printed book of ordinary size; and movable type is said to have been invented by Bi Sheng of the Northern Song, who used baked clay pieces."
+              },
+              {
+                "type": "paragraph",
+                "text": "China used practical firearms some five centuries before Europe; the compass reached the Arab world around the turn of the 13th century and was passed on from there to Europe. To remember the Four Great Inventions, recall papermaking, the compass, gunpowder, and printing."
+              }
+            ]
+          }
+        },
+        "twenty-four-histories": {
+          "name": "Twenty-Four Histories",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Twenty-Four Histories is the collective name for the twenty-four official histories compiled by the successive Chinese dynasties. Regarded as orthodox by every ruling house, they are also known as the 'Standard Histories'. They cover more than four thousand years of Chinese history, from the legendary Yellow Emperor to the seventeenth year of the Ming Chongzhen era (1644), in 3,213 volumes, all written in the annals-and-biographies format of basic annals and biographies."
+              },
+              {
+                "type": "paragraph",
+                "text": "The term 'Standard History' first appears in the Bibliographic Treatise of the Book of Sui; after the Qianlong emperor officially designated the Twenty-Four Histories, the name became exclusive to them. Once the Records of the Three Kingdoms was completed, it joined the Records of the Grand Historian, the Book of Han, and the Book of the Later Han as the 'Former Four Histories'."
+              },
+              {
+                "type": "paragraph",
+                "text": "When the History of Ming was completed in the Yongzheng era of the Qing, the collection became the Twenty-Two Histories; the addition of the Old Book of Tang made twenty-three. While compiling the Four Treasuries, the Old History of the Five Dynasties, recovered from the Yongle Dadian, was added to make the Twenty-Four Histories. In 1921 the New History of Yuan was added, making the Twenty-Five Histories."
+              },
+              {
+                "type": "paragraph",
+                "text": "To remember the Twenty-Four Histories, recall the annals-and-biographies format, the Former Four Histories, and the Qianlong emperor's selection of twenty-four official histories."
+              }
+            ]
+          }
+        },
+        "confucius-and-confucianism": {
+          "name": "Confucius and Confucianism",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Confucius (551–479 BC), personal name Qiu and courtesy name Zhongni, of the Kong lineage, was a Lu state official, thinker, and educator of the Spring and Autumn period. He was the founder of Confucian thought and the founder of Chinese philosophy and ethics. He was born in 551 BC at Zouyi, near Qufu in the state of Lu."
+              },
+              {
+                "type": "paragraph",
+                "text": "Confucius pioneered education for the common people, holding that education should be offered to all without distinction, and taught in accordance with each student's ability. He is said to have had three thousand disciples, of whom seventy-two mastered the six arts. His way of governing put moral cultivation of the people first, advocating rule by virtue and the virtues of benevolence (ren), filial piety, loyalty, and reciprocity."
+              },
+              {
+                "type": "paragraph",
+                "text": "His disciples compiled the Analects, recording Confucius's words and deeds. Benevolence (ren) is the heart of his thought, appearing in 58 of the Analects' more than 400 chapters. Confucius taught the six arts of ritual, music, archery, charioteering, calligraphy, and mathematics, and edited the Five Classics, yet he 'transmitted rather than created', leaving behind no works of his own."
+              },
+              {
+                "type": "paragraph",
+                "text": "His school revered him as a sage, and successive courts honored him as the 'model teacher for ten thousand generations'. To remember Confucius, recall benevolence, education for all, the Analects, and the six arts."
+              }
+            ]
+          }
+        },
+        "laozi-and-taoism": {
+          "name": "Laozi and Daoism",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Li Dan (born c. 571 BC), honored by posterity as Laozi ('Old Master'), is said to have been born in the village of Qurenli in Li township, Ku county, in the Chu state of the Eastern Zhou, and to have served as a keeper of the archives in the Zhou royal court during the Spring and Autumn period. Laozi is revered as the founder of Daoism and the Taoist religion, and as one of the Three Sages of the East."
+              },
+              {
+                "type": "paragraph",
+                "text": "The book written in his name, the Laozi, is widely known as the Daodejing and is the classic of Daoism. In the commonly transmitted editions of Heshan Gong of the Han and Wang Bi of the Wei, the work has 81 chapters: the first 37 form the 'Classic of the Way' (Daojing) and the last 42 the 'Classic of Virtue' (Dejing)."
+              },
+              {
+                "type": "paragraph",
+                "text": "Lao Dan advocated ruling through non-action, the unity of heaven and humanity, and quiet non-interference. Along with Zhuang Zhou he is regarded as a leading figure of Daoism, and the two are jointly called 'Lao-Zhuang'. The Records of the Grand Historian records that Confucius once asked Laozi about ritual."
+              },
+              {
+                "type": "paragraph",
+                "text": "In October 1993, 804 bamboo slips of the Warring States period were unearthed from the Chu tomb at Guodian in Jingmen, Hubei, representing the earliest extant text of the Daodejing. To remember Laozi, recall the Daodejing, rule by non-action, 'Lao-Zhuang', and his role as the founder of Daoism."
+              }
+            ]
+          }
+        },
+        "hundred-schools": {
+          "name": "Hundred Schools of Thought",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Hundred Schools of Thought is the later collective name for the thinkers and schools of Chinese intellectual life in the pre-Qin period. The 'Masters' include such representative figures as Laozi, Zhuangzi, Confucius, Mencius, Xunzi, Mozi, Liezi, Sunzi, Shenzi, Han Feizi, and Guiguzi."
+              },
+              {
+                "type": "paragraph",
+                "text": "By the late Spring and Autumn period such influential schools as Daoism, Confucianism, Mohism, the School of Names, Legalism, the School of Military Strategy, and the Yin-Yang school had appeared; by the mid-Warring States the Hundred Schools contended, and the profusion of doctrines laid a deep foundation for Chinese culture."
+              },
+              {
+                "type": "paragraph",
+                "text": "Sima Tan, father of Sima Qian, grouped the schools of the pre-Qin era into six: Daoism, Confucianism, Mohism, the School of Names, Legalism, and the Yin-Yang school. In the Book of Han, Ban Gu of the Eastern Han expanded this to ten schools, adding the School of Diplomacy, the School of Agrarianism, the School of Syncretism, and the School of Storytellers."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Qin burned books and buried scholars alive, and Emperor Wu of Han dismissed the Hundred Schools and honored only Confucianism. The Hundred Schools' contention was the first great movement of intellectual liberation in Chinese history. To remember the Masters, recall the major schools — Confucianism, Daoism, Mohism, Legalism — and their foundational place in Chinese culture."
+              }
+            ]
+          }
+        },
+        "zhonghua-civilization": {
+          "name": "Five Thousand Years of Chinese Civilization",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Chinese civilization is commonly regarded as some five thousand years old. The Origins of Chinese Civilization research project holds that around 5,800 years ago, marked social stratification appeared one after another across several regions of China, marking an accelerating phase in the origins of civilization."
+              },
+              {
+                "type": "paragraph",
+                "text": "The project divides the period from roughly 5,800 to 3,800 years ago into the age of ancient states, followed by the dynastic age represented by sites such as Erlitou. From around 3,800 years ago onward, the Central Plains, exemplified by the Erlitou culture, entered the dynastic age, as early broad-based states under royal power gradually took shape."
+              },
+              {
+                "type": "paragraph",
+                "text": "Archeologically, the Liangzhu ancient city site, dated to roughly 3300–2300 BC, reveals monumental earthen architecture, urban planning, water management systems, rice agriculture, a system of jade ritual objects, and hierarchical differentiation in burials — tangible evidence of the early stage of Chinese civilization."
+              },
+              {
+                "type": "paragraph",
+                "text": "By traditional dating the Xia is generally placed between 2070 and 1600 BC. To remember the five thousand years of Chinese civilization, recall the origins research project, the progression from the age of ancient states to the dynastic age, and the Liangzhu evidence."
+              }
+            ]
+          }
+        },
+        "qin-shi-huang": {
+          "name": "Qin Shi Huang",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Qin Shi Huang (259–210 BC), surnamed Ying and named Zheng, was born at Handan, the capital of Zhao, the son of King Zhuangxiang of Qin and Queen Zhao Ji. He came to the throne at thirteen, conquered the six states and founded the Qin at thirty-nine, and styled himself the First Emperor — the first ruler in Chinese history to bear the imperial title. The Ming thinker Li Zhi hailed him as 'the one emperor for a thousand ages'."
+              },
+              {
+                "type": "paragraph",
+                "text": "Between 230 and 221 BC, King Zheng of Qin conquered in turn the six states of Han, Zhao, Wei, Chu, Yan, and Qi, unifying the realm. After unification, the First Emperor carried forward the commandery-county system and centralization introduced by Shang Yang's reforms, standardized weights and measures, and imposed common axle widths for carts, a common script, shared standards of conduct, and a unified legal code."
+              },
+              {
+                "type": "paragraph",
+                "text": "During his reign the First Emperor undertook many great projects — the Great Wall, the Epang Palace, and his mausoleum at Mount Li among them — imposing such heavy corvée labor on the people that it became a principal reason the Qin collapsed a mere three years after his death."
+              },
+              {
+                "type": "paragraph",
+                "text": "To remember Qin Shi Huang, recall the 'emperor for a thousand ages', the unified script and standard axle gauge, the commandery-county system, and the building of the Wall and the mausoleum — and also the other face of his reign, where grand achievements coexisted with crushing burdens."
+              }
+            ]
+          }
+        },
+        "han-wudi": {
+          "name": "Emperor Wu of Han",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Emperor Wu of Han, Liu Che (156–87 BC), reigned from 141 to 87 BC, a total of 54 years. The tenth son of Emperor Jing (Liu Qi), he was made crown prince at seven and ascended the throne at sixteen. During his reign era names were first used for dating, with Jianyuan the first in Chinese history."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the second year of Yuanshuo (127 BC), adopting the advice of Zhufu Yan, Emperor Wu issued the Order of Grace to split the kingdoms of the feudal lords into smaller states. The system of recommendatory appointment (chaju) was established from the first year of Yuanguang (134 BC), and in the fifth year of Yuanshuo (124 BC) he founded the Imperial Academy. Economically he made salt and iron state monopolies, placing officials at the production sites to control output and sale."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Wu dispatched Zhang Qian to the Western Regions, opening the channel of exchange between the Central Plains and the western lands — the Silk Road. From the sixth year of Yuanguang (129 BC) he campaigned against the Xiongnu, deploying such famed generals as Wei Qing and Huo Qubing to strike back, and established the four commanderies of Jiuquan, Wuwei, Zhangye, and Dunhuang to open the Hexi Corridor."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the first year of Zhenghe (92 BC) the witchcraft crisis erupted, and Crown Prince Liu Ju, defeated in the ensuing conflict, took his own life; in the fourth year of Zhenghe (89 BC) the emperor issued the Luntai Edict acknowledging his errors and largely ceased military campaigns. To remember Emperor Wu, recall the Order of Grace, Zhang Qian's missions to the Western Regions, the campaigns against the Xiongnu, and the salt-and-iron monopoly."
+              }
+            ]
+          }
+        },
+        "tang-taizong": {
+          "name": "Emperor Taizong of Tang",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Li Shimin (598–649), second son of the Tang founder Li Yuan, was the second emperor of the Tang. On the fourth day of the sixth month in the ninth year of Wude (July 2, 626), Li Shimin ambushed his rivals at the Xuanwu Gate, personally shooting the crown prince Li Jiancheng while Yuchi Jingde killed the Prince of Qi, Li Yuanji — an event known as the Xuanwu Gate Incident. That September the founding emperor abdicated, and Li Shimin took the throne as Emperor Taizong, changing the era name to Zhenguan the following year."
+              },
+              {
+                "type": "paragraph",
+                "text": "Li Shimin reigned for 23 years (626–649), remembered by posterity as the Zhenguan era. He appointed able men and welcomed frank remonstrance; Wei Zheng bluntly admonished the emperor on more than 200 occasions at court. In the spring of 643, Taizong had portraits of the twenty-four meritorious statesmen painted in the Lingyan Pavilion."
+              },
+              {
+                "type": "paragraph",
+                "text": "After the Eastern Turkic Khaganate fell in 630, the histories record that the nine clans of the Tiele, the kingdoms of the Western Regions, and Tokhara alike honored him as the 'Heavenly Khan'. In 641 Princess Wencheng of the Tang court married Songtsen Gampo, the tsenpo of Tibet. Emperor Taizong died at the Cuiwei Palace in 649 and was buried at the Zhaoling Mausoleum, with the posthumous title Emperor Wen and temple name Taizong."
+              },
+              {
+                "type": "paragraph",
+                "text": "To remember Emperor Taizong, recall four things: the Xuanwu Gate Incident, the Zhenguan era, the title Heavenly Khan, and Wei Zheng's frank remonstrance."
+              }
+            ]
+          }
+        },
+        "zheng-he": {
+          "name": "Zheng He's Voyages",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Zheng He (1371–1433), originally surnamed Ma with the childhood name Sanbao, was a native of Kunyang in Yunnan. The Yongle emperor bestowed on him the surname Zheng, whence his name. A military officer, navigator, diplomat, and eunuch of the Ming, he led seven great voyages at the Yongle emperor's command over twenty-eight years, visiting more than thirty countries and regions along the western Pacific and Indian Ocean — the voyages known in history as Zheng He's journeys to the Western Ocean, covering more than 70,000 nautical miles in all."
+              },
+              {
+                "type": "paragraph",
+                "text": "On the fifteenth day of the sixth month in the third year of Yongle (July 11, 1405), the Yongle emperor ordered Zheng He to lead a fleet of more than 240 ocean-going ships with 27,400 crewmen on a voyage to distant seas. On his fourth voyage he rounded the Arabian Peninsula and for the first time sailed as far as Malindi in present-day Kenya, East Africa."
+              },
+              {
+                "type": "paragraph",
+                "text": "Zheng He reached more than thirty states, including Java, Sumatra, Sulu, Malacca, Chenla, Siam, Hormuz, and Mogadishu, venturing as far as the east coast of Africa and the Red Sea. On his seventh voyage he died in 1433 (eighth year of Xuande) at Calicut on the west coast of India."
+              },
+              {
+                "type": "paragraph",
+                "text": "Since 2005, July 11 of each year has been observed in China as National Maritime Day, chosen to mark the date of Zheng He's first voyage, July 11, 1405. To remember Zheng He, recall his seven voyages, visits to more than thirty countries, and the journeys that reached as far as the east coast of Africa."
+              }
+            ]
+          }
+        },
+        "yue-fei": {
+          "name": "Yue Fei",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Yue Fei (1103–1142), courtesy name Pengju, was a native of Tangyin in Xiangzhou and the celebrated Southern Song general who resisted the Jin. From the time he served under Zong Ze in the second year of Jianyan (1128) until 1141 (the eleventh year of Shaoxing), he led the Yue Family Army through hundreds of engagements, large and small, against the Jin forces."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1140 (the tenth year of Shaoxing), Wanyan Wuzhu, fourth son of the Jin founder, broke the peace treaty and attacked the Song. Yue Fei struck north, recovering Zhengzhou and other places, then routed the Jin at Yancheng and Yingchang and advanced on Zhuxian Town. The Yue Family Army was famed for refusing to dismantle houses even when freezing and refusing to plunder even when starving; even the opposing Jurchens marveled that it was easier to move a mountain than to move the Yue Family Army."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Gaozong, set on peace, ordered a withdrawal with twelve gilt tablets of command, and Yue Fei was compelled to turn his army back. On the twenty-ninth day of the twelfth month in the eleventh year of Shaoxing (January 27, 1142), the eve of the new year, Yue Fei was executed at the Fengbo Pavilion of the court of judicial review in Hangzhou on trumped-up charges; his eldest son Yue Yun and his general Zhang Xian were put to death as well."
+              },
+              {
+                "type": "paragraph",
+                "text": "After Emperor Xiaozong came to the throne he rehabilitated Yue Fei, granting him the posthumous title Wumu in 1178 (the fifth year of Chunxi), and in 1204 (the fourth year of Jiatai) Emperor Ningzong posthumously created him Prince of E. To remember Yue Fei, recall the Yue Family Army, the drive on Zhuxian Town, the twelve gilt tablets, and the injustice of Fengbo Pavilion."
+              }
+            ]
+          }
+        },
+        "wang-anshi": {
+          "name": "Wang Anshi",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Wang Anshi (1021–1086), courtesy name Jiefu and sobriquet Banshan, was a native of Linchuan county in Fuzhou. A Northern Song statesman, writer, thinker, and reformer, he was created Duke of Jing and posthumously honored as Wen; posterity counts him among the Eight Masters of the Tang and Song. In the third month of the second year of Qingli (1042), at the age of twenty-two, he passed the jinshi examination."
+              },
+              {
+                "type": "paragraph",
+                "text": "While magistrate of Yin county, Wang Anshi lent grain from the official granaries to the people, repaid with interest after the autumn harvest; the Green Sprouts policy he later championed grew directly out of this practice. In the second year of Xining (1069), Emperor Shenzong appointed him vice grand councilor, and in the twelfth month of the third year of Xining (1070) he rose to grand councilor. The reforms he led are known in history as the Xining Reforms or Wang Anshi's Reforms."
+              },
+              {
+                "type": "paragraph",
+                "text": "Across the realm Wang Anshi implemented new laws including the Green Sprouts policy, the Farmland and Water Conservancy law, and the Replacement Service law, and reformed the examination system, the bureaucracy, and the military, also introducing the mutual-responsibility baojia system. He was dismissed from office twice, in 1074 and 1076."
+              },
+              {
+                "type": "paragraph",
+                "text": "After Emperor Shenzong's death, Sima Guang became grand councilor and led the Yuanyou reversal, repealing nearly all of the reform laws. Wang Anshi died at Jiangning Prefecture in 1086 (the first year of Yuanyou), aged sixty-four. To remember him, recall the Green Sprouts policy, the Xining Reforms, his two dismissals from office, and his place among the Eight Masters of the Tang and Song."
+              }
+            ]
+          }
+        },
+        "kangxi": {
+          "name": "Kangxi Emperor",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Kangxi emperor (1654–1722), personal name Xuanye of the Aisin Gioro clan, reigned from 1661 to 1722 under the era name Kangxi, with the temple name Shengzu. The third son of the Shunzhi emperor, Xuanye ascended the throne in 1661 upon his father's death, at only eight years old by Chinese reckoning."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the eighth year of Kangxi (1669), the emperor had the young palace attendants seize Oboi on charges of disrespect, thereby fully recovering control of the court. In 1673, when the Kangxi emperor decided to abolish the feudatories, the Prince of Pingxi, Wu Sangui, rose against the Qing, and the Revolt of the Three Feudatories was finally crushed in 1681."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1683 the Kangxi emperor appointed Shi Lang admiral of the Fujian fleet; Shi Lang took Penghu, Zheng Keshuang surrendered, and Taiwan was pacified. The emperor also signed the Treaty of Nerchinsk with Russia, securing control of the Amur basin and the vast northeast. From 1690 to 1697 he repeatedly defeated Galdan of the Dzungar confederation, in campaigns remembered as the Three Expeditions against Galdan."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Kangxi emperor reigned for sixty-one years and ten months, the longest reign in Chinese history. To remember him, recall the seizure of Oboi, the suppression of the Three Feudatories, the recovery of Taiwan, and the Three Expeditions against Galdan."
+              }
+            ]
+          }
+        },
+        "wenjing-prosperity": {
+          "name": "Rule of Wen and Jing",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Rule of Wen and Jing refers to the reigns of Emperor Wen and Emperor Jing of Han — a period of good governance and the first golden age of a unified dynasty in Chinese history. It laid the foundations on which Emperor Wu later carried the Han to its peak."
+              },
+              {
+                "type": "paragraph",
+                "text": "Early in the Han, the economy was weak, and the court espoused the Huang-Lao arts of government, adopting policies of light levies and letting the people rest. In the second year of Emperor Wen's reign (178 BC) and the twelfth (168 BC), the land tax was halved on each occasion, eventually settled at one-thirtieth, and in the thirteenth year of his reign it was abolished altogether."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Wen lived frugally, adding nothing to his palaces, carriages, and wardrobe, and issued edicts forbidding the commanderies and kingdoms from presenting rare treasures. In the early years of his reign Emperor Jing put down the Rebellion of the Seven Kingdoms, then devoted himself to government, maintaining a policy of marriage alliance with the Xiongnu."
+              },
+              {
+                "type": "paragraph",
+                "text": "The histories say that the capital's coins piled up by the tens of millions, their strings rotted beyond counting, and that the grain of the great granaries, laid up year after year, overflowed and rotted in the open. To remember the Rule of Wen and Jing, recall light levies, the one-thirtieth tax, and the non-intervention of Huang-Lao governance."
+              }
+            ]
+          }
+        },
+        "zhenguan-rule": {
+          "name": "Zhenguan Rule",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Zhenguan Rule refers to the clear and able government of Emperor Taizong of Tang during his 23-year reign (627–649). In those twenty-three years he used a single era name, Zhenguan, hence the name; it was the first golden age of the Tang."
+              },
+              {
+                "type": "paragraph",
+                "text": "Emperor Taizong appointed talented men and welcomed frank remonstrance, giving high office to Fang Xuanling, Du Ruhui, Wei Zheng, and others; Wei Zheng offered more than two hundred pieces of remonstrance in all. After Wei Zheng's death, the emperor reflected: 'Use bronze as a mirror to straighten one's dress; use the past as a mirror to understand the rise and fall of states; use a person as a mirror to see what is gained and lost.'"
+              },
+              {
+                "type": "paragraph",
+                "text": "Economically, Taizong implemented the equal-field land system and the taxation of rent, levy, and service, cutting extravagance and easing burdens. Abroad, he subdued in turn the Eastern Turks, the Xueyantuo, Gaochang, and Tuyuhun, and established the Anxi Protectorate in the Western Regions; the peoples of the northwest jointly honored him as the Heavenly Khan."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Zhenguan Rule laid vital groundwork for the later Kaiyuan flourishing age. To remember it, recall the single era name used for 23 years, the ministers Fang Xuanling, Du Ruhui, and Wei Zheng, and the title Heavenly Khan."
+              }
+            ]
+          }
+        },
+        "kaiyuan-flourishing": {
+          "name": "Kaiyuan Flourishing Age",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Kaiyuan flourishing age, also called the Kaiyuan golden rule, was the golden age of the Tang under Emperor Xuanzong. For the first thirty years of his governance Xuanzong used the era name Kaiyuan, governing with vigor and appointing worthy and able men, and raised the Tang to the summit of its power."
+              },
+              {
+                "type": "paragraph",
+                "text": "After ascending the throne, Xuanzong first appointed Yao Chong and Song Jing as chancellors, then Zhang Jiazhen, Zhang Yue, Li Yuanhong, Du Xian, Han Xiu, and Zhang Jiuling in turn. By the first year of Tianbao (742), the Tang empire's population had reached about 48.91 million."
+              },
+              {
+                "type": "paragraph",
+                "text": "Adopting the proposal of Zhang Yue, Emperor Xuanzong implemented a volunteer-based standing army to replace the declining fubing garrison system. In the first year of Tianbao (742) he established ten frontier military commands under military governors (jiedushi), intended as a deterrent against foreign peoples and a measure of border defense — but they also planted the seeds of the An Lushan Rebellion that later erupted."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Kaiyuan flourishing age was the summit of the Tang, lying close to the turning point of decline after prosperity. To remember it, recall the chancellors Yao Chong and Song Jing, the population of about 48.91 million, and the military governors who sowed the seeds of the An Lushan Rebellion."
+              }
+            ]
+          }
+        },
+        "an-lushan-rebellion": {
+          "name": "An Lushan Rebellion",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The An Lushan Rebellion (755–763) was a great civil war that broke out in the mid-Tang, lasting, as the sources record, over seven years. It was launched by An Lushan, military governor of three frontier commands, and his subordinate Shi Siming, who marched troops toward the capital under the banner of punishing the imperial kinsman Yang Guozhong; it spanned the reigns of Emperors Xuanzong, Suzong, and Daizong."
+              },
+              {
+                "type": "paragraph",
+                "text": "On the ninth day of the eleventh month in the fourteenth year of Tianbao (December 16, 755), An Lushan rose in revolt at Fanyang (present-day Beijing); on the first day of the first month of 756 he proclaimed himself emperor at Luoyang under the title Great Yan. When Xuanzong fled to Mawei Slope, his soldiers mutinied, Yang Guozhong was cut down, and Xuanzong issued an order that the imperial consort Yang Guifei be strangled. The crown prince, Li Heng, was enthroned at Lingzhou as Emperor Suzong."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the spring of 763 (the second year of Baoying), Shi Chaoyi, with no way out, hanged himself, ending the rebellion after seven years and two months. After the war the court accepted the surrender of the rebels' remnants, appointing Tian Chengsi military governor of Weibo, Li Huaixian of Youzhou, and Li Baochen of Chengde, giving rise to the separatist rule of the Three Garrison Towns of Hebei."
+              },
+              {
+                "type": "paragraph",
+                "text": "The An Lushan Rebellion is regarded as the pivotal event in the Tang's shift from prosperity to decline. Although it was ultimately suppressed with the aid of the Uyghurs, the registered Han population of the Tang fell by more than half in its aftermath. To remember the rebellion, recall An Lushan and Shi Siming, Mawei Slope, and the years 755 to 763."
+              }
+            ]
+          }
+        },
+        "jingkang-incident": {
+          "name": "Jingkang Incident",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Jingkang Incident, also called the Humiliation of Jingkang, refers to the great war of 1125–1127 in which the Jurchens captured Bianliang (present-day Kaifeng, Henan), the capital of the Northern Song, and carried off Emperor Qinzong, the retired Emperor Huizong, nearly the entire imperial clan of the Song Taizong line, consorts, officials, and more than a hundred thousand residents of the capital."
+              },
+              {
+                "type": "paragraph",
+                "text": "The capital fell on the twenty-fifth day of the intercalary eleventh month of the first year of Jingkang (January 9, 1127), which is how the incident got its name. In the first month of 1126 the eastern Jin army reached the walls of Kaifeng but failed to break in, thanks to the stout defense organized by the capital's defender Li Gang; in the autumn of 1126 the Jin attacked again on two fronts and, after besieging the city for a month, breached it."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the spring of 1127 the Jin carried the two emperors Huizong and Qinzong and a great number of the Song Taizong imperial clan northward; on the sixth day of the second month of the second year of Jingkang (March 20, 1127), the Jin emperor decreed that the two deposed rulers become commoners, and the Northern Song (960–1127) came to an end."
+              },
+              {
+                "type": "paragraph",
+                "text": "After the fall of the Northern Song, Prince Kang, Zhao Gou, proclaimed himself emperor at Yingtian Prefecture as Emperor Gaozong, beginning the Southern Song; in 1141 the Song and Jin signed the Treaty of Shaoxing, fixing the boundary along the Qinling Mountains and the Huai River. To remember the Jingkang Incident, recall the year 1127, the fall of Bianjing, and the capture of Emperors Huizong and Qinzong."
+              }
+            ]
+          }
+        },
+        "opium-war": {
+          "name": "Opium Wars",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Opium Wars were two conflicts between the Qing empire and the Western powers in the mid-19th century; because the first was sparked by the prohibition of opium and the second is regarded as its continuation, the two are jointly called the Opium Wars. The First Opium War was launched by Britain against China in 1840 and ended with the Treaty of Nanking in 1842."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1839 Lin Zexu ordered the confiscation of all opium in Guangzhou; Charles Elliot, the British superintendent of trade in China, handed over 20,000 chests (1,300 tons) of opium, which Lin Zexu destroyed at Humen. The Treaty of Nanking, signed in 1842, ceded Hong Kong Island to Britain, opened the five treaty ports of Shanghai, Guangzhou, Ningbo, Fuzhou, and Xiamen, and required China to pay 21 million silver dollars."
+              },
+              {
+                "type": "paragraph",
+                "text": "From 1856 to 1860 Britain and France waged the Second Opium War against China, resulting in the Treaties of Tianjin (1858) and Peking (1860); the second phase of fighting included the sack of the Old Summer Palace and the occupation of the Forbidden City palace complex in Beijing."
+              },
+              {
+                "type": "paragraph",
+                "text": "China ceded sovereignty over Hong Kong to the British Empire, whose control over the territory lasted until 1997. To remember the Opium Wars, recall 1840, the destruction of opium at Humen, the Treaty of Nanking, and the cession of Hong Kong."
+              }
+            ]
+          }
+        }
+      },
+      "attractions": {
+        "great-wall": {
+          "name": "Great Wall"
+        },
+        "grand-canal": {
+          "name": "Beijing–Hangzhou Grand Canal"
+        }
+      },
+      "introductions": {
+        "great-wall.badaling": {
+          "name": "Badaling Great Wall",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Standing on the wall at Badaling, first look east and west along the battlements: this section belongs to the Ming wall system. The wall that survives today is chiefly the Ming Great Wall, begun in the 14th century and running from Jiayuguan in the west to the Hushan wall in the east."
+              },
+              {
+                "type": "paragraph",
+                "text": "Through twenty large-scale construction campaigns the Ming built a wall stretching 8,851.8 kilometers from Jiayuguan in Gansu to Hushan in Liaoning, running largely along the line of the Nine Border Commands. The wall system consists chiefly of four parts: passes, walls and towers, and beacon towers."
+              },
+              {
+                "type": "paragraph",
+                "text": "In 1987 the Great Wall was inscribed as a UNESCO World Cultural Heritage site. Counting its eastern and western sections and its successive passes together, the entire wall stretches over ten thousand li — roughly 4,500 to 6,000 kilometers."
+              },
+              {
+                "type": "paragraph",
+                "text": "From the wall at Badaling, set the phrase 'Wall of Ten Thousand Li' back in time: it began to be built during the Spring and Autumn and Warring States periods, the First Emperor's joining of the old walls earned it the name 'Ten Thousand Li Wall', and the Ming wall is the most complete part surviving today."
+              }
+            ]
+          }
+        },
+        "great-wall.jiayuguan": {
+          "name": "Jiayuguan",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Jiayuguan lies in a narrow defile between the Qilian and Longshou mountains. First built in the Ming dynasty, it is the westernmost pass of the Ming Great Wall and is known as the 'First Great Pass Under Heaven'."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Ming Great Wall runs 8,851.8 kilometers from Jiayuguan in Gansu to Hushan in Liaoning, and Jiayuguan is the western terminus of that wall. In the wall's beacon system, signals warned of border incursions: smoke by day was called feng, and fire by night su."
+              },
+              {
+                "type": "paragraph",
+                "text": "Its counterpart is Shanhaiguan, the first pass at the eastern end of the Ming Great Wall, known as the 'First Pass Under Heaven'. In 1987 the Great Wall was inscribed as a UNESCO World Cultural Heritage site."
+              },
+              {
+                "type": "paragraph",
+                "text": "Visiting Jiayuguan, remember two superlatives: it is the westernmost pass of the Ming Great Wall and the 'First Great Pass Under Heaven'."
+              }
+            ]
+          }
+        },
+        "grand-canal.gongchen-bridge": {
+          "name": "Gongchen Bridge",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Gongchen Bridge spans the Beijing–Hangzhou Grand Canal and is the emblematic old bridge of the canal's Hangzhou section. Standing on the bridge and gazing at the water, you are looking at a thousand-year waterway linking Beijing and Hangzhou. The Grand Canal runs from Tongzhou, Beijing, in the north to Hangzhou in the south, 1,794 kilometers in length."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Grand Canal links the five great river systems of the Hai, Yellow, Huai, Yangtze, and Qiantang. Its origins trace back to the late Spring and Autumn period, to the Hangou cut by King Fuchai of Wu — the earliest stretch of the Grand Canal with a firmly dated beginning."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the Sui dynasty the north-south Grand Canal, some 2,700 kilometers long and centering on Luoyang, was dug; rebuilt in the Yuan dynasty, it became the Grand Canal as it is today. In 2014 the Beijing–Hangzhou Grand Canal was inscribed on the World Heritage List as part of the Grand Canal."
+              },
+              {
+                "type": "paragraph",
+                "text": "Standing beside Gongchen Bridge, hold on to two facts — Beijing to Hangzhou, and the linking of five river systems — and you have grasped the basic frame of this canal."
+              }
+            ]
+          }
+        },
+        "grand-canal.hangzhou-section": {
+          "name": "Hangzhou Canal Section",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Walking along the canal in Hangzhou is walking through a history of grain transport (caoyun). Caoyun was a specialized system of moving public grain by river or sea routes, and Chinese histories recorded it as early as the Qin and Han eras."
+              },
+              {
+                "type": "paragraph",
+                "text": "After the Sui reunified north and south, several sections of canal centering on Luoyang were dug in succession, known in history as the north-south Grand Canal; the Yuan emperor Kublai rebuilt the canal on the foundations of the Sui-Tang waterway, cutting straight through its bends, and the Yuan astronomer Guo Shoujing oversaw the digging of the Tonghui River."
+              },
+              {
+                "type": "paragraph",
+                "text": "Before sea transport and modern overland routes arose, the Grand Canal generally handled about three-quarters of the nation's freight; in the Ming and Qing dynasties a special grain transport directorate was even established at Huai'an. After the Yellow River changed course in 1855, the canal's Shandong section gradually silted up, and once the Tianjin–Pukou Railway opened in 1911 the Grand Canal's importance collapsed."
+              },
+              {
+                "type": "paragraph",
+                "text": "To remember the Grand Canal, keep in mind its 1,794 kilometers and the five river systems it links — every one of its bends is tied to more than a thousand years of grain transport between north and south China."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
   "manifest": {
-    "packVersion": "chinese-history-v1",
-    "generatedAt": "2026-08-03T16:00:00Z"
+    "packVersion": "chinese-history-v2",
+    "generatedAt": "2026-08-05T08:01:46Z"
   }
 }

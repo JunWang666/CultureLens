@@ -1,5 +1,6 @@
 {
-  "version": "liangzhu-v1",
+  "version": "liangzhu-v2",
+  "source_language": "zh-Hans",
   "elements": [
     {
       "key": "liangzhu-culture-overview",
@@ -24,7 +25,8 @@
             "text": "看良渚文物时，把目光落在玉琮、玉璧、玉钺的形制与兽面纹上，就能从一件件玉器里读出一个擅长组织劳动力、也崇尚玉礼的史前社会。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "liangzhu-chronology",
@@ -49,7 +51,8 @@
             "text": "看年代资料时不必纠结数字：记住“距今5300至4000年”这个约数，再看良渚早于商代、晚于河姆渡，就能在时间里给它排好位置。"
           }
         ]
-      }
+      },
+      "conceptKind": "历史"
     },
     {
       "key": "liangzhu-distribution",
@@ -74,7 +77,8 @@
             "text": "逛遗址或看展时，可以把“环太湖”作为一把标尺：你看到的每件玉器、每处台地，都来自这片河网密布的太湖平原。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "mojiaoshan-center",
@@ -99,7 +103,8 @@
             "text": "在良渚古城遗址公园登上莫角山台地时，先看平台的大致范围，再对比它周围环绕的小遗址，就能体会这处由约一万人之力筑成的台地，为何被称为良渚的权力中心。"
           }
         ]
-      }
+      },
+      "conceptKind": "审美"
     },
     {
       "key": "liangzhu-ancient-city",
@@ -124,7 +129,8 @@
             "text": "在遗址公园看城墙时，不妨把它想象成五千年前的工程边界：外城、内城、宫殿逐层收窄，一套秩序就藏在台地的高低里。"
           }
         ]
-      }
+      },
+      "conceptKind": "审美"
     },
     {
       "key": "liangzhu-water-system",
@@ -149,7 +155,8 @@
             "text": "到遗址公园时，别只在城内走，留意城北拉开的坝堤轮廓；它们与城墙、台地一起，构成了良渚人治水与聚居的完整图景。"
           }
         ]
-      }
+      },
+      "conceptKind": "功能"
     },
     {
       "key": "fanshan-cemetery",
@@ -174,7 +181,8 @@
             "text": "在遗址公园的反山保护区，可以沿一处百来米的台地来回走走，体会随葬玉器在这里的高度集中——一座台地之下，埋着一位位首领与他们的玉礼世界。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "yaoshan-altar",
@@ -199,7 +207,8 @@
             "text": "走到瑶山祭坛，先看那方形的坛面与向南排列的墓坑，再想它从“祭坛到墓地”的身份转变，一处神权与权力交织的空间就浮现出来。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "jade-cong-wang",
@@ -224,7 +233,8 @@
             "text": "看玉琮王时，先看它整体的分量和外方内圆的形制，再看满布器面的兽面纹——它既是工艺的极致，也是一件首领墓里沟通天地的权力之物。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "jade-cong-ritual",
@@ -249,7 +259,8 @@
             "text": "看馆中玉琮时，先记住“外方内圆”四个字：方为地、圆为天，一件琮就把古人对天地秩序的想象握在了手里。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "jade-bi",
@@ -274,7 +285,8 @@
             "text": "看玉璧时，注意它与玉琮一圆一方的对比——“圆璧祭天、方琮祭地”，这套成对出现的玉礼器，就是良渚人宇宙观的一角。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "jade-yue",
@@ -299,7 +311,8 @@
             "text": "在展厅找到玉钺时，先看它的刃部与孔眼特征，再想它原本嵌在镶玉的木柄上——这件玉器不只是权力的声明，也是持钺者地位的直接证明。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "god-man-beast-mask",
@@ -324,7 +337,8 @@
             "text": "看神人兽面纹时，先找那对下垂的眼角与舒展的羽冠，再想这种“神灵图象”反复出现在玉琮上，它就是良渚神权在器物上最直观的落地。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "jade-crafting",
@@ -349,7 +363,8 @@
             "text": "看玉器时，先想它从溧阳的矿到作坊里的多道工序——一块透闪石，正是良渚手工业专业化最有力的证据。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "liangzhu-pottery",
@@ -374,7 +389,8 @@
             "text": "看良渚陶器时，先注意黑陶的磨光与快轮器形，再去对照陶器的圈足平底——一件灰黑陶器，往往比玉器更能说明良渚人日常的手艺。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "rice-agriculture",
@@ -399,7 +415,8 @@
             "text": "看展时，把石犁、破土器、千篰这组农具与城墙、水利系统并读，就能明白良渚的玉权和王权，其实是建立在成片稻田之上的。"
           }
         ]
-      }
+      },
+      "conceptKind": "功能"
     },
     {
       "key": "liangzhu-society",
@@ -424,7 +441,8 @@
             "text": "看墓葬出土的玉器时，把真假玉的等级、贵族与平民的差别在心里排一个序，良渚神权之下的社会金字塔就不言自明了。"
           }
         ]
-      }
+      },
+      "conceptKind": "制度"
     },
     {
       "key": "silk-and-weaving",
@@ -449,7 +467,8 @@
             "text": "看馆藏丝织品与相关随葬物时，可以想象那缕从竹篚里带到今天的丝帛：五千年前，江南的水乡就已经开始养蚕织丝。"
           }
         ]
-      }
+      },
+      "conceptKind": "技法"
     },
     {
       "key": "liangzhu-symbols",
@@ -474,7 +493,8 @@
             "text": "在展品上寻找那些刻画的鸟类、尖形符号时，不妨想：五千年前的人已经用线条在记录语言——这比许多地区迈出了更早的一步。"
           }
         ]
-      }
+      },
+      "conceptKind": "基础知识"
     },
     {
       "key": "shi-xingeng-discovery",
@@ -499,7 +519,8 @@
             "text": "在良渚博物院看“发现求真”的部分时，这位28岁就病逝的青年考古者是这段历史的起点；他找到的那两片黑陶，竟揭开了一片江南史前文明。"
           }
         ]
-      }
+      },
+      "conceptKind": "人物"
     },
     {
       "key": "liangzhu-museum",
@@ -524,7 +545,8 @@
             "text": "参观时按“发现求真—良渚古国—良渚文明”的顺序走，三个部分正好对应“考古发现—古国复原—文明价值”，是最顺的阅读路线。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "site-park",
@@ -549,7 +571,8 @@
             "text": "走在这片原野上，试着把莫角山—外城—内城的台地高低看成一张肉眼可见的梯度：这恐怕是理解良渚“早期城市”最直观的方式。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     },
     {
       "key": "world-heritage-status",
@@ -574,7 +597,8 @@
             "text": "逛良渚时，常听到“五千年文明”的说法，这并非一句口号，而是联合国教科文组织对这片水乡遗址的正式认证；你脚下的土地，正在与中华文明的源头对话。"
           }
         ]
-      }
+      },
+      "conceptKind": "制度"
     },
     {
       "key": "hemudu-comparison",
@@ -599,7 +623,8 @@
             "text": "在良渚展厅看到石犁、玉器时，试着想想河姆渡时期更朴素的骨耜与漆器——一段从“稻之家园”到“稻之城邦”的变化，就在你脑海里贯通了。"
           }
         ]
-      }
+      },
+      "conceptKind": "相似对象"
     },
     {
       "key": "contemporary-cultures",
@@ -624,7 +649,8 @@
             "text": "看到良渚以外，不妨把视野拉到红山玉龙与凌家滩祭坛上：良渚只是这片星光里最亮的那一束，而并非唯一。"
           }
         ]
-      }
+      },
+      "conceptKind": "相似对象"
     },
     {
       "key": "liangzhu-in-zhejiang-museum",
@@ -649,95 +675,505 @@
             "text": "在浙博看良渚时，把它和《浙江一万年》的参观路线连在一起，从玉琮王到良渚玉琮，一条浙江最早的文明线索就铺出来了。"
           }
         ]
-      }
+      },
+      "conceptKind": "地域"
     }
   ],
   "relations": [
-    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-chronology"},
-    {"elementKey": "liangzhu-chronology", "relatedElementKey": "liangzhu-culture-overview"},
-    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-distribution"},
-    {"elementKey": "liangzhu-distribution", "relatedElementKey": "liangzhu-culture-overview"},
-    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "world-heritage-status"},
-    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-culture-overview"},
-    {"elementKey": "liangzhu-culture-overview", "relatedElementKey": "liangzhu-society"},
-    {"elementKey": "liangzhu-society", "relatedElementKey": "liangzhu-culture-overview"},
-    {"elementKey": "liangzhu-chronology", "relatedElementKey": "rice-agriculture"},
-    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-chronology"},
-    {"elementKey": "liangzhu-chronology", "relatedElementKey": "shi-xingeng-discovery"},
-    {"elementKey": "shi-xingeng-discovery", "relatedElementKey": "liangzhu-chronology"},
-    {"elementKey": "liangzhu-chronology", "relatedElementKey": "contemporary-cultures"},
-    {"elementKey": "contemporary-cultures", "relatedElementKey": "liangzhu-chronology"},
-    {"elementKey": "liangzhu-distribution", "relatedElementKey": "mojiaoshan-center"},
-    {"elementKey": "mojiaoshan-center", "relatedElementKey": "liangzhu-distribution"},
-    {"elementKey": "mojiaoshan-center", "relatedElementKey": "liangzhu-ancient-city"},
-    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "mojiaoshan-center"},
-    {"elementKey": "mojiaoshan-center", "relatedElementKey": "site-park"},
-    {"elementKey": "site-park", "relatedElementKey": "mojiaoshan-center"},
-    {"elementKey": "mojiaoshan-center", "relatedElementKey": "fanshan-cemetery"},
-    {"elementKey": "fanshan-cemetery", "relatedElementKey": "mojiaoshan-center"},
-    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "liangzhu-water-system"},
-    {"elementKey": "liangzhu-water-system", "relatedElementKey": "liangzhu-ancient-city"},
-    {"elementKey": "liangzhu-ancient-city", "relatedElementKey": "world-heritage-status"},
-    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-ancient-city"},
-    {"elementKey": "liangzhu-water-system", "relatedElementKey": "rice-agriculture"},
-    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-water-system"},
-    {"elementKey": "liangzhu-water-system", "relatedElementKey": "world-heritage-status"},
-    {"elementKey": "world-heritage-status", "relatedElementKey": "liangzhu-water-system"},
-    {"elementKey": "liangzhu-water-system", "relatedElementKey": "liangzhu-society"},
-    {"elementKey": "liangzhu-society", "relatedElementKey": "liangzhu-water-system"},
-    {"elementKey": "fanshan-cemetery", "relatedElementKey": "yaoshan-altar"},
-    {"elementKey": "yaoshan-altar", "relatedElementKey": "fanshan-cemetery"},
-    {"elementKey": "fanshan-cemetery", "relatedElementKey": "jade-cong-wang"},
-    {"elementKey": "jade-cong-wang", "relatedElementKey": "fanshan-cemetery"},
-    {"elementKey": "fanshan-cemetery", "relatedElementKey": "site-park"},
-    {"elementKey": "site-park", "relatedElementKey": "fanshan-cemetery"},
-    {"elementKey": "yaoshan-altar", "relatedElementKey": "liangzhu-society"},
-    {"elementKey": "liangzhu-society", "relatedElementKey": "yaoshan-altar"},
-    {"elementKey": "yaoshan-altar", "relatedElementKey": "god-man-beast-mask"},
-    {"elementKey": "god-man-beast-mask", "relatedElementKey": "yaoshan-altar"},
-    {"elementKey": "jade-cong-wang", "relatedElementKey": "jade-cong-ritual"},
-    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-cong-wang"},
-    {"elementKey": "jade-cong-wang", "relatedElementKey": "liangzhu-museum"},
-    {"elementKey": "liangzhu-museum", "relatedElementKey": "jade-cong-wang"},
-    {"elementKey": "jade-cong-wang", "relatedElementKey": "liangzhu-in-zhejiang-museum"},
-    {"elementKey": "liangzhu-in-zhejiang-museum", "relatedElementKey": "jade-cong-wang"},
-    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-bi"},
-    {"elementKey": "jade-bi", "relatedElementKey": "jade-cong-ritual"},
-    {"elementKey": "jade-cong-ritual", "relatedElementKey": "jade-crafting"},
-    {"elementKey": "jade-crafting", "relatedElementKey": "jade-cong-ritual"},
-    {"elementKey": "jade-bi", "relatedElementKey": "jade-yue"},
-    {"elementKey": "jade-yue", "relatedElementKey": "jade-bi"},
-    {"elementKey": "jade-yue", "relatedElementKey": "liangzhu-society"},
-    {"elementKey": "liangzhu-society", "relatedElementKey": "jade-yue"},
-    {"elementKey": "jade-crafting", "relatedElementKey": "god-man-beast-mask"},
-    {"elementKey": "god-man-beast-mask", "relatedElementKey": "jade-crafting"},
-    {"elementKey": "jade-crafting", "relatedElementKey": "liangzhu-symbols"},
-    {"elementKey": "liangzhu-symbols", "relatedElementKey": "jade-crafting"},
-    {"elementKey": "liangzhu-pottery", "relatedElementKey": "rice-agriculture"},
-    {"elementKey": "rice-agriculture", "relatedElementKey": "liangzhu-pottery"},
-    {"elementKey": "liangzhu-pottery", "relatedElementKey": "hemudu-comparison"},
-    {"elementKey": "hemudu-comparison", "relatedElementKey": "liangzhu-pottery"},
-    {"elementKey": "silk-and-weaving", "relatedElementKey": "rice-agriculture"},
-    {"elementKey": "rice-agriculture", "relatedElementKey": "silk-and-weaving"},
-    {"elementKey": "silk-and-weaving", "relatedElementKey": "hemudu-comparison"},
-    {"elementKey": "hemudu-comparison", "relatedElementKey": "silk-and-weaving"},
-    {"elementKey": "liangzhu-symbols", "relatedElementKey": "god-man-beast-mask"},
-    {"elementKey": "god-man-beast-mask", "relatedElementKey": "liangzhu-symbols"},
-    {"elementKey": "shi-xingeng-discovery", "relatedElementKey": "liangzhu-museum"},
-    {"elementKey": "liangzhu-museum", "relatedElementKey": "shi-xingeng-discovery"},
-    {"elementKey": "liangzhu-museum", "relatedElementKey": "site-park"},
-    {"elementKey": "site-park", "relatedElementKey": "liangzhu-museum"},
-    {"elementKey": "liangzhu-museum", "relatedElementKey": "liangzhu-in-zhejiang-museum"},
-    {"elementKey": "liangzhu-in-zhejiang-museum", "relatedElementKey": "liangzhu-museum"},
-    {"elementKey": "site-park", "relatedElementKey": "world-heritage-status"},
-    {"elementKey": "world-heritage-status", "relatedElementKey": "site-park"},
-    {"elementKey": "hemudu-comparison", "relatedElementKey": "contemporary-cultures"},
-    {"elementKey": "contemporary-cultures", "relatedElementKey": "hemudu-comparison"}
+    {
+      "elementKey": "liangzhu-culture-overview",
+      "relatedElementKey": "liangzhu-chronology",
+      "kind": "理解前先懂",
+      "explanation": "先懂良渚的年代分期，才能理解其文化总貌。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "解释",
+      "explanation": "以年代分期为线索，可解释良渚文化的整体兴衰。"
+    },
+    {
+      "elementKey": "liangzhu-culture-overview",
+      "relatedElementKey": "liangzhu-distribution",
+      "kind": "理解前先懂",
+      "explanation": "了解良渚的地理分布，是理解其文化面貌的空间前提。"
+    },
+    {
+      "elementKey": "liangzhu-distribution",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "体现",
+      "explanation": "环太湖的遗址分布，体现良渚文化的整体势力范围。"
+    },
+    {
+      "elementKey": "liangzhu-culture-overview",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "解释",
+      "explanation": "良渚的文明成就，解释了它何以成为五千年文明实证。"
+    },
+    {
+      "elementKey": "world-heritage-status",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "象征",
+      "explanation": "世界遗产身份，象征良渚作为中华文明源头的地位。"
+    },
+    {
+      "elementKey": "liangzhu-culture-overview",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "理解前先懂",
+      "explanation": "理解良渚总览的文明高度，先要懂得其神权社会。"
+    },
+    {
+      "elementKey": "liangzhu-society",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "体现",
+      "explanation": "神权与社会分化，是良渚文化整体面貌的核心体现。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "体现",
+      "explanation": "良渚的千年年代跨度里，体现着稻作农业的成熟。"
+    },
+    {
+      "elementKey": "rice-agriculture",
+      "relatedElementKey": "liangzhu-chronology",
+      "kind": "解释",
+      "explanation": "稻作农业的成熟，是判断良渚文明水平的重要依据。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "shi-xingeng-discovery",
+      "kind": "理解前先懂",
+      "explanation": "先了解良渚的年代，才能理解施昕更发现的意义。"
+    },
+    {
+      "elementKey": "shi-xingeng-discovery",
+      "relatedElementKey": "liangzhu-chronology",
+      "kind": "产生于",
+      "explanation": "良渚年代的确定，诞生于施昕更的考古发掘。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "contemporary-cultures",
+      "kind": "解释",
+      "explanation": "以年代对照，可解释良渚与红山等文化同处共时。"
+    },
+    {
+      "elementKey": "contemporary-cultures",
+      "relatedElementKey": "liangzhu-chronology",
+      "kind": "相似于",
+      "explanation": "同时代诸文化年代相近，便于与良渚相互参照。"
+    },
+    {
+      "elementKey": "liangzhu-distribution",
+      "relatedElementKey": "mojiaoshan-center",
+      "kind": "位于",
+      "explanation": "莫角山遗址位于良渚遗址群的中心位置。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "liangzhu-distribution",
+      "kind": "体现",
+      "explanation": "莫角山作为中心，体现遗址群向心分布的空间格局。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "liangzhu-ancient-city",
+      "kind": "组成",
+      "explanation": "莫角山台地是良渚古城宫殿区的重要组成部分。"
+    },
+    {
+      "elementKey": "liangzhu-ancient-city",
+      "relatedElementKey": "mojiaoshan-center",
+      "kind": "位于",
+      "explanation": "莫角山位于古城内城中心，是宫殿区的所在。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "site-park",
+      "kind": "位于",
+      "explanation": "莫角山台地位于良渚古城遗址公园的核心区域。"
+    },
+    {
+      "elementKey": "site-park",
+      "relatedElementKey": "mojiaoshan-center",
+      "kind": "体现",
+      "explanation": "遗址公园让莫角山这座权力中心成为可亲历的现场。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "体现",
+      "explanation": "莫角山的政治权力，体现在反山王陵的玉器随葬中。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "mojiaoshan-center",
+      "kind": "位于",
+      "explanation": "反山贵族墓地邻近莫角山，同属良渚权力核心区。"
+    },
+    {
+      "elementKey": "liangzhu-ancient-city",
+      "relatedElementKey": "liangzhu-water-system",
+      "kind": "组成",
+      "explanation": "外围水利系统是良渚古城整体营建的重要组成。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "liangzhu-ancient-city",
+      "kind": "位于",
+      "explanation": "水利系统位于古城外围，拱卫着城墙与内城。"
+    },
+    {
+      "elementKey": "liangzhu-ancient-city",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "体现",
+      "explanation": "古城的完整营建，是良渚入选世界遗产的核心见证。"
+    },
+    {
+      "elementKey": "world-heritage-status",
+      "relatedElementKey": "liangzhu-ancient-city",
+      "kind": "象征",
+      "explanation": "世界遗产身份，象征古城作为文明实证的地位。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "用于",
+      "explanation": "水利系统用于灌溉稻田，支撑集约式稻作农业。"
+    },
+    {
+      "elementKey": "rice-agriculture",
+      "relatedElementKey": "liangzhu-water-system",
+      "kind": "产生于",
+      "explanation": "稻作的规模化催生治水需求，水利系统由此营建。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "体现",
+      "explanation": "外围水利系统体现良渚作为早期国家的组织能力。"
+    },
+    {
+      "elementKey": "world-heritage-status",
+      "relatedElementKey": "liangzhu-water-system",
+      "kind": "解释",
+      "explanation": "世界遗产认证，佐证了良渚水利工程的历史价值。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "体现",
+      "explanation": "集体治水的营建，体现良渚社会的高度组织动员。"
+    },
+    {
+      "elementKey": "liangzhu-society",
+      "relatedElementKey": "liangzhu-water-system",
+      "kind": "产生于",
+      "explanation": "良渚复杂社会因应集体合作治水的需求而产生。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "yaoshan-altar",
+      "kind": "相似于",
+      "explanation": "反山与瑶山墓地，在用玉制度与性质上十分相似。"
+    },
+    {
+      "elementKey": "yaoshan-altar",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "组成",
+      "explanation": "瑶山与反山同列良渚最高等级的王陵墓地。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "jade-cong-wang",
+      "kind": "产生于",
+      "explanation": "玉琮王出土于反山第12号贵族墓葬。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "位于",
+      "explanation": "玉琮王出自反山王陵，是最高等级的随葬品。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "site-park",
+      "kind": "位于",
+      "explanation": "反山贵族墓地位于良渚古城遗址公园内。"
+    },
+    {
+      "elementKey": "site-park",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "体现",
+      "explanation": "遗址公园让反山王陵成为可见可走的考古现场。"
+    },
+    {
+      "elementKey": "yaoshan-altar",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "受规制于",
+      "explanation": "瑶山祭坛的祭祀与葬制，受良渚神权体制的规制。"
+    },
+    {
+      "elementKey": "liangzhu-society",
+      "relatedElementKey": "yaoshan-altar",
+      "kind": "体现",
+      "explanation": "良渚的神权体制，在瑶山祭坛中体现得最为集中。"
+    },
+    {
+      "elementKey": "yaoshan-altar",
+      "relatedElementKey": "god-man-beast-mask",
+      "kind": "体现",
+      "explanation": "瑶山祭坛的神权色彩，与兽面纹的神灵意象呼应。"
+    },
+    {
+      "elementKey": "god-man-beast-mask",
+      "relatedElementKey": "yaoshan-altar",
+      "kind": "位于",
+      "explanation": "兽面纹玉器大量出土于瑶山等祭祀遗址中。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "jade-cong-ritual",
+      "kind": "体现",
+      "explanation": "玉琮王是琮作为沟通天地礼器的极致体现。"
+    },
+    {
+      "elementKey": "jade-cong-ritual",
+      "relatedElementKey": "jade-cong-wang",
+      "kind": "解释",
+      "explanation": "琮的礼器内涵，解释了玉琮王为何贵为琮王。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "位于",
+      "explanation": "玉琮王在良渚博物院的展厅中陈列展出。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "jade-cong-wang",
+      "kind": "体现",
+      "explanation": "博物院以玉琮王为核心，展现良渚玉礼体系。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "liangzhu-in-zhejiang-museum",
+      "kind": "位于",
+      "explanation": "玉琮王是浙博《浙江一万年》陈列的重要展品。"
+    },
+    {
+      "elementKey": "liangzhu-in-zhejiang-museum",
+      "relatedElementKey": "jade-cong-wang",
+      "kind": "体现",
+      "explanation": "浙博以玉琮王开篇，体现浙江最早的文明线索。"
+    },
+    {
+      "elementKey": "jade-cong-ritual",
+      "relatedElementKey": "jade-bi",
+      "kind": "相似于",
+      "explanation": "琮与璧同为良渚祭天礼地的核心礼器。"
+    },
+    {
+      "elementKey": "jade-bi",
+      "relatedElementKey": "jade-cong-ritual",
+      "kind": "组成",
+      "explanation": "玉璧常与玉琮配合，组成成套的随葬礼器。"
+    },
+    {
+      "elementKey": "jade-cong-ritual",
+      "relatedElementKey": "jade-crafting",
+      "kind": "制作采用",
+      "explanation": "玉琮的制作采用良渚精湛的阴线雕琢工艺。"
+    },
+    {
+      "elementKey": "jade-crafting",
+      "relatedElementKey": "jade-cong-ritual",
+      "kind": "解释",
+      "explanation": "良渚制玉工艺，解释了玉琮兽面纹精雕的由来。"
+    },
+    {
+      "elementKey": "jade-bi",
+      "relatedElementKey": "jade-yue",
+      "kind": "相似于",
+      "explanation": "玉璧与玉钺同属良渚重要的权威玉器。"
+    },
+    {
+      "elementKey": "jade-yue",
+      "relatedElementKey": "jade-bi",
+      "kind": "组成",
+      "explanation": "玉钺常与玉琮、玉璧一同出现在大墓随葬中。"
+    },
+    {
+      "elementKey": "jade-yue",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "象征",
+      "explanation": "玉钺象征军权与王权，对应社会权力的分化。"
+    },
+    {
+      "elementKey": "liangzhu-society",
+      "relatedElementKey": "jade-yue",
+      "kind": "体现",
+      "explanation": "军权与神权并行，体现在玉钺与玉琮的权力组合中。"
+    },
+    {
+      "elementKey": "jade-crafting",
+      "relatedElementKey": "god-man-beast-mask",
+      "kind": "制作采用",
+      "explanation": "神人兽面纹的制作采用繁复的阴线雕琢技术。"
+    },
+    {
+      "elementKey": "god-man-beast-mask",
+      "relatedElementKey": "jade-crafting",
+      "kind": "体现",
+      "explanation": "兽面纹的精工细刻，体现良渚玉器工艺的极致。"
+    },
+    {
+      "elementKey": "jade-crafting",
+      "relatedElementKey": "liangzhu-symbols",
+      "kind": "解释",
+      "explanation": "玉器作坊的技艺，解释了器物刻符的工艺来源。"
+    },
+    {
+      "elementKey": "liangzhu-symbols",
+      "relatedElementKey": "jade-crafting",
+      "kind": "制作采用",
+      "explanation": "原始文字符号的制作采用与玉器相同的刻划手法。"
+    },
+    {
+      "elementKey": "liangzhu-pottery",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "用于",
+      "explanation": "陶器用于盛放稻米等日常饮食，伴随稻作生活。"
+    },
+    {
+      "elementKey": "rice-agriculture",
+      "relatedElementKey": "liangzhu-pottery",
+      "kind": "受到影响",
+      "explanation": "稻作农业的发展，影响到陶器的器形与需求。"
+    },
+    {
+      "elementKey": "liangzhu-pottery",
+      "relatedElementKey": "hemudu-comparison",
+      "kind": "相似于",
+      "explanation": "良渚陶器与河姆渡陶器同为浙江新石器遗物。"
+    },
+    {
+      "elementKey": "hemudu-comparison",
+      "relatedElementKey": "liangzhu-pottery",
+      "kind": "解释",
+      "explanation": "与河姆渡对照，可解释良渚陶器工艺的进步。"
+    },
+    {
+      "elementKey": "silk-and-weaving",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "产生于",
+      "explanation": "丝帛纺织与稻作，同属良渚多样的经济生活。"
+    },
+    {
+      "elementKey": "rice-agriculture",
+      "relatedElementKey": "silk-and-weaving",
+      "kind": "组成",
+      "explanation": "丝帛与稻作、家畜饲养共同组成良渚的经济生活。"
+    },
+    {
+      "elementKey": "silk-and-weaving",
+      "relatedElementKey": "hemudu-comparison",
+      "kind": "相似于",
+      "explanation": "钱山漾丝帛与河姆渡遗存同证江南纺织源流。"
+    },
+    {
+      "elementKey": "hemudu-comparison",
+      "relatedElementKey": "silk-and-weaving",
+      "kind": "解释",
+      "explanation": "以河姆渡为参照，可解释江南养蚕织丝的传统。"
+    },
+    {
+      "elementKey": "liangzhu-symbols",
+      "relatedElementKey": "god-man-beast-mask",
+      "kind": "产生于",
+      "explanation": "刻符与兽面纹，共同生长于良渚的装饰传统。"
+    },
+    {
+      "elementKey": "god-man-beast-mask",
+      "relatedElementKey": "liangzhu-symbols",
+      "kind": "制作采用",
+      "explanation": "兽面纹与刻符的制作采用相近的雕刻手法。"
+    },
+    {
+      "elementKey": "shi-xingeng-discovery",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "产生于",
+      "explanation": "良渚博物院的研究与陈列，始于施昕更的发现。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "shi-xingeng-discovery",
+      "kind": "体现",
+      "explanation": "博物院发现求真展厅，体现施昕更的发掘历程。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "site-park",
+      "kind": "相似于",
+      "explanation": "博物院与遗址公园同为了解良渚文化的场所。"
+    },
+    {
+      "elementKey": "site-park",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "组成",
+      "explanation": "遗址公园与博物院互补，组成完整的观展路线。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "liangzhu-in-zhejiang-museum",
+      "kind": "相似于",
+      "explanation": "良渚博物院与浙博都系统展出良渚玉器。"
+    },
+    {
+      "elementKey": "liangzhu-in-zhejiang-museum",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "理解前先懂",
+      "explanation": "先逛良渚博物院，再在浙博中认出同源玉器体系。"
+    },
+    {
+      "elementKey": "site-park",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "体现",
+      "explanation": "遗址公园正是世界遗产良渚古城的现场呈现。"
+    },
+    {
+      "elementKey": "world-heritage-status",
+      "relatedElementKey": "site-park",
+      "kind": "解释",
+      "explanation": "世界遗产认证，解释了遗址公园的价值所在。"
+    },
+    {
+      "elementKey": "hemudu-comparison",
+      "relatedElementKey": "contemporary-cultures",
+      "kind": "相似于",
+      "explanation": "河姆渡的比较，可延伸到同时代的满天星光。"
+    },
+    {
+      "elementKey": "contemporary-cultures",
+      "relatedElementKey": "hemudu-comparison",
+      "kind": "解释",
+      "explanation": "与其他文化对照，可解释良渚文明的多源共生。"
+    }
   ],
   "attractions": [
-    {"key": "liangzhu-museum", "name": "良渚博物院"},
-    {"key": "liangzhu-site-park", "name": "良渚古城遗址公园"},
-    {"key": "yaoshan-site-park", "name": "瑶山遗址公园"}
+    {
+      "key": "liangzhu-museum",
+      "name": "良渚博物院"
+    },
+    {
+      "key": "liangzhu-site-park",
+      "name": "良渚古城遗址公园"
+    },
+    {
+      "key": "yaoshan-site-park",
+      "name": "瑶山遗址公园"
+    }
   ],
   "introductions": [
     {
@@ -886,8 +1322,833 @@
       "longitude": 119.936
     }
   ],
+  "themes": [
+    {
+      "key": "jade-ritual-heaven",
+      "name": "以玉礼天",
+      "summary": "从采玉、治玉到琮王入墓，琮、璧、钺与兽面纹搭起一套沟通天地的玉礼，读懂一件玉器，就读懂了良渚的神权。",
+      "elementKeys": [
+        "jade-cong-wang",
+        "jade-cong-ritual",
+        "jade-bi",
+        "jade-yue",
+        "god-man-beast-mask",
+        "jade-crafting",
+        "fanshan-cemetery",
+        "yaoshan-altar"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "city-water-rice",
+      "name": "一城、一水与一稻",
+      "summary": "莫角山的台地、环城的城墙与外围水利，连同成片的稻田，共同撑起一个能动员万人治水的早期国家。",
+      "elementKeys": [
+        "mojiaoshan-center",
+        "liangzhu-ancient-city",
+        "liangzhu-water-system",
+        "liangzhu-distribution",
+        "rice-agriculture",
+        "liangzhu-society",
+        "site-park"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "how-liangzhu-was-seen",
+      "name": "良渚如何被看见",
+      "summary": "从施昕更在池底拾起的两片黑陶，到列入世界遗产名录，跟着发现史与博物馆，读懂五千年文明如何被一层层看见。",
+      "elementKeys": [
+        "shi-xingeng-discovery",
+        "liangzhu-chronology",
+        "liangzhu-museum",
+        "site-park",
+        "world-heritage-status",
+        "liangzhu-in-zhejiang-museum"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "jiangnan-lifeways",
+      "name": "稻作江南：日常里的手艺",
+      "summary": "稻米、黑陶、丝帛与刻符构成良渚比玉器更日常的一面，往前接河姆渡，往旁看同时代的满天星光。",
+      "elementKeys": [
+        "rice-agriculture",
+        "liangzhu-pottery",
+        "silk-and-weaving",
+        "liangzhu-symbols",
+        "hemudu-comparison",
+        "contemporary-cultures",
+        "liangzhu-culture-overview"
+      ],
+      "minContacted": 3
+    }
+  ],
+  "locales": {
+    "en": {
+      "elements": {
+        "liangzhu-culture-overview": {
+          "name": "Liangzhu Culture: An Overview",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu culture, dating from around 5300 to 4000 years ago, is one of China's Neolithic archaeological cultures. It arose and flourished in the Lake Tai region of the lower Yangtze River, where more than 500 sites have been found. Centred on Mojiaoshan near the Liangzhu site, it is regarded as one of the cradles of prehistoric Chinese civilization."
+              },
+              {
+                "type": "paragraph",
+                "text": "The most distinctive feature of the Liangzhu culture is the use of jade for ritual and burial, including large cong tubes, bi discs and yue axes. Among them, the jade cong shows the finest craftsmanship and the greatest authority: it is often carved with delicate beast masks regarded as images of deities, while the jade yue symbolizes military and royal power. The Liangzhu people skillfully cultivated with stone plows, rice began to become the staple food source, and early forms of writing appeared."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu's political organization has been described as a chiefdom, and some scholars believe it had already taken the embryonic form of a state. It could mobilize large numbers of laborers to build great ritual grounds, city walls and flood-control embankments, and its society was stratified into an aristocracy and commoners. The Liangzhu culture disappeared around 4000 years ago; the succeeding Maqiao culture shows a marked decline in agricultural economy, jade working and settlement patterns."
+              },
+              {
+                "type": "paragraph",
+                "text": "When viewing Liangzhu artefacts, let your eye rest on the forms of the cong, bi and yue and their beast-mask motifs. From one jade object after another, you can read a prehistoric society skilled at organizing labour and devoted to jade ritual."
+              }
+            ]
+          }
+        },
+        "liangzhu-chronology": {
+          "name": "The Chronology and Periods of Liangzhu",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The commonly accepted dates for the Liangzhu culture are c. 5300 to 4000 years ago; in calibrated terms, the sites date from c. 3300 to 2000 BC. Museum labels and publications mostly follow this main chronology."
+              },
+              {
+                "type": "paragraph",
+                "text": "Scholars do not fully agree on the dates. Shao Wangping placed Liangzhu at c. 5300–4000 years ago or slightly earlier, a span of more than 1,200 years; Cho-yun Hsu placed it at c. 5300–4700 years ago, lasting about 600 years; and Hayashi Minao held that it flourished c. 6000–5000 years ago."
+              },
+              {
+                "type": "paragraph",
+                "text": "After Liangzhu, the Maqiao culture shows a marked decline in agriculture, jade and settlement. The beast-mask motif of Liangzhu jade shares many features with the taotie motif of Shang bronzes: Li Xueqin believed the relationship was close though not a direct descent, while Hayashi Minao held that the taotie of the Shang–Zhou period derived from the Liangzhu beast-mask motif."
+              },
+              {
+                "type": "paragraph",
+                "text": "You needn't dwell on the exact numbers. Just remember the round figure of '5300 to 4000 years ago', and note that Liangzhu is earlier than the Shang dynasty but later than Hemudu — that is enough to place it in time."
+              }
+            ]
+          }
+        },
+        "liangzhu-distribution": {
+          "name": "Distribution around Lake Tai and the Site Cluster",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu culture spread across the Lake Tai region in the lower Yangtze, covering a total cultural area of about 36,500 square kilometres, of which plains account for about five-sixths. The density of waterways averages 3 to 4 kilometres per square kilometre."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu's core area was the region around Lake Tai: bounded by Hangzhou Bay and the northern bank of the Qiantang River to the south, extending its influence over the Ningshao Plain, reaching the sea to the east, and stopping at the Maoshan and Tianmu mountains near Zhenjiang to the west. To the north it crossed the Yangtze, reaching northern Jiangsu at its peak. In the middle period of the Liangzhu culture, the Liangzhu site cluster on the south shore of Lake Tai was dominant; later, the centre of power shifted north of the lake to the Sidun site cluster in the Changzhou area."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu site cluster consists roughly of three tiers of settlements: one first-tier settlement, the Mojiaoshan site; nine second-tier settlements of 30,000–90,000 square metres; and more than thirty third-tier settlements each under 20,000 square metres. At Longnan, Meiyan, in Wujiang, Jiangsu, an early village covering 20,000 square metres contains twelve houses and eighteen burials."
+              },
+              {
+                "type": "paragraph",
+                "text": "When visiting the sites or an exhibition, keep 'around Lake Tai' as your frame of reference: every piece of jade and every earthen terrace you see comes from this water-networked plain of Lake Tai."
+              }
+            ]
+          }
+        },
+        "mojiaoshan-center": {
+          "name": "Mojiaoshan: The Power Centre of Liangzhu",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Mojiaoshan site is the centre of the Liangzhu culture: 670 metres east–west and 450 metres north–south, covering more than 300,000 square metres with a relative height of about 8 metres. The entire Liangzhu site cluster is distributed around it, and it can be considered the centre of political power."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Mojiaoshan terrace is rectangular and trapezoidal in profile, 9 to 15 metres high, and entirely artificial. To build a platform of 300,000 square metres would have required an estimated 500,000 cubic metres of earth and at least 600,000 person-days of labour. If completed in 100 days, that means 6,000 people working continuously, and with organizers and provisioning personnel, about 10,000 people in total."
+              },
+              {
+                "type": "paragraph",
+                "text": "Yan Wenming suggested that Mojiaoshan may have been the capital of a state. On the terrace, rammed-earth foundations covering more than 1,400 square metres and postholes have been found, and within a 34-square-kilometre area around it at least fifty sites of various sizes cluster densely."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you climb onto the Mojiaoshan terrace in the Liangzhu Archaeological Site Park, first take in the extent of the platform, then compare it with the small sites surrounding it — you will understand why this terrace, built by the labour of some 10,000 people, is called the power centre of Liangzhu."
+              }
+            ]
+          }
+        },
+        "liangzhu-ancient-city": {
+          "name": "The Ancient Liangzhu City and Its Walls",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The ancient Liangzhu city site is the most important and representative site of the Liangzhu culture, hailed as 'China's first city' and 'proof of five thousand years of Chinese civilization'. The city itself is the core of the site, composed of a palatial zone, an inner city and an outer city, covering 881.45 hectares."
+              },
+              {
+                "type": "paragraph",
+                "text": "The palatial zone covers about 0.39 square kilometres, comprising the Mojiaoshan terrace at the centre of the inner city and, to its south, the Huangfenshan and Chizhongsi terraces. The inner city is a rounded rectangle of about 300 hectares, enclosed by walls roughly 20 to 60 metres wide. The outer city covers about 500 hectares, made up of seventeen discontinuous artificial terraces, with the height of the construction descending gradually from the palatial zone through the inner city to the outer city."
+              },
+              {
+                "type": "paragraph",
+                "text": "Mojiaoshan, Fanshan and some small sites around them are enclosed by rammed-earth walls covering a total of 2.9 million square metres. North of the walls, a long embankment runs parallel to the Tianmu mountains: 5 kilometres long and 20–50 metres wide, built partly of rammed earth and partly of sand and cobbles. Some archaeologists believe this wall was for flood control."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you view the walls in the site park, imagine them as the engineering boundary of five thousand years ago: the outer city, the inner city and palaces narrow inward tier by tier, and a whole order is encoded in the rising heights of the terraces."
+              }
+            ]
+          }
+        },
+        "liangzhu-water-system": {
+          "name": "The Water-Management System of Liangzhu",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The outer water-management system of Liangzhu was part of its monumental engineering, made up of high dams in the valley mouths, low dams on the plain and a long embankment along the foothills. Together they represent some of the earliest waterworks in China."
+              },
+              {
+                "type": "paragraph",
+                "text": "The high dams in the valley mouths lie at the southern foot of the Dazhe mountains, northwest of the city, covering about 136.41 hectares. There are six dams in two groups, east and west, each 50–200 metres long, with crests at 25–40 metres above sea level. The low dams on the plain lie among hills about 3.5 kilometres south of the high dams, each 35–360 metres long, with crests at about 10 metres above sea level. The long embankment along the foothills, also known as the Tangshan site, runs along the north of the ancient city for about 5 kilometres and is 20–50 metres wide. In 2015, the survey and excavation of this outer water-management project was named one of China's Top Ten Archaeological Discoveries."
+              },
+              {
+                "type": "paragraph",
+                "text": "Cho-yun Hsu believed that Liangzhu's complex social system emerged in response to the need for collective, cooperative flood control, not from military conquest. Together with the Mojiaoshan terrace and the city walls, this water system shows that Liangzhu could mobilize large numbers of workers to organize water management."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you visit the site park, don't only walk inside the city. Notice the line of dams and embankments stretching north of it; together with the walls and terraces, they complete the picture of how the Liangzhu people managed water and settled."
+              }
+            ]
+          }
+        },
+        "fanshan-cemetery": {
+          "name": "The Fanshan Aristocratic Cemetery",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Fanshan aristocratic cemetery lies near the ancient Liangzhu city. It is a deliberately built and finished platform cemetery, about 100 metres east–west and 30 metres north–south. Every tomb has its burial pit, and the grave goods, chiefly jade, number about a thousand pieces in total."
+              },
+              {
+                "type": "paragraph",
+                "text": "Tomb 20 at Fanshan contained as many as 547 jade objects and is thought to be the burial of the supreme leader. Tomb 12 yielded a jade cong weighing 3,500 grams and carved with delicate beast-mask motifs, regarded as the 'King of Cong'; it also yielded an exceptionally well-made jade yue, the 'King of Yue', mounted on a 70–80 cm wooden haft fitted with jade fittings at both ends — a symbol of military and royal power."
+              },
+              {
+                "type": "paragraph",
+                "text": "The jade from the great tombs of Fanshan and Yaoshan is genuine nephrite, in contrast with the jade used in lesser cemeteries. Yan Wenming believed that the aristocratic cemeteries of Fanshan and Yaoshan may well have been the royal tombs of the Liangzhu 'kingdom'. In February 1989, the Fanshan and Yaoshan sites were both named among China's Top Ten Archaeological Discoveries of the Seventh Five-Year Plan period."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the Fanshan protected area of the site park, walk back and forth along the hundred-odd-metre terrace. Feel how densely the burial jades are concentrated here — beneath a single terrace lie leader after leader with their world of jade ritual."
+              }
+            ]
+          }
+        },
+        "yaoshan-altar": {
+          "name": "The Yaoshan Altar and Burials",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Yaoshan site lies about 5 kilometres northeast of the ancient Liangzhu city, covering about 66.56 hectares. At its centre is a square altar aligned exactly north–south, used for major rituals; after the altar fell out of use, the place became a high-ranking aristocratic cemetery."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Yaoshan cemetery began as an altar 20 metres square and 2 metres high, from whose surface twelve jade-bearing tombs were cleared. The tombs lie south of the altar in two rows — seven in the southern row and six in the northern — all rectangular shaft graves with heads facing due south. The Yaoshan cemetery may also be connected with astronomical observation and calendar-keeping."
+              },
+              {
+                "type": "paragraph",
+                "text": "The beast-mask motif of Liangzhu is closely tied to this altar: jade cong, beast masks and the altar together proclaim the theocratic character of Liangzhu. Like Fanshan, the Yaoshan site was named among China's Top Ten Archaeological Discoveries of the Seventh Five-Year Plan period in February 1989."
+              },
+              {
+                "type": "paragraph",
+                "text": "At the Yaoshan altar, first look at the square platform and the tomb pits aligned to the south, then consider its transformation from 'altar to cemetery' — a space where sacred authority and power intertwine takes shape before you."
+              }
+            ]
+          }
+        },
+        "jade-cong-wang": {
+          "name": "King Jade Cong",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The King Jade Cong was excavated from Tomb 12 at Fanshan. Weighing 3,500 grams and carved with delicate beast-mask motifs, it is regarded as the 'King of Cong' for being the supreme example of Liangzhu jade in both size and craftsmanship. It is a national treasure jointly presented by the Liangzhu Museum and the Zhejiang Provincial Museum."
+              },
+              {
+                "type": "paragraph",
+                "text": "The cong is a ritual object used to worship the earth, square on the outside and hollow-cylindrical within. The densely carved beast-mask decoration of the King Jade Cong shows the exquisite craftsmanship of Liangzhu jade, in which 'three incised lines may pass within a single millimetre'. For this very reason, such objects must have been made by full-time, even hereditary craftsmen released from agricultural labour."
+              },
+              {
+                "type": "paragraph",
+                "text": "The King Jade Cong is on the list of cultural relics prohibited from travelling abroad for exhibition, and has been shown in displays such as Zhejiang across Ten Thousand Years. It embodies, in concentrated form, the jade ritual system and theocratic character of Liangzhu."
+              },
+              {
+                "type": "paragraph",
+                "text": "When viewing the King Jade Cong, first take in its sheer weight and its square-outside, round-within form, then study the beast-mask motifs covering its surface. It is at once the summit of craft and an object of power, connecting heaven and earth, placed in a leader's tomb."
+              }
+            ]
+          }
+        },
+        "jade-cong-ritual": {
+          "name": "The Cong: A Ritual Object Linking Heaven and Earth",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The cong is a cylindrical jade object used for sacrifice in ancient China, shaped rather like a brush pot, square outside and round inside. The earliest jade cong is found in the third phase of the Xuejiagang culture at Qianshan, Anhui, dating to about 5100 years ago."
+              },
+              {
+                "type": "paragraph",
+                "text": "Among jade objects, the cong was used for worshipping the earth. The ancients held that 'the heavens are round and the earth square', so round bi discs honoured heaven and square cong honoured earth. The Rites of Zhou records: 'Six jade objects were made to ritualize heaven, earth and the four directions: a blue-green bi to honour heaven, a yellow cong to honour the earth.'"
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu cong are hollow cylinders within, and the hollow centre is thought to be a passage linking the gods of heaven and earth. Hayashi Minao believed the beast mask on the cong represented a sun god or fire god, while Li Xueqin held it to be a dragon. Even the very function of the cong was not settled by the Qing dynasty: the Qianlong Emperor once used excavated cong as counterweights for moving heavy objects."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you look at a cong in the museum, remember just four words: 'square outside, round within'. The square is the earth, the circle is heaven — in a single cong, the ancient imagination of cosmic order lies in your hands."
+              }
+            ]
+          }
+        },
+        "jade-bi": {
+          "name": "The Jade Bi Disc",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The jade bi is a flat jade disc with a circular hole in the centre. Alongside the cong, it is one of the most important ritual objects of Liangzhu, and it often appears together with cong in sacrifice and burial."
+              },
+              {
+                "type": "paragraph",
+                "text": "The bi was used in sacrifice and to ward off evil, and it was also a symbol of wealth. In Liangzhu tombs it commonly appears together with cong and yue — for example, the great tomb at Sidun, Wujin, Jiangsu, contained 124 grave goods, including 33 jade cong and 24 jade bi. The ancients honoured heaven with round bi discs."
+              },
+              {
+                "type": "paragraph",
+                "text": "Some Liangzhu bi discs are plain and unadorned; others carry bird motifs or solemn, complex designs resembling clan emblems, reflecting the varied yet institutionalized uses of Liangzhu jade."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you see a bi, note the contrast between its circle and the square of the cong beside it — 'round bi for heaven, square cong for earth'. This paired set of ritual jades is a corner of the Liangzhu people's cosmology."
+              }
+            ]
+          }
+        },
+        "jade-yue": {
+          "name": "The Jade Yue and Royal Authority",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The jade yue was modelled on the stone yue battle-axe. In Liangzhu it symbolized military and royal power, ranking among aristocratic tomb jades second only to the cong."
+              },
+              {
+                "type": "paragraph",
+                "text": "A superbly made jade yue from Tomb 12 at Fanshan, regarded as the 'King of Yue', has a 70–80 cm wooden haft inset with jade beads and fitted with jade finials at both ends; the blade is set transversely into the haft. It is a symbol of military and royal power."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu's polity was a chiefdom or early state capable of mobilizing great numbers of workers. The military power represented by the yue ran parallel to the theocratic power of the cong, forming the twin pillars of Liangzhu's system of authority."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you find the jade yue in the galleries, first study its blade and the drilled holes, then imagine it mounted on its jade-studded wooden haft. This object is not merely a declaration of power but direct evidence of the bearer's status."
+              }
+            ]
+          }
+        },
+        "god-man-beast-mask": {
+          "name": "The God-Man Beast Mask Motif",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The god-man beast mask (also called simply the beast-mask motif) is the most classic design on Liangzhu jade. Often carved on the faces of cong, yue and jade ornaments, it is regarded as the 'image of the spirit' of Liangzhu."
+              },
+              {
+                "type": "paragraph",
+                "text": "The beast mask has owl-like, oval eyes with inner and outer corners drooping downward, a head shaped like an inverted trapezoid crowned with a spreading feather headdress. A small number of these motifs combine a human face with a beast mask, expressing the 'union of man and beast'. The workmanship is extraordinarily fine — in places three incised lines pass within a single millimetre."
+              },
+              {
+                "type": "paragraph",
+                "text": "Hayashi Minao believed the beast mask on the cong represented a sun god or fire god — the worship of the sun being linked to rice regions, where the grain depends on the sun's light and warmth — and that the feather headdress stands for birds' wings and the sun's rays. Li Xueqin, by contrast, held the mask to be a dragon. The motif shares many features with the taotie of Shang bronzes."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you look at the god-man beast mask, first find the drooping eye corners and the spreading feather headdress, then consider how this 'image of the spirit' recurs on jade cong. It is the most direct imprint of Liangzhu's theocratic power on its artefacts."
+              }
+            ]
+          }
+        },
+        "jade-crafting": {
+          "name": "Liangzhu Jade Craftsmanship and Sources of Jade",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The jade used for Liangzhu objects came mainly from the tremolite deposits of Xiaomeiling in the Tianmu range, Liyang, Jiangsu. Jade-working workshops have been found at the Tangshanbei site within the Liangzhu cluster and at Dingshadi in Jurong, Jiangsu."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Tangshan site in Yuhang had a jade workshop that yielded more than 400 stone tools for jade working, including whetstones, grinding and polishing stones, and carving tools, along with over 100 pieces of jade waste, most bearing traces of workmanship. Three workshop structures built of stone blocks have also been identified."
+              },
+              {
+                "type": "paragraph",
+                "text": "Making Liangzhu jade was extraordinarily difficult, above all the intricate beast-mask motifs, in which three incised lines pass within a single millimetre. Objects like these must have been produced by full-time, even hereditary craftsmen released from agriculture — evidence that Liangzhu society had already developed a specialized class of artisans."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you look at the jades, trace them from the mines of Liyang through the many stages of the workshop. A single piece of tremolite is among the most powerful evidence of specialization in Liangzhu's craft industry."
+              }
+            ]
+          }
+        },
+        "liangzhu-pottery": {
+          "name": "Liangzhu Pottery",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Liangzhu pottery is famed for its burnished black ware, which immediately evokes parallels with the Longshan culture of Shandong. This was also the class of finds that first drew attention to Liangzhu archaeology."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu pottery is chiefly grey-black ware, complemented by grit-tempered red ware. Ring feet and flat bases are common, and the wares were made on the fast wheel. Forms include pots, jars, stemmed dishes and basins, with burnished black ware being the most striking."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu remains were first discovered in the 1930s and were recognized by their burnished black pottery, at the time called 'Longshan culture of the Hangzhou Bay area' or 'Zhejiang Longshan culture'. Black pottery was one of the key traits by which Liangzhu was first identified."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you view Liangzhu pottery, first note the burnished black ware and the fast-wheel forms, then check the ring feet and flat bases. A piece of grey-black pottery often tells you more about the everyday craftsmanship of the Liangzhu people than the jades do."
+              }
+            ]
+          }
+        },
+        "rice-agriculture": {
+          "name": "Rice Agriculture",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Rice agriculture was the economic foundation of the Liangzhu culture. The Liangzhu people skillfully cultivated with stone plows, and rice began to become the staple food, making Liangzhu a major representative of prehistoric rice-growing civilization in China."
+              },
+              {
+                "type": "paragraph",
+                "text": "Economically, Liangzhu developed intensive rice agriculture. New tools appeared, such as triangular stone plows and soil breakers, and plow cultivation replaced hoeing with the spade. Archaeologists have also found a tool called the qianbu, used to drain water into paddy fields, mix the mud and level the field soil. Domesticated animals, including pigs, also appear in Liangzhu culture."
+              },
+              {
+                "type": "paragraph",
+                "text": "The World Heritage Committee described Liangzhu as an early regional state 'founded on rice agriculture'. Some scholars have proposed agricultural decline as one explanation for the end of the Liangzhu culture. An economy capable of sustaining large-scale intensive farming while managing water and flood control was precisely the foundation of Liangzhu's complex society."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the exhibition, read the group of farm tools — the stone plow, the soil breaker and the qianbu — alongside the city walls and the water system. Then you will see that Liangzhu's jade power and royal authority were in fact built upon wide paddy fields."
+              }
+            ]
+          }
+        },
+        "liangzhu-society": {
+          "name": "Theocracy and Social Stratification",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu culture had a theocratic system. Social status was differentiated into an aristocracy and commoners, a key sign that Liangzhu had taken on the shape of an 'early state'."
+              },
+              {
+                "type": "paragraph",
+                "text": "Liangzhu's polity has been called a chiefdom, and some scholars believe an embryonic state had already emerged. It could mobilize large numbers of workers to build ritual grounds, city walls and flood-control embankments. Theocratic in character, religion was a vital pillar of the running of Liangzhu society."
+              },
+              {
+                "type": "paragraph",
+                "text": "Social stratification is also visible in the rules for using jade. The jade from the great tombs of Fanshan and Yaoshan is genuine nephrite; at Fuquanshan genuine jade predominates but is mixed with substitutes; and at Heye Di in Haining genuine and imitation jade are used roughly half and half. The tomb owners at Fanshan and Yaoshan were the top aristocracy, while the sixteen tombs found at Heye Di belonged to a lesser aristocracy, with burial jades inferior in both quantity and quality."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you look at the jades from the tombs, mentally rank them by real versus substitute jade and by the gulf between aristocrats and commoners. The social pyramid beneath Liangzhu's theocracy then becomes self-evident."
+              }
+            ]
+          }
+        },
+        "silk-and-weaving": {
+          "name": "Silk and Weaving",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Another achievement of the Liangzhu culture was the advent of silk, a precious legacy it left to later ages. The silk ribbons and silk fabric from Qianshanyang are the most direct evidence."
+              },
+              {
+                "type": "paragraph",
+                "text": "Archaeologists found silk ribbons and silk cloth stored in bamboo baskets at Qianshanyang — major physical evidence of early silkworm raising and silk weaving in China. Together with rice farming and animal husbandry, they show the fairly diversified economy of the time."
+              },
+              {
+                "type": "paragraph",
+                "text": "The grave goods of cemeteries such as Yaoshan also hint at textile production: the northern row of Yaoshan tombs contained jade huang pendants and spinning wheels, in contrast with the jade cong and yue of the southern row — a difference generally read as one of gender."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you look at the silk textiles and related burial goods in the collection, imagine the strand of silk carried from a bamboo basket to the present day: five thousand years ago, the watery lands of Jiangnan had already begun to raise silkworms and weave silk."
+              }
+            ]
+          }
+        },
+        "liangzhu-symbols": {
+          "name": "Incised Symbols and Early Writing",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu culture already possessed writing in the making, or proto-writing. Not a mature script, it nevertheless shows recognizable symbols, and is one of the keys to understanding Liangzhu's path toward 'civilization'."
+              },
+              {
+                "type": "paragraph",
+                "text": "Li Xueqin once identified fourteen signs, including those for 'bird', 'sun', 'seal', 'swallow' and 'mountain'; some resemble the pottery symbols of the Dawenkou culture. In 2013, the archaeologist Xu Xinmin discovered still more written symbols while cataloguing finds from the Zhuangqiaofen site in Pinghu, Zhejiang."
+              },
+              {
+                "type": "paragraph",
+                "text": "These incised symbols often appear on jade, pottery and other objects, showing that beyond shaping form, the Liangzhu people had begun to express things with signs — one of the early forms of Chinese writing."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you search the exhibits for those carved birds and pointed signs, reflect: five thousand years ago, people were already recording language in lines — a step taken earlier here than in many other regions."
+              }
+            ]
+          }
+        },
+        "shi-xingeng-discovery": {
+          "name": "Shi Xingeng and the Discovery of Liangzhu",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "Shi Xingeng (1912–1939) was born in Liangzhu town, Hang County, Zhejiang (today's Yuhang District). A geologist–mineralogist and archaeologist, he was the first to carry out scientific excavation at the Liangzhu site, and is honoured as an outstanding pioneer of exploration into the Liangzhu culture."
+              },
+              {
+                "type": "paragraph",
+                "text": "On 31 May 1936, Shi Xingeng took part in a test excavation of the Gudang site at the request of the West Lake Museum. Noticing that some of the stone tools collected 'were a common sight in my hometown', the next day he returned to the Liangzhu area in search of Neolithic sites. On 3 November 1936, at the bottom of a pond at Qipanfen near Liangzhu town, he found two pieces of shiny black pottery."
+              },
+              {
+                "type": "paragraph",
+                "text": "Between December 1936 and March 1937, Shi Xingeng carried out three test excavations around Liangzhu, identifying twelve sites including Maoanli and Qipanfen. In April 1937 he completed the book Liangzhu: A Preliminary Report on the Black Pottery Culture Sites of the Second District of Hang County, published in Shanghai by the China Science Corporation in August 1938. On 29 May 1939, Shi Xingeng died of scarlet fever complicated by peritonitis, aged just 28."
+              },
+              {
+                "type": "paragraph",
+                "text": "In the 'Discovery and the Pursuit of Truth' section of the Liangzhu Museum, remember that this young archaeologist, who died of illness at 28, is the starting point of the whole story. The two pieces of black pottery he found would unveil an entire prehistoric civilization of Jiangnan."
+              }
+            ]
+          }
+        },
+        "liangzhu-museum": {
+          "name": "Liangzhu Museum",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu Museum stands in Meilizhou Park, Liangzhu Subdistrict, Yuhang District, Hangzhou, Zhejiang. It is a museum devoted to displaying and studying the Liangzhu culture, and its predecessor, the Liangzhu Culture Museum, opened in 1994."
+              },
+              {
+                "type": "paragraph",
+                "text": "The new building was begun in March 2005 and opened to the public in October 2008. Designed by the British architect David Chipperfield, its concept is 'a handful of jade cones scattered across the ground', realized as four elongated volumes that are not quite parallel. The museum covers about 40,000 square metres, with a floor area of about 10,000 square metres and more than 4,000 square metres of exhibition space, comprising three permanent galleries, one temporary gallery and a collection store."
+              },
+              {
+                "type": "paragraph",
+                "text": "The permanent exhibition, under the overall theme 'The Liangzhu Culture: Proof of Five Thousand Years of Chinese Civilization', is divided into three parts — 'Discovery and the Pursuit of Truth', 'The Ancient Liangzhu State' and 'Liangzhu Civilization' — and displays more than 1,000 treasured objects including Liangzhu jades, pottery and lacquerware. In 2009 the exhibition won the top award among China's Top Ten Museum Exhibitions. In August 2017 the museum upgraded the permanent exhibition in light of the latest archaeological findings, reopening in June 2018."
+              },
+              {
+                "type": "paragraph",
+                "text": "Follow the order 'Discovery — the Ancient State — Civilization'; the three sections correspond exactly to 'archaeological discovery, reconstruction of the ancient state, and the value of the civilization' — the smoothest route for reading the exhibition."
+              }
+            ]
+          }
+        },
+        "site-park": {
+          "name": "Liangzhu Ancient City Archaeological Site Park",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu Ancient City Archaeological Site Park is an archaeological park centred on the ancient Liangzhu city. On this World Heritage land, you can see directly the city, the walls, the water system and the royal tombs of five thousand years ago."
+              },
+              {
+                "type": "paragraph",
+                "text": "The park is built around the ancient Liangzhu city site, covering the palatial zone on the Mojiaoshan terrace, the inner and outer cities, the outer water-management system and the Fanshan aristocratic cemetery. On 9 October 2010, the State Administration of Cultural Heritage named the Liangzhu site among the first batch of national archaeological site parks. This is the place where more than five thousand years of Chinese civilization is demonstrated most directly."
+              },
+              {
+                "type": "paragraph",
+                "text": "Before you tour, mark the Mojiaoshan terrace (about 30 hectares) and the Fanshan royal tombs on your map. As you walk, keep checking the waterways and the palatial zone against your position, and you will avoid seeing only scattered terraces."
+              },
+              {
+                "type": "paragraph",
+                "text": "Walking across this open land, try to read the rising heights of the Mojiaoshan terrace, the outer city and the inner city as a gradient visible to the naked eye — perhaps the most direct way to understand Liangzhu as an 'early city'."
+              }
+            ]
+          }
+        },
+        "world-heritage-status": {
+          "name": "World Heritage: Proof of Five Thousand Years of Civilization",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "On 6 July 2019, the archaeological ruins of Liangzhu city, meeting UNESCO World Heritage criteria (iii) and (iv), were inscribed on the World Heritage List — a holy site attesting to more than five thousand years of Chinese civilization."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu site was placed on China's Tentative List for World Cultural Heritage in 1994, designated a Major Historical and Cultural Site Protected at the National Level (fourth batch) in 1996, and named among the first national archaeological site parks in 2010. It was formally inscribed on the World Heritage List on 6 July 2019; since 2020, 6 July each year — the anniversary of the inscription — has been celebrated as 'Hangzhou Liangzhu Day'."
+              },
+              {
+                "type": "paragraph",
+                "text": "The World Heritage Committee's rationale: Liangzhu is an outstanding testimony to an early regional state of the late Neolithic in China, founded on rice agriculture and marked by social stratification and unified belief, and it demonstrates in outstanding fashion the political transition from Neolithic societies to large, integrated political entities."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you visit Liangzhu, you will often hear of 'five thousand years of civilization'. This is not a slogan but the formal recognition UNESCO has given this watery landscape of sites. The ground beneath your feet is in dialogue with the very source of Chinese civilization."
+              }
+            ]
+          }
+        },
+        "hemudu-comparison": {
+          "name": "Liangzhu and Hemudu",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Hemudu and Liangzhu cultures are both major Neolithic archaeological cultures of Zhejiang, but they differ in date: Hemudu flourished around 7000–6000 years ago and Liangzhu around 5300–4000 years ago, following one another in sequence."
+              },
+              {
+                "type": "paragraph",
+                "text": "Hemudu is represented by cultivated rice, stilt-house architecture, and the earliest wooden ornaments and lacquerware in China; stone tools are comparatively few, with wooden and bone implements more common. Liangzhu, by contrast, is represented by jade ritual objects, city walls and water management, stone-plow rice farming and proto-writing, and shows specialized division of labour and class differentiation."
+              },
+              {
+                "type": "paragraph",
+                "text": "If Hemudu is the 'foundation of rice agriculture', then Liangzhu is 'rice agriculture combined with royal power'. In farming tradition and way of life, the two form an unbroken thread of development in the Jiangnan region."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you see stone plows and jades in the Liangzhu galleries, imagine the plainer bone spades and lacquerware of the Hemudu period — and the arc from 'a homeland of rice' to 'a city-state of rice' runs through your mind."
+              }
+            ]
+          }
+        },
+        "contemporary-cultures": {
+          "name": "The Stars of Chinese Civilization in Liangzhu's Time",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The age of Liangzhu was not home to a single culture. In northern China and along the Yangtze, cultures such as Hongshan and Lingjiatan were active at the same time, together forming the 'star-filled sky' of the origins of Chinese civilization."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Hongshan culture is a predominantly agricultural Neolithic culture of northern China, dated c. 4700–2900 BC. Its jade dragon is hailed as 'China's first dragon' and is prohibited from travelling abroad for exhibition. The Lingjiatan culture spread across the Chaohu Lake area of the middle and lower Yangtze; some 5,000 years ago the Lingjiatan site was a large late Neolithic settlement, where an altar and a large clan cemetery have been found."
+              },
+              {
+                "type": "paragraph",
+                "text": "These cultures share much in jade, altars and sacred authority — the Hongshan jade dragon, the Lingjiatan jades and the Liangzhu cong all remind us that 'Chinese civilization' was jointly born of many regions influencing one another."
+              },
+              {
+                "type": "paragraph",
+                "text": "Look beyond Liangzhu — turn your gaze to the Hongshan jade dragon and the Lingjiatan altar. Liangzhu is the brightest beam in this starry sky, but far from the only one."
+              }
+            ]
+          }
+        },
+        "liangzhu-in-zhejiang-museum": {
+          "name": "Liangzhu at the Zhejiang Provincial Museum",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "In the Zhejiang across Ten Thousand Years exhibition at the Zhejiang Provincial Museum (Zhijiang Hall), several treasures of the Liangzhu culture are placed in prominent positions — the most important opening chapter of Zhejiang's memory of 'jade ritual'."
+              },
+              {
+                "type": "paragraph",
+                "text": "The museum's collection includes Hemudu pottery, jades and silks, as well as Liangzhu jades. Among its ten greatest treasures is a 'Liangzhu culture jade cong', and the list of relics prohibited from travelling abroad includes the King Jade Cong excavated from Liangzhu, held by the Zhejiang Provincial Institute of Cultural Relics and Archaeology."
+              },
+              {
+                "type": "paragraph",
+                "text": "If you have already visited the Liangzhu Museum, you will recognize in Zhejiang this same system of jades from the tombs; if not, the ancient state of Liangzhu is introduced here in the friendliest of ways."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you see Liangzhu at Zhejiang, link it to the route of Zhejiang across Ten Thousand Years — from the King Jade Cong to the Liangzhu cong, the earliest thread of Zhejiang civilization unfolds before you."
+              }
+            ]
+          }
+        }
+      },
+      "attractions": {
+        "liangzhu-museum": {
+          "name": "Liangzhu Museum"
+        },
+        "liangzhu-site-park": {
+          "name": "Liangzhu Ancient City Archaeological Site Park"
+        },
+        "yaoshan-site-park": {
+          "name": "Yaoshan Archaeological Site Park"
+        }
+      },
+      "introductions": {
+        "liangzhu-museum.cong-wang-hall": {
+          "name": "King Jade Cong Gallery",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "In the Liangzhu Museum galleries, let your eye settle on the King Jade Cong, square without and round within. First study the beast-mask motifs that cover its surface, then consider how this great object, unearthed from Tomb 12 at Fanshan alone, came to hold the 'king's' place in the jade ritual system."
+              },
+              {
+                "type": "paragraph",
+                "text": "The King Jade Cong was excavated from Tomb 12 at Fanshan. Weighing 3,500 grams and carved with exceptionally fine beast-mask motifs, it is regarded by scholars as the 'King of Cong'; the same tomb also yielded a jade yue regarded as the 'King of Yue'. The cong is a ritual object for worshipping the earth, square outside and round within, and the Liangzhu cong is considered a passage linking the gods of heaven and earth."
+              },
+              {
+                "type": "paragraph",
+                "text": "These 'kings of jade' also appear in the collection of the Zhejiang Provincial Museum, and the King Jade Cong itself is on the list of relics prohibited from travelling abroad. In the museum, take note of the panels near the case explaining the Fanshan royal tombs, and read the tombs and the objects together."
+              },
+              {
+                "type": "paragraph",
+                "text": "'Square outside is the earth, round within is heaven' — if you remember only one thing at the museum, remember the name 'King Jade Cong' and the cosmic square-and-circle it holds, and you will have grasped the heart of Liangzhu jade ritual."
+              }
+            ]
+          }
+        },
+        "liangzhu-museum.discovery-history": {
+          "name": "Discovery and the Pursuit of Truth: The Story of the Excavations",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The 'Discovery and the Pursuit of Truth' section opens the museum's three-part display — 'Discovery, the Ancient State, Civilization' — and from here you can follow, step by step, how Liangzhu came to be 'seen'."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Liangzhu site was discovered in 1936, when Shi Xingeng of the West Lake Museum found shiny black pottery at Qipanfen near Liangzhu, Yuhang, and carried out three test excavations; in 1938 he published Liangzhu. In 1959 the archaeologist Xia Nai gave the culture its name, 'Liangzhu culture'. The successive excavations at Fanshan, Yaoshan and Mojiaoshan that followed mark the milestones of our knowledge of Liangzhu."
+              },
+              {
+                "type": "paragraph",
+                "text": "This story is full of milestones: Huiguanshan in 1991, Mojiaoshan in 1993, the discovery of the ancient city in 2007, and the survey of the outer water system in 2015, among others — many of them named among China's Top Ten Archaeological Discoveries. The few steps you take through this gallery correspond to decades of fieldwork."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you read this section, set the dates 1936–1959–2019 as a timeline in your mind; from a single piece of black pottery to a World Heritage site, the excavation story of this Jiangnan land gains its depth."
+              }
+            ]
+          }
+        },
+        "liangzhu-site-park.mojiaoshan": {
+          "name": "The Mojiaoshan Terrace",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "At the centre of the site park stands a rectangular high terrace, about 670 metres east–west and 450 metres north–south — the Mojiaoshan terrace. Standing on it, you can clearly see how it rises 9 to 15 metres above the surrounding plain."
+              },
+              {
+                "type": "paragraph",
+                "text": "The Mojiaoshan terrace covers about 30 hectares and was built entirely by hand, requiring an estimated 500,000 cubic metres of earth and some 10,000 people. Yan Wenming believed this may have been the capital of the Liangzhu 'kingdom'."
+              },
+              {
+                "type": "paragraph",
+                "text": "Walk around the terrace and, from the surrounding plain, trace with your eyes how the palatial zone, the inner city and the outer city step downward in sequence — and feel the layout of the capital of 'China's first city'."
+              },
+              {
+                "type": "paragraph",
+                "text": "'A high and mighty artificial terrace — precisely the centre of an early state that could mobilize ten thousand people.' Gazing at the grass and wind on the open terrace, you will slowly come to understand this sentence."
+              }
+            ]
+          }
+        },
+        "liangzhu-site-park.fanshan": {
+          "name": "The Fanshan Royal Tombs",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Fanshan site in the park is a high-terrace cemetery of royal rank within Liangzhu's aristocratic burial grounds — about 100 metres east–west and 30 metres north–south, an artificially built and finished terrace."
+              },
+              {
+                "type": "paragraph",
+                "text": "Fanshan's grave goods, chiefly jade, number about a thousand pieces in total. Tomb 20 contained as many as 547 jade objects and is thought to be the burial of the supreme leader; Tomb 12 yielded the King Jade Cong and the King Jade Yue. Yan Wenming believed this may indeed have been the site of the Liangzhu royal tombs."
+              },
+              {
+                "type": "paragraph",
+                "text": "As you visit, compare it with the Mojiaoshan terrace in the same park: one terrace held the palace of the capital, the other the royal tombs of the aristocracy. Only together do the two complete the three-dimensional picture of the 'Liangzhu kingdom'."
+              },
+              {
+                "type": "paragraph",
+                "text": "Standing on the Fanshan terrace, think of those '547 pieces of jade' — beneath a single terrace lies a world of power built of jade."
+              }
+            ]
+          }
+        },
+        "yaoshan-site-park.altar": {
+          "name": "The Yaoshan Altar and Cemetery",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The Yaoshan Archaeological Site Park lies about 5 kilometres northeast of the ancient Liangzhu city. At the centre of the site is a square altar aligned exactly north–south, used for major rituals before becoming an aristocratic cemetery when it fell out of use."
+              },
+              {
+                "type": "paragraph",
+                "text": "The altar was originally a terrace 20 metres square and 2 metres high, from whose surface twelve jade-bearing tombs were cleared. Lying south of the altar in two rows, the tombs are all rectangular shaft graves with heads facing due south; the cemetery may also be connected with astronomical observation and calendar-keeping. This is a space intimately bound up with sacred authority and ritual."
+              },
+              {
+                "type": "paragraph",
+                "text": "In February 1989, Yaoshan and Fanshan were both named among China's Top Ten Archaeological Discoveries of the Seventh Five-Year Plan period. As an altar and a cemetery in one, it embodies the union of 'jade, ritual and power' in Liangzhu society."
+              },
+              {
+                "type": "paragraph",
+                "text": "When you visit Yaoshan, first find the square outline of the altar, then look south across the neatly aligned tomb pits — sacred altar and the dead share one place, the most direct page of Liangzhu's theocratic power."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
   "manifest": {
-    "packVersion": "liangzhu-v1",
-    "generatedAt": "2026-08-03T16:00:00Z"
+    "packVersion": "liangzhu-v2",
+    "generatedAt": "2026-08-05T08:01:46Z"
   }
 }

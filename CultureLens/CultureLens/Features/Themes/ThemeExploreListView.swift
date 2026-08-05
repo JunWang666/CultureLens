@@ -16,7 +16,8 @@ struct ThemeExploreListView: View {
   private var progressList: [ThemeProgress] {
     ThemeProgressCalculator.progressList(
       themes: themes,
-      contactedElementKeys: contactedKeys
+      contactedElementKeys: contactedKeys,
+      knowledgeStore: KnowledgeStore.shared
     )
   }
 
@@ -24,7 +25,7 @@ struct ThemeExploreListView: View {
     ZStack {
       CulturePageBackground()
 
-      if themes.isEmpty {
+      if progressList.isEmpty {
         ContentUnavailableView {
           Label("暂无主题", systemImage: "list.bullet.rectangle")
         } description: {
@@ -77,7 +78,7 @@ struct ThemeExploreListView: View {
       ProgressView(value: progress.fractionComplete)
         .tint(CultureTheme.cinnabar)
 
-      Text("\(progress.theme.elementKeys.count) 个相关节点 · 完成需点亮 \(progress.requiredCount) 个")
+      Text("\(progress.totalCount) 个相关节点 · 完成需点亮 \(progress.requiredCount) 个")
         .font(.caption)
         .foregroundStyle(CultureTheme.inkSecondary)
     }

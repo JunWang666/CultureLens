@@ -116,6 +116,29 @@ final class LocationContextProvider: NSObject {
         continuation = nil
         pending?.resume(with: result)
     }
+
+    /// Reverse-geocodes a coordinate into a display name. Used to backfill
+    /// place names for locations that only carry raw coordinates (e.g. photo EXIF).
+    nonisolated static func reverseDisplayName(
+        latitude: CLLocationDegrees,
+        longitude: CLLocationDegrees
+    ) async -> String? {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        if #available(iOS 26.0, macOS 26.0, visionOS 26.0, *) {
+            guard let request = MKReverseGeocodingRequest(location: location) else { return nil }
+            request.preferredLocale = .current
+            guard let mapItems = try? await request.mapItems else { return nil }
+            return mapItems.first?.addressRepresentations?.cityWithContext(.full)
+        }
+        guard let placemark = try? await CLGeocoder().reverseGeocodeLocation(
+            location,
+            preferredLocale: .current
+        ).first else { return nil }
+        let components = [placemark.locality, placemark.country]
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+        return components.isEmpty ? nil : components.joined(separator: "，")
+    }
 }
 
 extension LocationContextProvider: CLLocationManagerDelegate {

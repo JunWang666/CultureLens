@@ -20,7 +20,7 @@ struct AbstractionLadderView: View {
   }
 
   private var rungs: [Rung] {
-    guard let store else { return [] }
+    guard let store, store.element(key: rootKey) != nil else { return [] }
     let levels = store.ancestors(key: rootKey, maxLevels: 4)
     var pathKeys: Set<String> = [rootKey]
     var result: [Rung] = []

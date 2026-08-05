@@ -19,7 +19,8 @@ struct ThemeDetailView: View {
     guard let theme else { return nil }
     return ThemeProgressCalculator.progress(
       for: theme,
-      contactedElementKeys: contactedKeys
+      contactedElementKeys: contactedKeys,
+      knowledgeStore: KnowledgeStore.shared
     )
   }
 
@@ -27,7 +28,7 @@ struct ThemeDetailView: View {
     ZStack {
       CulturePageBackground()
 
-      if let theme, let progress {
+      if let theme, let progress, !progress.elementKeys.isEmpty {
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 22) {
             VStack(alignment: .leading, spacing: 10) {
@@ -74,7 +75,7 @@ struct ThemeDetailView: View {
 
             sectionTitle("主题节点")
 
-            ForEach(theme.elementKeys, id: \.self) { key in
+            ForEach(progress.elementKeys, id: \.self) { key in
               elementRow(
                 key: key,
                 isContacted: progress.contactedKeys.contains(key)
@@ -100,49 +101,48 @@ struct ThemeDetailView: View {
 
   @ViewBuilder
   private func elementRow(key: String, isContacted: Bool) -> some View {
-    let name = KnowledgeStore.shared?.element(key: key)?.name ?? key
-    let summary =
-      KnowledgeStore.shared?.element(key: key).map {
-        KnowledgeStore.richTextPlainText($0.introduction)
-      } ?? ""
+    if let element = KnowledgeStore.shared?.element(key: key) {
+      let name = element.name
+      let summary = KnowledgeStore.richTextPlainText(element.introduction)
 
-    NavigationLink(value: AppRoute.knowledgeElement(key)) {
-      HStack(alignment: .top, spacing: 14) {
-        Image(systemName: isContacted ? "checkmark.circle.fill" : "circle")
-          .foregroundStyle(
-            isContacted ? CultureTheme.antiqueGold : CultureTheme.inkSecondary
-          )
-          .font(.title3)
+      NavigationLink(value: AppRoute.knowledgeElement(key)) {
+        HStack(alignment: .top, spacing: 14) {
+          Image(systemName: isContacted ? "checkmark.circle.fill" : "circle")
+            .foregroundStyle(
+              isContacted ? CultureTheme.antiqueGold : CultureTheme.inkSecondary
+            )
+            .font(.title3)
 
-        VStack(alignment: .leading, spacing: 4) {
-          Text(name)
-            .font(.headline)
-            .foregroundStyle(CultureTheme.inkPrimary)
-          if !summary.isEmpty {
-            Text(summary)
-              .font(.caption)
-              .foregroundStyle(CultureTheme.inkSecondary)
-              .lineLimit(2)
+          VStack(alignment: .leading, spacing: 4) {
+            Text(name)
+              .font(.headline)
+              .foregroundStyle(CultureTheme.inkPrimary)
+            if !summary.isEmpty {
+              Text(summary)
+                .font(.caption)
+                .foregroundStyle(CultureTheme.inkSecondary)
+                .lineLimit(2)
+            }
           }
+
+          Spacer(minLength: 0)
+
+          Image(systemName: "chevron.right")
+            .font(.caption)
+            .foregroundStyle(.secondary)
         }
-
-        Spacer(minLength: 0)
-
-        Image(systemName: "chevron.right")
-          .font(.caption)
-          .foregroundStyle(.secondary)
+        .padding(16)
+        .background(
+          CultureTheme.surface,
+          in: RoundedRectangle(cornerRadius: 18)
+        )
+        .overlay {
+          RoundedRectangle(cornerRadius: 18)
+            .stroke(CultureTheme.hairline, lineWidth: 1)
+        }
       }
-      .padding(16)
-      .background(
-        CultureTheme.surface,
-        in: RoundedRectangle(cornerRadius: 18)
-      )
-      .overlay {
-        RoundedRectangle(cornerRadius: 18)
-          .stroke(CultureTheme.hairline, lineWidth: 1)
-      }
+      .buttonStyle(.plain)
     }
-    .buttonStyle(.plain)
   }
 }
 

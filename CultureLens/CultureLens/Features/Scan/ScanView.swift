@@ -20,6 +20,9 @@ struct ScanView: View {
     /// just sends the whole photo (same as "直接发送").
     @State private var focusSelection: NormalizedImageRegion?
     @State private var reviewPrepareError: String?
+    @State private var previewPlace: PlaceContext?
+    @State private var isResolvingPreviewPlace = false
+    @State private var locationProvider = LocationContextProvider()
 
     private var isReviewing: Bool {
         pendingReview != nil
@@ -64,6 +67,19 @@ struct ScanView: View {
             }
 
             VStack {
+                if showsLocationPreview {
+                    HStack {
+                        Spacer(minLength: 0)
+                        ScanLocationPreviewButton(
+                            place: previewPlace,
+                            isLoading: isResolvingPreviewPlace
+                        )
+                        .accessibilityIdentifier("scan.locationPreview")
+                    }
+                    .padding(.top, 8)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+
                 Spacer()
 
                 if let reviewPrepareError, isReviewing {
@@ -118,6 +134,9 @@ struct ScanView: View {
         }
         .task(id: pendingReview?.id) {
             await prepareReviewImage()
+        }
+        .task(id: pendingReview?.id) {
+            await resolvePreviewPlace()
         }
         .sheet(isPresented: $helpSheetPresented) {
             ScanHelpSheet(
@@ -386,6 +405,12 @@ struct ScanView: View {
         useLocation ? .currentDevice : .none
     }
 
+    private var showsLocationPreview: Bool {
+        guard isReviewing, !coordinator.phase.isWorking else { return false }
+        if case .failed = coordinator.phase { return false }
+        return pendingReview?.locationSource.showsPreview == true
+    }
+
     private func presentReview(
         _ imageData: Data,
         locationSource: ScanLocationSource
@@ -393,6 +418,8 @@ struct ScanView: View {
         preparedReview = nil
         reviewPrepareError = nil
         focusSelection = nil
+        previewPlace = nil
+        isResolvingPreviewPlace = false
         coordinator.resetFailure()
         pendingReview = PendingScanImage(
             data: imageData,
@@ -405,6 +432,42 @@ struct ScanView: View {
         preparedReview = nil
         reviewPrepareError = nil
         focusSelection = nil
+        previewPlace = nil
+        isResolvingPreviewPlace = false
+    }
+
+    private func resolvePreviewPlace() async {
+        previewPlace = nil
+        isResolvingPreviewPlace = false
+        guard let pendingReview else { return }
+
+        switch pendingReview.locationSource {
+        case .photoMetadata(let place):
+            previewPlace = place
+        case .resolved(let place):
+            previewPlace = place
+        case .currentDevice:
+            isResolvingPreviewPlace = true
+            defer { isResolvingPreviewPlace = false }
+            do {
+                let place = try await locationProvider.requestBestPlace()
+                try Task.checkCancellation()
+                guard self.pendingReview?.id == pendingReview.id else { return }
+                previewPlace = place
+                self.pendingReview = PendingScanImage(
+                    id: pendingReview.id,
+                    data: pendingReview.data,
+                    locationSource: .resolved(place)
+                )
+            } catch is CancellationError {
+                return
+            } catch {
+                guard self.pendingReview?.id == pendingReview.id else { return }
+                previewPlace = nil
+            }
+        case .none:
+            previewPlace = nil
+        }
     }
 
     private func confirmReview(useFocusRegion: Bool) {
@@ -502,9 +565,30 @@ extension View {
 }
 
 private struct PendingScanImage: Identifiable {
-    let id = UUID()
+    let id: UUID
     let data: Data
     let locationSource: ScanLocationSource
+
+    init(
+        id: UUID = UUID(),
+        data: Data,
+        locationSource: ScanLocationSource
+    ) {
+        self.id = id
+        self.data = data
+        self.locationSource = locationSource
+    }
+}
+
+private extension ScanLocationSource {
+    var showsPreview: Bool {
+        switch self {
+        case .currentDevice, .resolved, .photoMetadata:
+            true
+        case .none:
+            false
+        }
+    }
 }
 
 private struct PreparedReviewImage {

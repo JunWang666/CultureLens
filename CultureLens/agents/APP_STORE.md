@@ -8,12 +8,12 @@
 
 ## ODR（On-Demand Resources）
 
-- Tag：`knowledge-base`，内容 = `knowledge-pack.json` + `pack-manifest.json`（约 36KB）。
-- 工程配置：`project.pbxproj` 中这两个文件以显式 file reference 加入 Resources phase，`ASSET_TAGS = ("knowledge-base")`；同时通过 `PBXFileSystemSynchronizedBuildFileExceptionSet` 把它们从同步 group 的 target 成员中排除，避免重复打包。
-- 当前设置 `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base"`：asset pack **随 App 首装一起下发**（用户决定，暂不省下载体积），运行时无需等待下载。
-- 将来要省体积/按需分发时，从该 build setting 移除 tag 即可切换为按需下载，工程与代码无需改动。
+- Tag：`knowledge-base`，内容 = 西湖包 `knowledge-pack.json` + `pack-manifest.json`（约 36KB）。
+- 良渚 / 浙博 / 中国历史包作为普通 bundle 资源（`KnowledgePackLiangzhu` 等子目录）打进 App，运行时与西湖包合并。
+- 工程配置：西湖包以显式 file reference 加入 Resources phase，`ASSET_TAGS = ("knowledge-base")`；通过 `membershipExceptions` 避免与同步 group 重复打包。其余三包用 `explicitFolders` 保留子目录，避免同名 JSON 互相覆盖。
+- 当前设置 `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base"`：西湖 asset pack **随 App 首装一起下发**；将来可拆独立 tag 做按需下载。
 - 上传：Xcode 归档上传时 asset pack 自动随构建上传到 App Store Connect，无需额外操作。
-- 验证：归档后确认 `Products/OnDemandResources/` 存在、`OnDemandResources.plist` 含 `knowledge-base` tag（2026-08-02 已验证）。
+- 验证：归档后确认 `Products/OnDemandResources/` 存在、`OnDemandResources.plist` 含 `knowledge-base` tag（2026-08-02 已验证）；App 包内应可见 `KnowledgePackLiangzhu` 等目录。
 - 注意：ODR 内容随 App 版本发布，不能独立热更新；`pack-manifest.json` 的 `packVersion`/`sha256` 为将来多包或自托管下发预留。
 
 ## LLM Key

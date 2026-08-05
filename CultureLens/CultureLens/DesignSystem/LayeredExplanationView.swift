@@ -13,7 +13,7 @@ struct PersonalizedExplanationView: View {
       MarkdownView(text: explanation.markdown, config: Self.markdownConfig)
         .frame(maxWidth: .infinity, alignment: .leading)
 
-      if !explanation.citations.isEmpty {
+      if !explanation.citations.existingInKnowledgeBase().isEmpty {
         KnowledgeCitationCardsView(citations: explanation.citations)
       }
     }

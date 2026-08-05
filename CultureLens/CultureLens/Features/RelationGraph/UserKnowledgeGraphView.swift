@@ -802,7 +802,9 @@ struct UserKnowledgeGraphView: View {
     // MARK: - Rebuild & resolution
 
     private func route(for node: UserKnowledgeGraphNode) -> AppRoute? {
-        if let elementKey = node.elementKey {
+        if let elementKey = node.elementKey,
+            knowledgeStore?.element(key: elementKey) != nil
+        {
             return .knowledgeElement(elementKey)
         }
         if object(id: node.id) != nil {

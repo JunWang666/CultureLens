@@ -200,18 +200,18 @@ struct CultureRelationGraphView: View {
   /// either unmatched to the knowledge base, the pack failed to load, or the
   /// node genuinely has no relation edges — three different messages.
   private var unavailableGraph: some View {
-    if object.culturalElementKey == nil {
-      ContentUnavailableView(
-        "未匹配到知识库对象",
-        systemImage: "questionmark.circle",
-        description: Text("当前结果还没有绑定到知识库中的文化元素，因此没有可展示的关系。")
-      )
-      .frame(minHeight: 220)
-    } else if KnowledgeStore.shared == nil {
+    if KnowledgeStore.shared == nil {
       ContentUnavailableView(
         "知识包未载入",
         systemImage: "externaldrive.badge.exclamationmark",
         description: Text("知识库数据包没有成功载入，关系图谱暂时不可用。")
+      )
+      .frame(minHeight: 220)
+    } else if !isMatchedToKnowledgeBase {
+      ContentUnavailableView(
+        "未匹配到知识库对象",
+        systemImage: "questionmark.circle",
+        description: Text("当前结果还没有绑定到知识库中的文化元素，因此没有可展示的关系。")
       )
       .frame(minHeight: 220)
     } else {
@@ -222,6 +222,11 @@ struct CultureRelationGraphView: View {
       )
       .frame(minHeight: 220)
     }
+  }
+
+  private var isMatchedToKnowledgeBase: Bool {
+    guard let key = object.culturalElementKey else { return false }
+    return KnowledgeStore.shared?.element(key: key) != nil
   }
 
   private func header(showsDisplayModePicker: Bool) -> some View {
@@ -598,7 +603,12 @@ struct CultureRelationGraphView: View {
     switch route {
     case .concept(let id):
       if let concept = object.concepts.first(where: { $0.id == id }) {
-        ConceptDetailView(concept: concept)
+        ScanResultView(
+          knowledgeObject: CultureObject(
+            knowledgeConcept: concept,
+            elementKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+          )
+        )
       } else {
         ContentUnavailableView(
           "未找到文化关系",
@@ -606,16 +616,16 @@ struct CultureRelationGraphView: View {
         )
       }
     case .knowledgeElement(let key):
-      if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
-        ConceptDetailView(concept: concept, elementKey: key)
+      if let element = KnowledgeStore.shared?.element(key: key) {
+        ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
       } else {
         ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
       }
     case .object(let id):
       if id == object.id {
-        ObjectDetailView(object: object)
+        ScanResultView(knowledgeObject: object)
       } else if let sample = SampleCultureData.object(id: id) {
-        ObjectDetailView(object: sample)
+        ScanResultView(knowledgeObject: sample)
       } else {
         ContentUnavailableView("未找到对象", systemImage: "questionmark.circle")
       }

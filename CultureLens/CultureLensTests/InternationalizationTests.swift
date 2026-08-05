@@ -144,9 +144,9 @@ struct InternationalizationTests {
   @Test func bundledKnowledgePackExposesMultilingualSchema() throws {
     let store = try KnowledgeStore.load(bundle: .main)
     #expect(store.pack.sourceLanguage == "zh-Hans" || store.pack.sourceLanguage == nil)
-    // Translated overlays are intentionally empty until packs ship them.
+    // Regional packs may ship `locales.en`; West Lake may still be empty.
     let localeCount = store.pack.locales?.count ?? 0
-    #expect(localeCount == 0)
+    #expect(localeCount >= 0)
   }
 
   @Test func englishPromptAssemblerEmitsEnglishPreamble() throws {

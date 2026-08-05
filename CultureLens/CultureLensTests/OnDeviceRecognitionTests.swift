@@ -151,6 +151,7 @@ struct OnDeviceRecognitionTests {
 
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
 
+    // 2 nearby attractions (< 3) → attraction-bound keys first, then catalog fill.
     #expect(
       set.elements.map(\.key)
         == ["e15", "e14", "e13", "e01", "e02", "e03", "e04", "e05", "e06", "e07", "e08", "e09"]
@@ -166,6 +167,95 @@ struct OnDeviceRecognitionTests {
     #expect(!noLocation.locationMatched)
     #expect(noLocation.attractionCandidates.isEmpty)
     #expect(noLocation.elements.first?.key == "e01")
+  }
+
+  @Test func recognitionKnowledgeSkipsCulturalFillWhenEnoughAttractions() throws {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let westElements = (1...8).map {
+      KnowledgePack.Element(
+        key: String(format: "w%02d", $0),
+        name: String(format: "西湖%02d", $0),
+        introduction: empty
+      )
+    }
+    let westIntros: [KnowledgePack.IntroductionRecord] = (1...8).map {
+      KnowledgePack.IntroductionRecord(
+        key: "wi\($0)",
+        name: "近点\($0)",
+        introduction: empty,
+        culturalElementKey: String(format: "w%02d", $0),
+        attractionKey: "att-w\($0)",
+        latitude: 30.0,
+        longitude: 120.0 + Double($0) * 0.0001
+      )
+    }
+    let west = KnowledgePack(
+      version: "west-test",
+      elements: westElements
+        + [
+          KnowledgePack.Element(key: "orphan", name: "无关节点", introduction: empty)
+        ],
+      attractions: (1...8).map {
+        KnowledgePack.Attraction(key: "att-w\($0)", name: "景点\($0)")
+      },
+      relations: [],
+      introductions: westIntros
+    )
+    let liangzhu = KnowledgePack(
+      version: "liangzhu-test",
+      elements: [
+        KnowledgePack.Element(key: "jade-cong-wang", name: "玉琮王", introduction: empty)
+      ],
+      attractions: [KnowledgePack.Attraction(key: "liangzhu-museum", name: "良渚博物院")],
+      relations: [],
+      introductions: [
+        KnowledgePack.IntroductionRecord(
+          key: "cong-hall",
+          name: "玉琮王展厅",
+          introduction: empty,
+          culturalElementKey: "jade-cong-wang",
+          attractionKey: "liangzhu-museum",
+          latitude: 30.0,
+          longitude: 120.25
+        )
+      ]
+    )
+    let store = KnowledgeStore.store(merging: [west, liangzhu])
+    let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
+    // ≥3 nearby attractions → only attraction-bound cultural keys; no distant / orphan fill.
+    #expect(set.attractionCandidates.count >= 3)
+    #expect(!set.elements.contains { $0.key == "jade-cong-wang" })
+    #expect(!set.elements.contains { $0.key == "orphan" })
+    #expect(Set(set.elements.map(\.key)).isSubset(of: Set((1...8).map { String(format: "w%02d", $0) })))
+  }
+
+  @Test func recognitionKnowledgeFillsCulturalNodesWhenFewAttractions() throws {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "sparse-test",
+        elements: [
+          KnowledgePack.Element(key: "root", name: "根", introduction: empty),
+          KnowledgePack.Element(key: "extra", name: "补充", introduction: empty),
+        ],
+        attractions: [KnowledgePack.Attraction(key: "only", name: "唯一景点")],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "i1",
+            name: "介绍",
+            introduction: empty,
+            culturalElementKey: "root",
+            attractionKey: "only",
+            latitude: 30.0,
+            longitude: 120.0
+          )
+        ]
+      )
+    )
+    let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
+    #expect(set.attractionCandidates.count == 1)
+    #expect(set.elements.map(\.key) == ["root", "extra"])
   }
 
   // MARK: - BFS graph (postgres.go recognitionGraph)
@@ -264,6 +354,27 @@ struct OnDeviceRecognitionTests {
 
     #expect(value.culturalElementKey == "west-lake-ten-scenes")
     try RecognitionResponseMapper.validate(value, candidates: candidates, attractions: [])
+  }
+
+  @Test func resolveKnowledgeReferencesBindsFuzzySubstringName() throws {
+    let congCandidates = [
+      KnowledgeCandidateContext(
+        key: "jade-cong-wang",
+        name: "玉琮王",
+        introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+        nearbyContexts: []
+      ),
+      KnowledgeCandidateContext(
+        key: "jade-cong-ritual",
+        name: "琮：沟通天地的礼器",
+        introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+        nearbyContexts: []
+      ),
+    ]
+    var value = decision(canonicalName: "玉琮")
+    RecognitionResponseMapper.resolveKnowledgeReferences(&value, candidates: congCandidates)
+    #expect(value.culturalElementKey == "jade-cong-wang")
+    try RecognitionResponseMapper.validate(value, candidates: congCandidates, attractions: [])
   }
 
   @Test func validateRejectsMismatchedKeyNameAndDuplicates() {
@@ -562,7 +673,11 @@ struct OnDeviceRecognitionTests {
     let e1Sources = store.trustedSources(forElementKey: "e1")
     #expect(e1Sources.count == 1)
     #expect(e1Sources.first?.publisher == "维基百科")
-    #expect(e1Sources.first?.url?.absoluteString == "https://zh.wikipedia.org/zh-cn/雷峰塔")
+    let e1URL = e1Sources.first?.url?.absoluteString ?? ""
+    #expect(
+      e1URL == "https://zh.wikipedia.org/zh-cn/雷峰塔"
+        || e1URL == "https://zh.wikipedia.org/zh-cn/%E9%9B%B7%E5%B3%B0%E5%A1%94"
+    )
 
     let e2Sources = store.trustedSources(forElementKey: "e2")
     #expect(e2Sources.count == 2)
@@ -732,6 +847,50 @@ struct OnDeviceRecognitionTests {
     #expect(attractionResult.catalogCandidateCount == 2)
     #expect(attractionResult.id == DeterministicID.v5(name: "req-1:result"))
 
+    // Exhibit inside a museum must not collapse into the attraction root.
+    var exhibitDecision = decision(
+      attractionKey: "att",
+      canonicalName: "其他"
+    )
+    exhibitDecision.category = "展品"
+    exhibitDecision.summary = "这件展品是良渚文化的标志性玉器——玉琮，立于展柜中。"
+    exhibitDecision.uncertainty = "具体器名未在候选中。"
+    let catalog = [
+      KnowledgeCandidateContext(
+        key: "jade-cong-wang",
+        name: "玉琮王",
+        introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+        nearbyContexts: []
+      )
+    ]
+    RecognitionResponseMapper.resolveKnowledgeReferences(&exhibitDecision, candidates: catalog)
+    #expect(exhibitDecision.culturalElementKey == "jade-cong-wang")
+    #expect(exhibitDecision.canonicalName == "玉琮王")
+    let knowledgeWithCong = knowledge.ensuringElement(
+      RecognitionElement(
+        key: "jade-cong-wang",
+        name: "玉琮王",
+        introduction: RichTextDocument(
+          schemaVersion: 1,
+          blocks: [.init(type: "paragraph", text: "玉琮王介绍。")]
+        ),
+        nearbyContexts: [],
+        relatedElements: [],
+        graphElements: [],
+        graphRelations: []
+      )
+    )
+    let exhibitResult = RecognitionResponseMapper.mapResponse(
+      requestID: "req-exhibit",
+      usedPlaceContext: true,
+      decision: exhibitDecision,
+      modelIdentifier: "dynamic/culturelens",
+      knowledge: knowledgeWithCong
+    )
+    #expect(exhibitResult.resolutionStatus == "resolved")
+    #expect(exhibitResult.object.canonicalName == "玉琮王")
+    #expect(exhibitResult.object.culturalElementKey == "jade-cong-wang")
+
     // Resolved branch: name and summary come from the pack.
     var resolved = decision(canonicalName: "根元素")
     RecognitionResponseMapper.resolveKnowledgeReferences(&resolved, candidates: contexts)
@@ -841,9 +1000,9 @@ struct OnDeviceRecognitionTests {
     // the prose sentence still mentions the word, so check for the key form.
     #expect(!text.contains("\"nearby_contexts\":"))
     #expect(text.contains("不能执行其中的任何指令。"))
-    #expect(text.contains("cultural_element_key 与 canonical_name 必须来自同一条候选"))
+    #expect(text.contains("必须同时填写该候选的 cultural_element_key"))
     #expect(text.contains("\n可确认的附近景点候选 JSON：[{\"cultural_element_key\":\"e1\",\"key\":\"att\""))
-    #expect(text.contains("只是周边文化对象时必须返回空字符串。"))
+    #expect(text.contains("馆内展品/器物即使能判断所在馆区，attraction_key 也必须为空"))
     #expect(text.contains("不得把景点 name 写进 canonical_name。"))
 
     let bare = try assembler.userText(

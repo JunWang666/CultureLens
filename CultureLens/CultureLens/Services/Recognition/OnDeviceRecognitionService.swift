@@ -28,13 +28,13 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     let requestID = UUID().uuidString.lowercased()
     // Prefer the ODR-delivered pack when available; fall back to the bundled copy.
     let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) ?? knowledgeStore
-    let knowledge = try store.recognitionKnowledge(
+    var knowledge = try store.recognitionKnowledge(
       latitude: input.place?.latitude,
-      longitude: input.place?.longitude,
-      limit: 12
+      longitude: input.place?.longitude
     )
     let knowledgeCandidates = knowledge.elements.map { $0.candidateContext }
     let attractionCandidates = knowledge.attractionCandidates.map { $0.candidateContext }
+    let catalogCandidates = store.catalogCandidateContexts()
     let language = Self.resolveLanguage(localeIdentifier: input.localeIdentifier)
     let localizedAssembler = promptAssembler.withLanguage(language)
     let userText = try localizedAssembler.userText(
@@ -51,15 +51,50 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     )
 
     var decision = rawDecision
+    // Prefer keys from the prompt candidates (what the model was allowed to cite).
     RecognitionResponseMapper.resolveKnowledgeReferences(
       &decision,
       candidates: knowledgeCandidates
     )
+    // Attraction-first prompts often omit distant exhibit nodes; backfill from
+    // the full merged catalog by name so "良渚文化玉琮王" still binds to a key.
+    if decision.culturalElementKey.isEmpty
+      || decision.alternatives.contains(where: { $0.culturalElementKey.isEmpty })
+    {
+      RecognitionResponseMapper.resolveKnowledgeReferences(
+        &decision,
+        candidates: catalogCandidates
+      )
+    }
+
+    var validationCandidates = knowledgeCandidates
+    Self.appendValidationCandidate(
+      forKey: decision.culturalElementKey,
+      from: catalogCandidates,
+      into: &validationCandidates
+    )
+    for alternative in decision.alternatives {
+      Self.appendValidationCandidate(
+        forKey: alternative.culturalElementKey,
+        from: catalogCandidates,
+        into: &validationCandidates
+      )
+    }
+
     try RecognitionResponseMapper.validate(
       decision,
-      candidates: knowledgeCandidates,
+      candidates: validationCandidates,
       attractions: attractionCandidates
     )
+
+    knowledge = Self.enriching(
+      knowledge,
+      withKeys: ([decision.culturalElementKey]
+        + decision.alternatives.map(\.culturalElementKey))
+        .filter { !$0.isEmpty },
+      store: store
+    )
+
     return RecognitionResponseMapper.mapResponse(
       requestID: requestID,
       usedPlaceContext: input.place != nil,
@@ -67,6 +102,36 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
       modelIdentifier: modelIdentifier,
       knowledge: knowledge
     )
+  }
+
+  private static func appendValidationCandidate(
+    forKey key: String,
+    from catalog: [KnowledgeCandidateContext],
+    into candidates: inout [KnowledgeCandidateContext]
+  ) {
+    guard !key.isEmpty else { return }
+    if candidates.contains(where: { $0.key.caseInsensitiveCompare(key) == .orderedSame }) {
+      return
+    }
+    if let match = catalog.first(where: { $0.key.caseInsensitiveCompare(key) == .orderedSame }) {
+      candidates.append(match)
+    }
+  }
+
+  private static func enriching(
+    _ knowledge: RecognitionKnowledgeSet,
+    withKeys keys: [String],
+    store: KnowledgeStore
+  ) -> RecognitionKnowledgeSet {
+    var enriched = knowledge
+    var seen = Set(knowledge.elements.map { $0.key.lowercased() })
+    for key in keys {
+      let lowered = key.lowercased()
+      guard seen.insert(lowered).inserted else { continue }
+      guard let element = store.recognitionElement(forKey: key) else { continue }
+      enriched = enriched.ensuringElement(element)
+    }
+    return enriched
   }
 
   private static func resolveLanguage(localeIdentifier: String) -> AppLanguage {

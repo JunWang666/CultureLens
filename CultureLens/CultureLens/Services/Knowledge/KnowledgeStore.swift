@@ -24,6 +24,21 @@ nonisolated func bundledResourceURL(
   return bundle.url(forResource: name, withExtension: ext)
 }
 
+/// Known knowledge-pack resource directories, in merge priority order.
+/// Earlier packs win on key collision. `KnowledgePackFallback` is last so the
+/// ODR / primary West Lake pack overrides the embedded duplicate.
+nonisolated enum KnowledgePackDirectory: String, CaseIterable, Sendable {
+  case westLake = "KnowledgePack"
+  case chineseHistory = "KnowledgePackChineseHistory"
+  case liangzhu = "KnowledgePackLiangzhu"
+  case zhejiangMuseum = "KnowledgePackZhejiangMuseum"
+  case fallback = "KnowledgePackFallback"
+
+  var subdirectoryCandidates: [String] {
+    [rawValue, "Resources/\(rawValue)"]
+  }
+}
+
 enum KnowledgeStoreError: LocalizedError {
   case packMissing
   case packInvalid(String)
@@ -46,9 +61,14 @@ enum KnowledgeStoreError: LocalizedError {
 /// instead of PostgreSQL.
 nonisolated struct KnowledgeStore: Sendable {
   static let defaultCandidateLimit = 12
-  static let maximumObjectLimit = 20
+  static let maximumObjectLimit = 48
   static let maximumGraphExpansionNodes = 48
   static let defaultRadiusMeters = 50_000.0
+  /// Pull unbound cultural nodes into the recognition prompt only when fewer
+  /// than this many nearby attractions are available.
+  static let minimumAttractionsBeforeCulturalFill = 3
+  /// Cap nearby attraction candidates sent to the model (nearest first).
+  static let maximumAttractionCandidates = 8
 
   let pack: KnowledgePack
 
@@ -56,6 +76,8 @@ nonisolated struct KnowledgeStore: Sendable {
   private let orderedElementKeys: [String]
   private let elementsByKey: [String: KnowledgePack.Element]
   private let elementKeysByID: [UUID: String]
+  /// Source pack `version` for each element key (first pack wins on collision).
+  private let packVersionByElementKey: [String: String]
   /// Directed pack relations in stable lexicographic order. Endpoint order and
   /// optional `kind` / `explanation` are preserved so typed edges stay usable
   /// downstream; adjacency treats them as undirected for BFS.
@@ -68,7 +90,7 @@ nonisolated struct KnowledgeStore: Sendable {
   private let incomingEdges: [String: [DirectedRelationEdge]]
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
 
-  init(pack: KnowledgePack) {
+  init(pack: KnowledgePack, packVersionByElementKey: [String: String] = [:]) {
     self.pack = pack
     elementsByKey = Dictionary(
       pack.elements.map { ($0.key, $0) },
@@ -78,6 +100,13 @@ nonisolated struct KnowledgeStore: Sendable {
       pack.elements.map { (DeterministicID.culturalElement($0.key), $0.key) },
       uniquingKeysWith: { first, _ in first }
     )
+    if packVersionByElementKey.isEmpty {
+      self.packVersionByElementKey = Dictionary(
+        uniqueKeysWithValues: pack.elements.map { ($0.key, pack.version) }
+      )
+    } else {
+      self.packVersionByElementKey = packVersionByElementKey
+    }
     orderedElementKeys = pack.elements
       .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
       .map(\.key)
@@ -117,26 +146,168 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
-  /// Loads `knowledge-pack.json` from the app bundle.
+  /// Loads and merges every discoverable `knowledge-pack.json` in `bundle`.
   static func load(bundle: Bundle = .main) throws -> KnowledgeStore {
-    guard
-      let url = bundledResourceURL(
-        "knowledge-pack",
-        "json",
-        subdirectory: "KnowledgePack",
-        bundle: bundle
+    let packs = try discoverPacks(in: bundle)
+    guard !packs.isEmpty else { throw KnowledgeStoreError.packMissing }
+    return store(merging: packs)
+  }
+
+  /// Builds a store from already-decoded packs (ODR + bundle merge).
+  static func store(merging packs: [KnowledgePack]) -> KnowledgeStore {
+    KnowledgeStore(
+      pack: mergePacks(packs),
+      packVersionByElementKey: packVersionsByElement(from: packs)
+    )
+  }
+
+  /// First-seen pack version for each element key.
+  static func packVersionsByElement(from packs: [KnowledgePack]) -> [String: String] {
+    var map: [String: String] = [:]
+    for pack in packs {
+      for element in pack.elements where map[element.key] == nil {
+        map[element.key] = pack.version
+      }
+    }
+    return map
+  }
+
+  /// Decodes packs from `bundle` in `KnowledgePackDirectory` priority order.
+  /// Duplicate directory names (e.g. Fallback after West Lake) are skipped when
+  /// their content would only repeat already-loaded keys — callers that need
+  /// raw per-pack lists should use this before `mergePacks`.
+  static func discoverPacks(in bundle: Bundle) throws -> [KnowledgePack] {
+    var packs: [KnowledgePack] = []
+    var seenVersions = Set<String>()
+    for directory in KnowledgePackDirectory.allCases {
+      guard let url = packURL(in: bundle, directory: directory) else { continue }
+      do {
+        let data = try Data(contentsOf: url)
+        let pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
+        // Skip Fallback when the primary West Lake pack (same version family)
+        // was already loaded from ODR / KnowledgePack.
+        if directory == .fallback, packs.contains(where: { $0.version == pack.version }) {
+          continue
+        }
+        if seenVersions.insert(pack.version).inserted {
+          packs.append(pack)
+        }
+      } catch let error as KnowledgeStoreError {
+        throw error
+      } catch {
+        throw KnowledgeStoreError.packInvalid(error.localizedDescription)
+      }
+    }
+    return packs
+  }
+
+  /// Merges packs; earlier entries win on element / attraction / introduction /
+  /// theme key collisions. Relations whose endpoints both survive are kept.
+  /// Locale overlays are unioned per language, with earlier packs winning keys.
+  static func mergePacks(_ packs: [KnowledgePack]) -> KnowledgePack {
+    guard let first = packs.first else {
+      return KnowledgePack(
+        version: "empty",
+        elements: [],
+        attractions: [],
+        relations: [],
+        introductions: []
       )
-    else {
-      throw KnowledgeStoreError.packMissing
     }
-    do {
-      let data = try Data(contentsOf: url)
-      return KnowledgeStore(pack: try JSONDecoder().decode(KnowledgePack.self, from: data))
-    } catch let error as KnowledgeStoreError {
-      throw error
-    } catch {
-      throw KnowledgeStoreError.packInvalid(error.localizedDescription)
+    if packs.count == 1 { return first }
+
+    var elements: [String: KnowledgePack.Element] = [:]
+    var attractions: [String: KnowledgePack.Attraction] = [:]
+    var introductions: [String: KnowledgePack.IntroductionRecord] = [:]
+    var themes: [String: KnowledgePack.Theme] = [:]
+    var relations: [KnowledgePack.Relation] = []
+    var seenRelation = Set<String>()
+    var locales: [String: KnowledgePack.LocaleOverlay] = [:]
+    var sourceLanguage = first.sourceLanguage
+
+    for pack in packs {
+      if sourceLanguage == nil { sourceLanguage = pack.sourceLanguage }
+      for element in pack.elements where elements[element.key] == nil {
+        elements[element.key] = element
+      }
+      for attraction in pack.attractions where attractions[attraction.key] == nil {
+        attractions[attraction.key] = attraction
+      }
+      for introduction in pack.introductions where introductions[introduction.key] == nil {
+        introductions[introduction.key] = introduction
+      }
+      for theme in pack.themes where themes[theme.key] == nil {
+        themes[theme.key] = theme
+      }
+      for relation in pack.relations {
+        let signature = [
+          relation.elementKey,
+          relation.relatedElementKey,
+          relation.kind ?? "",
+          relation.explanation ?? "",
+        ].joined(separator: "\u{1f}")
+        guard seenRelation.insert(signature).inserted else { continue }
+        relations.append(relation)
+      }
+      guard let packLocales = pack.locales else { continue }
+      for (language, overlay) in packLocales {
+        var merged = locales[language] ?? KnowledgePack.LocaleOverlay()
+        for (key, value) in overlay.elements where merged.elements[key] == nil {
+          merged.elements[key] = value
+        }
+        for (key, value) in overlay.attractions where merged.attractions[key] == nil {
+          merged.attractions[key] = value
+        }
+        for (key, value) in overlay.introductions where merged.introductions[key] == nil {
+          merged.introductions[key] = value
+        }
+        locales[language] = merged
+      }
     }
+
+    // Drop relations that point at elements lost to collision filtering.
+    relations = relations.filter {
+      elements[$0.elementKey] != nil && elements[$0.relatedElementKey] != nil
+    }
+    // Themes may reference keys from their home pack only; drop dangling keys.
+    let cleanedThemes = themes.values.map { theme in
+      KnowledgePack.Theme(
+        key: theme.key,
+        name: theme.name,
+        summary: theme.summary,
+        elementKeys: theme.elementKeys.filter { elements[$0] != nil },
+        minContacted: theme.minContacted
+      )
+    }
+    .filter { !$0.elementKeys.isEmpty }
+    .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+
+    let version = packs.map(\.version).joined(separator: "+")
+    return KnowledgePack(
+      version: version,
+      sourceLanguage: sourceLanguage,
+      elements: elements.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      attractions: attractions.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      relations: relations.sorted {
+        ($0.elementKey, $0.relatedElementKey) < ($1.elementKey, $1.relatedElementKey)
+      },
+      introductions: introductions.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      themes: cleanedThemes,
+      locales: locales.isEmpty ? nil : locales
+    )
+  }
+
+  private static func packURL(in bundle: Bundle, directory: KnowledgePackDirectory) -> URL? {
+    for subdirectory in directory.subdirectoryCandidates {
+      if let url = bundle.url(
+        forResource: "knowledge-pack",
+        withExtension: "json",
+        subdirectory: subdirectory
+      ) {
+        return url
+      }
+    }
+    return nil
   }
 
   /// Shared store cached on first access; `nil` when the bundle lacks a pack.
@@ -341,6 +512,36 @@ nonisolated struct KnowledgeStore: Sendable {
       edges: edges,
       maximumDepth: depthLimit,
       isExpansionTruncated: isTruncated
+    )
+  }
+
+  /// Lightweight candidate contexts for every element — used to backfill
+  /// `cultural_element_key` after recognition when the prompt only carried a
+  /// location-narrowed subset.
+  func catalogCandidateContexts() -> [KnowledgeCandidateContext] {
+    elements.map {
+      KnowledgeCandidateContext(
+        key: $0.key,
+        name: $0.name,
+        introduction: $0.introduction,
+        nearbyContexts: []
+      )
+    }
+  }
+
+  /// Builds a recognition element (with BFS graph) for a single pack key.
+  func recognitionElement(forKey key: String) -> RecognitionElement? {
+    guard let element = elementsByKey[key] else { return nil }
+    let graph = recognitionGraph(rootKey: key, maxDepth: 3, maxNodes: 32)
+    return RecognitionElement(
+      key: element.key,
+      name: element.name,
+      introduction: element.introduction,
+      nearbyContexts: [],
+      relatedElements: relatedElements(forKey: key, limit: Self.maximumObjectLimit),
+      graphElements: graph.elements,
+      graphRelations: graph.relations,
+      sources: packSources(forElementKey: key)
     )
   }
 
@@ -596,7 +797,7 @@ nonisolated struct KnowledgeStore: Sendable {
         latitude: latitude,
         longitude: longitude,
         radiusMeters: Self.defaultRadiusMeters,
-        limit: Self.maximumObjectLimit
+        limit: max(Self.maximumObjectLimit, pack.introductions.count)
       ).introductions
     }
 
@@ -608,6 +809,8 @@ nonisolated struct KnowledgeStore: Sendable {
     var attractionRoots: [String: String] = [:]
     var attractionNames: [String: String] = [:]
     var attractionBindings: [String: Set<String>] = [:]
+    var attractionCandidates: [AttractionCandidate] = []
+    var seenAttractions = Set<String>()
     for introduction in nearby {
       if attractionRoots[introduction.attractionKey] == nil {
         attractionRoots[introduction.attractionKey] = introduction.culturalElementKey
@@ -615,33 +818,34 @@ nonisolated struct KnowledgeStore: Sendable {
       }
       attractionBindings[introduction.attractionKey, default: []]
         .insert(introduction.culturalElementKey)
+      guard seenAttractions.insert(introduction.attractionKey).inserted else { continue }
+      guard attractionCandidates.count < Self.maximumAttractionCandidates else { continue }
+      attractionCandidates.append(
+        AttractionCandidate(
+          key: introduction.attractionKey,
+          name: introduction.attractionName,
+          culturalElementKey: attractionRoots[introduction.attractionKey]
+            ?? introduction.culturalElementKey,
+          summary: Self.richTextPlainText(introduction.introduction, separator: "\n\n"),
+          distanceMeters: introduction.distanceMeters,
+          sources: introduction.sources
+        )
+      )
     }
 
-    // Candidate priority: attraction root elements → nearby bound elements →
-    // remaining elements in (name, key) order.
-    var prioritizedKeys: [String] = []
-    var seen = Set<String>()
-    for introduction in nearby {
-      guard
-        let key = attractionRoots[introduction.attractionKey],
-        elementsByKey[key] != nil,
-        seen.insert(key).inserted
-      else { continue }
-      prioritizedKeys.append(key)
-    }
-    for introduction in nearby {
-      let key = introduction.culturalElementKey
-      guard elementsByKey[key] != nil, seen.insert(key).inserted else { continue }
-      prioritizedKeys.append(key)
-    }
-    for key in orderedElementKeys where seen.insert(key).inserted {
-      prioritizedKeys.append(key)
-    }
+    let selectedAttractionKeys = Set(attractionCandidates.map(\.key))
+    let prioritizedKeys = prioritizedRecognitionKeys(
+      nearby: nearby,
+      attractionRoots: attractionRoots,
+      selectedAttractionKeys: selectedAttractionKeys,
+      allowCulturalCatalogFill: attractionCandidates.count
+        < Self.minimumAttractionsBeforeCulturalFill,
+      limit: limit
+    )
 
-    let selectedKeys = prioritizedKeys.prefix(limit)
     var elements: [RecognitionElement] = []
-    elements.reserveCapacity(selectedKeys.count)
-    for key in selectedKeys {
+    elements.reserveCapacity(prioritizedKeys.count)
+    for key in prioritizedKeys {
       guard let element = elementsByKey[key] else { continue }
       var graph = recognitionGraph(rootKey: key, maxDepth: 3, maxNodes: 32)
       graph = appendAttractionBindings(
@@ -681,22 +885,6 @@ nonisolated struct KnowledgeStore: Sendable {
       )
     }
 
-    var attractionCandidates: [AttractionCandidate] = []
-    var seenAttractions = Set<String>()
-    for introduction in nearby where seenAttractions.insert(introduction.attractionKey).inserted {
-      attractionCandidates.append(
-        AttractionCandidate(
-          key: introduction.attractionKey,
-          name: introduction.attractionName,
-          culturalElementKey: attractionRoots[introduction.attractionKey]
-            ?? introduction.culturalElementKey,
-          summary: Self.richTextPlainText(introduction.introduction, separator: "\n\n"),
-          distanceMeters: introduction.distanceMeters,
-          sources: introduction.sources
-        )
-      )
-    }
-
     return RecognitionKnowledgeSet(
       version: pack.version,
       elements: elements,
@@ -705,6 +893,51 @@ nonisolated struct KnowledgeStore: Sendable {
       nearbyContextCount: nearby.count,
       locationMatched: !nearby.isEmpty
     )
+  }
+
+  /// Cultural-content candidates for the recognition prompt, nearest-first:
+  /// 1. Elements bound to the selected nearby attractions (roots, then others)
+  /// 2. Only when nearby attractions < 3: other in-radius elements by distance,
+  ///    then remaining catalog keys by name
+  private func prioritizedRecognitionKeys(
+    nearby: [NearbyAttractionIntroduction],
+    attractionRoots: [String: String],
+    selectedAttractionKeys: Set<String>,
+    allowCulturalCatalogFill: Bool,
+    limit: Int
+  ) -> [String] {
+    var prioritizedKeys: [String] = []
+    var seen = Set<String>()
+
+    func append(_ key: String) {
+      guard elementsByKey[key] != nil, seen.insert(key).inserted else { return }
+      prioritizedKeys.append(key)
+    }
+
+    let selectedNearby = nearby.filter { selectedAttractionKeys.contains($0.attractionKey) }
+
+    for introduction in selectedNearby {
+      if let key = attractionRoots[introduction.attractionKey] {
+        append(key)
+        if prioritizedKeys.count >= limit { return prioritizedKeys }
+      }
+    }
+    for introduction in selectedNearby {
+      append(introduction.culturalElementKey)
+      if prioritizedKeys.count >= limit { return prioritizedKeys }
+    }
+
+    guard allowCulturalCatalogFill else { return prioritizedKeys }
+
+    for introduction in nearby {
+      append(introduction.culturalElementKey)
+      if prioritizedKeys.count >= limit { return prioritizedKeys }
+    }
+    for key in orderedElementKeys {
+      append(key)
+      if prioritizedKeys.count >= limit { return prioritizedKeys }
+    }
+    return prioritizedKeys
   }
 
   // MARK: - Graph traversal (postgres.go recognitionGraph / appendAttractionBindings)

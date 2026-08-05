@@ -179,8 +179,9 @@ struct AppRootView: View {
             if let object = sessionStore.object(id: id)
                 ?? historyObject(id: id)
                 ?? SampleCultureData.object(id: id)
+                ?? knowledgeObject(id: id)
             {
-                ObjectDetailView(object: object)
+                ScanResultView(knowledgeObject: object)
             } else {
                 ContentUnavailableView("未找到对象", systemImage: "questionmark.circle")
             }
@@ -189,13 +190,18 @@ struct AppRootView: View {
                 ?? historyConcept(id: id)
                 ?? SampleCultureData.concept(id: id)
             {
-                ConceptDetailView(concept: concept)
+                ScanResultView(
+                    knowledgeObject: CultureObject(
+                        knowledgeConcept: concept,
+                        elementKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+                    )
+                )
             } else {
                 ContentUnavailableView("未找到文化关系", systemImage: "point.3.connected.trianglepath.dotted")
             }
         case .knowledgeElement(let key):
-            if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
-                ConceptDetailView(concept: concept, elementKey: key)
+            if let element = KnowledgeStore.shared?.element(key: key) {
+                ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
             } else {
                 ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
             }
@@ -203,7 +209,8 @@ struct AppRootView: View {
             AskCultureView(
                 object: sessionStore.object(id: objectID)
                     ?? historyObject(id: objectID)
-                    ?? SampleCultureData.object(id: objectID),
+                    ?? SampleCultureData.object(id: objectID)
+                    ?? knowledgeObject(id: objectID),
                 rationale: askRationale(for: objectID)
             )
         case .chat:
@@ -217,11 +224,11 @@ struct AppRootView: View {
         case .scanCandidate(let sessionID, let candidateID):
             if
                 let session = sessionStore.session(id: sessionID),
-                let candidate = session.result.displayAttractionCandidates.first(
+                let candidate = session.result.alternatives.first(
                     where: { $0.id == candidateID }
                 )
             {
-                ScanCandidateDetailView(session: session, candidate: candidate)
+                ScanResultView(session: session, candidate: candidate)
             } else {
                 ContentUnavailableView("候选已过期", systemImage: "clock.badge.exclamationmark")
             }
@@ -248,6 +255,11 @@ struct AppRootView: View {
         historyRecords.lazy
             .compactMap(\.savedObject)
             .first { $0.id == id }
+    }
+
+    /// 知识库元素按确定性 id 解析为展示对象（图谱节点追问/详情兜底）。
+    private func knowledgeObject(id: UUID) -> CultureObject? {
+        KnowledgeStore.shared?.element(id: id).map(CultureObject.init(knowledgeElement:))
     }
 
     private func historyConcept(id: UUID) -> CultureConcept? {

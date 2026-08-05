@@ -365,10 +365,23 @@ nonisolated struct LLMGatewayClient: Sendable {
       "stream": true,
       "messages": messages,
     ]
-    if let reasoningEffort {
+    Self.applyReasoning(&body, reasoningEffort: reasoningEffort)
+    return try JSONSerialization.data(withJSONObject: body)
+  }
+
+  /// Wire format for gateway reasoning controls.
+  /// Disable must be exactly `thinking: { "type": "disabled" }` — not `reasoning_effort: "none"`.
+  static func applyReasoning(
+    _ body: inout [String: Any],
+    reasoningEffort: LLMReasoningEffort?
+  ) {
+    guard let reasoningEffort else { return }
+    switch reasoningEffort {
+    case .disabled:
+      body["thinking"] = ["type": "disabled"]
+    case .low:
       body["reasoning_effort"] = reasoningEffort.rawValue
     }
-    return try JSONSerialization.data(withJSONObject: body)
   }
 
   private func completeFreeform(
@@ -386,9 +399,7 @@ nonisolated struct LLMGatewayClient: Sendable {
       "model": config.model,
       "messages": messages,
     ]
-    if let reasoningEffort {
-      body["reasoning_effort"] = reasoningEffort.rawValue
-    }
+    Self.applyReasoning(&body, reasoningEffort: reasoningEffort)
     request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
     let data: Data
@@ -546,7 +557,8 @@ nonisolated struct ChatTurn: Sendable, Hashable {
 }
 
 nonisolated enum LLMReasoningEffort: String, Sendable {
-  case none
+  /// Emits `thinking: { "type": "disabled" }` (literal `disabled` required by upstream).
+  case disabled
   case low
 }
 

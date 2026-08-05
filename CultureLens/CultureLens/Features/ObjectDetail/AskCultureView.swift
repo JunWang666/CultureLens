@@ -74,8 +74,8 @@ struct AskCultureView: View {
       return .systemAction(url)
     })
     .navigationDestination(item: $selectedCitationKey) { key in
-      if let concept = KnowledgeStore.shared?.cultureConcept(elementKey: key) {
-        ConceptDetailView(concept: concept, elementKey: key)
+      if let element = KnowledgeStore.shared?.element(key: key) {
+        ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
       } else {
         ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
       }
@@ -233,7 +233,10 @@ struct AskCultureView: View {
           }
         }
 
-        if message.role == .assistant, !message.citations.isEmpty, !message.isStreaming {
+        if message.role == .assistant,
+          !message.citations.existingInKnowledgeBase().isEmpty,
+          !message.isStreaming
+        {
           KnowledgeCitationCardsView(citations: message.citations) { citation in
             selectedCitationKey = citation.key
           }
@@ -248,7 +251,7 @@ struct AskCultureView: View {
     if message.isStreaming { return true }
     if !message.text.isEmpty { return true }
     // Finished with citations only — skip the empty "正在组织回答…" bubble.
-    return message.citations.isEmpty
+    return message.citations.existingInKnowledgeBase().isEmpty
   }
 
   @ViewBuilder

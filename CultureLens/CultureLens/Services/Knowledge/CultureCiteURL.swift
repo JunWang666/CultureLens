@@ -13,30 +13,32 @@ enum CultureCiteURL {
 
   /// Resolves a knowledge-pack element key from a cite URL, falling back to
   /// name lookup in the loaded knowledge store.
+  ///
+  /// When `store` is provided, the key must exist in the pack; otherwise returns
+  /// `nil` so callers do not navigate to a missing node.
   static func elementKey(from url: URL, store: KnowledgeStore? = .shared) -> String? {
     guard isCiteURL(url) else { return nil }
     let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
 
+    let resolved: String?
     if let key = firstValue(["elementKey", "citationKey"], in: items), !key.isEmpty {
-      return key
-    }
-
-    if let marker = firstValue(["citationMarker"], in: items),
+      resolved = key
+    } else if let marker = firstValue(["citationMarker"], in: items),
       marker != citationMarker,
       looksLikeElementKey(marker)
     {
-      return marker
+      resolved = marker
+    } else if let a11y = firstValue(["citationA11yValue"], in: items),
+      let key = keyEmbedded(in: a11y)
+    {
+      resolved = key
+    } else if let title = firstValue(["citationTitle"], in: items), !title.isEmpty {
+      resolved = store?.elementKey(matchingName: title)
+    } else {
+      resolved = nil
     }
 
-    if let a11y = firstValue(["citationA11yValue"], in: items) {
-      if let key = keyEmbedded(in: a11y) { return key }
-    }
-
-    if let title = firstValue(["citationTitle"], in: items), !title.isEmpty {
-      return store?.elementKey(matchingName: title)
-    }
-
-    return nil
+    return existingElementKey(resolved, store: store)
   }
 
   static func route(from url: URL, store: KnowledgeStore? = .shared) -> AppRoute? {
@@ -163,6 +165,12 @@ enum CultureCiteURL {
       title = displayName(for: key, store: store) ?? (key.isEmpty ? String(localized: "来源") : key)
     }
 
+    let resolvedKey = key.isEmpty ? linkText : key
+    guard let existingKey = existingElementKey(resolvedKey, store: store) else {
+      // Missing pack target: keep readable title, drop the navigable cite chip.
+      return title
+    }
+
     var a11y = (params["citationA11yValue"] ?? "")
       .trimmingCharacters(in: .whitespacesAndNewlines)
     if a11y.isEmpty || looksLikeElementKey(a11y) {
@@ -170,7 +178,7 @@ enum CultureCiteURL {
     }
 
     return makeCiteMarkdown(
-      elementKey: key.isEmpty ? linkText : key,
+      elementKey: existingKey,
       title: title,
       a11y: a11y
     )
@@ -182,11 +190,12 @@ enum CultureCiteURL {
     store: KnowledgeStore?
   ) -> String? {
     guard looksLikeElementKey(elementKey) else { return nil }
+    guard let existingKey = existingElementKey(elementKey, store: store) else { return nil }
     let title =
       titleHint?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
-      ?? displayName(for: elementKey, store: store)
-      ?? elementKey
-    return makeCiteMarkdown(elementKey: elementKey, title: title, a11y: title)
+      ?? displayName(for: existingKey, store: store)
+      ?? existingKey
+    return makeCiteMarkdown(elementKey: existingKey, title: title, a11y: title)
   }
 
   private static func makeCiteMarkdown(
@@ -204,6 +213,18 @@ enum CultureCiteURL {
   private static func displayName(for key: String, store: KnowledgeStore?) -> String? {
     guard !key.isEmpty else { return nil }
     return store?.element(key: key)?.name
+  }
+
+  /// When `store` is nil (unit tests), accept any non-empty key; otherwise require
+  /// the element to exist in the loaded pack.
+  private static func existingElementKey(
+    _ key: String?,
+    store: KnowledgeStore?
+  ) -> String? {
+    guard let key, !key.isEmpty else { return nil }
+    guard let store else { return key }
+    if store.element(key: key) != nil { return key }
+    return nil
   }
 
   // MARK: - Helpers

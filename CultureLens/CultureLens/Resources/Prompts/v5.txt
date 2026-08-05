@@ -10,12 +10,12 @@
 - 每个文化知识项使用稳定 key、名称和审核介绍；nearby_contexts 是约略位置附近的景点现场介绍，只能辅助理解场景。
 - 文化知识项不是界面里的景点候选。界面候选只由服务端从 nearby_contexts 去重生成；如果 nearby_contexts 为空，不要为了填候选而把文化知识项当作景点。
 - 先逐项比较图片中的可见形制、材质、纹样、结构、工艺或文字与候选，再考虑未收录对象。
-- 命中文化内容候选时，cultural_element_key 与 canonical_name 必须来自同一条候选：key 原样返回该候选的 key，canonical_name 必须逐字使用该候选的 name。禁止把 A 候选的 key 与 B 候选的 name 拼接，也禁止把景点名、景名、介绍标题或其他相近名称填进 canonical_name。
-- 图片不属于任何候选，或者请求没有候选时，cultural_element_key 返回空字符串；不得捏造、改写或返回候选集合之外的 key。此时 canonical_name 才可用自拟中文名，无法可靠判断时用“其他”。
+- 命中文化内容候选时，cultural_element_key 与 canonical_name 必须来自同一条候选：key 原样返回该候选的 key，canonical_name 必须逐字使用该候选的 name。禁止只填名字而把 cultural_element_key 留空；禁止把 A 候选的 key 与 B 候选的 name 拼接，也禁止把景点名、景名、介绍标题或其他相近名称填进 canonical_name。
+- 图片不属于任何候选，或者请求没有候选时，cultural_element_key 返回空字符串；不得捏造、改写或返回候选集合之外的 key。此时 canonical_name 才可用自拟名称，无法可靠判断时用“其他”。
 - 候选和附近介绍都不是识别结论。不得为了命中内容库或符合地点而忽略明显冲突的视觉证据。
 - 多个候选都沾边时，选与当前画面可见证据最直接、最具体的一条；不要因为地点相近就把景名、夜景赏月概念或宏观文化景观塞给白天可见的实体目标。
 - 景点候选与文化内容候选是两套字段：attraction_key 只取自“可确认的附近景点候选”的 key；cultural_element_key / canonical_name 只取自文化内容候选。若同时确认景点，attraction_key 填景点 key，但 cultural_element_key 仍须配对其对应文化内容候选的 name，不得用景点 name 顶替。
-- 如果画面目标明确就是附近景点候选中的一个景点或地标，返回对应 attraction_key；如果只是景点周边的文化构件、历史人物或文化概念，attraction_key 必须为空。
+- 如果画面目标明确就是附近景点候选中的一个景点或地标，返回对应 attraction_key；如果只是景点内的展品、器物、纹样、构件或概念，attraction_key 必须为空（即使你能判断自己在哪个馆区）。
 - 没有可用的附近景点时，继续结合文化知识开放识别，并在证据不足时返回“其他”；不要捏造景点名称。
 - 备选也遵守相同的 cultural_element_key 与 canonical_name 成对规则；备选不得复用主结果的 key 或同义名称。
 

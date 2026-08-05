@@ -19,19 +19,109 @@ nonisolated enum RecognitionResponseMapper {
     _ decision: inout ProviderRecognition,
     candidates: [KnowledgeCandidateContext]
   ) {
+    if decision.culturalElementKey.isEmpty {
+      decision.culturalElementKey = resolveElementKey(
+        forName: decision.canonicalName,
+        candidates: candidates
+      )
+    }
+    // Model often returns「其他」+ empty key when the exhibit was missing from the
+    // prompt candidates, while still describing it in summary/rationale.
+    if decision.culturalElementKey.isEmpty {
+      let fromText = resolveElementKey(
+        fromText: decision.summary + "\n" + decision.rationale,
+        candidates: candidates
+      )
+      if !fromText.isEmpty {
+        decision.culturalElementKey = fromText
+        if let matched = candidates.first(where: {
+          $0.key.caseInsensitiveCompare(fromText) == .orderedSame
+        }) {
+          decision.canonicalName = matched.name
+        }
+      }
+    }
+    for index in decision.alternatives.indices
+    where decision.alternatives[index].culturalElementKey.isEmpty {
+      decision.alternatives[index].culturalElementKey = resolveElementKey(
+        forName: decision.alternatives[index].canonicalName,
+        candidates: candidates
+      )
+    }
+  }
+
+  /// Exact normalized-name match first; otherwise a unique / closest candidate
+  /// whose name contains the query (or vice versa). Lets "玉琮" bind to "玉琮王".
+  static func resolveElementKey(
+    forName name: String,
+    candidates: [KnowledgeCandidateContext]
+  ) -> String {
+    let normalized = normalizeEntityName(name)
+    guard !normalized.isEmpty else { return "" }
+    // 「其他」/ Other is a schema sentinel, never a pack name.
+    if normalized == "其他" || normalized == "other" { return "" }
+
     var keyByName: [String: String] = [:]
     for candidate in candidates {
       keyByName[normalizeEntityName(candidate.name)] = candidate.key
     }
-    if decision.culturalElementKey.isEmpty {
-      decision.culturalElementKey =
-        keyByName[normalizeEntityName(decision.canonicalName)] ?? ""
+    if let exact = keyByName[normalized] { return exact }
+
+    let fuzzy = candidates.filter { candidate in
+      let candidateName = normalizeEntityName(candidate.name)
+      guard !candidateName.isEmpty else { return false }
+      return candidateName.contains(normalized) || normalized.contains(candidateName)
     }
-    for index in decision.alternatives.indices
-    where decision.alternatives[index].culturalElementKey.isEmpty {
-      decision.alternatives[index].culturalElementKey =
-        keyByName[normalizeEntityName(decision.alternatives[index].canonicalName)] ?? ""
+    guard !fuzzy.isEmpty else { return "" }
+    if fuzzy.count == 1 { return fuzzy[0].key }
+
+    // Prefer names that contain the query (玉琮 → 玉琮王 over unrelated short keys),
+    // then the smallest length gap so "玉琮王" beats "良渚玉琮王".
+    let containing = fuzzy.filter { normalizeEntityName($0.name).contains(normalized) }
+    let pool = containing.isEmpty ? fuzzy : containing
+    return pool.min { lhs, rhs in
+      let left = normalizeEntityName(lhs.name)
+      let right = normalizeEntityName(rhs.name)
+      let leftGap = abs(left.count - normalized.count)
+      let rightGap = abs(right.count - normalized.count)
+      if leftGap != rightGap { return leftGap < rightGap }
+      return (left, lhs.key) < (right, rhs.key)
+    }?.key ?? ""
+  }
+
+  /// Finds a catalog element mentioned in free text (summary / rationale).
+  /// Prefers the longest candidate name whose normalized form (or a prefix of
+  /// length ≥ 2) appears in the text — so「……玉琮……」binds to「玉琮王」.
+  static func resolveElementKey(
+    fromText text: String,
+    candidates: [KnowledgeCandidateContext]
+  ) -> String {
+    let normalizedText = normalizeEntityName(text)
+    guard !normalizedText.isEmpty else { return "" }
+
+    var bestKey = ""
+    var bestScore = 0
+    for candidate in candidates {
+      let name = normalizeEntityName(candidate.name)
+      guard name.count >= 2 else { continue }
+      var score = 0
+      if normalizedText.contains(name) {
+        score = name.count * 10
+      } else {
+        for length in stride(from: name.count - 1, through: 2, by: -1) {
+          let prefix = String(name.prefix(length))
+          if normalizedText.contains(prefix) {
+            score = length
+            break
+          }
+        }
+      }
+      if score > bestScore {
+        bestScore = score
+        bestKey = candidate.key
+      }
     }
+    return bestKey
   }
 
   // MARK: - validateDecision (pipeline.go:268-364)
@@ -109,9 +199,18 @@ nonisolated enum RecognitionResponseMapper {
     guard !key.isEmpty else { return true }
     for candidate in candidates
     where candidate.key.caseInsensitiveCompare(key) == .orderedSame {
-      return normalizeEntityName(name) == normalizeEntityName(candidate.name)
+      return namesAreCompatible(name, candidate.name)
     }
     return false
+  }
+
+  /// Exact match, or one normalized name contains the other (min length 2).
+  private static func namesAreCompatible(_ lhs: String, _ rhs: String) -> Bool {
+    let left = normalizeEntityName(lhs)
+    let right = normalizeEntityName(rhs)
+    if left == right { return true }
+    guard left.count >= 2, right.count >= 2 else { return false }
+    return left.contains(right) || right.contains(left)
   }
 
   // MARK: - mapResponse (pipeline.go:365-664)
@@ -149,7 +248,8 @@ nonisolated enum RecognitionResponseMapper {
           candidate,
           requestID: requestID,
           index: index,
-          elements: elementsByKey
+          elements: elementsByKey,
+          attractions: knowledge.attractionCandidates
         )
       )
     }
@@ -191,21 +291,28 @@ nonisolated enum RecognitionResponseMapper {
     elements: [String: RecognitionElement],
     attractions: [AttractionCandidate]
   ) -> (CultureObject, String) {
-    if !decision.attractionKey.isEmpty {
-      for attraction in attractions
-      where attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame {
-        if let element = elements[attraction.culturalElementKey.lowercased()] {
-          var object = knowledgeCultureObject(element: element, decision: decision)
-          object.canonicalName = attraction.name
-          return (object, "attraction")
-        }
-      }
-    }
+    // Cultural element wins over attraction. A model may set attraction_key for
+    // "I'm at this museum" while the framed target is an exhibit (玉琮) with an
+    // empty cultural_element_key — that must stay unresolved/catalog-resolved,
+    // not collapse into the attraction root (之江馆区 / 馆史).
     if let element = elements[decision.culturalElementKey.lowercased()],
       !decision.culturalElementKey.isEmpty
     {
       return (knowledgeCultureObject(element: element, decision: decision), "resolved")
     }
+
+    if !decision.attractionKey.isEmpty {
+      for attraction in attractions
+      where attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame {
+        guard shouldResolveAsAttraction(decision: decision, attraction: attraction),
+          let element = elements[attraction.culturalElementKey.lowercased()]
+        else { continue }
+        var object = knowledgeCultureObject(element: element, decision: decision)
+        object.canonicalName = attraction.name
+        return (object, "attraction")
+      }
+    }
+
     return (
       CultureObject(
         id: DeterministicID.v5(
@@ -224,6 +331,26 @@ nonisolated enum RecognitionResponseMapper {
       ),
       "unresolved"
     )
+  }
+
+  /// Attraction mapping only when the visual target *is* the place (name match
+  /// or spatial category), not when attraction_key is merely scene context.
+  private static func shouldResolveAsAttraction(
+    decision: ProviderRecognition,
+    attraction: AttractionCandidate
+  ) -> Bool {
+    if normalizeEntityName(decision.canonicalName) == normalizeEntityName(attraction.name) {
+      return true
+    }
+    if !decision.culturalElementKey.isEmpty,
+      decision.culturalElementKey.caseInsensitiveCompare(attraction.culturalElementKey)
+        == .orderedSame
+    {
+      return true
+    }
+    return decision.category == "空间"
+      && (decision.canonicalName == "其他" || decision.canonicalName.lowercased() == "other"
+        || normalizeEntityName(decision.canonicalName) == normalizeEntityName(attraction.name))
   }
 
   private static func knowledgeCultureObject(
@@ -304,7 +431,8 @@ nonisolated enum RecognitionResponseMapper {
     _ candidate: ProviderCandidate,
     requestID: String,
     index: Int,
-    elements: [String: RecognitionElement]
+    elements: [String: RecognitionElement],
+    attractions: [AttractionCandidate]
   ) -> RecognitionCandidate {
     let category = ObjectCategory(rawValue: candidate.category) ?? .other
     let symbol = artworkSymbol(for: candidate.category)
@@ -319,11 +447,20 @@ nonisolated enum RecognitionResponseMapper {
       resolutionStatus = "resolved"
     }
 
+    // 视觉备选的名称与附近景点候选一致时，视为命中该景点并带上景点 key。
+    // 注意不能按文化元素 key 匹配：景点绑定的元素往往是文化概念（如
+    // “西湖塔影与湖山构景”），命中元素不等于备选本身是景点。
+    let normalizedName = normalizeEntityName(candidate.canonicalName)
+    let attractionKey = attractions.first {
+      normalizeEntityName($0.name) == normalizedName
+    }?.key
+
     return RecognitionCandidate(
       id: DeterministicID.v5(
         name: requestID + ":visual:" + String(index) + ":"
           + candidate.canonicalName.lowercased()
       ),
+      attractionKey: attractionKey,
       culturalElementKey: candidate.culturalElementKey.isEmpty
         ? nil
         : candidate.culturalElementKey,

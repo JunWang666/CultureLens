@@ -5,6 +5,9 @@ struct KnowledgeCitationCardsView: View {
   let citations: [KnowledgeCitation]
   private let selection: Selection
 
+  /// 引文部分默认折叠，点按标题展开。
+  @State private var isExpanded = false
+
   private enum Selection {
     case action((KnowledgeCitation) -> Void)
     case appRoute
@@ -22,22 +25,51 @@ struct KnowledgeCitationCardsView: View {
     self.selection = .appRoute
   }
 
-  var body: some View {
-    VStack(alignment: .leading, spacing: 10) {
-      Text("引用来源")
-        .font(.subheadline.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkPrimary)
+  /// Only citations whose element key exists in the loaded knowledge pack.
+  private var visibleCitations: [KnowledgeCitation] {
+    citations.existingInKnowledgeBase()
+  }
 
-      ForEach(citations) { citation in
-        citationCard(citation)
+  var body: some View {
+    let visible = visibleCitations
+    if !visible.isEmpty {
+      VStack(alignment: .leading, spacing: 10) {
+        Button {
+          withAnimation(.easeInOut(duration: 0.2)) {
+            isExpanded.toggle()
+          }
+        } label: {
+          HStack(spacing: 6) {
+            Text("引用来源")
+              .font(.subheadline.weight(.semibold))
+              .foregroundStyle(CultureTheme.inkPrimary)
+            Text("\(visible.count)")
+              .font(.caption.weight(.medium))
+              .foregroundStyle(CultureTheme.inkSecondary)
+            Spacer(minLength: 0)
+            Image(systemName: "chevron.right")
+              .font(.caption.weight(.semibold))
+              .foregroundStyle(CultureTheme.inkSecondary.opacity(0.75))
+              .rotationEffect(.degrees(isExpanded ? 90 : 0))
+          }
+          .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint(isExpanded ? "折叠引用来源" : "展开引用来源")
+
+        if isExpanded {
+          ForEach(visible) { citation in
+            citationCard(citation)
+          }
+        }
       }
+      .padding(12)
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .background(
+        CultureTheme.antiqueGold.opacity(0.08),
+        in: RoundedRectangle(cornerRadius: 16, style: .continuous)
+      )
     }
-    .padding(12)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.antiqueGold.opacity(0.08),
-      in: RoundedRectangle(cornerRadius: 16, style: .continuous)
-    )
   }
 
   @ViewBuilder

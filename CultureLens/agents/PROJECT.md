@@ -19,16 +19,17 @@
 
 - UI 文案：`Localizable.xcstrings`（zh-Hans / en），语言偏好在「我的」页。纯 `String` 文案经 `String(localized:)` / `LocalizedStringKey` 接入目录；构建后用 `xcstringstool sync`（配合 DerivedData 里的 `.stringsdata`）同步新 key。
 - LLM（识别 `dynamic/culturelens`、讲解/问答 `dynamic/chat`）：按目标语言直接生成；见 `PromptLanguagePolicy`。
-- 知识包：`source_language` + `locales` overlay；译文暂缺时详情页用 `dynamic/chat` 即时翻译（`KnowledgeTranslationService`，`reasoning_effort: none`），翻译期间显示骨架屏（`SkeletonViews`），译好后直接展示，不再先显示原文再替换。设计见 `agents/design/0005`。
+- 知识包：`source_language` + `locales` overlay；译文暂缺时详情页用 `dynamic/chat` 即时翻译（`KnowledgeTranslationService`，`thinking: { type: "disabled" }`），翻译期间显示骨架屏（`SkeletonViews`），译好后直接展示，不再先显示原文再替换。设计见 `agents/design/0005`。
 
 ## 知识包与 ODR 分包
 
-- 数据文件：`CultureLens/Resources/KnowledgePack/`（knowledge-pack.json + pack-manifest.json），打 ODR tag `knowledge-base`，App Store 托管。
-- 当前为 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`），随 App 首装下发；将来移除该设置即切换为按需下载，实现按地域拆包分发。
-- 内置回退：`Resources/KnowledgePackFallback/`（同内容副本，不打 tag），保证首启与离线可用。
-- 运行时：`Services/Knowledge/KnowledgePackLoader.swift` 用 `NSBundleResourceRequest` 优先取 ODR 包，失败回退内置副本。
-- 知识包当前以仓库内 JSON 为源；需要更新时直接编辑 `Resources/KnowledgePack/`（及 fallback 副本）并同步 `pack-manifest.json`。
-- 后续可按地域/主题拆多包（每包一个 ODR tag），结构已预留。
+- 数据文件：
+  - `Resources/KnowledgePack/`（西湖）打 ODR tag `knowledge-base`，App Store 托管。
+  - `Resources/KnowledgePackLiangzhu/`、`KnowledgePackZhejiangMuseum/`、`KnowledgePackChineseHistory/` 作为普通 bundle 资源打进 App（多包合并）。
+- 当前西湖包为 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`）；将来可按地域拆独立 ODR tag。
+- 内置回退：`Resources/KnowledgePackFallback/`（西湖副本，不打 tag），保证首启与离线可用。
+- 运行时：`KnowledgePackLoader` 取 ODR 西湖包，再与 bundle 内其余包 `KnowledgeStore.mergePacks` 合并；键冲突时先到先得（西湖 / 良渚优先于浙博同名 `shi-xingeng-discovery`）。
+- 知识包当前以仓库内 JSON 为源；需要更新时编辑对应目录并同步 `pack-manifest.json`。
 
 ## 抽象轴与图谱渲染（0006 / 0007）
 

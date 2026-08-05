@@ -198,7 +198,7 @@ nonisolated actor KnowledgeTranslationService {
     let (content, _) = try await client.completeText(
       systemPrompt: system,
       userText: user,
-      reasoningEffort: .none
+      reasoningEffort: .disabled
     )
     let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
     let jsonSlice = Self.extractJSONObject(from: trimmed) ?? trimmed

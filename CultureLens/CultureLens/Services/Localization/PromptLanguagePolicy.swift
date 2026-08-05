@@ -22,7 +22,7 @@ nonisolated struct PromptLanguagePolicy: Sendable {
       输出语言：
       - 所有面向用户的文字使用简体中文。
       - category 枚举值必须仍使用中文词（建筑构件 / 器物 / 纹样 / 展品 / 空间 / 其他），这是机器字段。
-      - 命中文化内容候选时，canonical_name 必须逐字复制候选 name（即使它与输出语言不同）。
+      - 命中文化内容候选时，cultural_element_key 必须原样返回该候选 key（禁止只填名字而留空），canonical_name 必须逐字复制候选 name（即使它与输出语言不同）。
       - 未命中候选时，canonical_name、summary、rationale、uncertainty、time_period、region 使用简体中文。
       """
     case .english:
@@ -30,7 +30,7 @@ nonisolated struct PromptLanguagePolicy: Sendable {
       Output language:
       - Write all user-facing free text in English (summary, rationale, uncertainty, time_period, region, explanations, chat answers).
       - category enum values MUST remain the Chinese tokens from the schema (建筑构件 / 器物 / 纹样 / 展品 / 空间 / 其他); these are machine codes.
-      - When a cultural-content candidate matches, canonical_name MUST copy that candidate's name verbatim (even if the name is Chinese).
+      - When a cultural-content candidate matches, cultural_element_key MUST be that candidate's key (never leave it empty while inventing a name); canonical_name MUST copy that candidate's name verbatim (even if the name is Chinese).
       - When no candidate matches, invent English names for canonical_name; use "Other" only in summary/rationale prose — category must still be "其他" when unrecognized.
       - Knowledge-base fragments may be Simplified Chinese; translate their meaning into English in the answer, but citation excerpts must stay continuous verbatim quotes from the provided fragment text.
       """

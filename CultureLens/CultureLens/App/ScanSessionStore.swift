@@ -19,9 +19,16 @@ final class ScanSessionStore {
     }
 
     func object(id: CultureObject.ID) -> CultureObject? {
-        sessions.values.lazy
-            .map(\.result.object)
-            .first { $0.id == id }
+        for session in sessions.values {
+            if session.result.object.id == id {
+                return session.result.object
+            }
+            // 候选详情页的对象来自 alternatives（景点候选与视觉备选）。
+            if let candidate = session.result.alternatives.first(where: { $0.id == id }) {
+                return candidate.cultureObject
+            }
+        }
+        return nil
     }
 
     func concept(id: CultureConcept.ID) -> CultureConcept? {

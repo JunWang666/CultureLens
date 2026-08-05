@@ -3,6 +3,8 @@ import Observation
 
 nonisolated enum ScanLocationSource: Sendable {
     case currentDevice
+    /// Already resolved during capture review (device GPS or photo EXIF).
+    case resolved(PlaceContext)
     case photoMetadata(PlaceContext?)
     case none
 }
@@ -74,6 +76,8 @@ final class ScanCoordinator {
                         place = nil
                         locationNotice = error.localizedDescription
                     }
+                case .resolved(let recordedPlace):
+                    place = recordedPlace
                 case .photoMetadata(let recordedPlace):
                     place = recordedPlace
                     locationNotice = recordedPlace == nil

@@ -85,6 +85,16 @@ nonisolated struct KnowledgeCitation: Identifiable, Codable, Hashable, Sendable 
   }
 }
 
+extension Array where Element == KnowledgeCitation {
+  /// Drops citations whose element key is not in the loaded knowledge pack.
+  /// When the store is unavailable, returns an empty list so UI never links to
+  /// unverified targets.
+  func existingInKnowledgeBase(store: KnowledgeStore? = .shared) -> [KnowledgeCitation] {
+    guard let store else { return [] }
+    return filter { store.element(key: $0.key) != nil }
+  }
+}
+
 /// Knowledge-aware cultural background constrained to knowledge-base fragments.
 nonisolated struct PersonalizedExplanation: Hashable, Sendable {
   let markdown: String

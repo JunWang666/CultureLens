@@ -140,6 +140,22 @@ nonisolated struct RecognitionKnowledgeSet: Sendable {
   let totalElements: Int
   let nearbyContextCount: Int
   let locationMatched: Bool
+
+  /// Appends `element` when its key is missing so post-prompt catalog binding
+  /// can still map a resolved object with graph edges.
+  func ensuringElement(_ element: RecognitionElement) -> RecognitionKnowledgeSet {
+    if elements.contains(where: { $0.key.caseInsensitiveCompare(element.key) == .orderedSame }) {
+      return self
+    }
+    return RecognitionKnowledgeSet(
+      version: version,
+      elements: elements + [element],
+      attractionCandidates: attractionCandidates,
+      totalElements: totalElements,
+      nearbyContextCount: nearbyContextCount,
+      locationMatched: locationMatched
+    )
+  }
 }
 
 // MARK: - LLM prompt contexts (recognition/types.go JSON shapes)

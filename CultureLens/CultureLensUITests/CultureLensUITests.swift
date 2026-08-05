@@ -46,14 +46,8 @@ final class CultureLensUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["result.title"].waitForExistence(timeout: 7))
 
-        let save = app.buttons["result.save"]
-        for _ in 0..<8 where !save.isHittable {
-            app.swipeUp()
-        }
-        XCTAssertTrue(save.waitForExistence(timeout: 3))
-        XCTAssertTrue(save.isHittable)
-        save.tap()
-        XCTAssertTrue(app.staticTexts["已加入文化图谱"].waitForExistence(timeout: 3))
+        // 访问结果页即自动写入扫描历史并加入文化图谱，无需手动保存。
+        XCTAssertTrue(app.staticTexts["已加入文化图谱"].waitForExistence(timeout: 5))
     }
 
     @MainActor

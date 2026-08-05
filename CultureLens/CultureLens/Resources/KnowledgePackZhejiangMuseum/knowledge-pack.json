@@ -1596,7 +1596,7 @@
   "attractions": [
     {
       "key": "zhijiang-campus",
-      "name": "之江馆区"
+      "name": "之江馆区与《浙江一万年》"
     },
     {
       "key": "gushan-campus",
@@ -1609,6 +1609,62 @@
     {
       "key": "sha-menghai-residence",
       "name": "沙孟海旧居"
+    },
+    {
+      "key": "fuchun-shanju-tu",
+      "name": "《富春山居图》与剩山图"
+    },
+    {
+      "key": "asoka-pagoda",
+      "name": "五代鎏金银阿育王塔"
+    },
+    {
+      "key": "liangzhu-cong-wang",
+      "name": "良渚玉琮王"
+    },
+    {
+      "key": "cong-ritual-jade",
+      "name": "琮：祭地的礼器"
+    },
+    {
+      "key": "hemudu-double-bird",
+      "name": "双鸟朝阳纹牙雕"
+    },
+    {
+      "key": "zhejiang-yue-sword",
+      "name": "越王者旨於睗剑"
+    },
+    {
+      "key": "cai-feng-ming-qi",
+      "name": "唐“彩凤鸣岐”七弦琴"
+    },
+    {
+      "key": "jiyue-bronze-house",
+      "name": "春秋伎乐铜屋"
+    },
+    {
+      "key": "longquan-boat-drip",
+      "name": "元龙泉窑舟形砚滴"
+    },
+    {
+      "key": "caisu-mud-bodhisattva",
+      "name": "北宋彩塑泥菩萨立像"
+    },
+    {
+      "key": "wan-gong-jiao",
+      "name": "民国万工轿"
+    },
+    {
+      "key": "zhang-cheng-red-lacquer",
+      "name": "张成剔红婴戏图盘"
+    },
+    {
+      "key": "hemudu-painted-pottery",
+      "name": "河姆渡绘纹陶器"
+    },
+    {
+      "key": "hemudu-bone-plough",
+      "name": "河姆渡骨耜"
     }
   ],
   "introductions": [
@@ -1638,8 +1694,8 @@
       "longitude": 120.0975
     },
     {
-      "key": "zhijiang-campus.fuchun-shanshui",
-      "name": "山水之间：富春山居图数字展",
+      "key": "fuchun-shanju-tu.on-display",
+      "name": "剩山图展陈",
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -1658,7 +1714,7 @@
         ]
       },
       "culturalElementKey": "fuchun-shanju-tu",
-      "attractionKey": "zhijiang-campus",
+      "attractionKey": "fuchun-shanju-tu",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
@@ -1738,8 +1794,8 @@
       "longitude": 120.13888889
     },
     {
-      "key": "gushan-campus.leifeng-ta-wenwu",
-      "name": "雷峰塔文物陈列",
+      "key": "asoka-pagoda.on-display",
+      "name": "阿育王塔展陈",
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -1758,7 +1814,7 @@
         ]
       },
       "culturalElementKey": "asoka-pagoda",
-      "attractionKey": "gushan-campus",
+      "attractionKey": "asoka-pagoda",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
@@ -1861,6 +1917,279 @@
       "attractionKey": "sha-menghai-residence",
       "latitude": 30.2622,
       "longitude": 120.1519
+    },
+    {
+      "key": "liangzhu-cong-wang.on-display",
+      "name": "良渚玉琮王展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚玉琮王出自反山12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，被学界视为“琮王”，也是浙江省博物馆十大镇馆之宝之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山12号墓是良渚贵族墓地中最高等级的墓葬之一；除玉琮王外，该墓还出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米，头尾两端安有玉件，是军权、王权的象征。反山20号墓随葬玉器总计达547件，应为最高首领的墓葬。"
+          }
+        ]
+      },
+      "culturalElementKey": "liangzhu-cong-wang",
+      "attractionKey": "liangzhu-cong-wang",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "cong-ritual-jade.on-display",
+      "name": "琮礼器展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型方内洞圆，最早见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”。"
+          }
+        ]
+      },
+      "culturalElementKey": "cong-ritual-jade",
+      "attractionKey": "cong-ritual-jade",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "hemudu-double-bird.on-display",
+      "name": "双鸟朝阳纹牙雕展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双鸟朝阳纹牙雕是河姆渡文化线雕的代表作，也是浙江省博物馆十大镇馆之宝之一，属于新石器时代距今约6000至7000年的河姆渡先民之手。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这件牙雕长16.6厘米，残宽5.9厘米，厚1.2厘米，中心由五个同心圆组成太阳纹，圆外有火焰纹，两侧有钩喙昂首相望的双鸟；它是河姆渡遗址线雕技艺的最高代表。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-double-bird",
+      "attractionKey": "hemudu-double-bird",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhejiang-yue-sword.on-display",
+      "name": "越王者旨於睗剑展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗剑是春秋时期越国君主者旨於睗时期铸造的铜剑，也是浙江省博物馆十大镇馆之宝之一；者旨於睗虽在位仅六年，但曾大量铸造铜剑。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗也就是《史记》中记载的越王勾践之子鼫与，其名在《越绝书》作“与夷”，《竹书纪年》作“鹿郢”；根据《竹书纪年》，鹿郢在位六年，其在位的年代按公元纪年为公元前464年至公元前459年。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhejiang-yue-sword",
+      "attractionKey": "zhejiang-yue-sword",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "cai-feng-ming-qi.on-display",
+      "name": "彩凤鸣岐琴展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "唐·“彩凤鸣岐”七弦琴是浙江省博物馆十大镇馆之宝之一，是一张唐代制作的传世古琴，也是浙博古琴收藏中的代表性藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世珍宝；“彩凤鸣岐”正属于这批流传至今的唐琴之列。"
+          }
+        ]
+      },
+      "culturalElementKey": "cai-feng-ming-qi",
+      "attractionKey": "cai-feng-ming-qi",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "jiyue-bronze-house.on-display",
+      "name": "伎乐铜屋展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "春秋·伎乐铜屋是浙江省博物馆十大镇馆之宝之一，是一件以房屋与乐人为主题的青铜器，出自越国所在的绍兴一带。"
+          },
+          {
+            "type": "paragraph",
+            "text": "据史料记载，绍兴出土的伎乐铜屋内，有鼓师、琴师、瑟师和歌伎的陶俑，再现了当时越国人组合演唱的场景；它把一场两千多年前的“小型音乐会”凝固在青铜之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "jiyue-bronze-house",
+      "attractionKey": "jiyue-bronze-house",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "longquan-boat-drip.on-display",
+      "name": "龙泉窑舟形砚滴展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "元·龙泉窑舟形砚滴是浙江省博物馆十大镇馆之宝之一，是一件龙泉窑系的青瓷文房器，属于书斋里用来盛水研墨的小器皿。"
+          },
+          {
+            "type": "paragraph",
+            "text": "龙泉窑的鼎盛时期在南宋，改进釉料配方后创制出粉青、梅子青等品种；这件舟形砚滴以小舟为造型，正属于龙泉青瓷中文房用器的精品，既实用，也带着文人书斋的雅趣。"
+          }
+        ]
+      },
+      "culturalElementKey": "longquan-boat-drip",
+      "attractionKey": "longquan-boat-drip",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "caisu-mud-bodhisattva.on-display",
+      "name": "彩塑泥菩萨展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "北宋·彩塑泥菩萨立像是浙江省博物馆十大镇馆之宝之一，是一件宋代泥质彩塑的菩萨造像。"
+          },
+          {
+            "type": "paragraph",
+            "text": "比起青铜或瓷器，泥塑佛像更难保存；能有一件北宋的彩塑泥菩萨流传至今，本身就十分不易。它与五代吴越的佛教遗存一样，提醒你在浙博看造像时，注意宋代雕塑在材料与造型上的另一条路线。"
+          }
+        ]
+      },
+      "culturalElementKey": "caisu-mud-bodhisattva",
+      "attractionKey": "caisu-mud-bodhisattva",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "wan-gong-jiao.on-display",
+      "name": "万工轿展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "民国·万工轿是浙江省博物馆十大镇馆之宝之一，是宁绍“十里红妆”婚俗中最华重的一件嫁妆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宁海婚俗的嫁妆以朱金木雕为主，有“千工床、万工轿”之说；花轿常常采用梓木、香樟、银杏等木材制成，轻巧而有韧性，表面雕刻大量吉祥喜庆的图案，是朱金木雕工艺的代表作。"
+          }
+        ]
+      },
+      "culturalElementKey": "wan-gong-jiao",
+      "attractionKey": "wan-gong-jiao",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "zhang-cheng-red-lacquer.on-display",
+      "name": "张成剔红盘展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "张成剔红婴戏图盘是元代雕漆名家张成创作的漆器，堪称国宝级文物，是目前已知的4件“张成造”之一，也是浙江省博物馆漆器收藏中的顶级藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "元代雕漆名家张成创作的剔红婴戏图盘堪称国宝级文物，是目前已知的4件“张成造”之一；2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这件剔红婴戏图盘正在其中。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhang-cheng-red-lacquer",
+      "attractionKey": "zhang-cheng-red-lacquer",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "hemudu-painted-pottery.on-display",
+      "name": "河姆渡绘纹陶展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "河姆渡绘纹陶器是河姆渡文化先民手工制作、并在表面绘刻纹样的陶器，是了解河姆渡人生活与信仰的重要实物。它们厚实、呈灰黑色，表面常有绳纹或动植物图案。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡陶器为手工制作，十分厚实，呈灰黑色，表面常打磨，常有绳纹，或雕刻植物、动物图案。陶器上的绘画作品题材包括鸟、鱼、水稻、太阳、花草等，以鱼禾纹陶盆、稻穗纹陶盆、猪纹陶钵、五叶纹陶块为代表。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-painted-pottery",
+      "attractionKey": "hemudu-painted-pottery",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "hemudu-bone-plough.on-display",
+      "name": "河姆渡骨耜展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "骨耜是河姆渡遗址出土的骨制翻地农具，是河姆渡人翻地种稻的得力工具，也是“耜耕农业”的标志性器物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡遗址两次正式发掘出土的骨耜达200件左右；第二次正式发掘出土的4670件文物中，骨器占到了48.6%，可见骨器在河姆渡遗存中的分量之重。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-bone-plough",
+      "attractionKey": "hemudu-bone-plough",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhijiang-campus.visit",
+      "name": "之江馆区参观",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "之江馆区是浙江省博物馆的新主场，位于杭州之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。"
+          },
+          {
+            "type": "paragraph",
+            "text": "它的核心是常设展览“浙江一万年——浙江历史文化陈列”，位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，展览于2023年8月开幕；入选禁止出国（境）展览的五件（组）文物均位于这一展览之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhijiang-campus",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
     }
   ],
   "themes": [

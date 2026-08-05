@@ -219,11 +219,28 @@ nonisolated struct CultureChatService: Sendable {
       let name = current.name.trimmingCharacters(in: .whitespacesAndNewlines)
       let fragment = current.fragment.trimmingCharacters(in: .whitespacesAndNewlines)
       guard !key.isEmpty || !name.isEmpty else { return }
-      let resolvedKey = key.isEmpty ? name : key
+
+      let resolvedKey: String
+      let resolvedName: String
+      if let store {
+        if !key.isEmpty, store.element(key: key) != nil {
+          resolvedKey = key
+          resolvedName = name.isEmpty ? (store.element(key: key)?.name ?? key) : name
+        } else if let byName = store.elementKey(matchingName: name.isEmpty ? key : name) {
+          resolvedKey = byName
+          resolvedName = name.isEmpty ? (store.element(key: byName)?.name ?? byName) : name
+        } else {
+          return
+        }
+      } else {
+        resolvedKey = key.isEmpty ? name : key
+        resolvedName = name.isEmpty ? key : name
+      }
+
       citations.append(
         KnowledgeCitation(
           key: resolvedKey,
-          name: name.isEmpty ? key : name,
+          name: resolvedName,
           fragment: fragment,
           sources: store?.trustedSources(forElementKey: resolvedKey) ?? []
         )

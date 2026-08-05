@@ -417,6 +417,19 @@ struct CultureLensTests {
     #expect(body["model"] as? String == "dynamic/chat")
     #expect(body["stream"] as? Bool == true)
     #expect(body["reasoning_effort"] as? String == "low")
+    #expect(body["thinking"] == nil)
+  }
+
+  @Test func translationRequestDisablesThinkingWithLiteralDisabled() throws {
+    var body: [String: Any] = [
+      "model": "dynamic/chat",
+      "messages": [["role": "user", "content": "text"]],
+    ]
+    LLMGatewayClient.applyReasoning(&body, reasoningEffort: .disabled)
+
+    let thinking = try #require(body["thinking"] as? [String: Any])
+    #expect(thinking["type"] as? String == "disabled")
+    #expect(body["reasoning_effort"] == nil)
   }
 
   @Test func chatTurnEncodesMultimodalImageURLParts() throws {
@@ -566,6 +579,108 @@ struct CultureLensTests {
     #expect(!parsed.body.contains("为什么是它"))
     #expect(!parsed.body.contains("引用来源"))
     #expect(parsed.citations.map(\.key) == ["three-pools-mirroring-moon"])
+  }
+
+  @Test func citationParserDropsMissingKnowledgeTargets() {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "cite-filter-test",
+        elements: [
+          KnowledgePack.Element(
+            key: "three-pools-mirroring-moon",
+            name: "三潭印月",
+            introduction: emptyIntroduction
+          )
+        ],
+        attractions: [],
+        relations: [],
+        introductions: []
+      )
+    )
+    let markdown = """
+      正文。
+
+      ## 引用来源
+      - key: `three-pools-mirroring-moon`, name: 三潭印月
+        - 原文摘录：湖中石塔。
+      - key: `not-in-pack`, name: 虚构节点
+        - 原文摘录：不应展示。
+      """
+    let parsed = CultureChatService.parseAnswer(markdown, store: store)
+    #expect(parsed.citations.map(\.key) == ["three-pools-mirroring-moon"])
+
+    let missingURL = URL(
+      string:
+        "https://culturelens.local/cite?citationMarker=9F742443&citationTitle=x&citationA11yValue=x&elementKey=not-in-pack"
+    )!
+    #expect(CultureCiteURL.elementKey(from: missingURL, store: store) == nil)
+
+    let cleaned = CultureCiteURL.sanitizeInlineCitations(
+      "参见 not-in-pack 与 `three-pools-mirroring-moon`。",
+      store: store
+    )
+    #expect(!cleaned.contains("not-in-pack"))
+    #expect(cleaned.contains("elementKey=three-pools-mirroring-moon"))
+  }
+
+  @Test func themeProgressFiltersMissingElementKeys() {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "theme-filter-test",
+        elements: [
+          KnowledgePack.Element(
+            key: "a",
+            name: "甲",
+            introduction: emptyIntroduction
+          ),
+          KnowledgePack.Element(
+            key: "c",
+            name: "丙",
+            introduction: emptyIntroduction
+          ),
+        ],
+        attractions: [],
+        relations: [],
+        introductions: [],
+        themes: [
+          KnowledgePack.Theme(
+            key: "demo",
+            name: "演示",
+            summary: "摘要",
+            elementKeys: ["a", "missing", "c"],
+            minContacted: 2
+          )
+        ]
+      )
+    )
+    let theme = store.pack.themes[0]
+    let progress = ThemeProgressCalculator.progress(
+      for: theme,
+      contactedElementKeys: ["a", "missing"],
+      knowledgeStore: store
+    )
+    #expect(progress.elementKeys == ["a", "c"])
+    #expect(progress.contactedKeys == ["a"])
+    #expect(progress.remainingKeys == ["c"])
+    #expect(progress.requiredCount == 2)
+    #expect(!progress.isComplete)
+
+    let emptyTheme = ThemeProgressCalculator.progressList(
+      themes: [
+        KnowledgePack.Theme(
+          key: "gone",
+          name: "空",
+          summary: "",
+          elementKeys: ["missing-only"],
+          minContacted: 1
+        )
+      ],
+      contactedElementKeys: [],
+      knowledgeStore: store
+    )
+    #expect(emptyTheme.isEmpty)
   }
 
   @Test func cultureCiteURLResolvesElementKey() throws {
@@ -1076,6 +1191,67 @@ struct CultureLensTests {
     }
   }
 
+  @Test func mergePacksUnionsElementsAndDropsDanglingRelations() {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let west = KnowledgePack(
+      version: "west-v1",
+      elements: [
+        KnowledgePack.Element(key: "a", name: "甲", introduction: empty)
+      ],
+      attractions: [],
+      relations: [
+        KnowledgePack.Relation(elementKey: "a", relatedElementKey: "missing")
+      ],
+      introductions: [],
+      themes: [
+        KnowledgePack.Theme(
+          key: "t-west",
+          name: "西湖主题",
+          summary: "s",
+          elementKeys: ["a", "ghost"],
+          minContacted: 1
+        )
+      ]
+    )
+    let liangzhu = KnowledgePack(
+      version: "liangzhu-v1",
+      elements: [
+        KnowledgePack.Element(key: "jade-cong-wang", name: "玉琮王", introduction: empty),
+        KnowledgePack.Element(key: "a", name: "不应覆盖", introduction: empty),
+      ],
+      attractions: [],
+      relations: [
+        KnowledgePack.Relation(elementKey: "jade-cong-wang", relatedElementKey: "a")
+      ],
+      introductions: [],
+      themes: [
+        KnowledgePack.Theme(
+          key: "t-cong",
+          name: "玉琮",
+          summary: "s",
+          elementKeys: ["jade-cong-wang"],
+          minContacted: 1
+        )
+      ]
+    )
+
+    let merged = KnowledgeStore.mergePacks([west, liangzhu])
+    #expect(merged.version == "west-v1+liangzhu-v1")
+    #expect(merged.elements.count == 2)
+    #expect(merged.element(key: "a")?.name == "甲")
+    #expect(merged.elements.contains { $0.key == "jade-cong-wang" })
+    #expect(merged.relations.count == 1)
+    #expect(merged.relations[0].elementKey == "jade-cong-wang")
+    #expect(Set(merged.themes.map(\.key)) == ["t-west", "t-cong"])
+    #expect(merged.themes.first { $0.key == "t-west" }?.elementKeys == ["a"])
+  }
+
+}
+
+private extension KnowledgePack {
+  func element(key: String) -> Element? {
+    elements.first { $0.key == key }
+  }
 }
 
 private func makeGraphStore(

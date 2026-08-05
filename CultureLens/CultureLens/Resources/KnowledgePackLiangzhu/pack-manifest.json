@@ -1,12 +1,12 @@
 {
   "packVersion": "liangzhu-v2",
-  "generatedAt": "2026-08-05T08:01:46Z",
+  "generatedAt": "2026-08-05T11:21:38Z",
   "recordCounts": {
     "elements": 26,
     "relations": 80,
-    "introductions": 5,
-    "attractions": 3,
+    "introductions": 10,
+    "attractions": 10,
     "themes": 4
   },
-  "sha256": "8428b1a69bd362ebb66ec586e09b49dc2f2ec6d071971872e5210c046b6f0c72"
+  "sha256": "a9f4d6d8f3936ecfa66b1f9c82bc040fa3d6968acc90b9e62f9c10a2ee79a87b"
 }

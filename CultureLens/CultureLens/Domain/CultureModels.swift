@@ -65,7 +65,7 @@ struct CultureConcept: Identifiable, Codable, Hashable {
 }
 
 struct CultureObject: Identifiable, Codable, Hashable {
-  let id: UUID
+  var id: UUID
   var culturalElementKey: String? = nil
   var canonicalName: String
   var summary: String
@@ -100,6 +100,44 @@ struct CultureRelation: Identifiable, Codable, Hashable {
   var targetID: UUID
   var kind: RelationKind
   var explanation: String
+}
+
+extension CultureObject {
+  /// 知识库元素 → 展示用对象（图谱节点页、追问等场景复用扫描结果页）。
+  init(knowledgeElement element: KnowledgePack.Element) {
+    self.init(
+      id: DeterministicID.culturalElement(element.key),
+      culturalElementKey: element.key,
+      canonicalName: element.name,
+      summary: KnowledgeStore.richTextPlainText(element.introduction),
+      category: .other,
+      timePeriod: nil,
+      region: nil,
+      confidence: 1,
+      artworkSymbol: "sparkles",
+      concepts: [],
+      relations: [],
+      sources: element.sources.map { $0.asKnowledgeSource() }
+    )
+  }
+
+  /// 图谱概念 → 展示用对象。
+  init(knowledgeConcept concept: CultureConcept, elementKey: String?) {
+    self.init(
+      id: concept.id,
+      culturalElementKey: elementKey,
+      canonicalName: concept.name,
+      summary: concept.summary,
+      category: .other,
+      timePeriod: nil,
+      region: nil,
+      confidence: 1,
+      artworkSymbol: concept.kind.systemImage,
+      concepts: [],
+      relations: [],
+      sources: []
+    )
+  }
 }
 
 nonisolated struct PlaceContext: Codable, Hashable, Sendable {

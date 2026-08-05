@@ -956,10 +956,14 @@ struct OnDeviceRecognitionTests {
       explainSystemPrompt: """
         你是讲解助手。不要重复识别结论。
         - `掌握`：不复述基础定义。
+        - relation_dimensions 按 dimension 分组给出五类系统关联。
         输出格式（严格按此 Markdown 结构，不要包在 JSON 或代码块里）：
 
         ## 文化背景
         正文
+
+        ## 关联脉络
+        - 维度名：关联及意义
 
         ## 下一步建议
         - 建议一
@@ -1056,11 +1060,26 @@ struct OnDeviceRecognitionTests {
       userKnowledgeStates: [
         UserKnowledgeStateContext(key: "e2", name: "邻居", level: .master)
       ],
-      siteContext: "三潭印月"
+      siteContext: "三潭印月",
+      relationDimensions: [
+        RelationDimensionContext(
+          dimension: "历史时期",
+          key: "e3",
+          name: "北宋三潭",
+          relationKind: "产生于",
+          explanation: "与北宋疏浚治理史相连"
+        )
+      ]
     )
     #expect(explain.contains("按用户已有知识调整的文化背景讲解"))
     #expect(explain.contains("knowledge_fragments"))
     #expect(explain.contains("user_knowledge_states"))
+    #expect(explain.contains("\"relation_dimensions\":"))
+    #expect(explain.contains("\"dimension\":\"历史时期\""))
+    #expect(explain.contains("\"relation_kind\":\"产生于\""))
+    #expect(assembler.explainSystemPrompt.contains("## 文化背景"))
+    #expect(assembler.explainSystemPrompt.contains("## 关联脉络"))
+    #expect(assembler.explainSystemPrompt.contains("relation_dimensions"))
     #expect(assembler.explainSystemPrompt.contains("## 文化背景"))
     #expect(assembler.explainSystemPrompt.contains("## 下一步建议"))
     #expect(assembler.explainSystemPrompt.contains("`掌握`"))

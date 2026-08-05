@@ -62,6 +62,7 @@ nonisolated struct CultureExplanationService: Sendable {
           let fragments = self.knowledgeFragments(
             rootKey: rootKey,
             neighbors: axisContexts.neighbors,
+            relationDimensions: axisContexts.relationDimensions,
             store: store,
             object: result.object,
             siteContext: siteContext
@@ -80,6 +81,7 @@ nonisolated struct CultureExplanationService: Sendable {
             abstractionPath: axisContexts.abstractionPath,
             missingPrerequisites: axisContexts.missingPrerequisites,
             preferenceProfile: axisContexts.preferenceProfile,
+            relationDimensions: axisContexts.relationDimensions,
             userKnowledgeTotalCount: userKnowledgeStates.count
           )
           for try await event in self.gatewayClient.streamAsk(
@@ -111,8 +113,21 @@ nonisolated struct CultureExplanationService: Sendable {
     var abstractionPath: [AbstractionPathContext] = []
     var missingPrerequisites: [MissingPrerequisiteContext] = []
     var preferenceProfile: [PreferenceProfileContext] = []
+    var relationDimensions: [RelationDimensionContext] = []
     var relevantKnowledgeStates: [UserKnowledgeStateContext] = []
   }
+
+  /// Relation dimensions surfaced in the explanation's「关联脉络」section,
+  /// each mapped to the knowledge-pack relation kinds that answer it.
+  /// `产生于` is taken in both directions (orientation audit pending); the
+  /// edge explanation text carries the semantics.
+  private static let relationDimensionKinds: [(dimension: String, kinds: Set<RelationKind>)] = [
+    ("历史时期", [.emergedIn]),
+    ("地域文化", [.locatedIn]),
+    ("使用功能", [.usedFor]),
+    ("审美观念", [.expresses, .symbolizes, .influencedBy]),
+    ("相似对象", [.similarTo]),
+  ]
 
   private func axisContexts(
     rootKey: String?,
@@ -159,6 +174,23 @@ nonisolated struct CultureExplanationService: Sendable {
     let missing = store.missingPrerequisites(key: rootKey, known: knownKeys, maxCount: 3)
     contexts.missingPrerequisites = missing.map {
       MissingPrerequisiteContext(key: $0.key, name: $0.name, fragment: $0.excerpt)
+    }
+
+    // Relation dimensions: up to 2 edges per fixed dimension (历史时期 /
+    // 地域文化 / 使用功能 / 审美观念 / 相似对象).
+    for (dimension, kinds) in Self.relationDimensionKinds {
+      for edge in store.edges(key: rootKey, kinds: kinds).prefix(2) {
+        guard let element = store.element(key: edge.key) else { continue }
+        contexts.relationDimensions.append(
+          RelationDimensionContext(
+            dimension: dimension,
+            key: element.key,
+            name: element.name,
+            relationKind: edge.kind?.rawValue,
+            explanation: edge.explanation
+          )
+        )
+      }
     }
 
     // Neighbor slots by axis.
@@ -220,6 +252,7 @@ nonisolated struct CultureExplanationService: Sendable {
     var relevantKeys = Set(chosen.map(\.key))
     relevantKeys.formUnion(contexts.abstractionPath.map(\.key))
     relevantKeys.formUnion(contexts.missingPrerequisites.map(\.key))
+    relevantKeys.formUnion(contexts.relationDimensions.map(\.key))
     let relevant = userKnowledgeStates.filter { relevantKeys.contains($0.key) }
     contexts.relevantKnowledgeStates = relevant
     return contexts
@@ -250,6 +283,7 @@ nonisolated struct CultureExplanationService: Sendable {
   private func knowledgeFragments(
     rootKey: String?,
     neighbors: [ExplanationNeighborContext],
+    relationDimensions: [RelationDimensionContext],
     store: KnowledgeStore,
     object: CultureObject,
     siteContext: String?
@@ -282,6 +316,18 @@ nonisolated struct CultureExplanationService: Sendable {
         )
       } else if let explanation = neighbor.explanation {
         append(key: neighbor.key, name: neighbor.name, text: explanation)
+      }
+    }
+
+    for dimension in relationDimensions {
+      if let element = store.element(key: dimension.key) {
+        append(
+          key: element.key,
+          name: element.name,
+          text: KnowledgeStore.richTextPlainText(element.introduction)
+        )
+      } else if let explanation = dimension.explanation {
+        append(key: dimension.key, name: dimension.name, text: explanation)
       }
     }
 

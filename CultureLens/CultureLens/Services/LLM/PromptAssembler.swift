@@ -136,6 +136,7 @@ nonisolated struct PromptAssembler: Sendable {
     abstractionPath: [AbstractionPathContext] = [],
     missingPrerequisites: [MissingPrerequisiteContext] = [],
     preferenceProfile: [PreferenceProfileContext] = [],
+    relationDimensions: [RelationDimensionContext] = [],
     userKnowledgeTotalCount: Int? = nil
   ) throws -> String {
     let encoder = JSONEncoder()
@@ -158,6 +159,9 @@ nonisolated struct PromptAssembler: Sendable {
     }
     if !preferenceProfile.isEmpty {
       payload["preference_profile"] = try jsonObject(encoder.encode(preferenceProfile))
+    }
+    if !relationDimensions.isEmpty {
+      payload["relation_dimensions"] = try jsonObject(encoder.encode(relationDimensions))
     }
     if let siteContext = siteContext?.trimmingCharacters(in: .whitespacesAndNewlines),
       !siteContext.isEmpty
@@ -287,4 +291,24 @@ nonisolated struct MissingPrerequisiteContext: Encodable, Sendable {
 nonisolated struct PreferenceProfileContext: Encodable, Sendable {
   let kind: String
   let count: Int
+}
+
+/// One related element under a fixed relation dimension (历史时期 / 地域文化 /
+/// 使用功能 / 审美观念 / 相似对象), grounding the explanation's「关联脉络」
+/// section. Direction is intentionally not exposed: the edge `explanation`
+/// carries the semantics.
+nonisolated struct RelationDimensionContext: Encodable, Sendable {
+  let dimension: String
+  let key: String
+  let name: String
+  let relationKind: String?
+  let explanation: String?
+
+  enum CodingKeys: String, CodingKey {
+    case dimension
+    case key
+    case name
+    case relationKind = "relation_kind"
+    case explanation
+  }
 }

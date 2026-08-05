@@ -38,13 +38,14 @@ nonisolated struct PromptLanguagePolicy: Sendable {
   }
 
   var explainSectionHeadings: (
-    prerequisite: String, background: String, nextSteps: String, sources: String
+    prerequisite: String, background: String, relationWeb: String, nextSteps: String,
+    sources: String
   ) {
     switch language {
     case .zhHans:
-      ("先理解", "文化背景", "下一步建议", "引用来源")
+      ("先理解", "文化背景", "关联脉络", "下一步建议", "引用来源")
     case .english:
-      ("Prerequisites", "Cultural Background", "Next Steps", "Sources")
+      ("Prerequisites", "Cultural Background", "Connections", "Next Steps", "Sources")
     }
   }
 
@@ -67,6 +68,10 @@ nonisolated struct PromptLanguagePolicy: Sendable {
         ## \(h.background)
         body
 
+        ## \(h.relationWeb)
+        仅当 relation_dimensions 非空时出现；逐维度各一条，每条 1–2 句。为空则整节省略，不要保留标题。
+        - 维度名：该维度下对象与相关元素的关联及意义
+
         ## \(h.nextSteps)
         - suggestion one
         - suggestion two (optional)
@@ -83,6 +88,10 @@ nonisolated struct PromptLanguagePolicy: Sendable {
         ## \(h.background)
         body
 
+        ## \(h.relationWeb)
+        Only when relation_dimensions is non-empty; one bullet per given dimension, 1–2 sentences each. Omit the whole section (and its heading) otherwise.
+        - dimension: how the object relates to the linked elements and why it matters
+
         ## \(h.nextSteps)
         - suggestion one
         - suggestion two (optional)
@@ -97,9 +106,9 @@ nonisolated struct PromptLanguagePolicy: Sendable {
   var explainLengthGuidance: String {
     switch language {
     case .zhHans:
-      "「先理解」每项前置 1–2 句；「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
+      "「先理解」每项前置 1–2 句；「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「关联脉络」只对 relation_dimensions 给出的维度各写一条、每条 1–2 句，总长度尽量控制在 200 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
     case .english:
-      "Prerequisites: 1–2 sentences per item, sourced only from missing_prerequisites fragments. Cultural Background: 2–4 short paragraphs, aim for under ~220 words. Next Steps: 1–2 short bullets, each under ~25 words."
+      "Prerequisites: 1–2 sentences per item, sourced only from missing_prerequisites fragments. Cultural Background: 2–4 short paragraphs, aim for under ~220 words. Connections: one bullet per dimension given in relation_dimensions, 1–2 sentences each, under ~120 words total. Next Steps: 1–2 short bullets, each under ~25 words."
     }
   }
 

@@ -138,6 +138,55 @@ struct AbstractionAxisTests {
     #expect(store.lateral(key: "x").isEmpty)
     #expect(store.ancestors(key: "x").isEmpty)
   }
+
+  @Test func edgesByKindMatchBothDirections() {
+    let store = makeDirectedGraphStore(
+      keys: ["a", "b", "c", "d"],
+      edges: [
+        ("a", "b", "位于"), // outgoing from a
+        ("c", "a", "位于"), // incoming to a
+        ("a", "d", "相似于"), // different kind, excluded
+      ]
+    )
+    let edges = store.edges(key: "a", kinds: [.locatedIn])
+    #expect(edges.map(\.key) == ["b", "c"])
+    #expect(edges.allSatisfy { $0.kind == .locatedIn })
+    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.key) == ["d"])
+    #expect(store.edges(key: "a", kinds: [.usedFor]).isEmpty)
+    #expect(store.edges(key: "missing", kinds: [.locatedIn]).isEmpty)
+  }
+
+  @Test func edgesByKindDeduplicatesReverseDuplicates() {
+    let store = makeDirectedGraphStore(
+      keys: ["a", "b"],
+      edges: [
+        ("a", "b", "相似于"),
+        ("b", "a", "相似于"), // same pair, reverse direction
+      ]
+    )
+    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.key) == ["b"])
+  }
+
+  @Test func relationDimensionsCoverThreePoolsFromBundledPack() throws {
+    let store = try loadBundledStore()
+    let key = "three-pools-mirroring-moon"
+    // 历史时期
+    #expect(store.edges(key: key, kinds: [.emergedIn]).map(\.key).contains("northern-song-three-pools"))
+    // 地域文化
+    #expect(store.edges(key: key, kinds: [.locatedIn]).map(\.key).contains("west-lake-cultural-landscape"))
+    // 使用功能
+    #expect(store.edges(key: key, kinds: [.usedFor]).isEmpty == false)
+    // 审美观念
+    let aesthetics = store.edges(key: key, kinds: [.expresses, .symbolizes, .influencedBy])
+    #expect(aesthetics.isEmpty == false)
+    #expect(
+      aesthetics.allSatisfy { edge in
+        edge.kind == .expresses || edge.kind == .symbolizes || edge.kind == .influencedBy
+      }
+    )
+    // 相似对象
+    #expect(store.edges(key: key, kinds: [.similarTo]).map(\.key).contains("leifeng-pagoda-and-evening-glow"))
+  }
 }
 
 private func makeDirectedGraphStore(

@@ -10,10 +10,11 @@
 - 适配必须体现在正文内容里；不要说“根据你的画像”“因为你已经了解”等元话术，也不要机械罗列用户状态。
 
 内容约束：
-- 所有实质内容必须严格来自 knowledge_fragments 与 graph_neighbors；禁止编造年代、人物、轶事、馆藏或未给出的关系。
+- 所有实质内容必须严格来自 knowledge_fragments、graph_neighbors 与 relation_dimensions；禁止编造年代、人物、轶事、馆藏或未给出的关系。
 - recognition 只用于确定讲解对象；不要复述 rationale、置信度或可见特征。
 - “文化背景”用 2–4 个短段落讲清语境、关键含义与相关脉络，优先补用户未知的部分，总长度尽量控制在 320 个汉字内。
 - abstraction_path 是当前对象通往更大文化脉络的抽象链（由近及远）。在“文化背景”结尾用一句话把对象放回这条脉络；只能引用 path 中给出的 key 与 excerpt，不得添加链上没有的层级。
+- relation_dimensions 按 dimension 分组给出对象与五类系统关联（历史时期、地域文化、使用功能、审美观念、相似对象）的相关元素。有数据时必须出现“关联脉络”一节：只对给出的 dimension 各写一条列表项（前缀维度名，如 `- 历史时期：…`），每项 1–2 句，讲清关系是什么、意味着什么；只能依据 knowledge_fragments 与 relation_dimensions 中的 explanation 与原文，禁止编造年代、地域或用途，不要在正文中裸露 key。该节总长度尽量控制在 200 个汉字内。relation_dimensions 为空或某维度无数据时对应项省略，整节无数据时整节省略，不要保留标题。
 - missing_prerequisites 非空时必须出现“先理解”一节，且该节内容只能来自 missing_prerequisites 的 fragment：逐项补用户尚未掌握的前置，每项 1–2 句，说明它与理解当前对象的关系。missing_prerequisites 为空时整节省略，不要保留标题。
 - “下一步建议”只给 1–2 条短建议，优先指向 abstraction_path 的下一级或某条 missing_prerequisites 中的前置；必须是现场可观察的细节或可继续追问的具体问题，每条尽量不超过 40 个汉字。
 - preference_profile 是用户已加入节点的类别分布，只用于选择补充角度（偏审美 / 偏历史 / 偏技法等），不要在正文中提及它。
@@ -28,6 +29,10 @@
 
 ## 文化背景
 正文
+
+## 关联脉络
+仅当 relation_dimensions 非空时出现；逐维度各一条，每条 1–2 句。
+- 维度名：该维度下对象与相关元素的关联及意义
 
 ## 下一步建议
 - 建议一

@@ -182,9 +182,8 @@ struct ScanResultView: View {
             visualContext(candidate)
           }
         }
-        if let elementKey = objectElementKey {
-          AbstractionLadderView(rootKey: elementKey, rootName: object.canonicalName)
-        }
+        // 文化脉络阶梯（AbstractionLadderView）现阶段对用户价值不大，先隐藏；
+        // 组件保留在 DesignSystem 中，需要时恢复此调用即可。
         // 候选与知识节点的图谱数据由知识库补齐（见 graphObject），补不到关系时不展示
         if candidate == nil || !graphObject.relations.isEmpty {
           CultureRelationGraphView(

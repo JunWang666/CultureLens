@@ -46,6 +46,7 @@ struct InternationalizationTests {
       """
     let prompt = policy.apply(toSystemPrompt: bundled, kind: .explain)
     #expect(prompt.contains("## Cultural Background"))
+    #expect(prompt.contains("## Connections"))
     #expect(prompt.contains("## Next Steps"))
     #expect(prompt.contains("## Sources"))
     #expect(prompt.contains("Source excerpt"))

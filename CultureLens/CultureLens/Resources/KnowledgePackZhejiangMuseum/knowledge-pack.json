@@ -1,5 +1,5 @@
 {
-  "version": "zhejiang-museum-v1",
+  "version": "zhejiang-museum-v2",
   "elements": [
     {
       "key": "zhejiang-museum-history",
@@ -72,31 +72,6 @@
           {
             "type": "paragraph",
             "text": "对多数参观者而言，之江馆是读懂浙江全史最顺的入口：沿三大展厅从史前走到近现代，再回头细看那些镇馆之宝与禁止出境文物，一条万年时间的脉络就很清晰了。"
-          }
-        ]
-      }
-    },
-    {
-      "key": "wulin-campus-history",
-      "name": "武林馆区与西湖文化广场",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "武林馆区曾是浙江省博物馆的市区展区，位于杭州西湖文化广场E区，建筑面积20991平方米，陈列面积7600多平方米，2009年12月22日正式开放。"
-          },
-          {
-            "type": "paragraph",
-            "text": "西湖文化广场位于杭州市市中心，2009年7月28日正式落成；2002年2月开工、2009年7月建成，工程建设总投资约22亿元，广场占地200亩，总建筑面积36万余平方米，分为A、B、C、D、E五大区块，E区设有浙江省博物馆分馆等。"
-          },
-          {
-            "type": "paragraph",
-            "text": "随着之江馆区的落成，武林馆区已于2023年5月关闭，E区的浙江省博物馆分馆也于2023年5月4日关闭。它作为浙博在城中心的过渡性展区，完成了从孤山到之江迁转中的一段承接。"
-          },
-          {
-            "type": "paragraph",
-            "text": "你现在参观的是之江馆区；把孤山、武林、之江三段历史并在一起看，就能明白“从西湖孤山走向之江文化中心”正是浙博近年的馆区轨迹。"
           }
         ]
       }
@@ -798,106 +773,6 @@
       }
     },
     {
-      "key": "zhejiang-culture-center",
-      "name": "之江文化中心",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "之江文化中心位于杭州市西湖区之江国家旅游度假区，于2023年8月29日正式启用，是浙江省博物馆之江新馆所在的公共文化聚落。"
-          },
-          {
-            "type": "paragraph",
-            "text": "之江文化中心包括浙江省博物馆之江新馆、浙江图书馆之江新馆、浙江省非物质文化遗产馆、浙江文学馆以及配套的公共服务中心，占地面积258亩，总建筑面积32.1万平米。"
-          },
-          {
-            "type": "paragraph",
-            "text": "4座场馆为开放的“合院式”布局，建筑外观为传统江南粉墙黛瓦风格，“四馆一中心”构成一座“公共文化共同体”；它是浙江省“十三五”规划中的重要文化建设项目，由浙江省文化和旅游厅负责管理。"
-          },
-          {
-            "type": "paragraph",
-            "text": "参观浙博之余，可以把一整天留给之江文化中心：先看博物馆的《浙江一万年》，再顺路走进非遗馆、文学馆或图书馆，四座场馆互相补充，正是这组建筑想给你的“共同体”体验。"
-          }
-        ]
-      }
-    },
-    {
-      "key": "zhejiang-marine-culture",
-      "name": "向东是大海：浙江海洋文化",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "“向东是大海——浙江海洋文化陈列”是浙江省博物馆之江馆区的常设展览，位于馆区三层，展示面积约1000平方米，专门讲述浙江面向海洋的一面。"
-          },
-          {
-            "type": "paragraph",
-            "text": "浙江的海洋文化由来已久：吴越国因受北方邻国吴国和南唐的陆上军事威胁，大力发展航海贸易，《五代史补》记载当时都城杭州“舟楫辐辏，望之不见其首尾”，苏轼称其“象犀珠玉之富，甲于天下”。"
-          },
-          {
-            "type": "paragraph",
-            "text": "从史前的舟楫到近代的港口，这一展览把“海”作为理解浙江的另一把钥匙，与《浙江一万年》的陆地视角互为补充。"
-          },
-          {
-            "type": "paragraph",
-            "text": "看这一层时，不妨把《浙江一万年》里的吴越展厅与它对照：一条线讲陆地文明，一条线讲海洋贸易，两条线合起来，才是完整的浙江。"
-          }
-        ]
-      }
-    },
-    {
-      "key": "song-yun-culture",
-      "name": "宋·韵与宋韵文化",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "宋韵指的是宋代审美与文化生活的气质，在浙江省博物馆里，它具体落在南宋官窑的青瓷、宋元以来的漆器，以及两宋时期的文房与音乐器物上。"
-          },
-          {
-            "type": "paragraph",
-            "text": "南宋官窑位于杭州，以郊坛下窑址为基础，是浙江青瓷谱系中重要的一环；龙泉窑一般认为其鼎盛时期也在南宋，创制的粉青、梅子青正是宋代釉色审美的代表。"
-          },
-          {
-            "type": "paragraph",
-            "text": "宋韵也藏在声音里：第一个古琴流派浙派出现于南宋晚期，创始人是郭沔。宋徽宗御制名琴松石间意在2010年以1.3664亿元拍卖，成为当时拍卖价格最高的古琴、世界最贵乐器之一。"
-          },
-          {
-            "type": "paragraph",
-            "text": "在浙博逛到宋代文物时，可以把青瓷、漆器、古琴连起来想：一件器物、一张琴，都是宋人如何过日子、如何追求雅致的具体答案。"
-          }
-        ]
-      }
-    },
-    {
-      "key": "ancient-kiln-specimen-center",
-      "name": "浙江古窑址标本中心",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "浙江省文保科研基地位于杭州天目山路古荡桥20号，内设全国首个以本地窑业遗存为依托的古窑址标本中心——浙江古窑址标本中心。"
-          },
-          {
-            "type": "paragraph",
-            "text": "该中心分越窑、龙泉窑、瓯窑、婺州窑、南宋官窑等区块，收藏本地各窑口的窑址标本，对外预约免费开放，是研究浙江青瓷体系的第一手材料库。"
-          },
-          {
-            "type": "paragraph",
-            "text": "如果说博物馆展厅里是烧成后的“作品”，标本中心则是窑业生产的“原料与废料”；两处对照，能看出越窑、龙泉窑等瓷窑从原料到成品的完整过程。"
-          },
-          {
-            "type": "paragraph",
-            "text": "如果你在浙博陶瓷厅看完越窑、龙泉窑、南宋官窑后仍想深入，可以提前预约到标本中心看看窑址标本，那里把浙江瓷业的窑火一步步还原给你看。"
-          }
-        ]
-      }
-    },
-    {
       "key": "shi-xingeng-discovery",
       "name": "施昕更与良渚的发现",
       "introduction": {
@@ -965,48 +840,107 @@
       }
     },
     {
-      "key": "zhejiang-art-gallery",
-      "name": "浙江西湖美术馆与国立艺术院旧址",
+      "key": "hemudu-painted-pottery",
+      "name": "河姆渡绘纹陶器",
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
           {
             "type": "paragraph",
-            "text": "浙江西湖美术馆位于孤山馆区东侧，1999年10月落成，原为我国第一所高等美术学府——国立艺术院的旧址。"
+            "text": "河姆渡绘纹陶器是河姆渡文化先民手工制作、并在表面绘刻纹样的陶器，是了解河姆渡人生活与信仰的重要实物。它们厚实、呈灰黑色，表面常有绳纹或动植物图案。"
           },
           {
             "type": "paragraph",
-            "text": "这里是原我国第一所高等美术学府、即国立艺术院的旧址；今天的西湖美术馆沿用这处文化旧址，常设展示书画等美术类藏品。"
+            "text": "河姆渡陶器为手工制作，十分厚实，呈灰黑色，表面常打磨，常有绳纹，或雕刻植物、动物图案。陶器上的绘画作品题材包括鸟、鱼、水稻、太阳、花草等，以鱼禾纹陶盆、稻穗纹陶盆、猪纹陶钵、五叶纹陶块为代表。"
           },
           {
             "type": "paragraph",
-            "text": "把美术馆放在孤山馆区里看，它与文澜阁、主馆一起构成了孤山“馆中园”的文化组合：一边是古代典籍与书画，一边是中国现代美术教育的起点。"
+            "text": "河姆渡陶器制作有一定的水准，估计最高烧成温度达1000摄氏度；另一史料记载，河姆渡遗址第一期陶器烧制温度大约为850摄氏度，主要制作方法为泥条盘筑法。两次发掘共出土完整和复原陶器1695件以及数倍于此的陶片，出土陶器中以夹炭黑陶为多。"
           },
           {
             "type": "paragraph",
-            "text": "游览孤山时，在西湖美术馆门口停一停：这里既是浙博的一部分，也是中国第一所高等美术学府曾经办学的地方，一栋楼连着两段历史。"
+            "text": "看这些绘纹陶器时，先认纹饰里的题材——鸟、鱼、水稻、太阳、花草，都是河姆渡人日复一日面对的水乡生活；再想那近千度（一说850摄氏度）的烧成温度，才知道这样一件陶器要费多大的火候才能成形。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "hemudu-bone-plough",
+      "name": "河姆渡骨耜",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "骨耜是河姆渡遗址出土的骨制翻地农具，是河姆渡人翻地种稻的得力工具，也是“耜耕农业”的标志性器物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡遗址两次正式发掘出土的骨耜达200件左右；第二次正式发掘出土的4670件文物中，骨器占到了48.6%，可见骨器在河姆渡遗存中的分量之重。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙江农业大学教授游修龄提出，骨耜为河姆渡人翻地的工具，并以其用具将当时的农业形态命名为“耜耕农业”，这一观点被学界普遍接受。遗址中还发掘出堆积厚达40至50厘米的大量人工栽培稻谷，轰动了学术界。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看骨耜时，把它和层层堆积的栽培稻谷放在一起想：正是靠这样的骨制农具翻地种稻，河姆渡人才在距今六七千年前的杭州湾水乡里站稳了脚跟。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "zhang-cheng-red-lacquer",
+      "name": "张成剔红婴戏图盘",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "张成剔红婴戏图盘是元代雕漆名家张成创作的漆器，堪称国宝级文物，是目前已知的4件“张成造”之一，也是浙江省博物馆漆器收藏中的顶级藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "元代雕漆名家张成创作的剔红婴戏图盘堪称国宝级文物，是目前已知的4件“张成造”之一；2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这件剔红婴戏图盘正在其中。"
+          },
+          {
+            "type": "paragraph",
+            "text": "经鉴定，这批捐赠漆器中一级文物21件、二级文物118件、三级文物15件；捐赠中的宋元时期一色漆器、明早期剔犀漆器、明嘉靖万历戗金填漆漆器、以清代乾隆为代表的清中期漆器，都是极为珍贵的文物精品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这件剔红婴戏图盘时，先看层层髹漆后雕刻出的婴戏图案，再想一件雕漆从元代匠人之手流传到今天、又经曹氏捐赠入藏浙博的经历——工匠、藏家与博物馆，就这样被一件漆器连在了一起。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "tang-guqin-tradition",
+      "name": "唐代古琴与“唐圆”",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "唐代古琴是传世古琴中年代最早且可信的一批，也是中国斫琴传统里的稀世珍宝；“唐圆”则是古琴形制里流传至今的一句老话。"
+          },
+          {
+            "type": "paragraph",
+            "text": "斫琴在唐朝有巨大的发展，如四川雷氏家族为唐朝皇室斫造的“九霄环佩”和“大圣遗音”皆为传世名琴，唐琴在历代都被视为稀世之宝；在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今。"
+          },
+          {
+            "type": "paragraph",
+            "text": "论及古琴形制，古有“唐圆”之说，“圆”虽是唐琴的特征之一，但并不准确，不是所有制形浑圆的琴都是唐琴。浙江省博物馆十大镇馆之宝中的唐“彩凤鸣岐”七弦琴，就属于这批流传至今的唐琴之列。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在展厅里看唐琴时，先看琴身的浑圆轮廓、断纹与琴名，再想“唐圆”这句老话背后的分寸——圆是唐琴的特征之一，却不是唯一的标准。"
           }
         ]
       }
     }
   ],
   "relations": [
-    {
-      "elementKey": "ancient-kiln-specimen-center",
-      "relatedElementKey": "longquan-boat-drip"
-    },
-    {
-      "elementKey": "ancient-kiln-specimen-center",
-      "relatedElementKey": "longquan-kiln"
-    },
-    {
-      "elementKey": "ancient-kiln-specimen-center",
-      "relatedElementKey": "southern-song-guan-ware"
-    },
-    {
-      "elementKey": "ancient-kiln-specimen-center",
-      "relatedElementKey": "yue-kiln"
-    },
     {
       "elementKey": "asoka-pagoda",
       "relatedElementKey": "cai-feng-ming-qi"
@@ -1064,20 +998,12 @@
       "relatedElementKey": "cai-feng-ming-qi"
     },
     {
-      "elementKey": "guqin-world",
-      "relatedElementKey": "song-yun-culture"
-    },
-    {
       "elementKey": "gushan-campus",
       "relatedElementKey": "hemudu-double-bird"
     },
     {
       "elementKey": "gushan-campus",
       "relatedElementKey": "huang-binhong"
-    },
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "zhejiang-art-gallery"
     },
     {
       "elementKey": "gushan-campus",
@@ -1118,10 +1044,6 @@
     {
       "elementKey": "huang-binhong",
       "relatedElementKey": "sha-menghai"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "zhejiang-art-gallery"
     },
     {
       "elementKey": "huang-gongwang",
@@ -1181,19 +1103,11 @@
     },
     {
       "elementKey": "longquan-boat-drip",
-      "relatedElementKey": "ancient-kiln-specimen-center"
-    },
-    {
-      "elementKey": "longquan-boat-drip",
       "relatedElementKey": "longquan-kiln"
     },
     {
       "elementKey": "longquan-boat-drip",
       "relatedElementKey": "top-ten-treasures"
-    },
-    {
-      "elementKey": "longquan-kiln",
-      "relatedElementKey": "ancient-kiln-specimen-center"
     },
     {
       "elementKey": "longquan-kiln",
@@ -1272,26 +1186,6 @@
       "relatedElementKey": "wan-gong-jiao"
     },
     {
-      "elementKey": "song-yun-culture",
-      "relatedElementKey": "guqin-world"
-    },
-    {
-      "elementKey": "song-yun-culture",
-      "relatedElementKey": "southern-song-guan-ware"
-    },
-    {
-      "elementKey": "song-yun-culture",
-      "relatedElementKey": "zhejiang-marine-culture"
-    },
-    {
-      "elementKey": "southern-song-guan-ware",
-      "relatedElementKey": "ancient-kiln-specimen-center"
-    },
-    {
-      "elementKey": "southern-song-guan-ware",
-      "relatedElementKey": "song-yun-culture"
-    },
-    {
       "elementKey": "southern-song-guan-ware",
       "relatedElementKey": "yue-kiln"
     },
@@ -1336,14 +1230,6 @@
       "relatedElementKey": "sha-menghai"
     },
     {
-      "elementKey": "wulin-campus-history",
-      "relatedElementKey": "zhejiang-museum-history"
-    },
-    {
-      "elementKey": "wulin-campus-history",
-      "relatedElementKey": "zhijiang-campus"
-    },
-    {
       "elementKey": "wuyue-buddhist-art",
       "relatedElementKey": "asoka-pagoda"
     },
@@ -1365,10 +1251,6 @@
     },
     {
       "elementKey": "wuyue-state",
-      "relatedElementKey": "zhejiang-marine-culture"
-    },
-    {
-      "elementKey": "wuyue-state",
       "relatedElementKey": "zhejiang-yue-sword"
     },
     {
@@ -1385,51 +1267,11 @@
     },
     {
       "elementKey": "yue-kiln",
-      "relatedElementKey": "ancient-kiln-specimen-center"
-    },
-    {
-      "elementKey": "yue-kiln",
       "relatedElementKey": "longquan-kiln"
     },
     {
       "elementKey": "yue-kiln",
       "relatedElementKey": "southern-song-guan-ware"
-    },
-    {
-      "elementKey": "yue-kiln",
-      "relatedElementKey": "zhejiang-marine-culture"
-    },
-    {
-      "elementKey": "zhejiang-art-gallery",
-      "relatedElementKey": "gushan-campus"
-    },
-    {
-      "elementKey": "zhejiang-art-gallery",
-      "relatedElementKey": "huang-binhong"
-    },
-    {
-      "elementKey": "zhejiang-culture-center",
-      "relatedElementKey": "zhejiang-marine-culture"
-    },
-    {
-      "elementKey": "zhejiang-culture-center",
-      "relatedElementKey": "zhijiang-campus"
-    },
-    {
-      "elementKey": "zhejiang-marine-culture",
-      "relatedElementKey": "song-yun-culture"
-    },
-    {
-      "elementKey": "zhejiang-marine-culture",
-      "relatedElementKey": "wuyue-state"
-    },
-    {
-      "elementKey": "zhejiang-marine-culture",
-      "relatedElementKey": "yue-kiln"
-    },
-    {
-      "elementKey": "zhejiang-marine-culture",
-      "relatedElementKey": "zhejiang-culture-center"
     },
     {
       "elementKey": "zhejiang-museum-history",
@@ -1438,10 +1280,6 @@
     {
       "elementKey": "zhejiang-museum-history",
       "relatedElementKey": "sha-menghai"
-    },
-    {
-      "elementKey": "zhejiang-museum-history",
-      "relatedElementKey": "wulin-campus-history"
     },
     {
       "elementKey": "zhejiang-museum-history",
@@ -1469,15 +1307,47 @@
     },
     {
       "elementKey": "zhijiang-campus",
-      "relatedElementKey": "wulin-campus-history"
-    },
-    {
-      "elementKey": "zhijiang-campus",
-      "relatedElementKey": "zhejiang-culture-center"
-    },
-    {
-      "elementKey": "zhijiang-campus",
       "relatedElementKey": "zhejiang-museum-history"
+    },
+    {
+      "elementKey": "hemudu-painted-pottery",
+      "relatedElementKey": "hemudu-culture"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-painted-pottery"
+    },
+    {
+      "elementKey": "hemudu-bone-plough",
+      "relatedElementKey": "hemudu-culture"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-bone-plough"
+    },
+    {
+      "elementKey": "zhang-cheng-red-lacquer",
+      "relatedElementKey": "qi-lacquer-donation"
+    },
+    {
+      "elementKey": "qi-lacquer-donation",
+      "relatedElementKey": "zhang-cheng-red-lacquer"
+    },
+    {
+      "elementKey": "tang-guqin-tradition",
+      "relatedElementKey": "cai-feng-ming-qi"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "tang-guqin-tradition"
+    },
+    {
+      "elementKey": "tang-guqin-tradition",
+      "relatedElementKey": "guqin-world"
+    },
+    {
+      "elementKey": "guqin-world",
+      "relatedElementKey": "tang-guqin-tradition"
     }
   ],
   "attractions": [
@@ -1739,7 +1609,7 @@
     }
   ],
   "manifest": {
-    "packVersion": "zhejiang-museum-v1",
-    "generatedAt": "2026-08-03T15:00:00Z"
+    "packVersion": "zhejiang-museum-v2",
+    "generatedAt": "2026-08-03T17:00:00Z"
   }
 }

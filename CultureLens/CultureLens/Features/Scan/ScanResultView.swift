@@ -2,42 +2,126 @@ import SwiftData
 import SwiftUI
 
 struct ScanResultView: View {
+  /// 页面展示模式：实时扫描（含候选）、足迹历史、知识节点（图谱/概念）。
+  enum Presentation {
+    case scan
+    case history
+    case knowledge
+  }
+
   let session: ScanSession
+  /// 非 nil 时页面展示某个候选（从景点推荐进入），复用扫描结果布局，
+  /// 但不显示拍摄的照片（后续换成数据库图片）。
+  var candidate: RecognitionCandidate? = nil
+  var presentation: Presentation = .scan
 
   @Environment(\.modelContext) private var modelContext
   @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
-  @State private var isSaving = false
-  @State private var saveError: String?
-  @State private var explanationState: ExplanationLoadState = .idle
-  @State private var explanationStreamSource: GrowingMarkdownSource?
-  @State private var knowledgeContextSummary: LocalizedStringKey = "从你的文化图谱调整解释深度"
-  private let explanationService = CultureExplanationService.live()
+
+  private var isAttractionCandidate: Bool {
+    candidate?.resolutionStatus == "attraction"
+  }
 
   private var object: CultureObject {
-    session.result.object
+    guard let candidate else { return session.result.object }
+    var result = candidate.cultureObject
+    if let summary = candidate.informativeSummary {
+      result.summary = summary
+    }
+    return result
+  }
+
+  /// 图谱成员判定用的 key：景点候选优先用景点 key，与保存时记录的 key 一致。
+  private var graphElementKey: String? {
+    candidate?.attractionKey ?? object.culturalElementKey
   }
 
   private var isInCultureGraph: Bool {
     knowledgeProgressStore.isInGraph(
       object.id,
-      elementKey: object.culturalElementKey
+      elementKey: graphElementKey
     )
   }
 
   private var rationale: String {
-    session.result.rationale
+    candidate?.rationale ?? session.result.rationale
   }
 
-  private var primaryObject: CultureObject {
-    session.result.object
+  /// 讲解服务的输入：候选没有独立识别结果，用主会话上下文包一层。
+  private var explanationInput: RecognitionResult {
+    guard let candidate else { return session.result }
+    return RecognitionResult(
+      id: candidate.id,
+      object: object,
+      alternatives: [],
+      rationale: candidate.rationale,
+      modelIdentifier: session.result.modelIdentifier,
+      usedPlaceContext: session.result.usedPlaceContext,
+      resolutionStatus: candidate.resolutionStatus
+    )
+  }
+
+  /// 识别结果若已绑定知识库 key 但 relations 为空（或候选页本身不带图谱），
+  /// 用知识库相邻关系补齐，与识别映射的 fallback 关系构建保持一致。
+  private var graphObject: CultureObject {
+    guard object.relations.isEmpty else { return object }
+    let elementKey =
+      object.culturalElementKey
+      ?? KnowledgeStore.shared?.elementKey(matchingName: object.canonicalName)
+    guard let elementKey, let store = KnowledgeStore.shared else { return object }
+    let related = store.relatedElements(forKey: elementKey)
+    guard !related.isEmpty else {
+      // Even without edges, attach the key so the empty-state can say「暂无关系边」
+      // instead of「未匹配到知识库对象」.
+      if object.culturalElementKey == nil {
+        var keyed = object
+        keyed.culturalElementKey = elementKey
+        keyed.id = DeterministicID.culturalElement(elementKey)
+        return keyed
+      }
+      return object
+    }
+
+    let explanation: String
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      explanation =
+        "The culture content library records an explicit link between this object and the concept; the relation type is not yet refined."
+    case .zhHans:
+      explanation = "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
+    }
+
+    var enriched = object
+    enriched.culturalElementKey = elementKey
+    enriched.id = DeterministicID.culturalElement(elementKey)
+    enriched.concepts = related.map { element in
+      CultureConcept(
+        id: DeterministicID.culturalElement(element.key),
+        name: element.name,
+        kind: CulturalElementPresentation.conceptKind(element.conceptKind),
+        summary: KnowledgeStore.richTextPlainText(element.introduction),
+        detail: ""
+      )
+    }
+    enriched.relations = related.map { element in
+      CultureRelation(
+        id: DeterministicID.v5(name: elementKey + ":" + element.key + ":" + "解释"),
+        sourceID: DeterministicID.culturalElement(elementKey),
+        targetID: DeterministicID.culturalElement(element.key),
+        kind: .explains,
+        explanation: explanation
+      )
+    }
+    return enriched
   }
 
   private var attractionCandidates: [RecognitionCandidate] {
     session.result.displayAttractionCandidates
   }
 
+  /// 景点推荐中的模型备选只保留命中景点 key 的条目。
   private var visualAlternatives: [RecognitionCandidate] {
-    session.result.displayVisualAlternatives
+    session.result.displayVisualAlternatives.filter { $0.attractionKey != nil }
   }
 
   private var currentResolutionStatus: String? {
@@ -45,7 +129,9 @@ struct ScanResultView: View {
   }
 
   private var objectElementKey: String? {
-    object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+    let key = object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+    guard let key, KnowledgeStore.shared?.element(key: key) != nil else { return nil }
+    return key
   }
 
   var body: some View {
@@ -53,7 +139,7 @@ struct ScanResultView: View {
       CulturePageBackground()
 
       SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
-        // 分栏布局下对象名提到左栏顶部（导航栏只显示“扫描结果”）
+        // 分栏布局下对象名提到左栏顶部（导航栏只显示页面标题）
         if isWide {
           LocalizedPackText(
             source: object.canonicalName,
@@ -64,48 +150,87 @@ struct ScanResultView: View {
           .foregroundStyle(CultureTheme.inkPrimary)
         }
 
-        imageHeader(height: isWide ? 340 : 280)
+        // 候选页与知识节点页不显示拍摄的照片（候选后续换成数据库图片）；
+        // 历史记录的图片可能已被清理，为空时同样不显示
+        if candidate == nil && presentation != .knowledge && !session.imageData.isEmpty {
+          imageHeader(height: isWide ? 340 : 280)
+        }
         identity(showTitle: !isWide)
         actionButtons
-      } trailing: { _ in
-        explanationSection
-        if let elementKey = object.culturalElementKey {
+        // 景点推荐：分栏（iPad）时放左栏，单列（iPhone）时放页面底部（见 trailing）；
+        // 足迹历史不展示候选
+        if isWide, presentation != .history {
+          recommendations
+        }
+      } trailing: { isWide in
+        ScanExplanationSectionView(
+          result: explanationInput,
+          isDemo: session.isDemo,
+          siteContext: siteContext,
+          demoMarkdown: demoExplanationMarkdown,
+          onExplained: markExplained
+        )
+        if let candidate {
+          if isAttractionCandidate, let attractionKey = candidate.attractionKey {
+            AttractionIntroductionsView(
+              place: session.place,
+              attractionKey: attractionKey,
+              existingSummary: candidate.informativeSummary
+            )
+            candidateContext
+          } else {
+            visualContext(candidate)
+          }
+        }
+        if let elementKey = objectElementKey {
           AbstractionLadderView(rootKey: elementKey, rootName: object.canonicalName)
         }
-        CultureRelationGraphView(
-          object: primaryObject,
-          presentation: .expandablePreview
-        )
-        alternatives
-        evidenceCard
+        // 候选与知识节点的图谱数据由知识库补齐（见 graphObject），补不到关系时不展示
+        if candidate == nil || !graphObject.relations.isEmpty {
+          CultureRelationGraphView(
+            object: graphObject,
+            presentation: .expandablePreview
+          )
+        }
+        if presentation != .knowledge {
+          evidenceCard
+        }
+        // 足迹历史不展示候选
+        if !isWide, presentation != .history {
+          recommendations
+        }
       }
     }
     .cultureNavigationTitle(
-      "扫描结果",
+      navigationTitle,
       prefersLeadingTitle: true,
       accessibilityIdentifier: "result.title"
     )
-    .alert(
-      "无法保存",
-      isPresented: Binding(
-        get: { saveError != nil },
-        set: { if !$0 { saveError = nil } }
-      )
-    ) {
-      Button("好", role: .cancel) {
-        saveError = nil
-      }
-    } message: {
-      Text(saveError ?? "")
-    }
     .task(id: session.id) {
-      await loadExplanation()
+      autoSaveIfNeeded()
     }
   }
 
+  private var navigationTitle: LocalizedStringKey {
+    if candidate != nil { return "候选详情" }
+    switch presentation {
+    case .knowledge:
+      return LocalizedStringKey(object.canonicalName)
+    case .scan, .history:
+      return "扫描结果"
+    }
+  }
+
+  /// 只固定高度时 scaledToFill 会把图片撑得比栏宽更宽（frame 跟随图片实际
+  /// 渲染宽度），照片会溢出到右栏下方。先用透明占位把区域定死，再叠加图片
+  /// 并裁剪，保证填满且不外溢。
   private func imageHeader(height: CGFloat) -> some View {
-    DataImageView(data: session.imageData)
+    Color.clear
+      .frame(maxWidth: .infinity)
       .frame(height: height)
+      .overlay {
+        DataImageView(data: session.imageData)
+      }
       .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
       .overlay(alignment: .topLeading) {
         Label(
@@ -122,14 +247,24 @@ struct ScanResultView: View {
 
   private func identity(showTitle: Bool) -> some View {
     VStack(alignment: .leading, spacing: 12) {
-      Label(confidenceText, systemImage: confidenceSymbol)
-        .font(.subheadline.weight(.semibold))
-        .foregroundStyle(CultureTheme.cinnabar)
+      if let candidate {
+        candidateKindLabel(candidate)
+          .font(.subheadline.weight(.semibold))
+          .foregroundStyle(CultureTheme.cinnabar)
+      } else if presentation == .knowledge {
+        Label("知识库节点", systemImage: "sparkles")
+          .font(.subheadline.weight(.semibold))
+          .foregroundStyle(CultureTheme.cinnabar)
+      } else {
+        Label(confidenceText, systemImage: confidenceSymbol)
+          .font(.subheadline.weight(.semibold))
+          .foregroundStyle(CultureTheme.cinnabar)
 
-      if currentResolutionStatus == "resolved" {
-        Label("知识库已收录", systemImage: "checkmark.seal.fill")
-          .font(.caption.weight(.semibold))
-          .foregroundStyle(CultureTheme.inkSecondary)
+        if currentResolutionStatus == "resolved", objectElementKey != nil {
+          Label("知识库已收录", systemImage: "checkmark.seal.fill")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkSecondary)
+        }
       }
 
       // 单列布局下对象名显示在这里；分栏时已提到左栏顶部
@@ -143,13 +278,16 @@ struct ScanResultView: View {
         .foregroundStyle(CultureTheme.inkPrimary)
       }
 
-      Text(
-        [object.category.localizedTitle, object.timePeriod, object.region]
-          .compactMap { $0 }
-          .joined(separator: " · ")
-      )
-      .font(.subheadline)
-      .foregroundStyle(CultureTheme.inkSecondary)
+      // 知识节点没有类别/年代/地区等识别元信息
+      if presentation != .knowledge {
+        Text(
+          [object.category.localizedTitle, object.timePeriod, object.region]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        )
+        .font(.subheadline)
+        .foregroundStyle(CultureTheme.inkSecondary)
+      }
 
       LocalizedKnowledgeBlocksView(
         elementKey: objectElementKey,
@@ -161,66 +299,51 @@ struct ScanResultView: View {
     }
   }
 
-  @ViewBuilder
-  private var explanationSection: some View {
-    switch explanationState {
-    case .idle, .loading(_):
-      VStack(alignment: .leading, spacing: 12) {
-        VStack(alignment: .leading, spacing: 3) {
-          Text("正在整理文化背景…")
-            .font(.subheadline.weight(.semibold))
-          Text(knowledgeContextSummary)
-            .font(.caption)
-        }
-        .foregroundStyle(CultureTheme.inkSecondary)
-        SkeletonTextBlock()
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding(16)
-      .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
-    case .streaming:
-      if let explanationStreamSource {
-        StreamingPersonalizedExplanationView(
-          source: explanationStreamSource,
-          knowledgeContextSummary: knowledgeContextSummary
-        )
-        .id(ObjectIdentifier(explanationStreamSource))
-      }
-    case .loaded(let explanation):
-      PersonalizedExplanationView(
-        explanation: explanation,
-        knowledgeContextSummary: knowledgeContextSummary
-      )
-    case .partial(let explanation, let message):
-      VStack(alignment: .leading, spacing: 12) {
-        PersonalizedExplanationView(
-          explanation: explanation,
-          knowledgeContextSummary: knowledgeContextSummary
-        )
-        Label("连接中断，已保留收到的内容。\(message)", systemImage: "wifi.exclamationmark")
-          .font(.footnote)
-          .foregroundStyle(CultureTheme.cinnabar)
-        Button("重新生成") {
-          Task { await loadExplanation() }
-        }
-        .buttonStyle(.bordered)
-      }
-    case .failed(let message):
-      VStack(alignment: .leading, spacing: 10) {
-        Label("文化背景暂不可用", systemImage: "exclamationmark.bubble")
-          .font(.headline)
-          .foregroundStyle(CultureTheme.cinnabar)
-        Text(message)
-          .font(.footnote)
-          .foregroundStyle(CultureTheme.inkSecondary)
-        Button("重试") {
-          Task { await loadExplanation() }
-        }
-        .buttonStyle(.bordered)
-      }
-      .padding(16)
-      .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
+  /// 候选类型标签：与主结果页的可信度标签同一位置。景点候选显示来源，
+  /// 视觉备选附带模型置信度。
+  private func candidateKindLabel(_ candidate: RecognitionCandidate) -> some View {
+    if candidate.resolutionStatus == "attraction" {
+      return Label("附近景点候选", systemImage: "location.fill")
     }
+    if candidate.confidence > 0 {
+      let percent = candidate.confidence.formatted(
+        .percent.precision(.fractionLength(0))
+      )
+      return Label("视觉备选 · \(percent)", systemImage: "eye")
+    }
+    return Label("视觉备选", systemImage: "eye")
+  }
+
+  /// 景点候选的说明卡。
+  private var candidateContext: some View {
+    Label(
+      "根据本次扫描位置列为候选，尚未由画面确认。",
+      systemImage: "location.fill"
+    )
+    .font(.subheadline)
+    .foregroundStyle(CultureTheme.inkSecondary)
+    .padding(16)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(
+      CultureTheme.surface,
+      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+    )
+  }
+
+  /// 视觉备选的说明卡：模型的判断依据。
+  private func visualContext(_ candidate: RecognitionCandidate) -> some View {
+    VStack(alignment: .leading, spacing: 8) {
+      Label("识别模型的备选判断，与画面特征相关。", systemImage: "eye")
+      Text(candidate.rationale)
+    }
+    .font(.subheadline)
+    .foregroundStyle(CultureTheme.inkSecondary)
+    .padding(16)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(
+      CultureTheme.surface,
+      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+    )
   }
 
   private var evidenceCard: some View {
@@ -234,7 +357,7 @@ struct ScanResultView: View {
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineSpacing(5)
 
-      if let uncertainty = session.result.uncertainty {
+      if candidate == nil, let uncertainty = session.result.uncertainty {
         Divider()
         Label("仍需确认", systemImage: "questionmark.circle")
           .font(.headline)
@@ -268,29 +391,30 @@ struct ScanResultView: View {
     }
   }
 
+  /// 景点推荐：视觉模型的备选猜测（在前，只保留命中景点 key 的）与附近景点候选。
   @ViewBuilder
-  private var alternatives: some View {
-    if !visualAlternatives.isEmpty {
+  private var recommendations: some View {
+    if !attractionCandidates.isEmpty || !visualAlternatives.isEmpty {
       VStack(alignment: .leading, spacing: 12) {
-        Text(object.confidence < 0.8 ? "也可能是" : "其他视觉猜测")
+        Text("景点推荐")
           .font(.cultureSerif(.title2))
           .foregroundStyle(CultureTheme.inkPrimary)
 
-        Text("来自识别模型的备选判断，与画面特征相关。")
+        Text("识别模型的备选判断与附近可确认的景点。")
           .font(.caption)
           .foregroundStyle(CultureTheme.inkSecondary)
 
         ForEach(visualAlternatives) { candidate in
-          visualAlternativeRow(candidate)
+          NavigationLink(
+            value: AppRoute.scanCandidate(
+              sessionID: session.id,
+              candidateID: candidate.id
+            )
+          ) {
+            visualAlternativeRow(candidate)
+          }
+          .buttonStyle(.plain)
         }
-      }
-    }
-
-    if !attractionCandidates.isEmpty {
-      VStack(alignment: .leading, spacing: 12) {
-        Text("附近景点候选")
-          .font(.cultureSerif(.title2))
-          .foregroundStyle(CultureTheme.inkPrimary)
 
         ForEach(attractionCandidates) { candidate in
           NavigationLink(
@@ -324,6 +448,9 @@ struct ScanResultView: View {
         )
         .font(.caption.monospacedDigit())
         .foregroundStyle(CultureTheme.cinnabar)
+        Image(systemName: "chevron.right")
+          .font(.caption.weight(.semibold))
+          .foregroundStyle(CultureTheme.inkSecondary)
       }
       Text(candidate.rationale)
         .font(.subheadline)
@@ -414,7 +541,13 @@ struct ScanResultView: View {
         .tint(CultureTheme.inkPrimary)
         .controlSize(.large)
 
-        if isInCultureGraph {
+        if presentation == .knowledge {
+          KnowledgeGraphMembershipButton(
+            nodeID: object.id,
+            elementKey: objectElementKey,
+            presentation: .fullWidth
+          )
+        } else if isInCultureGraph {
           NavigationLink(value: AppRoute.object(object.id)) {
             Label("阅读完整解释", systemImage: "book.pages")
               .lineLimit(1)
@@ -424,29 +557,10 @@ struct ScanResultView: View {
           .buttonStyle(.borderedProminent)
           .tint(CultureTheme.inkPrimary)
           .controlSize(.large)
-        } else {
-          Button {
-            save()
-          } label: {
-            if isSaving {
-              ProgressView()
-                .frame(maxWidth: .infinity)
-            } else {
-              Label("确认并保存到文化图谱", systemImage: "point.3.connected.trianglepath.dotted")
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .frame(maxWidth: .infinity)
-            }
-          }
-          .buttonStyle(.borderedProminent)
-          .tint(CultureTheme.cinnabar)
-          .controlSize(.large)
-          .disabled(isSaving)
-          .accessibilityIdentifier("result.save")
         }
       }
 
-      if session.isDemo {
+      if session.isDemo, presentation == .scan {
         Text("演示结果会保存到本机历史，但不代表真实视觉识别。")
           .font(.caption)
           .foregroundStyle(CultureTheme.inkSecondary)
@@ -470,174 +584,104 @@ struct ScanResultView: View {
     object.confidence >= 0.8 ? "checkmark.seal.fill" : "questionmark.diamond.fill"
   }
 
-  private func save() {
-    isSaving = true
-    Task {
-      do {
-        let path = try await ScanMediaStore.shared.saveJPEG(
-          session.imageData,
-          id: session.id
-        )
-        let place = session.place
-        let snapshotData = try JSONEncoder().encode(
-          ScanHistorySnapshot(
-            result: session.result,
-            selectedObject: object,
-            selectedCandidateID: nil
-          )
-        )
-        let record = ScanHistoryRecord(
-          recordID: session.id,
-          createdAt: session.createdAt,
-          cultureObjectID: object.id,
-          canonicalName: object.canonicalName,
-          categoryRawValue: object.category.rawValue,
-          summary: object.summary,
-          timePeriod: object.timePeriod,
-          region: object.region,
-          confidence: object.confidence,
-          latitude: place?.latitude,
-          longitude: place?.longitude,
-          placeName: place?.displayName,
-          imageRelativePath: path,
-          modelIdentifier: session.result.modelIdentifier,
-          resultSnapshotData: snapshotData
-        )
-        modelContext.insert(record)
-        try modelContext.save()
-        knowledgeProgressStore.setLevel(
-          .contact,
-          for: object.id,
-          source: .manual,
-          elementKey: object.culturalElementKey
-        )
-      } catch {
-        saveError = error.localizedDescription
+  /// 访问即存：扫描结果页/候选页出现时自动写入扫描历史，无需手动确认。
+  /// 主结果仅在本次会话还没有历史记录时插入，避免覆盖候选页更新的选择；
+  /// 候选页每次访问都把该候选写入/更新历史（没有可展示介绍时不生成记录）。
+  /// 历史与知识节点模式不写入。
+  private func autoSaveIfNeeded() {
+    guard presentation == .scan else { return }
+    if let candidate {
+      guard candidate.informativeSummary != nil else { return }
+      Task {
+        try? await persist(selectedCandidateID: candidate.id)
       }
-      isSaving = false
+      return
     }
-  }
 
-  @MainActor
-  private func loadExplanation() async {
-    explanationStreamSource?.finish()
-
-    let userKnowledgeStates = knowledgeProgressStore.userKnowledgeStates(
-      knowledgeStore: KnowledgeStore.shared
+    let id = session.id
+    let descriptor = FetchDescriptor<ScanHistoryRecord>(
+      predicate: #Predicate { $0.recordID == id }
     )
-    knowledgeContextSummary = knowledgeContextSummary(for: userKnowledgeStates)
-
-    guard let explanationService else {
-      explanationState = .failed(String(localized: "讲解服务暂不可用。"))
-      return
-    }
-    // Demo / sample recognition should not call the live chat gateway.
-    if session.isDemo {
-      explanationState = .loaded(
-        PersonalizedExplanation(
-          markdown: demoExplanationMarkdown,
-          citations: [
-            KnowledgeCitation(
-              key: object.culturalElementKey ?? object.id.uuidString,
-              name: object.canonicalName,
-              fragment: object.summary,
-              sources: object.sources
-            )
-          ],
-          modelIdentifier: "local-demo"
-        )
-      )
-      return
-    }
-
-    let streamSource = GrowingMarkdownSource()
-    explanationStreamSource = streamSource
-    explanationState = .loading(isThinking: false)
-    var latestBody = ""
-    var modelIdentifier = LLMGatewayConfig.chat.model
-
-    do {
-      for try await event in explanationService.streamExplanation(
-        result: session.result,
-        userKnowledgeStates: userKnowledgeStates,
-        siteContext: [
-          session.place?.displayName,
-          session.result.locationInfluence?.summary,
-        ]
-        .compactMap { $0 }
-        .filter { !$0.isEmpty }
-        .joined(separator: "；")
-      ) {
-        try Task.checkCancellation()
-        switch event {
-        case .thinking:
-          if latestBody.isEmpty {
-            explanationState = .loading(isThinking: true)
-          }
-        case .delta(let snapshot):
-          let body = CultureChatService.displayBody(from: snapshot)
-          guard !body.isEmpty else { continue }
-          latestBody = body
-          explanationState = .streaming
-          streamSource.yield(body)
-        case .finished(let model, let content):
-          modelIdentifier = model
-          let parsed = CultureChatService.parseAnswer(content)
-          latestBody = parsed.body
-          streamSource.finish()
-          explanationState = .loaded(
-            PersonalizedExplanation(
-              markdown: parsed.body,
-              citations: parsed.citations,
-              modelIdentifier: model
-            )
-          )
-        }
-      }
-
-      if let key = object.culturalElementKey,
-        knowledgeProgressStore.level(for: object.id, elementKey: key) == nil
-      {
-        knowledgeProgressStore.setLevel(
-          .contact,
-          for: object.id,
-          source: .explanation,
-          elementKey: key
-        )
-      }
-    } catch {
-      streamSource.finish()
-      guard !Task.isCancelled else { return }
-      if !latestBody.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-        explanationState = .partial(
-          PersonalizedExplanation(
-            markdown: latestBody,
-            citations: [],
-            modelIdentifier: modelIdentifier
-          ),
-          message: error.localizedDescription
-        )
-      } else {
-        explanationState = .failed(error.localizedDescription)
-      }
+    guard ((try? modelContext.fetchCount(descriptor)) ?? 0) == 0 else { return }
+    Task {
+      try? await persist(selectedCandidateID: nil)
     }
   }
 
-  private func knowledgeContextSummary(
-    for states: [UserKnowledgeStateContext]
-  ) -> LocalizedStringKey {
-    guard !states.isEmpty else {
-      return "你的文化图谱暂无已有节点，将从必要背景讲起"
+  private func persist(selectedCandidateID: UUID?) async throws {
+    let path = try await ScanMediaStore.shared.saveJPEG(
+      session.imageData,
+      id: session.id
+    )
+    let place = session.place
+    // 坐标已有但缺少地名时（如照片 EXIF 定位）补一次逆地理编码，避免历史里显示“未记录位置”。
+    var placeName = place?.displayName
+    if (placeName?.isEmpty ?? true), let place {
+      placeName = await LocationContextProvider.reverseDisplayName(
+        latitude: place.latitude,
+        longitude: place.longitude
+      )
     }
-    let deeperCount = states.filter { $0.level != KnowledgeLevel.contact.rawValue }.count
-    if deeperCount > 0 {
-      return "已结合文化图谱中 \(states.count) 个节点，其中 \(deeperCount) 个已理解或掌握"
+    let snapshotData = try JSONEncoder().encode(
+      ScanHistorySnapshot(
+        result: session.result,
+        selectedObject: object,
+        selectedCandidateID: selectedCandidateID
+      )
+    )
+    let record = ScanHistoryRecord(
+      recordID: session.id,
+      createdAt: session.createdAt,
+      cultureObjectID: object.id,
+      canonicalName: object.canonicalName,
+      categoryRawValue: object.category.rawValue,
+      summary: object.summary,
+      timePeriod: object.timePeriod,
+      region: object.region,
+      confidence: object.confidence,
+      latitude: place?.latitude,
+      longitude: place?.longitude,
+      placeName: placeName,
+      imageRelativePath: path,
+      modelIdentifier: session.result.modelIdentifier,
+      resultSnapshotData: snapshotData
+    )
+    modelContext.insert(record)
+    try modelContext.save()
+    knowledgeProgressStore.setLevel(
+      .contact,
+      for: object.id,
+      source: .manual,
+      elementKey: graphElementKey
+    )
+  }
+
+  private var siteContext: String? {
+    let context = [
+      session.place?.displayName,
+      session.result.locationInfluence?.summary,
+    ]
+    .compactMap { $0 }
+    .filter { !$0.isEmpty }
+    .joined(separator: "；")
+    return context.isEmpty ? nil : context
+  }
+
+  private func markExplained() {
+    if let key = objectElementKey,
+      knowledgeProgressStore.level(for: object.id, elementKey: key) == nil
+    {
+      knowledgeProgressStore.setLevel(
+        .contact,
+        for: object.id,
+        source: .explanation,
+        elementKey: key
+      )
     }
-    return "已结合文化图谱中 \(states.count) 个接触过的节点补齐基础"
   }
 
   private var demoExplanationMarkdown: String {
-    let relatedNames = object.concepts.prefix(2).map(\.name).joined(separator: "、")
+    let relatedNames = graphObject.concepts.prefix(2).map(\.name).joined(separator: "、")
     let nextStep =
       relatedNames.isEmpty
       ? "- \(String(localized: "从关系图选择一个相邻概念继续探索。"))"
@@ -649,6 +693,32 @@ struct ScanResultView: View {
       ## \(String(localized: "下一步建议"))
       \(nextStep)
       """
+  }
+}
+
+extension ScanResultView {
+  /// 知识节点展示入口：由知识库对象合成会话，复用扫描结果页布局。
+  /// 合成会话标记为 demo（讲解走本地内容、不打网关），知识模式不写扫描历史。
+  init(knowledgeObject object: CultureObject) {
+    let result = RecognitionResult(
+      id: object.id,
+      object: object,
+      alternatives: [],
+      rationale: object.summary,
+      modelIdentifier: "knowledge-pack",
+      usedPlaceContext: false
+    )
+    self.init(
+      session: ScanSession(
+        id: object.id,
+        imageData: Data(),
+        result: result,
+        place: nil,
+        createdAt: Date(),
+        isDemo: true
+      ),
+      presentation: .knowledge
+    )
   }
 }
 

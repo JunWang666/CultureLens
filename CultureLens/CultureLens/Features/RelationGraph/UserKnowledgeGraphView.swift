@@ -124,9 +124,21 @@ struct UserKnowledgeGraphView: View {
                 selectCenter(node.id)
             } label: {
                 if node.id == centerID {
-                    Label(node.name, systemImage: "scope")
+                    Label {
+                        LocalizedPackText(
+                            source: node.name,
+                            cacheNamespace: "element",
+                            cacheKey: node.elementKey
+                        )
+                    } icon: {
+                        Image(systemName: "scope")
+                    }
                 } else {
-                    Text(node.name)
+                    LocalizedPackText(
+                        source: node.name,
+                        cacheNamespace: "element",
+                        cacheKey: node.elementKey
+                    )
                 }
             }
         }
@@ -245,11 +257,15 @@ struct UserKnowledgeGraphView: View {
             .font(.caption2.weight(.semibold))
             .foregroundStyle(isCenter ? CultureTheme.antiqueGold : nodeAccent(node))
 
-            Text(node.name)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(isCenter ? Color.white : CultureTheme.inkPrimary)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
+            LocalizedPackText(
+                source: node.name,
+                cacheNamespace: "element",
+                cacheKey: node.elementKey
+            )
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(isCenter ? Color.white : CultureTheme.inkPrimary)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
         }
         .frame(
             width: UserKnowledgeGraphLayout.nodeSize.width,
@@ -309,7 +325,7 @@ struct UserKnowledgeGraphView: View {
             }
         } label: {
             Label(
-                node.isJoined ? "调整掌握程度" : "加入文化图谱",
+                node.isJoined ? LocalizedStringKey("调整掌握程度") : "加入文化图谱",
                 systemImage: node.isJoined ? "slider.horizontal.3" : "plus.circle"
             )
         }
@@ -332,11 +348,7 @@ struct UserKnowledgeGraphView: View {
     private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {
         if isCenter { return String(localized: "当前中心") }
         if let level = progressStore.level(for: node.id) {
-            switch level {
-            case .contact: return String(localized: "接触")
-            case .understand: return String(localized: "理解")
-            case .master: return String(localized: "掌握")
-            }
+            return level.localizedTitle
         }
         return String(localized: "\(node.hop) 跳")
     }

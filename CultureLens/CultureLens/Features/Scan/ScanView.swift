@@ -244,7 +244,7 @@ struct ScanView: View {
             }
             .scanActionButtonStyle()
             .disabled(!isCameraAvailable || coordinator.phase.isWorking)
-            .accessibilityLabel(isTorchOn ? "关闭手电筒" : "打开手电筒")
+            .accessibilityLabel(isTorchOn ? LocalizedStringKey("关闭手电筒") : "打开手电筒")
             .accessibilityIdentifier("scan.torch")
         }
     }
@@ -298,11 +298,23 @@ struct ScanView: View {
         }
     }
 
+    /// Working-phase status text lives in the view so it follows the in-app
+    /// locale (`LocalizedStringKey`), not the device locale.
+    private var progressMessage: LocalizedStringKey {
+        switch coordinator.phase {
+        case .idle: "准备扫描"
+        case .preparing: "正在保护隐私并整理图片…"
+        case .locating: "正在获取当前位置…"
+        case .recognizing: "正在辨认文化线索…"
+        case .failed(let message): LocalizedStringKey(message)
+        }
+    }
+
     private var progressCard: some View {
         VStack(spacing: 12) {
             ProgressView()
                 .tint(.white)
-            Text(coordinator.phase.message)
+            Text(progressMessage)
                 .font(.headline)
             if let locationNotice = coordinator.locationNotice {
                 Text(locationNotice)

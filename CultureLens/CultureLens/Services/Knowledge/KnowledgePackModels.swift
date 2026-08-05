@@ -64,8 +64,13 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       return host.replacingOccurrences(of: "www.", with: "")
     }
 
-    func asKnowledgeSource() -> KnowledgeSource {
-      let identity = (url ?? title).trimmingCharacters(in: .whitespacesAndNewlines)
+    /// View-facing publisher name in the active app language. The stored
+    /// `publisher` stays Chinese (tests and provenance depend on it).
+    var displayPublisher: String {
+      KnowledgePublisherDisplay.name(for: publisher)
+    }
+
+    func asKnowledgeSource() -> KnowledgeSource {      let identity = (url ?? title).trimmingCharacters(in: .whitespacesAndNewlines)
       // Percent-encode non-ASCII paths so Link/openURL can open Wikipedia CN URLs.
       let resolvedURL = url.flatMap { raw -> URL? in
         if let url = URL(string: raw) { return url }
@@ -283,5 +288,26 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
     themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
     locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
+  }
+}
+
+/// Maps stored (Chinese) publisher names to the active app language for
+/// display. Stored values are never mutated — provenance tests depend on them.
+enum KnowledgePublisherDisplay {
+  static func name(for publisher: String) -> String {
+    switch AppLanguageStore.currentLanguage() {
+    case .zhHans:
+      return publisher
+    case .english:
+      switch publisher {
+      case "维基百科": return "Wikipedia"
+      case "高德地图": return "Amap"
+      case "杭州政府网": return "Hangzhou Gov"
+      case "司法部": return "Ministry of Justice"
+      case "UNESCO": return "UNESCO"
+      case "外部资料": return String(localized: "外部资料")
+      default: return publisher
+      }
+    }
   }
 }

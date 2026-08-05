@@ -20,16 +20,6 @@ final class ScanCoordinator {
         case recognizing
         case failed(String)
 
-        var message: String {
-            switch self {
-            case .idle: String(localized: "准备扫描")
-            case .preparing: String(localized: "正在保护隐私并整理图片…")
-            case .locating: String(localized: "正在获取当前位置…")
-            case .recognizing: String(localized: "正在辨认文化线索…")
-            case .failed(let message): message
-            }
-        }
-
         var isWorking: Bool {
             switch self {
             case .preparing, .locating, .recognizing: true

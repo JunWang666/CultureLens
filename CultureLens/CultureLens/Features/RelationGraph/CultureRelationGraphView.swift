@@ -414,9 +414,13 @@ struct CultureRelationGraphView: View {
       Text("当前对象")
         .font(.caption2)
         .foregroundStyle(CultureTheme.antiqueGold)
-      Text(object.canonicalName)
-        .font(.headline)
-        .lineLimit(1)
+      LocalizedPackText(
+        source: object.canonicalName,
+        cacheNamespace: "element",
+        cacheKey: objectElementKey
+      )
+      .font(.headline)
+      .lineLimit(1)
     }
     .foregroundStyle(.white)
     .frame(width: 136, height: 100)
@@ -433,16 +437,20 @@ struct CultureRelationGraphView: View {
     VStack(spacing: 5) {
       HStack(spacing: 5) {
         Image(systemName: concept.kind.systemImage)
-        Text(concept.kind.rawValue)
+        Text(concept.kind.localizedTitle)
       }
       .font(.caption2)
       .foregroundStyle(color(for: concept.kind))
 
-      Text(concept.name)
-        .font(.subheadline.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkPrimary)
-        .multilineTextAlignment(.center)
-        .lineLimit(2)
+      LocalizedPackText(
+        source: concept.name,
+        cacheNamespace: "element",
+        cacheKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+      )
+      .font(.subheadline.weight(.semibold))
+      .foregroundStyle(CultureTheme.inkPrimary)
+      .multilineTextAlignment(.center)
+      .lineLimit(2)
     }
     .frame(width: 138, height: 82)
     .background(CultureTheme.canvas, in: RoundedRectangle(cornerRadius: 20))
@@ -452,7 +460,7 @@ struct CultureRelationGraphView: View {
     }
     .contentShape(RoundedRectangle(cornerRadius: 20))
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("\(concept.kind.rawValue)，\(concept.name)")
+    .accessibilityLabel("\(concept.kind.localizedTitle)，\(concept.name)")
     .accessibilityHint("打开概念详情")
   }
 
@@ -488,7 +496,7 @@ struct CultureRelationGraphView: View {
       .stroke(edgeColor, style: StrokeStyle(lineWidth: 2, lineCap: .round))
 
       if showsLabel {
-        Text(relation.kind.rawValue)
+        Text(relation.kind.localizedTitle)
           .font(.caption2.weight(.semibold))
           .foregroundStyle(edgeColor)
           .padding(.horizontal, 7)
@@ -548,12 +556,16 @@ struct CultureRelationGraphView: View {
   private func relationRow(_ relation: CultureRelation) -> some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack(spacing: 8) {
-        Text(name(for: relation.sourceID))
-          .font(.subheadline.weight(.semibold))
+        LocalizedPackText(
+          source: name(for: relation.sourceID),
+          cacheNamespace: "element",
+          cacheKey: elementKey(for: relation.sourceID)
+        )
+        .font(.subheadline.weight(.semibold))
         Image(systemName: "arrow.right")
           .font(.caption)
           .foregroundStyle(color(for: relation))
-        Text(relation.kind.rawValue)
+        Text(relation.kind.localizedTitle)
           .font(.caption.weight(.semibold))
           .foregroundStyle(color(for: relation))
           .padding(.horizontal, 8)
@@ -562,8 +574,12 @@ struct CultureRelationGraphView: View {
         Image(systemName: "arrow.right")
           .font(.caption)
           .foregroundStyle(color(for: relation))
-        Text(name(for: relation.targetID))
-          .font(.subheadline.weight(.semibold))
+        LocalizedPackText(
+          source: name(for: relation.targetID),
+          cacheNamespace: "element",
+          cacheKey: elementKey(for: relation.targetID)
+        )
+        .font(.subheadline.weight(.semibold))
         Spacer(minLength: 0)
       }
       .foregroundStyle(CultureTheme.inkPrimary)
@@ -581,9 +597,20 @@ struct CultureRelationGraphView: View {
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(
-      "\(name(for: relation.sourceID))，\(relation.kind.rawValue)，\(name(for: relation.targetID))。\(relation.explanation)"
+      "\(name(for: relation.sourceID))，\(relation.kind.localizedTitle)，\(name(for: relation.targetID))。\(relation.explanation)"
     )
     .accessibilityHint(navigableConcept(for: relation) == nil ? "" : "打开相关概念")
+  }
+
+  private var objectElementKey: String? {
+    object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+  }
+
+  private func elementKey(for id: UUID) -> String? {
+    if id == object.id {
+      return objectElementKey
+    }
+    return KnowledgeStore.shared?.elementKey(for: id)
   }
 
   private func name(for id: UUID) -> String {

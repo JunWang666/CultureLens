@@ -40,6 +40,11 @@ struct KnowledgeSource: Identifiable, Codable, Hashable {
   var title: String
   var publisher: String
   var url: URL?
+
+  /// View-facing publisher name in the active app language.
+  var displayPublisher: String {
+    KnowledgePublisherDisplay.name(for: publisher)
+  }
 }
 
 struct CultureConcept: Identifiable, Codable, Hashable {

@@ -52,17 +52,6 @@ enum AppLanguagePreference: String, CaseIterable, Identifiable, Codable, Sendabl
 
   var id: String { rawValue }
 
-  var title: String {
-    switch self {
-    case .system:
-      String(localized: "跟随系统")
-    case .zhHans:
-      AppLanguage.zhHans.nativeDisplayName
-    case .english:
-      AppLanguage.english.nativeDisplayName
-    }
-  }
-
   func resolved(deviceLocale: Locale = .autoupdatingCurrent) -> AppLanguage {
     switch self {
     case .zhHans:

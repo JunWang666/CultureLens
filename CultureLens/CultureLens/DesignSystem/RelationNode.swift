@@ -14,15 +14,19 @@ struct RelationNode: View {
                     Circle().stroke(CultureTheme.antiqueGold.opacity(0.6), lineWidth: 1)
                 }
 
-            Text(concept.kind.rawValue)
+            Text(concept.kind.localizedTitle)
                 .font(.caption)
                 .foregroundStyle(CultureTheme.inkSecondary)
 
-            Text(concept.name)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(CultureTheme.inkPrimary)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
+            LocalizedPackText(
+                source: concept.name,
+                cacheNamespace: "element",
+                cacheKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+            )
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
         }
         .frame(width: 112, height: 150)
         .padding(.vertical, 8)

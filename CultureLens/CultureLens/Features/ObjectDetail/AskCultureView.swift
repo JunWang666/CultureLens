@@ -152,13 +152,13 @@ struct AskCultureView: View {
 
   private var emptyState: some View {
     VStack(alignment: .leading, spacing: 16) {
-      Text(isGeneralChat ? "从知识库问起" : "继续追问这个对象")
+      Text(isGeneralChat ? LocalizedStringKey("从知识库问起") : "继续追问这个对象")
         .font(.cultureSerif(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(
         isGeneralChat
-          ? "回答会流式渲染，可上传图片，历史对话会自动保存。"
+          ? LocalizedStringKey("回答会流式渲染，可上传图片，历史对话会自动保存。")
           : "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。"
       )
       .font(.subheadline)
@@ -416,7 +416,7 @@ struct AskCultureView: View {
         }
         .buttonStyle(.plain)
         .disabled(chatService == nil || model.isSending)
-        .accessibilityLabel(model.canSend ? "发送" : "语音对话")
+        .accessibilityLabel(model.canSend ? LocalizedStringKey("发送") : "语音对话")
       }
       .animation(.easeOut(duration: 0.16), value: model.canSend)
       .padding(.leading, 8)
@@ -571,18 +571,35 @@ final class AskCultureChatModel: ObservableObject {
   private var didConfigure = false
   private var streamTask: Task<Void, Never>?
 
+  /// Suggestions double as the message sent on tap, so resolve against the
+  /// app language (not the device locale) like the chat service does.
   var suggestions: [String] {
+    let isEnglish = AppLanguageStore.currentLanguage() == .english
     if object == nil {
+      if isEnglish {
+        return [
+          "How were the Ten Scenes of West Lake named?",
+          "What connects Three Pools Mirroring the Moon and Su Shi?",
+          "How else can the nodes I already know be connected?",
+        ]
+      }
       return [
-        String(localized: "西湖十景是怎样被命名的？"),
-        String(localized: "三潭映月和苏轼有什么关系？"),
-        String(localized: "我已经了解的节点还能怎样串联？"),
+        "西湖十景是怎样被命名的？",
+        "三潭映月和苏轼有什么关系？",
+        "我已经了解的节点还能怎样串联？",
+      ]
+    }
+    if isEnglish {
+      return [
+        "Why did it develop this structure?",
+        "How does it vary across regions?",
+        "Where else can I see similar objects?",
       ]
     }
     return [
-      String(localized: "它为什么会形成这样的结构？"),
-      String(localized: "在不同地区有什么变化？"),
-      String(localized: "我还能在哪里看到相似对象？"),
+      "它为什么会形成这样的结构？",
+      "在不同地区有什么变化？",
+      "我还能在哪里看到相似对象？",
     ]
   }
 

@@ -60,7 +60,7 @@ struct ThemeDetailView: View {
                 .tint(CultureTheme.cinnabar)
               Text(
                 progress.isComplete
-                  ? "已达到完成条件。可以继续点亮其余节点，加深理解。"
+                  ? LocalizedStringKey("已达到完成条件。可以继续点亮其余节点，加深理解。")
                   : "在现场扫描并加入文化图谱，即可推进主题进度。"
               )
               .font(.caption)

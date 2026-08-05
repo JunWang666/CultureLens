@@ -27,15 +27,29 @@
 
 ## 下一步
 
-1. 真机验证：扫描识别三态、分层讲解、多轮追问（含历史恢复与图片上传）、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback、文化回顾 / 主题探索 / 卡片分享、语言切换与知识译文。
-2. 归档 + 导出 ipa，确认 OnDemandResources 拆分；按 `APP_STORE.md` 检查单准备上架。
-3. R2 bucket 开通公开读并补内容图片 URL；admin 侧维护含 image block 的介绍。
-4. 补 App 图标与隐私清单（照片经 AI Gateway 发 Google 需如实声明；问答上传图片同属此声明）。
+1. 抽象阶梯与前置知识感知讲解，见 `design/0006-abstraction-axis-and-prerequisite-aware-explanation.md`：
+   关系方向表与有向遍历 API（可先在 Cloud 环境纯单测验证）→ `产生于` 取向审计与多包合并 →
+   讲解 prompt 三节改造 → 阶梯 UI。
+2. 图谱渲染、性能与交互整备，见 `design/0007-graph-rendering-performance-and-interaction.md`：
+   重心排序与边内缩、图谱 Tab 缺失的缩放、用户图谱丢失的关系类型、`joinedSeeds` 解码风暴。
+   方向分层布局与 `0006` 阶段 1 合并实施。
+3. 真机验证：扫描识别三态、分层讲解、多轮追问（含历史恢复与图片上传）、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback、文化回顾 / 主题探索 / 卡片分享、语言切换与知识译文。
+4. 归档 + 导出 ipa，确认 OnDemandResources 拆分；按 `APP_STORE.md` 检查单准备上架。
+5. R2 bucket 开通公开读并补内容图片 URL；admin 侧维护含 image block 的介绍。
+6. 补 App 图标与隐私清单（照片经 AI Gateway 发 Google 需如实声明；问答上传图片同属此声明）。
 
 ## 已知取舍与阻塞
 
 - LLM key 硬编码，需在 Cloudflare 配限额告警（用户已确认接受）。
 - ODR 不能独立于 App 版本热更；多地域拆分待内容增长后执行。
-- 丝绸之路包未导入，本期仅西湖包。
+- 丝绸之路包未导入。浙博 / 良渚 / 中国历史三个包已入仓但**未进 App**：它们列在
+  `project.pbxproj` 的 `membershipExceptions` 中且无补偿 build file，而 `KnowledgeStore.load`
+  也硬编码单包路径（`subdirectory: "KnowledgePack"`）。App 当前实际可见的仍只有西湖包 70 元素，
+  仓库内另有 106 元素 / 310 关系加载不到。解法见 `design/0006`。
+- 关系类型化只覆盖一半：西湖包 94/182 条带 `kind`，另三包 0/310；`conceptKind` 西湖包 70/70，
+  另三包 0/106。缺 `kind` 的边无法参与抽象阶梯。
+- `理解前先懂` 边全包仅 3 条且都是对象内部细节，不足以支撑「自动补未掌握前置」。
+- 上行关系图存在 1 个环（西湖文化景观 → 南宋临安与西湖十景 → 西湖十景的观看方式 → 1985 西湖新十景 →
+  西湖文化景观），`产生于` 有约 2/4 条反向边，会导致阶梯层级算错，须先审计。
 - 讲解 / 追问依赖 `dynamic/chat` 网关可用性；演示识别结果使用本地占位。
 - 本 Cloud VM 无法编译 iOS；P1 改动需在 Mac + Xcode 上跑模拟器验证。

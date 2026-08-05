@@ -37,12 +37,14 @@ nonisolated struct PromptLanguagePolicy: Sendable {
     }
   }
 
-  var explainSectionHeadings: (background: String, nextSteps: String, sources: String) {
+  var explainSectionHeadings: (
+    prerequisite: String, background: String, nextSteps: String, sources: String
+  ) {
     switch language {
     case .zhHans:
-      ("文化背景", "下一步建议", "引用来源")
+      ("先理解", "文化背景", "下一步建议", "引用来源")
     case .english:
-      ("Cultural Background", "Next Steps", "Sources")
+      ("Prerequisites", "Cultural Background", "Next Steps", "Sources")
     }
   }
 
@@ -56,26 +58,48 @@ nonisolated struct PromptLanguagePolicy: Sendable {
   /// Markdown skeleton the explain model must follow.
   var explainMarkdownSkeleton: String {
     let h = explainSectionHeadings
-    return """
-      ## \(h.background)
-      body
+    switch language {
+    case .zhHans:
+      return """
+        ## \(h.prerequisite)
+        仅当 missing_prerequisites 非空时出现；逐条补齐前置，每项 1–2 句。为空则整节省略，不要保留标题。
 
-      ## \(h.nextSteps)
-      - suggestion one
-      - suggestion two (optional)
+        ## \(h.background)
+        body
 
-      ## \(h.sources)
-      - key: `element-key`, name: element display name
-        - \(explainExcerptLabel): continuous verbatim quote from knowledge_fragments
-      """
+        ## \(h.nextSteps)
+        - suggestion one
+        - suggestion two (optional)
+
+        ## \(h.sources)
+        - key: `element-key`, name: element display name
+          - \(explainExcerptLabel): continuous verbatim quote from knowledge_fragments
+        """
+    case .english:
+      return """
+        ## \(h.prerequisite)
+        Only when missing_prerequisites is non-empty; 1–2 sentences per missing prerequisite. Omit the whole section (and its heading) otherwise.
+
+        ## \(h.background)
+        body
+
+        ## \(h.nextSteps)
+        - suggestion one
+        - suggestion two (optional)
+
+        ## \(h.sources)
+        - key: `element-key`, name: element display name
+          - \(explainExcerptLabel): continuous verbatim quote from knowledge_fragments
+        """
+    }
   }
 
   var explainLengthGuidance: String {
     switch language {
     case .zhHans:
-      "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
+      "「先理解」每项前置 1–2 句；「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
     case .english:
-      "Cultural Background: 2–4 short paragraphs, aim for under ~220 words. Next Steps: 1–2 short bullets, each under ~25 words."
+      "Prerequisites: 1–2 sentences per item, sourced only from missing_prerequisites fragments. Cultural Background: 2–4 short paragraphs, aim for under ~220 words. Next Steps: 1–2 short bullets, each under ~25 words."
     }
   }
 

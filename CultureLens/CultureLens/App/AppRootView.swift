@@ -64,7 +64,9 @@ struct AppRootView: View {
 
             Tab(AppTab.graph.title, systemImage: AppTab.graph.systemImage, value: .graph) {
                 appStack(path: $graphPath) {
-                    UserKnowledgeGraphView()
+                    UserKnowledgeGraphView(onNavigate: { route in
+                        graphPath.append(route)
+                    })
                 }
             }
 

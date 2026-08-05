@@ -29,6 +29,24 @@ nonisolated struct UserKnowledgeGraphEdge: Identifiable, Hashable {
   let id: UUID
   let sourceID: UUID
   let targetID: UUID
+  /// Pack relation type; nil for untyped legacy edges.
+  let kind: RelationKind?
+  /// Human-readable edge gloss from the pack, when present.
+  let explanation: String?
+
+  init(
+    id: UUID,
+    sourceID: UUID,
+    targetID: UUID,
+    kind: RelationKind? = nil,
+    explanation: String? = nil
+  ) {
+    self.id = id
+    self.sourceID = sourceID
+    self.targetID = targetID
+    self.kind = kind
+    self.explanation = explanation
+  }
 }
 
 nonisolated struct UserKnowledgeGraphSnapshot: Hashable {
@@ -56,8 +74,9 @@ nonisolated enum CulturalElementPresentation {
   }
 }
 
-/// A deterministic radial shortest-hop layout. It performs no iterative
-/// simulation, so positions are stable and the cost is linear after grouping.
+/// A deterministic radial shortest-hop layout backed by the shared
+/// `RadialGraphLayout` kernel (barycenter ordering + abstraction direction
+/// bias), so the Graph tab renders with the same quality as the object graph.
 nonisolated struct UserKnowledgeGraphLayout {
   static let nodeSize = CGSize(width: 146, height: 86)
 
@@ -72,45 +91,65 @@ nonisolated struct UserKnowledgeGraphLayout {
     }
 
     let outerJoinedHop = snapshot.maximumDepth + 1
-    let nodesByRing = Dictionary(grouping: snapshot.nodes.filter { $0.id != centerID }) {
-      min(max($0.hop, 1), outerJoinedHop)
-    }
-
-    var radiusByRing: [Int: CGFloat] = [:]
-    var previousRadius: CGFloat = 0
-    for ring in nodesByRing.keys.sorted() {
-      let count = CGFloat(nodesByRing[ring]?.count ?? 0)
-      let radiusForCircumference = count * (Self.nodeSize.width + 24) / (2 * .pi)
-      let minimumRadius = previousRadius == 0 ? 210 : previousRadius + 178
-      let radius = max(minimumRadius, radiusForCircumference)
-      radiusByRing[ring] = radius
-      previousRadius = radius
-    }
-
-    let maximumRadius = max(radiusByRing.values.max() ?? 0, 210)
-    let margin = max(Self.nodeSize.width, Self.nodeSize.height) / 2 + 36
-    let center = CGPoint(x: maximumRadius + margin, y: maximumRadius + margin)
-    var result: [UUID: CGPoint] = [centerID: center]
-
-    for ring in nodesByRing.keys.sorted() {
-      guard let nodes = nodesByRing[ring], !nodes.isEmpty else { continue }
-      let orderedNodes = nodes.sorted {
-        if $0.name != $1.name { return $0.name.localizedCompare($1.name) == .orderedAscending }
-        return $0.id.uuidString < $1.id.uuidString
-      }
-      let angleStep = 2 * CGFloat.pi / CGFloat(orderedNodes.count)
-      let startingAngle = -CGFloat.pi / 2 + (ring.isMultiple(of: 2) ? angleStep / 2 : 0)
-      let radius = radiusByRing[ring] ?? 210
-      for (index, node) in orderedNodes.enumerated() {
-        let angle = startingAngle + CGFloat(index) * angleStep
-        result[node.id] = CGPoint(
-          x: center.x + cos(angle) * radius,
-          y: center.y + sin(angle) * radius
+    let nodes = snapshot.nodes
+      .filter { $0.id != centerID }
+      .map {
+        RadialGraphLayout.Node(
+          id: $0.id,
+          ring: min(max($0.hop, 1), outerJoinedHop),
+          name: $0.name
         )
       }
+
+    // Direction bias: infer each node's semantic direction from the typed
+    // edge connecting it to the lowest-hop neighbor it touches.
+    let hopByID = Dictionary(uniqueKeysWithValues: snapshot.nodes.map { ($0.id, $0.hop) })
+    var directionOf: [UUID: AbstractionDirection] = [:]
+    for node in snapshot.nodes where node.id != centerID {
+      let nodeHop = hopByID[node.id] ?? 0
+      let candidates = snapshot.edges
+        .filter { edge in
+          guard edge.kind != nil else { return false }
+          let otherID: UUID
+          if edge.sourceID == node.id {
+            otherID = edge.targetID
+          } else if edge.targetID == node.id {
+            otherID = edge.sourceID
+          } else {
+            return false
+          }
+          return (hopByID[otherID] ?? .max) < nodeHop
+        }
+        .sorted { ($0.id.uuidString) < ($1.id.uuidString) }
+      guard let edge = candidates.first, let kind = edge.kind else { continue }
+      let direction = kind.abstractionDirection
+      if edge.sourceID == node.id {
+        // node → parent: invert the axis.
+        switch direction {
+        case .up: directionOf[node.id] = .down
+        case .down: directionOf[node.id] = .up
+        default: directionOf[node.id] = direction
+        }
+      } else {
+        directionOf[node.id] = direction
+      }
     }
 
-    positions = result
-    size = CGSize(width: center.x * 2, height: center.y * 2)
+    let layout = RadialGraphLayout(
+      centerID: centerID,
+      nodes: nodes,
+      edges: snapshot.edges.map { ($0.sourceID, $0.targetID) },
+      directionOf: directionOf,
+      metrics: RadialGraphLayout.Metrics(
+        nodeSize: Self.nodeSize,
+        initialRadius: 210,
+        ringSpacing: 178,
+        circumferenceSpacing: Self.nodeSize.width + 24,
+        margin: max(Self.nodeSize.width, Self.nodeSize.height) / 2 + 36,
+        directionBiasWeight: 0.45
+      )
+    )
+    positions = layout.positions
+    size = layout.size
   }
 }

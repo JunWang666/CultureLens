@@ -69,6 +69,9 @@ struct ScanResultView: View {
         actionButtons
       } trailing: { _ in
         explanationSection
+        if let elementKey = object.culturalElementKey {
+          AbstractionLadderView(rootKey: elementKey, rootName: object.canonicalName)
+        }
         CultureRelationGraphView(
           object: primaryObject,
           presentation: .expandablePreview

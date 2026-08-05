@@ -53,14 +53,15 @@ nonisolated struct CultureExplanationService: Sendable {
             await KnowledgePackLoader.shared.store(fallback: self.knowledgeStore)
             ?? self.knowledgeStore
           let rootKey = result.object.culturalElementKey
-          let neighbors = self.neighborContexts(
+          let axisContexts = self.axisContexts(
             rootKey: rootKey,
             store: store,
-            object: result.object
+            object: result.object,
+            userKnowledgeStates: userKnowledgeStates
           )
           let fragments = self.knowledgeFragments(
             rootKey: rootKey,
-            neighbors: neighbors,
+            neighbors: axisContexts.neighbors,
             store: store,
             object: result.object,
             siteContext: siteContext
@@ -72,10 +73,14 @@ nonisolated struct CultureExplanationService: Sendable {
           let assembler = self.promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
           let userText = try assembler.explainUserText(
             recognition: ExplanationRecognitionContext(result: result),
-            neighbors: neighbors,
+            neighbors: axisContexts.neighbors,
             knowledgeFragments: fragments,
-            userKnowledgeStates: userKnowledgeStates,
-            siteContext: siteContext
+            userKnowledgeStates: axisContexts.relevantKnowledgeStates,
+            siteContext: siteContext,
+            abstractionPath: axisContexts.abstractionPath,
+            missingPrerequisites: axisContexts.missingPrerequisites,
+            preferenceProfile: axisContexts.preferenceProfile,
+            userKnowledgeTotalCount: userKnowledgeStates.count
           )
           for try await event in self.gatewayClient.streamAsk(
             systemPrompt: assembler.explainSystemPrompt,
@@ -95,34 +100,151 @@ nonisolated struct CultureExplanationService: Sendable {
     }
   }
 
-  private func neighborContexts(
+  /// Prompt context selected along the abstraction axis (design 0006 阶段 3):
+  /// neighbor slots are allocated by direction (upward 2–3, all missing
+  /// prerequisites up to 3, lateral 2, then fill to 8) instead of the old
+  /// alphabetical first-8, and the payload gains the abstraction path, the
+  /// missing-prerequisite closure, a preference profile, and a narrowed
+  /// relevant subset of the user's knowledge states.
+  private struct AxisContexts {
+    var neighbors: [ExplanationNeighborContext] = []
+    var abstractionPath: [AbstractionPathContext] = []
+    var missingPrerequisites: [MissingPrerequisiteContext] = []
+    var preferenceProfile: [PreferenceProfileContext] = []
+    var relevantKnowledgeStates: [UserKnowledgeStateContext] = []
+  }
+
+  private func axisContexts(
     rootKey: String?,
     store: KnowledgeStore,
-    object: CultureObject
-  ) -> [ExplanationNeighborContext] {
-    if let rootKey {
-      let related = store.relatedElements(forKey: rootKey, limit: 8)
-      return related.map { element in
+    object: CultureObject,
+    userKnowledgeStates: [UserKnowledgeStateContext]
+  ) -> AxisContexts {
+    var contexts = AxisContexts()
+    contexts.preferenceProfile = preferenceProfile(
+      from: userKnowledgeStates,
+      store: store
+    )
+
+    guard let rootKey else {
+      // No knowledge-pack binding: keep the legacy concept-only neighbors.
+      contexts.neighbors = object.concepts.prefix(8).map {
+        ExplanationNeighborContext(
+          key: $0.id.uuidString,
+          name: $0.name,
+          relationKind: $0.kind.rawValue,
+          explanation: $0.summary
+        )
+      }
+      contexts.relevantKnowledgeStates = userKnowledgeStates
+      return contexts
+    }
+
+    let knownKeys = Set(userKnowledgeStates.map(\.key))
+
+    // Abstraction path: one backbone ancestor per level, capped at 5.
+    contexts.abstractionPath = store.ancestors(key: rootKey, maxLevels: 5)
+      .compactMap { level -> AbstractionPathContext? in
+        guard let backbone = level.elements.first,
+          let element = store.element(key: backbone.key)
+        else { return nil }
+        return AbstractionPathContext(
+          key: backbone.key,
+          name: backbone.name,
+          excerpt: Self.excerpt(from: element)
+        )
+      }
+
+    // Missing prerequisites: full transitive closure minus known, capped at 3.
+    let missing = store.missingPrerequisites(key: rootKey, known: knownKeys, maxCount: 3)
+    contexts.missingPrerequisites = missing.map {
+      MissingPrerequisiteContext(key: $0.key, name: $0.name, fragment: $0.excerpt)
+    }
+
+    // Neighbor slots by axis.
+    var chosen: [ExplanationNeighborContext] = []
+    var chosenKeys = Set<String>()
+
+    func appendEdge(_ edge: DirectedRelationEdge, kindOverride: RelationKind? = nil) {
+      guard chosenKeys.insert(edge.key).inserted,
+        let element = store.element(key: edge.key)
+      else { return }
+      chosen.append(
+        ExplanationNeighborContext(
+          key: element.key,
+          name: element.name,
+          relationKind: (kindOverride ?? edge.kind)?.rawValue,
+          explanation: edge.explanation
+        )
+      )
+    }
+
+    for prerequisite in missing {
+      appendEdge(
+        DirectedRelationEdge(
+          key: prerequisite.key,
+          kind: .prerequisiteFor,
+          explanation: prerequisite.excerpt
+        )
+      )
+    }
+    for edge in store.upward(key: rootKey).prefix(3) {
+      appendEdge(edge)
+    }
+    for edge in store.lateral(key: rootKey).prefix(2) {
+      appendEdge(edge)
+    }
+    // Fill remaining slots with other related elements (legacy behavior).
+    if chosen.count < 8 {
+      for element in store.relatedElements(forKey: rootKey, limit: 20) {
+        guard chosen.count < 8, !chosenKeys.contains(element.key) else { continue }
         let relation = object.relations.first {
           $0.targetID == DeterministicID.culturalElement(element.key)
             || $0.sourceID == DeterministicID.culturalElement(element.key)
         }
-        return ExplanationNeighborContext(
-          key: element.key,
-          name: element.name,
-          relationKind: relation?.kind.rawValue,
-          explanation: relation?.explanation
+        chosen.append(
+          ExplanationNeighborContext(
+            key: element.key,
+            name: element.name,
+            relationKind: relation?.kind.rawValue,
+            explanation: relation?.explanation
+          )
         )
+        chosenKeys.insert(element.key)
       }
     }
-    return object.concepts.prefix(8).map {
-      ExplanationNeighborContext(
-        key: $0.id.uuidString,
-        name: $0.name,
-        relationKind: $0.kind.rawValue,
-        explanation: $0.summary
-      )
+    contexts.neighbors = chosen
+
+    // Narrow the user states to nodes relevant to this object; the total
+    // count travels separately so the model still knows the graph size.
+    var relevantKeys = Set(chosen.map(\.key))
+    relevantKeys.formUnion(contexts.abstractionPath.map(\.key))
+    relevantKeys.formUnion(contexts.missingPrerequisites.map(\.key))
+    let relevant = userKnowledgeStates.filter { relevantKeys.contains($0.key) }
+    contexts.relevantKnowledgeStates = relevant
+    return contexts
+  }
+
+  /// Preference profile from the ConceptKind distribution of joined nodes
+  /// (design 0006 设计六), top three kinds by count.
+  private func preferenceProfile(
+    from states: [UserKnowledgeStateContext],
+    store: KnowledgeStore
+  ) -> [PreferenceProfileContext] {
+    var counts: [ConceptKind: Int] = [:]
+    for state in states {
+      guard let element = store.element(key: state.key) else { continue }
+      counts[CulturalElementPresentation.conceptKind(element.conceptKind), default: 0] += 1
     }
+    return counts
+      .sorted { ($0.value, $0.key.rawValue) > ($1.value, $1.key.rawValue) }
+      .prefix(3)
+      .map { PreferenceProfileContext(kind: $0.key.rawValue, count: $0.value) }
+  }
+
+  private static func excerpt(from element: KnowledgePack.Element) -> String {
+    let text = KnowledgeStore.richTextPlainText(element.introduction)
+    return text.count <= 120 ? text : String(text.prefix(120)) + "…"
   }
 
   private func knowledgeFragments(

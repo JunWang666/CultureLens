@@ -93,7 +93,12 @@ struct ObjectDetailView: View {
     }
 
     private var relationSection: some View {
-        CultureRelationGraphView(object: object)
+        VStack(alignment: .leading, spacing: 20) {
+            if let elementKey = object.culturalElementKey {
+                AbstractionLadderView(rootKey: elementKey, rootName: object.canonicalName)
+            }
+            CultureRelationGraphView(object: object)
+        }
     }
 
 }

@@ -30,6 +30,15 @@
 - 知识包当前以仓库内 JSON 为源；需要更新时直接编辑 `Resources/KnowledgePack/`（及 fallback 副本）并同步 `pack-manifest.json`。
 - 后续可按地域/主题拆多包（每包一个 ODR tag），结构已预留。
 
+## 抽象轴与图谱渲染（0006 / 0007）
+
+- 关系抽象方向：`RelationKind.abstractionDirection`（上行 / 下行 / 横向 / 前置），`产生于` 因数据中存在反向边暂不纳入默认上行集合。
+- 有向遍历：`KnowledgeStore.upward/downward/lateral/ancestors/siblings/missingPrerequisites`，含环检测与层级去重，全部为纯函数（`AbstractionAxisTests` 以真实西湖包断言「三潭印月 → 宋代山水审美」可达）。
+- 讲解契约：`explainUserText` payload 新增 `abstraction_path` / `missing_prerequisites` / `preference_profile` / `user_knowledge_total_count`，邻居按轴分配名额；`explain.txt` 输出扩为三节（「先理解」仅当前置缺失时出现），旧两节格式讲解仍可正常解析展示。
+- 抽象阶梯：`DesignSystem/AbstractionLadderView`（纵向祖先链 + 同级 chips），接入扫描结果页、对象详情、概念详情（点节点即以它为起点重排）。
+- 图谱渲染：`RadialGraphLayout` 共享内核（重心排序 + 方向分层偏置，确定性 O(V+E)），对象图谱与用户图谱共用；边按 5 个语义族着色/线型/图标，图例可点选筛选；用户图谱接入捏合缩放、搜索筛选、列表模式、可搜索中心选择、截断提示与前置未掌握标记。
+- 未实施：0006 阶段 2（补 kind / conceptKind / 前置边覆盖、`产生于` 取向审计、多包合并与 UUID 迁移）——属于内容与数据迁移工作，需单独评估。
+
 ## 已移除的后端
 
 Go BFF（`CultureLensBackend/`）已从仓库删除。识别与知识检索均在端侧完成；`RemoteRecognitionService`、`CultureLensAPI` 等远程调用路径亦已删除。

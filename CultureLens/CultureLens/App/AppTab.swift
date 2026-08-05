@@ -27,11 +27,11 @@ enum AppTab: String, CaseIterable, Identifiable {
     var title: LocalizedStringKey {
         switch self {
         case .explore: "探索"
-        case .chat: "文化问答"
+        case .chat: "问答"
         case .scan: "扫描"
         case .graph: "图谱"
         case .history: "足迹"
-        case .review: "文化回顾"
+        case .review: "回顾"
         case .settings: "设置"
         case .more: "更多"
         }

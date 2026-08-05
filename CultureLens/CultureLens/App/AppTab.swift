@@ -26,11 +26,11 @@ enum AppTab: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .explore: String(localized: "探索")
-        case .chat: String(localized: "文化问答")
+        case .chat: String(localized: "问答")
         case .scan: String(localized: "扫描")
         case .graph: String(localized: "图谱")
         case .history: String(localized: "足迹")
-        case .review: String(localized: "文化回顾")
+        case .review: String(localized: "回顾")
         case .settings: String(localized: "设置")
         case .more: String(localized: "更多")
         }

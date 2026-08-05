@@ -762,6 +762,23 @@
         }
       }
     },
+    "从知识库与你的文化图谱里找答案，也可以附一张现场照片。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answers come from the knowledge base and your culture graph — you can attach a photo too."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从知识库与你的文化图谱里找答案，也可以附一张现场照片。"
+          }
+        }
+      }
+    },
     "从知识库问起" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1835,9 +1852,6 @@
         }
       }
     },
-    "回答会流式渲染，可上传图片，历史对话会自动保存。" : {
-
-    },
     "回答会流式渲染，引用整理成卡片展示。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1851,6 +1865,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "回答会流式渲染，引用整理成卡片展示。"
+          }
+        }
+      }
+    },
+    "回顾" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回顾"
           }
         }
       }
@@ -2172,6 +2203,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "好"
+          }
+        }
+      }
+    },
+    "好奇什么，直接问" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask whatever you're curious about"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好奇什么，直接问"
           }
         }
       }
@@ -6486,6 +6534,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "长按可设为中心"
+          }
+        }
+      }
+    },
+    "问答" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q&A"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "问答"
           }
         }
       }

@@ -62,4 +62,5 @@ Go BFF（`CultureLensBackend/`）已从仓库删除。识别与知识检索均�
 - 标题宋体：`Font.magazineDisplay(...)`。内置子集化思源宋体 `Resources/Fonts/CultureLensSerif-SemiBold.ttf`（GB2312 字符集子集 ≈3MB；OFL 的 Reserved Font Name 约束要求改名，许可见同目录 `OFL.txt`），`CultureThemeFonts` 运行时注册并探测，回退链：内置宋体 → Songti SC → 系统衬线。
 - 页面背景：`CulturePageBackground` 用运行时生成的纸纹颗粒平铺，不再用光斑。
 - 版面原则：分栏细线（hairline rule）与大留白代替圆角卡片盒；刊头不放品牌字标。圆角 surface 盒仅保留给分享卡、对话气泡、墨色封面等确需盒子的交互块。
+- 海报感示意图：`DesignSystem/ObjectArtwork.swift`（无实拍照片时的对象/景点占位图，用于列表卡缩略图与分享卡导出）用扁平撞色对角构图 + 放大剪影图标，按对象 id 交替朱砂/墨色主色，是版面里刻意突出的「强对比」槽位；详情页正文等阅读场景仍保持安静克制。设计见 `agents/design/0022`。
 - ODR 注意：asset pack 内文件为扁平布局，`KnowledgePackLoader.loadPack` 需从包根目录读取（子目录候选仅为 bundle 内旧布局保留）。

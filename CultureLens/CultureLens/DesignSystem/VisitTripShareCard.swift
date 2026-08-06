@@ -93,20 +93,23 @@ struct VisitTripShareCard: View {
 
   @ViewBuilder
   private var hero: some View {
-    if let heroImage {
-      Image(uiImage: heroImage)
-        .resizable()
-        .scaledToFill()
-        .frame(maxWidth: .infinity)
-        .frame(height: 200)
-        .clipped()
-        .magazinePhoto()
-    } else {
-      ObjectArtwork(
-        object: VisitTripHero.artworkObject(for: trip),
-        height: 200
-      )
-    }
+    Color.clear
+      .frame(maxWidth: .infinity)
+      .frame(height: 200)
+      .overlay {
+        if let heroImage {
+          Image(uiImage: heroImage)
+            .resizable()
+            .scaledToFill()
+            .magazinePhoto()
+        } else {
+          ObjectArtwork(
+            object: VisitTripHero.artworkObject(for: trip),
+            height: 200
+          )
+        }
+      }
+      .clipped()
   }
 
   private func shareStat(_ value: String, _ label: LocalizedStringKey) -> some View {

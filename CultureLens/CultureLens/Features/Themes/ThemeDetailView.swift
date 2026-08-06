@@ -42,6 +42,8 @@ struct ThemeDetailView: View {
                 .tracking(2)
                 .foregroundStyle(CultureTheme.cinnabar)
 
+              ThemeSeriesHero(theme: theme)
+
               Text(progress.statusText)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(
@@ -49,7 +51,7 @@ struct ThemeDetailView: View {
                 )
 
               if progress.isComplete {
-                Label("文化系已点亮", systemImage: "seal.fill")
+                Text("文化系已点亮")
                   .font(CultureTypography.title(.headline))
                   .foregroundStyle(CultureTheme.antiqueGold)
                   .transition(.scale.combined(with: .opacity))
@@ -155,6 +157,27 @@ struct ThemeDetailView: View {
       }
       .buttonStyle(.plain)
     }
+  }
+}
+
+private struct ThemeSeriesHero: View {
+  let theme: KnowledgePack.Theme
+
+  var body: some View {
+    Image(ExplorationArtwork.seriesImageName(for: theme))
+      .resizable()
+      .scaledToFill()
+      .frame(maxWidth: .infinity)
+      .frame(height: 210)
+      .clipped()
+      .overlay(alignment: .bottomTrailing) {
+        Text(verbatim: "CULTURAL SERIES")
+          .font(.caption2.weight(.bold))
+          .tracking(1.4)
+          .foregroundStyle(CultureTheme.canvas.opacity(0.86))
+          .padding(12)
+      }
+      .accessibilityLabel("\(theme.name)主题海报")
   }
 }
 

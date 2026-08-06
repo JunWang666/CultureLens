@@ -40,6 +40,10 @@ enum VisitTripHero {
 
 /// Full-width magazine hero for a visit trip — intro photo when available,
 /// otherwise poster-style `ObjectArtwork`.
+///
+/// Layout mirrors `ScanResultView.imageHeader`: pin width+height first, then
+/// overlay `scaledToFill` and clip. Framing only the image height lets fill
+/// expand past the column and spill into the trailing pane on iPad landscape.
 struct VisitTripHeroView: View {
   let trip: VisitTrip
   var height: CGFloat = 240
@@ -50,41 +54,42 @@ struct VisitTripHeroView: View {
   }
 
   var body: some View {
-    Group {
-      if let resolvedURL {
-        CachedAsyncImage(
-          url: resolvedURL,
-          transaction: Transaction(animation: .easeOut(duration: 0.3))
-        ) { phase in
-          switch phase {
-          case .success(let image):
-            image
-              .resizable()
-              .scaledToFill()
-              .frame(maxWidth: .infinity)
-              .frame(height: height)
-              .clipped()
-              .magazinePhoto()
-              .transition(.opacity)
-          case .failure:
-            posterFallback
-          case .empty:
-            Rectangle()
-              .fill(CultureTheme.inkPrimary.opacity(0.08))
-              .frame(maxWidth: .infinity)
-              .frame(height: height)
-          @unknown default:
-            posterFallback
-          }
-        }
-      } else {
-        posterFallback
+    Color.clear
+      .frame(maxWidth: .infinity)
+      .frame(height: height)
+      .overlay {
+        heroContent
       }
+      .clipped()
+      .accessibilityLabel("\(trip.title)主图")
+  }
+
+  @ViewBuilder
+  private var heroContent: some View {
+    if let resolvedURL {
+      CachedAsyncImage(
+        url: resolvedURL,
+        transaction: Transaction(animation: .easeOut(duration: 0.3))
+      ) { phase in
+        switch phase {
+        case .success(let image):
+          image
+            .resizable()
+            .scaledToFill()
+            .magazinePhoto()
+            .transition(.opacity)
+        case .failure:
+          posterFallback
+        case .empty:
+          Rectangle()
+            .fill(CultureTheme.inkPrimary.opacity(0.08))
+        @unknown default:
+          posterFallback
+        }
+      }
+    } else {
+      posterFallback
     }
-    .frame(maxWidth: .infinity)
-    .frame(height: height)
-    .clipped()
-    .accessibilityLabel("\(trip.title)主图")
   }
 
   private var posterFallback: some View {

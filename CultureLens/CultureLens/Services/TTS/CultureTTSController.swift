@@ -136,6 +136,8 @@ final class CultureTTSController: NSObject {
     switch language {
     case .zhHans: code = "zh-CN"
     case .english: code = "en-US"
+    case .japanese: code = "ja-JP"
+    case .russian: code = "ru-RU"
     }
     return AVSpeechSynthesisVoice(language: code)
       ?? AVSpeechSynthesisVoice(language: language.localeIdentifier)

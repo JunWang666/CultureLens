@@ -730,7 +730,8 @@ enum KnowledgePublisherDisplay {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:
       return publisher
-    case .english:
+    case .english, .japanese, .russian:
+      // Keep widely recognized Latin/English publisher names across non-Chinese UIs.
       switch publisher {
       case "维基百科": return "Wikipedia"
       case "高德地图": return "Amap"

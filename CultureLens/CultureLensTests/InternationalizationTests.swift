@@ -4,7 +4,7 @@ import Testing
 @testable import CultureLens
 
 struct InternationalizationTests {
-  @Test func systemPreferenceResolvesChineseLocales() {
+  @Test func systemPreferenceResolvesSupportedLocales() {
     #expect(
       AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "zh-Hans"))
         == .zhHans
@@ -17,8 +17,18 @@ struct InternationalizationTests {
       AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "en_US"))
         == .english
     )
+    #expect(
+      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "ja_JP"))
+        == .japanese
+    )
+    #expect(
+      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "ru_RU"))
+        == .russian
+    )
     #expect(AppLanguagePreference.english.resolved() == .english)
     #expect(AppLanguagePreference.zhHans.resolved() == .zhHans)
+    #expect(AppLanguagePreference.japanese.resolved() == .japanese)
+    #expect(AppLanguagePreference.russian.resolved() == .russian)
   }
 
   @Test func promptLanguagePolicyInjectsEnglishOutputRules() {
@@ -30,6 +40,27 @@ struct InternationalizationTests {
     #expect(prompt.contains("Write all user-facing free text in English"))
     #expect(!prompt.contains("所有文字使用简体中文。"))
     #expect(policy.recognitionUserPreamble() == "Identify the cultural object in this photo.")
+  }
+
+  @Test func promptLanguagePolicyInjectsJapaneseAndRussianOutputRules() {
+    let ja = PromptLanguagePolicy(language: .japanese)
+    let jaPrompt = ja.apply(
+      toSystemPrompt: "任务说明。\n所有文字使用简体中文。\n",
+      kind: .recognize
+    )
+    #expect(jaPrompt.contains("ユーザー向けの自由記述はすべて日本語で書く"))
+    #expect(!jaPrompt.contains("所有文字使用简体中文。"))
+    #expect(ja.recognitionUserPreamble() == "この文化現場の写真を識別してください。")
+    #expect(ja.explainSectionHeadings.sources == "出典")
+
+    let ru = PromptLanguagePolicy(language: .russian)
+    let ruPrompt = ru.apply(
+      toSystemPrompt: "任务说明。\n所有文字使用简体中文。\n",
+      kind: .recognize
+    )
+    #expect(ruPrompt.contains("Весь пользовательский свободный текст пишите на русском"))
+    #expect(ru.recognitionUserPreamble() == "Определите культурный объект на этом фото.")
+    #expect(ru.explainSectionHeadings.sources == "Источники")
   }
 
   @Test func explainPromptUsesEnglishSectionHeadings() {
@@ -56,6 +87,30 @@ struct InternationalizationTests {
     #expect(prompt.contains("Source excerpt"))
   }
 
+  @Test func explainPromptUsesJapaneseSectionHeadings() {
+    let policy = PromptLanguagePolicy(language: .japanese)
+    let bundled = """
+      你是讲解助手。
+      输出格式（严格按此 Markdown 结构，不要包在 JSON 或代码块里）：
+
+      ## 文化背景
+      正文
+
+      ## 下一步建议
+      - 建议
+
+      ## 引用来源
+      - key: `k`, name: n
+        - 原文摘录：quote
+      """
+    let prompt = policy.apply(toSystemPrompt: bundled, kind: .explain)
+    #expect(prompt.contains("## 文化的背景"))
+    #expect(prompt.contains("## 関連の脈絡"))
+    #expect(prompt.contains("## 次のステップ"))
+    #expect(prompt.contains("## 出典"))
+    #expect(prompt.contains("原文抜粋"))
+  }
+
   @Test func citationParserAcceptsEnglishSourcesHeading() {
     let markdown = """
       West Lake night scenery relies on lamps, water, and moon illusion.
@@ -70,6 +125,30 @@ struct InternationalizationTests {
     #expect(parsed.citations.count == 1)
     #expect(parsed.citations[0].key == "three-pools-mirroring-moon")
     #expect(parsed.citations[0].fragment.contains("Stone pagodas"))
+  }
+
+  @Test func citationParserAcceptsJapaneseAndRussianSourcesHeadings() {
+    let jaMarkdown = """
+      西湖の夜景は灯籠と水面、月の錯覚に依る。
+
+      ## 出典
+      - key: `three-pools-mirroring-moon`, name: 三潭映月
+        - 原文抜粋: 石塔、灯孔、水面、月光。
+      """
+    let jaParsed = CultureChatService.parseAnswer(jaMarkdown, store: nil)
+    #expect(jaParsed.citations.count == 1)
+    #expect(jaParsed.citations[0].key == "three-pools-mirroring-moon")
+
+    let ruMarkdown = """
+      Ночной пейзаж Сиху опирается на фонари, воду и иллюзию луны.
+
+      ## Источники
+      - key: `three-pools-mirroring-moon`, name: Три пруда, отражающие луну
+        - Цитата из источника: Каменные пагоды, отверстия для ламп, вода и лунный свет.
+      """
+    let ruParsed = CultureChatService.parseAnswer(ruMarkdown, store: nil)
+    #expect(ruParsed.citations.count == 1)
+    #expect(ruParsed.citations[0].key == "three-pools-mirroring-moon")
   }
 
   @Test func knowledgePackDecodesEmptyLocalesOverlay() throws {
@@ -102,6 +181,14 @@ struct InternationalizationTests {
     let en = localization.elementText(key: "e1", language: .english)
     #expect(en?.name == "元素一")
     #expect(en?.isSourceFallback == true)
+
+    // Japanese / Russian have no pack overlays yet; fall back to source for LLM translation.
+    let ja = localization.elementText(key: "e1", language: .japanese)
+    #expect(ja?.name == "元素一")
+    #expect(ja?.isSourceFallback == true)
+    let ru = localization.elementText(key: "e1", language: .russian)
+    #expect(ru?.name == "元素一")
+    #expect(ru?.isSourceFallback == true)
   }
 
   @Test func knowledgePackDecodesEnglishOverlayWhenPresent() throws {
@@ -167,5 +254,20 @@ struct InternationalizationTests {
     )
     #expect(text == "Identify the cultural object in this photo.")
     #expect(assembler.systemPrompt.contains("Write all user-facing free text in English"))
+  }
+
+  @Test func stringCatalogIncludesJapaneseAndRussianLocales() throws {
+    let url = try #require(
+      Bundle.main.url(forResource: "Localizable", withExtension: "xcstrings")
+    )
+    let data = try Data(contentsOf: url)
+    let object = try #require(
+      JSONSerialization.jsonObject(with: data) as? [String: Any]
+    )
+    let strings = try #require(object["strings"] as? [String: Any])
+    let languageEntry = try #require(strings["语言"] as? [String: Any])
+    let localizations = try #require(languageEntry["localizations"] as? [String: Any])
+    #expect(localizations["ja"] != nil)
+    #expect(localizations["ru"] != nil)
   }
 }

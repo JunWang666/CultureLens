@@ -318,6 +318,12 @@ nonisolated enum RecognitionResponseMapper {
     case .english:
       explanation =
         "The culture content library records an explicit link between this object and the concept; the relation type is not yet refined."
+    case .japanese:
+      explanation =
+        "文化コンテンツ庫はこの対象とその概念の明示的な関連を記録していますが、関係の種類はまだ細分化されていません。"
+    case .russian:
+      explanation =
+        "Библиотека культурного контента фиксирует явную связь между этим объектом и понятием; тип отношения пока не уточнён."
     case .zhHans:
       explanation = "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
     }
@@ -382,6 +388,11 @@ nonisolated enum RecognitionResponseMapper {
     case .english:
       rationale =
         "Listed as a nearby attraction from this scan's location; not yet confirmed by the image."
+    case .japanese:
+      rationale = "このスキャン位置に基づく付近の名所として掲載。画像では未確認。"
+    case .russian:
+      rationale =
+        "Указана как ближайшая достопримечательность по месту сканирования; по изображению ещё не подтверждена."
     case .zhHans:
       rationale = "根据当前位置列出的附近景点，仍需结合画面确认。"
     }
@@ -410,6 +421,12 @@ nonisolated enum RecognitionResponseMapper {
       case .english:
         summary =
           "Matched \(knowledge.nearbyContextCount) nearby attraction introductions and produced \(knowledge.attractionCandidates.count) attraction candidates; cultural elements are explanatory only."
+      case .japanese:
+        summary =
+          "付近の名所紹介 \(knowledge.nearbyContextCount) 件に一致し、名所候補 \(knowledge.attractionCandidates.count) 件を生成。文化要素は説明用のみ。"
+      case .russian:
+        summary =
+          "Совпало с \(knowledge.nearbyContextCount) описаниями ближайших достопримечательностей; сформировано \(knowledge.attractionCandidates.count) кандидатов. Культурные элементы только для пояснения."
       case .zhHans:
         summary =
           "位置匹配到 \(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。"
@@ -424,6 +441,12 @@ nonisolated enum RecognitionResponseMapper {
     case .english:
       summary =
         "No nearby attraction introductions matched; the model still judged from the image and \(knowledge.elements.count) cultural-element candidates."
+    case .japanese:
+      summary =
+        "付近の名所紹介は一致せず。モデルは画像と文化要素候補 \(knowledge.elements.count) 件から判断。"
+    case .russian:
+      summary =
+        "Ближайшие описания достопримечательностей не совпали; модель судила по изображению и \(knowledge.elements.count) кандидатам культурных элементов."
     case .zhHans:
       summary =
         "附近没有匹配到景点现场介绍，模型仍按图片和现有 \(knowledge.elements.count) 条文化元素候选判断。"
@@ -450,6 +473,10 @@ nonisolated enum RecognitionResponseMapper {
     switch AppLanguageStore.currentLanguage() {
     case .english:
       "This judgment is based on visible features; verify with on-site labels or catalog records when possible."
+    case .japanese:
+      "この判断は可視的な特徴に基づきます。可能なら現場の説明板や図録で確認してください。"
+    case .russian:
+      "Это суждение основано на видимых признаках; по возможности сверьте с табличками на месте или каталогом."
     case .zhHans:
       "该判断基于可见特征，建议结合现场说明牌或馆藏资料进一步核验。"
     }

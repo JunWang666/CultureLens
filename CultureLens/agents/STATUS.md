@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-06 多语言扩展日语 / 俄语：`AppLanguage` 与设置语言偏好增加 `ja` / `ru`；`Localizable.xcstrings` 补齐静态 UI 译文；`PromptLanguagePolicy` / 引用解析 / TTS 语音 / 枚举展示名支持目标语言；知识包正文仍不打包日俄译文，详情与缺 overlay 文案继续走 `KnowledgeTranslationService` 即时翻译。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
 - 2026-08-06 识别绑定收紧：删除空 `cultural_element_key` 的名称 / summary `fromText` 模糊回填与 catalog 名猜测；空 key 保持未绑定，有 key 仍经 `LLMIDSession` 短 ID→UUID。根因修复：浙博包补齐与景点同 key 的 `jade-cong-wang` / `jade-cong-ritual` 看点元素（v8），避免仅装浙博时 `nearbyIntroductions` 因缺元素丢弃之江展陈介绍。见 `design/0021-recognition-no-fuzzy-element-binding.md`。
 - 2026-08-06 知识配图整包 ODR：`Resources/images/`（约 180 张，路径对齐 R2）打成 tag `images`，列入 initial-install；`RemoteImageCache` 在内存/磁盘之后、网络之前拦截 `culturelens.goudaijun.top/images/...` 并读本地包；启动预加载与「资源包管理」可单独下载。见 `design/0020-image-pack-odr-and-remote-intercept.md`。
 - 2026-08-06 扫描识别新增 MapKit 地理上下文：围绕当前/照片坐标用 `MKLocalPointsOfInterestRequest` 搜索 1 km，二次按直线距离过滤、去重后只向模型发送最近 3 条 POI，并同时发送坐标精度/反向地理名称；MapKit 无网、失败或无结果时不阻断识别，POI 不会写入历史或成为知识库候选。通用 iOS App 与 unit-test target 编译通过，Simulator 运行受既有依赖宏插件阻断。见 `design/0019-recognition-mapkit-geographic-context.md`。

@@ -18,7 +18,7 @@ struct LanguageSettingsSection: View {
           preferenceLabel(preference).tag(preference)
         }
       }
-      .pickerStyle(.segmented)
+      .pickerStyle(.menu)
       .accessibilityIdentifier("languagePreferencePicker")
     }
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,6 +33,10 @@ struct LanguageSettingsSection: View {
       Text(verbatim: AppLanguage.zhHans.nativeDisplayName)
     case .english:
       Text(verbatim: AppLanguage.english.nativeDisplayName)
+    case .japanese:
+      Text(verbatim: AppLanguage.japanese.nativeDisplayName)
+    case .russian:
+      Text(verbatim: AppLanguage.russian.nativeDisplayName)
     }
   }
 }

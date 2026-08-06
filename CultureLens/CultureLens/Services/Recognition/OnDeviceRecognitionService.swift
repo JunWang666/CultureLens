@@ -221,15 +221,8 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     if let exact = AppLanguage(rawValue: localeIdentifier) {
       return exact
     }
-    // Accept values like "en_US", "zh_CN", "zh-Hans_US".
-    let lowered = localeIdentifier.replacingOccurrences(of: "_", with: "-").lowercased()
-    if lowered.hasPrefix("zh") {
-      return .zhHans
-    }
-    if lowered.hasPrefix("en") {
-      return .english
-    }
-    return AppLanguagePreference.system.resolved(
+    // Accept values like "en_US", "zh_CN", "ja_JP", "ru_RU", "zh-Hans_US".
+    return AppLanguagePreference.resolveSystem(
       deviceLocale: Locale(identifier: localeIdentifier)
     )
   }

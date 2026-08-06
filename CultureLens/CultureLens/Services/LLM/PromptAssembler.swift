@@ -100,9 +100,16 @@ nonisolated struct PromptAssembler: Sendable {
     if let note = contextNote?.trimmingCharacters(in: .whitespacesAndNewlines),
       !note.isEmpty
     {
-      text += languagePolicy.language == .english
-        ? " Scene note: " + note
-        : " 补充场景：" + note
+      switch languagePolicy.language {
+      case .english:
+        text += " Scene note: " + note
+      case .japanese:
+        text += " 場面メモ：" + note
+      case .russian:
+        text += " Заметка о сцене: " + note
+      case .zhHans:
+        text += " 补充场景：" + note
+      }
     }
     // sortedKeys keeps the payload deterministic (Go's field order is not
     // guaranteed by JSONEncoder); the model only needs valid JSON.

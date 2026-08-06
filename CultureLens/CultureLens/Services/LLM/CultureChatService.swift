@@ -442,6 +442,15 @@ nonisolated struct CultureChatService: Sendable {
       topicSummary = "Ask freely about the knowledge base and nodes you already know."
       topicRationale =
         "The user opened cultural Q&A from the home screen without a single recognition target."
+    case .japanese:
+      topicCanonicalName = "文化Q&A"
+      topicSummary = "知識ベースとすでに知っているノードについて自由に質問できます。"
+      topicRationale = "ユーザーがホームから文化Q&Aを開き、単一の認識対象は指定していません。"
+    case .russian:
+      topicCanonicalName = "Культурный вопрос-ответ"
+      topicSummary = "Свободно спрашивайте о базе знаний и уже известных узлах."
+      topicRationale =
+        "Пользователь открыл культурный чат с главного экрана без одного объекта распознавания."
     case .zhHans:
       topicCanonicalName = "文化问答"
       topicSummary = "围绕知识库与用户已了解节点自由提问。"

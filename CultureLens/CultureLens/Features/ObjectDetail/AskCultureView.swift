@@ -591,9 +591,9 @@ final class AskCultureChatModel: ObservableObject {
   /// Suggestions double as the message sent on tap, so resolve against the
   /// app language (not the device locale) like the chat service does.
   var suggestions: [String] {
-    let isEnglish = AppLanguageStore.currentLanguage() == .english
-    if object == nil {
-      if isEnglish {
+    switch AppLanguageStore.currentLanguage() {
+    case .english:
+      if object == nil {
         return [
           "How were the Ten Scenes of West Lake named?",
           "What connects Three Pools Mirroring the Moon and Su Shi?",
@@ -601,23 +601,50 @@ final class AskCultureChatModel: ObservableObject {
         ]
       }
       return [
-        "西湖十景是怎样被命名的？",
-        "三潭映月和苏轼有什么关系？",
-        "我已经了解的节点还能怎样串联？",
-      ]
-    }
-    if isEnglish {
-      return [
         "Why did it develop this structure?",
         "How does it vary across regions?",
         "Where else can I see similar objects?",
       ]
+    case .japanese:
+      if object == nil {
+        return [
+          "西湖十景はどのように名付けられましたか？",
+          "三潭映月と蘇軾にはどんな関係がありますか？",
+          "すでに知っているノードをどうつなげられますか？",
+        ]
+      }
+      return [
+        "なぜこのような構造になったのですか？",
+        "地域によってどう違いますか？",
+        "似た対象は他にどこで見られますか？",
+      ]
+    case .russian:
+      if object == nil {
+        return [
+          "Как получили названия Десять видов Западного озера?",
+          "Что связывает Три пруда, отражающие луну, и Су Ши?",
+          "Как ещё связать узлы, которые я уже знаю?",
+        ]
+      }
+      return [
+        "Почему у него такая структура?",
+        "Как он меняется в разных регионах?",
+        "Где ещё можно увидеть похожие объекты?",
+      ]
+    case .zhHans:
+      if object == nil {
+        return [
+          "西湖十景是怎样被命名的？",
+          "三潭映月和苏轼有什么关系？",
+          "我已经了解的节点还能怎样串联？",
+        ]
+      }
+      return [
+        "它为什么会形成这样的结构？",
+        "在不同地区有什么变化？",
+        "我还能在哪里看到相似对象？",
+      ]
     }
-    return [
-      "它为什么会形成这样的结构？",
-      "在不同地区有什么变化？",
-      "我还能在哪里看到相似对象？",
-    ]
   }
 
   var canSend: Bool {

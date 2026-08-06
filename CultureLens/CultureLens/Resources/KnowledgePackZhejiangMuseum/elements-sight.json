@@ -420,5 +420,79 @@
       "conceptKind": "技法",
       "contentRole": "看点"
     }
+  ],
+  "attractions": [
+    {
+      "key": "zhijiang-campus",
+      "name": "之江馆区与《浙江一万年》"
+    },
+    {
+      "key": "gushan-campus",
+      "name": "孤山馆区"
+    },
+    {
+      "key": "huang-binhong-memorial",
+      "name": "黄宾虹纪念室"
+    },
+    {
+      "key": "sha-menghai-residence",
+      "name": "沙孟海旧居"
+    },
+    {
+      "key": "fuchun-shanju-tu",
+      "name": "《富春山居图》与剩山图"
+    },
+    {
+      "key": "asoka-pagoda",
+      "name": "五代鎏金银阿育王塔"
+    },
+    {
+      "key": "liangzhu-cong-wang",
+      "name": "良渚玉琮王"
+    },
+    {
+      "key": "cong-ritual-jade",
+      "name": "琮：祭地的礼器"
+    },
+    {
+      "key": "hemudu-double-bird",
+      "name": "双鸟朝阳纹牙雕"
+    },
+    {
+      "key": "zhejiang-yue-sword",
+      "name": "越王者旨於睗剑"
+    },
+    {
+      "key": "cai-feng-ming-qi",
+      "name": "唐“彩凤鸣岐”七弦琴"
+    },
+    {
+      "key": "jiyue-bronze-house",
+      "name": "春秋伎乐铜屋"
+    },
+    {
+      "key": "longquan-boat-drip",
+      "name": "元龙泉窑舟形砚滴"
+    },
+    {
+      "key": "caisu-mud-bodhisattva",
+      "name": "北宋彩塑泥菩萨立像"
+    },
+    {
+      "key": "wan-gong-jiao",
+      "name": "民国万工轿"
+    },
+    {
+      "key": "zhang-cheng-red-lacquer",
+      "name": "张成剔红婴戏图盘"
+    },
+    {
+      "key": "hemudu-painted-pottery",
+      "name": "河姆渡绘纹陶器"
+    },
+    {
+      "key": "hemudu-bone-plough",
+      "name": "河姆渡骨耜"
+    }
   ]
 }

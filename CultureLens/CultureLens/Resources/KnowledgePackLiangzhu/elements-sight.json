@@ -270,5 +270,47 @@
       "conceptKind": "审美",
       "contentRole": "看点"
     }
+  ],
+  "attractions": [
+    {
+      "key": "liangzhu-museum",
+      "name": "良渚博物院"
+    },
+    {
+      "key": "liangzhu-site-park",
+      "name": "良渚古城遗址公园"
+    },
+    {
+      "key": "yaoshan-site-park",
+      "name": "瑶山遗址公园"
+    },
+    {
+      "key": "jade-cong-wang",
+      "name": "玉琮王"
+    },
+    {
+      "key": "jade-cong-ritual",
+      "name": "琮：沟通天地的礼器"
+    },
+    {
+      "key": "jade-bi",
+      "name": "玉璧"
+    },
+    {
+      "key": "jade-yue",
+      "name": "玉钺与军权王权"
+    },
+    {
+      "key": "mojiaoshan-center",
+      "name": "莫角山：良渚的权力中心"
+    },
+    {
+      "key": "fanshan-cemetery",
+      "name": "反山贵族墓地"
+    },
+    {
+      "key": "yaoshan-altar",
+      "name": "瑶山祭坛与墓葬"
+    }
   ]
 }

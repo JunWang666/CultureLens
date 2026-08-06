@@ -177,9 +177,14 @@ nonisolated struct KnowledgeStore: Sendable {
   /// their content would only repeat already-loaded keys — callers that need
   /// raw per-pack lists should use this before `mergePacks`.
   ///
-  /// Each directory may split elements by `ContentRole` into sibling files
-  /// (`elements-sight.json`, `elements-history.json`); those are merged into
-  /// the main `knowledge-pack.json` (whose `elements` array may be empty).
+  /// Layout (sidecar-first):
+  /// - `knowledge-pack.json` — version / source_language / relations
+  /// - `elements-sight.json` — 看点 elements + attractions
+  /// - `elements-history.json` — 文化历史 elements
+  /// - `introductions.json` — on-site introductions
+  /// - `themes.json` — exploration themes
+  /// - `locales-<tag>.json` — one LocaleOverlay per language (e.g. `locales-en.json`)
+  /// - `pack-manifest.json` — counts / sha256 (not loaded into the store)
   static func discoverPacks(in bundle: Bundle) throws -> [KnowledgePack] {
     var packs: [KnowledgePack] = []
     var seenVersions = Set<String>()
@@ -188,7 +193,7 @@ nonisolated struct KnowledgeStore: Sendable {
       do {
         let data = try Data(contentsOf: url)
         var pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
-        pack = try mergingRoleElementFiles(into: pack, directory: directory, bundle: bundle)
+        pack = try mergingPackSidecars(into: pack, directory: directory, bundle: bundle)
         // Skip Fallback when the primary West Lake pack (same version family)
         // was already loaded from ODR / KnowledgePack.
         if directory == .fallback, packs.contains(where: { $0.version == pack.version }) {
@@ -206,16 +211,9 @@ nonisolated struct KnowledgeStore: Sendable {
     return packs
   }
 
-  /// Sidecar filenames for role-split element arrays next to `knowledge-pack.json`.
-  private static let roleElementFileNames: [(file: String, role: ContentRole)] = [
-    ("elements-sight", .sight),
-    ("elements-history", .culturalHistory),
-  ]
-
-  /// Loads optional `elements-sight.json` / `elements-history.json` and appends
-  /// them to `pack.elements`. Inline elements in the main file still win on
-  /// key collision. Sidecar entries missing `contentRole` inherit the file's role.
-  private static func mergingRoleElementFiles(
+  /// Loads optional sidecars and merges them into `pack`. Inline main-file
+  /// entries still win on key collision (backward compatible with monolithic JSON).
+  private static func mergingPackSidecars(
     into pack: KnowledgePack,
     directory: KnowledgePackDirectory,
     bundle: Bundle
@@ -224,40 +222,125 @@ nonisolated struct KnowledgeStore: Sendable {
       pack.elements.map { ($0.key, $0) },
       uniquingKeysWith: { first, _ in first }
     )
+    var attractionsByKey = Dictionary(
+      pack.attractions.map { ($0.key, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
+    var introductionsByKey = Dictionary(
+      pack.introductions.map { ($0.key, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
+    var themesByKey = Dictionary(
+      pack.themes.map { ($0.key, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
+    var locales = pack.locales ?? [:]
     var didLoadSidecar = false
-    for (name, role) in roleElementFileNames {
-      guard let url = elementFileURL(named: name, directory: directory, bundle: bundle)
-      else { continue }
-      let data = try Data(contentsOf: url)
-      let file = try JSONDecoder().decode(KnowledgePackElementFile.self, from: data)
+
+    if let url = sidecarURL(named: "elements-sight", directory: directory, bundle: bundle) {
+      let file = try JSONDecoder().decode(
+        KnowledgePackSightFile.self,
+        from: Data(contentsOf: url)
+      )
       didLoadSidecar = true
       for raw in file.elements where elementsByKey[raw.key] == nil {
-        // Filename is authoritative for role-split sidecars.
         elementsByKey[raw.key] = KnowledgePack.Element(
           key: raw.key,
           name: raw.name,
           introduction: raw.introduction,
           sources: raw.sources,
           conceptKind: raw.conceptKind,
-          contentRole: role
+          contentRole: .sight
+        )
+      }
+      for attraction in file.attractions where attractionsByKey[attraction.key] == nil {
+        attractionsByKey[attraction.key] = attraction
+      }
+    }
+
+    if let url = sidecarURL(named: "elements-history", directory: directory, bundle: bundle) {
+      let file = try JSONDecoder().decode(
+        KnowledgePackHistoryFile.self,
+        from: Data(contentsOf: url)
+      )
+      didLoadSidecar = true
+      for raw in file.elements where elementsByKey[raw.key] == nil {
+        elementsByKey[raw.key] = KnowledgePack.Element(
+          key: raw.key,
+          name: raw.name,
+          introduction: raw.introduction,
+          sources: raw.sources,
+          conceptKind: raw.conceptKind,
+          contentRole: .culturalHistory
         )
       }
     }
+
+    if let url = sidecarURL(named: "introductions", directory: directory, bundle: bundle) {
+      let file = try JSONDecoder().decode(
+        KnowledgePackIntroductionsFile.self,
+        from: Data(contentsOf: url)
+      )
+      didLoadSidecar = true
+      for record in file.introductions where introductionsByKey[record.key] == nil {
+        introductionsByKey[record.key] = record
+      }
+    }
+
+    if let url = sidecarURL(named: "themes", directory: directory, bundle: bundle) {
+      let file = try JSONDecoder().decode(
+        KnowledgePackThemesFile.self,
+        from: Data(contentsOf: url)
+      )
+      didLoadSidecar = true
+      for theme in file.themes where themesByKey[theme.key] == nil {
+        themesByKey[theme.key] = theme
+      }
+    }
+
+    for language in Self.knownLocaleSidecarTags {
+      let name = "locales-\(language)"
+      guard let url = sidecarURL(named: name, directory: directory, bundle: bundle)
+      else { continue }
+      let overlay = try JSONDecoder().decode(
+        KnowledgePack.LocaleOverlay.self,
+        from: Data(contentsOf: url)
+      )
+      didLoadSidecar = true
+      if locales[language] == nil {
+        locales[language] = overlay
+      } else {
+        var merged = locales[language] ?? KnowledgePack.LocaleOverlay()
+        for (key, value) in overlay.elements where merged.elements[key] == nil {
+          merged.elements[key] = value
+        }
+        for (key, value) in overlay.attractions where merged.attractions[key] == nil {
+          merged.attractions[key] = value
+        }
+        for (key, value) in overlay.introductions where merged.introductions[key] == nil {
+          merged.introductions[key] = value
+        }
+        locales[language] = merged
+      }
+    }
+
     guard didLoadSidecar else { return pack }
-    let merged = elementsByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) }
     return KnowledgePack(
       version: pack.version,
       sourceLanguage: pack.sourceLanguage,
-      elements: merged,
-      attractions: pack.attractions,
+      elements: elementsByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      attractions: attractionsByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
       relations: pack.relations,
-      introductions: pack.introductions,
-      themes: pack.themes,
-      locales: pack.locales
+      introductions: introductionsByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      themes: themesByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      locales: locales.isEmpty ? nil : locales
     )
   }
 
-  private static func elementFileURL(
+  /// Locale tags we look for as `locales-<tag>.json` sidecars.
+  private static let knownLocaleSidecarTags = ["en", "zh-Hans"]
+
+  private static func sidecarURL(
     named name: String,
     directory: KnowledgePackDirectory,
     bundle: Bundle

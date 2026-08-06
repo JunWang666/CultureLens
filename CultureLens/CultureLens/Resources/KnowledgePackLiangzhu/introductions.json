@@ -1,0 +1,254 @@
+{
+  "introductions": [
+    {
+      "key": "jade-cong-wang.on-display",
+      "name": "玉琮王展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在良渚博物院的展厅，把目光收拢到那件外方内圆的玉琮王上。看它时，先看它满布器面的兽面纹，再想这件仅从反山12号墓出土的重器，如何在玉礼体系中坐上“王”的位子。"
+          },
+          {
+            "type": "paragraph",
+            "text": "玉琮王出土于反山第12号墓，重达3500克，刻有极为精致的兽面纹，被学界视为“琮王”；与之同墓还出土了一件被视为“钺王”的玉钺。琮是祭地的礼器，外方内圆，良渚玉琮被视为连通天神与地神的通道。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这对“玉器之王”也见于浙江省博物馆的收藏体系，玉琮王更列入禁止出国（境）展览文物名录。在博物院看时，可同时留意展柜旁关于反山王陵的说明，把墓与器连起来读。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“外方为地、内圆为天”——如果你在博物院只记住一件，记住“玉琮王”三个字和它握住的天地方圆，也就把良渚最核心的玉礼记得差不多了。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-cong-wang",
+      "attractionKey": "jade-cong-wang",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "liangzhu-museum.discovery-history",
+      "name": "发现求真：考古历程",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚博物院的“发现求真”部分，对应“发现求真—良渚古国—良渚文明”三段陈列的开头，从这里可以一路读懂良渚是如何被“看见”的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "良渚遗址发现于1936年，西湖博物馆的施昕更在余杭良渚附近棋盘坟发现黑色有光的陶片，并进行了三次试掘，1938年出版《良渚》；1959年，考古学家夏鼐将这一文化命名为“良渚文化”。其后反山、瑶山、莫角山的一次次发掘，构成了良渚认识的里程碑。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这段历程里有不少节点：1991年汇观山、1993年莫角山、2007年古城发现、2015年外围水利调查等，多次获评全国十大考古新发现。你走过的这几步展厅，对应的正是几十年的田野考古。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看这段时，把“1936—1959—2019”几个年份在心里立成一支时间轴，那么从一片黑陶到世界遗产，这片江南土地的发掘故事就有了层次。"
+          }
+        ]
+      },
+      "culturalElementKey": "shi-xingeng-discovery",
+      "attractionKey": "liangzhu-museum",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "mojiaoshan-center.on-site",
+      "name": "莫角山遗址现场",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "遗址公园的中心，是一座东西约670米、南北约450米的长方形高台——莫角山台地。站上它，可以清楚看到它比周围平地高出9至15米的轮廓。"
+          },
+          {
+            "type": "paragraph",
+            "text": "莫角山台地的面积约30公顷，为人工堆砌而成，估计须用50万立方米的土方、动员约一万人参与；严文明认为这里可能是良渚“王国”的都城。"
+          },
+          {
+            "type": "paragraph",
+            "text": "绕台地一圈，你可以在平原上用视线丈量出宫殿区—内城—外城逐级降低的形态，感受这座“中华第一城”都城的布局。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“既高且大的人工台地，正是一个需动员万人的早期国家的中心”——看着空旷台面上的草与风，你会慢慢读懂这句话。"
+          }
+        ]
+      },
+      "culturalElementKey": "mojiaoshan-center",
+      "attractionKey": "mojiaoshan-center",
+      "latitude": 30.39666667,
+      "longitude": 119.98527778
+    },
+    {
+      "key": "fanshan-cemetery.on-site",
+      "name": "反山墓地现场",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "公园里的反山遗址，是良渚贵族墓地中王陵级别的高台墓地，东西约100米、南北约30米，是一处人工堆筑修整过的台地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山的随葬品以玉器为主，总计有千件，其中第20号墓随葬玉器达547件，应为最高首领的墓葬；第12号墓出土了玉琮王与玉钺王。严文明认为这里可能正是良渚王陵所在。"
+          },
+          {
+            "type": "paragraph",
+            "text": "参观时，可以把它与同公园里的莫角山台地对照：一座高台是都城宫殿，一座高台是贵族王陵，两者合起来，才构成“良渚王国”的立体图景。"
+          },
+          {
+            "type": "paragraph",
+            "text": "站在反山台地上，想一想那“547件玉器”——一座台地之下，就是一个由玉堆成的权力世界。"
+          }
+        ]
+      },
+      "culturalElementKey": "fanshan-cemetery",
+      "attractionKey": "fanshan-cemetery",
+      "latitude": 30.39666667,
+      "longitude": 119.98527778
+    },
+    {
+      "key": "yaoshan-altar.on-site",
+      "name": "瑶山祭坛现场",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "瑶山遗址公园位于良渚古城东北约5公里处，遗址中央是一座正南北方向、呈方形的祭坛，曾用于重大祭祀，祭坛废弃后成为贵族墓地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "祭坛原是一处20米见方、2米高的高台，从坛面上清理出12座殉玉墓，墓葬位于祭坛南侧分两排排列，均为长方形竖穴土坑墓，头部朝向正南方；瑶山墓地亦与天文观象测年有关。这是一处与神权、祭礼紧密相连的空间。"
+          },
+          {
+            "type": "paragraph",
+            "text": "瑶山与反山于1989年2月被评为“七五”期间全国十大考古新发现；作为祭坛兼墓地，它正体现了良渚社会“玉、祭、权”的结合。"
+          },
+          {
+            "type": "paragraph",
+            "text": "到访瑶山时，先找那方形的坛形轮廓，再南望排列整齐的墓坑——神坛与逝者同在一地，正是良渚神权最直接的一页。"
+          }
+        ]
+      },
+      "culturalElementKey": "yaoshan-altar",
+      "attractionKey": "yaoshan-altar",
+      "latitude": 30.371,
+      "longitude": 119.936
+    },
+    {
+      "key": "jade-cong-ritual.on-display",
+      "name": "琮：礼器展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型状似笔筒，外型方内洞圆；最早的玉琮见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”等。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-cong-ritual",
+      "attractionKey": "jade-cong-ritual",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "jade-bi.on-display",
+      "name": "玉璧展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "玉璧是圆形、中有圆孔的扁玉器，与玉琮同为良渚最重要的礼器之一，常与玉琮配合出现在祭祀与随葬之中。"
+          },
+          {
+            "type": "paragraph",
+            "text": "玉璧用于祭祀及驱邪，也是财富的象征；良渚墓葬中常与玉琮、玉钺并见，如江苏武进寺墩出土的大墓随葬品多达124件，其中有33件玉琮、24件玉璧。古人以圆璧祭天。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-bi",
+      "attractionKey": "jade-bi",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "jade-yue.on-display",
+      "name": "玉钺展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "玉钺按武器石钺制成，在良渚是军权、王权的象征，是贵族墓葬中仅次于玉琮的权威玉器。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山第12号墓出土的一件玉钺制作精良，被视为“钺王”，有70-80厘米长、镶嵌玉粒的木柄，木柄头尾两端安有玉件，玉钺横嵌入柄中，是军权、王权的象征。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-yue",
+      "attractionKey": "jade-yue",
+      "latitude": 30.3905,
+      "longitude": 119.9945
+    },
+    {
+      "key": "liangzhu-site-park.visit",
+      "name": "良渚古城遗址公园",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚古城遗址公园是以良渚古城遗址为中心的考古遗址公园，你可以在这一片被列入世界遗产的土地上，直接看到五千年前的城、墙、水利与王陵。"
+          },
+          {
+            "type": "paragraph",
+            "text": "公园依托良渚古城遗址修建，涵盖宫殿区莫角山台地、内城外城、外围水利系统以及反山贵族墓地等核心区域；良渚遗址于2010年10月9日由国家文物局公布为首批国家考古遗址公园。这里是实证中华五千多年文明史的集中现场。"
+          }
+        ]
+      },
+      "culturalElementKey": "site-park",
+      "attractionKey": "liangzhu-site-park",
+      "latitude": 30.39666667,
+      "longitude": 119.98527778
+    },
+    {
+      "key": "yaoshan-site-park.visit",
+      "name": "瑶山遗址公园",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "瑶山遗址位于良渚古城东北约5公里，占地约66.56公顷，有一座正南北方向、呈方形的祭坛，用于举行重大祭祀活动，祭坛废弃后成为一处高等级贵族墓地。"
+          },
+          {
+            "type": "paragraph",
+            "text": "瑶山墓地原是一处20米见方、2米高的祭坛，从坛面上清理出12座殉玉墓。瑶山墓葬位于祭坛南侧，分两排排列，南排7座、北排6座，均为长方形竖穴土坑墓，头部朝向正南方；瑶山墓地亦与天文观象测年有关。"
+          }
+        ]
+      },
+      "culturalElementKey": "yaoshan-altar",
+      "attractionKey": "yaoshan-site-park",
+      "latitude": 30.371,
+      "longitude": 119.936
+    }
+  ]
+}

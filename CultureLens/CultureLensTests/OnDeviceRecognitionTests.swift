@@ -607,6 +607,27 @@ struct OnDeviceRecognitionTests {
     #expect(pack.relations.first?.explanation == nil)
   }
 
+  @Test func knowledgePackDecodesLeanMainFileWithoutInlineCollections() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "lean-v1",
+        "source_language": "zh-Hans",
+        "relations": [
+          { "elementKey": "a", "relatedElementKey": "b", "kind": "解释", "explanation": "相关" }
+        ]
+      }
+      """#.utf8
+    )
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    #expect(pack.version == "lean-v1")
+    #expect(pack.elements.isEmpty)
+    #expect(pack.attractions.isEmpty)
+    #expect(pack.introductions.isEmpty)
+    #expect(pack.themes.isEmpty)
+    #expect(pack.relations.count == 1)
+  }
+
   @Test func knowledgePackDecodesContentRole() throws {
     let payload = Data(
       #"""

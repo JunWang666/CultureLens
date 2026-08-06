@@ -1,14 +1,23 @@
 {
-  "packVersion": "liangzhu-v3",
-  "generatedAt": "2026-08-06T05:32:02Z",
+  "packVersion": "liangzhu-v4",
+  "generatedAt": "2026-08-06T05:42:37Z",
   "recordCounts": {
     "elements": 26,
     "elementsSight": 10,
     "elementsHistory": 16,
+    "attractions": 10,
     "relations": 80,
     "introductions": 10,
-    "attractions": 10,
-    "themes": 4
+    "themes": 4,
+    "localeFiles": 1
   },
-  "sha256": "bd9eb347c774cb01f88db8b0421e2d2f93fc5775a2df7451c86fe63ee42da3b5"
+  "files": [
+    "knowledge-pack.json",
+    "elements-sight.json",
+    "elements-history.json",
+    "introductions.json",
+    "themes.json",
+    "locales-en.json"
+  ],
+  "sha256": "29a41bd0a098e1da56261f62862794fc063cbd5e7ebe15321cb65fd135497c08"
 }

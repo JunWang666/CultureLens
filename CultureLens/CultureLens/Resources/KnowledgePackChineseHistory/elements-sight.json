@@ -54,5 +54,15 @@
       "conceptKind": "审美",
       "contentRole": "看点"
     }
+  ],
+  "attractions": [
+    {
+      "key": "great-wall",
+      "name": "长城"
+    },
+    {
+      "key": "grand-canal",
+      "name": "京杭大运河"
+    }
   ]
 }

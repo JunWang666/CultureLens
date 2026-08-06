@@ -299,20 +299,39 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
     sourceLanguage = try container.decodeIfPresent(String.self, forKey: .sourceLanguage)
-    elements = try container.decode([Element].self, forKey: .elements)
-    attractions = try container.decode([Attraction].self, forKey: .attractions)
-    relations = try container.decode([Relation].self, forKey: .relations)
-    introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
+    // Sidecar-first packs keep these empty in the main file; older monolithic
+    // packs still decode them inline.
+    elements = try container.decodeIfPresent([Element].self, forKey: .elements) ?? []
+    attractions = try container.decodeIfPresent([Attraction].self, forKey: .attractions) ?? []
+    relations = try container.decodeIfPresent([Relation].self, forKey: .relations) ?? []
+    introductions =
+      try container.decodeIfPresent([IntroductionRecord].self, forKey: .introductions) ?? []
     themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
     locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
   }
 }
 
-/// Sidecar JSON for role-split element lists (`elements-sight.json` /
-/// `elements-history.json`). Same element shape as the main pack.
-nonisolated struct KnowledgePackElementFile: Decodable, Sendable {
+/// Sidecar payloads next to `knowledge-pack.json`.
+nonisolated struct KnowledgePackSightFile: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+  let attractions: [KnowledgePack.Attraction]
+}
+
+nonisolated struct KnowledgePackHistoryFile: Decodable, Sendable {
   let elements: [KnowledgePack.Element]
 }
+
+nonisolated struct KnowledgePackIntroductionsFile: Decodable, Sendable {
+  let introductions: [KnowledgePack.IntroductionRecord]
+}
+
+nonisolated struct KnowledgePackThemesFile: Decodable, Sendable {
+  let themes: [KnowledgePack.Theme]
+}
+
+/// Maps stored (Chinese) publisher names to the active app language for
+/// display. Stored values are never mutated — provenance tests depend on them.
+enum KnowledgePublisherDisplay {
   static func name(for publisher: String) -> String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:

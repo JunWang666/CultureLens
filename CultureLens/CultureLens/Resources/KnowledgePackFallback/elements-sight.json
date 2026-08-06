@@ -725,5 +725,99 @@
       "conceptKind": "技法",
       "contentRole": "看点"
     }
+  ],
+  "attractions": [
+    {
+      "key": "leifeng-pagoda",
+      "name": "雷峰塔"
+    },
+    {
+      "key": "baochu-pagoda",
+      "name": "保俶塔"
+    },
+    {
+      "key": "jingci-temple",
+      "name": "净慈寺"
+    },
+    {
+      "key": "yue-fei-temple",
+      "name": "岳王庙"
+    },
+    {
+      "key": "wenlan-pavilion",
+      "name": "文澜阁"
+    },
+    {
+      "key": "su-causeway",
+      "name": "苏堤"
+    },
+    {
+      "key": "three-pools-mirroring-moon",
+      "name": "三潭印月"
+    },
+    {
+      "key": "broken-bridge",
+      "name": "断桥"
+    },
+    {
+      "key": "pinghu-autumn-moon",
+      "name": "平湖秋月"
+    },
+    {
+      "key": "quyuan-feng-he",
+      "name": "曲院风荷"
+    },
+    {
+      "key": "huagang-guan-yu",
+      "name": "花港观鱼"
+    },
+    {
+      "key": "liulang-wen-ying",
+      "name": "柳浪闻莺"
+    },
+    {
+      "key": "shuang-feng-cha-yun",
+      "name": "双峰插云"
+    },
+    {
+      "key": "ling-yin-temple",
+      "name": "灵隐寺·飞来峰"
+    },
+    {
+      "key": "longjing-village",
+      "name": "龙井村"
+    },
+    {
+      "key": "hupao-park",
+      "name": "虎跑公园"
+    },
+    {
+      "key": "liu-he-pagoda",
+      "name": "六和塔"
+    },
+    {
+      "key": "xiling-seal",
+      "name": "西泠印社·孤山"
+    },
+    {
+      "key": "huxinting",
+      "name": "湖心亭"
+    },
+    {
+      "key": "yang-gong-causeway",
+      "name": "杨公堤"
+    },
+    {
+      "key": "baoshi-hill",
+      "name": "宝石山"
+    },
+    {
+      "key": "gushan-island",
+      "name": "孤山"
+    },
+    {
+      "key": "qianwang-temple",
+      "name": "钱王祠"
+    }
   ]
 }

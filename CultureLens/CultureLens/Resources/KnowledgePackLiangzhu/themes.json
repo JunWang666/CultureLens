@@ -1,0 +1,64 @@
+{
+  "themes": [
+    {
+      "key": "jade-ritual-heaven",
+      "name": "以玉礼天",
+      "summary": "从采玉、治玉到琮王入墓，琮、璧、钺与兽面纹搭起一套沟通天地的玉礼，读懂一件玉器，就读懂了良渚的神权。",
+      "elementKeys": [
+        "jade-cong-wang",
+        "jade-cong-ritual",
+        "jade-bi",
+        "jade-yue",
+        "god-man-beast-mask",
+        "jade-crafting",
+        "fanshan-cemetery",
+        "yaoshan-altar"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "city-water-rice",
+      "name": "一城、一水与一稻",
+      "summary": "莫角山的台地、环城的城墙与外围水利，连同成片的稻田，共同撑起一个能动员万人治水的早期国家。",
+      "elementKeys": [
+        "mojiaoshan-center",
+        "liangzhu-ancient-city",
+        "liangzhu-water-system",
+        "liangzhu-distribution",
+        "rice-agriculture",
+        "liangzhu-society",
+        "site-park"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "how-liangzhu-was-seen",
+      "name": "良渚如何被看见",
+      "summary": "从施昕更在池底拾起的两片黑陶，到列入世界遗产名录，跟着发现史与博物馆，读懂五千年文明如何被一层层看见。",
+      "elementKeys": [
+        "shi-xingeng-discovery",
+        "liangzhu-chronology",
+        "liangzhu-museum",
+        "site-park",
+        "world-heritage-status",
+        "liangzhu-in-zhejiang-museum"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "jiangnan-lifeways",
+      "name": "稻作江南：日常里的手艺",
+      "summary": "稻米、黑陶、丝帛与刻符构成良渚比玉器更日常的一面，往前接河姆渡，往旁看同时代的满天星光。",
+      "elementKeys": [
+        "rice-agriculture",
+        "liangzhu-pottery",
+        "silk-and-weaving",
+        "liangzhu-symbols",
+        "hemudu-culture",
+        "contemporary-cultures",
+        "liangzhu-culture-overview"
+      ],
+      "minContacted": 3
+    }
+  ]
+}

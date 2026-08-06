@@ -1,6 +1,22 @@
 # 知识包编写指南
 
-本指南规定 CultureLens 知识包（`Resources/KnowledgePack*/knowledge-pack.json`）的内容设计原则与数据编写规范。目标是让图谱成为**有明确流向和掌握顺序的学习路径**，而不是概念共现网。
+本指南规定 CultureLens 知识包（`Resources/KnowledgePack*/`）的内容设计原则与数据编写规范。目标是让图谱成为**有明确流向和掌握顺序的学习路径**，而不是概念共现网。
+
+## 文件布局（sidecar-first）
+
+每个包目录拆成多个 JSON，运行时由 `KnowledgeStore.discoverPacks` 合并：
+
+| 文件 | 内容 |
+|---|---|
+| `knowledge-pack.json` | `version` / `source_language` / `relations` |
+| `elements-sight.json` | 看点元素（`contentRole: 看点`）+ `attractions` 看点列表 |
+| `elements-history.json` | 文化历史元素（`contentRole: 文化历史`） |
+| `introductions.json` | 现场讲解（坐标） |
+| `themes.json` | 探索主题 |
+| `locales-<tag>.json` | 每种语言一份 overlay（如 `locales-en.json`） |
+| `pack-manifest.json` | 计数与 sha256（唯一 manifest） |
+
+`ContentRole` 与节点分层一一对应：本包 `attractions[]` 里有同 key 的 element → **看点**；其余 element → **文化历史**。识别 catalog / 无景点 fill 只收看点；景点绑定的介绍仍可引用文化历史节点。
 
 ## 一、内容设计三原则
 
@@ -10,8 +26,8 @@
 
 由此得到节点分层：
 
-- **景点层**：实体节点。必须在 `attractions[]` 里有同名同 key 的记录，必须配 `introductions[]`（带坐标的现场讲解）。
-- **知识层**：抽象概念节点——朝代、制度、审美、技法、人物、传说。它们不可扫描，只能通过边从景点抵达。
+- **景点层（看点）**：实体节点。必须在 `attractions[]` 里有同名同 key 的记录，必须配 `introductions[]`（带坐标的现场讲解）。
+- **知识层（文化历史）**：抽象概念节点——朝代、制度、审美、技法、人物、传说。它们不可扫描，只能通过边从景点抵达。
 
 一个节点不能既是实体又是抽象概念。像"雷峰塔与雷峰夕照"这种把实体（塔）和观看方式（夕照）揉在一起的节点要拆开：`leifeng-pagoda`（景点）+ `leifeng-evening-glow`（审美知识），用边连接。
 
@@ -51,16 +67,18 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 
 ### 顶层字段
 
+运行时合并后的逻辑模型仍是一张完整 `KnowledgePack`；磁盘上按 sidecar 拆分（见文首「文件布局」）。
+
 | 字段 | 说明 |
 |---|---|
-| `version` | 包版本，如 `hangzhou-west-lake-v4`。改内容必须升版本号，并同步 `pack-manifest.json`。 |
+| `version` | 包版本，如 `hangzhou-west-lake-v5`。改内容必须升版本号，并同步 `pack-manifest.json`。 |
 | `source_language` | BCP-47，默认 `zh-Hans`。 |
-| `elements[]` | 图谱节点（景点层 + 知识层）。 |
-| `attractions[]` | 可扫描景点清单，每个 key 必须有对应 element。 |
-| `relations[]` | 图谱边。 |
-| `introductions[]` | 现场讲解记录（绑定景点 + 元素 + 坐标）。 |
-| `themes[]` | 主题探索线路，只引用 elementKeys。 |
-| `locales` | 翻译覆盖层，`en` 必填。 |
+| `elements[]` | 图谱节点（看点 + 文化历史）；磁盘上分属 `elements-sight.json` / `elements-history.json`，每条带 `contentRole`。 |
+| `attractions[]` | 可扫描景点清单，每个 key 必须有对应 element（可跨包）；磁盘上放在 `elements-sight.json`。 |
+| `relations[]` | 图谱边；留在 `knowledge-pack.json`。 |
+| `introductions[]` | 现场讲解记录；`introductions.json`。 |
+| `themes[]` | 主题探索线路；`themes.json`。 |
+| `locales` | 翻译覆盖层；每种语言一个 `locales-<tag>.json`（`en` 必填）。 |
 
 ### key 规范
 
@@ -76,11 +94,13 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
   "key": "three-pools-mirroring-moon",
   "name": "三潭印月",
   "conceptKind": "基础知识",
+  "contentRole": "看点",
   "introduction": { "schemaVersion": 1, "blocks": [ … ] },
   "sources": [ { "title": "…", "publisher": "…", "url": "…" } ]
 }
 ```
 
+- `contentRole` 必填：`看点` 或 `文化历史`（与是否出现在 `attractions[]` 一致）。
 - `conceptKind` 必填，取值见 `Domain/CultureModels.swift` 的 `ConceptKind`（9 种）。**实体节点按其文化角色归类**：塔/堤/桥是"基础知识"，遗址格局是"地域"，水利工程是"功能"——不要用"审美"装长城、用"技法"装玉琮王。"相似对象"是边（`相似于`）的语义，一般不作节点身份。
 - `introduction` 用 RichTextDocument（paragraph / image blocks）。写法要求：
   - 第一段永远是"你眼前看到的是什么"——用户正站在它面前。
@@ -179,9 +199,32 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 ```bash
 python3 - <<'EOF'
 import json, glob, sys
+from pathlib import Path
 ok = True
-packs = [json.load(open(p)) for p in glob.glob('CultureLens/Resources/KnowledgePack*/knowledge-pack.json')
-         if 'Fallback' not in p]
+dirs = [Path(p) for p in glob.glob('CultureLens/CultureLens/Resources/KnowledgePack*')
+        if 'Fallback' not in p]
+
+def load_pack(d: Path):
+    main = json.load(open(d/'knowledge-pack.json'))
+    sight = json.load(open(d/'elements-sight.json'))
+    hist = json.load(open(d/'elements-history.json'))
+    intros = json.load(open(d/'introductions.json'))
+    themes = json.load(open(d/'themes.json'))
+    locales = {}
+    for loc in d.glob('locales-*.json'):
+        tag = loc.stem.removeprefix('locales-')
+        locales[tag] = json.load(open(loc))
+    return {
+        'version': main['version'],
+        'elements': sight['elements'] + hist['elements'],
+        'attractions': sight['attractions'],
+        'relations': main['relations'],
+        'introductions': intros['introductions'],
+        'themes': themes['themes'],
+        'locales': locales,
+    }
+
+packs = [load_pack(d) for d in dirs]
 elems = {}
 for d in packs:
     for e in d['elements']:
@@ -211,6 +254,18 @@ for d in packs:
     no_en = [e['key'] for e in d['elements'] if e['key'] not in en]
     if no_en:
         print(f"{d['version']}: {len(no_en)} 个元素缺英文名称覆盖")
+    for e in d['elements']:
+        role = e.get('contentRole')
+        is_attr = e['key'] in {a['key'] for a in d['attractions']}
+        expect = '看点' if is_attr else '文化历史'
+        # Cross-pack attractions may mark a remote key as attraction without a local element;
+        # local elements follow: in this pack's attractions => 看点.
+        if role != expect and not (role == '看点' and e['key'] in attrs):
+            # Local rule: attraction-key elements must be 看点; others 文化历史
+            local_attrs = {a['key'] for a in d['attractions']}
+            expect_local = '看点' if e['key'] in local_attrs else '文化历史'
+            if role != expect_local:
+                ok = False; print(f"{d['version']}: {e['key']} contentRole={role} 期望 {expect_local}")
 sys.exit(0 if ok else 1)
 EOF
 ```

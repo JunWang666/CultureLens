@@ -43,6 +43,20 @@ nonisolated extension ConceptKind {
   }
 }
 
+nonisolated extension ContentRole {
+  var localizedTitle: String {
+    switch AppLanguageStore.currentLanguage() {
+    case .zhHans:
+      rawValue
+    case .english:
+      switch self {
+      case .sight: "Sight"
+      case .culturalHistory: "Cultural history"
+      }
+    }
+  }
+}
+
 nonisolated extension RelationKind {
   var localizedTitle: String {
     switch AppLanguageStore.currentLanguage() {

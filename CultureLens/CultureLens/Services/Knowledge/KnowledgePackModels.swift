@@ -93,23 +93,33 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let sources: [Source]
     /// Optional `ConceptKind.rawValue`; omitted in older packs.
     let conceptKind: String?
+    /// `ContentRole.rawValue`. Older packs / fixtures without the field decode as
+    /// `.culturalHistory`. Production packs set it explicitly; sight sidecars
+    /// force `.sight` on load.
+    let contentRole: String
+
+    var resolvedContentRole: ContentRole {
+      ContentRole(rawValue: contentRole) ?? .culturalHistory
+    }
 
     init(
       key: String,
       name: String,
       introduction: RichTextDocument,
       sources: [Source] = [],
-      conceptKind: String? = nil
+      conceptKind: String? = nil,
+      contentRole: ContentRole = .culturalHistory
     ) {
       self.key = key
       self.name = name
       self.introduction = introduction
       self.sources = sources
       self.conceptKind = conceptKind
+      self.contentRole = contentRole.rawValue
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources, conceptKind
+      case key, name, introduction, sources, conceptKind, contentRole
     }
 
     init(from decoder: Decoder) throws {
@@ -119,6 +129,13 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
       conceptKind = try container.decodeIfPresent(String.self, forKey: .conceptKind)
+      if let raw = try container.decodeIfPresent(String.self, forKey: .contentRole),
+        ContentRole(rawValue: raw) != nil
+      {
+        contentRole = raw
+      } else {
+        contentRole = ContentRole.culturalHistory.rawValue
+      }
     }
   }
 
@@ -282,13 +299,34 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
     sourceLanguage = try container.decodeIfPresent(String.self, forKey: .sourceLanguage)
-    elements = try container.decode([Element].self, forKey: .elements)
-    attractions = try container.decode([Attraction].self, forKey: .attractions)
-    relations = try container.decode([Relation].self, forKey: .relations)
-    introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
+    // Sidecar-first packs keep these empty in the main file; older monolithic
+    // packs still decode them inline.
+    elements = try container.decodeIfPresent([Element].self, forKey: .elements) ?? []
+    attractions = try container.decodeIfPresent([Attraction].self, forKey: .attractions) ?? []
+    relations = try container.decodeIfPresent([Relation].self, forKey: .relations) ?? []
+    introductions =
+      try container.decodeIfPresent([IntroductionRecord].self, forKey: .introductions) ?? []
     themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
     locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
   }
+}
+
+/// Sidecar payloads next to `knowledge-pack.json`.
+nonisolated struct KnowledgePackSightFile: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+  let attractions: [KnowledgePack.Attraction]
+}
+
+nonisolated struct KnowledgePackHistoryFile: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+}
+
+nonisolated struct KnowledgePackIntroductionsFile: Decodable, Sendable {
+  let introductions: [KnowledgePack.IntroductionRecord]
+}
+
+nonisolated struct KnowledgePackThemesFile: Decodable, Sendable {
+  let themes: [KnowledgePack.Theme]
 }
 
 /// Maps stored (Chinese) publisher names to the active app language for

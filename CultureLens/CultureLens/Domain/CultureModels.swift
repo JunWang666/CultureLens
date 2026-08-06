@@ -35,6 +35,22 @@ nonisolated enum ConceptKind: String, Codable, Hashable, CaseIterable {
   }
 }
 
+/// Pack-level content class aligned with `agents/KNOWLEDGE_PACK_GUIDE.md`:
+/// photographable attraction-layer nodes vs abstract knowledge-layer nodes.
+nonisolated enum ContentRole: String, Codable, Hashable, CaseIterable {
+  /// 景点层：实体节点，须同时出现在 `attractions[]`（可扫描入口）。
+  case sight = "看点"
+  /// 知识层：抽象文化 / 历史节点，只能经边从景点抵达。
+  case culturalHistory = "文化历史"
+
+  var systemImage: String {
+    switch self {
+    case .sight: "eye"
+    case .culturalHistory: "books.vertical"
+    }
+  }
+}
+
 nonisolated struct KnowledgeSource: Identifiable, Codable, Hashable {
   let id: UUID
   var title: String

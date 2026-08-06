@@ -355,7 +355,9 @@ nonisolated struct CultureChatService: Sendable {
     }
 
     if fragments.count < 4 {
-      for element in store.elements.prefix(8) {
+      // Prefer cultural-history nodes for open-ended Q&A; fall back to sights.
+      let fillPool = store.culturalHistoryElements + store.sightElements
+      for element in fillPool.prefix(8) {
         append(
           key: element.key,
           name: element.name,

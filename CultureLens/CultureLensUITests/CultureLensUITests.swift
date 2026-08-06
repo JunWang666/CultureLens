@@ -28,9 +28,9 @@ final class CultureLensUITests: XCTestCase {
         app.launchArguments.append("-UITesting")
         app.launch()
 
-        let startScan = app.buttons["explore.startScan"]
-        XCTAssertTrue(startScan.waitForExistence(timeout: 3))
-        startScan.tap()
+        let scanTab = app.tabBars.buttons["扫描"]
+        XCTAssertTrue(scanTab.waitForExistence(timeout: 3))
+        scanTab.tap()
 
         let capture = app.buttons["scan.capture"]
         XCTAssertTrue(capture.waitForExistence(timeout: 3))

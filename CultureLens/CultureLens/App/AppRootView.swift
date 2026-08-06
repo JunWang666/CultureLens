@@ -40,10 +40,7 @@ struct AppRootView: View {
         TabView(selection: $selectedTab) {
             Tab(AppTab.explore.title, systemImage: AppTab.explore.systemImage, value: .explore) {
                 appStack(path: $explorePath) {
-                    ExploreHomeView(
-                        openChat: { selectedTab = .chat },
-                        startScan: { selectedTab = .scan }
-                    )
+                    ExploreHomeView()
                 }
             }
 

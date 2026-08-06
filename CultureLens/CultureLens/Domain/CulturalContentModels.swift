@@ -20,8 +20,16 @@ nonisolated struct RichTextDocument: Codable, Hashable, Sendable {
     }
 
     var imageURL: URL? {
-      guard type == "image", let url else { return nil }
-      return URL(string: url)
+      guard
+        type == "image",
+        let url = url?.trimmingCharacters(in: .whitespacesAndNewlines),
+        let resolved = URL(string: url),
+        resolved.scheme?.lowercased() == "https",
+        resolved.host != nil
+      else {
+        return nil
+      }
+      return resolved
     }
 
     func encode(to encoder: Encoder) throws {
@@ -46,6 +54,24 @@ nonisolated struct RichTextDocument: Codable, Hashable, Sendable {
       .compactMap(\.text)
       .filter { !$0.isEmpty }
       .joined(separator: "\n")
+  }
+
+  var imageBlocks: [Block] {
+    blocks.filter { $0.imageURL != nil }
+  }
+
+  /// Translation overlays and live translation results may contain text only.
+  /// Keep their localized text while restoring the source document's remote
+  /// images after the first text block. A localized document that already owns
+  /// image blocks remains authoritative and is returned unchanged.
+  func preservingImages(from source: RichTextDocument?) -> RichTextDocument {
+    guard imageBlocks.isEmpty, let source else { return self }
+    let sourceImages = source.imageBlocks
+    guard !sourceImages.isEmpty else { return self }
+
+    var mergedBlocks = blocks
+    mergedBlocks.insert(contentsOf: sourceImages, at: min(1, mergedBlocks.count))
+    return RichTextDocument(schemaVersion: schemaVersion, blocks: mergedBlocks)
   }
 }
 

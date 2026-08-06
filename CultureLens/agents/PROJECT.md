@@ -4,7 +4,7 @@
 
 与 CultureLens 相同的产品体验（扫描识别文化现场、附近推荐、知识图谱、历史），但识别管线完全在端侧运行：
 
-- 本地知识库（西湖内容包：70 元素 / 23 景点 / 114 关系 / 65 介绍，2026-08 重构为 v4）替代 PostgreSQL。
+- 本地知识库（西湖内容包：70 元素 / 23 看点 / 114 关系 / 65 介绍，2026-08 sidecar + ContentRole 为 v5）替代 PostgreSQL。
 - 本地完成候选挑选（Haversine 附近查询、优先级排序 top 12、BFS 图谱、景点绑定）与 prompt 拼接（v5 模板 + 候选 JSON），逻辑 1:1 移植自 Go 后端 `internal/knowledge`、`internal/recognition`、`internal/providers/googleai`。
 - LLM 调用直连 Cloudflare AI Gateway 的 OpenAI 兼容端点：识别用 `dynamic/culturelens`（多模态），讲解与追问用 `dynamic/chat`（追问可附现场照片，同样走 `image_url`）；key 硬编码于 `Services/LLM/LLMGatewayConfig.swift`（本期接受的安全取舍）。
 - 文化问答会话经 JSON 文件（`ChatHistoryStore` → `CultureLens/ChatHistory/conversations.json`）本地持久化，图片落盘于 Application Support `CultureLens/Chats/`。
@@ -28,12 +28,12 @@
 ## 知识包与 ODR 分包
 
 - 数据文件：
-  - `Resources/KnowledgePack/`（西湖）打 ODR tag `knowledge-base`，App Store 托管。
+  - `Resources/KnowledgePack/`（西湖 sidecar：主 JSON + elements-sight/history + introductions + themes + locales-en）打 ODR tag `knowledge-base`，App Store 托管。
   - `Resources/KnowledgePackLiangzhu/`、`KnowledgePackZhejiangMuseum/`、`KnowledgePackChineseHistory/` 作为普通 bundle 资源打进 App（多包合并）。
 - 当前西湖包为 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`）；将来可按地域拆独立 ODR tag。
 - 内置回退：`Resources/KnowledgePackFallback/`（西湖副本，不打 tag），保证首启与离线可用。
 - 运行时：`KnowledgePackLoader` 取 ODR 西湖包，再与 bundle 内其余包 `KnowledgeStore.mergePacks` 合并；键冲突时先到先得（西湖 / 良渚优先于浙博同名 `shi-xingeng-discovery`）。
-- 知识包当前以仓库内 JSON 为源；需要更新时编辑对应目录并同步 `pack-manifest.json`。
+- 知识包当前以仓库内 sidecar JSON 为源；需要更新时编辑对应目录并同步 `pack-manifest.json`。
 
 ## 抽象轴与图谱渲染（0006 / 0007）
 

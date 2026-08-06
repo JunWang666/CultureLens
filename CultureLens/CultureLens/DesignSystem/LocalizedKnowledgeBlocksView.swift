@@ -73,7 +73,7 @@ struct LocalizedKnowledgeBlocksView: View {
       !overlay.isSourceFallback
     {
       title = overlay.name
-      document = overlay.introduction
+      document = overlay.introduction?.preservingImages(from: introduction)
       return
     }
 
@@ -84,8 +84,11 @@ struct LocalizedKnowledgeBlocksView: View {
       language: language,
       localization: localization
     )
-    guard !localized.isSourceFallback else { return }
+    guard !localized.isSourceFallback else {
+      document = RichTextDocument.plain(fallbackSummary).preservingImages(from: introduction)
+      return
+    }
     title = localized.name
-    document = localized.introduction
+    document = localized.introduction?.preservingImages(from: introduction)
   }
 }

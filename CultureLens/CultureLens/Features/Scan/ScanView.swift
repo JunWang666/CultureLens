@@ -64,7 +64,8 @@ struct ScanView: View {
                     imageID: preparedReview.id,
                     imageData: preparedReview.data,
                     imagePixelSize: preparedReview.pixelSize,
-                    selection: $focusSelection
+                    selection: $focusSelection,
+                    isRecognizing: coordinator.phase.isWorking
                 )
             } else if isReviewing {
                 Color.black.opacity(0.72)
@@ -94,9 +95,6 @@ struct ScanView: View {
 
                 if let reviewPrepareError, isReviewing {
                     reviewErrorCard(reviewPrepareError)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                } else if coordinator.phase.isWorking {
-                    progressCard
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 } else if case .failed(let message) = coordinator.phase {
                     errorCard(message)
@@ -365,38 +363,6 @@ struct ScanView: View {
             .accessibilityLabel("直接发送")
             .accessibilityIdentifier("focus.sendFull")
         }
-    }
-
-    /// Working-phase status text lives in the view so it follows the in-app
-    /// locale (`LocalizedStringKey`), not the device locale.
-    private var progressMessage: LocalizedStringKey {
-        switch coordinator.phase {
-        case .idle: "准备扫描"
-        case .preparing: "正在保护隐私并整理图片…"
-        case .locating: "正在获取当前位置…"
-        case .recognizing: "正在辨认文化线索…"
-        case .failed(let message): LocalizedStringKey(message)
-        }
-    }
-
-    private var progressCard: some View {
-        VStack(spacing: 12) {
-            ProgressView()
-                .tint(.white)
-            Text(progressMessage)
-                .font(.headline)
-            if let locationNotice = coordinator.locationNotice {
-                Text(locationNotice)
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.7))
-                    .multilineTextAlignment(.center)
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(18)
-        .background(.black.opacity(0.42), in: RoundedRectangle(cornerRadius: 22))
-        .padding(.bottom, 16)
-        .accessibilityElement(children: .combine)
     }
 
     private func errorCard(_ message: String) -> some View {

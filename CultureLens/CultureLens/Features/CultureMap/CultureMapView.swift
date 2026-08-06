@@ -1,3 +1,4 @@
+import ImageIO
 import MapKit
 import SwiftData
 import SwiftUI
@@ -67,9 +68,11 @@ struct CultureMapView: View {
     @State private var poiCameraPosition: MapCameraPosition = .automatic
     @State private var poiCamera: MapCamera?
     @State private var poiSearchRegion: MKCoordinateRegion?
+    @State private var poiClusterPicker: POICluster?
 
     @State private var baseMapStyle: BaseMapStyle = .standard
     @State private var is3DViewEnabled = false
+    @State private var showsHistoryPhotos = false
     @State private var searchText = ""
     @State private var searchResults: [PlaceSearchResult] = []
     @State private var selectedSearchResult: PlaceSearchResult?
@@ -109,6 +112,21 @@ struct CultureMapView: View {
         }
     }
 
+    /// A group of knowledge-pack points too close to tap individually.
+    private struct POICluster: Identifiable {
+        var points: [AttractionPoint]
+
+        var id: UUID { points[0].id }
+
+        var center: CLLocationCoordinate2D {
+            let count = Double(points.count)
+            return CLLocationCoordinate2D(
+                latitude: points.map(\.latitude).reduce(0, +) / count,
+                longitude: points.map(\.longitude).reduce(0, +) / count
+            )
+        }
+    }
+
     private struct PlaceSearchResult: Identifiable {
         let id = UUID()
         let mapItem: MKMapItem
@@ -133,11 +151,6 @@ struct CultureMapView: View {
         let message: String
     }
 
-    private var clusteringThreshold: CLLocationDegrees {
-        let span = visibleSpan ?? boundingSpan
-        return max(span.latitudeDelta, span.longitudeDelta) / 6
-    }
-
     /// Fallback span derived from the records' bounding box before the camera reports one.
     private var boundingSpan: MKCoordinateSpan {
         let latitudes = locatedRecords.compactMap(\.latitude)
@@ -153,15 +166,18 @@ struct CultureMapView: View {
         )
     }
 
-    /// Greedy clustering: records within a fraction of the visible span merge into one pin.
+    /// Greedy screen-relative clustering: nearby records merge as the map zooms out.
     private var clusters: [RecordCluster] {
-        let threshold = clusteringThreshold
+        let span = visibleSpan ?? boundingSpan
         var result: [RecordCluster] = []
         for record in locatedRecords {
             guard let latitude = record.latitude, let longitude = record.longitude else { continue }
             if let index = result.firstIndex(where: {
-                abs($0.center.latitude - latitude) < threshold
-                    && abs($0.center.longitude - longitude) < threshold
+                coordinatesAreClose(
+                    $0.center,
+                    CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                    in: span
+                )
             }) {
                 result[index].records.append(record)
             } else {
@@ -169,6 +185,36 @@ struct CultureMapView: View {
             }
         }
         return result
+    }
+
+    /// The same clustering behavior is used for knowledge-pack points of interest.
+    private var poiClusters: [POICluster] {
+        let span = poiSearchRegion?.span
+            ?? MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        var result: [POICluster] = []
+        for point in poiPoints {
+            let coordinate = CLLocationCoordinate2D(
+                latitude: point.latitude,
+                longitude: point.longitude
+            )
+            if let index = result.firstIndex(where: {
+                coordinatesAreClose($0.center, coordinate, in: span)
+            }) {
+                result[index].points.append(point)
+            } else {
+                result.append(POICluster(points: [point]))
+            }
+        }
+        return result
+    }
+
+    private func coordinatesAreClose(
+        _ lhs: CLLocationCoordinate2D,
+        _ rhs: CLLocationCoordinate2D,
+        in span: MKCoordinateSpan
+    ) -> Bool {
+        abs(lhs.latitude - rhs.latitude) < max(span.latitudeDelta / 10, 0.000_05)
+            && abs(lhs.longitude - rhs.longitude) < max(span.longitudeDelta / 10, 0.000_05)
     }
 
     var body: some View {
@@ -214,6 +260,17 @@ struct CultureMapView: View {
                 dismissButton: .default(Text("好"))
             )
         }
+        .onChange(of: displayMode) {
+            clusterPicker = nil
+            poiClusterPicker = nil
+        }
+        .onChange(of: isMapSearchFocused) {
+            guard isMapSearchFocused else { return }
+            withAnimation {
+                clusterPicker = nil
+                poiClusterPicker = nil
+            }
+        }
     }
 
     @ToolbarContentBuilder
@@ -245,6 +302,10 @@ struct CultureMapView: View {
             .pickerStyle(.inline)
 
             Divider()
+
+            Toggle(isOn: $showsHistoryPhotos) {
+                Label("显示足迹照片", systemImage: "photo.on.rectangle")
+            }
 
             Toggle(isOn: threeDimensionalViewBinding) {
                 Label("3D 俯视", systemImage: "view.3d")
@@ -292,7 +353,7 @@ struct CultureMapView: View {
 
     @ViewBuilder
     private var historyMap: some View {
-        Map(position: $mapPosition, selection: $selectedRecordID) {
+        Map(position: $mapPosition) {
             UserAnnotation()
 
             if let selectedSearchResult {
@@ -307,19 +368,24 @@ struct CultureMapView: View {
             ForEach(clusters) { cluster in
                 if cluster.records.count == 1, let record = cluster.records.first,
                    let latitude = record.latitude, let longitude = record.longitude {
-                    Marker(
-                        record.canonicalName,
-                        systemImage: symbol(for: record),
+                    Annotation(
+                        "",
                         coordinate: CLLocationCoordinate2D(
                             latitude: latitude,
                             longitude: longitude
-                        )
-                    )
-                    .tint(CultureTheme.cinnabar)
-                    .tag(record.recordID)
+                        ),
+                        anchor: .bottom
+                    ) {
+                        historyRecordAnnotation(record)
+                    }
                 } else {
                     Annotation("", coordinate: cluster.center, anchor: .center) {
-                        clusterBadge(cluster)
+                        clusterBadge(
+                            count: cluster.records.count,
+                            accessibilityLabel: "重叠的扫描记录"
+                        ) {
+                            handleClusterTap(cluster)
+                        }
                     }
                 }
             }
@@ -332,10 +398,6 @@ struct CultureMapView: View {
             }
             visibleSpan = context.region.span
             historySearchRegion = context.region
-        }
-        .sheet(item: $clusterPicker) { cluster in
-            clusterRecordList(cluster)
-                .presentationDetents([.medium, .large])
         }
         .overlay(alignment: .topLeading) {
             if locatedRecords.isEmpty, selectedSearchResult == nil {
@@ -402,16 +464,27 @@ struct CultureMapView: View {
                 .tint(.blue)
             }
 
-            ForEach(poiPoints) { point in
-                Annotation(
-                    "",
-                    coordinate: CLLocationCoordinate2D(
-                        latitude: point.latitude,
-                        longitude: point.longitude
-                    ),
-                    anchor: .bottom
-                ) {
-                    poiAnnotation(point)
+            ForEach(poiClusters) { cluster in
+                if cluster.points.count == 1, let point = cluster.points.first {
+                    Annotation(
+                        "",
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: point.latitude,
+                            longitude: point.longitude
+                        ),
+                        anchor: .bottom
+                    ) {
+                        poiAnnotation(point)
+                    }
+                } else {
+                    Annotation("", coordinate: cluster.center, anchor: .center) {
+                        clusterBadge(
+                            count: cluster.points.count,
+                            accessibilityLabel: "重叠的兴趣点"
+                        ) {
+                            handlePOIClusterTap(cluster)
+                        }
+                    }
                 }
             }
         }
@@ -498,7 +571,13 @@ struct CultureMapView: View {
 
     private var mapSearchPanelContent: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if isMapSearchFocused, !trimmedSearchText.isEmpty {
+            if let clusterPicker {
+                clusterRecordPickerSurface(clusterPicker)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else if let poiClusterPicker {
+                poiClusterPickerSurface(poiClusterPicker)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else if isMapSearchFocused, !trimmedSearchText.isEmpty {
                 mapSearchResultsSurface
             }
 
@@ -507,6 +586,8 @@ struct CultureMapView: View {
         .frame(width: 340)
         .safeAreaPadding(.leading, 12)
         .safeAreaPadding(.bottom, 12)
+        .animation(.snappy, value: clusterPicker?.id)
+        .animation(.snappy, value: poiClusterPicker?.id)
     }
 
     @ViewBuilder
@@ -690,6 +771,55 @@ struct CultureMapView: View {
         isMapSearchFocused = false
     }
 
+    private func historyRecordAnnotation(_ record: ScanHistoryRecord) -> some View {
+        Button {
+            clusterPicker = nil
+            selectedRecordID = record.recordID
+        } label: {
+            VStack(spacing: 3) {
+                historyRecordMarker(record)
+
+                Text(record.canonicalName)
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(.ultraThinMaterial, in: Capsule())
+                    .lineLimit(1)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(record.canonicalName)
+        .accessibilityHint("打开历史扫描详情")
+    }
+
+    @ViewBuilder
+    private func historyRecordMarker(_ record: ScanHistoryRecord) -> some View {
+        if showsHistoryPhotos, record.imageRelativePath != nil {
+            ScanMapThumbnail(
+                relativePath: record.imageRelativePath,
+                fallbackSymbol: symbol(for: record)
+            )
+            .frame(width: 48, height: 48)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(.white, lineWidth: 2)
+            }
+            .shadow(radius: 3, y: 1)
+        } else {
+            Image(systemName: symbol(for: record))
+                .font(.callout.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 34, height: 34)
+                .background(CultureTheme.cinnabar, in: Circle())
+                .overlay {
+                    Circle().stroke(.white, lineWidth: 2)
+                }
+                .shadow(radius: 2, y: 1)
+        }
+    }
+
     @ViewBuilder
     private func poiAnnotation(_ point: AttractionPoint) -> some View {
         let visited = point.culturalElementKey.map { recordedElementKeys.contains($0) } ?? false
@@ -722,61 +852,228 @@ struct CultureMapView: View {
         }
     }
 
-    private func clusterBadge(_ cluster: RecordCluster) -> some View {
-        Button {
-            handleClusterTap(cluster)
-        } label: {
-            Text("\(cluster.records.count)")
-                .font(.callout.bold())
-                .foregroundStyle(.white)
-                .frame(width: 34, height: 34)
-                .background(CultureTheme.cinnabar, in: Circle())
-                .overlay {
-                    Circle().stroke(.white, lineWidth: 2)
-                }
-                .shadow(radius: 2, y: 1)
+    private func clusterBadge(
+        count: Int,
+        accessibilityLabel: LocalizedStringKey,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 5) {
+                Image(systemName: "square.stack.3d.up.fill")
+                Text("\(count)")
+                    .monospacedDigit()
+            }
+            .font(.callout.bold())
+            .foregroundStyle(.white)
+            .padding(.horizontal, 10)
+            .frame(height: 36)
+            .background(CultureTheme.cinnabar, in: Capsule())
+            .overlay {
+                Capsule().stroke(.white, lineWidth: 2)
+            }
+            .shadow(radius: 2, y: 1)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("重叠的扫描记录")
-        .accessibilityHint("轻点查看记录列表")
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue("\(count)")
+        .accessibilityHint("轻点显示选择器")
     }
 
-    /// 点按聚合点直接弹出该位置/附近的记录列表供选择。
+    /// 点按聚合点，在左下角搜索框上方展示该位置/附近的记录。
     private func handleClusterTap(_ cluster: RecordCluster) {
-        clusterPicker = cluster
+        isMapSearchFocused = false
+        withAnimation {
+            poiClusterPicker = nil
+            clusterPicker = cluster
+        }
     }
 
-    private func clusterRecordList(_ cluster: RecordCluster) -> some View {
-        NavigationStack {
-            List(cluster.records) { record in
-                Button {
-                    clusterPicker = nil
-                    // 等列表收起后再 push 详情，避免与 sheet 关闭动画冲突。
-                    Task { @MainActor in
-                        try? await Task.sleep(for: .milliseconds(350))
-                        selectedRecordID = record.recordID
-                    }
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: symbol(for: record))
-                            .foregroundStyle(CultureTheme.antiqueGold)
-                            .frame(width: 36, height: 36)
-                            .background(CultureTheme.inkPrimary, in: RoundedRectangle(cornerRadius: 10))
+    private func handlePOIClusterTap(_ cluster: POICluster) {
+        isMapSearchFocused = false
+        withAnimation {
+            clusterPicker = nil
+            poiClusterPicker = cluster
+        }
+    }
 
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text(record.canonicalName)
-                                .font(.headline)
-                                .foregroundStyle(CultureTheme.inkPrimary)
-                            Text(record.createdAt, format: .dateTime.month().day().hour().minute())
-                                .font(.caption)
-                                .foregroundStyle(CultureTheme.inkSecondary)
+    @ViewBuilder
+    private func clusterRecordPickerSurface(_ cluster: RecordCluster) -> some View {
+        if #available(iOS 26.0, *) {
+            clusterRecordPickerContent(cluster)
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 20))
+        } else {
+            clusterRecordPickerContent(cluster)
+                .background(
+                    .ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                )
+        }
+    }
+
+    private func clusterRecordPickerContent(_ cluster: RecordCluster) -> some View {
+        VStack(spacing: 0) {
+            clusterPickerHeader(
+                title: "该位置的扫描记录",
+                count: cluster.records.count
+            ) { dismissClusterPicker() }
+
+            Divider()
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(cluster.records) { record in
+                        Button {
+                            clusterPicker = nil
+                            selectedRecordID = record.recordID
+                        } label: {
+                            historyClusterRow(record)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .frame(maxHeight: 360)
+        }
+    }
+
+    @ViewBuilder
+    private func poiClusterPickerSurface(_ cluster: POICluster) -> some View {
+        if #available(iOS 26.0, *) {
+            poiClusterPickerContent(cluster)
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 20))
+        } else {
+            poiClusterPickerContent(cluster)
+                .background(
+                    .ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                )
+        }
+    }
+
+    private func poiClusterPickerContent(_ cluster: POICluster) -> some View {
+        VStack(spacing: 0) {
+            clusterPickerHeader(
+                title: "兴趣点",
+                count: cluster.points.count
+            ) { dismissClusterPicker() }
+
+            Divider()
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(cluster.points) { point in
+                        if let elementKey = point.culturalElementKey,
+                           knowledgeStore?.element(key: elementKey) != nil {
+                            NavigationLink(value: AppRoute.knowledgeElement(elementKey)) {
+                                poiClusterRow(point)
+                            }
+                            .buttonStyle(.plain)
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    poiClusterPicker = nil
+                                }
+                            )
+                        } else {
+                            poiClusterRow(point)
                         }
                     }
                 }
             }
-            .navigationTitle("该位置的扫描记录")
-            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxHeight: 360)
         }
+    }
+
+    private func clusterPickerHeader(
+        title: LocalizedStringKey,
+        count: Int,
+        close: @escaping () -> Void
+    ) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: "square.stack.3d.up.fill")
+                .foregroundStyle(CultureTheme.cinnabar)
+
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+
+            Text("\(count)")
+                .font(.caption.monospacedDigit())
+                .foregroundStyle(.secondary)
+
+            Spacer(minLength: 0)
+
+            Button(action: close) {
+                Image(systemName: "xmark")
+                    .font(.callout.weight(.semibold))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .accessibilityLabel("关闭")
+        }
+        .padding(.horizontal, 14)
+        .frame(height: 50)
+    }
+
+    private func dismissClusterPicker() {
+        withAnimation(.snappy) {
+            clusterPicker = nil
+            poiClusterPicker = nil
+        }
+    }
+
+    private func historyClusterRow(_ record: ScanHistoryRecord) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: symbol(for: record))
+                .foregroundStyle(CultureTheme.antiqueGold)
+                .frame(width: 34, height: 34)
+                .background(CultureTheme.inkPrimary, in: RoundedRectangle(cornerRadius: 9))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(record.canonicalName)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                Text(record.createdAt, format: .dateTime.month().day().hour().minute())
+                    .font(.caption)
+                    .foregroundStyle(CultureTheme.inkSecondary)
+            }
+
+            Spacer(minLength: 0)
+
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .contentShape(Rectangle())
+        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+    }
+
+    private func poiClusterRow(_ point: AttractionPoint) -> some View {
+        let visited = point.culturalElementKey.map { recordedElementKeys.contains($0) } ?? false
+        return HStack(spacing: 12) {
+            Image(systemName: visited ? "checkmark.seal.fill" : "mappin.circle.fill")
+                .foregroundStyle(visited ? CultureTheme.cinnabar : CultureTheme.inkPrimary)
+                .frame(width: 34, height: 34)
+                .background(CultureTheme.canvas, in: RoundedRectangle(cornerRadius: 9))
+
+            Text(point.name)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(CultureTheme.inkPrimary)
+                .lineLimit(2)
+
+            Spacer(minLength: 0)
+
+            if point.culturalElementKey != nil {
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .contentShape(Rectangle())
+        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+        .accessibilityLabel(visited ? "\(point.name)，已到访" : point.name)
     }
 
     private var timelineScroll: some View {
@@ -876,6 +1173,60 @@ struct CultureMapView: View {
         Task {
             try? await ScanMediaStore.shared.delete(relativePath: path)
         }
+    }
+}
+
+/// Loads only a small local preview so map annotations never retain full scan images.
+private struct ScanMapThumbnail: View {
+    let relativePath: String?
+    let fallbackSymbol: String
+
+    @State private var thumbnail: CGImage?
+
+    var body: some View {
+        Group {
+            if let thumbnail {
+                Image(decorative: thumbnail, scale: 1)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                ZStack {
+                    CultureTheme.cinnabar
+                    Image(systemName: fallbackSymbol)
+                        .font(.callout.weight(.semibold))
+                        .foregroundStyle(.white)
+                }
+            }
+        }
+        .task(id: relativePath) {
+            thumbnail = nil
+            guard let data = await ScanMediaStore.shared.data(for: relativePath) else { return }
+            let prepared = await Task.detached(priority: .utility) {
+                Self.downsampledImage(from: data)
+            }.value
+            guard !Task.isCancelled else { return }
+            thumbnail = prepared
+        }
+    }
+
+    private nonisolated static func downsampledImage(from data: Data) -> CGImage? {
+        guard let source = CGImageSourceCreateWithData(
+            data as CFData,
+            [kCGImageSourceShouldCache: false] as CFDictionary
+        ) else {
+            return nil
+        }
+
+        return CGImageSourceCreateThumbnailAtIndex(
+            source,
+            0,
+            [
+                kCGImageSourceCreateThumbnailFromImageAlways: true,
+                kCGImageSourceCreateThumbnailWithTransform: true,
+                kCGImageSourceThumbnailMaxPixelSize: 128,
+                kCGImageSourceShouldCacheImmediately: true,
+            ] as CFDictionary
+        )
     }
 }
 

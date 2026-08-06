@@ -1,0 +1,69 @@
+{
+  "themes": [
+    {
+      "key": "prehistoric-civilization-dawn",
+      "name": "从河姆渡到良渚",
+      "summary": "从七千年前河姆渡的干栏、稻作与骨耜，到五千年前良渚的玉琮、古城与水利，一条考古线索看浙江文明的源头如何成形。",
+      "elementKeys": [
+        "hemudu-culture",
+        "hemudu-double-bird",
+        "hemudu-painted-pottery",
+        "hemudu-bone-plough",
+        "liangzhu-culture-overview",
+        "jade-cong-wang",
+        "liangzhu-ancient-city",
+        "jade-cong-ritual",
+        "shi-xingeng-discovery"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "top-ten-treasures-trail",
+      "name": "镇馆之宝巡礼",
+      "summary": "跟着浙博十大镇馆之宝的榜单逐个寻访，从七千年前的牙雕到民国的万工轿，在一件件器物里拼出浙江手艺与历史的截面。",
+      "elementKeys": [
+        "top-ten-treasures",
+        "hemudu-double-bird",
+        "jade-cong-wang",
+        "zhejiang-yue-sword",
+        "asoka-pagoda",
+        "cai-feng-ming-qi",
+        "longquan-boat-drip",
+        "fuchun-shanju-tu",
+        "jiyue-bronze-house",
+        "wan-gong-jiao"
+      ],
+      "minContacted": 5
+    },
+    {
+      "key": "literati-and-elegant-objects",
+      "name": "文人与雅器",
+      "summary": "从《富春山居图》的剩山图到“彩凤鸣岐”的唐琴，再到黄公望、黄宾虹、沙孟海、吴昌硕这些名字，看浙江文人的笔墨与器物如何互相成就。",
+      "elementKeys": [
+        "fuchun-shanju-tu",
+        "huang-gongwang",
+        "guqin-world",
+        "cai-feng-ming-qi",
+        "tang-guqin-tradition",
+        "huang-binhong",
+        "sha-menghai",
+        "wu-changshuo"
+      ],
+      "minContacted": 4
+    },
+    {
+      "key": "wuyue-swords-and-pagodas",
+      "name": "吴越的剑与塔",
+      "summary": "把越王剑的锋芒与吴越佛国的塔影并置，从者旨於睗剑到鎏金银阿育王塔，看一个靠航海与信仰立国的王国如何把威权与慈悲铸进器物。",
+      "elementKeys": [
+        "wuyue-state",
+        "wuyue-buddhist-art",
+        "zhejiang-yue-sword",
+        "yue-bronze-swords",
+        "asoka-pagoda",
+        "caisu-mud-bodhisattva"
+      ],
+      "minContacted": 3
+    }
+  ]
+}

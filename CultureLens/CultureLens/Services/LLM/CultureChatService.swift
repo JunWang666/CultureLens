@@ -355,7 +355,10 @@ nonisolated struct CultureChatService: Sendable {
     }
 
     if fragments.count < 4 {
-      for element in store.elements.prefix(8) {
+      // Prefer cultural-history nodes for open Q&A seeding; sight entities are
+      // already covered via joined seeds / attraction-bound chat.
+      let fallbackPool = store.historyElements + store.sightElements
+      for element in fallbackPool.prefix(8) {
         append(
           key: element.key,
           name: element.name,

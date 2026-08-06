@@ -1,0 +1,527 @@
+{
+  "introductions": [
+    {
+      "key": "zhijiang-campus.zhejiang-wannian-guobao",
+      "name": "《浙江一万年》与五件国宝",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在之江馆区，把《浙江一万年——浙江历史文化陈列》当作读懂浙江全史的主线索。走进它时，不妨先记住“三大展厅、一条一万年的路”，再从一楼的史前一路走到二楼近现代，最后特意回头看清五件禁止出境的国宝，就能把整条参观串起来了。"
+          },
+          {
+            "type": "paragraph",
+            "text": "之江馆区是浙江省博物馆的新主场，位于之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。常设展览“浙江一万年——浙江历史文化陈列”位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，于2023年8月开幕。"
+          },
+          {
+            "type": "paragraph",
+            "text": "浙江省博物馆入选禁止出国（境）展览文物的全部五件（组）文物，都位于这一展览之中。换句话说，只要走完《浙江一百年》，就能把五件禁止出境的国宝一次看齐。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhejiang-museum-history",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "fuchun-shanju-tu.on-display",
+      "name": "剩山图展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在之江馆的这段导览里，把目光收回到一件画上：《富春山居图》的“剩山图”。看它时，先看卷首那一段火烧后的短卷，再看旁边的文本与数字重建，想象一条本来完整的富春江长卷曾经的模样。"
+          },
+          {
+            "type": "paragraph",
+            "text": "《富春山居图》是宋末元初画家黄公望的作品，创作于1347年至1350年，以浙江富春江为背景，是黄公望的代表作，获后世赞誉为“画中之兰亭”“山水画第一神品”，为中国十大传世名画之一。原卷首小段经过修补后称为“剩山图”，横51.4公分，高31.8公分，占原画1/14；后段画幅较长，称为“无用师卷”，横636.9公分，高33公分，占原画12/14。"
+          },
+          {
+            "type": "paragraph",
+            "text": "“剩山图”与“无用师卷”于2011年6月2日在台北故宫博物院展出，但合璧亮相的两幅真迹并没有连接在一起，而是同陈列在长16公尺的柜子内。浙江省博物馆珍藏的正是“剩山图”这一段，它也入选了浙博十大镇馆之宝。"
+          }
+        ]
+      },
+      "culturalElementKey": "fuchun-shanju-tu",
+      "attractionKey": "fuchun-shanju-tu",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhijiang-campus.taigu-guqin",
+      "name": "太古之音：古琴展厅",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "走到古琴展柜前，不必急着看标牌，先安静下来：看琴身的断纹、题刻与琴名，再听展柜旁若有若无的音韵提示，就能体会到古琴作为一种“听的传统”是如何被保存在一张木胎漆面上的。"
+          },
+          {
+            "type": "paragraph",
+            "text": "古琴艺术于2003年11月7日被联合国教科文组织列入世界第二批人类非物质文化遗产代表作名录；2006年5月20日，国务院将古琴列入第一批国家级非物质文化遗产名录，划分在“民间音乐”类，编号Ⅱ—34。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世之宝；宋元时期古琴开始出现明确的流派传承，第一个古琴流派浙派出现于南宋晚期，创始人是郭沔。浙博十大镇馆之宝中的唐“彩凤鸣岐”七弦琴，正属于这批流传至今的唐琴之列。"
+          }
+        ]
+      },
+      "culturalElementKey": "guqin-world",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "gushan-campus.zhongyuan-wenge",
+      "name": "园中馆、馆中园与文澜阁",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "到孤山馆区，先把它当作一座“馆中园”来逛：往西走到文澜阁下，站在湖山与楼阁交界处，看看一座博物馆如何与西湖山水几乎无边界地共生。"
+          },
+          {
+            "type": "paragraph",
+            "text": "孤山馆区是浙江省博物馆最早的馆区，位于杭州西湖孤山南麓，东衔白堤和平湖秋月，西接西泠印社，于1993年秋竣工，占地20400平方米，馆舍形成“园中馆、馆中园”的格局；它还包括浙江西湖美术馆和文澜阁。"
+          },
+          {
+            "type": "paragraph",
+            "text": "文澜阁位于孤山馆区西侧，建成于乾隆四十八年（1783年），为清代珍藏《四库全书》的七阁之一；咸丰十一年（1861年）遭焚毁，光绪六年（1880年）重建，是江南三阁中唯一幸存的一阁；2001年被国务院核定公布为全国重点文物保护单位，2006年经历建国后规模最大的一次修缮，2013年6月重新对外开放。"
+          }
+        ]
+      },
+      "culturalElementKey": "gushan-campus",
+      "attractionKey": "gushan-campus",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "gushan-campus.kunshan-pianyu",
+      "name": "昆山片玉：陶瓷陈列",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在孤山主楼的陶瓷馆里，把“昆山片玉”四个字当作逛这条展线的提示：从越窑的“类玉、类冰”，到龙泉的粉青、梅子青，一路对照着釉色看，就是理解浙江青瓷的一条捷径。"
+          },
+          {
+            "type": "paragraph",
+            "text": "常设展览“昆山片玉——中国古代陶瓷陈列”位于孤山馆区主楼陶瓷馆，展示面积1200多平方米，展出陶瓷文物近400件。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越窑是唐朝、五代时浙江绍兴越州的瓷窑，窑址主要分布于慈溪的上林湖一带；唐代陆羽在《茶经》中写道“碗，越州为上。其瓷类玉、类冰”，晚唐五代时最上品的越窑千峰翠色青瓷专门作为贡品，臣民不得用，因此称为“秘色”。龙泉窑改进釉料配方，创制出粉青、梅子青等前所未见的品种，一般认为其鼎盛时期在南宋。"
+          }
+        ]
+      },
+      "culturalElementKey": "yue-kiln",
+      "attractionKey": "gushan-campus",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "asoka-pagoda.on-display",
+      "name": "阿育王塔展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在孤山馆的雷峰塔文物陈列里，把目光先落在那几件小而精的阿育王塔上：先看四角的“山花蕉叶”与塔身上镂刻的画面，再想它们曾经安放在雷峰塔地宫正中，一座小塔就是一段吴越佛国史。"
+          },
+          {
+            "type": "paragraph",
+            "text": "雷峰塔由五代吴越王钱俶主持修建，塔内奉藏释迦牟尼佛“佛螺髻发”舍利；雷峰塔地宫位于塔心室正下方，2001年3月11日开启，为砖砌竖穴式，地宫内正中为铁舍利函。塔中地宫出土51组文物，其中鎏金纯银阿育王塔是遗址内最重要的文物之一，塔身内盛金质容器，应奉藏佛螺髻发舍利。"
+          },
+          {
+            "type": "paragraph",
+            "text": "2000年至2001年雷峰塔发掘出土的大量文物，现在大部分收藏和展出于浙江省博物馆。两座阿育王塔均为方形，由塔座、塔身、四根蕉叶状山花和塔刹组成，塔身四面镂刻佛祖本生故事画面。"
+          }
+        ]
+      },
+      "culturalElementKey": "asoka-pagoda",
+      "attractionKey": "asoka-pagoda",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "huang-binhong-memorial.qixialing",
+      "name": "栖霞岭的黄宾虹晚年",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "站在栖霞岭31号的纪念室前，先想一位85岁的老人在1948年夏天南下的情景：他就是在这里走完人生最后的七年。看室内的画作与题字，把这些作品与“最后七年”连起来，就能体会他晚年的创作心境。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹纪念室位于杭州栖霞岭31号；1948年夏，85岁的黄宾虹应国立杭州艺专之聘请，由北平南下，在这里走过了他人生的最后七年。纪念室于1988年正式向游人开放。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹（1865年1月27日—1955年3月25日）是中国近代山水画画家，1955年3月25日病逝，葬于杭州南山公墓；现在栖霞岭下设有黄宾虹纪念馆，在金华建有黄宾虹艺术馆和黄宾虹公园。"
+          }
+        ]
+      },
+      "culturalElementKey": "huang-binhong",
+      "attractionKey": "huang-binhong-memorial",
+      "latitude": 30.2589,
+      "longitude": 120.1344
+    },
+    {
+      "key": "huang-binhong-memorial.wuqian-zuoping",
+      "name": "五千件作品与纪念室",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "面对纪念室里这位老画家留下的数量惊人的作品，不妨先想一想数量本身意味着什么：他把自己的一生心血留在了浙江，也成了浙江省博物馆收藏的一大支柱。"
+          },
+          {
+            "type": "paragraph",
+            "text": "黄宾虹逝世后，家属秉承其遗愿，将其存留的五千余件作品及一万余件文物、手稿等遗物悉数捐献给浙江省博物馆，构成浙博书画收藏的重要来源。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1955年3月22日，黄宾虹遗属向博物馆捐赠文物，计图书1848部，另信件2416、函手稿810份、族谱10册、故宫审画记录65本、古玺释文6册；1958年3月，浙江省博物馆成立了“黄宾虹纪念室”。"
+          }
+        ]
+      },
+      "culturalElementKey": "huang-binhong",
+      "attractionKey": "huang-binhong-memorial",
+      "latitude": 30.2589,
+      "longitude": 120.1344
+    },
+    {
+      "key": "sha-menghai-residence.longlu-du",
+      "name": "龙游路的沙孟海旧居",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "走到沙孟海旧居门口，先看院内石墙上那五个字匾额，再看这栋两层小别墅的砖木结构。一位书法家、篆刻家的旧居，往往如其刀笔——院子里的一草一木都显得安静而讲究。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海旧居位于杭州龙游路15号，占地面积870平方米，总建筑面积601平方米，为砖木两层结构别墅，院内“沙孟海旧居”五字匾额为金石篆刻家钱君匋所书，2004年11月正式开放，供游人参观。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海（1900年6月11日—1992年10月10日）是中国著名书法家、篆刻家，原名沙文若，字孟海，浙江省鄞县（现宁波市鄞州区）塘溪镇沙村人。他晚年与浙江省博物馆渊源很深，旧居正位于杭州龙游路一处安静的院落之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "sha-menghai",
+      "attractionKey": "sha-menghai-residence",
+      "latitude": 30.2622,
+      "longitude": 120.1519
+    },
+    {
+      "key": "sha-menghai-residence.shufa-zhuanke",
+      "name": "书法、篆刻与浙博",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "站在沙孟海旧居前，再把视野放宽到浙江博物馆：这位老先生的书法、篆刻与这家博物馆的关系，看他一生多职多任的履历就能读明白。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海与浙江省博物馆渊源很深：1953年8月，沙孟海兼任该馆历史部主任；1984年8月，沙孟海任名誉馆长。他还于1963年任浙江美术学院书法篆刻专业教授，1979年当选西泠印社社长，1980年任西泠书画院院长。"
+          },
+          {
+            "type": "paragraph",
+            "text": "沙孟海与其他浙博名门交往密切，他先后与黄宾虹、吴昌硕等的作品一起构成浙博的书画与印章收藏。看馆内书法、篆刻藏品时，便知这是把书法、篆刻与浙江文化机构连在一起的一段因缘。"
+          }
+        ]
+      },
+      "culturalElementKey": "sha-menghai",
+      "attractionKey": "sha-menghai-residence",
+      "latitude": 30.2622,
+      "longitude": 120.1519
+    },
+    {
+      "key": "liangzhu-cong-wang.on-display",
+      "name": "良渚玉琮王展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "良渚玉琮王出自反山12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，被学界视为“琮王”，也是浙江省博物馆十大镇馆之宝之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "反山12号墓是良渚贵族墓地中最高等级的墓葬之一；除玉琮王外，该墓还出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米，头尾两端安有玉件，是军权、王权的象征。反山20号墓随葬玉器总计达547件，应为最高首领的墓葬。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-cong-wang",
+      "attractionKey": "jade-cong-wang",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "cong-ritual-jade.on-display",
+      "name": "琮礼器展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型方内洞圆，最早见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”。"
+          }
+        ]
+      },
+      "culturalElementKey": "jade-cong-ritual",
+      "attractionKey": "jade-cong-ritual",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "hemudu-double-bird.on-display",
+      "name": "双鸟朝阳纹牙雕展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双鸟朝阳纹牙雕是河姆渡文化线雕的代表作，也是浙江省博物馆十大镇馆之宝之一，属于新石器时代距今约6000至7000年的河姆渡先民之手。"
+          },
+          {
+            "type": "paragraph",
+            "text": "这件牙雕长16.6厘米，残宽5.9厘米，厚1.2厘米，中心由五个同心圆组成太阳纹，圆外有火焰纹，两侧有钩喙昂首相望的双鸟；它是河姆渡遗址线雕技艺的最高代表。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-double-bird",
+      "attractionKey": "hemudu-double-bird",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhejiang-yue-sword.on-display",
+      "name": "越王者旨於睗剑展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗剑是春秋时期越国君主者旨於睗时期铸造的铜剑，也是浙江省博物馆十大镇馆之宝之一；者旨於睗虽在位仅六年，但曾大量铸造铜剑。"
+          },
+          {
+            "type": "paragraph",
+            "text": "越王者旨於睗也就是《史记》中记载的越王勾践之子鼫与，其名在《越绝书》作“与夷”，《竹书纪年》作“鹿郢”；根据《竹书纪年》，鹿郢在位六年，其在位的年代按公元纪年为公元前464年至公元前459年。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhejiang-yue-sword",
+      "attractionKey": "zhejiang-yue-sword",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "cai-feng-ming-qi.on-display",
+      "name": "彩凤鸣岐琴展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "唐·“彩凤鸣岐”七弦琴是浙江省博物馆十大镇馆之宝之一，是一张唐代制作的传世古琴，也是浙博古琴收藏中的代表性藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世珍宝；“彩凤鸣岐”正属于这批流传至今的唐琴之列。"
+          }
+        ]
+      },
+      "culturalElementKey": "cai-feng-ming-qi",
+      "attractionKey": "cai-feng-ming-qi",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "jiyue-bronze-house.on-display",
+      "name": "伎乐铜屋展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "春秋·伎乐铜屋是浙江省博物馆十大镇馆之宝之一，是一件以房屋与乐人为主题的青铜器，出自越国所在的绍兴一带。"
+          },
+          {
+            "type": "paragraph",
+            "text": "据史料记载，绍兴出土的伎乐铜屋内，有鼓师、琴师、瑟师和歌伎的陶俑，再现了当时越国人组合演唱的场景；它把一场两千多年前的“小型音乐会”凝固在青铜之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "jiyue-bronze-house",
+      "attractionKey": "jiyue-bronze-house",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "longquan-boat-drip.on-display",
+      "name": "龙泉窑舟形砚滴展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "元·龙泉窑舟形砚滴是浙江省博物馆十大镇馆之宝之一，是一件龙泉窑系的青瓷文房器，属于书斋里用来盛水研墨的小器皿。"
+          },
+          {
+            "type": "paragraph",
+            "text": "龙泉窑的鼎盛时期在南宋，改进釉料配方后创制出粉青、梅子青等品种；这件舟形砚滴以小舟为造型，正属于龙泉青瓷中文房用器的精品，既实用，也带着文人书斋的雅趣。"
+          }
+        ]
+      },
+      "culturalElementKey": "longquan-boat-drip",
+      "attractionKey": "longquan-boat-drip",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "caisu-mud-bodhisattva.on-display",
+      "name": "彩塑泥菩萨展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "北宋·彩塑泥菩萨立像是浙江省博物馆十大镇馆之宝之一，是一件宋代泥质彩塑的菩萨造像。"
+          },
+          {
+            "type": "paragraph",
+            "text": "比起青铜或瓷器，泥塑佛像更难保存；能有一件北宋的彩塑泥菩萨流传至今，本身就十分不易。它与五代吴越的佛教遗存一样，提醒你在浙博看造像时，注意宋代雕塑在材料与造型上的另一条路线。"
+          }
+        ]
+      },
+      "culturalElementKey": "caisu-mud-bodhisattva",
+      "attractionKey": "caisu-mud-bodhisattva",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "wan-gong-jiao.on-display",
+      "name": "万工轿展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "民国·万工轿是浙江省博物馆十大镇馆之宝之一，是宁绍“十里红妆”婚俗中最华重的一件嫁妆。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宁海婚俗的嫁妆以朱金木雕为主，有“千工床、万工轿”之说；花轿常常采用梓木、香樟、银杏等木材制成，轻巧而有韧性，表面雕刻大量吉祥喜庆的图案，是朱金木雕工艺的代表作。"
+          }
+        ]
+      },
+      "culturalElementKey": "wan-gong-jiao",
+      "attractionKey": "wan-gong-jiao",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "zhang-cheng-red-lacquer.on-display",
+      "name": "张成剔红盘展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "张成剔红婴戏图盘是元代雕漆名家张成创作的漆器，堪称国宝级文物，是目前已知的4件“张成造”之一，也是浙江省博物馆漆器收藏中的顶级藏品。"
+          },
+          {
+            "type": "paragraph",
+            "text": "元代雕漆名家张成创作的剔红婴戏图盘堪称国宝级文物，是目前已知的4件“张成造”之一；2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这件剔红婴戏图盘正在其中。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhang-cheng-red-lacquer",
+      "attractionKey": "zhang-cheng-red-lacquer",
+      "latitude": 30.25333333,
+      "longitude": 120.13888889
+    },
+    {
+      "key": "hemudu-painted-pottery.on-display",
+      "name": "河姆渡绘纹陶展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "河姆渡绘纹陶器是河姆渡文化先民手工制作、并在表面绘刻纹样的陶器，是了解河姆渡人生活与信仰的重要实物。它们厚实、呈灰黑色，表面常有绳纹或动植物图案。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡陶器为手工制作，十分厚实，呈灰黑色，表面常打磨，常有绳纹，或雕刻植物、动物图案。陶器上的绘画作品题材包括鸟、鱼、水稻、太阳、花草等，以鱼禾纹陶盆、稻穗纹陶盆、猪纹陶钵、五叶纹陶块为代表。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-painted-pottery",
+      "attractionKey": "hemudu-painted-pottery",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "hemudu-bone-plough.on-display",
+      "name": "河姆渡骨耜展陈",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "骨耜是河姆渡遗址出土的骨制翻地农具，是河姆渡人翻地种稻的得力工具，也是“耜耕农业”的标志性器物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "河姆渡遗址两次正式发掘出土的骨耜达200件左右；第二次正式发掘出土的4670件文物中，骨器占到了48.6%，可见骨器在河姆渡遗存中的分量之重。"
+          }
+        ]
+      },
+      "culturalElementKey": "hemudu-bone-plough",
+      "attractionKey": "hemudu-bone-plough",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    },
+    {
+      "key": "zhijiang-campus.visit",
+      "name": "之江馆区参观",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "之江馆区是浙江省博物馆的新主场，位于杭州之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。"
+          },
+          {
+            "type": "paragraph",
+            "text": "它的核心是常设展览“浙江一万年——浙江历史文化陈列”，位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，展览于2023年8月开幕；入选禁止出国（境）展览的五件（组）文物均位于这一展览之中。"
+          }
+        ]
+      },
+      "culturalElementKey": "zhijiang-campus",
+      "attractionKey": "zhijiang-campus",
+      "latitude": 30.16277778,
+      "longitude": 120.0975
+    }
+  ]
+}

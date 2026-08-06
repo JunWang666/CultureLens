@@ -6,8 +6,11 @@
 
 ## 已完成
 
+- 2026-08-06 知识详情在线图片展示完善：继续复用 `RichTextDocument.image` block，不改知识包内容；详情页补齐 HTTPS 图片加载 / 失败 / 重试 / 图注 / VoiceOver 状态，并在 overlay 或即时翻译只返回文本时保留源文档图片。见 `design/0008-knowledge-detail-remote-images.md`。
+- 2026-08-06 知识包按 ContentRole 拆 sidecar：看点（`elements-sight`）与文化历史（`elements-history`）分文件，另拆 `introductions` / `themes` / `locales-<lang>`；主 JSON 只留 version / relations；加载时合并并按 `contentRole` 筛选识别 catalog（只收看点）与开放问答兜底（优先文化历史）。版本升至西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4。
+- 2026-08-06 识别候选收紧：`recognitionKnowledge` / prompt / v5 只允许 LLM 选择看点；景点根优先用同 key 看点，现场介绍里的文化历史只进 nearby_contexts / 绑图，不再作为 `cultural_element_key`。
 - 2026-08-06 补齐正式 App 图标：将文化镜头图标处理为无透明通道的 1024×1024 iOS 主图，并生成 macOS 全套尺寸资源。
-- 2026-08-06 足迹地图完善：右上角三段式模式选择器改为单个原生工具栏菜单，菜单内直接内联地图足迹 / 时间线足迹 / 兴趣点、标准 / 混合 / 卫星底图与 3D 俯视选项，消除重复玻璃和二级弹层；接入左下角 Liquid Glass 地点搜索，当前位置按钮移入系统 toolbar（定位后显示约 2 km 范围）；修复兴趣点系统标题与自定义标题重复；无带位置足迹时地图仍可搜索和定位。
+- 2026-08-06 足迹地图完善：右上角三段式模式选择器改为单个原生工具栏菜单，菜单内直接内联地图足迹 / 时间线足迹 / 兴趣点、标准 / 混合 / 卫星底图、足迹照片标记与 3D 俯视选项，消除重复玻璃和二级弹层；接入左下角 Liquid Glass 地点搜索，当前位置按钮移入系统 toolbar（定位后显示约 2 km 范围）；足迹与兴趣点按当前缩放范围合并为 stack 聚合点，点击后在搜索框上方选择具体项目再进入详情，并解除聚合标记与组内首条记录 ID 的隐式绑定；照片标记通过 ImageIO 下采样为 128px 本地预览；修复兴趣点系统标题与自定义标题重复；无带位置足迹时地图仍可搜索和定位。
 - 2026-08-05 足迹升级为三模式地图（地图足迹 / 时间线足迹 / 兴趣点，`KnowledgeStore.attractionPoints()` 聚合知识包景点坐标，已到访景点朱砂标记可跳详情）；用户图谱支持多高亮中心（多源 BFS，空选择默认全部已加入节点，`RadialGraphLayout` 多中心内圈簇布局），扫描已记录节点加显眼朱砂徽章；中英词条同步。
 - 2026-08-05 浙博 / 良渚包按「有实体即景点」改数据：玉琮王等可拍文物升为 `attractions` 并带展陈坐标；馆区景点保留但不独占附近候选。
 - 2026-08-05 多知识包：良渚 / 浙博 / 中国历史打进 App，`KnowledgeStore.mergePacks` + `KnowledgePackLoader` 与西湖 ODR 合并；识别名允许子串绑定（如「玉琮」→「玉琮王」）。

@@ -9,6 +9,15 @@ nonisolated enum ObjectCategory: String, Codable, Hashable {
   case other = "其他"
 }
 
+/// Scannable entity vs abstract cultural knowledge — aligns with
+/// 「实体即景点」 in `agents/KNOWLEDGE_PACK_GUIDE.md`.
+nonisolated enum ContentRole: String, Codable, Hashable, CaseIterable {
+  /// Physical entity listed in `attractions[]` (景点 / 文物 / 遗址).
+  case sight = "看点"
+  /// Abstract knowledge without a scannable entity (朝代、审美、人物、制度…).
+  case history = "文化历史"
+}
+
 nonisolated enum ConceptKind: String, Codable, Hashable, CaseIterable {
   case foundation = "基础知识"
   case history = "历史"

@@ -1,0 +1,62 @@
+{
+  "themes": [
+    {
+      "key": "dynasty-timeline",
+      "name": "朝代更迭的时间线",
+      "summary": "从夏商周的先声，到秦汉一统、唐宋盛世，再到元明清的更替，沿一条主线串起中国王朝的兴衰脉络。",
+      "elementKeys": [
+        "chinese-dynasty-overview",
+        "xia-dynasty",
+        "qin-dynasty",
+        "han-dynasty",
+        "tang-dynasty",
+        "song-dynasty",
+        "yuan-dynasty",
+        "ming-dynasty",
+        "qing-dynasty"
+      ],
+      "minContacted": 5
+    },
+    {
+      "key": "prosperity-and-decline",
+      "name": "盛世与落幕",
+      "summary": "从文景之治、贞观之治到开元盛世，再看安史之乱、靖康之变与鸦片战争，体会盛世如何兴起，又如何在转折中落幕。",
+      "elementKeys": [
+        "wenjing-prosperity",
+        "zhenguan-rule",
+        "kaiyuan-flourishing",
+        "an-lushan-rebellion",
+        "jingkang-incident",
+        "opium-war"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "hundred-schools-thought",
+      "name": "百家争鸣与思想之源",
+      "summary": "回到春秋战国的思想现场，认识儒道等诸子流派的诞生，以及它们如何塑造此后两千年的中华文明。",
+      "elementKeys": [
+        "hundred-schools",
+        "confucius-and-confucianism",
+        "laozi-and-taoism",
+        "spring-autumn-warring-states",
+        "zhonghua-civilization"
+      ],
+      "minContacted": 3
+    },
+    {
+      "key": "institutions-and-exchanges",
+      "name": "制度、工程与文明往来",
+      "summary": "科举选官、运河漕运、丝路贸易与四大发明，看中国的制度与工程如何连接四方、塑造文明交流。",
+      "elementKeys": [
+        "imperial-examination",
+        "grand-canal",
+        "silk-road",
+        "four-great-inventions",
+        "twenty-four-histories",
+        "zheng-he"
+      ],
+      "minContacted": 3
+    }
+  ]
+}

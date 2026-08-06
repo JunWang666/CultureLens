@@ -516,10 +516,8 @@ struct ScanResultView: View {
         )
         .font(.subheadline)
         .foregroundStyle(CultureTheme.inkSecondary)
+        .lineLimit(3)
       }
-      Label("查看候选详情", systemImage: "location.fill")
-        .font(.caption.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkSecondary)
     }
     .padding(16)
     .background(

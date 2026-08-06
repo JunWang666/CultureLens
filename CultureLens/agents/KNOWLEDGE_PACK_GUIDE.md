@@ -1,6 +1,6 @@
 # 知识包编写指南
 
-本指南规定 CultureLens 知识包（`Resources/KnowledgePack*/knowledge-pack.json`）的内容设计原则与数据编写规范。目标是让图谱成为**有明确流向和掌握顺序的学习路径**，而不是概念共现网。
+本指南规定 CultureLens 知识包（`Resources/KnowledgePack*/` sidecar 目录）的内容设计原则与数据编写规范。目标是让图谱成为**有明确流向和掌握顺序的学习路径**，而不是概念共现网。
 
 ## 一、内容设计三原则
 
@@ -47,20 +47,47 @@
 
 ## 三、数据模型与字段规范
 
-JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包按 key 合并（先到先得），两端元素不存在的边会被丢弃。
+JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`。运行时 `KnowledgeStore.loadPack` 把目录内 sidecar 合并成完整 `KnowledgePack`，多包再按 key 合并（先到先得），两端元素不存在的边会被丢弃。
 
-### 顶层字段
+### 文件拆分（sidecar）
+
+不要把全部内容塞进一个大 JSON。每个包目录按类型分文件；`pack-manifest.json` 是唯一 manifest，主 JSON 里不要再嵌一份。
+
+| 文件 | 内容 |
+|---|---|
+| `knowledge-pack.json` | 只留 `version` / `source_language` / `relations` |
+| `elements-sight.json` | 看点元素（`contentRole: 看点`）+ `attractions` 列表 |
+| `elements-history.json` | 文化历史元素（`contentRole: 文化历史`） |
+| `introductions.json` | 现场介绍 |
+| `themes.json` | 探索主题 |
+| `locales-<lang>.json` | 每种语言一个覆盖层（如 `locales-en.json`） |
+| `pack-manifest.json` | 版本、记录数、`sha256`、文件列表 |
+
+加载时合并 sidecar 成完整包。按 `contentRole` 筛选：识别 catalog / 无景点填充 → 只收「看点」；景点绑定的介绍仍可引用「文化历史」；开放问答兜底可优先文化历史。
+
+### 顶层字段（合并后的逻辑模型）
 
 | 字段 | 说明 |
 |---|---|
-| `version` | 包版本，如 `hangzhou-west-lake-v4`。改内容必须升版本号，并同步 `pack-manifest.json`。 |
+| `version` | 包版本，如 `hangzhou-west-lake-v5`。改内容必须升版本号，并同步 `pack-manifest.json`。 |
 | `source_language` | BCP-47，默认 `zh-Hans`。 |
-| `elements[]` | 图谱节点（景点层 + 知识层）。 |
-| `attractions[]` | 可扫描景点清单，每个 key 必须有对应 element。 |
-| `relations[]` | 图谱边。 |
+| `elements[]` | 图谱节点（看点 + 文化历史）。每条带 `contentRole`。 |
+| `attractions[]` | 可扫描景点清单，每个 key 必须有对应 element（可跨包）。 |
+| `relations[]` | 图谱边（写在主 `knowledge-pack.json`）。 |
 | `introductions[]` | 现场讲解记录（绑定景点 + 元素 + 坐标）。 |
 | `themes[]` | 主题探索线路，只引用 elementKeys。 |
-| `locales` | 翻译覆盖层，`en` 必填。 |
+| `locales` | 翻译覆盖层（由 `locales-*.json` 组装）；`en` 必填。 |
+
+### ContentRole（看点 / 文化历史）
+
+枚举见 `Domain/CultureModels.swift` 的 `ContentRole`：
+
+| 取值 | 含义 | 分类规则 |
+|---|---|---|
+| `看点` | 有实体、可扫描（景点 / 文物 / 遗址） | 本包 `attractions` 里有同 key |
+| `文化历史` | 无实体、抽象知识（朝代、审美、人物、制度等） | 否则 |
+
+`conceptKind` 仍描述文化角色（基础知识 / 历史 / 人物…），与 `contentRole` 正交：玉琮王是「看点」+「基础知识」，宋朝是「文化历史」+「历史」。
 
 ### key 规范
 
@@ -69,18 +96,20 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 - **attraction 与其绑定元素共用 key 是设计特性**（景点就是图谱里的实体节点）。代码侧靠命名空间 UUID 消歧（元素 `culturalElement` / 景点 `attraction` / 地图点 `attractionPoint`，见 `agents/PROJECT.md`「身份模型」），不要因为"key 撞名"给景点另造 key。
 - key 一旦发布不要改（用户图谱进度、UUIDv5 都按 key 派生）。
 
-### elements[]
+### elements（看点 / 文化历史 sidecar）
 
 ```json
 {
   "key": "three-pools-mirroring-moon",
   "name": "三潭印月",
+  "contentRole": "看点",
   "conceptKind": "基础知识",
   "introduction": { "schemaVersion": 1, "blocks": [ … ] },
   "sources": [ { "title": "…", "publisher": "…", "url": "…" } ]
 }
 ```
 
+- `contentRole` 必填，取值 `看点` / `文化历史`。
 - `conceptKind` 必填，取值见 `Domain/CultureModels.swift` 的 `ConceptKind`（9 种）。**实体节点按其文化角色归类**：塔/堤/桥是"基础知识"，遗址格局是"地域"，水利工程是"功能"——不要用"审美"装长城、用"技法"装玉琮王。"相似对象"是边（`相似于`）的语义，一般不作节点身份。
 - `introduction` 用 RichTextDocument（paragraph / image blocks）。写法要求：
   - 第一段永远是"你眼前看到的是什么"——用户正站在它面前。
@@ -93,6 +122,7 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 
 - **每个景点 key 必须同时存在于 `elements[]`**——扫描识别命中 attraction 后要能落进图谱节点。西湖包 19/23 景点无对应节点的现状属于缺陷，新包不允许。
 - `introductions[]` 的 `attractionKey` 与 `culturalElementKey` 对景点节点填同一个 key；`latitude/longitude` 必填，`coordinateSourceUrl` 注明坐标出处。
+- 现场介绍可把 `culturalElementKey` 指到文化历史节点（例如展厅景点绑定「施昕更发现」），识别 catalog 仍只收看点。
 
 ### relations[]
 
@@ -133,26 +163,24 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 ### themes[]
 
 - 每条主题线是一条策展路径（如"月与倒影""玉与礼制"），`elementKeys` 按推荐游览/学习顺序排列，`minContacted` 设为 keys 数量的 60%–80%。
-- 主题线里至少一半节点应是景点（可扫描），纯知识主题用户无法开始。
+- 主题线里至少一半节点应是看点（可扫描），纯知识主题用户无法开始。
 
-### locales.en（必填）
+### locales-en.json（必填）
 
 ```json
-"locales": {
-  "en": {
-    "elements": {
-      "jade-cong-wang": {
-        "name": "King Jade Cong",
-        "introduction": { "schemaVersion": 1, "blocks": [ … ] }
-      }
-    },
-    "attractions": { "…": { "name": "…" } },
-    "introductions": { "…": { "name": "…", "introduction": { … } } }
-  }
+{
+  "elements": {
+    "jade-cong-wang": {
+      "name": "King Jade Cong",
+      "introduction": { "schemaVersion": 1, "blocks": [ … ] }
+    }
+  },
+  "attractions": { "…": { "name": "…" } },
+  "introductions": { "…": { "name": "…", "introduction": { … } } }
 }
 ```
 
-- `locales.en.elements` 必须覆盖**每一个** element 的 `name`；`introduction` 英译对区域包（良渚/浙博/历史）为必填，西湖包目前只提供名称，正文由运行时 LLM 翻译兜底（`KnowledgeTranslationService`，设计见 PROJECT.md「多语言」）。
+- `elements` 必须覆盖**每一个** element 的 `name`；`introduction` 英译对区域包（良渚/浙博/历史）为必填，西湖包目前只提供名称，正文由运行时 LLM 翻译兜底（`KnowledgeTranslationService`，设计见 PROJECT.md「多语言」）。
 - 英文不是逐字翻译，是给英语读者重写的版本——拼音首次出现要配释义（Cong, a jade tube with a circular inner bore and square outer body）。
 
 ## 四、历史与文化内容的编写要点
@@ -166,11 +194,13 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 
 ## 五、提交前检查清单
 
-- [ ] 每个 attraction 的 key 都存在于 elements（景点可落图）
+- [ ] 每个 attraction 的 key 都存在于 elements（景点可落图；可跨包）
+- [ ] 每个 element 有正确的 `contentRole`（attractions 同 key → 看点，否则 → 文化历史）
+- [ ] 内容按 sidecar 分文件，主 JSON 不含 elements/attractions/introductions/themes/locales
 - [ ] 每条 relation 都有 kind 和 explanation，且方向与上表一致
 - [ ] 无成对互链；`理解前先懂` 无环、最终落到地基层
 - [ ] 无跨包重复实体（全库搜 key 与中文名）
-- [ ] 每个 element 有 `locales.en` 名称覆盖（区域包还需 introduction 英译）
+- [ ] 每个 element 有 `locales-en.json` 名称覆盖（区域包还需 introduction 英译）
 - [ ] 版本号已升级、`pack-manifest.json` 已同步
 - [ ] `AbstractionAxisTests` / `InternationalizationTests` 通过
 
@@ -178,16 +208,42 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`，运行时多包�
 
 ```bash
 python3 - <<'EOF'
-import json, glob, sys
+import json, glob, sys, os
 ok = True
-packs = [json.load(open(p)) for p in glob.glob('CultureLens/Resources/KnowledgePack*/knowledge-pack.json')
-         if 'Fallback' not in p]
+dirs = [d for d in glob.glob('CultureLens/CultureLens/Resources/KnowledgePack*')
+        if 'Fallback' not in d and os.path.isdir(d)]
+
+def load_pack(d):
+    main = json.load(open(f'{d}/knowledge-pack.json'))
+    sight = json.load(open(f'{d}/elements-sight.json'))
+    hist = json.load(open(f'{d}/elements-history.json'))
+    intros = json.load(open(f'{d}/introductions.json'))
+    themes = json.load(open(f'{d}/themes.json'))
+    en_path = f'{d}/locales-en.json'
+    en = json.load(open(en_path)) if os.path.exists(en_path) else {}
+    elements = sight.get('elements', []) + hist.get('elements', [])
+    return {
+        'version': main['version'],
+        'elements': elements,
+        'attractions': sight.get('attractions', []),
+        'relations': main.get('relations', []),
+        'introductions': intros.get('introductions', []),
+        'themes': themes.get('themes', []),
+        'locales': {'en': en},
+    }
+
+packs = [load_pack(d) for d in dirs]
 elems = {}
 for d in packs:
     for e in d['elements']:
         if e['key'] in elems:
             ok = False; print(f"跨包重复元素 {e['key']}")
         elems[e['key']] = d['version']
+        role = e.get('contentRole')
+        in_attr = e['key'] in {a['key'] for a in d['attractions']}
+        expect = '看点' if in_attr else '文化历史'
+        if role != expect:
+            ok = False; print(f"{d['version']}: {e['key']} contentRole={role} 期望 {expect}")
 attrs = {a['key'] for d in packs for a in d['attractions']}
 seen_pairs = set()
 for d in packs:
@@ -215,11 +271,11 @@ sys.exit(0 if ok else 1)
 EOF
 ```
 
-## 六、v4/v3 重构基线（2026-08）
+## 六、v5 sidecar 基线（2026-08）
 
-四个包已于 2026-08 按本指南整体重构（西湖 v4 / 良渚 v3 / 浙博 v4 / 历史 v3），此前的典型问题——景点不在图、无类型对称边、跨包重复实体、跨包前置缺失——已清除。当前基线：
+四个包已按本指南拆成 sidecar，并给每条 element 打上 `contentRole`（西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4）。节点与边计数与上一轮实体化重构一致：
 
-- 节点：西湖 70 / 良渚 25 / 浙博 35 / 历史 45（历史包含 5 个文化地基节点：中秋节、中国佛教、中国茶文化、中国书法、中国山水画）。
+- 节点：西湖 70（看点 23 / 文化历史 47）/ 良渚 25（9 / 16）/ 浙博 35（16 / 19）/ 历史 45（2 / 43）。
 - 边全部有 kind + explanation、单向、无对称对；跨包边统一指向历史包地基（朝代、文化概念）。
 - 玉琮王 canonical key 为良渚包 `jade-cong-wang`；河姆渡为浙博包 `hemudu-culture`；施昕更为良渚包 `shi-xingeng-discovery`。新内容引用这些 key，不要再建同义节点。
-- 西湖包 `locales.en` 目前只有名称级覆盖；补正文英译是已知的后续工作。
+- 浙博包 `attractions` 含跨包景点 key（如 `jade-cong-wang`），元素正文仍落在良渚包，靠合并宇宙校验。- 西湖包 `locales.en` 目前只有名称级覆盖；补正文英译是已知的后续工作。

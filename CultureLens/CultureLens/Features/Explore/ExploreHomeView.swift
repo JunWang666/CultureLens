@@ -2,22 +2,99 @@ import Foundation
 import SwiftUI
 
 struct ExploreHomeView: View {
-  let openChat: () -> Void
-  let startScan: () -> Void
   private let contentService: CultureContentService
 
+  @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
   @State private var locationProvider = LocationContextProvider()
   @State private var recommendationState: RecommendationState = .loading
   @State private var reloadID = UUID()
+  @State private var dailyOffset = 0
 
-  init(
-    contentService: CultureContentService = .live(),
-    openChat: @escaping () -> Void = {},
-    startScan: @escaping () -> Void
-  ) {
+  init(contentService: CultureContentService = .live()) {
     self.contentService = contentService
-    self.openChat = openChat
-    self.startScan = startScan
+  }
+
+  private var knowledgeStore: KnowledgeStore? {
+    KnowledgeStore.shared
+  }
+
+  private var contactedKeys: Set<String> {
+    Set(knowledgeProgressStore.entriesByID.values.compactMap(\.elementKey))
+  }
+
+  private var sortedElements: [KnowledgePack.Element] {
+    (knowledgeStore?.elements ?? []).sorted { $0.key < $1.key }
+  }
+
+  /// 每日确定性轮换：同一天所有用户看到同一元素，「换一个」只改本地 offset。
+  private var dailyElement: KnowledgePack.Element? {
+    let elements = sortedElements
+    guard !elements.isEmpty else { return nil }
+    let dayNumber = Int(Date().timeIntervalSince1970 / 86_400)
+    return elements[(dayNumber + dailyOffset) % elements.count]
+  }
+
+  /// 已收集节点的图谱邻居中尚未收集的；图谱为空时回落到主题剩余节点。
+  private var nextDiscoveries: [KnowledgePack.Element] {
+    guard let store = knowledgeStore else { return [] }
+    let contacted = contactedKeys
+    var keys: [String] = []
+    var seen = Set<String>()
+
+    func append(_ key: String) {
+      guard
+        !contacted.contains(key),
+        seen.insert(key).inserted,
+        store.element(key: key) != nil
+      else { return }
+      keys.append(key)
+    }
+
+    for key in contacted.sorted() {
+      for neighbor in store.relatedElements(forKey: key, limit: 6) {
+        append(neighbor.key)
+      }
+    }
+    if keys.isEmpty {
+      let themes = ThemeProgressCalculator.progressList(
+        themes: store.pack.themes,
+        contactedElementKeys: contacted,
+        knowledgeStore: store
+      )
+      for progress in themes {
+        for key in progress.remainingKeys {
+          append(key)
+        }
+      }
+    }
+    return keys.prefix(3).compactMap { store.element(key: $0) }
+  }
+
+  private var collectedCount: Int {
+    guard let store = knowledgeStore else { return 0 }
+    return contactedKeys.filter { store.element(key: $0) != nil }.count
+  }
+
+  /// 进行中的主题：未完成优先，按点亮比例降序，最多 3 个。
+  private var activeThemes: [ThemeProgress] {
+    guard let store = knowledgeStore else { return [] }
+    return Array(
+      ThemeProgressCalculator.progressList(
+        themes: store.pack.themes,
+        contactedElementKeys: contactedKeys,
+        knowledgeStore: store
+      )
+      .filter { !$0.isComplete }
+      .sorted { ($0.fractionComplete, $1.theme.key) > ($1.fractionComplete, $0.theme.key) }
+      .prefix(3)
+    )
+  }
+
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+  /// iPad 等 regular 宽度下使用双栏：左栏附近看点，右栏收集与发现流。
+  private var isWideLayout: Bool {
+    horizontalSizeClass == .regular
   }
 
   var body: some View {
@@ -25,22 +102,33 @@ struct ExploreHomeView: View {
       CulturePageBackground()
 
       ScrollView {
-        LazyVStack(alignment: .leading, spacing: 28) {
+        VStack(alignment: .leading, spacing: 28) {
           EditorialHeader(
             eyebrow: nil,
             title: "探索",
-            message: "留意一处屋檐、一件器物或一段纹样。文化的线索，常从细节开始。"
+            message: "看看附近的现场，翻翻你的收集，每天再认识一个新的文化细节。"
           )
 
-          chatInvitation
+          if isWideLayout {
+            HStack(alignment: .top, spacing: 32) {
+              VStack(alignment: .leading, spacing: 28) {
+                nearbySection
+              }
+              .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 
-          playbooksSection
-
-          sectionTitle("基于位置推荐", subtitle: "发现附近值得理解的文化线索")
-
-          recommendationContent
-
-          scanInvitation
+              VStack(alignment: .leading, spacing: 28) {
+                collectionSection
+                dailySection
+                nextDiscoveriesSection
+              }
+              .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            }
+          } else {
+            nearbySection
+            collectionSection
+            dailySection
+            nextDiscoveriesSection
+          }
         }
         .padding(.horizontal, CultureTheme.pagePadding)
         .padding(.top, 28)
@@ -52,6 +140,58 @@ struct ExploreHomeView: View {
       await loadRecommendations()
     }
   }
+
+  @ViewBuilder
+  private var nearbySection: some View {
+    sectionTitle("附近看点", subtitle: "离你最近的文化现场，点卡片看详情")
+    recommendationContent
+  }
+
+  @ViewBuilder
+  private var collectionSection: some View {
+    if knowledgeStore != nil {
+      sectionTitle("我的收集", subtitle: "已点亮的节点与进行中的主题")
+      collectionCard
+    }
+  }
+
+  @ViewBuilder
+  private var dailySection: some View {
+    if let daily = dailyElement {
+      HStack(alignment: .firstTextBaseline) {
+        sectionTitle("今日一物", subtitle: "每天轮换一个文化细节")
+        Spacer(minLength: 12)
+        Button {
+          dailyOffset += 1
+        } label: {
+          Label("换一个", systemImage: "shuffle")
+            .font(.caption.weight(.semibold))
+        }
+        .tint(CultureTheme.cinnabar)
+        .accessibilityIdentifier("explore.dailyShuffle")
+      }
+
+      DailyElementCard(
+        element: daily,
+        isCollected: contactedKeys.contains(daily.key)
+      )
+    }
+  }
+
+  @ViewBuilder
+  private var nextDiscoveriesSection: some View {
+    if !nextDiscoveries.isEmpty {
+      sectionTitle("下一个看点", subtitle: "从你的图谱向外延伸")
+      ForEach(nextDiscoveries, id: \.key) { element in
+        NavigationLink(value: AppRoute.knowledgeElement(element.key)) {
+          NextDiscoveryRow(element: element)
+        }
+        .buttonStyle(.plain)
+      }
+    }
+  }
+
+  // MARK: - 附近看点
 
   @ViewBuilder
   private var recommendationContent: some View {
@@ -68,13 +208,19 @@ struct ExploreHomeView: View {
 
     case .loaded(let recommendations):
       ForEach(recommendations) { recommendation in
-        NearbyIntroductionCard(recommendation: recommendation)
+        NavigationLink(value: AppRoute.knowledgeElement(recommendation.culturalElement.key)) {
+          NearbyIntroductionCard(
+            recommendation: recommendation,
+            isVisited: contactedKeys.contains(recommendation.culturalElement.key)
+          )
+        }
+        .buttonStyle(.plain)
       }
 
     case .empty:
       recommendationNotice(
         title: "附近暂无已收录内容",
-        message: String(localized: "这里只显示数据库返回的内容，不再使用本地样例补位。"),
+        message: String(localized: "你当前位置附近还没有收录的文化现场，到收录区域内再来看看。"),
         systemImage: "mappin.slash"
       )
 
@@ -134,7 +280,7 @@ struct ExploreHomeView: View {
         place.latitude,
         place.longitude,
         50_000,
-        2
+        6
       )
       recommendationState =
         response.introductions.isEmpty
@@ -147,151 +293,70 @@ struct ExploreHomeView: View {
     }
   }
 
-  private var chatInvitation: some View {
-    Button(action: openChat) {
-      HStack(alignment: .center, spacing: 16) {
-        VStack(alignment: .leading, spacing: 8) {
-          Text("文化问答")
-            .font(.cultureSerif(.title2))
-            .foregroundStyle(CultureTheme.inkPrimary)
-          Text("不必先扫描。直接问知识库与你的文化图谱；可上传图片，历史对话会保留。")
-            .font(.subheadline)
-            .foregroundStyle(CultureTheme.inkSecondary)
-            .fixedSize(horizontal: false, vertical: true)
-        }
+  // MARK: - 我的收集
 
-        Spacer(minLength: 8)
-
-        Image(systemName: "chevron.right")
-          .font(.body.weight(.semibold))
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .accessibilityHidden(true)
-      }
-      .padding(20)
-      .background(
-        CultureTheme.surface,
-        in: RoundedRectangle(cornerRadius: 24, style: .continuous)
-      )
-      .overlay {
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-          .stroke(CultureTheme.hairline, lineWidth: 1)
-      }
-    }
-    .buttonStyle(.plain)
-    .accessibilityIdentifier("explore.openChat")
-    .accessibilityLabel("进入文化问答")
-  }
-
-  private var playbooksSection: some View {
-    VStack(alignment: .leading, spacing: 12) {
-      sectionTitle("继续探索", subtitle: "主题路径与参观回顾")
-
-      NavigationLink(value: AppRoute.themes) {
-        playbookRow(
-          title: "主题探索",
-          message: "沿着月影、十景、塔影等线索连续点亮节点。",
-          systemImage: "list.bullet.rectangle"
-        )
-      }
-      .buttonStyle(.plain)
-      .accessibilityIdentifier("explore.openThemes")
-
-      NavigationLink(value: AppRoute.visitTrips) {
-        playbookRow(
-          title: "文化回顾",
-          message: "把相近时间与地点的扫描收成一次参观汇总。",
-          systemImage: "book.pages"
-        )
-      }
-      .buttonStyle(.plain)
-      .accessibilityIdentifier("explore.openReview")
-    }
-  }
-
-  private func playbookRow(
-    title: LocalizedStringKey,
-    message: LocalizedStringKey,
-    systemImage: String
-  ) -> some View {
-    HStack(alignment: .center, spacing: 16) {
-      Image(systemName: systemImage)
-        .font(.title3)
-        .foregroundStyle(CultureTheme.antiqueGold)
-        .frame(width: 36)
-
-      VStack(alignment: .leading, spacing: 4) {
-        Text(title)
+  private var collectionCard: some View {
+    VStack(alignment: .leading, spacing: 14) {
+      HStack(alignment: .firstTextBaseline) {
+        Text("已收集 \(collectedCount) / \(sortedElements.count) 个节点")
           .font(.headline)
           .foregroundStyle(CultureTheme.inkPrimary)
-        Text(message)
-          .font(.caption)
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .fixedSize(horizontal: false, vertical: true)
+        Spacer(minLength: 12)
+        NavigationLink(value: AppRoute.themes) {
+          Text("全部主题")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(CultureTheme.cinnabar)
+        }
+        .accessibilityIdentifier("explore.themesLink")
       }
 
-      Spacer(minLength: 8)
+      ProgressView(
+        value: sortedElements.isEmpty
+          ? 0
+          : Double(collectedCount) / Double(sortedElements.count)
+      )
+      .tint(CultureTheme.cinnabar)
 
-      Image(systemName: "chevron.right")
-        .font(.body.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .accessibilityHidden(true)
+      if collectedCount == 0 {
+        Text("还没有点亮任何节点。到扫描页拍下一个细节，或从下面的「今日一物」开始。")
+          .font(.subheadline)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .fixedSize(horizontal: false, vertical: true)
+      } else if activeThemes.isEmpty {
+        Text("所有主题都已完成。")
+          .font(.subheadline)
+          .foregroundStyle(CultureTheme.inkSecondary)
+      } else {
+        ForEach(activeThemes, id: \.theme.key) { progress in
+          NavigationLink(value: AppRoute.theme(progress.theme.key)) {
+            HStack(alignment: .center, spacing: 12) {
+              Text(progress.theme.name)
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(CultureTheme.inkPrimary)
+                .lineLimit(1)
+              Spacer(minLength: 8)
+              ProgressView(value: progress.fractionComplete)
+                .tint(CultureTheme.antiqueGold)
+                .frame(width: 72)
+              Text(progress.statusText)
+                .font(.caption.monospacedDigit())
+                .foregroundStyle(CultureTheme.inkSecondary)
+            }
+          }
+          .buttonStyle(.plain)
+        }
+      }
     }
     .padding(18)
     .background(
       CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
     )
     .overlay {
-      RoundedRectangle(cornerRadius: 20, style: .continuous)
+      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
-  }
-
-  private var scanInvitation: some View {
-    VStack(alignment: .leading, spacing: 18) {
-      HStack(alignment: .top) {
-        VStack(alignment: .leading, spacing: 8) {
-          Text("把镜头对准一个细节")
-            .font(.cultureSerif(.title2))
-          Text("拍摄后框选想理解的部分，让文化线索从眼前的细节展开。")
-            .font(.subheadline)
-            .foregroundStyle(.white.opacity(0.76))
-        }
-
-        Spacer()
-
-        Image(systemName: "viewfinder")
-          .font(.largeTitle.weight(.light))
-          .foregroundStyle(CultureTheme.antiqueGold)
-      }
-
-      Button(action: startScan) {
-        Label("开始扫描", systemImage: "camera.viewfinder")
-          .frame(maxWidth: .infinity)
-      }
-      .buttonStyle(.borderedProminent)
-      .tint(CultureTheme.cinnabar)
-      .controlSize(.large)
-      .accessibilityIdentifier("explore.startScan")
-    }
-    .foregroundStyle(.white)
-    .padding(22)
-    .background(
-      LinearGradient(
-        colors: [CultureTheme.inkPrimary, CultureTheme.inkPrimary.opacity(0.86)],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-      ),
-      in: RoundedRectangle(cornerRadius: 26, style: .continuous)
-    )
-    .overlay(alignment: .bottomTrailing) {
-      Circle()
-        .stroke(CultureTheme.antiqueGold.opacity(0.32), lineWidth: 1)
-        .frame(width: 140, height: 140)
-        .offset(x: 44, y: 54)
-        .allowsHitTesting(false)
-    }
-    .clipped()
+    .accessibilityIdentifier("explore.collectionCard")
   }
 
   private func sectionTitle(_ title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
@@ -313,8 +378,11 @@ private enum RecommendationState {
   case failed(String)
 }
 
+// MARK: - 附近看点卡片
+
 private struct NearbyIntroductionCard: View {
   let recommendation: AttractionIntroductionRecommendation
+  var isVisited: Bool = false
 
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
@@ -323,6 +391,12 @@ private struct NearbyIntroductionCard: View {
           .font(.cultureSerif(.title3))
           .foregroundStyle(CultureTheme.inkPrimary)
         Spacer(minLength: 12)
+        if isVisited {
+          Image(systemName: "checkmark.seal.fill")
+            .font(.caption)
+            .foregroundStyle(CultureTheme.cinnabar)
+            .accessibilityLabel("已到访")
+        }
         Text(distanceText)
           .font(.caption.monospacedDigit())
           .foregroundStyle(CultureTheme.cinnabar)
@@ -341,6 +415,7 @@ private struct NearbyIntroductionCard: View {
         .lineLimit(3)
     }
     .padding(18)
+    .frame(maxWidth: .infinity, alignment: .leading)
     .background(
       CultureTheme.surface,
       in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
@@ -358,6 +433,108 @@ private struct NearbyIntroductionCard: View {
     }
     let kilometers = String(format: "%.1f", recommendation.distanceMeters / 1_000)
     return "\(kilometers) 公里"
+  }
+}
+
+// MARK: - 今日一物卡片
+
+private struct DailyElementCard: View {
+  let element: KnowledgePack.Element
+  let isCollected: Bool
+
+  var body: some View {
+    NavigationLink(value: AppRoute.knowledgeElement(element.key)) {
+      VStack(alignment: .leading, spacing: 12) {
+        HStack(alignment: .firstTextBaseline) {
+          LocalizedPackText(
+            source: element.name,
+            cacheNamespace: "element",
+            cacheKey: element.key
+          )
+          .font(.cultureSerif(.title3))
+          .foregroundStyle(CultureTheme.inkPrimary)
+
+          Spacer(minLength: 12)
+
+          Label(
+            isCollected ? "已收集" : "未收集",
+            systemImage: isCollected ? "checkmark.seal.fill" : "circle.dashed"
+          )
+          .font(.caption.weight(.semibold))
+          .foregroundStyle(
+            isCollected ? CultureTheme.cinnabar : CultureTheme.inkSecondary
+          )
+        }
+
+        LocalizedPackText(
+          source: element.introduction.plainText,
+          cacheNamespace: "element",
+          cacheKey: element.key,
+          kind: .fragment
+        )
+        .font(.subheadline)
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .lineLimit(3)
+      }
+      .padding(18)
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .background(
+        CultureTheme.surface,
+        in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+      )
+      .overlay {
+        RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
+          .stroke(CultureTheme.hairline, lineWidth: 1)
+      }
+    }
+    .buttonStyle(.plain)
+    .accessibilityIdentifier("explore.dailyCard")
+  }
+}
+
+// MARK: - 下一个看点行
+
+private struct NextDiscoveryRow: View {
+  let element: KnowledgePack.Element
+
+  var body: some View {
+    HStack(alignment: .center, spacing: 16) {
+      VStack(alignment: .leading, spacing: 4) {
+        LocalizedPackText(
+          source: element.name,
+          cacheNamespace: "element",
+          cacheKey: element.key
+        )
+        .font(.headline)
+        .foregroundStyle(CultureTheme.inkPrimary)
+
+        LocalizedPackText(
+          source: element.introduction.plainText,
+          cacheNamespace: "element",
+          cacheKey: element.key,
+          kind: .fragment
+        )
+        .font(.caption)
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .lineLimit(2)
+      }
+
+      Spacer(minLength: 8)
+
+      Image(systemName: "chevron.right")
+        .font(.body.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .accessibilityHidden(true)
+    }
+    .padding(18)
+    .background(
+      CultureTheme.surface,
+      in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+    )
+    .overlay {
+      RoundedRectangle(cornerRadius: 20, style: .continuous)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
   }
 }
 
@@ -392,9 +569,8 @@ private struct NearbyIntroductionCard: View {
             )
           ]
         )
-      },
-      openChat: {},
-      startScan: {}
+      }
     )
   }
+  .environment(KnowledgeProgressStore())
 }

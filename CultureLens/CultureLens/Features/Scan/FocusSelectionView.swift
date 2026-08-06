@@ -124,6 +124,9 @@ struct CaptureReviewLayer: View {
     /// on top of the frozen preview. Only when the user taps a send button
     /// does `ScanCoordinator` actually redraw the photo with this region.
     @Binding var selection: NormalizedImageRegion?
+    /// While recognition is in flight the focus UI steps aside and an
+    /// animated glow marquee wraps the photo instead.
+    var isRecognizing: Bool = false
 
     // Decoded once per `imageID` and cached, so dragging the focus region
     // does not re-decode the JPEG on every gesture update (this was the
@@ -143,11 +146,20 @@ struct CaptureReviewLayer: View {
                 imageContent
                     .frame(width: imageFrame.width, height: imageFrame.height)
                     .position(x: imageFrame.midX, y: imageFrame.midY)
+                    .overlay {
+                        if isRecognizing {
+                            IntelligenceGlowBorder(cornerRadius: 22)
+                                .padding(-14)
+                                .transition(.opacity.combined(with: .scale(scale: 1.06)))
+                        }
+                    }
 
-                FocusSelectionOverlay(
-                    imageFrame: imageFrame,
-                    region: $selection
-                )
+                if !isRecognizing {
+                    FocusSelectionOverlay(
+                        imageFrame: imageFrame,
+                        region: $selection
+                    )
+                }
             }
             .coordinateSpace(name: CaptureReviewCoordinateSpace.name)
         }

@@ -126,8 +126,27 @@ struct OnDeviceRecognitionTests {
   // MARK: - Candidate priority (postgres.go RecognitionKnowledge)
 
   @Test func recognitionKnowledgePrioritizesAttractionRootsThenNearbyThenName() throws {
-    let elements = (1...15).map {
+    // att-a/att-b are sights (entity-as-attraction). e01–e12 are extra sights for
+    // catalog fill. e13–e15 are history nodes bound only via intros — must NOT
+    // appear as cultural_element_key candidates.
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    var elements = [
+      KnowledgePack.Element(key: "att-a", name: "景点甲", introduction: empty),
+      KnowledgePack.Element(key: "att-b", name: "景点乙", introduction: empty),
+    ]
+    elements += (1...12).map {
       element(String(format: "e%02d", $0), String(format: "N%02d", $0))
+    }
+    elements += [
+      element("e13", "N13"),
+      element("e14", "N14"),
+      element("e15", "N15"),
+    ]
+    let sightAttractions = (1...12).map {
+      KnowledgePack.Attraction(
+        key: String(format: "e%02d", $0),
+        name: String(format: "N%02d", $0)
+      )
     }
     let store = KnowledgeStore(
       pack: KnowledgePack(
@@ -136,7 +155,7 @@ struct OnDeviceRecognitionTests {
         attractions: [
           KnowledgePack.Attraction(key: "att-a", name: "景点甲"),
           KnowledgePack.Attraction(key: "att-b", name: "景点乙"),
-        ],
+        ] + sightAttractions,
         relations: [],
         introductions: [
           introduction(
@@ -151,22 +170,23 @@ struct OnDeviceRecognitionTests {
 
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
 
-    // 2 nearby attractions (< 3) → attraction-bound keys first, then catalog fill.
-    #expect(
-      set.elements.map(\.key)
-        == ["e15", "e14", "e13", "e01", "e02", "e03", "e04", "e05", "e06", "e07", "e08", "e09"]
-    )
-    #expect(set.totalElements == 15)
+    // Sight roots for nearby attractions first; history intro keys excluded.
+    #expect(set.elements.map(\.key).prefix(2) == ["att-a", "att-b"])
+    #expect(!set.elements.contains { $0.key == "e15" })
+    #expect(!set.elements.contains { $0.key == "e13" })
+    #expect(!set.elements.contains { $0.key == "e14" })
+    #expect(set.elements[0].nearbyContexts.map(\.key).contains("i1"))
+    #expect(set.totalElements == 17)
     #expect(set.nearbyContextCount == 3)
     #expect(set.locationMatched)
     #expect(set.attractionCandidates.map(\.key) == ["att-a", "att-b"])
-    #expect(set.attractionCandidates[0].culturalElementKey == "e15")
-    #expect(set.elements[0].nearbyContexts.map(\.key) == ["i1"])
+    #expect(set.attractionCandidates[0].culturalElementKey == "att-a")
 
     let noLocation = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 12)
     #expect(!noLocation.locationMatched)
     #expect(noLocation.attractionCandidates.isEmpty)
-    #expect(noLocation.elements.first?.key == "e01")
+    #expect(noLocation.elements.allSatisfy { $0.key.hasPrefix("e") || $0.key.hasPrefix("att") })
+    #expect(!noLocation.elements.contains { $0.key == "e15" })
   }
 
   @Test func recognitionKnowledgeSkipsCulturalFillWhenEnoughAttractions() throws {
@@ -192,6 +212,13 @@ struct OnDeviceRecognitionTests {
     let west = KnowledgePack(
       version: "west-test",
       elements: westElements
+        + (1...8).map {
+          KnowledgePack.Element(
+            key: "att-w\($0)",
+            name: "景点\($0)",
+            introduction: empty
+          )
+        }
         + [
           KnowledgePack.Element(key: "orphan", name: "无关节点", introduction: empty)
         ],
@@ -222,30 +249,38 @@ struct OnDeviceRecognitionTests {
     )
     let store = KnowledgeStore.store(merging: [west, liangzhu])
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
-    // ≥3 nearby attractions → only attraction-bound cultural keys; no distant / orphan fill.
+    // ≥3 nearby attractions → only sight roots for those attractions; no history / orphan fill.
     #expect(set.attractionCandidates.count >= 3)
     #expect(!set.elements.contains { $0.key == "jade-cong-wang" })
     #expect(!set.elements.contains { $0.key == "orphan" })
-    #expect(Set(set.elements.map(\.key)).isSubset(of: Set((1...8).map { String(format: "w%02d", $0) })))
+    #expect(!set.elements.contains { $0.key.hasPrefix("w") })
+    #expect(
+      Set(set.elements.map(\.key)).isSubset(of: Set((1...8).map { "att-w\($0)" }))
+    )
+    #expect(set.attractionCandidates[0].culturalElementKey.hasPrefix("att-w"))
   }
 
-  @Test func recognitionKnowledgeFillsCulturalNodesWhenFewAttractions() throws {
+  @Test func recognitionKnowledgeFillsSightNodesWhenFewAttractions() throws {
     let empty = RichTextDocument(schemaVersion: 1, blocks: [])
     let store = KnowledgeStore(
       pack: KnowledgePack(
         version: "sparse-test",
         elements: [
-          KnowledgePack.Element(key: "root", name: "根", introduction: empty),
-          KnowledgePack.Element(key: "extra", name: "补充", introduction: empty),
+          KnowledgePack.Element(key: "only", name: "唯一景点", introduction: empty),
+          KnowledgePack.Element(key: "extra-sight", name: "补充看点", introduction: empty),
+          KnowledgePack.Element(key: "extra-history", name: "补充历史", introduction: empty),
         ],
-        attractions: [KnowledgePack.Attraction(key: "only", name: "唯一景点")],
+        attractions: [
+          KnowledgePack.Attraction(key: "only", name: "唯一景点"),
+          KnowledgePack.Attraction(key: "extra-sight", name: "补充看点"),
+        ],
         relations: [],
         introductions: [
           KnowledgePack.IntroductionRecord(
             key: "i1",
             name: "介绍",
             introduction: empty,
-            culturalElementKey: "root",
+            culturalElementKey: "extra-history",
             attractionKey: "only",
             latitude: 30.0,
             longitude: 120.0
@@ -255,7 +290,11 @@ struct OnDeviceRecognitionTests {
     )
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
     #expect(set.attractionCandidates.count == 1)
-    #expect(set.elements.map(\.key) == ["root", "extra"])
+    #expect(set.attractionCandidates[0].culturalElementKey == "only")
+    // Sight root + sight catalog fill; history intro target never becomes a candidate.
+    #expect(set.elements.map(\.key) == ["only", "extra-sight"])
+    #expect(!set.elements.contains { $0.key == "extra-history" })
+    #expect(set.elements[0].nearbyContexts.map(\.key) == ["i1"])
   }
 
   // MARK: - BFS graph (postgres.go recognitionGraph)
@@ -265,7 +304,7 @@ struct OnDeviceRecognitionTests {
       pack: KnowledgePack(
         version: "test-v1",
         elements: (0...5).map { element("e\($0)", "N\($0)") },
-        attractions: [],
+        attractions: [KnowledgePack.Attraction(key: "e0", name: "N0")],
         relations: (0..<5).map {
           KnowledgePack.Relation(elementKey: "e\($0)", relatedElementKey: "e\($0 + 1)")
         },
@@ -273,8 +312,7 @@ struct OnDeviceRecognitionTests {
       )
     )
 
-    let set = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 6)
-    let root = try #require(set.elements.first { $0.key == "e0" })
+    let root = try #require(store.recognitionElement(forKey: "e0"))
 
     #expect(root.graphElements.map(\.key) == ["e1", "e2", "e3"])
     #expect(root.graphRelations.allSatisfy { $0.kind == "解释" })
@@ -288,7 +326,7 @@ struct OnDeviceRecognitionTests {
       pack: KnowledgePack(
         version: "test-v1",
         elements: elements,
-        attractions: [],
+        attractions: [KnowledgePack.Attraction(key: "a-root", name: "A-root")],
         relations: (0..<40).map {
           KnowledgePack.Relation(
             elementKey: "a-root",
@@ -299,8 +337,7 @@ struct OnDeviceRecognitionTests {
       )
     )
 
-    let set = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 12)
-    let root = try #require(set.elements.first { $0.key == "a-root" })
+    let root = try #require(store.recognitionElement(forKey: "a-root"))
 
     #expect(root.graphElements.count == 32)
   }
@@ -309,12 +346,12 @@ struct OnDeviceRecognitionTests {
     let store = KnowledgeStore(
       pack: KnowledgePack(
         version: "test-v1",
-        elements: [element("root", "Root"), element("bound", "Bound")],
+        elements: [element("att", "灵隐寺"), element("bound", "Bound")],
         attractions: [KnowledgePack.Attraction(key: "att", name: "灵隐寺")],
         relations: [],
         introductions: [
           introduction(
-            "i-root", element: "root", attraction: "att", latitude: 30.0, longitude: 120.0),
+            "i-root", element: "att", attraction: "att", latitude: 30.0, longitude: 120.0),
           introduction(
             "i-bound", element: "bound", attraction: "att", latitude: 30.0, longitude: 120.001),
         ]
@@ -322,7 +359,7 @@ struct OnDeviceRecognitionTests {
     )
 
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
-    let root = try #require(set.elements.first { $0.key == "root" })
+    let root = try #require(set.elements.first { $0.key == "att" })
 
     #expect(root.graphElements.map(\.key) == ["bound"])
     let edge = try #require(root.graphRelations.first { $0.relatedElementKey == "bound" })
@@ -513,6 +550,176 @@ struct OnDeviceRecognitionTests {
     #expect(pack.relations.first?.explanation == nil)
   }
 
+  @Test func knowledgePackDecodesSlimCoreWithoutEmbeddedArrays() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "slim-v1",
+        "source_language": "zh-Hans",
+        "relations": [
+          { "elementKey": "a", "relatedElementKey": "b", "kind": "解释", "explanation": "…" }
+        ]
+      }
+      """#.utf8
+    )
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    #expect(pack.version == "slim-v1")
+    #expect(pack.elements.isEmpty)
+    #expect(pack.attractions.isEmpty)
+    #expect(pack.introductions.isEmpty)
+    #expect(pack.themes.isEmpty)
+    #expect(pack.relations.count == 1)
+  }
+
+  @Test func knowledgePackStampsContentRoleFromAttractions() {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let pack = KnowledgePack(
+      version: "role-v1",
+      elements: [
+        KnowledgePack.Element(key: "pagoda", name: "塔", introduction: empty),
+        KnowledgePack.Element(key: "dynasty", name: "朝代", introduction: empty),
+      ],
+      attractions: [KnowledgePack.Attraction(key: "pagoda", name: "塔")],
+      relations: [],
+      introductions: []
+    ).withStampedContentRoles()
+
+    #expect(pack.elements.first { $0.key == "pagoda" }?.contentRole == ContentRole.sight.rawValue)
+    #expect(pack.elements.first { $0.key == "dynasty" }?.contentRole == ContentRole.history.rawValue)
+  }
+
+  @Test func catalogCandidateContextsIncludeOnlySightElements() {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "catalog-role-v1",
+        elements: [
+          KnowledgePack.Element(key: "sight-a", name: "景点甲", introduction: empty),
+          KnowledgePack.Element(key: "history-b", name: "审美乙", introduction: empty),
+        ],
+        attractions: [KnowledgePack.Attraction(key: "sight-a", name: "景点甲")],
+        relations: [],
+        introductions: []
+      )
+    )
+    let catalog = store.catalogCandidateContexts()
+    #expect(catalog.map(\.key) == ["sight-a"])
+    #expect(store.sightElements.map(\.key) == ["sight-a"])
+    #expect(store.historyElements.map(\.key) == ["history-b"])
+  }
+
+  @Test func loadPackAssemblesSidecarFiles() throws {
+    let dir = FileManager.default.temporaryDirectory
+      .appendingPathComponent("culturelens-sidecar-\(UUID().uuidString)", isDirectory: true)
+    try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: dir) }
+
+    let intro: [String: Any] = [
+      "schemaVersion": 1,
+      "blocks": [["type": "paragraph", "text": "正文"]],
+    ]
+    func writeJSON(_ object: [String: Any], name: String) throws {
+      let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted])
+      try data.write(to: dir.appendingPathComponent(name))
+    }
+
+    try writeJSON(
+      [
+        "version": "sidecar-v1",
+        "source_language": "zh-Hans",
+        "relations": [
+          [
+            "elementKey": "pagoda",
+            "relatedElementKey": "dynasty",
+            "kind": "产生于",
+            "explanation": "塔建于该朝",
+          ]
+        ],
+      ],
+      name: "knowledge-pack.json"
+    )
+    try writeJSON(
+      [
+        "elements": [
+          [
+            "key": "pagoda",
+            "name": "塔",
+            "contentRole": "看点",
+            "introduction": intro,
+          ]
+        ],
+        "attractions": [["key": "pagoda", "name": "塔"]],
+      ],
+      name: "elements-sight.json"
+    )
+    try writeJSON(
+      [
+        "elements": [
+          [
+            "key": "dynasty",
+            "name": "朝代",
+            "contentRole": "文化历史",
+            "introduction": intro,
+          ]
+        ]
+      ],
+      name: "elements-history.json"
+    )
+    try writeJSON(
+      [
+        "introductions": [
+          [
+            "key": "i1",
+            "name": "现场",
+            "introduction": intro,
+            "culturalElementKey": "dynasty",
+            "attractionKey": "pagoda",
+            "latitude": 30.0,
+            "longitude": 120.0,
+          ]
+        ]
+      ],
+      name: "introductions.json"
+    )
+    try writeJSON(
+      [
+        "themes": [
+          [
+            "key": "t1",
+            "name": "主题",
+            "summary": "概要",
+            "elementKeys": ["pagoda", "dynasty"],
+            "minContacted": 1,
+          ]
+        ]
+      ],
+      name: "themes.json"
+    )
+    try writeJSON(
+      [
+        "elements": [
+          "pagoda": ["name": "Pagoda"],
+          "dynasty": ["name": "Dynasty"],
+        ],
+        "attractions": ["pagoda": ["name": "Pagoda"]],
+        "introductions": [:] as [String: Any],
+      ],
+      name: "locales-en.json"
+    )
+
+    let pack = try KnowledgeStore.loadPack(
+      fromBaseURL: dir.appendingPathComponent("knowledge-pack.json")
+    )
+    #expect(pack.version == "sidecar-v1")
+    #expect(Set(pack.elements.map(\.key)) == ["pagoda", "dynasty"])
+    #expect(pack.attractions.map(\.key) == ["pagoda"])
+    #expect(pack.introductions.count == 1)
+    #expect(pack.themes.count == 1)
+    #expect(pack.locales?["en"]?.elements["pagoda"]?.name == "Pagoda")
+    #expect(pack.elements.first { $0.key == "pagoda" }?.contentRole == "看点")
+    #expect(pack.elements.first { $0.key == "dynasty" }?.contentRole == "文化历史")
+  }
+
   @Test func knowledgePackDecodesOptionalRelationAndConceptTyping() throws {
     let payload = Data(
       #"""
@@ -554,8 +761,7 @@ struct OnDeviceRecognitionTests {
 
     let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
     let store = KnowledgeStore(pack: pack)
-    let set = try store.recognitionKnowledge(latitude: nil, longitude: nil, limit: 6)
-    let root = try #require(set.elements.first { $0.key == "e1" })
+    let root = try #require(store.recognitionElement(forKey: "e1"))
     let edge = try #require(root.graphRelations.first)
 
     #expect(pack.elements.first?.conceptKind == "人物")
@@ -799,15 +1005,15 @@ struct OnDeviceRecognitionTests {
       pack: KnowledgePack(
         version: "test-v9",
         elements: [
-          element("e-root", "根元素", intro: "库内审核介绍。"),
+          element("att", "三潭印月", intro: "库内审核介绍。"),
           element("e-related", "关联元素", intro: "关联介绍。"),
         ],
         attractions: [KnowledgePack.Attraction(key: "att", name: "三潭印月")],
         relations: [
-          KnowledgePack.Relation(elementKey: "e-root", relatedElementKey: "e-related")
+          KnowledgePack.Relation(elementKey: "att", relatedElementKey: "e-related")
         ],
         introductions: [
-          introduction("i1", element: "e-root", attraction: "att", latitude: 30.0, longitude: 120.0)
+          introduction("i1", element: "att", attraction: "att", latitude: 30.0, longitude: 120.0)
         ]
       )
     )
@@ -831,9 +1037,9 @@ struct OnDeviceRecognitionTests {
     )
     #expect(attractionResult.resolutionStatus == "attraction")
     #expect(attractionResult.object.canonicalName == "三潭印月")
-    #expect(attractionResult.object.culturalElementKey == "e-root")
+    #expect(attractionResult.object.culturalElementKey == "att")
     #expect(
-      attractionResult.object.id == DeterministicID.culturalElement("e-root")
+      attractionResult.object.id == DeterministicID.culturalElement("att")
     )
     #expect(attractionResult.object.summary == "库内审核介绍。")
     #expect(attractionResult.object.concepts.map(\.name) == ["关联元素"])
@@ -844,7 +1050,8 @@ struct OnDeviceRecognitionTests {
     #expect(attractionResult.displayVisualAlternatives.first?.resolutionStatus == "visual")
     #expect(attractionResult.locationInfluence?.effect == .reordered)
     #expect(attractionResult.catalogVersion == "test-v9")
-    #expect(attractionResult.catalogCandidateCount == 2)
+    // Sight root is the only recognition candidate.
+    #expect(attractionResult.catalogCandidateCount == 1)
     #expect(attractionResult.id == DeterministicID.v5(name: "req-1:result"))
 
     // Exhibit inside a museum must not collapse into the attraction root.
@@ -891,8 +1098,8 @@ struct OnDeviceRecognitionTests {
     #expect(exhibitResult.object.canonicalName == "玉琮王")
     #expect(exhibitResult.object.culturalElementKey == "jade-cong-wang")
 
-    // Resolved branch: name and summary come from the pack.
-    var resolved = decision(canonicalName: "根元素")
+    // Entity-as-attraction: shared key resolves as attraction (not a separate history node).
+    var resolved = decision(canonicalName: "三潭印月")
     RecognitionResponseMapper.resolveKnowledgeReferences(&resolved, candidates: contexts)
     try RecognitionResponseMapper.validate(resolved, candidates: contexts, attractions: attractions)
     let resolvedResult = RecognitionResponseMapper.mapResponse(
@@ -902,14 +1109,10 @@ struct OnDeviceRecognitionTests {
       modelIdentifier: "dynamic/culturelens",
       knowledge: knowledge
     )
-    #expect(resolvedResult.resolutionStatus == "resolved")
+    #expect(resolvedResult.resolutionStatus == "attraction")
     #expect(resolvedResult.object.summary == "库内审核介绍。")
-    #expect(resolvedResult.displayAttractionCandidates.map(\.resolutionStatus) == ["attraction"])
-    #expect(resolvedResult.displayAttractionCandidates.first?.category == .space)
-    #expect(
-      resolvedResult.displayAttractionCandidates.first?.id
-        == DeterministicID.attraction("att")
-    )
+    #expect(resolvedResult.object.culturalElementKey == "att")
+    #expect(resolvedResult.displayAttractionCandidates.isEmpty)
     #expect(resolvedResult.displayVisualAlternatives.count == 1)
     #expect(resolvedResult.displayVisualAlternatives.first?.canonicalName == "备选对象")
 

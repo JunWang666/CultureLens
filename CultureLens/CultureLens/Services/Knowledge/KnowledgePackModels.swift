@@ -1,8 +1,9 @@
 import Foundation
 
-/// Codable models for the bundled knowledge pack
-/// (`Resources/KnowledgePack/knowledge-pack.json`), mirroring the Go backend's
-/// `content/hangzhou-west-lake.v1.json` export format.
+/// Codable models for the bundled knowledge pack under
+/// `Resources/KnowledgePack*/` (sidecar layout: slim `knowledge-pack.json`
+/// plus `elements-sight` / `elements-history` / `introductions` / `themes` /
+/// `locales-<lang>`). Assembled at load time by `KnowledgeStore.loadPack`.
 nonisolated struct KnowledgePack: Decodable, Sendable {
   let version: String
   /// BCP-47 tag for the primary text fields (name / introduction). Defaults to zh-Hans.
@@ -93,23 +94,28 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let sources: [Source]
     /// Optional `ConceptKind.rawValue`; omitted in older packs.
     let conceptKind: String?
+    /// `ContentRole.rawValue`（看点 / 文化历史）. Omitted in older monoliths;
+    /// loaders stamp from `attractions[]` membership when missing.
+    let contentRole: String?
 
     init(
       key: String,
       name: String,
       introduction: RichTextDocument,
       sources: [Source] = [],
-      conceptKind: String? = nil
+      conceptKind: String? = nil,
+      contentRole: String? = nil
     ) {
       self.key = key
       self.name = name
       self.introduction = introduction
       self.sources = sources
       self.conceptKind = conceptKind
+      self.contentRole = contentRole
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources, conceptKind
+      case key, name, introduction, sources, conceptKind, contentRole
     }
 
     init(from decoder: Decoder) throws {
@@ -119,6 +125,26 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
       conceptKind = try container.decodeIfPresent(String.self, forKey: .conceptKind)
+      contentRole = try container.decodeIfPresent(String.self, forKey: .contentRole)
+    }
+
+    /// Resolved role: explicit `contentRole`, else infer from attraction keys.
+    func resolvedContentRole(attractionKeys: Set<String> = []) -> ContentRole {
+      if let contentRole, let role = ContentRole(rawValue: contentRole) {
+        return role
+      }
+      return attractionKeys.contains(key) ? .sight : .history
+    }
+
+    func withContentRole(_ role: ContentRole) -> Element {
+      Element(
+        key: key,
+        name: name,
+        introduction: introduction,
+        sources: sources,
+        conceptKind: conceptKind,
+        contentRole: role.rawValue
+      )
     }
   }
 
@@ -282,12 +308,95 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
     sourceLanguage = try container.decodeIfPresent(String.self, forKey: .sourceLanguage)
-    elements = try container.decode([Element].self, forKey: .elements)
-    attractions = try container.decode([Attraction].self, forKey: .attractions)
-    relations = try container.decode([Relation].self, forKey: .relations)
-    introductions = try container.decode([IntroductionRecord].self, forKey: .introductions)
+    // Sidecar layout keeps only version / source_language / relations here;
+    // monolith packs still embed the other arrays for tests and legacy.
+    elements = try container.decodeIfPresent([Element].self, forKey: .elements) ?? []
+    attractions = try container.decodeIfPresent([Attraction].self, forKey: .attractions) ?? []
+    relations = try container.decodeIfPresent([Relation].self, forKey: .relations) ?? []
+    introductions =
+      try container.decodeIfPresent([IntroductionRecord].self, forKey: .introductions) ?? []
     themes = try container.decodeIfPresent([Theme].self, forKey: .themes) ?? []
     locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
+  }
+
+  /// Stamps `contentRole` from attractions membership when the field is absent.
+  func withStampedContentRoles() -> KnowledgePack {
+    let attractionKeys = Set(attractions.map(\.key))
+    let stamped = elements.map { element in
+      let role = element.resolvedContentRole(attractionKeys: attractionKeys)
+      return element.contentRole == role.rawValue ? element : element.withContentRole(role)
+    }
+    return KnowledgePack(
+      version: version,
+      sourceLanguage: sourceLanguage,
+      elements: stamped,
+      attractions: attractions,
+      relations: relations,
+      introductions: introductions,
+      themes: themes,
+      locales: locales
+    )
+  }
+}
+
+// MARK: - Sidecar file shapes
+
+/// Sight elements + scannable attraction registry (`elements-sight.json`).
+nonisolated struct KnowledgePackSightSidecar: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+  let attractions: [KnowledgePack.Attraction]
+
+  enum CodingKeys: String, CodingKey {
+    case elements, attractions
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    elements = try container.decodeIfPresent([KnowledgePack.Element].self, forKey: .elements) ?? []
+    attractions =
+      try container.decodeIfPresent([KnowledgePack.Attraction].self, forKey: .attractions) ?? []
+  }
+}
+
+/// Abstract cultural-history elements (`elements-history.json`).
+nonisolated struct KnowledgePackHistorySidecar: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    elements = try container.decodeIfPresent([KnowledgePack.Element].self, forKey: .elements) ?? []
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case elements
+  }
+}
+
+nonisolated struct KnowledgePackIntroductionsSidecar: Decodable, Sendable {
+  let introductions: [KnowledgePack.IntroductionRecord]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    introductions =
+      try container.decodeIfPresent([KnowledgePack.IntroductionRecord].self, forKey: .introductions)
+      ?? []
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case introductions
+  }
+}
+
+nonisolated struct KnowledgePackThemesSidecar: Decodable, Sendable {
+  let themes: [KnowledgePack.Theme]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    themes = try container.decodeIfPresent([KnowledgePack.Theme].self, forKey: .themes) ?? []
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case themes
   }
 }
 

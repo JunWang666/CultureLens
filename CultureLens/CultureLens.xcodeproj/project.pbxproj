@@ -10,6 +10,11 @@
 		A10000000000000000000006 /* SwiftStreamingMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = A10000000000000000000004 /* SwiftStreamingMarkdown */; };
 		C12E0D000000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000003 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 		C12E0D000000000000000002 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000004 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D000000000000000011 /* elements-sight.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000021 /* elements-sight.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D000000000000000012 /* elements-history.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000022 /* elements-history.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D000000000000000013 /* introductions.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000023 /* introductions.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D000000000000000014 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000024 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D000000000000000015 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000025 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,11 @@
 /* Begin PBXFileReference section */
 		C12E0D000000000000000003 /* knowledge-pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "knowledge-pack.json"; sourceTree = "<group>"; };
 		C12E0D000000000000000004 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000021 /* elements-sight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-sight.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000022 /* elements-history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-history.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000023 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "introductions.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000024 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "themes.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000025 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
 		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,8 +51,13 @@
 		C12E0D000000000000000005 /* Exceptions for "CultureLens" folder in "CultureLens" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Resources/KnowledgePack/elements-history.json",
+				"Resources/KnowledgePack/elements-sight.json",
+				"Resources/KnowledgePack/introductions.json",
 				"Resources/KnowledgePack/knowledge-pack.json",
+				"Resources/KnowledgePack/locales-en.json",
 				"Resources/KnowledgePack/pack-manifest.json",
+				"Resources/KnowledgePack/themes.json",
 			);
 			target = E9464E5F3017572B00B357C5 /* CultureLens */;
 		};
@@ -105,6 +120,11 @@
 			isa = PBXGroup;
 			children = (
 				C12E0D000000000000000003 /* knowledge-pack.json */,
+				C12E0D000000000000000021 /* elements-sight.json */,
+				C12E0D000000000000000022 /* elements-history.json */,
+				C12E0D000000000000000023 /* introductions.json */,
+				C12E0D000000000000000024 /* themes.json */,
+				C12E0D000000000000000025 /* locales-en.json */,
 				C12E0D000000000000000004 /* pack-manifest.json */,
 			);
 			name = "KnowledgePack ODR";
@@ -258,6 +278,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C12E0D000000000000000001 /* knowledge-pack.json in Resources */,
+				C12E0D000000000000000011 /* elements-sight.json in Resources */,
+				C12E0D000000000000000012 /* elements-history.json in Resources */,
+				C12E0D000000000000000013 /* introductions.json in Resources */,
+				C12E0D000000000000000014 /* themes.json in Resources */,
+				C12E0D000000000000000015 /* locales-en.json in Resources */,
 				C12E0D000000000000000002 /* pack-manifest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

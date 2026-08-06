@@ -1,0 +1,120 @@
+{
+  "introductions": [
+    {
+      "key": "great-wall.badaling",
+      "name": "八达岭长城",
+      "culturalElementKey": "great-wall",
+      "attractionKey": "great-wall",
+      "latitude": 40.4319,
+      "longitude": 116.5704,
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "到八达岭长城，先站在城墙上往东西两侧望：这一段属于明长城体系。现存的长城遗迹主要为始建于14世纪的明长城，西起嘉峪关，东至虎山长城。"
+          },
+          {
+            "type": "paragraph",
+            "text": "明朝经过先后20次大规模的修建，筑成一条西起甘肃嘉峪关、东至辽东虎山、全长8851.8公里的长城，主要沿着九边重镇一线修筑。长城体系主要由关隘、城墙与楼台、烽燧四部分组成。"
+          },
+          {
+            "type": "paragraph",
+            "text": "1987年，长城被联合国教科文组织列为世界文化遗产。整个长城东西段与前后关卡加总起来可绵延上万华里，约4500公里至6000公里。"
+          },
+          {
+            "type": "paragraph",
+            "text": "站在八达岭的城墙上，把万里长城四个字放回时间里：它从春秋战国时期开始修筑，秦始皇连接旧墙后始称万里长城，明长城则是现存最完整的部分。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "great-wall.jiayuguan",
+      "name": "嘉峪关",
+      "culturalElementKey": "great-wall",
+      "attractionKey": "great-wall",
+      "latitude": 39.8022,
+      "longitude": 98.5143,
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "嘉峪关位于祁连山与龙首山之间的狭窄隘口，始建于明代，是明长城最西端关口，有天下第一雄关之称。"
+          },
+          {
+            "type": "paragraph",
+            "text": "明长城西起甘肃嘉峪关、东至辽东虎山，全长8851.8公里，嘉峪关正是这条长城的西部起点。长城体系中的烽火是古代边防报警的信号，白天放烟叫烽，夜间举火叫燧。"
+          },
+          {
+            "type": "paragraph",
+            "text": "与它相对的是明长城东部的第一座关口山海关，有天下第一关之称。1987年，长城被联合国教科文组织列为世界文化遗产。"
+          },
+          {
+            "type": "paragraph",
+            "text": "看嘉峪关，记住两个最：它是明长城最西端的关口，也是天下第一雄关。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "grand-canal.gongchen-bridge",
+      "name": "拱宸桥",
+      "culturalElementKey": "grand-canal",
+      "attractionKey": "grand-canal",
+      "latitude": 30.2536,
+      "longitude": 120.1469,
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "拱宸桥横跨京杭大运河，是杭州段大运河的标志性古桥。站桥上而看水，就在看一条连接北京与杭州的千年水路。京杭大运河北起北京通州，南至杭州，全长1794公里。"
+          },
+          {
+            "type": "paragraph",
+            "text": "京杭大运河沟通海河、黄河、淮河、长江和钱塘江五大水系。大运河的源头可追溯到春秋末年吴王夫差开凿的邗沟，是大运河中最早有确切纪年的一段河道。"
+          },
+          {
+            "type": "paragraph",
+            "text": "隋代开挖了以洛阳为中心约2700多公里的南北大运河，元代改建后形成今天的京杭大运河。2014年，京杭大运河作为大运河的一部分被列入世界遗产名录。"
+          },
+          {
+            "type": "paragraph",
+            "text": "站在拱宸桥边，记住北京到杭州、五大水系相连，就抓住了这条运河的基本骨架。"
+          }
+        ]
+      }
+    },
+    {
+      "key": "grand-canal.hangzhou-section",
+      "name": "杭州运河段",
+      "culturalElementKey": "grand-canal",
+      "attractionKey": "grand-canal",
+      "latitude": 30.2536,
+      "longitude": 120.1469,
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在杭州的运河边走走，就是沿着一部漕运史在走。漕运是利用河道或海道调运公粮的一种专业运输，远在秦汉时代，中国史书就已经有了关于漕运的记载。"
+          },
+          {
+            "type": "paragraph",
+            "text": "隋代统一南北以后，陆续开挖了以洛阳为航运中心的几段运河，史称南北大运河；元世祖忽必烈在隋唐大运河基础上改建，中间裁弯取直，元代郭守敬又主持开凿了通惠河。"
+          },
+          {
+            "type": "paragraph",
+            "text": "在海运和现代陆路交通兴起以前，京杭大运河的货物运输量一般占到全国的3/4；明清两代更在淮安专门设立漕运总督。1855年黄河改道后运河山东段逐渐淤废，1911年津浦铁路通车后大运河的地位一落千丈。"
+          },
+          {
+            "type": "paragraph",
+            "text": "记京杭大运河，记住全线1794公里、沟通五大水系，它的每一个转折都连着中国南北方的一千多年漕运史。"
+          }
+        ]
+      }
+    }
+  ]
+}

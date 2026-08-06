@@ -91,6 +91,7 @@ nonisolated struct KnowledgeStore: Sendable {
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
 
   init(pack: KnowledgePack, packVersionByElementKey: [String: String] = [:]) {
+    let pack = pack.withStampedContentRoles()
     self.pack = pack
     elementsByKey = Dictionary(
       pack.elements.map { ($0.key, $0) },
@@ -156,7 +157,7 @@ nonisolated struct KnowledgeStore: Sendable {
   /// Builds a store from already-decoded packs (ODR + bundle merge).
   static func store(merging packs: [KnowledgePack]) -> KnowledgeStore {
     KnowledgeStore(
-      pack: mergePacks(packs),
+      pack: mergePacks(packs.map { $0.withStampedContentRoles() }),
       packVersionByElementKey: packVersionsByElement(from: packs)
     )
   }
@@ -173,17 +174,18 @@ nonisolated struct KnowledgeStore: Sendable {
   }
 
   /// Decodes packs from `bundle` in `KnowledgePackDirectory` priority order.
-  /// Duplicate directory names (e.g. Fallback after West Lake) are skipped when
-  /// their content would only repeat already-loaded keys — callers that need
-  /// raw per-pack lists should use this before `mergePacks`.
+  /// Each directory is assembled from `knowledge-pack.json` plus optional
+  /// sidecar files (`elements-sight`, `elements-history`, `introductions`,
+  /// `themes`, `locales-<lang>`). Duplicate directory names (e.g. Fallback
+  /// after West Lake) are skipped when their content would only repeat
+  /// already-loaded keys.
   static func discoverPacks(in bundle: Bundle) throws -> [KnowledgePack] {
     var packs: [KnowledgePack] = []
     var seenVersions = Set<String>()
     for directory in KnowledgePackDirectory.allCases {
       guard let url = packURL(in: bundle, directory: directory) else { continue }
       do {
-        let data = try Data(contentsOf: url)
-        let pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
+        let pack = try loadPack(fromBaseURL: url)
         // Skip Fallback when the primary West Lake pack (same version family)
         // was already loaded from ODR / KnowledgePack.
         if directory == .fallback, packs.contains(where: { $0.version == pack.version }) {
@@ -199,6 +201,83 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
     return packs
+  }
+
+  /// Loads `knowledge-pack.json` and merges sibling sidecar JSON files into a
+  /// complete `KnowledgePack`, then stamps `contentRole` on every element.
+  static func loadPack(fromBaseURL baseURL: URL) throws -> KnowledgePack {
+    let data = try Data(contentsOf: baseURL)
+    var pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
+    let directory = baseURL.deletingLastPathComponent()
+    let decoder = JSONDecoder()
+
+    func decodeSidecar<T: Decodable>(_ name: String, as type: T.Type) throws -> T? {
+      let url = directory.appendingPathComponent("\(name).json")
+      guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+      return try decoder.decode(T.self, from: Data(contentsOf: url))
+    }
+
+    var elements = pack.elements
+    var attractions = pack.attractions
+    var introductions = pack.introductions
+    var themes = pack.themes
+    var locales = pack.locales ?? [:]
+
+    if let sight = try decodeSidecar("elements-sight", as: KnowledgePackSightSidecar.self) {
+      if !sight.elements.isEmpty { elements.append(contentsOf: sight.elements) }
+      if !sight.attractions.isEmpty { attractions = sight.attractions }
+    }
+    if let history = try decodeSidecar("elements-history", as: KnowledgePackHistorySidecar.self),
+      !history.elements.isEmpty
+    {
+      elements.append(contentsOf: history.elements)
+    }
+    if let intro = try decodeSidecar("introductions", as: KnowledgePackIntroductionsSidecar.self),
+      !intro.introductions.isEmpty
+    {
+      introductions = intro.introductions
+    }
+    if let themeSidecar = try decodeSidecar("themes", as: KnowledgePackThemesSidecar.self),
+      !themeSidecar.themes.isEmpty
+    {
+      themes = themeSidecar.themes
+    }
+
+    // `locales-<lang>.json` — one overlay file per language; replaces nested
+    // `locales` in the main JSON when present.
+    let localePrefix = "locales-"
+    if let entries = try? FileManager.default.contentsOfDirectory(
+      at: directory,
+      includingPropertiesForKeys: nil
+    ) {
+      for url in entries where url.pathExtension == "json" {
+        let name = url.deletingPathExtension().lastPathComponent
+        guard name.hasPrefix(localePrefix) else { continue }
+        let lang = String(name.dropFirst(localePrefix.count))
+        guard !lang.isEmpty else { continue }
+        let overlay = try decoder.decode(
+          KnowledgePack.LocaleOverlay.self,
+          from: Data(contentsOf: url)
+        )
+        locales[lang] = overlay
+      }
+    }
+
+    // Deduplicate elements by key (first wins: sight before history append).
+    var seenElementKeys = Set<String>()
+    elements = elements.filter { seenElementKeys.insert($0.key).inserted }
+
+    pack = KnowledgePack(
+      version: pack.version,
+      sourceLanguage: pack.sourceLanguage,
+      elements: elements,
+      attractions: attractions,
+      relations: pack.relations,
+      introductions: introductions,
+      themes: themes,
+      locales: locales.isEmpty ? nil : locales
+    )
+    return pack.withStampedContentRoles()
   }
 
   /// Merges packs; earlier entries win on element / attraction / introduction /
@@ -317,6 +396,16 @@ nonisolated struct KnowledgeStore: Sendable {
 
   var elements: [KnowledgePack.Element] {
     orderedElementKeys.compactMap { elementsByKey[$0] }
+  }
+
+  /// Scannable sight elements only (`ContentRole.sight`).
+  var sightElements: [KnowledgePack.Element] {
+    elements.filter { $0.resolvedContentRole() == .sight }
+  }
+
+  /// Abstract cultural-history elements (`ContentRole.history`).
+  var historyElements: [KnowledgePack.Element] {
+    elements.filter { $0.resolvedContentRole() == .history }
   }
 
   func element(key: String) -> KnowledgePack.Element? {
@@ -583,11 +672,12 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
-  /// Lightweight candidate contexts for every element — used to backfill
+  /// Lightweight candidate contexts for **sight** elements — used to backfill
   /// `cultural_element_key` after recognition when the prompt only carried a
-  /// location-narrowed subset.
+  /// location-narrowed subset. Abstract cultural-history nodes are excluded
+  /// so the model only binds scans to scannable entities.
   func catalogCandidateContexts() -> [KnowledgeCandidateContext] {
-    elements.map {
+    sightElements.map {
       KnowledgeCandidateContext(
         key: $0.key,
         name: $0.name,
@@ -885,31 +975,38 @@ nonisolated struct KnowledgeStore: Sendable {
       ).introductions
     }
 
-    var nearbyContexts: [String: [NearbyAttractionIntroduction]] = [:]
-    for introduction in nearby where elementsByKey[introduction.culturalElementKey] != nil {
-      nearbyContexts[introduction.culturalElementKey, default: []].append(introduction)
-    }
-
     var attractionRoots: [String: String] = [:]
     var attractionNames: [String: String] = [:]
     var attractionBindings: [String: Set<String>] = [:]
     var attractionCandidates: [AttractionCandidate] = []
     var seenAttractions = Set<String>()
     for introduction in nearby {
+      // Prefer the scannable sight that shares the attraction key (实体即景点).
+      // History intro bindings stay in nearby_contexts / post-bind graph only.
+      let preferredRoot =
+        sightElementKey(forAttraction: introduction.attractionKey)
+        ?? (isSight(introduction.culturalElementKey) ? introduction.culturalElementKey : nil)
       if attractionRoots[introduction.attractionKey] == nil {
-        attractionRoots[introduction.attractionKey] = introduction.culturalElementKey
+        if let preferredRoot {
+          attractionRoots[introduction.attractionKey] = preferredRoot
+        }
         attractionNames[introduction.attractionKey] = introduction.attractionName
       }
+      if let root = attractionRoots[introduction.attractionKey] {
+        attractionBindings[introduction.attractionKey, default: []].insert(root)
+      }
+      // History targets remain graph bindings under the sight root after resolve.
       attractionBindings[introduction.attractionKey, default: []]
         .insert(introduction.culturalElementKey)
+
       guard seenAttractions.insert(introduction.attractionKey).inserted else { continue }
       guard attractionCandidates.count < Self.maximumAttractionCandidates else { continue }
+      let rootKey = attractionRoots[introduction.attractionKey] ?? preferredRoot ?? ""
       attractionCandidates.append(
         AttractionCandidate(
           key: introduction.attractionKey,
           name: introduction.attractionName,
-          culturalElementKey: attractionRoots[introduction.attractionKey]
-            ?? introduction.culturalElementKey,
+          culturalElementKey: rootKey,
           summary: Self.richTextPlainText(introduction.introduction, separator: "\n\n"),
           distanceMeters: introduction.distanceMeters,
           sources: introduction.sources
@@ -926,6 +1023,17 @@ nonisolated struct KnowledgeStore: Sendable {
         < Self.minimumAttractionsBeforeCulturalFill,
       limit: limit
     )
+
+    // Attach every on-site intro to the sight root for that attraction so the
+    // model still sees history context without being allowed to cite it as key.
+    var nearbyContexts: [String: [NearbyAttractionIntroduction]] = [:]
+    for introduction in nearby {
+      let attachKey =
+        attractionRoots[introduction.attractionKey]
+        ?? sightElementKey(forAttraction: introduction.attractionKey)
+      guard let attachKey, elementsByKey[attachKey] != nil else { continue }
+      nearbyContexts[attachKey, default: []].append(introduction)
+    }
 
     var elements: [RecognitionElement] = []
     elements.reserveCapacity(prioritizedKeys.count)
@@ -979,10 +1087,13 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
-  /// Cultural-content candidates for the recognition prompt, nearest-first:
-  /// 1. Elements bound to the selected nearby attractions (roots, then others)
-  /// 2. Only when nearby attractions < 3: other in-radius elements by distance,
-  ///    then remaining catalog keys by name
+  /// Cultural-content candidates for the recognition prompt — **sights only**.
+  /// History nodes may appear in nearby_contexts / graph after binding, but the
+  /// model must not cite them as `cultural_element_key`.
+  /// Priority:
+  /// 1. Sight roots for selected nearby attractions
+  /// 2. Other sight elements bound via introductions to those attractions
+  /// 3. Only when nearby attractions < 3: remaining sight catalog by name
   private func prioritizedRecognitionKeys(
     nearby: [NearbyAttractionIntroduction],
     attractionRoots: [String: String],
@@ -993,8 +1104,8 @@ nonisolated struct KnowledgeStore: Sendable {
     var prioritizedKeys: [String] = []
     var seen = Set<String>()
 
-    func append(_ key: String) {
-      guard elementsByKey[key] != nil, seen.insert(key).inserted else { return }
+    func appendSight(_ key: String) {
+      guard isSight(key), seen.insert(key).inserted else { return }
       prioritizedKeys.append(key)
     }
 
@@ -1002,26 +1113,41 @@ nonisolated struct KnowledgeStore: Sendable {
 
     for introduction in selectedNearby {
       if let key = attractionRoots[introduction.attractionKey] {
-        append(key)
+        appendSight(key)
         if prioritizedKeys.count >= limit { return prioritizedKeys }
       }
+      // Entity-as-attraction: inject the attraction key itself when it is a sight.
+      appendSight(introduction.attractionKey)
+      if prioritizedKeys.count >= limit { return prioritizedKeys }
     }
     for introduction in selectedNearby {
-      append(introduction.culturalElementKey)
+      appendSight(introduction.culturalElementKey)
       if prioritizedKeys.count >= limit { return prioritizedKeys }
     }
 
     guard allowCulturalCatalogFill else { return prioritizedKeys }
 
     for introduction in nearby {
-      append(introduction.culturalElementKey)
+      appendSight(introduction.attractionKey)
+      appendSight(introduction.culturalElementKey)
       if prioritizedKeys.count >= limit { return prioritizedKeys }
     }
     for key in orderedElementKeys {
-      append(key)
+      appendSight(key)
       if prioritizedKeys.count >= limit { return prioritizedKeys }
     }
     return prioritizedKeys
+  }
+
+  /// True when the element exists and resolves to `ContentRole.sight`.
+  private func isSight(_ key: String) -> Bool {
+    guard let element = elementsByKey[key] else { return false }
+    return element.resolvedContentRole() == .sight
+  }
+
+  /// Sight element that shares the attraction key, when present.
+  private func sightElementKey(forAttraction attractionKey: String) -> String? {
+    isSight(attractionKey) ? attractionKey : nil
   }
 
   // MARK: - Graph traversal (postgres.go recognitionGraph / appendAttractionBindings)

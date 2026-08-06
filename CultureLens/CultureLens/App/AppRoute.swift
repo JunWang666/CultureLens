@@ -17,4 +17,6 @@ nonisolated enum AppRoute: Hashable {
     case themes
     case theme(String)
     case settings
+    case packEditor
+    case packEditorDraft(UUID)
 }

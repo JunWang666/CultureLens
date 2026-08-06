@@ -171,9 +171,9 @@ nonisolated struct KnowledgePackMainSidecar: Codable, Sendable {
 
 // MARK: - Minimal ZIP (store method)
 
-enum ZipArchive {
+nonisolated enum ZipArchive {
   /// Builds an uncompressed ZIP from `(archive path, bytes)` entries.
-  nonisolated static func store(entries: [(name: String, data: Data)]) throws -> Data {
+  static func store(entries: [(name: String, data: Data)]) throws -> Data {
     var central: Data = Data()
     var local: Data = Data()
     var offset: UInt32 = 0
@@ -245,7 +245,7 @@ enum ZipArchive {
   }
 
   /// CRC-32 (ISO 3309 / ZIP).
-  nonisolated static func crc32(_ data: Data) -> UInt32 {
+  static func crc32(_ data: Data) -> UInt32 {
     var crc: UInt32 = 0xffff_ffff
     for byte in data {
       let idx = Int((crc ^ UInt32(byte)) & 0xff)
@@ -254,7 +254,7 @@ enum ZipArchive {
     return crc ^ 0xffff_ffff
   }
 
-  private nonisolated static let crcTable: [UInt32] = {
+  private static let crcTable: [UInt32] = {
     (0..<256).map { i -> UInt32 in
       var c = UInt32(i)
       for _ in 0..<8 {
@@ -265,7 +265,7 @@ enum ZipArchive {
   }()
 }
 
-private extension Data {
+private nonisolated extension Data {
   mutating func appendUInt16(_ value: UInt16) {
     var le = value.littleEndian
     Swift.withUnsafeBytes(of: &le) { append(contentsOf: $0) }

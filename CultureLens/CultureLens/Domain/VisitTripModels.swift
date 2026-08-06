@@ -93,7 +93,6 @@ nonisolated enum VisitTripBuilder {
       }
     )
 
-    var litKeys = Set<String>()
     var litIDs = Set<UUID>()
     var attractionNames: [String] = []
     var seenAttractions = Set<String>()
@@ -102,8 +101,8 @@ nonisolated enum VisitTripBuilder {
     var seenObjectIDs = Set<UUID>()
 
     for record in group {
-      if let key = record.culturalElementKey, !key.isEmpty {
-        litKeys.insert(key)
+      if let id = record.culturalElementID {
+        litIDs.insert(id)
       } else {
         litIDs.insert(record.cultureObjectID)
       }
@@ -147,7 +146,7 @@ nonisolated enum VisitTripBuilder {
       endedAt: ended,
       title: title,
       placeNames: placeNames,
-      litNodeCount: litKeys.count + litIDs.count,
+      litNodeCount: litIDs.count,
       attractionNames: attractionNames,
       newRelationCount: relationIDs.count,
       objects: objects
@@ -173,7 +172,7 @@ nonisolated struct ScanHistoryRecordSnapshot: Hashable, Sendable {
   let placeName: String?
   let latitude: Double?
   let longitude: Double?
-  let culturalElementKey: String?
+  let culturalElementID: UUID?
   let attractionName: String?
   let object: CultureObject?
 
@@ -185,7 +184,7 @@ nonisolated struct ScanHistoryRecordSnapshot: Hashable, Sendable {
     placeName: String? = nil,
     latitude: Double? = nil,
     longitude: Double? = nil,
-    culturalElementKey: String? = nil,
+    culturalElementID: UUID? = nil,
     attractionName: String? = nil,
     object: CultureObject? = nil
   ) {
@@ -196,7 +195,7 @@ nonisolated struct ScanHistoryRecordSnapshot: Hashable, Sendable {
     self.placeName = placeName
     self.latitude = latitude
     self.longitude = longitude
-    self.culturalElementKey = culturalElementKey
+    self.culturalElementID = culturalElementID
     self.attractionName = attractionName
     self.object = object
   }
@@ -219,7 +218,7 @@ extension ScanHistoryRecord {
       placeName: placeName,
       latitude: latitude,
       longitude: longitude,
-      culturalElementKey: saved?.culturalElementKey,
+      culturalElementID: saved?.culturalElementID,
       attractionName: attractionName,
       object: saved
     )

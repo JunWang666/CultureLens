@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
       "key": "chinese-dynasty-overview",
       "name": "中国历代王朝脉络",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "40678ced-1a79-542a-98b3-c176df713e7a",
       "key": "xia-dynasty",
       "name": "夏朝",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "687f092d-7c06-556a-ada0-d193b707b01e",
       "key": "shang-dynasty",
       "name": "商朝",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "23ba68c7-be2d-5074-984c-64512433e8d6",
       "key": "zhou-dynasty",
       "name": "周朝",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "key": "spring-autumn-warring-states",
       "name": "春秋战国",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
       "key": "qin-dynasty",
       "name": "秦朝",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "key": "han-dynasty",
       "name": "汉朝",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
       "key": "three-kingdoms",
       "name": "三国",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "key": "jin-dynasty",
       "name": "两晋",
       "introduction": {
@@ -244,6 +253,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "85f88308-831c-5be6-a232-82f86df1b030",
       "key": "southern-northern-dynasties",
       "name": "南北朝",
       "introduction": {
@@ -271,6 +281,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "key": "sui-dynasty",
       "name": "隋朝",
       "introduction": {
@@ -298,6 +309,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "key": "tang-dynasty",
       "name": "唐朝",
       "introduction": {
@@ -325,6 +337,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "04942ef0-d853-5849-942d-f30154c16e45",
       "key": "five-dynasties-ten-kingdoms",
       "name": "五代十国",
       "introduction": {
@@ -352,6 +365,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "key": "song-dynasty",
       "name": "宋朝",
       "introduction": {
@@ -379,6 +393,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
       "key": "yuan-dynasty",
       "name": "元朝",
       "introduction": {
@@ -406,6 +421,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "key": "ming-dynasty",
       "name": "明朝",
       "introduction": {
@@ -433,6 +449,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
       "key": "qing-dynasty",
       "name": "清朝",
       "introduction": {
@@ -460,6 +477,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "707c0481-01fa-5c61-ab0f-24448b981e4a",
       "key": "imperial-examination",
       "name": "科举制度",
       "introduction": {
@@ -487,6 +505,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
       "key": "silk-road",
       "name": "丝绸之路",
       "introduction": {
@@ -514,6 +533,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a",
       "key": "four-great-inventions",
       "name": "四大发明",
       "introduction": {
@@ -541,6 +561,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "948bb138-1ced-515b-b776-dfe22278d01d",
       "key": "twenty-four-histories",
       "name": "二十四史",
       "introduction": {
@@ -568,6 +589,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
       "key": "confucius-and-confucianism",
       "name": "孔子与儒家",
       "introduction": {
@@ -595,6 +617,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "b486685f-18a1-5090-994b-139b73689036",
       "key": "laozi-and-taoism",
       "name": "老子与道家",
       "introduction": {
@@ -622,6 +645,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
       "key": "hundred-schools",
       "name": "诸子百家",
       "introduction": {
@@ -649,6 +673,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "264e378e-2460-5b0c-8974-3d6ce6b72775",
       "key": "zhonghua-civilization",
       "name": "中华文明五千年",
       "introduction": {
@@ -676,6 +701,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a791db39-bcee-5907-9942-1efbe6a100f4",
       "key": "qin-shi-huang",
       "name": "秦始皇",
       "introduction": {
@@ -703,6 +729,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
       "key": "han-wudi",
       "name": "汉武帝",
       "introduction": {
@@ -730,6 +757,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "b606e202-ef33-5e44-8266-ce40598494fd",
       "key": "tang-taizong",
       "name": "唐太宗",
       "introduction": {
@@ -757,6 +785,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d9dc4898-8d93-59b7-9b79-320d60801d58",
       "key": "zheng-he",
       "name": "郑和下西洋",
       "introduction": {
@@ -784,6 +813,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
       "key": "yue-fei",
       "name": "岳飞",
       "introduction": {
@@ -811,6 +841,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
       "key": "wang-anshi",
       "name": "王安石",
       "introduction": {
@@ -838,6 +869,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "354ea9d5-7830-548f-8847-1d193625d358",
       "key": "kangxi",
       "name": "康熙帝",
       "introduction": {
@@ -865,6 +897,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "32c66150-415c-5830-9fa7-637b517458b5",
       "key": "wenjing-prosperity",
       "name": "文景之治",
       "introduction": {
@@ -892,6 +925,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
       "key": "zhenguan-rule",
       "name": "贞观之治",
       "introduction": {
@@ -919,6 +953,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a",
       "key": "kaiyuan-flourishing",
       "name": "开元盛世",
       "introduction": {
@@ -946,6 +981,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "04e81c89-e1c1-5c19-800e-f25d24c3b203",
       "key": "an-lushan-rebellion",
       "name": "安史之乱",
       "introduction": {
@@ -973,6 +1009,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd",
       "key": "jingkang-incident",
       "name": "靖康之变",
       "introduction": {
@@ -1000,6 +1037,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "bf64a656-a4a8-51da-86ca-f0e16eb5871c",
       "key": "opium-war",
       "name": "鸦片战争",
       "introduction": {
@@ -1027,6 +1065,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
       "key": "mid-autumn-festival",
       "name": "中秋节",
       "introduction": {
@@ -1057,6 +1096,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2bb7596f-1001-57d1-8230-2ec58490981e",
       "key": "chinese-buddhism",
       "name": "中国佛教",
       "introduction": {
@@ -1087,6 +1127,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
       "key": "tea-culture",
       "name": "中国茶文化",
       "introduction": {
@@ -1117,6 +1158,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "be77359e-4b0a-541b-83e4-3af6a9234a17",
       "key": "chinese-calligraphy",
       "name": "中国书法",
       "introduction": {
@@ -1147,6 +1189,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "bb8c2784-d40b-50f3-b07b-6d6f20eaedd5",
       "key": "chinese-landscape-painting",
       "name": "中国山水画",
       "introduction": {

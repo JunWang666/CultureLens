@@ -23,7 +23,7 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "知识库元素或介绍的稳定 key。"
+            "description": "本请求内的数字短编号（与输入 knowledge_fragments / neighbors 的 key 一致），不是 UUID。"
           },
           "name": {
             "type": "string",

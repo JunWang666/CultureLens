@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "893ee811-737d-54ca-a22a-d3a1fce35880",
       "key": "mojiaoshan-center",
       "name": "莫角山：良渚的权力中心",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
       "key": "fanshan-cemetery",
       "name": "反山贵族墓地",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "2af8cfef-b959-5152-8e81-c5f5a625e158",
       "key": "yaoshan-altar",
       "name": "瑶山祭坛与墓葬",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "422ecaac-9557-58b5-973a-5c181d410c71",
       "key": "jade-cong-wang",
       "name": "玉琮王",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e5ac2ef8-9095-57a6-808c-43df7159b392",
       "key": "jade-cong-ritual",
       "name": "琮：沟通天地的礼器",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
       "key": "jade-bi",
       "name": "玉璧",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "484417c0-6068-54d5-9d51-97659064a65b",
       "key": "jade-yue",
       "name": "玉钺与军权王权",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "88f77240-6a4c-57c9-9322-443456b25598",
       "key": "liangzhu-museum",
       "name": "良渚博物院",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
       "key": "site-park",
       "name": "良渚古城遗址公园",
       "introduction": {
@@ -246,38 +255,47 @@
   ],
   "attractions": [
     {
+      "id": "569034e5-d306-5605-b1d8-754c8e8041f7",
       "key": "liangzhu-museum",
       "name": "良渚博物院"
     },
     {
+      "id": "a0c85a81-92bb-51a4-8e99-4230136a5643",
       "key": "site-park",
       "name": "良渚古城遗址公园"
     },
     {
+      "id": "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25",
       "key": "yaoshan-altar",
       "name": "瑶山遗址公园"
     },
     {
+      "id": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "key": "jade-cong-wang",
       "name": "玉琮王"
     },
     {
+      "id": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "key": "jade-cong-ritual",
       "name": "琮：沟通天地的礼器"
     },
     {
+      "id": "2214c758-79d5-58bc-963d-17178b204af5",
       "key": "jade-bi",
       "name": "玉璧"
     },
     {
+      "id": "fda7f090-f56b-5e48-a8a7-2916beb3c469",
       "key": "jade-yue",
       "name": "玉钺与军权王权"
     },
     {
+      "id": "fa150bb0-7779-54e4-84dd-2e3dd817658a",
       "key": "mojiaoshan-center",
       "name": "莫角山：良渚的权力中心"
     },
     {
+      "id": "dd5d6d7b-2529-5301-8fac-5a6325df37a7",
       "key": "fanshan-cemetery",
       "name": "反山贵族墓地"
     }

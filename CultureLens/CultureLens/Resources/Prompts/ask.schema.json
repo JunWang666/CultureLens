@@ -13,7 +13,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "key": { "type": "string" },
+          "key": {
+            "type": "string",
+            "description": "本请求内的数字短编号（与输入 knowledge_fragments / neighbors 的 key 一致），不是 UUID。"
+          },
           "name": { "type": "string" },
           "fragment": { "type": "string" }
         },

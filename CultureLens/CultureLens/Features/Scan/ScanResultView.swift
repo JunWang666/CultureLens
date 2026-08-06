@@ -31,19 +31,17 @@ struct ScanResultView: View {
     return result
   }
 
-  /// 图谱成员判定用的 key：候选页一律用其绑定的文化元素 key（景点候选的
-  /// `culturalElementKey` 就是绑定元素），不再把 attractionKey 当元素 key 存。
-  private var graphElementKey: String? {
-    candidate?.culturalElementKey ?? object.culturalElementKey
+  /// 图谱成员判定用的元素 ID：候选页一律用其绑定的文化元素（景点候选的
+  /// `culturalElementID` 就是绑定元素），不再把 attractionID 当元素存。
+  private var graphElementID: UUID? {
+    candidate?.culturalElementID ?? object.culturalElementID
   }
 
   /// 图谱成员身份统一为元素节点 UUID：景点页、候选页与节点页落在同一节点上，
   /// 跨扫描去重，且在用户图谱中始终是 pack-backed 节点而非游离节点。
   private var graphNodeID: UUID {
-    if let key = graphElementKey,
-      KnowledgeStore.shared?.element(key: key) != nil
-    {
-      return DeterministicID.culturalElement(key)
+    if let id = graphElementID, KnowledgeStore.shared?.element(id: id) != nil {
+      return id
     }
     return object.id
   }
@@ -51,7 +49,7 @@ struct ScanResultView: View {
   private var isInCultureGraph: Bool {
     knowledgeProgressStore.isInGraph(
       graphNodeID,
-      elementKey: graphElementKey
+      elementID: graphElementID
     )
   }
 
@@ -73,22 +71,24 @@ struct ScanResultView: View {
     )
   }
 
-  /// 识别结果若已绑定知识库 key 但 relations 为空（或候选页本身不带图谱），
+  /// 识别结果若已绑定知识库元素但 relations 为空（或候选页本身不带图谱），
   /// 用知识库相邻关系补齐，与识别映射的 fallback 关系构建保持一致。
   private var graphObject: CultureObject {
     guard object.relations.isEmpty else { return object }
-    let elementKey =
-      object.culturalElementKey
-      ?? KnowledgeStore.shared?.elementKey(matchingName: object.canonicalName)
-    guard let elementKey, let store = KnowledgeStore.shared else { return object }
-    let related = store.relatedElements(forKey: elementKey)
+    let store = KnowledgeStore.shared
+    let elementID =
+      object.culturalElementID
+      ?? store?.elementID(matchingName: object.canonicalName)
+      ?? (store?.element(id: object.id) != nil ? object.id : nil)
+    guard let elementID, let store else { return object }
+    let related = store.relatedElements(forID: elementID)
     guard !related.isEmpty else {
-      // Even without edges, attach the key so the empty-state can say「暂无关系边」
+      // Even without edges, attach the ID so the empty-state can say「暂无关系边」
       // instead of「未匹配到知识库对象」.
-      if object.culturalElementKey == nil {
+      if object.culturalElementID == nil {
         var keyed = object
-        keyed.culturalElementKey = elementKey
-        keyed.id = DeterministicID.culturalElement(elementKey)
+        keyed.culturalElementID = elementID
+        keyed.id = elementID
         return keyed
       }
       return object
@@ -104,11 +104,11 @@ struct ScanResultView: View {
     }
 
     var enriched = object
-    enriched.culturalElementKey = elementKey
-    enriched.id = DeterministicID.culturalElement(elementKey)
+    enriched.culturalElementID = elementID
+    enriched.id = elementID
     enriched.concepts = related.map { element in
       CultureConcept(
-        id: DeterministicID.culturalElement(element.key),
+        id: element.id,
         name: element.name,
         kind: CulturalElementPresentation.conceptKind(element.conceptKind),
         summary: KnowledgeStore.richTextPlainText(element.introduction),
@@ -117,9 +117,11 @@ struct ScanResultView: View {
     }
     enriched.relations = related.map { element in
       CultureRelation(
-        id: DeterministicID.v5(name: elementKey + ":" + element.key + ":" + "解释"),
-        sourceID: DeterministicID.culturalElement(elementKey),
-        targetID: DeterministicID.culturalElement(element.key),
+        id: DeterministicID.v5(
+          name: elementID.uuidString + ":" + element.id.uuidString + ":" + "解释"
+        ),
+        sourceID: elementID,
+        targetID: element.id,
         kind: .explains,
         explanation: explanation
       )
@@ -131,19 +133,33 @@ struct ScanResultView: View {
     session.result.displayAttractionCandidates
   }
 
-  /// 景点推荐中的模型备选只保留命中景点 key 的条目。
+  /// 景点推荐中的模型备选只保留命中景点 ID 的条目。
   private var visualAlternatives: [RecognitionCandidate] {
-    session.result.displayVisualAlternatives.filter { $0.attractionKey != nil }
+    session.result.displayVisualAlternatives.filter { $0.attractionID != nil }
   }
 
   private var currentResolutionStatus: String? {
     return session.result.resolutionStatus
   }
 
+  /// Cache / localization key: prefer pack slug, fall back to UUID string.
   private var objectElementKey: String? {
-    let key = object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
-    guard let key, KnowledgeStore.shared?.element(key: key) != nil else { return nil }
-    return key
+    if let id = object.culturalElementID ?? (KnowledgeStore.shared?.element(id: object.id) != nil ? object.id : nil),
+      KnowledgeStore.shared?.element(id: id) != nil
+    {
+      return KnowledgeStore.shared?.elementKey(for: id) ?? id.uuidString.lowercased()
+    }
+    return nil
+  }
+
+  private var objectElementID: UUID? {
+    if let id = object.culturalElementID, KnowledgeStore.shared?.element(id: id) != nil {
+      return id
+    }
+    if KnowledgeStore.shared?.element(id: object.id) != nil {
+      return object.id
+    }
+    return nil
   }
 
   var body: some View {
@@ -182,10 +198,10 @@ struct ScanResultView: View {
           onExplained: markExplained
         )
         if let candidate {
-          if isAttractionCandidate, let attractionKey = candidate.attractionKey {
+          if isAttractionCandidate, let attractionID = candidate.attractionID {
             AttractionIntroductionsView(
               place: session.place,
-              attractionKey: attractionKey,
+              attractionID: attractionID,
               existingSummary: candidate.informativeSummary
             )
             candidateContext
@@ -300,6 +316,7 @@ struct ScanResultView: View {
       }
 
       LocalizedKnowledgeBlocksView(
+        elementID: objectElementID,
         elementKey: objectElementKey,
         fallbackName: object.canonicalName,
         fallbackSummary: object.summary,
@@ -447,7 +464,8 @@ struct ScanResultView: View {
         LocalizedPackText(
           source: candidate.canonicalName,
           cacheNamespace: "element",
-          cacheKey: candidate.culturalElementKey
+          cacheKey: candidate.culturalElementID.map { $0.uuidString.lowercased() }
+            ?? KnowledgeStore.shared?.elementKey(for: candidate.id)
         )
         .font(.headline)
         .foregroundStyle(CultureTheme.inkPrimary)
@@ -469,7 +487,8 @@ struct ScanResultView: View {
         LocalizedPackText(
           source: summary,
           cacheNamespace: "element",
-          cacheKey: candidate.culturalElementKey,
+          cacheKey: candidate.culturalElementID.map { $0.uuidString.lowercased() }
+            ?? KnowledgeStore.shared?.elementKey(for: candidate.id),
           kind: .fragment
         )
         .font(.caption)
@@ -498,7 +517,8 @@ struct ScanResultView: View {
         LocalizedPackText(
           source: candidate.canonicalName,
           cacheNamespace: "attraction",
-          cacheKey: candidate.attractionKey
+          cacheKey: candidate.attractionID.map { $0.uuidString.lowercased() }
+          ?? KnowledgeStore.shared?.attraction(id: candidate.id).flatMap(\.key)
         )
         .font(.headline)
         .foregroundStyle(CultureTheme.inkPrimary)
@@ -511,7 +531,8 @@ struct ScanResultView: View {
         LocalizedPackText(
           source: summary,
           cacheNamespace: "attraction",
-          cacheKey: candidate.attractionKey,
+          cacheKey: candidate.attractionID.map { $0.uuidString.lowercased() }
+          ?? KnowledgeStore.shared?.attraction(id: candidate.id).flatMap(\.key),
           kind: .fragment
         )
         .font(.subheadline)
@@ -552,7 +573,7 @@ struct ScanResultView: View {
         if presentation == .knowledge {
           KnowledgeGraphMembershipButton(
             nodeID: object.id,
-            elementKey: objectElementKey,
+            elementID: objectElementID,
             presentation: .fullWidth
           )
         } else if isInCultureGraph {
@@ -660,7 +681,7 @@ struct ScanResultView: View {
       .contact,
       for: graphNodeID,
       source: .manual,
-      elementKey: graphElementKey
+      elementID: graphElementID
     )
   }
 
@@ -676,14 +697,14 @@ struct ScanResultView: View {
   }
 
   private func markExplained() {
-    if let key = objectElementKey,
-      knowledgeProgressStore.level(for: object.id, elementKey: key) == nil
+    if let elementID = objectElementID,
+      knowledgeProgressStore.level(for: object.id, elementID: elementID) == nil
     {
       knowledgeProgressStore.setLevel(
         .contact,
         for: object.id,
         source: .explanation,
-        elementKey: key
+        elementID: elementID
       )
     }
   }

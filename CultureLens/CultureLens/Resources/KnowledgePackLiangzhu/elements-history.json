@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "3b970416-1756-55e8-8a1e-fca23a4cc03d",
       "key": "liangzhu-culture-overview",
       "name": "良渚文化总览",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
       "key": "liangzhu-chronology",
       "name": "良渚的年代与分期",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "343c405b-8a86-5177-89a6-76e25c53c37e",
       "key": "liangzhu-distribution",
       "name": "环太湖的分布与遗址群",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
       "key": "liangzhu-ancient-city",
       "name": "良渚古城与城墙",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d8dd65b0-c448-59b1-8626-7524c383e81d",
       "key": "liangzhu-water-system",
       "name": "良渚水利系统",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "5109ed5d-faa6-5146-94f7-3316cc6cadaf",
       "key": "god-man-beast-mask",
       "name": "神人兽面纹",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c41fc4b3-78f5-534f-8d98-5f4e27f31247",
       "key": "jade-crafting",
       "name": "良渚玉器工艺与玉料来源",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a3471eec-6d2a-5c85-89ec-04ae746c44a8",
       "key": "liangzhu-pottery",
       "name": "良渚陶器",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a157e85d-7d02-5790-8f29-6efcf18152b8",
       "key": "rice-agriculture",
       "name": "稻作农业",
       "introduction": {
@@ -244,6 +253,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "64602982-75d9-569c-863d-4e323bc833f0",
       "key": "liangzhu-society",
       "name": "神权与社会分化",
       "introduction": {
@@ -271,6 +281,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c0412b19-5da7-5fcb-ac78-4f5fc8df557d",
       "key": "silk-and-weaving",
       "name": "丝帛与纺织",
       "introduction": {
@@ -298,6 +309,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e31f52c9-e16b-56fb-ad11-b41a8d6337ec",
       "key": "liangzhu-symbols",
       "name": "刻符与原始文字",
       "introduction": {
@@ -325,6 +337,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d48d7adb-49d2-5879-9dd2-381f6bc9f06a",
       "key": "shi-xingeng-discovery",
       "name": "施昕更与良渚的发现",
       "introduction": {
@@ -352,6 +365,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "3f22446b-b6cd-5876-9df4-c9b72dc99f8f",
       "key": "world-heritage-status",
       "name": "世界遗产：中华五千年文明实证",
       "introduction": {
@@ -379,6 +393,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a47145b5-c9d7-5ba5-bdef-f280d3125b08",
       "key": "contemporary-cultures",
       "name": "同时期的中华文明星光",
       "introduction": {
@@ -406,6 +421,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e45da344-5dfc-5602-b582-33f67c8a312c",
       "key": "liangzhu-in-zhejiang-museum",
       "name": "浙博里的良渚",
       "introduction": {

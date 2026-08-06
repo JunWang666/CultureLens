@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
       "key": "yue-fei-memorial-culture",
       "name": "岳飞纪念与忠烈祠祀",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
       "key": "siku-quanshu-library",
       "name": "《四库全书》与皇家藏书楼",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
       "key": "three-pools-mirroring-moon",
       "name": "三潭印月",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
       "key": "pinghu-autumn-moon",
       "name": "平湖秋月",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
       "key": "su-causeway-spring-dawn",
       "name": "苏堤春晓",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "key": "leifeng-pagoda-and-evening-glow",
       "name": "雷峰塔与雷峰夕照",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
       "key": "west-lake-winter-snow",
       "name": "西湖冬雪与断桥",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
       "key": "quyuan-lotus-summer",
       "name": "曲院风荷与荷塘夏日",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7aa489c9-6efc-54da-8486-914cbab0267b",
       "key": "huagang-fish-viewing",
       "name": "花港观鱼与园林观鱼",
       "introduction": {
@@ -244,6 +253,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
       "key": "liulang-wenying-soundscape",
       "name": "柳浪闻莺与春景声景",
       "introduction": {
@@ -271,6 +281,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "77347f66-53d0-5e01-a359-01bc66ca8330",
       "key": "shuangfeng-cloud-peaks",
       "name": "双峰插云与南北高峰",
       "introduction": {
@@ -298,6 +309,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "85ea281c-8741-505e-a7f0-62400f5b33ba",
       "key": "lingyin-zen-grove",
       "name": "灵隐的山林禅寺",
       "introduction": {
@@ -325,6 +337,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e383a049-b7f3-53d5-96fb-301ea2297c49",
       "key": "hupao-spring-tea",
       "name": "虎跑泉与泉水",
       "introduction": {
@@ -352,6 +365,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
       "key": "liuhe-pagoda-river",
       "name": "六和塔与钱塘江",
       "introduction": {
@@ -379,6 +393,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
       "key": "xiling-seal-art",
       "name": "西泠印社与孤山篆刻",
       "introduction": {
@@ -406,6 +421,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "6836d943-c2ca-5696-8cd9-7ba71db683be",
       "key": "huxinting-islet",
       "name": "湖心亭与中国四大名亭",
       "introduction": {
@@ -433,6 +449,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
       "key": "yang-gong-causeway",
       "name": "杨公堤与明代西湖疏浚",
       "introduction": {
@@ -460,6 +477,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
       "key": "baoshi-hill-cinnabar-glow",
       "name": "宝石山与宝石流霞",
       "introduction": {
@@ -487,6 +505,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d0352861-3d2c-5301-a662-cd042e449e6a",
       "key": "gushan-island",
       "name": "孤山与“孤山不孤”",
       "introduction": {
@@ -514,6 +533,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
       "key": "qianwang-temple-wuyue",
       "name": "钱王祠与吴越国",
       "introduction": {
@@ -541,6 +561,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
       "key": "baochu-pagoda",
       "name": "保俶塔",
       "introduction": {
@@ -571,6 +592,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "cccf0722-3380-5fe3-960a-5947bbb8104b",
       "key": "jingci-temple",
       "name": "净慈寺",
       "introduction": {
@@ -601,6 +623,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
       "key": "longjing-village",
       "name": "龙井村",
       "introduction": {
@@ -633,94 +656,117 @@
   ],
   "attractions": [
     {
+      "id": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
       "key": "leifeng-pagoda-and-evening-glow",
       "name": "雷峰塔"
     },
     {
+      "id": "d10ba550-da02-5864-b01a-d6430d8b587f",
       "key": "baochu-pagoda",
       "name": "保俶塔"
     },
     {
+      "id": "972bbaf8-1b55-5043-8d74-d40856ab6492",
       "key": "jingci-temple",
       "name": "净慈寺"
     },
     {
+      "id": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
       "key": "yue-fei-memorial-culture",
       "name": "岳王庙"
     },
     {
+      "id": "65265052-5508-57df-a81a-2c027576f5b7",
       "key": "siku-quanshu-library",
       "name": "文澜阁"
     },
     {
+      "id": "bad747f4-43a2-5202-8274-d549c7c45887",
       "key": "su-causeway-spring-dawn",
       "name": "苏堤"
     },
     {
+      "id": "f4394af7-0206-5c20-a486-00d4d768e64a",
       "key": "three-pools-mirroring-moon",
       "name": "三潭印月"
     },
     {
+      "id": "29584556-38e5-5478-b694-c4da40593c03",
       "key": "west-lake-winter-snow",
       "name": "断桥"
     },
     {
+      "id": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
       "key": "pinghu-autumn-moon",
       "name": "平湖秋月"
     },
     {
+      "id": "660de823-9bec-50ac-a588-f5f5387dc225",
       "key": "quyuan-lotus-summer",
       "name": "曲院风荷"
     },
     {
+      "id": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
       "key": "huagang-fish-viewing",
       "name": "花港观鱼"
     },
     {
+      "id": "98ea122d-7182-50df-952b-399961d1f0af",
       "key": "liulang-wenying-soundscape",
       "name": "柳浪闻莺"
     },
     {
+      "id": "adaf1aa2-a082-5e05-8c67-022a131da536",
       "key": "shuangfeng-cloud-peaks",
       "name": "双峰插云"
     },
     {
+      "id": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
       "key": "lingyin-zen-grove",
       "name": "灵隐寺·飞来峰"
     },
     {
+      "id": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
       "key": "longjing-village",
       "name": "龙井村"
     },
     {
+      "id": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
       "key": "hupao-spring-tea",
       "name": "虎跑公园"
     },
     {
+      "id": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
       "key": "liuhe-pagoda-river",
       "name": "六和塔"
     },
     {
+      "id": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
       "key": "xiling-seal-art",
       "name": "西泠印社·孤山"
     },
     {
+      "id": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
       "key": "huxinting-islet",
       "name": "湖心亭"
     },
     {
+      "id": "a9155563-096d-57ba-affb-4c0544a3f559",
       "key": "yang-gong-causeway",
       "name": "杨公堤"
     },
     {
+      "id": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
       "key": "baoshi-hill-cinnabar-glow",
       "name": "宝石山"
     },
     {
+      "id": "efbadb98-a165-5a95-9b5b-fb7f22a91aec",
       "key": "gushan-island",
       "name": "孤山"
     },
     {
+      "id": "91998805-9ab0-5d8c-8a61-e59a5ef7a8cf",
       "key": "qianwang-temple-wuyue",
       "name": "钱王祠"
     }

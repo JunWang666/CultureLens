@@ -54,9 +54,9 @@ extension RelationKind {
 }
 
 /// A typed directed edge endpoint used by the abstraction-axis traversal.
-/// `key` is always the *other* endpoint relative to the queried node.
+/// `id` is always the *other* endpoint relative to the queried node.
 nonisolated struct DirectedRelationEdge: Hashable, Sendable {
-  let key: String
+  let id: UUID
   let kind: RelationKind?
   let explanation: String?
 }
@@ -64,7 +64,9 @@ nonisolated struct DirectedRelationEdge: Hashable, Sendable {
 /// One ancestor on the abstraction ladder: the element plus the typed edge
 /// that led to it from the previous level.
 nonisolated struct AbstractionAncestor: Hashable, Sendable {
-  let key: String
+  let id: UUID
+  /// Optional human-readable slug when present in the pack.
+  let key: String?
   let name: String
   let kind: RelationKind?
   let explanation: String?
@@ -79,7 +81,9 @@ nonisolated struct AbstractionLevel: Hashable, Sendable {
 /// One missing prerequisite in dependency order (nearest first), carrying a
 /// plain-text excerpt for the explanation prompt.
 nonisolated struct MissingPrerequisite: Hashable, Sendable {
-  let key: String
+  let id: UUID
+  /// Optional human-readable slug when present in the pack.
+  let key: String?
   let name: String
   let excerpt: String
 }

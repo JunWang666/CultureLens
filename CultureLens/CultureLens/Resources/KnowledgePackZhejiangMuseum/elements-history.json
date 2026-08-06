@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7",
       "key": "zhejiang-museum-history",
       "name": "浙江省博物馆的历史沿革",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "95906076-3c48-5762-ad31-2eebe2a9bd42",
       "key": "museum-collection-system",
       "name": "十万余件馆藏与收藏体系",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "162ffb68-7b96-5a03-aef2-73709620ccb1",
       "key": "top-ten-treasures",
       "name": "十大镇馆之宝评选",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7cb89f30-5375-5ddd-8a2a-68e8dc74462a",
       "key": "no-overseas-treasures",
       "name": "禁止出国（境）展览文物",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "fb207661-23da-54bc-af3c-aee4dbb88931",
       "key": "hemudu-culture",
       "name": "河姆渡文化",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919",
       "key": "yue-bronze-swords",
       "name": "越国青铜剑传统",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "key": "wuyue-state",
       "name": "吴越国与保境安民",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20",
       "key": "wuyue-buddhist-art",
       "name": "吴越佛教与宝箧印式塔",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7354cd7a-a6a2-56d7-b7a6-dfb871129047",
       "key": "yue-kiln",
       "name": "越窑与秘色瓷",
       "introduction": {
@@ -244,6 +253,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7f792a90-7796-57ed-bc27-e69b3fe33fbc",
       "key": "longquan-kiln",
       "name": "龙泉窑与粉青梅子青",
       "introduction": {
@@ -271,6 +281,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "ce41ce0d-05c3-5a8b-a586-16218e70392d",
       "key": "southern-song-guan-ware",
       "name": "南宋官窑",
       "introduction": {
@@ -298,6 +309,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "058e20d5-373f-5423-b6d6-4adb8f88c144",
       "key": "huang-gongwang",
       "name": "黄公望与富春江",
       "introduction": {
@@ -325,6 +337,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
       "key": "huang-binhong",
       "name": "黄宾虹与浙博",
       "introduction": {
@@ -352,6 +365,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "25847815-97a4-5692-860f-fa04a848bf53",
       "key": "sha-menghai",
       "name": "沙孟海与浙博",
       "introduction": {
@@ -379,6 +393,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90",
       "key": "wu-changshuo",
       "name": "吴昌硕与浙博",
       "introduction": {
@@ -406,6 +421,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c5978321-c18b-582e-bcac-e1990d4561ac",
       "key": "guqin-world",
       "name": "古琴与中国人的音韵世界",
       "introduction": {
@@ -433,6 +449,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a",
       "key": "qi-lacquer-donation",
       "name": "曹其镛夫妇捐赠的漆器",
       "introduction": {
@@ -460,6 +477,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
       "key": "shili-hongzhuang",
       "name": "十里红妆与宁绍婚俗",
       "introduction": {
@@ -487,6 +505,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "71261568-8116-57fb-8221-e32f8dbbfe77",
       "key": "tang-guqin-tradition",
       "name": "唐代古琴与“唐圆”",
       "introduction": {

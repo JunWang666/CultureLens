@@ -63,6 +63,8 @@ nonisolated struct UserKnowledgeStateContext: Codable, Hashable, Sendable {
 }
 
 /// One cited knowledge-base fragment supporting generated teaching text.
+/// `key` stores a pack element UUID string (legacy kebab slugs may still appear
+/// in persisted history until remapped via `resolveElementID`).
 nonisolated struct KnowledgeCitation: Identifiable, Codable, Hashable, Sendable {
   var id: String { "\(key)|\(fragment)" }
 
@@ -83,6 +85,17 @@ nonisolated struct KnowledgeCitation: Identifiable, Codable, Hashable, Sendable 
     self.fragment = fragment
     self.sources = sources
   }
+
+  /// Resolves the citation target to a pack element UUID.
+  func elementID(store: KnowledgeStore? = .shared) -> UUID? {
+    if let uuid = UUID(uuidString: key) {
+      if let store {
+        return store.element(id: uuid) != nil ? uuid : nil
+      }
+      return uuid
+    }
+    return store?.resolveElementID(key)
+  }
 }
 
 extension Array where Element == KnowledgeCitation {
@@ -91,7 +104,7 @@ extension Array where Element == KnowledgeCitation {
   /// unverified targets.
   func existingInKnowledgeBase(store: KnowledgeStore? = .shared) -> [KnowledgeCitation] {
     guard let store else { return [] }
-    return filter { store.element(key: $0.key) != nil }
+    return filter { $0.elementID(store: store) != nil }
   }
 }
 

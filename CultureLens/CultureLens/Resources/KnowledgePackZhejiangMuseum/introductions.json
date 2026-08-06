@@ -1,6 +1,7 @@
 {
   "introductions": [
     {
+      "id": "cc5357fc-e089-511d-9166-86cdb144adef",
       "key": "zhijiang-campus.zhejiang-wannian-guobao",
       "name": "《浙江一万年》与五件国宝",
       "introduction": {
@@ -20,12 +21,13 @@
           }
         ]
       },
-      "culturalElementKey": "zhejiang-museum-history",
-      "attractionKey": "zhijiang-campus",
+      "culturalElementId": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7",
+      "attractionId": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "c30196ac-7113-5fdf-86b6-a9b250c4488b",
       "key": "fuchun-shanju-tu.on-display",
       "name": "剩山图展陈",
       "introduction": {
@@ -45,12 +47,13 @@
           }
         ]
       },
-      "culturalElementKey": "fuchun-shanju-tu",
-      "attractionKey": "fuchun-shanju-tu",
+      "culturalElementId": "03450361-df1d-50fc-89cc-848d880e1783",
+      "attractionId": "562d57eb-4410-5aed-9742-4fef593dde73",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "3fc8e5c1-c715-5ba8-b0df-2011a9adc717",
       "key": "zhijiang-campus.taigu-guqin",
       "name": "太古之音：古琴展厅",
       "introduction": {
@@ -70,12 +73,13 @@
           }
         ]
       },
-      "culturalElementKey": "guqin-world",
-      "attractionKey": "zhijiang-campus",
+      "culturalElementId": "c5978321-c18b-582e-bcac-e1990d4561ac",
+      "attractionId": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "babdee75-1d7d-592e-bbc7-e8b2adcbd5e1",
       "key": "gushan-campus.zhongyuan-wenge",
       "name": "园中馆、馆中园与文澜阁",
       "introduction": {
@@ -95,12 +99,13 @@
           }
         ]
       },
-      "culturalElementKey": "gushan-campus",
-      "attractionKey": "gushan-campus",
+      "culturalElementId": "917dfb28-49c6-5a13-975c-0901a3248fc5",
+      "attractionId": "49e6e5b7-7656-506e-966d-4889b903de31",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "b4ff9e8e-d21b-54e6-b0b3-435789170b3a",
       "key": "gushan-campus.kunshan-pianyu",
       "name": "昆山片玉：陶瓷陈列",
       "introduction": {
@@ -120,12 +125,13 @@
           }
         ]
       },
-      "culturalElementKey": "yue-kiln",
-      "attractionKey": "gushan-campus",
+      "culturalElementId": "7354cd7a-a6a2-56d7-b7a6-dfb871129047",
+      "attractionId": "49e6e5b7-7656-506e-966d-4889b903de31",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "fc211ad0-d322-5f31-b3b9-bb824c2f65b2",
       "key": "asoka-pagoda.on-display",
       "name": "阿育王塔展陈",
       "introduction": {
@@ -145,12 +151,13 @@
           }
         ]
       },
-      "culturalElementKey": "asoka-pagoda",
-      "attractionKey": "asoka-pagoda",
+      "culturalElementId": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
+      "attractionId": "2ac5840a-ee1a-5a45-b60b-8f2621b58a94",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "e0cc4c3d-b661-5ba2-8ce6-eb4a6abf590b",
       "key": "huang-binhong-memorial.qixialing",
       "name": "栖霞岭的黄宾虹晚年",
       "introduction": {
@@ -170,12 +177,13 @@
           }
         ]
       },
-      "culturalElementKey": "huang-binhong",
-      "attractionKey": "huang-binhong-memorial",
+      "culturalElementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
+      "attractionId": "3617c401-555e-5c3a-a818-7a2554886b0b",
       "latitude": 30.2589,
       "longitude": 120.1344
     },
     {
+      "id": "bdf9a18b-f88b-5397-b4c8-51aa27f44a16",
       "key": "huang-binhong-memorial.wuqian-zuoping",
       "name": "五千件作品与纪念室",
       "introduction": {
@@ -195,12 +203,13 @@
           }
         ]
       },
-      "culturalElementKey": "huang-binhong",
-      "attractionKey": "huang-binhong-memorial",
+      "culturalElementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
+      "attractionId": "3617c401-555e-5c3a-a818-7a2554886b0b",
       "latitude": 30.2589,
       "longitude": 120.1344
     },
     {
+      "id": "562b8103-e326-55c2-8d20-d775b1f9f5d2",
       "key": "sha-menghai-residence.longlu-du",
       "name": "龙游路的沙孟海旧居",
       "introduction": {
@@ -220,12 +229,13 @@
           }
         ]
       },
-      "culturalElementKey": "sha-menghai",
-      "attractionKey": "sha-menghai-residence",
+      "culturalElementId": "25847815-97a4-5692-860f-fa04a848bf53",
+      "attractionId": "a2184653-deae-5b85-bc3e-3752107d82cf",
       "latitude": 30.2622,
       "longitude": 120.1519
     },
     {
+      "id": "cde3c3cc-de7a-5299-a660-3e868432c3bb",
       "key": "sha-menghai-residence.shufa-zhuanke",
       "name": "书法、篆刻与浙博",
       "introduction": {
@@ -245,12 +255,13 @@
           }
         ]
       },
-      "culturalElementKey": "sha-menghai",
-      "attractionKey": "sha-menghai-residence",
+      "culturalElementId": "25847815-97a4-5692-860f-fa04a848bf53",
+      "attractionId": "a2184653-deae-5b85-bc3e-3752107d82cf",
       "latitude": 30.2622,
       "longitude": 120.1519
     },
     {
+      "id": "278a07cf-9a73-557e-88ae-d298c7ac1560",
       "key": "liangzhu-cong-wang.on-display",
       "name": "良渚玉琮王展陈",
       "introduction": {
@@ -266,12 +277,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-cong-wang",
-      "attractionKey": "jade-cong-wang",
+      "culturalElementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "attractionId": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "f9772bbc-f475-5abc-ab0a-f8a211b69464",
       "key": "cong-ritual-jade.on-display",
       "name": "琮礼器展陈",
       "introduction": {
@@ -287,12 +299,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-cong-ritual",
-      "attractionKey": "jade-cong-ritual",
+      "culturalElementId": "e5ac2ef8-9095-57a6-808c-43df7159b392",
+      "attractionId": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "37df49e0-337f-5b55-9e16-ac9c9ed003f6",
       "key": "hemudu-double-bird.on-display",
       "name": "双鸟朝阳纹牙雕展陈",
       "introduction": {
@@ -308,12 +321,13 @@
           }
         ]
       },
-      "culturalElementKey": "hemudu-double-bird",
-      "attractionKey": "hemudu-double-bird",
+      "culturalElementId": "7761fd8c-06f2-5e4a-8343-5144175672c2",
+      "attractionId": "64a8b3bf-f875-55fa-8f9b-5a618f4b0c1c",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "e8f4b19e-0b30-52f7-a2f3-0d7c85f82e11",
       "key": "zhejiang-yue-sword.on-display",
       "name": "越王者旨於睗剑展陈",
       "introduction": {
@@ -329,12 +343,13 @@
           }
         ]
       },
-      "culturalElementKey": "zhejiang-yue-sword",
-      "attractionKey": "zhejiang-yue-sword",
+      "culturalElementId": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+      "attractionId": "a84b4d12-e868-58c8-9220-f641c1e90255",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "7e868dd1-5afd-5cf4-887d-d45d326c6124",
       "key": "cai-feng-ming-qi.on-display",
       "name": "彩凤鸣岐琴展陈",
       "introduction": {
@@ -350,12 +365,13 @@
           }
         ]
       },
-      "culturalElementKey": "cai-feng-ming-qi",
-      "attractionKey": "cai-feng-ming-qi",
+      "culturalElementId": "b78c3e13-f4fd-5626-8150-4744854e50d8",
+      "attractionId": "beb47b78-8d66-5e73-b740-aadc9bbaabbc",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "e14600ae-f335-5366-87c2-d147bedd51ed",
       "key": "jiyue-bronze-house.on-display",
       "name": "伎乐铜屋展陈",
       "introduction": {
@@ -371,12 +387,13 @@
           }
         ]
       },
-      "culturalElementKey": "jiyue-bronze-house",
-      "attractionKey": "jiyue-bronze-house",
+      "culturalElementId": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
+      "attractionId": "b854e452-202c-5960-bcd9-6c873557535a",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "6d2e5602-8c1c-598d-ac7a-a5adc8697703",
       "key": "longquan-boat-drip.on-display",
       "name": "龙泉窑舟形砚滴展陈",
       "introduction": {
@@ -392,12 +409,13 @@
           }
         ]
       },
-      "culturalElementKey": "longquan-boat-drip",
-      "attractionKey": "longquan-boat-drip",
+      "culturalElementId": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
+      "attractionId": "68e7c909-3e8e-5b52-9933-b2c899c6afcf",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "f39c6fe6-db59-5740-8b3d-d105bdb71c9b",
       "key": "caisu-mud-bodhisattva.on-display",
       "name": "彩塑泥菩萨展陈",
       "introduction": {
@@ -413,12 +431,13 @@
           }
         ]
       },
-      "culturalElementKey": "caisu-mud-bodhisattva",
-      "attractionKey": "caisu-mud-bodhisattva",
+      "culturalElementId": "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272",
+      "attractionId": "e3f2a77b-d4ce-5c19-8d40-e39ee90b7078",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "339e4605-c9cc-5f43-8e9d-0dbaae16e8cf",
       "key": "wan-gong-jiao.on-display",
       "name": "万工轿展陈",
       "introduction": {
@@ -434,12 +453,13 @@
           }
         ]
       },
-      "culturalElementKey": "wan-gong-jiao",
-      "attractionKey": "wan-gong-jiao",
+      "culturalElementId": "5429373a-0fd2-5912-b210-49ad3bcdc724",
+      "attractionId": "c843da49-7cb4-5f6c-8a8c-5d21052d68fe",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "2d32a982-cace-55f3-82be-e2e78fddc3cc",
       "key": "zhang-cheng-red-lacquer.on-display",
       "name": "张成剔红盘展陈",
       "introduction": {
@@ -455,12 +475,13 @@
           }
         ]
       },
-      "culturalElementKey": "zhang-cheng-red-lacquer",
-      "attractionKey": "zhang-cheng-red-lacquer",
+      "culturalElementId": "e50f9576-9d0d-506d-a71d-e893854c5e5f",
+      "attractionId": "b831e26f-5a8a-5a50-8ca1-2f80d7c74cb3",
       "latitude": 30.25333333,
       "longitude": 120.13888889
     },
     {
+      "id": "1cf6b855-7426-5622-8642-390d8305e674",
       "key": "hemudu-painted-pottery.on-display",
       "name": "河姆渡绘纹陶展陈",
       "introduction": {
@@ -476,12 +497,13 @@
           }
         ]
       },
-      "culturalElementKey": "hemudu-painted-pottery",
-      "attractionKey": "hemudu-painted-pottery",
+      "culturalElementId": "ac565d24-9a02-5a99-8acc-cb885f30883d",
+      "attractionId": "398dfaf3-8b22-51f9-8fee-3f6412549aa4",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "6c1ce2fd-3184-5c1b-8f2e-031571e8bbfa",
       "key": "hemudu-bone-plough.on-display",
       "name": "河姆渡骨耜展陈",
       "introduction": {
@@ -497,12 +519,13 @@
           }
         ]
       },
-      "culturalElementKey": "hemudu-bone-plough",
-      "attractionKey": "hemudu-bone-plough",
+      "culturalElementId": "9abf276c-9bef-5142-8dda-d964bcdb8015",
+      "attractionId": "a98b42ef-06e2-567d-9409-b20920f310a6",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
     {
+      "id": "3430762c-0b78-5c8d-818f-dd055a2f5be8",
       "key": "zhijiang-campus.visit",
       "name": "之江馆区参观",
       "introduction": {
@@ -518,8 +541,8 @@
           }
         ]
       },
-      "culturalElementKey": "zhijiang-campus",
-      "attractionKey": "zhijiang-campus",
+      "culturalElementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9",
+      "attractionId": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
       "latitude": 30.16277778,
       "longitude": 120.0975
     }

@@ -73,9 +73,10 @@ nonisolated struct CultureConcept: Identifiable, Codable, Hashable {
   }
 }
 
-nonisolated struct CultureObject: Identifiable, Codable, Hashable {
+nonisolated struct CultureObject: Identifiable, Hashable {
   var id: UUID
-  var culturalElementKey: String? = nil
+  /// Pack cultural-element UUID when the object is bound to the knowledge pack.
+  var culturalElementID: UUID? = nil
   var canonicalName: String
   var summary: String
   var category: ObjectCategory
@@ -86,6 +87,74 @@ nonisolated struct CultureObject: Identifiable, Codable, Hashable {
   var concepts: [CultureConcept]
   var relations: [CultureRelation]
   var sources: [KnowledgeSource]
+}
+
+extension CultureObject: Codable {
+  enum CodingKeys: String, CodingKey {
+    case id
+    case culturalElementID
+    case culturalElementKey
+    case canonicalName
+    case summary
+    case category
+    case timePeriod
+    case region
+    case confidence
+    case artworkSymbol
+    case concepts
+    case relations
+    case sources
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(UUID.self, forKey: .id)
+    if container.contains(.culturalElementID),
+      !(try container.decodeNil(forKey: .culturalElementID))
+    {
+      if let uuid = try? container.decode(UUID.self, forKey: .culturalElementID) {
+        culturalElementID = uuid
+      } else {
+        let raw = try container.decode(String.self, forKey: .culturalElementID)
+        culturalElementID = raw.isEmpty
+          ? nil
+          : DeterministicID.resolveCulturalElementID(from: raw)
+      }
+    } else if let legacy = try container.decodeIfPresent(String.self, forKey: .culturalElementKey),
+      !legacy.isEmpty
+    {
+      // UUID string or kebab slug (pack IDs are UUIDv5(slug)).
+      culturalElementID = DeterministicID.resolveCulturalElementID(from: legacy)
+    } else {
+      culturalElementID = nil
+    }
+    canonicalName = try container.decode(String.self, forKey: .canonicalName)
+    summary = try container.decode(String.self, forKey: .summary)
+    category = try container.decode(ObjectCategory.self, forKey: .category)
+    timePeriod = try container.decodeIfPresent(String.self, forKey: .timePeriod)
+    region = try container.decodeIfPresent(String.self, forKey: .region)
+    confidence = try container.decode(Double.self, forKey: .confidence)
+    artworkSymbol = try container.decode(String.self, forKey: .artworkSymbol)
+    concepts = try container.decodeIfPresent([CultureConcept].self, forKey: .concepts) ?? []
+    relations = try container.decodeIfPresent([CultureRelation].self, forKey: .relations) ?? []
+    sources = try container.decodeIfPresent([KnowledgeSource].self, forKey: .sources) ?? []
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
+    try container.encodeIfPresent(culturalElementID, forKey: .culturalElementID)
+    try container.encode(canonicalName, forKey: .canonicalName)
+    try container.encode(summary, forKey: .summary)
+    try container.encode(category, forKey: .category)
+    try container.encodeIfPresent(timePeriod, forKey: .timePeriod)
+    try container.encodeIfPresent(region, forKey: .region)
+    try container.encode(confidence, forKey: .confidence)
+    try container.encode(artworkSymbol, forKey: .artworkSymbol)
+    try container.encode(concepts, forKey: .concepts)
+    try container.encode(relations, forKey: .relations)
+    try container.encode(sources, forKey: .sources)
+  }
 }
 
 nonisolated enum RelationKind: String, Codable, Hashable, CaseIterable {
@@ -115,8 +184,8 @@ nonisolated extension CultureObject {
   /// 知识库元素 → 展示用对象（图谱节点页、追问等场景复用扫描结果页）。
   init(knowledgeElement element: KnowledgePack.Element) {
     self.init(
-      id: DeterministicID.culturalElement(element.key),
-      culturalElementKey: element.key,
+      id: element.id,
+      culturalElementID: element.id,
       canonicalName: element.name,
       summary: KnowledgeStore.richTextPlainText(element.introduction),
       category: .other,
@@ -131,10 +200,10 @@ nonisolated extension CultureObject {
   }
 
   /// 图谱概念 → 展示用对象。
-  init(knowledgeConcept concept: CultureConcept, elementKey: String?) {
+  init(knowledgeConcept concept: CultureConcept, elementID: UUID?) {
     self.init(
       id: concept.id,
-      culturalElementKey: elementKey,
+      culturalElementID: elementID ?? concept.id,
       canonicalName: concept.name,
       summary: concept.summary,
       category: .other,
@@ -181,10 +250,10 @@ nonisolated struct RecognitionInput: Sendable {
   }
 }
 
-nonisolated struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
+nonisolated struct RecognitionCandidate: Identifiable, Hashable, Sendable {
   let id: UUID
-  var attractionKey: String? = nil
-  var culturalElementKey: String? = nil
+  var attractionID: UUID? = nil
+  var culturalElementID: UUID? = nil
   var canonicalName: String
   var category: ObjectCategory
   var confidence: Double
@@ -208,7 +277,7 @@ nonisolated struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendab
   var cultureObject: CultureObject {
     CultureObject(
       id: id,
-      culturalElementKey: culturalElementKey,
+      culturalElementID: culturalElementID,
       canonicalName: canonicalName,
       summary: informativeSummary ?? Self.missingIntroductionSummary,
       category: category,
@@ -244,6 +313,92 @@ nonisolated struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendab
 
   private static func normalizedText(_ value: String) -> String {
     value.filter { !$0.isWhitespace }.lowercased()
+  }
+}
+
+extension RecognitionCandidate: Codable {
+  enum CodingKeys: String, CodingKey {
+    case id
+    case attractionID
+    case attractionKey
+    case culturalElementID
+    case culturalElementKey
+    case canonicalName
+    case category
+    case confidence
+    case rationale
+    case summary
+    case timePeriod
+    case region
+    case artworkSymbol
+    case sources
+    case resolutionStatus
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(UUID.self, forKey: .id)
+    if container.contains(.attractionID),
+      !(try container.decodeNil(forKey: .attractionID))
+    {
+      if let uuid = try? container.decode(UUID.self, forKey: .attractionID) {
+        attractionID = uuid
+      } else {
+        let raw = try container.decode(String.self, forKey: .attractionID)
+        attractionID = raw.isEmpty ? nil : DeterministicID.resolveAttractionID(from: raw)
+      }
+    } else if let legacy = try container.decodeIfPresent(String.self, forKey: .attractionKey),
+      !legacy.isEmpty
+    {
+      attractionID = DeterministicID.resolveAttractionID(from: legacy)
+    } else {
+      attractionID = nil
+    }
+    if container.contains(.culturalElementID),
+      !(try container.decodeNil(forKey: .culturalElementID))
+    {
+      if let uuid = try? container.decode(UUID.self, forKey: .culturalElementID) {
+        culturalElementID = uuid
+      } else {
+        let raw = try container.decode(String.self, forKey: .culturalElementID)
+        culturalElementID = raw.isEmpty
+          ? nil
+          : DeterministicID.resolveCulturalElementID(from: raw)
+      }
+    } else if let legacy = try container.decodeIfPresent(String.self, forKey: .culturalElementKey),
+      !legacy.isEmpty
+    {
+      culturalElementID = DeterministicID.resolveCulturalElementID(from: legacy)
+    } else {
+      culturalElementID = nil
+    }
+    canonicalName = try container.decode(String.self, forKey: .canonicalName)
+    category = try container.decode(ObjectCategory.self, forKey: .category)
+    confidence = try container.decode(Double.self, forKey: .confidence)
+    rationale = try container.decode(String.self, forKey: .rationale)
+    summary = try container.decodeIfPresent(String.self, forKey: .summary)
+    timePeriod = try container.decodeIfPresent(String.self, forKey: .timePeriod)
+    region = try container.decodeIfPresent(String.self, forKey: .region)
+    artworkSymbol = try container.decodeIfPresent(String.self, forKey: .artworkSymbol)
+    sources = try container.decodeIfPresent([KnowledgeSource].self, forKey: .sources)
+    resolutionStatus = try container.decodeIfPresent(String.self, forKey: .resolutionStatus)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
+    try container.encodeIfPresent(attractionID, forKey: .attractionID)
+    try container.encodeIfPresent(culturalElementID, forKey: .culturalElementID)
+    try container.encode(canonicalName, forKey: .canonicalName)
+    try container.encode(category, forKey: .category)
+    try container.encode(confidence, forKey: .confidence)
+    try container.encode(rationale, forKey: .rationale)
+    try container.encodeIfPresent(summary, forKey: .summary)
+    try container.encodeIfPresent(timePeriod, forKey: .timePeriod)
+    try container.encodeIfPresent(region, forKey: .region)
+    try container.encodeIfPresent(artworkSymbol, forKey: .artworkSymbol)
+    try container.encodeIfPresent(sources, forKey: .sources)
+    try container.encodeIfPresent(resolutionStatus, forKey: .resolutionStatus)
   }
 }
 

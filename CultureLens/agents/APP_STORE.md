@@ -8,12 +8,11 @@
 
 ## ODR（On-Demand Resources）
 
-- Tag：`knowledge-base`，内容 = 西湖包 sidecar（`knowledge-pack.json` + `elements-sight.json` + `elements-history.json` + `introductions.json` + `themes.json` + `locales-en.json` + `pack-manifest.json`）。
-- 良渚 / 浙博 / 中国历史包作为普通 bundle 资源（`KnowledgePackLiangzhu` 等子目录）打进 App，运行时与西湖包合并。
-- 工程配置：西湖包以显式 file reference 加入 Resources phase，`ASSET_TAGS = ("knowledge-base")`；通过 `membershipExceptions` 避免与同步 group 重复打包。其余三包用 `explicitFolders` 保留子目录，避免同名 JSON 互相覆盖。
-- 当前设置 `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base"`：西湖 asset pack **随 App 首装一起下发**；将来可拆独立 tag 做按需下载。
+- 四个独立 tag：西湖 `knowledge-base`、中国历史 `knowledge-chinese-history`、良渚 `knowledge-liangzhu`、浙博 `knowledge-zhejiang-museum`。每包内容均为 `knowledge-pack.json` + `elements-sight.json` + `elements-history.json` + `introductions.json` + `themes.json` + `locales-en.json` + `pack-manifest.json`。
+- 工程配置：四个目录的文件均以显式 file reference 加入 Resources phase，并分别配置 `ASSET_TAGS`；同步 group 的 `membershipExceptions` 排除这些路径，避免主 bundle 重复打包和同名 JSON 冲突。
+- `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS` 当前包含全部四个 tag：四个 asset pack **随 App 首装一起下发**，同时保留逐包状态检查和重新下载能力。
 - 上传：Xcode 归档上传时 asset pack 自动随构建上传到 App Store Connect，无需额外操作。
-- 验证：归档后确认 `Products/OnDemandResources/` 存在、`OnDemandResources.plist` 含 `knowledge-base` tag（2026-08-02 已验证）；App 包内应可见 `KnowledgePackLiangzhu` 等目录。
+- 验证：归档后确认 `Products/OnDemandResources/` 存在四个 asset pack，`OnDemandResources.plist` 含四个 tag；主 App bundle 不应再包含这些知识 JSON。2026-08-06 已用通用 iOS Simulator build 验证四包拆分与 initial-install manifest。
 - 注意：ODR 内容随 App 版本发布，不能独立热更新；`pack-manifest.json` 的 `packVersion`/`sha256` 为将来多包或自托管下发预留。
 
 ## LLM Key

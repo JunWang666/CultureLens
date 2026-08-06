@@ -4,6 +4,10 @@ import Foundation
 /// `Resources/KnowledgePack*/` (sidecar layout: slim `knowledge-pack.json`
 /// plus `elements-sight` / `elements-history` / `introductions` / `themes` /
 /// `locales-<lang>`). Assembled at load time by `KnowledgeStore.loadPack`.
+///
+/// Primary identity is `id` (UUIDv5 from the legacy slug, matching
+/// `DeterministicID`). Optional `key` retains the human-readable slug for
+/// migration, debugging, and display.
 nonisolated struct KnowledgePack: Decodable, Sendable {
   let version: String
   /// BCP-47 tag for the primary text fields (name / introduction). Defaults to zh-Hans.
@@ -14,8 +18,8 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   let introductions: [IntroductionRecord]
   /// Themed exploration tracks. Older packs may omit this field.
   let themes: [Theme]
-  /// Optional translated overlays keyed by BCP-47 tag (e.g. "en"). May be empty
-  /// until multilingual packs ship; runtime falls back to `dynamic/chat` translation.
+  /// Optional translated overlays keyed by BCP-47 tag (e.g. "en"). Overlay
+  /// maps inside are keyed by entity UUID string.
   let locales: [String: LocaleOverlay]?
 
   /// External trusted reference attached to an element or on-site introduction.
@@ -71,7 +75,8 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       KnowledgePublisherDisplay.name(for: publisher)
     }
 
-    func asKnowledgeSource() -> KnowledgeSource {      let identity = (url ?? title).trimmingCharacters(in: .whitespacesAndNewlines)
+    func asKnowledgeSource() -> KnowledgeSource {
+      let identity = (url ?? title).trimmingCharacters(in: .whitespacesAndNewlines)
       // Percent-encode non-ASCII paths so Link/openURL can open Wikipedia CN URLs.
       let resolvedURL = url.flatMap { raw -> URL? in
         if let url = URL(string: raw) { return url }
@@ -87,8 +92,10 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
-  nonisolated struct Element: Decodable, Sendable {
-    let key: String
+  nonisolated struct Element: Decodable, Sendable, Identifiable {
+    let id: UUID
+    /// Optional human-readable slug (legacy key). Always present in shipped packs.
+    let key: String?
     let name: String
     let introduction: RichTextDocument
     let sources: [Source]
@@ -99,13 +106,15 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let contentRole: String?
 
     init(
-      key: String,
+      id: UUID,
+      key: String? = nil,
       name: String,
       introduction: RichTextDocument,
       sources: [Source] = [],
       conceptKind: String? = nil,
       contentRole: String? = nil
     ) {
+      self.id = id
       self.key = key
       self.name = name
       self.introduction = introduction
@@ -114,13 +123,46 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       self.contentRole = contentRole
     }
 
+    /// Convenience for tests / fixtures that still mint identity from a slug.
+    init(
+      key: String,
+      name: String,
+      introduction: RichTextDocument,
+      sources: [Source] = [],
+      conceptKind: String? = nil,
+      contentRole: String? = nil
+    ) {
+      self.init(
+        id: DeterministicID.culturalElement(key),
+        key: key,
+        name: name,
+        introduction: introduction,
+        sources: sources,
+        conceptKind: conceptKind,
+        contentRole: contentRole
+      )
+    }
+
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources, conceptKind, contentRole
+      case id, key, name, introduction, sources, conceptKind, contentRole
     }
 
     init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      key = try container.decode(String.self, forKey: .key)
+      let decodedKey = try container.decodeIfPresent(String.self, forKey: .key)
+      if let decodedID = try container.decodeIfPresent(UUID.self, forKey: .id) {
+        id = decodedID
+      } else if let decodedKey {
+        // Legacy monolith / test fixtures that only carry a slug.
+        id = DeterministicID.culturalElement(decodedKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .id,
+          in: container,
+          debugDescription: "Element requires id or key"
+        )
+      }
+      key = decodedKey
       name = try container.decode(String.self, forKey: .name)
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
@@ -128,16 +170,18 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       contentRole = try container.decodeIfPresent(String.self, forKey: .contentRole)
     }
 
-    /// Resolved role: explicit `contentRole`, else infer from attraction keys.
+    /// Resolved role: explicit `contentRole`, else infer from attraction slugs.
     func resolvedContentRole(attractionKeys: Set<String> = []) -> ContentRole {
       if let contentRole, let role = ContentRole(rawValue: contentRole) {
         return role
       }
-      return attractionKeys.contains(key) ? .sight : .history
+      if let key, attractionKeys.contains(key) { return .sight }
+      return .history
     }
 
     func withContentRole(_ role: ContentRole) -> Element {
       Element(
+        id: id,
         key: key,
         name: name,
         introduction: introduction,
@@ -146,45 +190,122 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
         contentRole: role.rawValue
       )
     }
+
+    /// Stable sort key: name then slug then UUID.
+    var sortKey: String { key ?? id.uuidString }
   }
 
-  nonisolated struct Attraction: Decodable, Sendable {
-    let key: String
+  nonisolated struct Attraction: Decodable, Sendable, Identifiable {
+    let id: UUID
+    let key: String?
     let name: String
 
-    init(key: String, name: String) {
+    init(id: UUID, key: String? = nil, name: String) {
+      self.id = id
       self.key = key
       self.name = name
     }
+
+    init(key: String, name: String) {
+      self.init(id: DeterministicID.attraction(key), key: key, name: name)
+    }
+
+    enum CodingKeys: String, CodingKey {
+      case id, key, name
+    }
+
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      let decodedKey = try container.decodeIfPresent(String.self, forKey: .key)
+      if let decodedID = try container.decodeIfPresent(UUID.self, forKey: .id) {
+        id = decodedID
+      } else if let decodedKey {
+        id = DeterministicID.attraction(decodedKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .id,
+          in: container,
+          debugDescription: "Attraction requires id or key"
+        )
+      }
+      key = decodedKey
+      name = try container.decode(String.self, forKey: .name)
+    }
+
+    var sortKey: String { key ?? id.uuidString }
   }
 
   nonisolated struct Relation: Decodable, Sendable {
-    let elementKey: String
-    let relatedElementKey: String
+    let elementId: UUID
+    let relatedElementId: UUID
     /// Optional `RelationKind.rawValue`; omitted in older packs.
     let kind: String?
     /// Human-readable edge gloss; omitted in older packs.
     let explanation: String?
 
     init(
+      elementId: UUID,
+      relatedElementId: UUID,
+      kind: String? = nil,
+      explanation: String? = nil
+    ) {
+      self.elementId = elementId
+      self.relatedElementId = relatedElementId
+      self.kind = kind
+      self.explanation = explanation
+    }
+
+    /// Test / legacy convenience from slugs.
+    init(
       elementKey: String,
       relatedElementKey: String,
       kind: String? = nil,
       explanation: String? = nil
     ) {
-      self.elementKey = elementKey
-      self.relatedElementKey = relatedElementKey
-      self.kind = kind
-      self.explanation = explanation
+      self.init(
+        elementId: DeterministicID.culturalElement(elementKey),
+        relatedElementId: DeterministicID.culturalElement(relatedElementKey),
+        kind: kind,
+        explanation: explanation
+      )
+    }
+
+    enum CodingKeys: String, CodingKey {
+      case elementId, relatedElementId, kind, explanation
+      case elementKey, relatedElementKey
+    }
+
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      if let elementId = try container.decodeIfPresent(UUID.self, forKey: .elementId),
+        let relatedElementId = try container.decodeIfPresent(UUID.self, forKey: .relatedElementId)
+      {
+        self.elementId = elementId
+        self.relatedElementId = relatedElementId
+      } else if let elementKey = try container.decodeIfPresent(String.self, forKey: .elementKey),
+        let relatedElementKey = try container.decodeIfPresent(String.self, forKey: .relatedElementKey)
+      {
+        self.elementId = DeterministicID.culturalElement(elementKey)
+        self.relatedElementId = DeterministicID.culturalElement(relatedElementKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .elementId,
+          in: container,
+          debugDescription: "Relation requires elementId/relatedElementId or legacy keys"
+        )
+      }
+      kind = try container.decodeIfPresent(String.self, forKey: .kind)
+      explanation = try container.decodeIfPresent(String.self, forKey: .explanation)
     }
   }
 
-  nonisolated struct IntroductionRecord: Decodable, Sendable {
-    let key: String
+  nonisolated struct IntroductionRecord: Decodable, Sendable, Identifiable {
+    let id: UUID
+    let key: String?
     let name: String
     let introduction: RichTextDocument
-    let culturalElementKey: String
-    let attractionKey: String
+    let culturalElementId: UUID
+    let attractionId: UUID
     let latitude: Double
     let longitude: Double
     /// Raw coordinate provenance URL from the pack (Wikipedia, Amap, …).
@@ -193,6 +314,35 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     /// pack omits an explicit `sources` array.
     let sources: [Source]
 
+    init(
+      id: UUID,
+      key: String? = nil,
+      name: String,
+      introduction: RichTextDocument,
+      culturalElementId: UUID,
+      attractionId: UUID,
+      latitude: Double,
+      longitude: Double,
+      coordinateSourceUrl: String? = nil,
+      sources: [Source] = []
+    ) {
+      self.id = id
+      self.key = key
+      self.name = name
+      self.introduction = introduction
+      self.culturalElementId = culturalElementId
+      self.attractionId = attractionId
+      self.latitude = latitude
+      self.longitude = longitude
+      self.coordinateSourceUrl = coordinateSourceUrl
+      if sources.isEmpty, let coordinateSourceUrl, !coordinateSourceUrl.isEmpty {
+        self.sources = [Source.inferred(from: coordinateSourceUrl)]
+      } else {
+        self.sources = sources
+      }
+    }
+
+    /// Test / legacy convenience from slugs.
     init(
       key: String,
       name: String,
@@ -204,33 +354,70 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       coordinateSourceUrl: String? = nil,
       sources: [Source] = []
     ) {
-      self.key = key
-      self.name = name
-      self.introduction = introduction
-      self.culturalElementKey = culturalElementKey
-      self.attractionKey = attractionKey
-      self.latitude = latitude
-      self.longitude = longitude
-      self.coordinateSourceUrl = coordinateSourceUrl
-      if sources.isEmpty, let coordinateSourceUrl, !coordinateSourceUrl.isEmpty {
-        self.sources = [Source.inferred(from: coordinateSourceUrl)]
-      } else {
-        self.sources = sources
-      }
+      self.init(
+        id: DeterministicID.introduction(key),
+        key: key,
+        name: name,
+        introduction: introduction,
+        culturalElementId: DeterministicID.culturalElement(culturalElementKey),
+        attractionId: DeterministicID.attraction(attractionKey),
+        latitude: latitude,
+        longitude: longitude,
+        coordinateSourceUrl: coordinateSourceUrl,
+        sources: sources
+      )
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, culturalElementKey, attractionKey
+      case id, key, name, introduction
+      case culturalElementId, attractionId
+      case culturalElementKey, attractionKey
       case latitude, longitude, coordinateSourceUrl, sources
     }
 
     init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      key = try container.decode(String.self, forKey: .key)
+      let decodedKey = try container.decodeIfPresent(String.self, forKey: .key)
+      if let decodedID = try container.decodeIfPresent(UUID.self, forKey: .id) {
+        id = decodedID
+      } else if let decodedKey {
+        id = DeterministicID.introduction(decodedKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .id,
+          in: container,
+          debugDescription: "Introduction requires id or key"
+        )
+      }
+      key = decodedKey
       name = try container.decode(String.self, forKey: .name)
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
-      culturalElementKey = try container.decode(String.self, forKey: .culturalElementKey)
-      attractionKey = try container.decode(String.self, forKey: .attractionKey)
+      if let culturalElementId = try container.decodeIfPresent(UUID.self, forKey: .culturalElementId) {
+        self.culturalElementId = culturalElementId
+      } else if let culturalElementKey = try container.decodeIfPresent(
+        String.self,
+        forKey: .culturalElementKey
+      ) {
+        self.culturalElementId = DeterministicID.culturalElement(culturalElementKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .culturalElementId,
+          in: container,
+          debugDescription: "Introduction requires culturalElementId or culturalElementKey"
+        )
+      }
+      if let attractionId = try container.decodeIfPresent(UUID.self, forKey: .attractionId) {
+        self.attractionId = attractionId
+      } else if let attractionKey = try container.decodeIfPresent(String.self, forKey: .attractionKey)
+      {
+        self.attractionId = DeterministicID.attraction(attractionKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .attractionId,
+          in: container,
+          debugDescription: "Introduction requires attractionId or attractionKey"
+        )
+      }
       latitude = try container.decode(Double.self, forKey: .latitude)
       longitude = try container.decode(Double.self, forKey: .longitude)
       coordinateSourceUrl = try container.decodeIfPresent(String.self, forKey: .coordinateSourceUrl)
@@ -244,19 +431,36 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
         sources = decodedSources
       }
     }
+
+    var sortKey: String { key ?? id.uuidString }
   }
 
-  /// A curated exploration path that binds a set of cultural element keys
+  /// A curated exploration path that binds a set of cultural element IDs
   /// and a completion threshold (`minContacted`).
   nonisolated struct Theme: Decodable, Sendable, Identifiable, Hashable {
-    var id: String { key }
-
-    let key: String
+    let id: UUID
+    let key: String?
     let name: String
     let summary: String
-    let elementKeys: [String]
+    let elementIds: [UUID]
     /// Number of theme elements the user must have joined the graph for.
     let minContacted: Int
+
+    init(
+      id: UUID,
+      key: String? = nil,
+      name: String,
+      summary: String,
+      elementIds: [UUID],
+      minContacted: Int
+    ) {
+      self.id = id
+      self.key = key
+      self.name = name
+      self.summary = summary
+      self.elementIds = elementIds
+      self.minContacted = minContacted
+    }
 
     init(
       key: String,
@@ -265,12 +469,48 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       elementKeys: [String],
       minContacted: Int
     ) {
-      self.key = key
-      self.name = name
-      self.summary = summary
-      self.elementKeys = elementKeys
-      self.minContacted = minContacted
+      self.init(
+        id: DeterministicID.theme(key),
+        key: key,
+        name: name,
+        summary: summary,
+        elementIds: elementKeys.map(DeterministicID.culturalElement),
+        minContacted: minContacted
+      )
     }
+
+    enum CodingKeys: String, CodingKey {
+      case id, key, name, summary, elementIds, minContacted, elementKeys
+    }
+
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      let decodedKey = try container.decodeIfPresent(String.self, forKey: .key)
+      if let decodedID = try container.decodeIfPresent(UUID.self, forKey: .id) {
+        id = decodedID
+      } else if let decodedKey {
+        id = DeterministicID.theme(decodedKey)
+      } else {
+        throw DecodingError.dataCorruptedError(
+          forKey: .id,
+          in: container,
+          debugDescription: "Theme requires id or key"
+        )
+      }
+      key = decodedKey
+      name = try container.decode(String.self, forKey: .name)
+      summary = try container.decode(String.self, forKey: .summary)
+      if let ids = try container.decodeIfPresent([UUID].self, forKey: .elementIds) {
+        elementIds = ids
+      } else if let keys = try container.decodeIfPresent([String].self, forKey: .elementKeys) {
+        elementIds = keys.map(DeterministicID.culturalElement)
+      } else {
+        elementIds = []
+      }
+      minContacted = try container.decode(Int.self, forKey: .minContacted)
+    }
+
+    var sortKey: String { key ?? id.uuidString }
   }
 
   enum CodingKeys: String, CodingKey {
@@ -321,7 +561,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
 
   /// Stamps `contentRole` from attractions membership when the field is absent.
   func withStampedContentRoles() -> KnowledgePack {
-    let attractionKeys = Set(attractions.map(\.key))
+    let attractionKeys = Set(attractions.compactMap(\.key))
     let stamped = elements.map { element in
       let role = element.resolvedContentRole(attractionKeys: attractionKeys)
       return element.contentRole == role.rawValue ? element : element.withContentRole(role)

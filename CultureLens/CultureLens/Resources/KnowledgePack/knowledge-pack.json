@@ -1,688 +1,688 @@
 {
-  "version": "hangzhou-west-lake-v5",
+  "version": "hangzhou-west-lake-v6",
   "source_language": "zh-Hans",
   "relations": [
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "west-lake-cultural-landscape",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
       "kind": "位于",
       "explanation": "三潭印月是西湖文化景观中的标志性构景点，人工标志与诗意观看在此叠加。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "three-pools-stone-pagodas",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "67c74434-c86f-5d34-bba5-927ae2affcd7",
       "kind": "组成",
       "explanation": "三座水中石塔是三潭印月最醒目的实体，承担水域标志与构景焦点。"
     },
     {
-      "elementKey": "three-pools-stone-pagodas",
-      "relatedElementKey": "three-pools-round-openings",
+      "elementId": "67c74434-c86f-5d34-bba5-927ae2affcd7",
+      "relatedElementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
       "kind": "组成",
       "explanation": "每座石塔塔身分布圆孔，是灯光与月影故事的视觉入口。"
     },
     {
-      "elementKey": "three-pools-round-openings",
-      "relatedElementKey": "three-pools-light-mechanism",
+      "elementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
+      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9",
       "kind": "理解前先懂",
       "explanation": "先认识塔身圆孔，才能理解月光、塔灯与水面如何共同『印月』。"
     },
     {
-      "elementKey": "west-lake-moon-viewing",
-      "relatedElementKey": "three-pools-light-mechanism",
+      "elementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9",
       "kind": "解释",
       "explanation": "西湖月景如何被机制化地营造，可以从三潭塔孔、灯影与倒影看懂。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "northern-song-three-pools",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
       "kind": "产生于",
       "explanation": "今日所见三潭石塔传统，源于北宋苏轼疏浚时树立的水面界标。"
     },
     {
-      "elementKey": "northern-song-three-pools",
-      "relatedElementKey": "su-shi-and-west-lake",
+      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
       "kind": "解释",
       "explanation": "北宋三潭石塔的治理语境，要放到苏轼主持疏浚的线索中理解。"
     },
     {
-      "elementKey": "northern-song-three-pools",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "体现",
       "explanation": "以有限水面标志组织远近虚实，呼应宋代在约束视角中安排光影的审美。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "xiaoyingzhou-lake-garden",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
       "kind": "位于",
       "explanation": "三潭石塔立于小瀛洲外湖面，岛上桥岸亭树支撑这一景的可走可观。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "west-lake-garden-framing",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
       "kind": "用于",
       "explanation": "桥、岸、树木与亭台把三潭纳入框景借景，引导视线组织远山与倒影。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "mid-autumn-west-lake",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
       "kind": "象征",
       "explanation": "塔孔灯影与圆月意象，把团圆清赏的象征压缩进同一景名。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "west-lake-moon-viewing",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
       "kind": "体现",
       "explanation": "塔孔、灯影、月色与水波倒影，把西湖月景营造浓缩为一景。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "west-lake-ten-scenes-system",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
       "kind": "位于",
       "explanation": "三潭印月是南宋西湖十景体系中的核心景目之一。"
     },
     {
-      "elementKey": "three-pools-mirroring-moon",
-      "relatedElementKey": "leifeng-pagoda-and-evening-glow",
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "kind": "相似于",
       "explanation": "从三潭水域常把雷峰塔纳入远景，同属湖上塔影与夕照月色的对位关系。"
     },
     {
-      "elementKey": "one-yuan-three-pools-symbol",
-      "relatedElementKey": "three-pools-mirroring-moon",
+      "elementId": "e58c5e31-a4b0-5cac-bc18-58a88dda0fe6",
+      "relatedElementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
       "kind": "产生于",
       "explanation": "一元纸币背面图景取自三潭印月，使石塔成为高辨识度的国家图像符号。"
     },
     {
-      "elementKey": "mid-autumn-festival",
-      "relatedElementKey": "mid-autumn-west-lake",
+      "elementId": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
+      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
       "kind": "理解前先懂",
       "explanation": "先了解中秋节团圆赏月的习俗，才能理解西湖中秋夜游的传统。"
     },
     {
-      "elementKey": "mid-autumn-west-lake",
-      "relatedElementKey": "pinghu-autumn-moon",
+      "elementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
+      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
       "kind": "组成",
       "explanation": "中秋西湖赏月常把平湖秋月与三潭印月并置，展示两种月题。"
     },
     {
-      "elementKey": "xiaoyingzhou-lake-garden",
-      "relatedElementKey": "nested-chinese-garden",
+      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
+      "relatedElementId": "21117b05-6804-5961-986f-166884c84f64",
       "kind": "制作采用",
       "explanation": "岛上再分内湖、堤岸与小岛，采用湖中湖、岛中岛的多层嵌套手法。"
     },
     {
-      "elementKey": "xiaoyingzhou-lake-garden",
-      "relatedElementKey": "west-lake-garden-framing",
+      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
       "kind": "制作采用",
       "explanation": "小瀛洲以桥、岸、亭、树切分视域，把借景与框景落实为可步行的取景。"
     },
     {
-      "elementKey": "nested-chinese-garden",
-      "relatedElementKey": "moving-view-changing-scenery",
+      "elementId": "21117b05-6804-5961-986f-166884c84f64",
+      "relatedElementId": "0512b97c-833f-5004-bd51-8822cd29ed3e",
       "kind": "理解前先懂",
       "explanation": "先理解湖中湖的嵌套边界，才能体会步移时同一景物如何不断改组。"
     },
     {
-      "elementKey": "moving-view-changing-scenery",
-      "relatedElementKey": "west-lake-garden-framing",
+      "elementId": "0512b97c-833f-5004-bd51-8822cd29ed3e",
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
       "kind": "体现",
       "explanation": "步移景异把框景借景从静止画框推展为连续行走中的动态取景。"
     },
     {
-      "elementKey": "west-lake-garden-framing",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "体现",
       "explanation": "有限边界引导视线、组织远近虚实，是宋代山水审美在园林现场的操作。"
     },
     {
-      "elementKey": "west-lake-ten-scenes",
-      "relatedElementKey": "southern-song-linan",
+      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
       "kind": "产生于",
       "explanation": "南宋临安时期，西湖成为都城游赏与题名之地，十景观看方式由此成型。"
     },
     {
-      "elementKey": "west-lake-ten-scenes",
-      "relatedElementKey": "west-lake-ten-scenes-system",
+      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
       "kind": "解释",
       "explanation": "十景观看方式的具体内容，就是南宋定名的十景体系。"
     },
     {
-      "elementKey": "southern-song-linan",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "f097d527-52d8-568b-890c-1325f4b99a40",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "体现",
       "explanation": "临安都城语境下的湖山题名，把宋代山水审美落实为可传诵的四字景目。"
     },
     {
-      "elementKey": "song-dynasty",
-      "relatedElementKey": "southern-song-linan",
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
       "kind": "理解前先懂",
       "explanation": "先知道宋室南渡的历史，才能理解南宋临安与西湖十景的关系。"
     },
     {
-      "elementKey": "song-dynasty",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "理解前先懂",
       "explanation": "先了解宋朝士大夫主政的时代气质，再理解宋代山水审美的简约与留白。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "poetic-landscape-naming",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806",
       "kind": "受规制于",
       "explanation": "十景以四字景名的诗画规则，约束各地点如何被观看与传诵。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "su-causeway-spring-dawn",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
       "kind": "组成",
       "explanation": "苏堤春晓是南宋十景之首，治湖长堤化作桃柳春景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "pinghu-autumn-moon",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
       "kind": "组成",
       "explanation": "平湖秋月以开阔湖面与秋夜月色列入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "nanping-evening-bell",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
       "kind": "组成",
       "explanation": "南屏晚钟把钟声、山体与黄昏纳入十景，提醒西湖体验也依赖声音。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "west-lake-winter-snow",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
       "kind": "组成",
       "explanation": "断桥残雪以雪后桥面的黑白对比列入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "quyuan-lotus-summer",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
       "kind": "组成",
       "explanation": "曲院风荷以夏日荷塘与风列入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "huagang-fish-viewing",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "7aa489c9-6efc-54da-8486-914cbab0267b",
       "kind": "组成",
       "explanation": "花港观鱼以曲池、鱼影与回廊列入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "liulang-wenying-soundscape",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
       "kind": "组成",
       "explanation": "柳浪闻莺把声景与春柳纳入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "shuangfeng-cloud-peaks",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "77347f66-53d0-5e01-a359-01bc66ca8330",
       "kind": "组成",
       "explanation": "双峰插云看重云雾、高度与远望位置的关系。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "leifeng-pagoda-and-evening-glow",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "kind": "组成",
       "explanation": "雷峰夕照以塔影与夕阳列入南宋十景。"
     },
     {
-      "elementKey": "west-lake-ten-scenes-system",
-      "relatedElementKey": "kangxi-southern-tours",
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
       "kind": "受到影响",
       "explanation": "康熙南巡为十景题匾立碑，景名由此钦定流传。"
     },
     {
-      "elementKey": "west-lake-new-ten-scenes",
-      "relatedElementKey": "west-lake-ten-scenes",
+      "elementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
       "kind": "受到影响",
       "explanation": "1985新十景延续南宋十景的构景与题名方法，把观看推向山林泉声。"
     },
     {
-      "elementKey": "westlake-revalued-scenes-2007",
-      "relatedElementKey": "west-lake-ten-scenes",
+      "elementId": "25635e69-6a12-599d-857c-450ba4c60d3b",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
       "kind": "受到影响",
       "explanation": "2007三评西湖十景把题名传统延伸到当代城市栖居与夜色。"
     },
     {
-      "elementKey": "yuan-qiantang-scenes",
-      "relatedElementKey": "west-lake-ten-scenes",
+      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
       "kind": "相似于",
       "explanation": "元代钱塘八景以『钱塘』统称湖江，与西湖十景同属题名组景传统。"
     },
     {
-      "elementKey": "yuan-qiantang-scenes",
-      "relatedElementKey": "qiantang-tide",
+      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
+      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba",
       "kind": "组成",
       "explanation": "钱塘八景把江潮与湖山并置，观潮由此进入题名组景体系。"
     },
     {
-      "elementKey": "west-lake-cultural-landscape",
-      "relatedElementKey": "west-lake-world-heritage",
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "relatedElementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef",
       "kind": "解释",
       "explanation": "西湖文化景观的普世价值，经由2011年列入世界遗产得到确认。"
     },
     {
-      "elementKey": "west-lake-world-heritage",
-      "relatedElementKey": "west-lake-ten-scenes-system",
+      "elementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
       "kind": "解释",
       "explanation": "西湖申遗的核心依据，要回到南宋以来十景题名的景观传统。"
     },
     {
-      "elementKey": "west-lake-causeway-waterworks",
-      "relatedElementKey": "su-shi-and-west-lake",
+      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
       "kind": "解释",
       "explanation": "西湖堤岸水利的形态，要从苏轼疏浚筑堤的治理讲起。"
     },
     {
-      "elementKey": "west-lake-causeway-waterworks",
-      "relatedElementKey": "bai-juyi-and-west-lake",
+      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "relatedElementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
       "kind": "解释",
       "explanation": "更早的白居易治湖，解释了堤岸与诗人治理记忆如何叠合。"
     },
     {
-      "elementKey": "su-causeway-spring-dawn",
-      "relatedElementKey": "su-shi-and-west-lake",
+      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
       "kind": "产生于",
       "explanation": "苏堤由苏轼治湖工程形成，水利设施由此化为可吟咏的春景。"
     },
     {
-      "elementKey": "su-causeway-spring-dawn",
-      "relatedElementKey": "causeway-willow-peach",
+      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+      "relatedElementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
       "kind": "组成",
       "explanation": "桃柳间植使长堤在春日被读成一条转动的彩色景观带。"
     },
     {
-      "elementKey": "causeway-willow-peach",
-      "relatedElementKey": "west-lake-causeway-waterworks",
+      "elementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
       "kind": "解释",
       "explanation": "堤上桃柳最初为护岸固堤而植，其由来要放到堤岸水利中理解。"
     },
     {
-      "elementKey": "yang-gong-causeway",
-      "relatedElementKey": "west-lake-causeway-waterworks",
+      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
       "kind": "组成",
       "explanation": "杨公堤延续堤岸水利传统，兼顾疏浚与游赏。"
     },
     {
-      "elementKey": "yang-gong-causeway",
-      "relatedElementKey": "ming-dynasty",
+      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "kind": "产生于",
       "explanation": "杨公堤为明代杨孟瑛疏浚西湖所筑。"
     },
     {
-      "elementKey": "ruangong-mound",
-      "relatedElementKey": "west-lake-causeway-waterworks",
+      "elementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
       "kind": "产生于",
       "explanation": "阮公墩为清代阮元疏浚西湖以葑泥堆成。"
     },
     {
-      "elementKey": "su-shi-and-west-lake",
-      "relatedElementKey": "song-dynasty",
+      "elementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "kind": "产生于",
       "explanation": "苏轼两仕杭州皆在北宋，其治湖与题咏是宋代士大夫文化的代表。"
     },
     {
-      "elementKey": "bai-juyi-and-west-lake",
-      "relatedElementKey": "tang-dynasty",
+      "elementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "kind": "产生于",
       "explanation": "白居易任杭州刺史在唐代，治湖与吟咏是唐代诗人刺史传统的代表。"
     },
     {
-      "elementKey": "west-lake-pagoda-landscape",
-      "relatedElementKey": "leifeng-pagoda-and-evening-glow",
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "kind": "组成",
       "explanation": "雷峰塔影是西湖塔影构景在南岸的一端。"
     },
     {
-      "elementKey": "west-lake-pagoda-landscape",
-      "relatedElementKey": "baochu-pagoda",
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
       "kind": "组成",
       "explanation": "保俶塔瘦影是西湖塔影构景在北岸的一端。"
     },
     {
-      "elementKey": "west-lake-pagoda-landscape",
-      "relatedElementKey": "liuhe-pagoda-river",
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "relatedElementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
       "kind": "组成",
       "explanation": "六和塔把塔影传统从湖畔延伸到江岸。"
     },
     {
-      "elementKey": "west-lake-pagoda-landscape",
-      "relatedElementKey": "west-lake-ten-scenes",
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
       "kind": "体现",
       "explanation": "塔与山脊、湖面的对位，是十景命名观看中常见的空间组织。"
     },
     {
-      "elementKey": "baochu-leifeng-twin-tower",
-      "relatedElementKey": "west-lake-pagoda-landscape",
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "relatedElementId": "359c601d-38fc-5368-ae98-929ad425dc77",
       "kind": "体现",
       "explanation": "保俶与雷峰隔湖南北对景，是塔影构景中最经典的双塔格局。"
     },
     {
-      "elementKey": "baochu-leifeng-twin-tower",
-      "relatedElementKey": "leifeng-pagoda-and-evening-glow",
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "kind": "组成",
       "explanation": "雷峰塔是南岸对景的一端，夕照轮廓与北岸瘦影互相标定。"
     },
     {
-      "elementKey": "baochu-leifeng-twin-tower",
-      "relatedElementKey": "baochu-pagoda",
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
       "kind": "组成",
       "explanation": "保俶塔是北岸对景的一端。"
     },
     {
-      "elementKey": "leifeng-pagoda-and-evening-glow",
-      "relatedElementKey": "legend-of-the-white-snake",
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
       "kind": "解释",
       "explanation": "雷峰塔的文化意义要从《白蛇传》讲起，并区分历史塔址与文学再创作。"
     },
     {
-      "elementKey": "leifeng-pagoda-and-evening-glow",
-      "relatedElementKey": "nanping-evening-bell",
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
       "kind": "相似于",
       "explanation": "雷峰夕照与南屏晚钟同属南岸黄昏体验，一重光色轮廓，一重钟声回响。"
     },
     {
-      "elementKey": "leifeng-pagoda-and-evening-glow",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "产生于",
       "explanation": "雷峰塔始建于五代吴越国，为钱俶供养舍利而建。"
     },
     {
-      "elementKey": "baochu-pagoda",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "产生于",
       "explanation": "保俶塔相传建于吴越国时期，为祈保钱俶平安而得名。"
     },
     {
-      "elementKey": "baoshi-hill-cinnabar-glow",
-      "relatedElementKey": "baochu-pagoda",
+      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
       "kind": "组成",
       "explanation": "保俶塔立于宝石山脊，是宝石流霞的垂直标记。"
     },
     {
-      "elementKey": "baoshi-hill-cinnabar-glow",
-      "relatedElementKey": "west-lake-new-ten-scenes",
+      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
       "kind": "位于",
       "explanation": "宝石流霞列入1985西湖新十景。"
     },
     {
-      "elementKey": "liuhe-pagoda-river",
-      "relatedElementKey": "qiantang-tide",
+      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba",
       "kind": "用于",
       "explanation": "六和塔一带是观潮佳点，塔身帮助标定潮头与开阔江面。"
     },
     {
-      "elementKey": "liuhe-pagoda-river",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "产生于",
       "explanation": "六和塔始建于吴越国，为镇钱塘江潮而建。"
     },
     {
-      "elementKey": "chinese-buddhism",
-      "relatedElementKey": "west-lake-buddhist-culture",
+      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
+      "relatedElementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
       "kind": "理解前先懂",
       "explanation": "先了解佛教中国化的脉络，再看西湖寺院如何与湖山城市共生。"
     },
     {
-      "elementKey": "west-lake-buddhist-culture",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "受到影响",
       "explanation": "西湖寺院格局深受吴越国崇佛国策影响，雷峰、六和、净慈皆源于钱氏。"
     },
     {
-      "elementKey": "west-lake-buddhist-culture",
-      "relatedElementKey": "lingyin-zen-grove",
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "relatedElementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
       "kind": "组成",
       "explanation": "灵隐以殿宇、溪泉与古树把礼佛空间叠合山林，是西湖寺院文化的核心。"
     },
     {
-      "elementKey": "west-lake-buddhist-culture",
-      "relatedElementKey": "jingci-temple",
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "relatedElementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
       "kind": "组成",
       "explanation": "净慈寺是西湖南岸的寺院重镇，南屏晚钟由此传出。"
     },
     {
-      "elementKey": "lingyin-zen-grove",
-      "relatedElementKey": "feilai-grotto-carving",
+      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "relatedElementId": "3ff3b94d-b5d0-5baf-9b3b-cd0480e3d73b",
       "kind": "组成",
       "explanation": "飞来峰摩崖造像紧邻灵隐寺区，与寺院中轴线互为松紧。"
     },
     {
-      "elementKey": "lingyin-zen-grove",
-      "relatedElementKey": "jin-dynasty",
+      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "kind": "产生于",
       "explanation": "灵隐寺由印度僧人慧理创建于东晋咸和元年（326年）。"
     },
     {
-      "elementKey": "jingci-temple",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "产生于",
       "explanation": "净慈寺前身为954年钱弘俶为永明延寿禅师所建的慧日永明院。"
     },
     {
-      "elementKey": "jingci-temple",
-      "relatedElementKey": "nanping-evening-bell",
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
       "kind": "组成",
       "explanation": "南屏晚钟的钟声出自净慈寺，黄昏时响彻南屏山。"
     },
     {
-      "elementKey": "jingci-temple",
-      "relatedElementKey": "jigong-and-jingci-temple",
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "relatedElementId": "843e1bce-ea67-57de-a615-acd0d37575e6",
       "kind": "解释",
       "explanation": "净慈寺因济公传说家喻户晓，寺院的民俗形象要从济公讲起。"
     },
     {
-      "elementKey": "jigong-and-jingci-temple",
-      "relatedElementKey": "southern-song-linan",
+      "elementId": "843e1bce-ea67-57de-a615-acd0d37575e6",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
       "kind": "产生于",
       "explanation": "济公为南宋高僧，其传说产生于临安的市井文化。"
     },
     {
-      "elementKey": "hupao-spring-tea",
-      "relatedElementKey": "hongyi-master-and-hupao",
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "relatedElementId": "c45fc9c7-d1e4-54df-bfe5-c6420cfebf38",
       "kind": "解释",
       "explanation": "虎跑的近代文化记忆，要从弘一法师在此落发出家讲起。"
     },
     {
-      "elementKey": "tea-culture",
-      "relatedElementKey": "longjing-tea-terrace",
+      "elementId": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
+      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
       "kind": "理解前先懂",
       "explanation": "先了解中国茶文化与《茶经》传统，再看龙井为何居名茶之首。"
     },
     {
-      "elementKey": "longjing-tea-terrace",
-      "relatedElementKey": "longjing-village",
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "relatedElementId": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
       "kind": "组成",
       "explanation": "龙井村是狮峰山下的核心产茶村落。"
     },
     {
-      "elementKey": "longjing-tea-terrace",
-      "relatedElementKey": "meijiawu-tea-village",
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "relatedElementId": "78a2e749-e5d9-5b12-a923-dbec8727f0b7",
       "kind": "组成",
       "explanation": "梅家坞是龙井茶主要产村，构成茶山生活的具体肌理。"
     },
     {
-      "elementKey": "hupao-spring-tea",
-      "relatedElementKey": "longjing-tea-terrace",
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
       "kind": "用于",
       "explanation": "虎跑清泉常用于冲泡龙井，泉茶相配是西湖饮茶传统。"
     },
     {
-      "elementKey": "hupao-spring-tea",
-      "relatedElementKey": "west-lake-new-ten-scenes",
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
       "kind": "位于",
       "explanation": "虎跑梦泉列入1985西湖新十景。"
     },
     {
-      "elementKey": "longjing-tea-terrace",
-      "relatedElementKey": "qianlong-and-west-lake",
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "relatedElementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22",
       "kind": "解释",
       "explanation": "龙井茶声名大振，与乾隆南巡封点御茶树直接相关。"
     },
     {
-      "elementKey": "osmanthus-autumn-fragrance",
-      "relatedElementKey": "west-lake-new-ten-scenes",
+      "elementId": "37defe3a-cea5-5250-a1a7-e64545cd114f",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
       "kind": "位于",
       "explanation": "满陇桂雨列入1985新十景，以桂香把嗅觉写入景名。"
     },
     {
-      "elementKey": "chinese-calligraphy",
-      "relatedElementKey": "xiling-seal-art",
+      "elementId": "be77359e-4b0a-541b-83e4-3af6a9234a17",
+      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
       "kind": "理解前先懂",
       "explanation": "先了解书法与金石传统，再看西泠印社如何把篆刻变成学问。"
     },
     {
-      "elementKey": "xiling-seal-art",
-      "relatedElementKey": "gushan-island",
+      "elementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
       "kind": "位于",
       "explanation": "西泠印社嵌在孤山，把印学、庭园与金石观念写入西湖文人景观。"
     },
     {
-      "elementKey": "siku-quanshu-library",
-      "relatedElementKey": "gushan-island",
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
       "kind": "位于",
       "explanation": "文澜阁位于孤山，是清代皇家藏书楼在江南的遗存。"
     },
     {
-      "elementKey": "siku-quanshu-library",
-      "relatedElementKey": "qing-dynasty",
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
       "kind": "产生于",
       "explanation": "《四库全书》编纂于清乾隆年间，文澜阁为江南三阁之一。"
     },
     {
-      "elementKey": "siku-quanshu-library",
-      "relatedElementKey": "xiling-seal-art",
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
       "kind": "相似于",
       "explanation": "文澜阁与印社同在孤山，分别以皇家藏书与方寸金石承载知识秩序。"
     },
     {
-      "elementKey": "gushan-island",
-      "relatedElementKey": "linbu-recluse-gushan",
+      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "relatedElementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
       "kind": "解释",
       "explanation": "孤山『梅妻鹤子』的隐逸形象，要从北宋隐士林逋讲起。"
     },
     {
-      "elementKey": "linbu-recluse-gushan",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "体现",
       "explanation": "林逋的隐逸与咏梅，体现宋代士大夫的山水审美。"
     },
     {
-      "elementKey": "gushan-island",
-      "relatedElementKey": "west-lake-spatial-structure",
+      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "relatedElementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120",
       "kind": "位于",
       "explanation": "孤山是西湖『一山二塔三岛四堤五湖』格局中的一山。"
     },
     {
-      "elementKey": "west-lake-spatial-structure",
-      "relatedElementKey": "three-immortal-islands",
+      "elementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120",
+      "relatedElementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
       "kind": "组成",
       "explanation": "湖心三岛是西湖空间格局中的三岛。"
     },
     {
-      "elementKey": "three-immortal-islands",
-      "relatedElementKey": "xiaoyingzhou-lake-garden",
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
       "kind": "组成",
       "explanation": "小瀛洲是湖中三岛中最可游的一座。"
     },
     {
-      "elementKey": "three-immortal-islands",
-      "relatedElementKey": "huxinting-islet",
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "relatedElementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
       "kind": "组成",
       "explanation": "湖心亭所在是湖中三岛之一。"
     },
     {
-      "elementKey": "three-immortal-islands",
-      "relatedElementKey": "ruangong-mound",
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "relatedElementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5",
       "kind": "组成",
       "explanation": "阮公墩是湖中三岛之一，为清代阮元疏浚所成。"
     },
     {
-      "elementKey": "huxinting-islet",
-      "relatedElementKey": "west-lake-moon-viewing",
+      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
       "kind": "用于",
       "explanation": "湖心亭是湖上赏月与看雪的传统视点。"
     },
     {
-      "elementKey": "huxinting-islet",
-      "relatedElementKey": "west-lake-winter-snow",
+      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
       "kind": "相似于",
       "explanation": "《湖心亭看雪》与断桥残雪同属西湖冬雪的观看传统。"
     },
     {
-      "elementKey": "west-lake-winter-snow",
-      "relatedElementKey": "legend-of-the-white-snake",
+      "elementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
       "kind": "解释",
       "explanation": "断桥在《白蛇传》中是相会节点，冬雪现场因此承载文学地图的意义。"
     },
     {
-      "elementKey": "yue-fei",
-      "relatedElementKey": "yue-fei-memorial-culture",
+      "elementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
+      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
       "kind": "理解前先懂",
       "explanation": "先了解岳飞抗金与冤狱昭雪，再看岳庙的忠烈祠祀。"
     },
     {
-      "elementKey": "west-lake-three-heroes",
-      "relatedElementKey": "yue-fei-memorial-culture",
+      "elementId": "bebc6818-5c37-509b-a08b-2ad5e0f09ea2",
+      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
       "kind": "组成",
       "explanation": "岳飞是西湖三杰中最广为人知的一位。"
     },
     {
-      "elementKey": "yue-fei-memorial-culture",
-      "relatedElementKey": "southern-song-linan",
+      "elementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
       "kind": "产生于",
       "explanation": "岳飞冤狱与昭雪发生于南宋临安，祠祀传统由此延续。"
     },
     {
-      "elementKey": "qianwang-temple-wuyue",
-      "relatedElementKey": "wuyue-state",
+      "elementId": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "kind": "解释",
       "explanation": "钱王祠的祠祀对象，要从吴越国钱氏保境安民的历史理解。"
     },
     {
-      "elementKey": "kangxi-southern-tours",
-      "relatedElementKey": "kangxi",
+      "elementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
+      "relatedElementId": "354ea9d5-7830-548f-8847-1d193625d358",
       "kind": "解释",
       "explanation": "康熙南巡的题匾与景名钦定，要从康熙帝巩固江南统治的背景理解。"
     },
     {
-      "elementKey": "qianlong-and-west-lake",
-      "relatedElementKey": "kangxi-southern-tours",
+      "elementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22",
+      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
       "kind": "受到影响",
       "explanation": "乾隆南巡题咏，深受祖父康熙南巡传统的影响。"
     },
     {
-      "elementKey": "misty-rain-lake-scape",
-      "relatedElementKey": "poetic-landscape-naming",
+      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
+      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806",
       "kind": "解释",
       "explanation": "『山色空蒙雨亦奇』的诗意命名，解释了烟雨湖为何成为西湖经典面孔。"
     },
     {
-      "elementKey": "misty-rain-lake-scape",
-      "relatedElementKey": "song-landscape-aesthetics",
+      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
       "kind": "体现",
       "explanation": "雨中虚实与墨色层次，贴近宋代山水的水墨意趣。"
     },
     {
-      "elementKey": "west-lake-cultural-landscape",
-      "relatedElementKey": "southern-song-linan",
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
       "kind": "受到影响",
       "explanation": "今日西湖文化景观的叠层，深受南宋临安城市与游赏传统塑造。"
     },
     {
-      "elementKey": "west-lake-cultural-landscape",
-      "relatedElementKey": "lakeside-old-city-interface",
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
       "kind": "组成",
       "explanation": "湖滨与老城是湖山与城市的交界，决定市民如何日常进入西湖。"
     },
     {
-      "elementKey": "lakeside-old-city-interface",
-      "relatedElementKey": "chinese-zodiac-city-gate",
+      "elementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
+      "relatedElementId": "c16ab99a-cf45-5a9b-b898-75f1915eb2bc",
       "kind": "解释",
       "explanation": "涌金、清波、钱塘等城门地名，解释了湖滨曾是旧城西界的空间记忆。"
     },
     {
-      "elementKey": "liulang-wenying-soundscape",
-      "relatedElementKey": "lakeside-old-city-interface",
+      "elementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
+      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
       "kind": "位于",
       "explanation": "柳浪闻莺临近湖滨城市界面，春日声景与城湖边界叠合。"
     }

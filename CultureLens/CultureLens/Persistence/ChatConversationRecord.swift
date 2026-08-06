@@ -99,19 +99,48 @@ nonisolated struct PersistedKnowledgeCitation: Codable, Hashable, Sendable {
   let name: String
   let fragment: String
 
+  enum CodingKeys: String, CodingKey {
+    case key, name, fragment
+  }
+
   init(key: String, name: String, fragment: String) {
-    self.key = key
+    self.key = Self.normalizedKey(key)
     self.name = name
     self.fragment = fragment
   }
 
   init(_ citation: KnowledgeCitation) {
-    self.key = citation.key
+    self.key = Self.normalizedKey(citation.key)
     self.name = citation.name
     self.fragment = citation.fragment
   }
 
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    key = Self.normalizedKey(try container.decode(String.self, forKey: .key))
+    name = try container.decode(String.self, forKey: .name)
+    fragment = try container.decode(String.self, forKey: .fragment)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(key, forKey: .key)
+    try container.encode(name, forKey: .name)
+    try container.encode(fragment, forKey: .fragment)
+  }
+
   var asKnowledgeCitation: KnowledgeCitation {
     KnowledgeCitation(key: key, name: name, fragment: fragment)
+  }
+
+  /// Legacy kebab slugs become UUIDv5 strings so display/navigation can use IDs.
+  private static func normalizedKey(_ raw: String) -> String {
+    let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty else { return trimmed }
+    if UUID(uuidString: trimmed) != nil { return trimmed }
+    if DeterministicID.looksLikeLegacyElementSlug(trimmed) {
+      return DeterministicID.culturalElement(trimmed).uuidString
+    }
+    return trimmed
   }
 }

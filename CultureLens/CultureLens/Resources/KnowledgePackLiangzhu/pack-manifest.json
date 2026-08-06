@@ -1,6 +1,6 @@
 {
-  "packVersion": "liangzhu-v4",
-  "generatedAt": "2026-08-06T07:05:38Z",
+  "packVersion": "liangzhu-v5",
+  "generatedAt": "2026-08-06T08:18:33Z",
   "recordCounts": {
     "elements": 25,
     "elementsSight": 9,
@@ -10,7 +10,7 @@
     "attractions": 9,
     "themes": 4
   },
-  "sha256": "88c783c90a5e2ce118ee3995c537f7650c729e5d03cc0769d96f35c095095312",
+  "sha256": "495ff513531fabe91de5f607e593e1be1705969df98058afb6f0faf0862aa236",
   "files": [
     "knowledge-pack.json",
     "elements-sight.json",

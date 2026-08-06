@@ -34,14 +34,34 @@ struct CultureLensTests {
     }
   }
 
-  @Test func cultureObjectPreservesCulturalElementKey() throws {
+  @Test func cultureObjectPreservesCulturalElementID() throws {
     var object = SampleCultureData.featured
-    object.culturalElementKey = "timber-bracket"
+    let elementID = DeterministicID.culturalElement("timber-bracket")
+    object.culturalElementID = elementID
 
     let encoded = try JSONEncoder().encode(object)
     let decoded = try JSONDecoder().decode(CultureObject.self, from: encoded)
 
-    #expect(decoded.culturalElementKey == "timber-bracket")
+    #expect(decoded.culturalElementID == elementID)
+  }
+
+  @Test func cultureObjectDecodesLegacyCulturalElementKeySlug() throws {
+    let json = """
+      {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "culturalElementKey": "timber-bracket",
+        "canonicalName": "斗栱",
+        "summary": "s",
+        "category": "建筑构件",
+        "confidence": 0.9,
+        "artworkSymbol": "building.columns.fill",
+        "concepts": [],
+        "relations": [],
+        "sources": []
+      }
+      """.data(using: .utf8)!
+    let decoded = try JSONDecoder().decode(CultureObject.self, from: json)
+    #expect(decoded.culturalElementID == DeterministicID.culturalElement("timber-bracket"))
   }
 
   @Test func attractionCandidatesExcludeTheCurrentPrimaryAttraction() {
@@ -58,7 +78,7 @@ struct CultureLensTests {
     )
     let duplicate = RecognitionCandidate(
       id: UUID(),
-      attractionKey: "three-pools-mirroring-moon",
+      attractionID: DeterministicID.attraction("three-pools-mirroring-moon"),
       canonicalName: " 三潭印月 ",
       category: .space,
       confidence: 0,
@@ -67,7 +87,7 @@ struct CultureLensTests {
     )
     let other = RecognitionCandidate(
       id: UUID(),
-      attractionKey: "leifeng-pagoda",
+      attractionID: DeterministicID.attraction("leifeng-pagoda"),
       canonicalName: "雷峰塔",
       category: .space,
       confidence: 0,
@@ -492,7 +512,7 @@ struct CultureLensTests {
     let decoded = try JSONDecoder().decode([PersistedChatMessage].self, from: data)
     #expect(decoded.count == 1)
     #expect(decoded[0].text == "正文")
-    #expect(decoded[0].citations[0].key == "three-pools-mirroring-moon")
+    #expect(decoded[0].citations[0].key == DeterministicID.culturalElement("three-pools-mirroring-moon").uuidString)
     #expect(decoded[0].citations[0].asKnowledgeCitation.name == "三潭印月")
   }
 
@@ -608,7 +628,10 @@ struct CultureLensTests {
         - 原文摘录：不应展示。
       """
     let parsed = CultureChatService.parseAnswer(markdown, store: store)
-    #expect(parsed.citations.map(\.key) == ["three-pools-mirroring-moon"])
+    #expect(
+      parsed.citations.map(\.key)
+        == [DeterministicID.culturalElement("three-pools-mirroring-moon").uuidString]
+    )
 
     let missingURL = URL(
       string:
@@ -621,7 +644,7 @@ struct CultureLensTests {
       store: store
     )
     #expect(!cleaned.contains("not-in-pack"))
-    #expect(cleaned.contains("elementKey=three-pools-mirroring-moon"))
+    #expect(cleaned.contains("elementKey=" + DeterministicID.culturalElement("three-pools-mirroring-moon").uuidString))
   }
 
   @Test func themeProgressFiltersMissingElementKeys() {
@@ -661,9 +684,9 @@ struct CultureLensTests {
       contactedElementKeys: ["a", "missing"],
       knowledgeStore: store
     )
-    #expect(progress.elementKeys == ["a", "c"])
-    #expect(progress.contactedKeys == ["a"])
-    #expect(progress.remainingKeys == ["c"])
+    #expect(progress.elementIds == [DeterministicID.culturalElement("a"), DeterministicID.culturalElement("c")])
+    #expect(progress.contactedIds == [DeterministicID.culturalElement("a")])
+    #expect(progress.remainingIds == [DeterministicID.culturalElement("c")])
     #expect(progress.requiredCount == 2)
     #expect(!progress.isComplete)
 
@@ -839,18 +862,17 @@ struct CultureLensTests {
 
     let joinedID = UUID()
     let rescannedID = UUID()
+    let elementID = DeterministicID.culturalElement("three-pools-mirroring-moon")
     store.setLevel(
       .contact,
       for: joinedID,
       source: .manual,
-      elementKey: "three-pools-mirroring-moon"
+      elementID: elementID
     )
 
-    #expect(store.isInGraph(rescannedID, elementKey: "three-pools-mirroring-moon"))
-    #expect(
-      store.level(for: rescannedID, elementKey: "three-pools-mirroring-moon") == .contact
-    )
-    #expect(!store.isInGraph(rescannedID, elementKey: "broken-bridge"))
+    #expect(store.isInGraph(rescannedID, elementID: elementID))
+    #expect(store.level(for: rescannedID, elementID: elementID) == .contact)
+    #expect(!store.isInGraph(rescannedID, elementID: DeterministicID.culturalElement("broken-bridge")))
   }
 
   @Test func userGraphKeepsJoinedNodesAndExpandsExactlyThreeHops() throws {
@@ -1017,9 +1039,9 @@ struct CultureLensTests {
     #expect(points[0].name == "景点一")
     #expect(points[0].latitude == 30.24)
     #expect(points[0].longitude == 120.14)
-    #expect(points[0].culturalElementKey == "e0")
+    #expect(points[0].culturalElementId == DeterministicID.culturalElement("e0"))
     #expect(points[1].name == "景点二")
-    #expect(points[1].culturalElementKey == nil)
+    #expect(points[1].culturalElementId == nil)
   }
 
   @Test func attractionPointsSplitSameAttractionAcrossLocations() {
@@ -1096,14 +1118,14 @@ struct CultureLensTests {
         AttractionCandidate(
           key: "leifeng-pagoda-and-evening-glow",
           name: "雷峰塔",
-          culturalElementKey: "leifeng-pagoda-and-evening-glow",
+          culturalElementId: DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow"),
           summary: "",
           distanceMeters: 0
         ),
         AttractionCandidate(
           key: "zhijiang-campus",
           name: "之江馆区",
-          culturalElementKey: "zhijiang-campus",
+          culturalElementId: DeterministicID.culturalElement("zhijiang-campus"),
           summary: "",
           distanceMeters: 0
         ),
@@ -1120,9 +1142,20 @@ struct CultureLensTests {
     canonicalName: String,
     category: String
   ) -> ProviderRecognition {
-    ProviderRecognition(
-      culturalElementKey: culturalElementKey,
-      attractionKey: attractionKey,
+    // mapResponse expects pack UUID strings (post short-ID rewrite).
+    let elementID =
+      UUID(uuidString: culturalElementKey)?.uuidString
+      ?? (culturalElementKey.isEmpty
+        ? ""
+        : DeterministicID.culturalElement(culturalElementKey).uuidString)
+    let attractionID =
+      UUID(uuidString: attractionKey)?.uuidString
+      ?? (attractionKey.isEmpty
+        ? ""
+        : DeterministicID.attraction(attractionKey).uuidString)
+    return ProviderRecognition(
+      culturalElementKey: elementID,
+      attractionKey: attractionID,
       canonicalName: canonicalName,
       category: category,
       confidence: 0.9,
@@ -1163,7 +1196,10 @@ struct CultureLensTests {
       result.object.id
         == DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow")
     )
-    #expect(result.object.culturalElementKey == "leifeng-pagoda-and-evening-glow")
+    #expect(
+      result.object.culturalElementID
+        == DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow")
+    )
   }
 
   @Test func placeScanResolvesAsAttractionWhenOnlyElementKeyIsFilled() {
@@ -1326,7 +1362,7 @@ struct CultureLensTests {
     let base = Date(timeIntervalSince1970: 1_700_000_000)
     let objectA = CultureObject(
       id: UUID(),
-      culturalElementKey: "three-pools-mirroring-moon",
+      culturalElementID: DeterministicID.culturalElement("three-pools-mirroring-moon"),
       canonicalName: "三潭印月",
       summary: "湖中石塔",
       category: .space,
@@ -1346,7 +1382,7 @@ struct CultureLensTests {
     )
     let objectB = CultureObject(
       id: UUID(),
-      culturalElementKey: "leifeng-pagoda-and-evening-glow",
+      culturalElementID: DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow"),
       canonicalName: "雷峰塔",
       summary: "夕照",
       category: .space,
@@ -1366,7 +1402,7 @@ struct CultureLensTests {
         placeName: "西湖",
         latitude: 30.25,
         longitude: 120.14,
-        culturalElementKey: objectA.culturalElementKey,
+        culturalElementID: objectA.culturalElementID,
         object: objectA
       ),
       ScanHistoryRecordSnapshot(
@@ -1377,7 +1413,7 @@ struct CultureLensTests {
         placeName: "西湖",
         latitude: 30.231,
         longitude: 120.148,
-        culturalElementKey: objectB.culturalElementKey,
+        culturalElementID: objectB.culturalElementID,
         object: objectB
       ),
     ]
@@ -1399,7 +1435,7 @@ struct CultureLensTests {
         placeName: "西湖",
         latitude: 30.231,
         longitude: 120.148,
-        culturalElementKey: objectB.culturalElementKey,
+        culturalElementID: objectB.culturalElementID,
         object: objectB
       ),
     ]
@@ -1421,7 +1457,10 @@ struct CultureLensTests {
     #expect(partial.contactedCount == 2)
     #expect(partial.requiredCount == 3)
     #expect(!partial.isComplete)
-    #expect(partial.remainingKeys == ["b", "d"])
+    #expect(partial.remainingIds == [
+      DeterministicID.culturalElement("b"),
+      DeterministicID.culturalElement("d"),
+    ])
 
     let done = ThemeProgressCalculator.progress(
       for: theme,
@@ -1467,16 +1506,17 @@ struct CultureLensTests {
     #expect(legacy.themes.isEmpty)
   }
 
-  @Test func bundledKnowledgePackIncludesThemes() throws {
-    let store = try KnowledgeStore.load(
-      bundle: Bundle(for: KnowledgeProgressStore.self)
-    )
+  @Test func bundledKnowledgePackIncludesThemes() async throws {
+    // 知识包只走 ODR 分发，经 loader 加载。
+    let store = await KnowledgePackLoader.shared.store()
+    #expect(store != nil)
+    guard let store else { return }
     #expect(!store.pack.themes.isEmpty)
     for theme in store.pack.themes {
-      #expect(!theme.elementKeys.isEmpty)
+      #expect(!theme.elementIds.isEmpty)
       #expect(theme.minContacted > 0)
-      for key in theme.elementKeys {
-        #expect(store.element(key: key) != nil)
+      for id in theme.elementIds {
+        #expect(store.element(id: id) != nil)
       }
     }
   }
@@ -1531,9 +1571,9 @@ struct CultureLensTests {
     #expect(merged.element(key: "a")?.name == "甲")
     #expect(merged.elements.contains { $0.key == "jade-cong-wang" })
     #expect(merged.relations.count == 1)
-    #expect(merged.relations[0].elementKey == "jade-cong-wang")
+    #expect(merged.relations[0].elementId == DeterministicID.culturalElement("jade-cong-wang"))
     #expect(Set(merged.themes.map(\.key)) == ["t-west", "t-cong"])
-    #expect(merged.themes.first { $0.key == "t-west" }?.elementKeys == ["a"])
+    #expect(merged.themes.first { $0.key == "t-west" }?.elementIds == [DeterministicID.culturalElement("a")])
   }
 
 }

@@ -16,12 +16,12 @@ enum CultureChatError: LocalizedError {
 
 /// Multi-turn cultural Q&A via `dynamic/chat`, carrying object + graph context.
 nonisolated struct CultureChatService: Sendable {
-  let knowledgeStore: KnowledgeStore
+  let knowledgeStore: KnowledgeStore?
   let promptAssembler: PromptAssembler
   let gatewayClient: LLMGatewayClient
 
   init(bundle: Bundle = .main, session: URLSession = .shared) throws {
-    knowledgeStore = try KnowledgeStore.load(bundle: bundle)
+    knowledgeStore = try? KnowledgeStore.load(bundle: bundle)
     promptAssembler = try PromptAssembler(bundle: bundle)
     gatewayClient = try LLMGatewayClient(bundle: bundle, session: session)
   }
@@ -44,17 +44,30 @@ nonisolated struct CultureChatService: Sendable {
     object: CultureObject,
     rationale: String,
     userKnowledgeStates: [UserKnowledgeStateContext]
-  ) async throws -> String {
-    let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) ?? knowledgeStore
+  ) async throws -> (text: String, session: LLMIDSession) {
+    guard let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) else {
+      throw CultureChatError.knowledgeUnavailable
+    }
     let neighbors = neighborContexts(object: object, store: store)
     let fragments = knowledgeFragments(object: object, neighbors: neighbors, store: store)
-    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
-    return try assembler.askContextUserText(
-      object: ExplanationRecognitionContext(object: object, rationale: rationale),
+    var idSession = LLMIDSession()
+    let (recognition, shortNeighbors, shortFragments, shortStates) = Self.encodeWithShortIDs(
+      object: object,
+      rationale: rationale,
       neighbors: neighbors,
-      knowledgeFragments: fragments,
-      userKnowledgeStates: userKnowledgeStates
+      fragments: fragments,
+      userKnowledgeStates: userKnowledgeStates,
+      store: store,
+      session: &idSession
     )
+    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+    let text = try assembler.askContextUserText(
+      object: recognition,
+      neighbors: shortNeighbors,
+      knowledgeFragments: shortFragments,
+      userKnowledgeStates: shortStates
+    )
+    return (text, idSession)
   }
 
   func ask(
@@ -115,16 +128,21 @@ nonisolated struct CultureChatService: Sendable {
           }
 
           let bootstrap: String
+          let idSession: LLMIDSession
           if let object {
-            bootstrap = try await self.contextBootstrap(
+            let prepared = try await self.contextBootstrap(
               object: object,
               rationale: rationale,
               userKnowledgeStates: userKnowledgeStates
             )
+            bootstrap = prepared.text
+            idSession = prepared.session
           } else {
-            bootstrap = try await self.generalContextBootstrap(
+            let prepared = try await self.generalContextBootstrap(
               userKnowledgeStates: userKnowledgeStates
             )
+            bootstrap = prepared.text
+            idSession = prepared.session
           }
           var messages: [ChatTurn] = [
             ChatTurn(role: .user, content: bootstrap)
@@ -140,11 +158,13 @@ nonisolated struct CultureChatService: Sendable {
           )
 
           for try await event in self.gatewayClient.streamAsk(
-            systemPrompt: self.promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
-              .askSystemPrompt,
+            systemPrompt: self.promptAssembler.withLanguage(
+              AppLanguageStore.currentLanguage()
+            )
+            .askSystemPrompt,
             messages: messages
           ) {
-            continuation.yield(event)
+            continuation.yield(Self.remapEvent(event, session: idSession))
           }
           continuation.finish()
         } catch {
@@ -160,11 +180,16 @@ nonisolated struct CultureChatService: Sendable {
   /// Splits streamed Markdown into display body + structured citation cards.
   /// The trailing sources section (「引用来源」/ Sources / …) is removed from
   /// the body so it is not rendered twice (once as Markdown, once as cards).
+  ///
+  /// When `session` is provided, citation keys that are still short IDs are
+  /// resolved before falling back to UUID / legacy kebab via the store.
   static func parseAnswer(
     _ markdown: String,
-    store: KnowledgeStore? = .shared
+    store: KnowledgeStore? = .shared,
+    session: LLMIDSession? = nil
   ) -> (body: String, citations: [KnowledgeCitation]) {
-    let normalized = markdown.replacingOccurrences(of: "\r\n", with: "\n")
+    let remapped = session?.remapElementShortIDs(in: markdown) ?? markdown
+    let normalized = remapped.replacingOccurrences(of: "\r\n", with: "\n")
     guard
       let regex = try? NSRegularExpression(
         pattern: CitationMarkup.sourceHeadingPattern(),
@@ -192,23 +217,29 @@ nonisolated struct CultureChatService: Sendable {
       store: store
     )
     let section = String(normalized[headerRange.upperBound...])
-    return (body, parseCitationSection(section, store: store))
+    return (body, parseCitationSection(section, store: store, session: session))
   }
 
-  static func displayBody(from markdown: String, store: KnowledgeStore? = .shared) -> String {
-    parseAnswer(markdown, store: store).body
+  static func displayBody(
+    from markdown: String,
+    store: KnowledgeStore? = .shared,
+    session: LLMIDSession? = nil
+  ) -> String {
+    parseAnswer(markdown, store: store, session: session).body
   }
 
   static func extractCitations(
     from markdown: String,
-    store: KnowledgeStore? = .shared
+    store: KnowledgeStore? = .shared,
+    session: LLMIDSession? = nil
   ) -> [KnowledgeCitation] {
-    parseAnswer(markdown, store: store).citations
+    parseAnswer(markdown, store: store, session: session).citations
   }
 
   private static func parseCitationSection(
     _ section: String,
-    store: KnowledgeStore?
+    store: KnowledgeStore?,
+    session: LLMIDSession? = nil
   ) -> [KnowledgeCitation] {
     var citations: [KnowledgeCitation] = []
     var current: (key: String, name: String, fragment: String)?
@@ -223,16 +254,28 @@ nonisolated struct CultureChatService: Sendable {
       let resolvedKey: String
       let resolvedName: String
       if let store {
-        if !key.isEmpty, store.element(key: key) != nil {
-          resolvedKey = key
-          resolvedName = name.isEmpty ? (store.element(key: key)?.name ?? key) : name
-        } else if let byName = store.elementKey(matchingName: name.isEmpty ? key : name) {
-          resolvedKey = byName
-          resolvedName = name.isEmpty ? (store.element(key: byName)?.name ?? byName) : name
+        if let uuid = resolveCitationElementID(
+          key: key,
+          name: name,
+          store: store,
+          session: session
+        ) {
+          resolvedKey = uuid.uuidString
+          resolvedName =
+            name.isEmpty
+            ? (store.element(id: uuid)?.name ?? key)
+            : name
         } else {
           return
         }
+      } else if let session, let uuid = session.resolveElement(key) {
+        resolvedKey = uuid.uuidString
+        resolvedName = name.isEmpty ? key : name
+      } else if let uuid = UUID(uuidString: key) {
+        resolvedKey = uuid.uuidString
+        resolvedName = name.isEmpty ? key : name
       } else {
+        // Unit tests without a store: keep the raw key (legacy kebab fixtures).
         resolvedKey = key.isEmpty ? name : key
         resolvedName = name.isEmpty ? key : name
       }
@@ -242,7 +285,9 @@ nonisolated struct CultureChatService: Sendable {
           key: resolvedKey,
           name: resolvedName,
           fragment: fragment,
-          sources: store?.trustedSources(forElementKey: resolvedKey) ?? []
+          sources: store.flatMap { store in
+            UUID(uuidString: resolvedKey).map { store.trustedSources(forElementID: $0) }
+          } ?? store?.trustedSources(forElementKey: resolvedKey) ?? []
         )
       )
     }
@@ -323,11 +368,29 @@ nonisolated struct CultureChatService: Sendable {
     }
   }
 
+  /// Resolves a model citation key: short ID → UUID → legacy kebab slug → name.
+  private static func resolveCitationElementID(
+    key: String,
+    name: String,
+    store: KnowledgeStore,
+    session: LLMIDSession?
+  ) -> UUID? {
+    if let session, let uuid = session.resolveElement(key) {
+      return uuid
+    }
+    if let uuid = store.resolveElementID(key) {
+      return uuid
+    }
+    return store.elementID(matchingName: name.isEmpty ? key : name)
+  }
+
   /// Home-entry chat: seed from joined nodes, then a small pack sample.
   func generalContextBootstrap(
     userKnowledgeStates: [UserKnowledgeStateContext]
-  ) async throws -> String {
-    let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) ?? knowledgeStore
+  ) async throws -> (text: String, session: LLMIDSession) {
+    guard let store = await KnowledgePackLoader.shared.store(fallback: knowledgeStore) else {
+      throw CultureChatError.knowledgeUnavailable
+    }
     var fragments: [ExplanationFragmentContext] = []
     var seen = Set<String>()
 
@@ -340,13 +403,13 @@ nonisolated struct CultureChatService: Sendable {
     for state in userKnowledgeStates.prefix(8) {
       if let element = store.element(key: state.key) {
         append(
-          key: element.key,
+          key: element.id.uuidString,
           name: element.name,
           text: KnowledgeStore.richTextPlainText(element.introduction)
         )
-        for neighbor in store.relatedElements(forKey: element.key, limit: 2) {
+        for neighbor in store.relatedElements(forID: element.id, limit: 2) {
           append(
-            key: neighbor.key,
+            key: neighbor.id.uuidString,
             name: neighbor.name,
             text: KnowledgeStore.richTextPlainText(neighbor.introduction)
           )
@@ -360,7 +423,7 @@ nonisolated struct CultureChatService: Sendable {
       let fallbackPool = store.historyElements + store.sightElements
       for element in fallbackPool.prefix(8) {
         append(
-          key: element.key,
+          key: element.id.uuidString,
           name: element.name,
           text: KnowledgeStore.richTextPlainText(element.introduction)
         )
@@ -397,37 +460,47 @@ nonisolated struct CultureChatService: Sendable {
       relations: [],
       sources: []
     )
-    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
-    return try assembler.askContextUserText(
-      object: ExplanationRecognitionContext(
-        object: topic,
-        rationale: topicRationale
-      ),
-      neighbors: userKnowledgeStates.prefix(8).map {
-        ExplanationNeighborContext(
-          key: $0.key,
-          name: $0.name,
-          relationKind: nil,
-          explanation: "用户知识状态：\($0.level)"
-        )
-      },
-      knowledgeFragments: fragments,
-      userKnowledgeStates: userKnowledgeStates
+    var idSession = LLMIDSession()
+    let neighbors = userKnowledgeStates.prefix(8).map {
+      ExplanationNeighborContext(
+        key: $0.key,
+        name: $0.name,
+        relationKind: nil,
+        explanation: "用户知识状态：\($0.level)"
+      )
+    }
+    let (recognition, shortNeighbors, shortFragments, shortStates) = Self.encodeWithShortIDs(
+      object: topic,
+      rationale: topicRationale,
+      neighbors: neighbors,
+      fragments: fragments,
+      userKnowledgeStates: userKnowledgeStates,
+      store: store,
+      session: &idSession
     )
+    let assembler = promptAssembler.withLanguage(AppLanguageStore.currentLanguage())
+    let text = try assembler.askContextUserText(
+      object: recognition,
+      neighbors: shortNeighbors,
+      knowledgeFragments: shortFragments,
+      userKnowledgeStates: shortStates
+    )
+    return (text, idSession)
   }
 
   private func neighborContexts(
     object: CultureObject,
     store: KnowledgeStore
   ) -> [ExplanationNeighborContext] {
-    if let key = object.culturalElementKey {
-      return store.relatedElements(forKey: key, limit: 8).map { element in
+    let rootID =
+      object.culturalElementID ?? (store.element(id: object.id) != nil ? object.id : nil)
+    if let rootID {
+      return store.relatedElements(forID: rootID, limit: 8).map { element in
         let relation = object.relations.first {
-          $0.targetID == DeterministicID.culturalElement(element.key)
-            || $0.sourceID == DeterministicID.culturalElement(element.key)
+          $0.targetID == element.id || $0.sourceID == element.id
         }
         return ExplanationNeighborContext(
-          key: element.key,
+          key: element.id.uuidString,
           name: element.name,
           relationKind: relation?.kind.rawValue,
           explanation: relation?.explanation
@@ -458,9 +531,12 @@ nonisolated struct CultureChatService: Sendable {
       fragments.append(ExplanationFragmentContext(key: key, name: name, text: trimmed))
     }
 
-    if let key = object.culturalElementKey, let element = store.element(key: key) {
+    if let id = object.culturalElementID
+      ?? (store.element(id: object.id) != nil ? object.id : nil),
+      let element = store.element(id: id)
+    {
       append(
-        key: element.key,
+        key: element.id.uuidString,
         name: element.name,
         text: KnowledgeStore.richTextPlainText(element.introduction)
       )
@@ -471,7 +547,7 @@ nonisolated struct CultureChatService: Sendable {
     for neighbor in neighbors {
       if let element = store.element(key: neighbor.key) {
         append(
-          key: element.key,
+          key: element.id.uuidString,
           name: element.name,
           text: KnowledgeStore.richTextPlainText(element.introduction)
         )
@@ -485,5 +561,95 @@ nonisolated struct CultureChatService: Sendable {
     }
 
     return fragments
+  }
+
+  private static func encodeWithShortIDs(
+    object: CultureObject,
+    rationale: String,
+    neighbors: [ExplanationNeighborContext],
+    fragments: [ExplanationFragmentContext],
+    userKnowledgeStates: [UserKnowledgeStateContext],
+    store: KnowledgeStore,
+    session: inout LLMIDSession
+  ) -> (
+    ExplanationRecognitionContext,
+    [ExplanationNeighborContext],
+    [ExplanationFragmentContext],
+    [UserKnowledgeStateContext]
+  ) {
+    var orderedIDs: [UUID] = []
+    var seen = Set<UUID>()
+
+    func enqueue(_ id: UUID?) {
+      guard let id, seen.insert(id).inserted else { return }
+      orderedIDs.append(id)
+    }
+
+    let rootID =
+      object.culturalElementID
+      ?? (store.element(id: object.id) != nil ? object.id : nil)
+    enqueue(rootID)
+    for neighbor in neighbors {
+      enqueue(store.resolveElementID(neighbor.key))
+    }
+    for fragment in fragments {
+      enqueue(store.resolveElementID(fragment.key))
+    }
+    for state in userKnowledgeStates {
+      enqueue(store.resolveElementID(state.key))
+    }
+
+    session.registerElements(orderedIDs)
+
+    func shortKey(_ uuidString: String) -> String {
+      guard let id = store.resolveElementID(uuidString),
+        let short = session.shortID(forElement: id)
+      else { return uuidString }
+      return short
+    }
+
+    let recognition = ExplanationRecognitionContext(
+      object: object,
+      rationale: rationale,
+      culturalElementShortID: rootID.flatMap { session.shortID(forElement: $0) }
+    )
+    let shortNeighbors = neighbors.map {
+      ExplanationNeighborContext(
+        key: shortKey($0.key),
+        name: $0.name,
+        relationKind: $0.relationKind,
+        explanation: $0.explanation
+      )
+    }
+    let shortFragments = fragments.map {
+      ExplanationFragmentContext(
+        key: shortKey($0.key),
+        name: $0.name,
+        text: $0.text
+      )
+    }
+    let shortStates = userKnowledgeStates.map {
+      UserKnowledgeStateContext(
+        key: shortKey($0.key),
+        name: $0.name,
+        level: $0.level
+      )
+    }
+    return (recognition, shortNeighbors, shortFragments, shortStates)
+  }
+
+  private static func remapEvent(
+    _ event: ChatStreamEvent,
+    session: LLMIDSession
+  ) -> ChatStreamEvent {
+    switch event {
+    case .thinking:
+      return event
+    case .delta(let snapshot):
+      return .delta(session.remapElementShortIDs(in: snapshot))
+    case .finished(let model, let content):
+      return .finished(
+        modelIdentifier: model, content: session.remapElementShortIDs(in: content))
+    }
   }
 }

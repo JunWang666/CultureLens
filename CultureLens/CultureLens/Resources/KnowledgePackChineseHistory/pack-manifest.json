@@ -1,6 +1,6 @@
 {
-  "packVersion": "chinese-history-v4",
-  "generatedAt": "2026-08-06T07:05:38Z",
+  "packVersion": "chinese-history-v5",
+  "generatedAt": "2026-08-06T08:18:33Z",
   "recordCounts": {
     "elements": 45,
     "elementsSight": 2,
@@ -10,7 +10,7 @@
     "attractions": 2,
     "themes": 4
   },
-  "sha256": "ade326ca0aa652755239de0a7d2b672798b09717c49e57d2316447923912cdad",
+  "sha256": "0efd6b2c5b86c40fc19b2c1f09d874f1997193ff7d386d6cfbe9bcb728f4de8e",
   "files": [
     "knowledge-pack.json",
     "elements-sight.json",

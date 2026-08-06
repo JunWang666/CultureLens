@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "09d1daac-ed74-587b-aa70-1ce187d7c781",
       "key": "great-wall",
       "name": "长城",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
       "key": "grand-canal",
       "name": "京杭大运河",
       "introduction": {
@@ -57,10 +59,12 @@
   ],
   "attractions": [
     {
+      "id": "2d39c655-cd6f-5dc1-9931-5b1ca79c05ed",
       "key": "great-wall",
       "name": "长城"
     },
     {
+      "id": "5964012f-2efe-5a85-a99f-a9b5a2ad3341",
       "key": "grand-canal",
       "name": "京杭大运河"
     }

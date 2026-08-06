@@ -1,6 +1,6 @@
 {
   "elements": {
-    "zhejiang-museum-history": {
+    "9d5f30ce-f7b7-5897-b564-e02a11a0fea7": {
       "name": "The History of the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -24,7 +24,7 @@
         ]
       }
     },
-    "gushan-campus": {
+    "917dfb28-49c6-5a13-975c-0901a3248fc5": {
       "name": "The Gushan Campus and 'A Museum in a Garden, a Garden in a Museum'",
       "introduction": {
         "schemaVersion": 1,
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "zhijiang-campus": {
+    "f1967937-d54e-5f3a-8492-b74f2d81f6a9": {
       "name": "The Zhijiang Campus and 'Ten Thousand Years of Zhejiang'",
       "introduction": {
         "schemaVersion": 1,
@@ -72,7 +72,7 @@
         ]
       }
     },
-    "museum-collection-system": {
+    "95906076-3c48-5762-ad31-2eebe2a9bd42": {
       "name": "A Collection of Over One Hundred Thousand Objects and Its System",
       "introduction": {
         "schemaVersion": 1,
@@ -96,7 +96,7 @@
         ]
       }
     },
-    "top-ten-treasures": {
+    "162ffb68-7b96-5a03-aef2-73709620ccb1": {
       "name": "The Selection of the Top Ten Treasures",
       "introduction": {
         "schemaVersion": 1,
@@ -120,7 +120,7 @@
         ]
       }
     },
-    "no-overseas-treasures": {
+    "7cb89f30-5375-5ddd-8a2a-68e8dc74462a": {
       "name": "Artefacts Barred from Overseas Exhibition",
       "introduction": {
         "schemaVersion": 1,
@@ -144,7 +144,7 @@
         ]
       }
     },
-    "hemudu-culture": {
+    "fb207661-23da-54bc-af3c-aee4dbb88931": {
       "name": "The Hemudu Culture",
       "introduction": {
         "schemaVersion": 1,
@@ -168,7 +168,7 @@
         ]
       }
     },
-    "hemudu-double-bird": {
+    "7761fd8c-06f2-5e4a-8343-5144175672c2": {
       "name": "Ivory Carving of Twin Birds Facing the Sun",
       "introduction": {
         "schemaVersion": 1,
@@ -192,7 +192,7 @@
         ]
       }
     },
-    "yue-bronze-swords": {
+    "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919": {
       "name": "The Bronze Sword Tradition of the Yue State",
       "introduction": {
         "schemaVersion": 1,
@@ -216,7 +216,7 @@
         ]
       }
     },
-    "zhejiang-yue-sword": {
+    "c93861c2-1ccb-5cc1-a394-e3e67da38c5d": {
       "name": "The Sword of King Zhejiyushi of Yue",
       "introduction": {
         "schemaVersion": 1,
@@ -240,7 +240,7 @@
         ]
       }
     },
-    "wuyue-state": {
+    "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9": {
       "name": "The Wuyue Kingdom and Its Policy of Protecting the Realm",
       "introduction": {
         "schemaVersion": 1,
@@ -264,7 +264,7 @@
         ]
       }
     },
-    "wuyue-buddhist-art": {
+    "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20": {
       "name": "Wuyue Buddhism and the Jewel Casket Stupa",
       "introduction": {
         "schemaVersion": 1,
@@ -288,7 +288,7 @@
         ]
       }
     },
-    "asoka-pagoda": {
+    "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7": {
       "name": "The Five Dynasties Gilded Silver Asoka Pagoda",
       "introduction": {
         "schemaVersion": 1,
@@ -312,7 +312,7 @@
         ]
       }
     },
-    "yue-kiln": {
+    "7354cd7a-a6a2-56d7-b7a6-dfb871129047": {
       "name": "The Yue Kiln and Secret-Colour Celadon",
       "introduction": {
         "schemaVersion": 1,
@@ -336,7 +336,7 @@
         ]
       }
     },
-    "longquan-kiln": {
+    "7f792a90-7796-57ed-bc27-e69b3fe33fbc": {
       "name": "The Longquan Kiln and Its Powder-Blue and Plum-Green Glazes",
       "introduction": {
         "schemaVersion": 1,
@@ -360,7 +360,7 @@
         ]
       }
     },
-    "longquan-boat-drip": {
+    "7a93901c-1ccc-51e6-ae5e-392a22bc1abe": {
       "name": "The Yuan Longquan Kiln Boat-Shaped Water Dropper",
       "introduction": {
         "schemaVersion": 1,
@@ -384,7 +384,7 @@
         ]
       }
     },
-    "southern-song-guan-ware": {
+    "ce41ce0d-05c3-5a8b-a586-16218e70392d": {
       "name": "The Southern Song Guan (Imperial) Kiln",
       "introduction": {
         "schemaVersion": 1,
@@ -408,7 +408,7 @@
         ]
       }
     },
-    "fuchun-shanju-tu": {
+    "03450361-df1d-50fc-89cc-848d880e1783": {
       "name": "The Dwelling in the Fuchun Mountains and the Remaining Mountain Scroll",
       "introduction": {
         "schemaVersion": 1,
@@ -432,7 +432,7 @@
         ]
       }
     },
-    "huang-gongwang": {
+    "058e20d5-373f-5423-b6d6-4adb8f88c144": {
       "name": "Huang Gongwang and the Fuchun River",
       "introduction": {
         "schemaVersion": 1,
@@ -456,7 +456,7 @@
         ]
       }
     },
-    "huang-binhong": {
+    "d402f589-b0e2-59f7-96ee-d53df0019cb1": {
       "name": "Huang Binhong and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -480,7 +480,7 @@
         ]
       }
     },
-    "sha-menghai": {
+    "25847815-97a4-5692-860f-fa04a848bf53": {
       "name": "Sha Menghai and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -504,7 +504,7 @@
         ]
       }
     },
-    "wu-changshuo": {
+    "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90": {
       "name": "Wu Changshuo and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -528,7 +528,7 @@
         ]
       }
     },
-    "guqin-world": {
+    "c5978321-c18b-582e-bcac-e1990d4561ac": {
       "name": "The Guqin and the Chinese World of Sound",
       "introduction": {
         "schemaVersion": 1,
@@ -552,7 +552,7 @@
         ]
       }
     },
-    "cai-feng-ming-qi": {
+    "b78c3e13-f4fd-5626-8150-4744854e50d8": {
       "name": "The Tang Seven-Stringed Zither 'Cai Feng Ming Qi'",
       "introduction": {
         "schemaVersion": 1,
@@ -576,7 +576,7 @@
         ]
       }
     },
-    "qi-lacquer-donation": {
+    "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a": {
       "name": "The Lacquerware Donated by Mr. and Mrs. Cao Qiyong",
       "introduction": {
         "schemaVersion": 1,
@@ -600,7 +600,7 @@
         ]
       }
     },
-    "shili-hongzhuang": {
+    "a3c5b4b8-d016-5690-81d6-458cceeee4e3": {
       "name": "Shili Hongzhuang and the Marriage Customs of Ningbo and Shaoxing",
       "introduction": {
         "schemaVersion": 1,
@@ -624,7 +624,7 @@
         ]
       }
     },
-    "wan-gong-jiao": {
+    "5429373a-0fd2-5912-b210-49ad3bcdc724": {
       "name": "The Republican-Era Ten-Thousand-Work Sedan Chair",
       "introduction": {
         "schemaVersion": 1,
@@ -644,7 +644,7 @@
         ]
       }
     },
-    "jiyue-bronze-house": {
+    "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842": {
       "name": "The Spring and Autumn Bronze House of Musicians",
       "introduction": {
         "schemaVersion": 1,
@@ -668,7 +668,7 @@
         ]
       }
     },
-    "caisu-mud-bodhisattva": {
+    "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272": {
       "name": "The Northern Song Painted Clay Standing Bodhisattva",
       "introduction": {
         "schemaVersion": 1,
@@ -684,7 +684,7 @@
         ]
       }
     },
-    "hemudu-painted-pottery": {
+    "ac565d24-9a02-5a99-8acc-cb885f30883d": {
       "name": "Decorated Pottery of the Hemudu Culture",
       "introduction": {
         "schemaVersion": 1,
@@ -708,7 +708,7 @@
         ]
       }
     },
-    "hemudu-bone-plough": {
+    "9abf276c-9bef-5142-8dda-d964bcdb8015": {
       "name": "The Bone Plough of Hemudu",
       "introduction": {
         "schemaVersion": 1,
@@ -732,7 +732,7 @@
         ]
       }
     },
-    "zhang-cheng-red-lacquer": {
+    "e50f9576-9d0d-506d-a71d-e893854c5e5f": {
       "name": "Zhang Cheng's Carved Red-Lacquer Plate of Children at Play",
       "introduction": {
         "schemaVersion": 1,
@@ -756,7 +756,7 @@
         ]
       }
     },
-    "tang-guqin-tradition": {
+    "71261568-8116-57fb-8221-e32f8dbbfe77": {
       "name": "Tang-Dynasty Guqin and the Saying 'The Tang Is Round'",
       "introduction": {
         "schemaVersion": 1,
@@ -780,7 +780,7 @@
         ]
       }
     },
-    "huang-binhong-memorial": {
+    "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e": {
       "name": "Huang Binhong Memorial Room",
       "introduction": {
         "schemaVersion": 1,
@@ -792,7 +792,7 @@
         ]
       }
     },
-    "sha-menghai-residence": {
+    "beae431c-6816-5890-8ebe-39df230ebe3c": {
       "name": "Former Residence of Sha Menghai",
       "introduction": {
         "schemaVersion": 1,
@@ -806,21 +806,21 @@
     }
   },
   "attractions": {
-    "zhijiang-campus": {
+    "f0f5b61e-f773-5975-b59e-65a23d726ea6": {
       "name": "Zhijiang Campus"
     },
-    "gushan-campus": {
+    "49e6e5b7-7656-506e-966d-4889b903de31": {
       "name": "Gushan Campus"
     },
-    "huang-binhong-memorial": {
+    "3617c401-555e-5c3a-a818-7a2554886b0b": {
       "name": "Huang Binhong Memorial Room"
     },
-    "sha-menghai-residence": {
+    "a2184653-deae-5b85-bc3e-3752107d82cf": {
       "name": "Former Residence of Sha Menghai"
     }
   },
   "introductions": {
-    "zhijiang-campus.zhejiang-wannian-guobao": {
+    "cc5357fc-e089-511d-9166-86cdb144adef": {
       "name": "Ten Thousand Years of Zhejiang and the Five National Treasures",
       "introduction": {
         "schemaVersion": 1,
@@ -840,7 +840,7 @@
         ]
       }
     },
-    "zhijiang-campus.fuchun-shanshui": {
+    "0abc9dd1-6c4c-5aa8-905c-1af7c3a2aab2": {
       "name": "Between Mountain and Water: The Digital Exhibition of the Dwelling in the Fuchun Mountains",
       "introduction": {
         "schemaVersion": 1,
@@ -860,7 +860,7 @@
         ]
       }
     },
-    "zhijiang-campus.taigu-guqin": {
+    "3fc8e5c1-c715-5ba8-b0df-2011a9adc717": {
       "name": "Sound of Antiquity: The Guqin Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -880,7 +880,7 @@
         ]
       }
     },
-    "gushan-campus.zhongyuan-wenge": {
+    "babdee75-1d7d-592e-bbc7-e8b2adcbd5e1": {
       "name": "A Museum in a Garden, a Garden in a Museum, and the Wenglan Pavilion",
       "introduction": {
         "schemaVersion": 1,
@@ -900,7 +900,7 @@
         ]
       }
     },
-    "gushan-campus.kunshan-pianyu": {
+    "b4ff9e8e-d21b-54e6-b0b3-435789170b3a": {
       "name": "Jade Fragments from Mount Kun: The Ceramics Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -920,7 +920,7 @@
         ]
       }
     },
-    "gushan-campus.leifeng-ta-wenwu": {
+    "6f9f4661-1191-55d4-a8c6-5308da697c0e": {
       "name": "The Leifeng Pagoda Artefacts Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -940,7 +940,7 @@
         ]
       }
     },
-    "huang-binhong-memorial.qixialing": {
+    "e0cc4c3d-b661-5ba2-8ce6-eb4a6abf590b": {
       "name": "Huang Binhong's Later Years at Qixia Ridge",
       "introduction": {
         "schemaVersion": 1,
@@ -960,7 +960,7 @@
         ]
       }
     },
-    "huang-binhong-memorial.wuqian-zuoping": {
+    "bdf9a18b-f88b-5397-b4c8-51aa27f44a16": {
       "name": "Five Thousand Works and the Memorial Room",
       "introduction": {
         "schemaVersion": 1,
@@ -980,7 +980,7 @@
         ]
       }
     },
-    "sha-menghai-residence.longlu-du": {
+    "562b8103-e326-55c2-8d20-d775b1f9f5d2": {
       "name": "The Former Residence of Sha Menghai on Longyou Road",
       "introduction": {
         "schemaVersion": 1,
@@ -1000,7 +1000,7 @@
         ]
       }
     },
-    "sha-menghai-residence.shufa-zhuanke": {
+    "cde3c3cc-de7a-5299-a660-3e868432c3bb": {
       "name": "Calligraphy, Seal Carving and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,

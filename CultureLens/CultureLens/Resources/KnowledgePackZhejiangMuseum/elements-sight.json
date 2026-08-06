@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "917dfb28-49c6-5a13-975c-0901a3248fc5",
       "key": "gushan-campus",
       "name": "孤山馆区与“园中馆、馆中园”",
       "introduction": {
@@ -28,6 +29,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "f1967937-d54e-5f3a-8492-b74f2d81f6a9",
       "key": "zhijiang-campus",
       "name": "之江馆区与《浙江一万年》",
       "introduction": {
@@ -55,6 +57,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7761fd8c-06f2-5e4a-8343-5144175672c2",
       "key": "hemudu-double-bird",
       "name": "双鸟朝阳纹牙雕",
       "introduction": {
@@ -82,6 +85,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
       "key": "zhejiang-yue-sword",
       "name": "越王者旨於睗剑",
       "introduction": {
@@ -109,6 +113,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
       "key": "asoka-pagoda",
       "name": "五代鎏金银阿育王塔",
       "introduction": {
@@ -136,6 +141,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
       "key": "longquan-boat-drip",
       "name": "元龙泉窑舟形砚滴",
       "introduction": {
@@ -163,6 +169,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "03450361-df1d-50fc-89cc-848d880e1783",
       "key": "fuchun-shanju-tu",
       "name": "《富春山居图》与剩山图",
       "introduction": {
@@ -190,6 +197,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "b78c3e13-f4fd-5626-8150-4744854e50d8",
       "key": "cai-feng-ming-qi",
       "name": "唐“彩凤鸣岐”七弦琴",
       "introduction": {
@@ -217,6 +225,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5429373a-0fd2-5912-b210-49ad3bcdc724",
       "key": "wan-gong-jiao",
       "name": "民国万工轿",
       "introduction": {
@@ -240,6 +249,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
       "key": "jiyue-bronze-house",
       "name": "春秋伎乐铜屋",
       "introduction": {
@@ -267,6 +277,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272",
       "key": "caisu-mud-bodhisattva",
       "name": "北宋彩塑泥菩萨立像",
       "introduction": {
@@ -286,6 +297,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "ac565d24-9a02-5a99-8acc-cb885f30883d",
       "key": "hemudu-painted-pottery",
       "name": "河姆渡绘纹陶器",
       "introduction": {
@@ -313,6 +325,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "9abf276c-9bef-5142-8dda-d964bcdb8015",
       "key": "hemudu-bone-plough",
       "name": "河姆渡骨耜",
       "introduction": {
@@ -340,6 +353,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e50f9576-9d0d-506d-a71d-e893854c5e5f",
       "key": "zhang-cheng-red-lacquer",
       "name": "张成剔红婴戏图盘",
       "introduction": {
@@ -367,6 +381,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e",
       "key": "huang-binhong-memorial",
       "name": "黄宾虹纪念室",
       "introduction": {
@@ -393,6 +408,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "beae431c-6816-5890-8ebe-39df230ebe3c",
       "key": "sha-menghai-residence",
       "name": "沙孟海旧居",
       "introduction": {
@@ -421,74 +437,92 @@
   ],
   "attractions": [
     {
+      "id": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
       "key": "zhijiang-campus",
       "name": "之江馆区与《浙江一万年》"
     },
     {
+      "id": "49e6e5b7-7656-506e-966d-4889b903de31",
       "key": "gushan-campus",
       "name": "孤山馆区"
     },
     {
+      "id": "3617c401-555e-5c3a-a818-7a2554886b0b",
       "key": "huang-binhong-memorial",
       "name": "黄宾虹纪念室"
     },
     {
+      "id": "a2184653-deae-5b85-bc3e-3752107d82cf",
       "key": "sha-menghai-residence",
       "name": "沙孟海旧居"
     },
     {
+      "id": "562d57eb-4410-5aed-9742-4fef593dde73",
       "key": "fuchun-shanju-tu",
       "name": "《富春山居图》与剩山图"
     },
     {
+      "id": "2ac5840a-ee1a-5a45-b60b-8f2621b58a94",
       "key": "asoka-pagoda",
       "name": "五代鎏金银阿育王塔"
     },
     {
+      "id": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "key": "jade-cong-wang",
       "name": "良渚玉琮王"
     },
     {
+      "id": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "key": "jade-cong-ritual",
       "name": "琮：祭地的礼器"
     },
     {
+      "id": "64a8b3bf-f875-55fa-8f9b-5a618f4b0c1c",
       "key": "hemudu-double-bird",
       "name": "双鸟朝阳纹牙雕"
     },
     {
+      "id": "a84b4d12-e868-58c8-9220-f641c1e90255",
       "key": "zhejiang-yue-sword",
       "name": "越王者旨於睗剑"
     },
     {
+      "id": "beb47b78-8d66-5e73-b740-aadc9bbaabbc",
       "key": "cai-feng-ming-qi",
       "name": "唐“彩凤鸣岐”七弦琴"
     },
     {
+      "id": "b854e452-202c-5960-bcd9-6c873557535a",
       "key": "jiyue-bronze-house",
       "name": "春秋伎乐铜屋"
     },
     {
+      "id": "68e7c909-3e8e-5b52-9933-b2c899c6afcf",
       "key": "longquan-boat-drip",
       "name": "元龙泉窑舟形砚滴"
     },
     {
+      "id": "e3f2a77b-d4ce-5c19-8d40-e39ee90b7078",
       "key": "caisu-mud-bodhisattva",
       "name": "北宋彩塑泥菩萨立像"
     },
     {
+      "id": "c843da49-7cb4-5f6c-8a8c-5d21052d68fe",
       "key": "wan-gong-jiao",
       "name": "民国万工轿"
     },
     {
+      "id": "b831e26f-5a8a-5a50-8ca1-2f80d7c74cb3",
       "key": "zhang-cheng-red-lacquer",
       "name": "张成剔红婴戏图盘"
     },
     {
+      "id": "398dfaf3-8b22-51f9-8fee-3f6412549aa4",
       "key": "hemudu-painted-pottery",
       "name": "河姆渡绘纹陶器"
     },
     {
+      "id": "a98b42ef-06e2-567d-9409-b20920f310a6",
       "key": "hemudu-bone-plough",
       "name": "河姆渡骨耜"
     }

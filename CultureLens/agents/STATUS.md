@@ -6,8 +6,12 @@
 
 ## 已完成
 
+- 2026-08-06 探索页新增「点亮图鉴」仪式：复用主题进度点亮文化系，从扫描历史派生已点亮城市，并按首个节点 / 首个文化系 / 首座城市 / 现场扫描数 / 节点数 / 跨城探索解锁六枚徽章；新徽章提供单次庆祝覆盖层、成功触感与 Reduce Motion 适配。城市和徽章均从现有数据派生，不改 SwiftData schema；新增规则单测 3 项通过，iOS Simulator Debug build 通过。设计见 `design/0010-exploration-illumination-and-badges.md`。
+- 2026-08-06 设置新增「资源包管理」：展示四个知识包的可用状态、版本与内容数量，并支持缺失时逐包下载 / 重试；西湖 / 中国历史 / 良渚 / 浙博均改为独立 ODR tag，四个 tag 全部设为 initial-install，默认随 App 首装交付。通用 iOS Simulator App build 已通过并确认产出四个独立 asset pack，主 App bundle 不再重复包含知识 JSON。设计见 `design/0009-settings-knowledge-pack-manager.md`。
+- 2026-08-06 知识包 UUID 主键迁移完成：entities 以 `id: UUID` 为运行时身份，`key` 为可选 slug；relations / themes / introductions 跨引用改 UUID；识别 / 引用 / 主题进度 / 图谱 API 对齐；LLM 经 `LLMIDSession` 使用 per-request 短 ID 并在入 App 前还原。包版本：西湖 v6 / 历史 v5 / 良渚 v5 / 浙博 v6。单元测试与 `LLMIDSessionTests` 已更新。
+- 2026-08-06 图谱捏合缩放锚点修复：全屏图谱（对象关系图谱 + 用户知识图谱）的缩放从 SwiftUI `scaleEffect`（固定绕画布中心缩放，双指位置无效）改为 `ZoomableScrollView`（`UIViewRepresentable` 包装 `UIScrollView.viewForZooming`），捏合以双指中心为锚点，附系统惯性 / 橡皮筋；工具栏 ± / 复位按钮经绑定驱动 `setZoomScale`，内容小于视口时居中，宿主 `UIHostingController` 挂入 VC 链保证节点 popover / 长按菜单可用，节点导航在全屏态改走 `onNavigate` 闭包（宿主内 `NavigationLink` 拿不到栈）。
 - 2026-08-06 知识详情在线图片展示完善：继续复用 `RichTextDocument.image` block，不改知识包内容；详情页补齐 HTTPS 图片加载 / 失败 / 重试 / 图注 / VoiceOver 状态，并在 overlay 或即时翻译只返回文本时保留源文档图片。见 `design/0008-knowledge-detail-remote-images.md`。
-- 2026-08-06 知识包按 ContentRole 拆 sidecar：看点（`elements-sight`）与文化历史（`elements-history`）分文件，另拆 `introductions` / `themes` / `locales-<lang>`；主 JSON 只留 version / relations；加载时合并并按 `contentRole` 筛选识别 catalog（只收看点）与开放问答兜底（优先文化历史）。版本升至西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4。
+- 2026-08-06 知识包按 ContentRole 拆 sidecar：看点（`elements-sight`）与文化历史（`elements-history`）分文件，另拆 `introductions` / `themes` / `locales-<lang>`；主 JSON 只留 version / relations；加载时合并并按 `contentRole` 筛选识别 catalog（只收看点）与开放问答兜底（优先文化历史）。版本升至西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4（随后 UUID 迁移再升至西湖 v6 / 良渚 v5 / 浙博 v6 / 历史 v5）。
 - 2026-08-06 识别候选收紧：`recognitionKnowledge` / prompt / v5 只允许 LLM 选择看点；景点根优先用同 key 看点，现场介绍里的文化历史只进 nearby_contexts / 绑图，不再作为 `cultural_element_key`。
 - 2026-08-06 补齐正式 App 图标：将文化镜头图标处理为无透明通道的 1024×1024 iOS 主图，并生成 macOS 全套尺寸资源。
 - 2026-08-06 足迹地图完善：右上角三段式模式选择器改为单个原生工具栏菜单，菜单内直接内联地图足迹 / 时间线足迹 / 兴趣点、标准 / 混合 / 卫星底图、足迹照片标记与 3D 俯视选项，消除重复玻璃和二级弹层；接入左下角 Liquid Glass 地点搜索，当前位置按钮移入系统 toolbar（定位后显示约 2 km 范围）；足迹与兴趣点按当前缩放范围合并为 stack 聚合点，点击后在搜索框上方选择具体项目再进入详情，并解除聚合标记与组内首条记录 ID 的隐式绑定；照片标记通过 ImageIO 下采样为 128px 本地预览；修复兴趣点系统标题与自定义标题重复；无带位置足迹时地图仍可搜索和定位。
@@ -49,10 +53,10 @@
 ## 已知取舍与阻塞
 
 - LLM key 硬编码，需在 Cloudflare 配限额告警（用户已确认接受）。
-- ODR 不能独立于 App 版本热更；多地域拆分待内容增长后执行。
-- 丝绸之路包未导入。浙博 / 良渚 / 中国历史三个包已随 App 打包，并与西湖包在运行时合并
+- ODR 不能独立于 App 版本热更；四包已按地域 / 主题拆成独立 tag，但当前均为 initial-install。
+- 丝绸之路包未导入。浙博 / 良渚 / 中国历史与西湖包均为 ODR，并在运行时合并
   （`KnowledgeStore.mergePacks` / `KnowledgePackLoader`）。键冲突仅 `shi-xingeng-discovery`
-  （良渚优先）。跨包桥接边与 UUID 命名空间仍见 `design/0006` 待做。
+  （良渚优先）。跨包桥接边已随 UUID 主键落地；详见 `KNOWLEDGE_PACK_GUIDE.md` / `PROJECT.md` 身份模型。
 - 关系类型化只覆盖一半：西湖包 94/182 条带 `kind`，另三包 0/310；`conceptKind` 西湖包 70/70，
   另三包 0/106。缺 `kind` 的边无法参与抽象阶梯。
 - `理解前先懂` 边全包仅 3 条且都是对象内部细节，不足以支撑「自动补未掌握前置」。

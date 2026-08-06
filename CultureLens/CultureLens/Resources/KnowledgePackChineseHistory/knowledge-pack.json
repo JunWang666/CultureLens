@@ -1,442 +1,442 @@
 {
-  "version": "chinese-history-v4",
+  "version": "chinese-history-v5",
   "source_language": "zh-Hans",
   "relations": [
     {
-      "elementKey": "zhonghua-civilization",
-      "relatedElementKey": "chinese-dynasty-overview",
+      "elementId": "264e378e-2460-5b0c-8974-3d6ce6b72775",
+      "relatedElementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
       "kind": "理解前先懂",
       "explanation": "先建立中华文明五千年连续发展的整体概念，再进入具体朝代的更替脉络。"
     },
     {
-      "elementKey": "xia-dynasty",
-      "relatedElementKey": "zhonghua-civilization",
+      "elementId": "40678ced-1a79-542a-98b3-c176df713e7a",
+      "relatedElementId": "264e378e-2460-5b0c-8974-3d6ce6b72775",
       "kind": "解释",
       "explanation": "夏朝由传说迈向信史的过程，需要放到中华文明探源研究的语境中理解。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "xia-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "40678ced-1a79-542a-98b3-c176df713e7a",
       "kind": "组成",
       "explanation": "夏朝是脉络中由传说迈向王朝时代的开端。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "shang-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "687f092d-7c06-556a-ada0-d193b707b01e",
       "kind": "组成",
       "explanation": "商朝以青铜文明与甲骨文著称。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "zhou-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "23ba68c7-be2d-5074-984c-64512433e8d6",
       "kind": "组成",
       "explanation": "周朝奠定礼乐制度与封建格局。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "spring-autumn-warring-states",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "kind": "组成",
       "explanation": "春秋战国是东周王权衰落后的分裂与争鸣时代。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "qin-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
       "kind": "组成",
       "explanation": "秦朝是脉络中首个大一统帝国。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "han-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "kind": "组成",
       "explanation": "汉朝奠定汉民族与汉文化的基本格局。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "three-kingdoms",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
       "kind": "组成",
       "explanation": "三国是汉末群雄割据的鼎立时期。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "jin-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "kind": "组成",
       "explanation": "两晋短暂统一后陷入长期南北分裂。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "southern-northern-dynasties",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "85f88308-831c-5be6-a232-82f86df1b030",
       "kind": "组成",
       "explanation": "南北朝是南北政权并立、民族交融的时期。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "sui-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "kind": "组成",
       "explanation": "隋朝重新统一南北，开创科举与大运河。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "tang-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "kind": "组成",
       "explanation": "唐朝是中国古代最开放强盛的王朝之一。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "five-dynasties-ten-kingdoms",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "04942ef0-d853-5849-942d-f30154c16e45",
       "kind": "组成",
       "explanation": "五代十国是唐亡后政权频繁更迭的过渡时期。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "song-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "kind": "组成",
       "explanation": "宋朝以经济繁荣与文化精致著称，军事上偏于守势。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "yuan-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
       "kind": "组成",
       "explanation": "元朝是蒙古建立的大一统王朝。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "ming-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "kind": "组成",
       "explanation": "明朝恢复汉人统治，修筑长城、远航西洋。"
     },
     {
-      "elementKey": "chinese-dynasty-overview",
-      "relatedElementKey": "qing-dynasty",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
       "kind": "组成",
       "explanation": "清朝是帝制时代的最后一个王朝。"
     },
     {
-      "elementKey": "shang-dynasty",
-      "relatedElementKey": "xia-dynasty",
+      "elementId": "687f092d-7c06-556a-ada0-d193b707b01e",
+      "relatedElementId": "40678ced-1a79-542a-98b3-c176df713e7a",
       "kind": "产生于",
       "explanation": "商汤灭夏而建商，青铜文明在夏的世袭制度基础上成熟。"
     },
     {
-      "elementKey": "zhou-dynasty",
-      "relatedElementKey": "shang-dynasty",
+      "elementId": "23ba68c7-be2d-5074-984c-64512433e8d6",
+      "relatedElementId": "687f092d-7c06-556a-ada0-d193b707b01e",
       "kind": "产生于",
       "explanation": "周武王灭商建周，礼乐制度在商文化基础上损益而成。"
     },
     {
-      "elementKey": "zhou-dynasty",
-      "relatedElementKey": "spring-autumn-warring-states",
+      "elementId": "23ba68c7-be2d-5074-984c-64512433e8d6",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "kind": "组成",
       "explanation": "春秋战国是东周王权衰落后的历史分期。"
     },
     {
-      "elementKey": "qin-dynasty",
-      "relatedElementKey": "spring-autumn-warring-states",
+      "elementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "kind": "产生于",
       "explanation": "秦灭六国终结战国纷争，统一产生于分裂时代的终点。"
     },
     {
-      "elementKey": "han-dynasty",
-      "relatedElementKey": "qin-dynasty",
+      "elementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
       "kind": "受到影响",
       "explanation": "汉承秦制，郡县制与皇帝制度皆延续秦朝的开创。"
     },
     {
-      "elementKey": "three-kingdoms",
-      "relatedElementKey": "han-dynasty",
+      "elementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "kind": "产生于",
       "explanation": "汉末黄巾之乱后群雄割据，曹魏代汉后进入三国。"
     },
     {
-      "elementKey": "jin-dynasty",
-      "relatedElementKey": "three-kingdoms",
+      "elementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
+      "relatedElementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
       "kind": "产生于",
       "explanation": "司马氏代魏建晋，灭吴后结束三国鼎立。"
     },
     {
-      "elementKey": "southern-northern-dynasties",
-      "relatedElementKey": "jin-dynasty",
+      "elementId": "85f88308-831c-5be6-a232-82f86df1b030",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "kind": "产生于",
       "explanation": "东晋灭亡后刘宋代晋，南北政权并立。"
     },
     {
-      "elementKey": "sui-dynasty",
-      "relatedElementKey": "southern-northern-dynasties",
+      "elementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
+      "relatedElementId": "85f88308-831c-5be6-a232-82f86df1b030",
       "kind": "产生于",
       "explanation": "隋灭陈统一南北，终结数百年分裂。"
     },
     {
-      "elementKey": "tang-dynasty",
-      "relatedElementKey": "sui-dynasty",
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "kind": "受到影响",
       "explanation": "唐承隋制，三省六部与科举在隋朝开创的格局上发展。"
     },
     {
-      "elementKey": "five-dynasties-ten-kingdoms",
-      "relatedElementKey": "tang-dynasty",
+      "elementId": "04942ef0-d853-5849-942d-f30154c16e45",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "kind": "产生于",
       "explanation": "唐亡后藩镇割据演变为五代十国的政权更迭。"
     },
     {
-      "elementKey": "song-dynasty",
-      "relatedElementKey": "five-dynasties-ten-kingdoms",
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "relatedElementId": "04942ef0-d853-5849-942d-f30154c16e45",
       "kind": "产生于",
       "explanation": "赵匡胤陈桥兵变取代后周建宋，结束五代纷争。"
     },
     {
-      "elementKey": "yuan-dynasty",
-      "relatedElementKey": "song-dynasty",
+      "elementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "kind": "产生于",
       "explanation": "蒙古灭南宋建元，结束两宋与北方政权并立。"
     },
     {
-      "elementKey": "ming-dynasty",
-      "relatedElementKey": "yuan-dynasty",
+      "elementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
       "kind": "产生于",
       "explanation": "元末群雄并起，明军北伐攻克大都，元廷北退。"
     },
     {
-      "elementKey": "qing-dynasty",
-      "relatedElementKey": "ming-dynasty",
+      "elementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "kind": "产生于",
       "explanation": "清军入关取代明朝统治，建立清朝。"
     },
     {
-      "elementKey": "qin-shi-huang",
-      "relatedElementKey": "qin-dynasty",
+      "elementId": "a791db39-bcee-5907-9942-1efbe6a100f4",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
       "kind": "体现",
       "explanation": "秦始皇的统一功业与沉重徭役，集中体现了秦朝的崛起与速亡。"
     },
     {
-      "elementKey": "great-wall",
-      "relatedElementKey": "qin-shi-huang",
+      "elementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "relatedElementId": "a791db39-bcee-5907-9942-1efbe6a100f4",
       "kind": "产生于",
       "explanation": "秦始皇连接战国旧墙，始有万里长城之称。"
     },
     {
-      "elementKey": "han-dynasty",
-      "relatedElementKey": "wenjing-prosperity",
+      "elementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
+      "relatedElementId": "32c66150-415c-5830-9fa7-637b517458b5",
       "kind": "组成",
       "explanation": "文景之治是汉初与民休息造就的治世。"
     },
     {
-      "elementKey": "han-wudi",
-      "relatedElementKey": "han-dynasty",
+      "elementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "kind": "体现",
       "explanation": "推恩令与开疆拓土，体现汉朝鼎盛时期的国力。"
     },
     {
-      "elementKey": "wenjing-prosperity",
-      "relatedElementKey": "han-wudi",
+      "elementId": "32c66150-415c-5830-9fa7-637b517458b5",
+      "relatedElementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
       "kind": "理解前先懂",
       "explanation": "文景之治积累的国力，是理解汉武帝功业的前提。"
     },
     {
-      "elementKey": "silk-road",
-      "relatedElementKey": "han-wudi",
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "relatedElementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
       "kind": "产生于",
       "explanation": "汉武帝遣张骞凿空西域，丝绸之路由此正式开通。"
     },
     {
-      "elementKey": "imperial-examination",
-      "relatedElementKey": "sui-dynasty",
+      "elementId": "707c0481-01fa-5c61-ab0f-24448b981e4a",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "kind": "产生于",
       "explanation": "隋文帝首创、隋炀帝设进士科，科举制度产生于隋朝。"
     },
     {
-      "elementKey": "grand-canal",
-      "relatedElementKey": "sui-dynasty",
+      "elementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "kind": "产生于",
       "explanation": "隋统一南北后大规模开凿运河，奠定后世漕运格局。"
     },
     {
-      "elementKey": "tang-dynasty",
-      "relatedElementKey": "zhenguan-rule",
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "relatedElementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
       "kind": "组成",
       "explanation": "贞观之治是唐太宗在位二十三年的清明治世。"
     },
     {
-      "elementKey": "tang-taizong",
-      "relatedElementKey": "tang-dynasty",
+      "elementId": "b606e202-ef33-5e44-8266-ce40598494fd",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "kind": "体现",
       "explanation": "唐太宗的治理把唐朝带入第一个治世。"
     },
     {
-      "elementKey": "zhenguan-rule",
-      "relatedElementKey": "tang-taizong",
+      "elementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
+      "relatedElementId": "b606e202-ef33-5e44-8266-ce40598494fd",
       "kind": "解释",
       "explanation": "贞观之治的成就，要放到太宗的用人与纳谏中理解。"
     },
     {
-      "elementKey": "kaiyuan-flourishing",
-      "relatedElementKey": "zhenguan-rule",
+      "elementId": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a",
+      "relatedElementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
       "kind": "受到影响",
       "explanation": "开元盛世承继贞观之治打下的制度基础。"
     },
     {
-      "elementKey": "tang-dynasty",
-      "relatedElementKey": "an-lushan-rebellion",
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "relatedElementId": "04e81c89-e1c1-5c19-800e-f25d24c3b203",
       "kind": "组成",
       "explanation": "安史之乱是唐朝由盛转衰的关键转折。"
     },
     {
-      "elementKey": "an-lushan-rebellion",
-      "relatedElementKey": "kaiyuan-flourishing",
+      "elementId": "04e81c89-e1c1-5c19-800e-f25d24c3b203",
+      "relatedElementId": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a",
       "kind": "解释",
       "explanation": "开元后期节度使坐大的隐患，解释了安史之乱为何爆发。"
     },
     {
-      "elementKey": "song-dynasty",
-      "relatedElementKey": "jingkang-incident",
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "relatedElementId": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd",
       "kind": "组成",
       "explanation": "靖康之变导致北宋灭亡，宋室南渡。"
     },
     {
-      "elementKey": "jingkang-incident",
-      "relatedElementKey": "yue-fei",
+      "elementId": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd",
+      "relatedElementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
       "kind": "理解前先懂",
       "explanation": "靖康之变的国耻，是理解岳飞抗金动力的前提。"
     },
     {
-      "elementKey": "wang-anshi",
-      "relatedElementKey": "song-dynasty",
+      "elementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "kind": "体现",
       "explanation": "王安石变法的成败，集中体现北宋中期的财政困境与改革尝试。"
     },
     {
-      "elementKey": "imperial-examination",
-      "relatedElementKey": "wang-anshi",
+      "elementId": "707c0481-01fa-5c61-ab0f-24448b981e4a",
+      "relatedElementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
       "kind": "理解前先懂",
       "explanation": "先了解科举取士的基本制度，才能理解王安石以经义取士的改革。"
     },
     {
-      "elementKey": "yue-fei",
-      "relatedElementKey": "wang-anshi",
+      "elementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
+      "relatedElementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
       "kind": "相似于",
       "explanation": "同为两宋名臣，一个变法受挫，一个蒙冤而亡，都壮志难酬。"
     },
     {
-      "elementKey": "zheng-he",
-      "relatedElementKey": "ming-dynasty",
+      "elementId": "d9dc4898-8d93-59b7-9b79-320d60801d58",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "kind": "体现",
       "explanation": "七下西洋体现明初鼎盛时期的国威与海洋开拓。"
     },
     {
-      "elementKey": "great-wall",
-      "relatedElementKey": "ming-dynasty",
+      "elementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "kind": "受到影响",
       "explanation": "现存长城主体为明朝大规模修筑的边防遗存。"
     },
     {
-      "elementKey": "zheng-he",
-      "relatedElementKey": "silk-road",
+      "elementId": "d9dc4898-8d93-59b7-9b79-320d60801d58",
+      "relatedElementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
       "kind": "位于",
       "explanation": "郑和航线属于海上丝绸之路，连接西太平洋与印度洋。"
     },
     {
-      "elementKey": "kangxi",
-      "relatedElementKey": "qing-dynasty",
+      "elementId": "354ea9d5-7830-548f-8847-1d193625d358",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
       "kind": "体现",
       "explanation": "康熙的文治武功，体现清朝康乾盛世的开端。"
     },
     {
-      "elementKey": "qing-dynasty",
-      "relatedElementKey": "opium-war",
+      "elementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
+      "relatedElementId": "bf64a656-a4a8-51da-86ca-f0e16eb5871c",
       "kind": "组成",
       "explanation": "鸦片战争揭开近代序幕，清朝统治由盛转衰。"
     },
     {
-      "elementKey": "silk-road",
-      "relatedElementKey": "kangxi",
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "relatedElementId": "354ea9d5-7830-548f-8847-1d193625d358",
       "kind": "受到影响",
       "explanation": "康熙三征噶尔丹安定西北，丝路沿线重归稳定。"
     },
     {
-      "elementKey": "grand-canal",
-      "relatedElementKey": "opium-war",
+      "elementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "relatedElementId": "bf64a656-a4a8-51da-86ca-f0e16eb5871c",
       "kind": "受到影响",
       "explanation": "鸦片战争后通商口岸兴起，运河漕运地位渐衰。"
     },
     {
-      "elementKey": "hundred-schools",
-      "relatedElementKey": "spring-autumn-warring-states",
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "kind": "产生于",
       "explanation": "百家争鸣产生于春秋战国的社会剧变与思想解放。"
     },
     {
-      "elementKey": "hundred-schools",
-      "relatedElementKey": "confucius-and-confucianism",
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "relatedElementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
       "kind": "组成",
       "explanation": "儒家是诸子百家中影响最深远的流派。"
     },
     {
-      "elementKey": "hundred-schools",
-      "relatedElementKey": "laozi-and-taoism",
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "relatedElementId": "b486685f-18a1-5090-994b-139b73689036",
       "kind": "组成",
       "explanation": "道家是与儒家并立的重要流派。"
     },
     {
-      "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "spring-autumn-warring-states",
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "kind": "产生于",
       "explanation": "孔子思想产生于春秋乱世，回应礼崩乐坏。"
     },
     {
-      "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "laozi-and-taoism",
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "relatedElementId": "b486685f-18a1-5090-994b-139b73689036",
       "kind": "相似于",
       "explanation": "同为春秋思想源头，儒家重入世教化，道家贵自然无为。"
     },
     {
-      "elementKey": "confucius-and-confucianism",
-      "relatedElementKey": "imperial-examination",
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "relatedElementId": "707c0481-01fa-5c61-ab0f-24448b981e4a",
       "kind": "用于",
       "explanation": "儒家经典被科举用作考试内容，成为读书入仕的阶梯。"
     },
     {
-      "elementKey": "twenty-four-histories",
-      "relatedElementKey": "chinese-dynasty-overview",
+      "elementId": "948bb138-1ced-515b-b776-dfe22278d01d",
+      "relatedElementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
       "kind": "用于",
       "explanation": "二十四史以纪传体记录四千年王朝，是印证朝代更替的正史依据。"
     },
     {
-      "elementKey": "four-great-inventions",
-      "relatedElementKey": "yuan-dynasty",
+      "elementId": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
       "kind": "解释",
       "explanation": "蒙元的驿站网络与东西往来，解释了四大发明为何在此时加速西传。"
     },
     {
-      "elementKey": "silk-road",
-      "relatedElementKey": "four-great-inventions",
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "relatedElementId": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a",
       "kind": "用于",
       "explanation": "丝绸之路是四大发明西传中亚与欧洲的重要通道。"
     },
     {
-      "elementKey": "chinese-buddhism",
-      "relatedElementKey": "han-dynasty",
+      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "kind": "产生于",
       "explanation": "佛教于两汉之际传入中国，逐渐本土化为中国文化的重要组成。"
     },
     {
-      "elementKey": "chinese-calligraphy",
-      "relatedElementKey": "han-dynasty",
+      "elementId": "be77359e-4b0a-541b-83e4-3af6a9234a17",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "kind": "产生于",
       "explanation": "汉字书写在汉代隶变之后成为自觉的艺术。"
     },
     {
-      "elementKey": "chinese-landscape-painting",
-      "relatedElementKey": "jin-dynasty",
+      "elementId": "bb8c2784-d40b-50f3-b07b-6d6f20eaedd5",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "kind": "产生于",
       "explanation": "山水画在两晋南北朝成为独立画科，与士人隐逸之风同生。"
     },
     {
-      "elementKey": "tea-culture",
-      "relatedElementKey": "tang-dynasty",
+      "elementId": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "kind": "产生于",
       "explanation": "唐代陆羽《茶经》标志饮茶成为体系化的文化生活。"
     },
     {
-      "elementKey": "mid-autumn-festival",
-      "relatedElementKey": "song-dynasty",
+      "elementId": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "kind": "产生于",
       "explanation": "中秋赏月成俗于唐宋，至宋代成为全民团圆佳节。"
     }

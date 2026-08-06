@@ -1,6 +1,7 @@
 {
   "introductions": [
     {
+      "id": "f162057d-019e-5c35-9d80-ec740e7db49a",
       "key": "jade-cong-wang.on-display",
       "name": "玉琮王展陈",
       "introduction": {
@@ -24,12 +25,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-cong-wang",
-      "attractionKey": "jade-cong-wang",
+      "culturalElementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "attractionId": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "latitude": 30.3905,
       "longitude": 119.9945
     },
     {
+      "id": "1e71581c-11c2-5eb7-8643-773d0c08a4f5",
       "key": "liangzhu-museum.discovery-history",
       "name": "发现求真：考古历程",
       "introduction": {
@@ -53,12 +55,13 @@
           }
         ]
       },
-      "culturalElementKey": "shi-xingeng-discovery",
-      "attractionKey": "liangzhu-museum",
+      "culturalElementId": "d48d7adb-49d2-5879-9dd2-381f6bc9f06a",
+      "attractionId": "569034e5-d306-5605-b1d8-754c8e8041f7",
       "latitude": 30.3905,
       "longitude": 119.9945
     },
     {
+      "id": "1347c50a-75f3-5dbe-bfc9-d21e3d4f7239",
       "key": "mojiaoshan-center.on-site",
       "name": "莫角山遗址现场",
       "introduction": {
@@ -82,12 +85,13 @@
           }
         ]
       },
-      "culturalElementKey": "mojiaoshan-center",
-      "attractionKey": "mojiaoshan-center",
+      "culturalElementId": "893ee811-737d-54ca-a22a-d3a1fce35880",
+      "attractionId": "fa150bb0-7779-54e4-84dd-2e3dd817658a",
       "latitude": 30.39666667,
       "longitude": 119.98527778
     },
     {
+      "id": "fe129795-7eb8-5667-9414-c0cb8be15498",
       "key": "fanshan-cemetery.on-site",
       "name": "反山墓地现场",
       "introduction": {
@@ -111,12 +115,13 @@
           }
         ]
       },
-      "culturalElementKey": "fanshan-cemetery",
-      "attractionKey": "fanshan-cemetery",
+      "culturalElementId": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
+      "attractionId": "dd5d6d7b-2529-5301-8fac-5a6325df37a7",
       "latitude": 30.39666667,
       "longitude": 119.98527778
     },
     {
+      "id": "2b623b16-77ea-57f0-bad3-6bd01bcca029",
       "key": "yaoshan-altar.on-site",
       "name": "瑶山祭坛现场",
       "introduction": {
@@ -140,12 +145,13 @@
           }
         ]
       },
-      "culturalElementKey": "yaoshan-altar",
-      "attractionKey": "yaoshan-altar",
+      "culturalElementId": "2af8cfef-b959-5152-8e81-c5f5a625e158",
+      "attractionId": "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25",
       "latitude": 30.371,
       "longitude": 119.936
     },
     {
+      "id": "aa4a5ea5-2a43-5085-b136-7c071260174b",
       "key": "jade-cong-ritual.on-display",
       "name": "琮：礼器展陈",
       "introduction": {
@@ -161,12 +167,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-cong-ritual",
-      "attractionKey": "jade-cong-ritual",
+      "culturalElementId": "e5ac2ef8-9095-57a6-808c-43df7159b392",
+      "attractionId": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "latitude": 30.3905,
       "longitude": 119.9945
     },
     {
+      "id": "324ea549-4a92-51ab-b6e2-caa69ad16c91",
       "key": "jade-bi.on-display",
       "name": "玉璧展陈",
       "introduction": {
@@ -182,12 +189,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-bi",
-      "attractionKey": "jade-bi",
+      "culturalElementId": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
+      "attractionId": "2214c758-79d5-58bc-963d-17178b204af5",
       "latitude": 30.3905,
       "longitude": 119.9945
     },
     {
+      "id": "35142d99-41e7-5772-80c2-6bb86176ad31",
       "key": "jade-yue.on-display",
       "name": "玉钺展陈",
       "introduction": {
@@ -203,12 +211,13 @@
           }
         ]
       },
-      "culturalElementKey": "jade-yue",
-      "attractionKey": "jade-yue",
+      "culturalElementId": "484417c0-6068-54d5-9d51-97659064a65b",
+      "attractionId": "fda7f090-f56b-5e48-a8a7-2916beb3c469",
       "latitude": 30.3905,
       "longitude": 119.9945
     },
     {
+      "id": "624bbd50-fa26-5d5d-81ff-41b8f0a93a14",
       "key": "liangzhu-site-park.visit",
       "name": "良渚古城遗址公园",
       "introduction": {
@@ -224,12 +233,13 @@
           }
         ]
       },
-      "culturalElementKey": "site-park",
-      "attractionKey": "site-park",
+      "culturalElementId": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
+      "attractionId": "a0c85a81-92bb-51a4-8e99-4230136a5643",
       "latitude": 30.39666667,
       "longitude": 119.98527778
     },
     {
+      "id": "86171a18-0732-5d83-b63e-4d5fe09e4874",
       "key": "yaoshan-site-park.visit",
       "name": "瑶山遗址公园",
       "introduction": {
@@ -245,8 +255,8 @@
           }
         ]
       },
-      "culturalElementKey": "yaoshan-altar",
-      "attractionKey": "yaoshan-altar",
+      "culturalElementId": "2af8cfef-b959-5152-8e81-c5f5a625e158",
+      "attractionId": "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25",
       "latitude": 30.371,
       "longitude": 119.936
     }

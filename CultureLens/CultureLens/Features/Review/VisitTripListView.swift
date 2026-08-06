@@ -24,8 +24,8 @@ struct VisitTripListView: View {
       } else {
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 16) {
-            EditorialHeader(
-              eyebrow: nil,
+            MagazinePageHeader(
+              eyebrow: "JOURNAL",
               title: "文化回顾",
               message: "把一次参观里点亮的节点、走过的景点与新认识的关系收成可回看的行程。"
             )
@@ -74,10 +74,10 @@ struct VisitTripListView: View {
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(
       CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous)
+      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
     )
     .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous)
+      RoundedRectangle(cornerRadius: 12, style: .continuous)
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
     .accessibilityElement(children: .combine)

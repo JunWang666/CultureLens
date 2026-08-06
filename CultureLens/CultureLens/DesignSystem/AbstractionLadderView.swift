@@ -7,45 +7,61 @@ import SwiftUI
 /// Tapping any rung or chip opens its knowledge-element detail, where the
 /// ladder re-roots itself on that node — this is how the user「换起点」.
 struct AbstractionLadderView: View {
-  let rootKey: String
+  let rootID: UUID
   let rootName: String
   /// Injectable for previews/tests; defaults to the shared bundled store.
   var store: KnowledgeStore? = KnowledgeStore.shared
 
+  /// Convenience for call sites that still hold a slug or UUID string.
+  init(rootKey: String, rootName: String, store: KnowledgeStore? = KnowledgeStore.shared) {
+    self.rootID =
+      store?.resolveElementID(rootKey)
+      ?? UUID(uuidString: rootKey)
+      ?? DeterministicID.culturalElement(rootKey)
+    self.rootName = rootName
+    self.store = store
+  }
+
+  init(rootID: UUID, rootName: String, store: KnowledgeStore? = KnowledgeStore.shared) {
+    self.rootID = rootID
+    self.rootName = rootName
+    self.store = store
+  }
+
   /// One displayed rung: the backbone ancestor plus same-level related chips.
   private struct Rung: Identifiable {
-    let id: String
+    let id: UUID
     let ancestor: AbstractionAncestor
     let siblings: [KnowledgePack.Element]
   }
 
   private var rungs: [Rung] {
-    guard let store, store.element(key: rootKey) != nil else { return [] }
-    let levels = store.ancestors(key: rootKey, maxLevels: 4)
-    var pathKeys: Set<String> = [rootKey]
+    guard let store, store.element(id: rootID) != nil else { return [] }
+    let levels = store.ancestors(id: rootID, maxLevels: 4)
+    var pathIDs: Set<UUID> = [rootID]
     var result: [Rung] = []
-    var childKey = rootKey
+    var childID = rootID
     for level in levels {
       guard let backbone = level.elements.first else { continue }
-      pathKeys.insert(backbone.key)
+      pathIDs.insert(backbone.id)
 
       // Same-level related: other ancestors at this level plus nodes that
       // share this rung as an upward parent with the previous rung.
-      var siblingKeys: [String] = level.elements.dropFirst().map(\.key)
-      for sibling in store.siblings(key: childKey) {
-        guard !pathKeys.contains(sibling), !siblingKeys.contains(sibling) else { continue }
-        let sharesThisParent = store.upward(key: sibling).contains { $0.key == backbone.key }
+      var siblingIDs: [UUID] = level.elements.dropFirst().map(\.id)
+      for sibling in store.siblings(id: childID) {
+        guard !pathIDs.contains(sibling), !siblingIDs.contains(sibling) else { continue }
+        let sharesThisParent = store.upward(id: sibling).contains { $0.id == backbone.id }
         if sharesThisParent {
-          siblingKeys.append(sibling)
+          siblingIDs.append(sibling)
         }
       }
-      let siblingElements = siblingKeys.prefix(4).compactMap { store.element(key: $0) }
+      let siblingElements = siblingIDs.prefix(4).compactMap { store.element(id: $0) }
 
       result.append(
-        Rung(id: backbone.key, ancestor: backbone, siblings: siblingElements)
+        Rung(id: backbone.id, ancestor: backbone, siblings: siblingElements)
       )
-      pathKeys.formUnion(siblingKeys)
-      childKey = backbone.key
+      pathIDs.formUnion(siblingIDs)
+      childID = backbone.id
     }
     return result
   }
@@ -62,7 +78,7 @@ struct AbstractionLadderView: View {
           ladderRow(
             title: rootName,
             subtitle: "当前对象",
-            key: nil,
+            elementID: nil,
             isRoot: true
           )
           ForEach(rungs) { rung in
@@ -70,7 +86,7 @@ struct AbstractionLadderView: View {
             ladderRow(
               title: rung.ancestor.name,
               subtitle: rung.ancestor.kind?.rawValue,
-              key: rung.ancestor.key,
+              elementID: rung.ancestor.id,
               isRoot: false
             )
             if !rung.siblings.isEmpty {
@@ -96,7 +112,7 @@ struct AbstractionLadderView: View {
   private func ladderRow(
     title: String,
     subtitle: String?,
-    key: String?,
+    elementID: UUID?,
     isRoot: Bool
   ) -> some View {
     let content = HStack(spacing: 10) {
@@ -119,7 +135,7 @@ struct AbstractionLadderView: View {
 
       Spacer(minLength: 8)
 
-      if key != nil {
+      if elementID != nil {
         Image(systemName: "chevron.right")
           .font(.caption2.weight(.semibold))
           .foregroundStyle(CultureTheme.inkSecondary)
@@ -133,8 +149,8 @@ struct AbstractionLadderView: View {
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
 
-    if let key {
-      NavigationLink(value: AppRoute.knowledgeElement(key)) {
+    if let elementID {
+      NavigationLink(value: AppRoute.knowledgeElement(elementID)) {
         content
       }
       .buttonStyle(.plain)
@@ -149,8 +165,8 @@ struct AbstractionLadderView: View {
   private func siblingChips(_ siblings: [KnowledgePack.Element]) -> some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 8) {
-        ForEach(siblings, id: \.key) { element in
-          NavigationLink(value: AppRoute.knowledgeElement(element.key)) {
+        ForEach(siblings, id: \.id) { element in
+          NavigationLink(value: AppRoute.knowledgeElement(element.id)) {
             Text(element.name)
               .font(.caption.weight(.semibold))
               .foregroundStyle(CultureTheme.inkSecondary)
@@ -162,27 +178,10 @@ struct AbstractionLadderView: View {
               }
           }
           .buttonStyle(.plain)
-          .accessibilityLabel("同级相关 \(element.name)")
         }
       }
-      .padding(.leading, 46)
-      .padding(.vertical, 4)
     }
-  }
-}
-
-#Preview {
-  NavigationStack {
-    ScrollView {
-      if let store = KnowledgeStore.shared {
-        AbstractionLadderView(
-          rootKey: "three-pools-mirroring-moon",
-          rootName: "三潭印月",
-          store: store
-        )
-        .padding()
-      }
-    }
-    .background(CultureTheme.canvas)
+    .padding(.leading, 36)
+    .padding(.vertical, 4)
   }
 }

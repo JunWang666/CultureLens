@@ -1,41 +1,78 @@
 import Foundation
 
-/// Loads knowledge packs through On-Demand Resources (tag `knowledge-base`) and
-/// merges them with any additional packs embedded in the app bundle
-/// (Liangzhu / Zhejiang Museum / Chinese History).
-///
-/// The ODR tag is currently in `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`, so the
-/// West Lake asset pack installs with the app. Extra regional packs ship as
-/// regular bundle resources today; giving each its own ODR tag later does not
-/// require changing call sites.
+/// Loads and merges the four independently tagged knowledge ODR packs.
+/// Every tag is currently initial-install, but each remains independently
+/// queryable and downloadable from the settings resource manager.
 actor KnowledgePackLoader {
   static let shared = KnowledgePackLoader()
-  static let odrTag = "knowledge-base"
 
   private var cachedStore: KnowledgeStore?
-  private var resourceRequest: NSBundleResourceRequest?
+  private var resourceRequests: [KnowledgePackDirectory: NSBundleResourceRequest] = [:]
+  private var accessedDirectories = Set<KnowledgePackDirectory>()
+  /// ODR 请求不支持并发 begin；actor 在 await 处可重入，用共享 Task 去重。
+  private var inFlightAccess: [KnowledgePackDirectory: Task<Bool, Error>] = [:]
 
-  /// Returns the merged store: ODR West Lake (when available) plus every other
-  /// pack found in the main bundle. Falls back to `fallback` when nothing loads.
+  /// Returns the merged ODR store. Missing initial-install resources are
+  /// downloaded on demand; `fallback` keeps injected test stores supported.
   func store(fallback: KnowledgeStore? = KnowledgeStore.shared) async -> KnowledgeStore? {
     if let cachedStore { return cachedStore }
-    if let merged = await loadMergedStore() {
+    if let merged = await loadMergedStore(downloadIfNeeded: true) {
       cachedStore = merged
+      KnowledgeStore.installShared(merged)
       return merged
     }
     return fallback
   }
 
-  private func loadMergedStore() async -> KnowledgeStore? {
-    var packs: [KnowledgePack] = []
-
-    if let odrPacks = await loadODRPacks() {
-      packs.append(contentsOf: odrPacks)
+  /// Returns one fresh status snapshot per known pack, in merge-priority order.
+  /// Merely opening the manager never starts a missing ODR download.
+  func resourceStatuses() async -> [KnowledgePackResource] {
+    var resources: [KnowledgePackResource] = []
+    for directory in KnowledgePackDirectory.allCases {
+      let available =
+        (try? await ensureAccess(to: directory, downloadIfNeeded: false)) == true
+      let pack = available ? loadPack(directory) : nil
+      resources.append(
+        KnowledgePackResource(
+          directory: directory,
+          delivery: .onDemand,
+          availability: pack == nil
+            ? (available ? .unavailable : .notDownloaded)
+            : .available,
+          pack: pack
+        )
+      )
     }
+    return resources
+  }
 
-    if let bundled = try? KnowledgeStore.discoverPacks(in: .main) {
-      for pack in bundled where !packs.contains(where: { $0.version == pack.version }) {
-        packs.append(pack)
+  /// Downloads one missing ODR pack and refreshes the merged runtime snapshot.
+  func downloadOnDemandPack(_ directory: KnowledgePackDirectory) async throws {
+    guard try await ensureAccess(to: directory, downloadIfNeeded: true) else {
+      throw KnowledgeStoreError.packMissing
+    }
+    guard loadPack(directory) != nil else {
+      throw KnowledgeStoreError.packMissing
+    }
+    cachedStore = await loadMergedStore(downloadIfNeeded: false)
+    if let cachedStore {
+      KnowledgeStore.installShared(cachedStore)
+    }
+  }
+
+  private func loadMergedStore(downloadIfNeeded: Bool) async -> KnowledgeStore? {
+    var packs: [KnowledgePack] = []
+    for directory in KnowledgePackDirectory.allCases {
+      do {
+        guard try await ensureAccess(to: directory, downloadIfNeeded: downloadIfNeeded)
+        else {
+          continue
+        }
+        if let pack = loadPack(directory) {
+          packs.append(pack)
+        }
+      } catch {
+        continue
       }
     }
 
@@ -43,19 +80,60 @@ actor KnowledgePackLoader {
     return KnowledgeStore.store(merging: packs)
   }
 
-  private func loadODRPacks() async -> [KnowledgePack]? {
-    let request = resourceRequest ?? NSBundleResourceRequest(tags: [Self.odrTag])
-    resourceRequest = request
-    request.loadingPriority = NSBundleResourceRequestLoadingPriorityUrgent
-    do {
-      let alreadyAvailable = await request.conditionallyBeginAccessingResources()
-      if !alreadyAvailable {
-        try await request.beginAccessingResources()
-      }
-      let packs = try KnowledgeStore.discoverPacks(in: request.bundle)
-      return packs.isEmpty ? nil : packs
-    } catch {
-      return nil
+  private func ensureAccess(
+    to directory: KnowledgePackDirectory,
+    downloadIfNeeded: Bool
+  ) async throws -> Bool {
+    if accessedDirectories.contains(directory) { return true }
+    if let inFlight = inFlightAccess[directory] {
+      return try await inFlight.value
     }
+
+    let request = request(for: directory)
+    let task = Task { () throws -> Bool in
+      if await request.conditionallyBeginAccessingResources() { return true }
+      guard downloadIfNeeded else { return false }
+      try await request.beginAccessingResources()
+      return true
+    }
+    inFlightAccess[directory] = task
+    defer { inFlightAccess[directory] = nil }
+
+    do {
+      let accessed = try await task.value
+      if accessed {
+        accessedDirectories.insert(directory)
+      }
+      return accessed
+    } catch {
+      // begin 失败的请求实例不能再次 begin（再次调用会抛 NSException 闪退），
+      // 丢弃实例，下次重试时创建新请求。
+      resourceRequests[directory] = nil
+      throw error
+    }
+  }
+
+  private func request(for directory: KnowledgePackDirectory) -> NSBundleResourceRequest {
+    if let request = resourceRequests[directory] { return request }
+    let request = NSBundleResourceRequest(tags: [directory.odrTag])
+    request.loadingPriority = NSBundleResourceRequestLoadingPriorityUrgent
+    resourceRequests[directory] = request
+    return request
+  }
+
+  private func loadPack(_ directory: KnowledgePackDirectory) -> KnowledgePack? {
+    let bundle = request(for: directory).bundle
+    // ODR asset pack 内文件是扁平的（根目录），bundle 资源则带目录前缀。
+    for subdirectory in directory.subdirectoryCandidates + [nil] {
+      guard
+        let url = bundle.url(
+          forResource: "knowledge-pack",
+          withExtension: "json",
+          subdirectory: subdirectory
+        )
+      else { continue }
+      return try? KnowledgeStore.loadPack(fromBaseURL: url)
+    }
+    return nil
   }
 }

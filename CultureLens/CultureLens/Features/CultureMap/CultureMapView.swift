@@ -93,9 +93,9 @@ struct CultureMapView: View {
         knowledgeStore?.attractionPoints() ?? []
     }
 
-    /// Element keys the user has already scanned — visited POIs.
-    private var recordedElementKeys: Set<String> {
-        Set(records.compactMap { $0.savedObject?.culturalElementKey })
+    /// Element UUIDs the user has already scanned — visited POIs.
+    private var recordedElementIDs: Set<UUID> {
+        Set(records.compactMap { $0.savedObject?.culturalElementID })
     }
 
     /// A group of records too close to tap individually at the current zoom.
@@ -800,13 +800,13 @@ struct CultureMapView: View {
                 relativePath: record.imageRelativePath,
                 fallbackSymbol: symbol(for: record)
             )
-            .frame(width: 48, height: 48)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .frame(width: 72, height: 72)
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             .overlay {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(.white, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .stroke(.white, lineWidth: 2.5)
             }
-            .shadow(radius: 3, y: 1)
+            .shadow(radius: 4, y: 1)
         } else {
             Image(systemName: symbol(for: record))
                 .font(.callout.weight(.semibold))
@@ -822,7 +822,7 @@ struct CultureMapView: View {
 
     @ViewBuilder
     private func poiAnnotation(_ point: AttractionPoint) -> some View {
-        let visited = point.culturalElementKey.map { recordedElementKeys.contains($0) } ?? false
+        let visited = point.culturalElementId.map { recordedElementIDs.contains($0) } ?? false
         let label = VStack(spacing: 3) {
             Image(systemName: visited ? "checkmark.seal.fill" : "mappin.circle.fill")
                 .font(.title2)
@@ -840,9 +840,9 @@ struct CultureMapView: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(visited ? "\(point.name)，已到访" : point.name)
 
-        if let elementKey = point.culturalElementKey,
-           knowledgeStore?.element(key: elementKey) != nil {
-            NavigationLink(value: AppRoute.knowledgeElement(elementKey)) {
+        if let elementID = point.culturalElementId,
+           knowledgeStore?.element(id: elementID) != nil {
+            NavigationLink(value: AppRoute.knowledgeElement(elementID)) {
                 label
             }
             .buttonStyle(.plain)
@@ -962,9 +962,9 @@ struct CultureMapView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(cluster.points) { point in
-                        if let elementKey = point.culturalElementKey,
-                           knowledgeStore?.element(key: elementKey) != nil {
-                            NavigationLink(value: AppRoute.knowledgeElement(elementKey)) {
+                        if let elementID = point.culturalElementId,
+                           knowledgeStore?.element(id: elementID) != nil {
+                            NavigationLink(value: AppRoute.knowledgeElement(elementID)) {
                                 poiClusterRow(point)
                             }
                             .buttonStyle(.plain)
@@ -1050,7 +1050,7 @@ struct CultureMapView: View {
     }
 
     private func poiClusterRow(_ point: AttractionPoint) -> some View {
-        let visited = point.culturalElementKey.map { recordedElementKeys.contains($0) } ?? false
+        let visited = point.culturalElementId.map { recordedElementIDs.contains($0) } ?? false
         return HStack(spacing: 12) {
             Image(systemName: visited ? "checkmark.seal.fill" : "mappin.circle.fill")
                 .foregroundStyle(visited ? CultureTheme.cinnabar : CultureTheme.inkPrimary)
@@ -1064,7 +1064,7 @@ struct CultureMapView: View {
 
             Spacer(minLength: 0)
 
-            if point.culturalElementKey != nil {
+            if point.culturalElementId != nil {
                 Image(systemName: "chevron.right")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -1223,7 +1223,7 @@ private struct ScanMapThumbnail: View {
             [
                 kCGImageSourceCreateThumbnailFromImageAlways: true,
                 kCGImageSourceCreateThumbnailWithTransform: true,
-                kCGImageSourceThumbnailMaxPixelSize: 128,
+                kCGImageSourceThumbnailMaxPixelSize: 192,
                 kCGImageSourceShouldCacheImmediately: true,
             ] as CFDictionary
         )

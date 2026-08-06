@@ -1,6 +1,6 @@
 {
   "elements": {
-    "liangzhu-culture-overview": {
+    "3b970416-1756-55e8-8a1e-fca23a4cc03d": {
       "name": "Liangzhu Culture: An Overview",
       "introduction": {
         "schemaVersion": 1,
@@ -24,7 +24,7 @@
         ]
       }
     },
-    "liangzhu-chronology": {
+    "a0d2ece0-3148-51b3-992a-bc0f60391cf2": {
       "name": "The Chronology and Periods of Liangzhu",
       "introduction": {
         "schemaVersion": 1,
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "liangzhu-distribution": {
+    "343c405b-8a86-5177-89a6-76e25c53c37e": {
       "name": "Distribution around Lake Tai and the Site Cluster",
       "introduction": {
         "schemaVersion": 1,
@@ -72,7 +72,7 @@
         ]
       }
     },
-    "mojiaoshan-center": {
+    "893ee811-737d-54ca-a22a-d3a1fce35880": {
       "name": "Mojiaoshan: The Power Centre of Liangzhu",
       "introduction": {
         "schemaVersion": 1,
@@ -96,7 +96,7 @@
         ]
       }
     },
-    "liangzhu-ancient-city": {
+    "61aa62f4-8cb8-5577-a7de-f4576b63fa9c": {
       "name": "The Ancient Liangzhu City and Its Walls",
       "introduction": {
         "schemaVersion": 1,
@@ -120,7 +120,7 @@
         ]
       }
     },
-    "liangzhu-water-system": {
+    "d8dd65b0-c448-59b1-8626-7524c383e81d": {
       "name": "The Water-Management System of Liangzhu",
       "introduction": {
         "schemaVersion": 1,
@@ -144,7 +144,7 @@
         ]
       }
     },
-    "fanshan-cemetery": {
+    "cceb0298-98aa-56e7-9b5b-cf975d971b61": {
       "name": "The Fanshan Aristocratic Cemetery",
       "introduction": {
         "schemaVersion": 1,
@@ -168,7 +168,7 @@
         ]
       }
     },
-    "yaoshan-altar": {
+    "2af8cfef-b959-5152-8e81-c5f5a625e158": {
       "name": "The Yaoshan Altar and Burials",
       "introduction": {
         "schemaVersion": 1,
@@ -192,7 +192,7 @@
         ]
       }
     },
-    "jade-cong-wang": {
+    "422ecaac-9557-58b5-973a-5c181d410c71": {
       "name": "King Jade Cong",
       "introduction": {
         "schemaVersion": 1,
@@ -216,7 +216,7 @@
         ]
       }
     },
-    "jade-cong-ritual": {
+    "e5ac2ef8-9095-57a6-808c-43df7159b392": {
       "name": "The Cong: A Ritual Object Linking Heaven and Earth",
       "introduction": {
         "schemaVersion": 1,
@@ -240,7 +240,7 @@
         ]
       }
     },
-    "jade-bi": {
+    "6c2ead86-fe0b-5842-a266-10ea8ecfac6c": {
       "name": "The Jade Bi Disc",
       "introduction": {
         "schemaVersion": 1,
@@ -264,7 +264,7 @@
         ]
       }
     },
-    "jade-yue": {
+    "484417c0-6068-54d5-9d51-97659064a65b": {
       "name": "The Jade Yue and Royal Authority",
       "introduction": {
         "schemaVersion": 1,
@@ -288,7 +288,7 @@
         ]
       }
     },
-    "god-man-beast-mask": {
+    "5109ed5d-faa6-5146-94f7-3316cc6cadaf": {
       "name": "The God-Man Beast Mask Motif",
       "introduction": {
         "schemaVersion": 1,
@@ -312,7 +312,7 @@
         ]
       }
     },
-    "jade-crafting": {
+    "c41fc4b3-78f5-534f-8d98-5f4e27f31247": {
       "name": "Liangzhu Jade Craftsmanship and Sources of Jade",
       "introduction": {
         "schemaVersion": 1,
@@ -336,7 +336,7 @@
         ]
       }
     },
-    "liangzhu-pottery": {
+    "a3471eec-6d2a-5c85-89ec-04ae746c44a8": {
       "name": "Liangzhu Pottery",
       "introduction": {
         "schemaVersion": 1,
@@ -360,7 +360,7 @@
         ]
       }
     },
-    "rice-agriculture": {
+    "a157e85d-7d02-5790-8f29-6efcf18152b8": {
       "name": "Rice Agriculture",
       "introduction": {
         "schemaVersion": 1,
@@ -384,7 +384,7 @@
         ]
       }
     },
-    "liangzhu-society": {
+    "64602982-75d9-569c-863d-4e323bc833f0": {
       "name": "Theocracy and Social Stratification",
       "introduction": {
         "schemaVersion": 1,
@@ -408,7 +408,7 @@
         ]
       }
     },
-    "silk-and-weaving": {
+    "c0412b19-5da7-5fcb-ac78-4f5fc8df557d": {
       "name": "Silk and Weaving",
       "introduction": {
         "schemaVersion": 1,
@@ -432,7 +432,7 @@
         ]
       }
     },
-    "liangzhu-symbols": {
+    "e31f52c9-e16b-56fb-ad11-b41a8d6337ec": {
       "name": "Incised Symbols and Early Writing",
       "introduction": {
         "schemaVersion": 1,
@@ -456,7 +456,7 @@
         ]
       }
     },
-    "shi-xingeng-discovery": {
+    "d48d7adb-49d2-5879-9dd2-381f6bc9f06a": {
       "name": "Shi Xingeng and the Discovery of Liangzhu",
       "introduction": {
         "schemaVersion": 1,
@@ -480,7 +480,7 @@
         ]
       }
     },
-    "liangzhu-museum": {
+    "88f77240-6a4c-57c9-9322-443456b25598": {
       "name": "Liangzhu Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -504,7 +504,7 @@
         ]
       }
     },
-    "site-park": {
+    "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca": {
       "name": "Liangzhu Ancient City Archaeological Site Park",
       "introduction": {
         "schemaVersion": 1,
@@ -528,7 +528,7 @@
         ]
       }
     },
-    "world-heritage-status": {
+    "3f22446b-b6cd-5876-9df4-c9b72dc99f8f": {
       "name": "World Heritage: Proof of Five Thousand Years of Civilization",
       "introduction": {
         "schemaVersion": 1,
@@ -552,7 +552,7 @@
         ]
       }
     },
-    "contemporary-cultures": {
+    "a47145b5-c9d7-5ba5-bdef-f280d3125b08": {
       "name": "The Stars of Chinese Civilization in Liangzhu's Time",
       "introduction": {
         "schemaVersion": 1,
@@ -576,7 +576,7 @@
         ]
       }
     },
-    "liangzhu-in-zhejiang-museum": {
+    "e45da344-5dfc-5602-b582-33f67c8a312c": {
       "name": "Liangzhu at the Zhejiang Provincial Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -602,18 +602,18 @@
     }
   },
   "attractions": {
-    "liangzhu-museum": {
+    "569034e5-d306-5605-b1d8-754c8e8041f7": {
       "name": "Liangzhu Museum"
     },
-    "site-park": {
+    "a0c85a81-92bb-51a4-8e99-4230136a5643": {
       "name": "Liangzhu Ancient City Archaeological Site Park"
     },
-    "yaoshan-altar": {
+    "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25": {
       "name": "Yaoshan Archaeological Site Park"
     }
   },
   "introductions": {
-    "liangzhu-museum.cong-wang-hall": {
+    "a9bd87da-de68-5d8c-822a-f9024f41a922": {
       "name": "King Jade Cong Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -637,7 +637,7 @@
         ]
       }
     },
-    "liangzhu-museum.discovery-history": {
+    "1e71581c-11c2-5eb7-8643-773d0c08a4f5": {
       "name": "Discovery and the Pursuit of Truth: The Story of the Excavations",
       "introduction": {
         "schemaVersion": 1,
@@ -661,7 +661,7 @@
         ]
       }
     },
-    "liangzhu-site-park.mojiaoshan": {
+    "b9ff3a1b-f24c-5a02-b9ca-e0afa76bdeaf": {
       "name": "The Mojiaoshan Terrace",
       "introduction": {
         "schemaVersion": 1,
@@ -685,7 +685,7 @@
         ]
       }
     },
-    "liangzhu-site-park.fanshan": {
+    "1b4eca35-cc7f-590d-9de8-5c62945fd21a": {
       "name": "The Fanshan Royal Tombs",
       "introduction": {
         "schemaVersion": 1,
@@ -709,7 +709,7 @@
         ]
       }
     },
-    "yaoshan-site-park.altar": {
+    "fdb51d5c-22d9-5576-ad00-f06d348f3ea7": {
       "name": "The Yaoshan Altar and Cemetery",
       "introduction": {
         "schemaVersion": 1,

@@ -2,6 +2,9 @@ import Foundation
 
 /// Parses / rewrites CultureLens inline citation URLs produced by ask prompts:
 /// `https://culturelens.local/cite?citationMarker=9F742443&citationTitle=…&citationA11yValue=…&elementKey=…`
+///
+/// After explain/ask short-ID remapping, `elementKey` is a pack UUID string.
+/// Legacy kebab slugs are still accepted and resolved via the store.
 nonisolated enum CultureCiteURL {
   static let citationMarker = "9F742443"
 
@@ -11,38 +14,28 @@ nonisolated enum CultureCiteURL {
       || url.absoluteString.lowercased().contains("culturelens.local/cite")
   }
 
-  /// Resolves a knowledge-pack element key from a cite URL, falling back to
-  /// name lookup in the loaded knowledge store.
+  /// Resolves a knowledge-pack element key (UUID string or legacy kebab) from a
+  /// cite URL, falling back to name lookup in the loaded knowledge store.
   ///
   /// When `store` is provided, the key must exist in the pack; otherwise returns
-  /// `nil` so callers do not navigate to a missing node.
+  /// `nil` so callers do not navigate to a missing node. Returned value is the
+  /// canonical UUID string when the store can resolve it.
   static func elementKey(from url: URL, store: KnowledgeStore? = .shared) -> String? {
-    guard isCiteURL(url) else { return nil }
-    let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+    elementID(from: url, store: store)?.uuidString
+      ?? existingElementKey(rawElementKey(from: url, store: store), store: store)
+  }
 
-    let resolved: String?
-    if let key = firstValue(["elementKey", "citationKey"], in: items), !key.isEmpty {
-      resolved = key
-    } else if let marker = firstValue(["citationMarker"], in: items),
-      marker != citationMarker,
-      looksLikeElementKey(marker)
-    {
-      resolved = marker
-    } else if let a11y = firstValue(["citationA11yValue"], in: items),
-      let key = keyEmbedded(in: a11y)
-    {
-      resolved = key
-    } else if let title = firstValue(["citationTitle"], in: items), !title.isEmpty {
-      resolved = store?.elementKey(matchingName: title)
-    } else {
-      resolved = nil
+  /// Resolves a cite URL to a pack element UUID.
+  static func elementID(from url: URL, store: KnowledgeStore? = .shared) -> UUID? {
+    guard let raw = rawElementKey(from: url, store: store) else { return nil }
+    if let store {
+      return store.resolveElementID(raw)
     }
-
-    return existingElementKey(resolved, store: store)
+    return UUID(uuidString: raw)
   }
 
   static func route(from url: URL, store: KnowledgeStore? = .shared) -> AppRoute? {
-    elementKey(from: url, store: store).map { .knowledgeElement($0) }
+    elementID(from: url, store: store).map { .knowledgeElement($0) }
   }
 
   /// Rewrites malformed model citations into the exact markdown form
@@ -59,6 +52,36 @@ nonisolated enum CultureCiteURL {
     text = rewriteInlineCodeKeys(text, store: store)
     text = rewriteBareElementKeys(text, store: store)
     return text
+  }
+
+  // MARK: - Resolve
+
+  private static func rawElementKey(
+    from url: URL,
+    store: KnowledgeStore?
+  ) -> String? {
+    guard isCiteURL(url) else { return nil }
+    let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+
+    if let key = firstValue(["elementKey", "citationKey"], in: items), !key.isEmpty {
+      return key
+    }
+    if let marker = firstValue(["citationMarker"], in: items),
+      marker != citationMarker,
+      looksLikeElementKey(marker)
+    {
+      return marker
+    }
+    if let a11y = firstValue(["citationA11yValue"], in: items),
+      let key = keyEmbedded(in: a11y)
+    {
+      return key
+    }
+    if let title = firstValue(["citationTitle"], in: items), !title.isEmpty {
+      return store?.elementKey(matchingName: title)
+        ?? store?.elementID(matchingName: title)?.uuidString
+    }
+    return nil
   }
 
   // MARK: - Rewrite
@@ -91,7 +114,8 @@ nonisolated enum CultureCiteURL {
     _ markdown: String,
     store: KnowledgeStore?
   ) -> String {
-    let pattern = #/`([a-z0-9]+(?:-[a-z0-9]+)+)`/#
+    // Legacy kebab or UUID in backticks.
+    let pattern = #/`([a-z0-9]+(?:-[a-z0-9]+)+|[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})`/#
     var result = ""
     var cursor = markdown.startIndex
 
@@ -216,14 +240,16 @@ nonisolated enum CultureCiteURL {
   }
 
   /// When `store` is nil (unit tests), accept any non-empty key; otherwise require
-  /// the element to exist in the loaded pack.
+  /// the element to exist in the loaded pack. Prefer canonical UUID string.
   private static func existingElementKey(
     _ key: String?,
     store: KnowledgeStore?
   ) -> String? {
     guard let key, !key.isEmpty else { return nil }
     guard let store else { return key }
-    if store.element(key: key) != nil { return key }
+    if let id = store.resolveElementID(key) {
+      return id.uuidString
+    }
     return nil
   }
 
@@ -248,8 +274,10 @@ nonisolated enum CultureCiteURL {
     return value.addingPercentEncoding(withAllowedCharacters: allowed) ?? value
   }
 
-  private static func looksLikeElementKey(_ value: String) -> Bool {
-    value.wholeMatch(of: #/[a-z0-9]+(?:-[a-z0-9]+)+/#) != nil
+  /// Accepts a pack UUID string or legacy kebab-case slug.
+  static func looksLikeElementKey(_ value: String) -> Bool {
+    if UUID(uuidString: value) != nil { return true }
+    return value.wholeMatch(of: #/[a-z0-9]+(?:-[a-z0-9]+)+/#) != nil
   }
 
   private static func firstValue(_ names: [String], in items: [URLQueryItem]) -> String? {

@@ -8,8 +8,12 @@ import Testing
 /// hand (e.g. 三潭印月 can climb to 宋代山水审美 without any content work).
 struct AbstractionAxisTests {
 
-  private func loadBundledStore() throws -> KnowledgeStore {
-    try KnowledgeStore.load(bundle: Bundle(for: KnowledgeProgressStore.self))
+  private func loadBundledStore() async throws -> KnowledgeStore {
+    // 知识包只走 ODR 分发，bundle 里不再有副本；经 loader 加载。
+    guard let store = await KnowledgePackLoader.shared.store() else {
+      throw KnowledgeStoreError.packMissing
+    }
+    return store
   }
 
   @Test func relationKindDirectionTable() {
@@ -36,11 +40,11 @@ struct AbstractionAxisTests {
     #expect(RelationKind.composedOf.isAuditedUpward == false)
   }
 
-  @Test func threePoolsAncestorsReachSongLandscapeAesthetics() throws {
-    let store = try loadBundledStore()
+  @Test func threePoolsAncestorsReachSongLandscapeAesthetics() async throws {
+    let store = try await loadBundledStore()
     let levels = store.ancestors(key: "three-pools-mirroring-moon")
     let keyByLevel = Dictionary(
-      levels.map { ($0.level, $0.elements.map(\.key)) },
+      levels.map { ($0.level, $0.elements.compactMap(\.key)) },
       uniquingKeysWith: { first, _ in first }
     )
     // Design 0006 实测路径:
@@ -50,15 +54,15 @@ struct AbstractionAxisTests {
     #expect(keyByLevel[3]?.contains("song-landscape-aesthetics") == true)
   }
 
-  @Test func ancestorsAreDeterministic() throws {
-    let store = try loadBundledStore()
+  @Test func ancestorsAreDeterministic() async throws {
+    let store = try await loadBundledStore()
     let first = store.ancestors(key: "three-pools-mirroring-moon")
     let second = store.ancestors(key: "three-pools-mirroring-moon")
     #expect(first == second)
   }
 
-  @Test func backbonePriorityOrdersLocatedInFirst() throws {
-    let store = try loadBundledStore()
+  @Test func backbonePriorityOrdersLocatedInFirst() async throws {
+    let store = try await loadBundledStore()
     let levels = store.ancestors(key: "three-pools-mirroring-moon")
     for level in levels {
       let priorities = level.elements.map {
@@ -68,21 +72,21 @@ struct AbstractionAxisTests {
     }
   }
 
-  @Test func siblingsShareAnUpwardParent() throws {
-    let store = try loadBundledStore()
+  @Test func siblingsShareAnUpwardParent() async throws {
+    let store = try await loadBundledStore()
     let siblings = store.siblings(key: "three-pools-mirroring-moon")
     // 苏堤春晓 shares the 南宋西湖十景体系 parent (组成 reverse) with 三潭印月.
-    #expect(siblings.contains("su-causeway-spring-dawn"))
+    #expect(siblings.contains(DeterministicID.culturalElement("su-causeway-spring-dawn")))
   }
 
-  @Test func missingPrerequisitesClosure() throws {
-    let store = try loadBundledStore()
+  @Test func missingPrerequisitesClosure() async throws {
+    let store = try await loadBundledStore()
     // Pack edge: three-pools-round-openings --理解前先懂--> three-pools-light-mechanism
     let missing = store.missingPrerequisites(
       key: "three-pools-light-mechanism",
       known: []
     )
-    #expect(missing.map(\.key) == ["three-pools-round-openings"])
+    #expect(missing.compactMap(\.key) == ["three-pools-round-openings"])
     #expect(missing.first?.excerpt.isEmpty == false)
 
     let known = store.missingPrerequisites(
@@ -103,10 +107,10 @@ struct AbstractionAxisTests {
     )
     let levels = store.ancestors(key: "a")
     #expect(levels.count == 2)
-    #expect(levels[0].elements.map(\.key) == ["b"])
-    #expect(levels[1].elements.map(\.key) == ["c"])
+    #expect(levels[0].elements.compactMap(\.key) == ["b"])
+    #expect(levels[1].elements.compactMap(\.key) == ["c"])
     // Root is never re-listed as its own ancestor, and results repeat exactly.
-    #expect(levels.flatMap(\.elements).map(\.key).contains("a") == false)
+    #expect(levels.flatMap(\.elements).compactMap(\.key).contains("a") == false)
     #expect(levels == store.ancestors(key: "a"))
   }
 
@@ -115,8 +119,8 @@ struct AbstractionAxisTests {
       keys: ["part", "whole"],
       edges: [("whole", "part", "组成")]
     )
-    #expect(store.upward(key: "part").map(\.key) == ["whole"])
-    #expect(store.downward(key: "whole").map(\.key) == ["part"])
+    #expect(store.upward(key: "part").map(\.id) == elementIDs(["whole"]))
+    #expect(store.downward(key: "whole").map(\.id) == elementIDs(["part"]))
   }
 
   @Test func emergedInRequiresOptIn() {
@@ -125,7 +129,7 @@ struct AbstractionAxisTests {
       edges: [("x", "y", "产生于")]
     )
     #expect(store.upward(key: "x").isEmpty)
-    #expect(store.upward(key: "x", includeUnaudited: true).map(\.key) == ["y"])
+    #expect(store.upward(key: "x", includeUnaudited: true).map(\.id) == elementIDs(["y"]))
   }
 
   @Test func untypedEdgesNeverEnterTheAxis() {
@@ -149,9 +153,9 @@ struct AbstractionAxisTests {
       ]
     )
     let edges = store.edges(key: "a", kinds: [.locatedIn])
-    #expect(edges.map(\.key) == ["b", "c"])
+    #expect(edges.map(\.id) == elementIDs(["b", "c"]))
     #expect(edges.allSatisfy { $0.kind == .locatedIn })
-    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.key) == ["d"])
+    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.id) == elementIDs(["d"]))
     #expect(store.edges(key: "a", kinds: [.usedFor]).isEmpty)
     #expect(store.edges(key: "missing", kinds: [.locatedIn]).isEmpty)
   }
@@ -164,16 +168,16 @@ struct AbstractionAxisTests {
         ("b", "a", "相似于"), // same pair, reverse direction
       ]
     )
-    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.key) == ["b"])
+    #expect(store.edges(key: "a", kinds: [.similarTo]).map(\.id) == elementIDs(["b"]))
   }
 
-  @Test func relationDimensionsCoverThreePoolsFromBundledPack() throws {
-    let store = try loadBundledStore()
+  @Test func relationDimensionsCoverThreePoolsFromBundledPack() async throws {
+    let store = try await loadBundledStore()
     let key = "three-pools-mirroring-moon"
     // 历史时期
-    #expect(store.edges(key: key, kinds: [.emergedIn]).map(\.key).contains("northern-song-three-pools"))
+    #expect(store.edges(key: key, kinds: [.emergedIn]).map(\.id).contains(DeterministicID.culturalElement("northern-song-three-pools")))
     // 地域文化
-    #expect(store.edges(key: key, kinds: [.locatedIn]).map(\.key).contains("west-lake-cultural-landscape"))
+    #expect(store.edges(key: key, kinds: [.locatedIn]).map(\.id).contains(DeterministicID.culturalElement("west-lake-cultural-landscape")))
     // 使用功能
     #expect(store.edges(key: key, kinds: [.usedFor]).isEmpty == false)
     // 审美观念
@@ -185,8 +189,13 @@ struct AbstractionAxisTests {
       }
     )
     // 相似对象
-    #expect(store.edges(key: key, kinds: [.similarTo]).map(\.key).contains("leifeng-pagoda-and-evening-glow"))
+    #expect(store.edges(key: key, kinds: [.similarTo]).map(\.id).contains(DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow")))
   }
+}
+
+/// UUIDv5 element identity for the given slugs, matching how the pack mints IDs.
+private func elementIDs(_ keys: [String]) -> [UUID] {
+  keys.map(DeterministicID.culturalElement)
 }
 
 private func makeDirectedGraphStore(

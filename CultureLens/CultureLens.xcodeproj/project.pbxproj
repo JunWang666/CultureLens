@@ -15,6 +15,27 @@
 		C12E0D000000000000000013 /* introductions.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000023 /* introductions.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 		C12E0D000000000000000014 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000024 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
 		C12E0D000000000000000015 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D000000000000000025 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-base", ); }; };
+		C12E0D100000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000021 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000002 /* elements-sight.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000022 /* elements-sight.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000003 /* elements-history.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000023 /* elements-history.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000004 /* introductions.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000024 /* introductions.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000005 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000025 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000006 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000026 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D100000000000000007 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D100000000000000027 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-chinese-history", ); }; };
+		C12E0D200000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000021 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000002 /* elements-sight.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000022 /* elements-sight.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000003 /* elements-history.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000023 /* elements-history.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000004 /* introductions.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000024 /* introductions.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000005 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000025 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000006 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000026 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D200000000000000007 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D200000000000000027 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-liangzhu", ); }; };
+		C12E0D300000000000000001 /* knowledge-pack.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000021 /* knowledge-pack.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000002 /* elements-sight.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000022 /* elements-sight.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000003 /* elements-history.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000023 /* elements-history.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000004 /* introductions.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000024 /* introductions.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000005 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000025 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000006 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000026 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D300000000000000007 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000027 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +60,30 @@
 		C12E0D000000000000000004 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
 		C12E0D000000000000000021 /* elements-sight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-sight.json"; sourceTree = "<group>"; };
 		C12E0D000000000000000022 /* elements-history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-history.json"; sourceTree = "<group>"; };
-		C12E0D000000000000000023 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "introductions.json"; sourceTree = "<group>"; };
-		C12E0D000000000000000024 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "themes.json"; sourceTree = "<group>"; };
+		C12E0D000000000000000023 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = introductions.json; sourceTree = "<group>"; };
+		C12E0D000000000000000024 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themes.json; sourceTree = "<group>"; };
 		C12E0D000000000000000025 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
+		C12E0D100000000000000021 /* knowledge-pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "knowledge-pack.json"; sourceTree = "<group>"; };
+		C12E0D100000000000000022 /* elements-sight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-sight.json"; sourceTree = "<group>"; };
+		C12E0D100000000000000023 /* elements-history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-history.json"; sourceTree = "<group>"; };
+		C12E0D100000000000000024 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = introductions.json; sourceTree = "<group>"; };
+		C12E0D100000000000000025 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themes.json; sourceTree = "<group>"; };
+		C12E0D100000000000000026 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
+		C12E0D100000000000000027 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
+		C12E0D200000000000000021 /* knowledge-pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "knowledge-pack.json"; sourceTree = "<group>"; };
+		C12E0D200000000000000022 /* elements-sight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-sight.json"; sourceTree = "<group>"; };
+		C12E0D200000000000000023 /* elements-history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-history.json"; sourceTree = "<group>"; };
+		C12E0D200000000000000024 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = introductions.json; sourceTree = "<group>"; };
+		C12E0D200000000000000025 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themes.json; sourceTree = "<group>"; };
+		C12E0D200000000000000026 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
+		C12E0D200000000000000027 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
+		C12E0D300000000000000021 /* knowledge-pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "knowledge-pack.json"; sourceTree = "<group>"; };
+		C12E0D300000000000000022 /* elements-sight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-sight.json"; sourceTree = "<group>"; };
+		C12E0D300000000000000023 /* elements-history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "elements-history.json"; sourceTree = "<group>"; };
+		C12E0D300000000000000024 /* introductions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = introductions.json; sourceTree = "<group>"; };
+		C12E0D300000000000000025 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themes.json; sourceTree = "<group>"; };
+		C12E0D300000000000000026 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
+		C12E0D300000000000000027 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
 		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,11 +95,32 @@
 			membershipExceptions = (
 				"Resources/KnowledgePack/elements-history.json",
 				"Resources/KnowledgePack/elements-sight.json",
-				"Resources/KnowledgePack/introductions.json",
+				Resources/KnowledgePack/introductions.json,
 				"Resources/KnowledgePack/knowledge-pack.json",
 				"Resources/KnowledgePack/locales-en.json",
 				"Resources/KnowledgePack/pack-manifest.json",
-				"Resources/KnowledgePack/themes.json",
+				Resources/KnowledgePack/themes.json,
+				"Resources/KnowledgePackChineseHistory/elements-history.json",
+				"Resources/KnowledgePackChineseHistory/elements-sight.json",
+				Resources/KnowledgePackChineseHistory/introductions.json,
+				"Resources/KnowledgePackChineseHistory/knowledge-pack.json",
+				"Resources/KnowledgePackChineseHistory/locales-en.json",
+				"Resources/KnowledgePackChineseHistory/pack-manifest.json",
+				Resources/KnowledgePackChineseHistory/themes.json,
+				"Resources/KnowledgePackLiangzhu/elements-history.json",
+				"Resources/KnowledgePackLiangzhu/elements-sight.json",
+				Resources/KnowledgePackLiangzhu/introductions.json,
+				"Resources/KnowledgePackLiangzhu/knowledge-pack.json",
+				"Resources/KnowledgePackLiangzhu/locales-en.json",
+				"Resources/KnowledgePackLiangzhu/pack-manifest.json",
+				Resources/KnowledgePackLiangzhu/themes.json,
+				"Resources/KnowledgePackZhejiangMuseum/elements-history.json",
+				"Resources/KnowledgePackZhejiangMuseum/elements-sight.json",
+				Resources/KnowledgePackZhejiangMuseum/introductions.json,
+				"Resources/KnowledgePackZhejiangMuseum/knowledge-pack.json",
+				"Resources/KnowledgePackZhejiangMuseum/locales-en.json",
+				"Resources/KnowledgePackZhejiangMuseum/pack-manifest.json",
+				Resources/KnowledgePackZhejiangMuseum/themes.json,
 			);
 			target = E9464E5F3017572B00B357C5 /* CultureLens */;
 		};
@@ -68,12 +131,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				C12E0D000000000000000005 /* Exceptions for "CultureLens" folder in "CultureLens" target */,
-			);
-			explicitFolders = (
-				Resources/KnowledgePackChineseHistory,
-				Resources/KnowledgePackFallback,
-				Resources/KnowledgePackLiangzhu,
-				Resources/KnowledgePackZhejiangMuseum,
 			);
 			path = CultureLens;
 			sourceTree = "<group>";
@@ -131,11 +188,59 @@
 			path = CultureLens/Resources/KnowledgePack;
 			sourceTree = "<group>";
 		};
+		C12E0D100000000000000008 /* Chinese History ODR */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D100000000000000021 /* knowledge-pack.json */,
+				C12E0D100000000000000022 /* elements-sight.json */,
+				C12E0D100000000000000023 /* elements-history.json */,
+				C12E0D100000000000000024 /* introductions.json */,
+				C12E0D100000000000000025 /* themes.json */,
+				C12E0D100000000000000026 /* locales-en.json */,
+				C12E0D100000000000000027 /* pack-manifest.json */,
+			);
+			name = "Chinese History ODR";
+			path = CultureLens/Resources/KnowledgePackChineseHistory;
+			sourceTree = "<group>";
+		};
+		C12E0D200000000000000008 /* Liangzhu ODR */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D200000000000000021 /* knowledge-pack.json */,
+				C12E0D200000000000000022 /* elements-sight.json */,
+				C12E0D200000000000000023 /* elements-history.json */,
+				C12E0D200000000000000024 /* introductions.json */,
+				C12E0D200000000000000025 /* themes.json */,
+				C12E0D200000000000000026 /* locales-en.json */,
+				C12E0D200000000000000027 /* pack-manifest.json */,
+			);
+			name = "Liangzhu ODR";
+			path = CultureLens/Resources/KnowledgePackLiangzhu;
+			sourceTree = "<group>";
+		};
+		C12E0D300000000000000008 /* Zhejiang Museum ODR */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D300000000000000021 /* knowledge-pack.json */,
+				C12E0D300000000000000022 /* elements-sight.json */,
+				C12E0D300000000000000023 /* elements-history.json */,
+				C12E0D300000000000000024 /* introductions.json */,
+				C12E0D300000000000000025 /* themes.json */,
+				C12E0D300000000000000026 /* locales-en.json */,
+				C12E0D300000000000000027 /* pack-manifest.json */,
+			);
+			name = "Zhejiang Museum ODR";
+			path = CultureLens/Resources/KnowledgePackZhejiangMuseum;
+			sourceTree = "<group>";
+		};
 		E9464E573017572B00B357C5 = {
 			isa = PBXGroup;
 			children = (
 				E9464E623017572B00B357C5 /* CultureLens */,
 				C12E0D000000000000000006 /* KnowledgePack ODR */,
+				C12E0D100000000000000008 /* Chinese History ODR */,
+				C12E0D200000000000000008 /* Liangzhu ODR */,
+				C12E0D300000000000000008 /* Zhejiang Museum ODR */,
 				E9464E723017572C00B357C5 /* CultureLensTests */,
 				E9464E7C3017572C00B357C5 /* CultureLensUITests */,
 				E9464E613017572B00B357C5 /* Products */,
@@ -284,6 +389,27 @@
 				C12E0D000000000000000014 /* themes.json in Resources */,
 				C12E0D000000000000000015 /* locales-en.json in Resources */,
 				C12E0D000000000000000002 /* pack-manifest.json in Resources */,
+				C12E0D100000000000000001 /* knowledge-pack.json in Resources */,
+				C12E0D100000000000000002 /* elements-sight.json in Resources */,
+				C12E0D100000000000000003 /* elements-history.json in Resources */,
+				C12E0D100000000000000004 /* introductions.json in Resources */,
+				C12E0D100000000000000005 /* themes.json in Resources */,
+				C12E0D100000000000000006 /* locales-en.json in Resources */,
+				C12E0D100000000000000007 /* pack-manifest.json in Resources */,
+				C12E0D200000000000000001 /* knowledge-pack.json in Resources */,
+				C12E0D200000000000000002 /* elements-sight.json in Resources */,
+				C12E0D200000000000000003 /* elements-history.json in Resources */,
+				C12E0D200000000000000004 /* introductions.json in Resources */,
+				C12E0D200000000000000005 /* themes.json in Resources */,
+				C12E0D200000000000000006 /* locales-en.json in Resources */,
+				C12E0D200000000000000007 /* pack-manifest.json in Resources */,
+				C12E0D300000000000000001 /* knowledge-pack.json in Resources */,
+				C12E0D300000000000000002 /* elements-sight.json in Resources */,
+				C12E0D300000000000000003 /* elements-history.json in Resources */,
+				C12E0D300000000000000004 /* introductions.json in Resources */,
+				C12E0D300000000000000005 /* themes.json in Resources */,
+				C12E0D300000000000000006 /* locales-en.json in Resources */,
+				C12E0D300000000000000007 /* pack-manifest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +614,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junwei.CultureLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -535,7 +661,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junwei.CultureLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;

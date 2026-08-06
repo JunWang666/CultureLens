@@ -7,14 +7,14 @@ enum KnowledgeGraphMembershipButtonPresentation {
 
 struct KnowledgeGraphMembershipButton: View {
     let nodeID: UUID
-    var elementKey: String? = nil
+    var elementID: UUID? = nil
     let presentation: KnowledgeGraphMembershipButtonPresentation
 
     @Environment(KnowledgeProgressStore.self)
     private var progressStore
 
     private var currentLevel: KnowledgeLevel? {
-        progressStore.level(for: nodeID, elementKey: elementKey)
+        progressStore.level(for: nodeID, elementID: elementID)
     }
 
     private var isInGraph: Bool {
@@ -63,7 +63,7 @@ struct KnowledgeGraphMembershipButton: View {
                         level,
                         for: nodeID,
                         source: .manual,
-                        elementKey: elementKey
+                        elementID: elementID
                     )
                 }
             } label: {
@@ -78,7 +78,7 @@ struct KnowledgeGraphMembershipButton: View {
             Divider()
             Button(role: .destructive) {
                 withAnimation(.snappy) {
-                    progressStore.remove(nodeID, elementKey: elementKey)
+                    progressStore.remove(nodeID, elementID: elementID)
                 }
             } label: {
                 Label("移出文化图谱", systemImage: "minus.circle")

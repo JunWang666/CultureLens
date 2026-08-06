@@ -1,62 +1,66 @@
 {
   "themes": [
     {
+      "id": "f226e5dc-ecdf-5636-962c-449fcc5cb701",
       "key": "jade-ritual-heaven",
       "name": "以玉礼天",
       "summary": "从采玉、治玉到琮王入墓，琮、璧、钺与兽面纹搭起一套沟通天地的玉礼，读懂一件玉器，就读懂了良渚的神权。",
-      "elementKeys": [
-        "jade-cong-wang",
-        "jade-cong-ritual",
-        "jade-bi",
-        "jade-yue",
-        "god-man-beast-mask",
-        "jade-crafting",
-        "fanshan-cemetery",
-        "yaoshan-altar"
+      "elementIds": [
+        "422ecaac-9557-58b5-973a-5c181d410c71",
+        "e5ac2ef8-9095-57a6-808c-43df7159b392",
+        "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
+        "484417c0-6068-54d5-9d51-97659064a65b",
+        "5109ed5d-faa6-5146-94f7-3316cc6cadaf",
+        "c41fc4b3-78f5-534f-8d98-5f4e27f31247",
+        "cceb0298-98aa-56e7-9b5b-cf975d971b61",
+        "2af8cfef-b959-5152-8e81-c5f5a625e158"
       ],
       "minContacted": 4
     },
     {
+      "id": "b839dd19-2b59-54b7-929e-1ec49db883c5",
       "key": "city-water-rice",
       "name": "一城、一水与一稻",
       "summary": "莫角山的台地、环城的城墙与外围水利，连同成片的稻田，共同撑起一个能动员万人治水的早期国家。",
-      "elementKeys": [
-        "mojiaoshan-center",
-        "liangzhu-ancient-city",
-        "liangzhu-water-system",
-        "liangzhu-distribution",
-        "rice-agriculture",
-        "liangzhu-society",
-        "site-park"
+      "elementIds": [
+        "893ee811-737d-54ca-a22a-d3a1fce35880",
+        "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
+        "d8dd65b0-c448-59b1-8626-7524c383e81d",
+        "343c405b-8a86-5177-89a6-76e25c53c37e",
+        "a157e85d-7d02-5790-8f29-6efcf18152b8",
+        "64602982-75d9-569c-863d-4e323bc833f0",
+        "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca"
       ],
       "minContacted": 4
     },
     {
+      "id": "9945cb17-729e-51fc-ade0-8b488ade00c5",
       "key": "how-liangzhu-was-seen",
       "name": "良渚如何被看见",
       "summary": "从施昕更在池底拾起的两片黑陶，到列入世界遗产名录，跟着发现史与博物馆，读懂五千年文明如何被一层层看见。",
-      "elementKeys": [
-        "shi-xingeng-discovery",
-        "liangzhu-chronology",
-        "liangzhu-museum",
-        "site-park",
-        "world-heritage-status",
-        "liangzhu-in-zhejiang-museum"
+      "elementIds": [
+        "d48d7adb-49d2-5879-9dd2-381f6bc9f06a",
+        "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
+        "88f77240-6a4c-57c9-9322-443456b25598",
+        "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
+        "3f22446b-b6cd-5876-9df4-c9b72dc99f8f",
+        "e45da344-5dfc-5602-b582-33f67c8a312c"
       ],
       "minContacted": 3
     },
     {
+      "id": "f9d12972-1fc4-5b7b-8285-9d807c5467f7",
       "key": "jiangnan-lifeways",
       "name": "稻作江南：日常里的手艺",
       "summary": "稻米、黑陶、丝帛与刻符构成良渚比玉器更日常的一面，往前接河姆渡，往旁看同时代的满天星光。",
-      "elementKeys": [
-        "rice-agriculture",
-        "liangzhu-pottery",
-        "silk-and-weaving",
-        "liangzhu-symbols",
-        "hemudu-culture",
-        "contemporary-cultures",
-        "liangzhu-culture-overview"
+      "elementIds": [
+        "a157e85d-7d02-5790-8f29-6efcf18152b8",
+        "a3471eec-6d2a-5c85-89ec-04ae746c44a8",
+        "c0412b19-5da7-5fcb-ac78-4f5fc8df557d",
+        "e31f52c9-e16b-56fb-ad11-b41a8d6337ec",
+        "fb207661-23da-54bc-af3c-aee4dbb88931",
+        "a47145b5-c9d7-5ba5-bdef-f280d3125b08",
+        "3b970416-1756-55e8-8a1e-fca23a4cc03d"
       ],
       "minContacted": 3
     }

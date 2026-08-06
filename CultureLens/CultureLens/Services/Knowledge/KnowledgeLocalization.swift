@@ -1,10 +1,11 @@
 import Foundation
 
 extension KnowledgePack {
-  /// Optional per-locale text overlays. Keys match element / attraction /
-  /// introduction keys. Missing entries fall back to the pack's source-language
-  /// fields (today: Simplified Chinese). Content may be absent until packs ship
-  /// translations; the App then uses `KnowledgeTranslationService`.
+  /// Optional per-locale text overlays. Keys are entity UUID strings (with
+  /// legacy slug fallback during migration). Missing entries fall back to the
+  /// pack's source-language fields (today: Simplified Chinese). Content may be
+  /// absent until packs ship translations; the App then uses
+  /// `KnowledgeTranslationService`.
   nonisolated struct LocaleOverlay: Decodable, Sendable {
     var elements: [String: LocalizedElementText]
     var attractions: [String: LocalizedAttractionText]
@@ -74,8 +75,29 @@ nonisolated struct KnowledgeLocalization: Sendable {
     self.sourceLanguage = sourceLanguage
   }
 
+  // MARK: - Element
+
+  func elementText(id: UUID, language: AppLanguage) -> LocalizedKnowledgeText? {
+    guard let element = pack.elements.first(where: { $0.id == id }) else { return nil }
+    return elementText(element: element, language: language)
+  }
+
+  /// Accepts a UUID string or legacy kebab slug.
   func elementText(key: String, language: AppLanguage) -> LocalizedKnowledgeText? {
-    guard let element = pack.elements.first(where: { $0.key == key }) else { return nil }
+    if let uuid = UUID(uuidString: key) {
+      return elementText(id: uuid, language: language)
+    }
+    let needle = key.lowercased()
+    guard let element = pack.elements.first(where: {
+      $0.key?.lowercased() == needle
+    }) else { return nil }
+    return elementText(element: element, language: language)
+  }
+
+  private func elementText(
+    element: KnowledgePack.Element,
+    language: AppLanguage
+  ) -> LocalizedKnowledgeText {
     if language == sourceLanguage {
       return LocalizedKnowledgeText(
         name: element.name,
@@ -84,7 +106,7 @@ nonisolated struct KnowledgeLocalization: Sendable {
         language: language
       )
     }
-    if let overlay = pack.locales?[language.rawValue]?.elements[key],
+    if let overlay = localizedElementOverlay(for: element, language: language),
       let name = overlay.name, !name.isEmpty
     {
       return LocalizedKnowledgeText(
@@ -102,19 +124,91 @@ nonisolated struct KnowledgeLocalization: Sendable {
     )
   }
 
+  private func localizedElementOverlay(
+    for element: KnowledgePack.Element,
+    language: AppLanguage
+  ) -> KnowledgePack.LocalizedElementText? {
+    let map = pack.locales?[language.rawValue]?.elements ?? [:]
+    if let byID = map[element.id.uuidString.lowercased()] ?? map[element.id.uuidString] {
+      return byID
+    }
+    if let slug = element.key {
+      return map[slug] ?? map[slug.lowercased()]
+    }
+    return nil
+  }
+
+  // MARK: - Attraction
+
+  func attractionName(id: UUID, language: AppLanguage) -> (name: String, isSourceFallback: Bool)? {
+    guard let attraction = pack.attractions.first(where: { $0.id == id }) else { return nil }
+    return attractionName(attraction: attraction, language: language)
+  }
+
+  /// Accepts a UUID string or legacy kebab slug.
   func attractionName(key: String, language: AppLanguage) -> (name: String, isSourceFallback: Bool)? {
-    guard let attraction = pack.attractions.first(where: { $0.key == key }) else { return nil }
+    if let uuid = UUID(uuidString: key) {
+      return attractionName(id: uuid, language: language)
+    }
+    let needle = key.lowercased()
+    guard let attraction = pack.attractions.first(where: {
+      $0.key?.lowercased() == needle
+    }) else { return nil }
+    return attractionName(attraction: attraction, language: language)
+  }
+
+  private func attractionName(
+    attraction: KnowledgePack.Attraction,
+    language: AppLanguage
+  ) -> (name: String, isSourceFallback: Bool) {
     if language == sourceLanguage {
       return (attraction.name, false)
     }
-    if let name = pack.locales?[language.rawValue]?.attractions[key]?.name, !name.isEmpty {
+    if let name = localizedAttractionOverlay(for: attraction, language: language)?.name,
+      !name.isEmpty
+    {
       return (name, false)
     }
     return (attraction.name, true)
   }
 
+  private func localizedAttractionOverlay(
+    for attraction: KnowledgePack.Attraction,
+    language: AppLanguage
+  ) -> KnowledgePack.LocalizedAttractionText? {
+    let map = pack.locales?[language.rawValue]?.attractions ?? [:]
+    if let byID = map[attraction.id.uuidString.lowercased()] ?? map[attraction.id.uuidString] {
+      return byID
+    }
+    if let slug = attraction.key {
+      return map[slug] ?? map[slug.lowercased()]
+    }
+    return nil
+  }
+
+  // MARK: - Introduction
+
+  func introductionText(id: UUID, language: AppLanguage) -> LocalizedKnowledgeText? {
+    guard let record = pack.introductions.first(where: { $0.id == id }) else { return nil }
+    return introductionText(record: record, language: language)
+  }
+
+  /// Accepts a UUID string or legacy kebab slug.
   func introductionText(key: String, language: AppLanguage) -> LocalizedKnowledgeText? {
-    guard let record = pack.introductions.first(where: { $0.key == key }) else { return nil }
+    if let uuid = UUID(uuidString: key) {
+      return introductionText(id: uuid, language: language)
+    }
+    let needle = key.lowercased()
+    guard let record = pack.introductions.first(where: {
+      $0.key?.lowercased() == needle
+    }) else { return nil }
+    return introductionText(record: record, language: language)
+  }
+
+  private func introductionText(
+    record: KnowledgePack.IntroductionRecord,
+    language: AppLanguage
+  ) -> LocalizedKnowledgeText {
     if language == sourceLanguage {
       return LocalizedKnowledgeText(
         name: record.name,
@@ -123,7 +217,7 @@ nonisolated struct KnowledgeLocalization: Sendable {
         language: language
       )
     }
-    if let overlay = pack.locales?[language.rawValue]?.introductions[key],
+    if let overlay = localizedIntroductionOverlay(for: record, language: language),
       let name = overlay.name, !name.isEmpty
     {
       return LocalizedKnowledgeText(
@@ -139,5 +233,19 @@ nonisolated struct KnowledgeLocalization: Sendable {
       isSourceFallback: true,
       language: sourceLanguage
     )
+  }
+
+  private func localizedIntroductionOverlay(
+    for record: KnowledgePack.IntroductionRecord,
+    language: AppLanguage
+  ) -> KnowledgePack.LocalizedIntroductionText? {
+    let map = pack.locales?[language.rawValue]?.introductions ?? [:]
+    if let byID = map[record.id.uuidString.lowercased()] ?? map[record.id.uuidString] {
+      return byID
+    }
+    if let slug = record.key {
+      return map[slug] ?? map[slug.lowercased()]
+    }
+    return nil
   }
 }

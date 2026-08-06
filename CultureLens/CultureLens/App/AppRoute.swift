@@ -1,6 +1,6 @@
 import Foundation
 
-enum AppRoute: Hashable {
+nonisolated enum AppRoute: Hashable {
     case object(UUID)
     case concept(UUID)
     case knowledgeElement(String)

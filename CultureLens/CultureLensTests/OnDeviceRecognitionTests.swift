@@ -908,7 +908,7 @@ struct OnDeviceRecognitionTests {
     #expect(resolvedResult.displayAttractionCandidates.first?.category == .space)
     #expect(
       resolvedResult.displayAttractionCandidates.first?.id
-        == DeterministicID.v5(name: "attraction:att")
+        == DeterministicID.attraction("att")
     )
     #expect(resolvedResult.displayVisualAlternatives.count == 1)
     #expect(resolvedResult.displayVisualAlternatives.first?.canonicalName == "备选对象")

@@ -1,6 +1,6 @@
 import Foundation
 
-enum ObjectCategory: String, Codable, Hashable {
+nonisolated enum ObjectCategory: String, Codable, Hashable {
   case architecture = "建筑构件"
   case artifact = "器物"
   case pattern = "纹样"
@@ -9,7 +9,7 @@ enum ObjectCategory: String, Codable, Hashable {
   case other = "其他"
 }
 
-enum ConceptKind: String, Codable, Hashable, CaseIterable {
+nonisolated enum ConceptKind: String, Codable, Hashable, CaseIterable {
   case foundation = "基础知识"
   case history = "历史"
   case region = "地域"
@@ -35,7 +35,7 @@ enum ConceptKind: String, Codable, Hashable, CaseIterable {
   }
 }
 
-struct KnowledgeSource: Identifiable, Codable, Hashable {
+nonisolated struct KnowledgeSource: Identifiable, Codable, Hashable {
   let id: UUID
   var title: String
   var publisher: String
@@ -47,7 +47,7 @@ struct KnowledgeSource: Identifiable, Codable, Hashable {
   }
 }
 
-struct CultureConcept: Identifiable, Codable, Hashable {
+nonisolated struct CultureConcept: Identifiable, Codable, Hashable {
   let id: UUID
   var name: String
   var kind: ConceptKind
@@ -64,7 +64,7 @@ struct CultureConcept: Identifiable, Codable, Hashable {
   }
 }
 
-struct CultureObject: Identifiable, Codable, Hashable {
+nonisolated struct CultureObject: Identifiable, Codable, Hashable {
   var id: UUID
   var culturalElementKey: String? = nil
   var canonicalName: String
@@ -79,7 +79,7 @@ struct CultureObject: Identifiable, Codable, Hashable {
   var sources: [KnowledgeSource]
 }
 
-enum RelationKind: String, Codable, Hashable, CaseIterable {
+nonisolated enum RelationKind: String, Codable, Hashable, CaseIterable {
   case emergedIn = "产生于"
   case locatedIn = "位于"
   case usedFor = "用于"
@@ -94,7 +94,7 @@ enum RelationKind: String, Codable, Hashable, CaseIterable {
   case madeWith = "制作采用"
 }
 
-struct CultureRelation: Identifiable, Codable, Hashable {
+nonisolated struct CultureRelation: Identifiable, Codable, Hashable {
   let id: UUID
   var sourceID: UUID
   var targetID: UUID
@@ -102,7 +102,7 @@ struct CultureRelation: Identifiable, Codable, Hashable {
   var explanation: String
 }
 
-extension CultureObject {
+nonisolated extension CultureObject {
   /// 知识库元素 → 展示用对象（图谱节点页、追问等场景复用扫描结果页）。
   init(knowledgeElement element: KnowledgePack.Element) {
     self.init(
@@ -172,7 +172,7 @@ nonisolated struct RecognitionInput: Sendable {
   }
 }
 
-struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
+nonisolated struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
   let id: UUID
   var attractionKey: String? = nil
   var culturalElementKey: String? = nil
@@ -238,7 +238,7 @@ struct RecognitionCandidate: Identifiable, Codable, Hashable, Sendable {
   }
 }
 
-struct LocationInfluence: Codable, Hashable, Sendable {
+nonisolated struct LocationInfluence: Codable, Hashable, Sendable {
   enum Effect: String, Codable, Hashable, Sendable {
     case none
     case reordered
@@ -249,7 +249,7 @@ struct LocationInfluence: Codable, Hashable, Sendable {
   var summary: String
 }
 
-struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
+nonisolated struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
   let id: UUID
   var object: CultureObject
   var alternatives: [RecognitionCandidate]
@@ -285,7 +285,7 @@ struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
   }
 }
 
-struct ScanSession: Identifiable, Sendable {
+nonisolated struct ScanSession: Identifiable, Sendable {
   let id: UUID
   var imageData: Data
   var result: RecognitionResult

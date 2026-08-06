@@ -1,12 +1,12 @@
 {
-  "packVersion": "chinese-history-v2",
-  "generatedAt": "2026-08-05T08:01:46Z",
+  "packVersion": "chinese-history-v3",
+  "generatedAt": "2026-08-05T17:26:23Z",
   "recordCounts": {
-    "elements": 40,
-    "relations": 108,
+    "elements": 45,
+    "relations": 73,
     "introductions": 4,
     "attractions": 2,
     "themes": 4
   },
-  "sha256": "1210af1638ad42ea95c9a9ab8a6e37020d510f9dcc35318f26c0bd5d4c44a482"
+  "sha256": "52208c8018c2c63e0501522c41a6a556d5fd80c5ce2ba53f359fb931fd5c8fb0"
 }

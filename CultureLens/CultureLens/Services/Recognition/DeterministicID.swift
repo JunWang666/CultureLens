@@ -32,4 +32,20 @@ nonisolated enum DeterministicID {
   static func culturalElement(_ key: String) -> UUID {
     v5(name: "culturelens:cultural-element:" + key.lowercased())
   }
+
+  /// Attraction (scannable POI) identity. Kept in a separate namespace from
+  /// `culturalElement` because pack data intentionally shares key strings
+  /// between an attraction and its bound element.
+  static func attraction(_ key: String) -> UUID {
+    v5(name: "culturelens:attraction:" + key.lowercased())
+  }
+
+  /// Map-point identity: one per physical location of an attraction. The same
+  /// attraction key can live at several sites across packs (e.g. an exhibit on
+  /// loan); coordinates rounded to 3 decimals (~110 m) cluster on-site records.
+  static func attractionPoint(key: String, latitude: Double, longitude: Double) -> UUID {
+    let lat = String(format: "%.3f", latitude)
+    let lng = String(format: "%.3f", longitude)
+    return v5(name: "culturelens:attraction-point:" + key.lowercased() + ":" + lat + "," + lng)
+  }
 }

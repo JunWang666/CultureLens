@@ -931,6 +931,7 @@
       }
     },
     "从关系图选择一个相邻概念继续探索。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1790,6 +1791,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "加入文化图谱"
+          }
+        }
+      }
+    },
+    "卫星地图" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Satellite"
           }
         }
       }
@@ -2824,6 +2835,16 @@
         }
       }
     },
+    "定位我的位置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locate Me"
+          }
+        }
+      }
+    },
     "审美" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3437,6 +3458,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "应用内缺少知识库数据包。"
+          }
+        }
+      }
+    },
+    "底图" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map Style"
+          }
+        }
+      }
+    },
+    "3D 俯视" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D View"
+          }
+        }
+      }
+    },
+    "清除搜索" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Search"
+          }
+        }
+      }
+    },
+    "未找到地点" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Places Found"
           }
         }
       }
@@ -4317,6 +4378,26 @@
     "搜索中心节点" : {
 
     },
+    "搜索地点或地址" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for a place or address"
+          }
+        }
+      }
+    },
+    "搜索暂时不可用" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search is temporarily unavailable."
+          }
+        }
+      }
+    },
     "搜索节点名称" : {
 
     },
@@ -4749,6 +4830,16 @@
         }
       }
     },
+    "无法定位" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Locate"
+          }
+        }
+      }
+    },
     "无法读取所选图片。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5050,6 +5141,16 @@
     "未匹配到知识库对象" : {
 
     },
+    "未命名地点" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unnamed Place"
+          }
+        }
+      }
+    },
     "未找到对象" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5260,6 +5361,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "查看这个文化关系"
+          }
+        }
+      }
+    },
+    "标准地图" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         }
       }
@@ -5604,6 +5715,16 @@
         }
       }
     },
+    "正在搜索…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching…"
+          }
+        }
+      }
+    },
     "正在整理文化背景…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5830,6 +5951,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Light up nodes along threads like moon shadows, the Ten Scenes, and pagoda reflections."
+          }
+        }
+      }
+    },
+    "混合地图" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hybrid"
           }
         }
       }
@@ -6755,6 +6886,7 @@
       }
     },
     "继续观察或追问它与%@的关系。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7489,6 +7621,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "返回"
+          }
+        }
+      }
+    },
+    "还没有带位置的足迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No footprints with a location yet"
           }
         }
       }

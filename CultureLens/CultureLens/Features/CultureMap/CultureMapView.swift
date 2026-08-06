@@ -10,6 +10,41 @@ struct CultureMapView: View {
         case timeline = "时间线足迹"
         case pois = "兴趣点"
         var id: Self { self }
+
+        var systemImage: String {
+            switch self {
+            case .map: "map"
+            case .timeline: "clock.arrow.circlepath"
+            case .pois: "mappin.and.ellipse"
+            }
+        }
+    }
+
+    private enum BaseMapStyle: String, CaseIterable, Identifiable {
+        case standard = "标准地图"
+        case hybrid = "混合地图"
+        case imagery = "卫星地图"
+
+        var id: Self { self }
+
+        var systemImage: String {
+            switch self {
+            case .standard: "map"
+            case .hybrid: "square.3.layers.3d"
+            case .imagery: "globe.asia.australia.fill"
+            }
+        }
+
+        var mapStyle: MapStyle {
+            switch self {
+            case .standard:
+                .standard(elevation: .realistic, showsTraffic: true)
+            case .hybrid:
+                .hybrid(elevation: .realistic, showsTraffic: true)
+            case .imagery:
+                .imagery(elevation: .realistic)
+            }
+        }
     }
 
     var showsBackButton: Bool = false
@@ -22,12 +57,29 @@ struct CultureMapView: View {
     @State private var displayMode: DisplayMode = .map
     @State private var selectedRecordID: UUID?
     @State private var mapPosition: MapCameraPosition = .automatic
+    @State private var historyCamera: MapCamera?
     @State private var visibleSpan: MKCoordinateSpan?
+    @State private var historySearchRegion: MKCoordinateRegion?
     @State private var clusterPicker: RecordCluster?
 
     @State private var knowledgeStore: KnowledgeStore?
     @State private var didAttemptStoreLoad = false
     @State private var poiCameraPosition: MapCameraPosition = .automatic
+    @State private var poiCamera: MapCamera?
+    @State private var poiSearchRegion: MKCoordinateRegion?
+
+    @State private var baseMapStyle: BaseMapStyle = .standard
+    @State private var is3DViewEnabled = false
+    @State private var searchText = ""
+    @State private var searchResults: [PlaceSearchResult] = []
+    @State private var selectedSearchResult: PlaceSearchResult?
+    @State private var isSearchingPlaces = false
+    @State private var searchErrorMessage: String?
+    @State private var isLocatingUser = false
+    @State private var locationAlert: LocationAlert?
+    @State private var locationProvider = LocationContextProvider()
+
+    @FocusState private var isMapSearchFocused: Bool
 
     private var locatedRecords: [ScanHistoryRecord] {
         records.filter { $0.latitude != nil && $0.longitude != nil }
@@ -55,6 +107,30 @@ struct CultureMapView: View {
             let longitude = records.compactMap(\.longitude).reduce(0, +) / count
             return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
+    }
+
+    private struct PlaceSearchResult: Identifiable {
+        let id = UUID()
+        let mapItem: MKMapItem
+
+        var name: String {
+            mapItem.name ?? String(localized: "未命名地点")
+        }
+
+        var subtitle: String? {
+            let title = mapItem.placemark.title
+            guard let title, title != name else { return nil }
+            return title
+        }
+
+        var coordinate: CLLocationCoordinate2D {
+            mapItem.placemark.coordinate
+        }
+    }
+
+    private struct LocationAlert: Identifiable {
+        let id = UUID()
+        let message: String
     }
 
     private var clusteringThreshold: CLLocationDegrees {
@@ -104,11 +180,11 @@ struct CultureMapView: View {
                 if displayMode == .pois {
                     poiContent
                         .ignoresSafeArea()
-                } else if records.isEmpty {
-                    emptyState
                 } else if displayMode == .map {
                     historyMap
                         .ignoresSafeArea()
+                } else if records.isEmpty {
+                    emptyState
                 } else {
                     timelineScroll
                 }
@@ -118,10 +194,7 @@ struct CultureMapView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(!showsBackButton)
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                displayModePicker
-                    .frame(minWidth: 200, maxWidth: 280)
-            }
+            mapToolbarContent
         }
         .navigationDestination(item: $selectedRecordID) { id in
             ScanHistoryDetailView(recordID: id)
@@ -131,17 +204,77 @@ struct CultureMapView: View {
             knowledgeStore = await KnowledgePackLoader.shared.store()
             didAttemptStoreLoad = true
         }
+        .task(id: searchText) {
+            await searchPlaces()
+        }
+        .alert(item: $locationAlert) { alert in
+            Alert(
+                title: Text("无法定位"),
+                message: Text(alert.message),
+                dismissButton: .default(Text("好"))
+            )
+        }
     }
 
-    private var displayModePicker: some View {
-        Picker("显示方式", selection: $displayMode) {
-            ForEach(DisplayMode.allCases) { mode in
-                Text(LocalizedStringKey(mode.rawValue)).tag(mode)
+    @ToolbarContentBuilder
+    private var mapToolbarContent: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            locateUserToolbarButton
+            displayModeMenu
+        }
+    }
+
+    private var displayModeMenu: some View {
+        Menu {
+            Picker("显示方式", selection: $displayMode) {
+                ForEach(DisplayMode.allCases) { mode in
+                    Label(LocalizedStringKey(mode.rawValue), systemImage: mode.systemImage)
+                        .tag(mode)
+                }
+            }
+            .pickerStyle(.inline)
+
+            Divider()
+
+            Picker("底图", selection: $baseMapStyle) {
+                ForEach(BaseMapStyle.allCases) { style in
+                    Label(LocalizedStringKey(style.rawValue), systemImage: style.systemImage)
+                        .tag(style)
+                }
+            }
+            .pickerStyle(.inline)
+
+            Divider()
+
+            Toggle(isOn: threeDimensionalViewBinding) {
+                Label("3D 俯视", systemImage: "view.3d")
+            }
+        } label: {
+            Image(systemName: displayMode.systemImage)
+        }
+        .accessibilityLabel("显示方式")
+        .accessibilityValue(LocalizedStringKey(displayMode.rawValue))
+    }
+
+    private var threeDimensionalViewBinding: Binding<Bool> {
+        Binding(
+            get: { is3DViewEnabled },
+            set: { set3DViewEnabled($0) }
+        )
+    }
+
+    private var locateUserToolbarButton: some View {
+        Button {
+            locateUser()
+        } label: {
+            if isLocatingUser {
+                ProgressView()
+            } else {
+                Image(systemName: "location.fill")
             }
         }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .accessibilityLabel("显示方式")
+        .disabled(isLocatingUser)
+        .accessibilityLabel("定位我的位置")
     }
 
     private var emptyState: some View {
@@ -159,45 +292,74 @@ struct CultureMapView: View {
 
     @ViewBuilder
     private var historyMap: some View {
-        if locatedRecords.isEmpty {
-            ContentUnavailableView(
-                "历史中没有位置",
-                systemImage: "location.slash",
-                description: Text("没有位置的扫描仍可在时间线中查看。")
-            )
-            .padding(CultureTheme.pagePadding)
-        } else {
-            Map(position: $mapPosition, selection: $selectedRecordID) {
-                ForEach(clusters) { cluster in
-                    if cluster.records.count == 1, let record = cluster.records.first,
-                       let latitude = record.latitude, let longitude = record.longitude {
-                        Marker(
-                            record.canonicalName,
-                            systemImage: symbol(for: record),
-                            coordinate: CLLocationCoordinate2D(
-                                latitude: latitude,
-                                longitude: longitude
-                            )
+        Map(position: $mapPosition, selection: $selectedRecordID) {
+            UserAnnotation()
+
+            if let selectedSearchResult {
+                Marker(
+                    selectedSearchResult.name,
+                    systemImage: "mappin.and.ellipse",
+                    coordinate: selectedSearchResult.coordinate
+                )
+                .tint(.blue)
+            }
+
+            ForEach(clusters) { cluster in
+                if cluster.records.count == 1, let record = cluster.records.first,
+                   let latitude = record.latitude, let longitude = record.longitude {
+                    Marker(
+                        record.canonicalName,
+                        systemImage: symbol(for: record),
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: latitude,
+                            longitude: longitude
                         )
-                        .tint(CultureTheme.cinnabar)
-                        .tag(record.recordID)
-                    } else {
-                        Annotation("", coordinate: cluster.center, anchor: .center) {
-                            clusterBadge(cluster)
-                        }
+                    )
+                    .tint(CultureTheme.cinnabar)
+                    .tag(record.recordID)
+                } else {
+                    Annotation("", coordinate: cluster.center, anchor: .center) {
+                        clusterBadge(cluster)
                     }
                 }
             }
-            .mapStyle(.standard(elevation: .realistic))
-            .onMapCameraChange(frequency: .onEnd) { context in
-                visibleSpan = context.region.span
-            }
-            .sheet(item: $clusterPicker) { cluster in
-                clusterRecordList(cluster)
-                    .presentationDetents([.medium, .large])
-            }
-            .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
         }
+        .mapStyle(baseMapStyle.mapStyle)
+        .onMapCameraChange(frequency: .onEnd) { context in
+            historyCamera = context.camera
+            if displayMode == .map {
+                is3DViewEnabled = context.camera.pitch > 1
+            }
+            visibleSpan = context.region.span
+            historySearchRegion = context.region
+        }
+        .sheet(item: $clusterPicker) { cluster in
+            clusterRecordList(cluster)
+                .presentationDetents([.medium, .large])
+        }
+        .overlay(alignment: .topLeading) {
+            if locatedRecords.isEmpty, selectedSearchResult == nil {
+                noLocatedHistoryCallout
+            }
+        }
+        .overlay(alignment: .bottomLeading) {
+            mapSearchPanel
+        }
+        .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
+    }
+
+    private var noLocatedHistoryCallout: some View {
+        Label("还没有带位置的足迹", systemImage: "location.slash")
+            .font(.callout.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(CultureTheme.surface, in: Capsule())
+            .overlay {
+                Capsule().stroke(CultureTheme.hairline, lineWidth: 1)
+            }
+            .safeAreaPadding(.leading, 12)
+            .safeAreaPadding(.top, 12)
     }
 
     // MARK: - All points of interest (knowledge pack)
@@ -229,9 +391,20 @@ struct CultureMapView: View {
 
     private var poiMap: some View {
         Map(position: $poiCameraPosition) {
+            UserAnnotation()
+
+            if let selectedSearchResult {
+                Marker(
+                    selectedSearchResult.name,
+                    systemImage: "mappin.and.ellipse",
+                    coordinate: selectedSearchResult.coordinate
+                )
+                .tint(.blue)
+            }
+
             ForEach(poiPoints) { point in
                 Annotation(
-                    point.name,
+                    "",
                     coordinate: CLLocationCoordinate2D(
                         latitude: point.latitude,
                         longitude: point.longitude
@@ -242,8 +415,279 @@ struct CultureMapView: View {
                 }
             }
         }
-        .mapStyle(.standard(elevation: .realistic))
+        .mapStyle(baseMapStyle.mapStyle)
+        .onMapCameraChange(frequency: .onEnd) { context in
+            poiCamera = context.camera
+            if displayMode == .pois {
+                is3DViewEnabled = context.camera.pitch > 1
+            }
+            poiSearchRegion = context.region
+        }
+        .overlay(alignment: .bottomLeading) {
+            mapSearchPanel
+        }
         .accessibilityLabel("知识包兴趣点地图，包含 \(poiPoints.count) 个景点")
+    }
+
+    private func set3DViewEnabled(_ enabled: Bool) {
+        is3DViewEnabled = enabled
+
+        let currentCamera: MapCamera?
+        switch displayMode {
+        case .map, .timeline:
+            currentCamera = historyCamera ?? mapPosition.camera
+        case .pois:
+            currentCamera = poiCamera ?? poiCameraPosition.camera
+        }
+        guard var camera = currentCamera else { return }
+
+        camera.pitch = enabled ? 55 : 0
+        withAnimation {
+            switch displayMode {
+            case .map, .timeline:
+                mapPosition = .camera(camera)
+            case .pois:
+                poiCameraPosition = .camera(camera)
+            }
+        }
+    }
+
+    private func locateUser() {
+        guard !isLocatingUser else { return }
+        isLocatingUser = true
+
+        Task {
+            defer { isLocatingUser = false }
+            do {
+                let place = try await locationProvider.requestBestPlace()
+                let region = MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(
+                        latitude: place.latitude,
+                        longitude: place.longitude
+                    ),
+                    latitudinalMeters: 2_000,
+                    longitudinalMeters: 2_000
+                )
+                withAnimation {
+                    is3DViewEnabled = false
+                    if displayMode == .pois {
+                        poiCameraPosition = .region(region)
+                    } else {
+                        displayMode = .map
+                        mapPosition = .region(region)
+                    }
+                }
+            } catch is CancellationError {
+                return
+            } catch {
+                locationAlert = LocationAlert(message: error.localizedDescription)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var mapSearchPanel: some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer(spacing: 10) {
+                mapSearchPanelContent
+            }
+        } else {
+            mapSearchPanelContent
+        }
+    }
+
+    private var mapSearchPanelContent: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            if isMapSearchFocused, !trimmedSearchText.isEmpty {
+                mapSearchResultsSurface
+            }
+
+            mapSearchField
+        }
+        .frame(width: 340)
+        .safeAreaPadding(.leading, 12)
+        .safeAreaPadding(.bottom, 12)
+    }
+
+    @ViewBuilder
+    private var mapSearchField: some View {
+        if #available(iOS 26.0, *) {
+            mapSearchFieldContent
+                .glassEffect(.regular.interactive(), in: .capsule)
+        } else {
+            mapSearchFieldContent
+                .background(.ultraThinMaterial, in: Capsule())
+        }
+    }
+
+    private var mapSearchFieldContent: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(.primary)
+
+            TextField("搜索地点或地址", text: $searchText)
+                .textFieldStyle(.plain)
+                .focused($isMapSearchFocused)
+                .submitLabel(.search)
+
+            if !searchText.isEmpty {
+                Button("清除搜索", systemImage: "xmark.circle.fill") {
+                    clearSearch()
+                }
+                .labelStyle(.iconOnly)
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+            }
+        }
+        .font(.body)
+        .padding(.horizontal, 16)
+        .frame(height: 52)
+    }
+
+    @ViewBuilder
+    private var mapSearchResultsSurface: some View {
+        if #available(iOS 26.0, *) {
+            mapSearchResultsContent
+                .glassEffect(.regular, in: .rect(cornerRadius: 20))
+        } else {
+            mapSearchResultsContent
+                .background(
+                    .ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                )
+        }
+    }
+
+    @ViewBuilder
+    private var mapSearchResultsContent: some View {
+        if isSearchingPlaces {
+            Label("正在搜索…", systemImage: "magnifyingglass")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(14)
+        } else if let searchErrorMessage {
+            Label(searchErrorMessage, systemImage: "exclamationmark.triangle")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(14)
+        } else if searchResults.isEmpty {
+            Label("未找到地点", systemImage: "mappin.slash")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(14)
+        } else {
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(searchResults) { result in
+                        Button {
+                            selectSearchResult(result)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "mappin.and.ellipse")
+                                    .foregroundStyle(CultureTheme.cinnabar)
+
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(result.name)
+                                        .foregroundStyle(.primary)
+                                    if let subtitle = result.subtitle {
+                                        Text(subtitle)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                            .lineLimit(1)
+                                    }
+                                }
+
+                                Spacer(minLength: 0)
+                            }
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .frame(maxHeight: 280)
+        }
+    }
+
+    private var trimmedSearchText: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func clearSearch() {
+        searchText = ""
+        searchResults = []
+        searchErrorMessage = nil
+    }
+
+    private func searchPlaces() async {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else {
+            searchResults = []
+            searchErrorMessage = nil
+            isSearchingPlaces = false
+            return
+        }
+
+        isSearchingPlaces = true
+        searchErrorMessage = nil
+
+        do {
+            try await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled else { return }
+
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = query
+            request.resultTypes = [.address, .pointOfInterest]
+            if let region = activeSearchRegion {
+                request.region = region
+            }
+
+            let response = try await MKLocalSearch(request: request).start()
+            guard !Task.isCancelled,
+                  searchText.trimmingCharacters(in: .whitespacesAndNewlines) == query
+            else { return }
+
+            searchResults = response.mapItems.prefix(8).map {
+                PlaceSearchResult(mapItem: $0)
+            }
+            isSearchingPlaces = false
+        } catch is CancellationError {
+            return
+        } catch {
+            guard !Task.isCancelled else { return }
+            searchResults = []
+            searchErrorMessage = String(localized: "搜索暂时不可用")
+            isSearchingPlaces = false
+        }
+    }
+
+    private var activeSearchRegion: MKCoordinateRegion? {
+        switch displayMode {
+        case .map, .timeline:
+            historySearchRegion
+        case .pois:
+            poiSearchRegion
+        }
+    }
+
+    private func selectSearchResult(_ result: PlaceSearchResult) {
+        selectedSearchResult = result
+
+        let region = MKCoordinateRegion(
+            center: result.coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        )
+        withAnimation {
+            if displayMode == .pois {
+                poiCameraPosition = .region(region)
+            } else {
+                displayMode = .map
+                mapPosition = .region(region)
+            }
+        }
+
+        searchText = ""
+        searchResults = []
+        isMapSearchFocused = false
     }
 
     @ViewBuilder

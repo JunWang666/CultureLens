@@ -2,7 +2,7 @@ import Foundation
 
 /// On-demand translation of knowledge-pack text via `dynamic/chat` when a
 /// locale overlay is missing. Results are cached in memory and UserDefaults.
-nonisolated actor KnowledgeTranslationService {
+actor KnowledgeTranslationService {
   static let shared = KnowledgeTranslationService()
 
   private let gatewayClient: LLMGatewayClient?
@@ -236,7 +236,7 @@ nonisolated actor KnowledgeTranslationService {
 
 extension RichTextDocument {
   /// Minimal single-paragraph document used for translated plain text.
-  static func plain(_ text: String) -> RichTextDocument {
+  nonisolated static func plain(_ text: String) -> RichTextDocument {
     let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
     if trimmed.isEmpty {
       return RichTextDocument(schemaVersion: 1, blocks: [])

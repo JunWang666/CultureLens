@@ -4,7 +4,7 @@ import Foundation
 // so they resolve via `AppLanguageStore.currentLanguage()` instead of
 // `String(localized:)`. `rawValue` stays the persisted/prompt value (Chinese).
 
-extension ObjectCategory {
+nonisolated extension ObjectCategory {
   var localizedTitle: String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:
@@ -22,7 +22,7 @@ extension ObjectCategory {
   }
 }
 
-extension ConceptKind {
+nonisolated extension ConceptKind {
   var localizedTitle: String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:
@@ -43,7 +43,7 @@ extension ConceptKind {
   }
 }
 
-extension RelationKind {
+nonisolated extension RelationKind {
   var localizedTitle: String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:
@@ -67,7 +67,7 @@ extension RelationKind {
   }
 }
 
-extension KnowledgeLevel {
+nonisolated extension KnowledgeLevel {
   var localizedTitle: String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:

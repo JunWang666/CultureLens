@@ -291,16 +291,9 @@ nonisolated enum RecognitionResponseMapper {
     elements: [String: RecognitionElement],
     attractions: [AttractionCandidate]
   ) -> (CultureObject, String) {
-    // Cultural element wins over attraction. A model may set attraction_key for
-    // "I'm at this museum" while the framed target is an exhibit (玉琮) with an
-    // empty cultural_element_key — that must stay unresolved/catalog-resolved,
-    // not collapse into the attraction root (之江馆区 / 馆史).
-    if let element = elements[decision.culturalElementKey.lowercased()],
-      !decision.culturalElementKey.isEmpty
-    {
-      return (knowledgeCultureObject(element: element, decision: decision), "resolved")
-    }
-
+    // Attraction beats element when the visual target *is* the place. Pack data
+    // intentionally shares key strings between an attraction and its bound
+    // element, so an element-key hit alone must not hijack place scans.
     if !decision.attractionKey.isEmpty {
       for attraction in attractions
       where attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame {
@@ -311,6 +304,31 @@ nonisolated enum RecognitionResponseMapper {
         object.canonicalName = attraction.name
         return (object, "attraction")
       }
+    }
+
+    // The model may only fill cultural_element_key with a key that is shared by
+    // an attraction; when the name matches the attraction's name it still means
+    // the place, not the concept node.
+    if !decision.culturalElementKey.isEmpty {
+      for attraction in attractions
+      where attraction.key.caseInsensitiveCompare(decision.culturalElementKey) == .orderedSame {
+        guard namesAreCompatible(decision.canonicalName, attraction.name),
+          let element = elements[attraction.culturalElementKey.lowercased()]
+        else { continue }
+        var object = knowledgeCultureObject(element: element, decision: decision)
+        object.canonicalName = attraction.name
+        return (object, "attraction")
+      }
+    }
+
+    // A model may set attraction_key for "I'm at this museum" while the framed
+    // target is an exhibit (玉琮) with an empty cultural_element_key — that
+    // must stay catalog-resolved, not collapse into the attraction root
+    // (之江馆区 / 馆史). Neither branch above fires in that case.
+    if let element = elements[decision.culturalElementKey.lowercased()],
+      !decision.culturalElementKey.isEmpty
+    {
+      return (knowledgeCultureObject(element: element, decision: decision), "resolved")
     }
 
     return (
@@ -486,7 +504,7 @@ nonisolated enum RecognitionResponseMapper {
       rationale = "根据当前位置列出的附近景点，仍需结合画面确认。"
     }
     return RecognitionCandidate(
-      id: DeterministicID.v5(name: "attraction:" + attraction.key),
+      id: DeterministicID.attraction(attraction.key),
       attractionKey: attraction.key,
       culturalElementKey: attraction.culturalElementKey,
       canonicalName: attraction.name,

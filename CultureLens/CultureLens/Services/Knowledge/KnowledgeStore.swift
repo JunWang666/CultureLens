@@ -400,32 +400,43 @@ nonisolated struct KnowledgeStore: Sendable {
   // MARK: - Attraction points (POI map)
 
   /// All attractions in the bundled packs as map points, aggregated from the
-  /// on-site introduction records (which carry the coordinates). Deterministic
-  /// `(name, key)` ordering.
+  /// on-site introduction records (which carry the coordinates). Records
+  /// cluster per physical location (attraction key + coordinates rounded to 3
+  /// decimals): the same attraction key hosted at different sites — across
+  /// packs or across intro records — yields one point per site instead of
+  /// collapsing into the first record's location.
   func attractionPoints() -> [AttractionPoint] {
     var nameByAttraction: [String: String] = [:]
     for attraction in pack.attractions {
       nameByAttraction[attraction.key] = attraction.name
     }
-    var firstRecordByAttraction: [String: KnowledgePack.IntroductionRecord] = [:]
-    for record in pack.introductions where firstRecordByAttraction[record.attractionKey] == nil {
-      firstRecordByAttraction[record.attractionKey] = record
+    var firstRecordByLocation: [String: KnowledgePack.IntroductionRecord] = [:]
+    for record in pack.introductions {
+      let locationKey = record.attractionKey + "|"
+        + String(format: "%.3f", record.latitude) + ","
+        + String(format: "%.3f", record.longitude)
+      if firstRecordByLocation[locationKey] == nil {
+        firstRecordByLocation[locationKey] = record
+      }
     }
-    return firstRecordByAttraction.compactMap { key, record in
-      let name = nameByAttraction[key] ?? record.name
+    return firstRecordByLocation.values.compactMap { record in
+      let name = nameByAttraction[record.attractionKey] ?? record.name
       guard !name.isEmpty else { return nil }
       let elementKey = elementsByKey[record.culturalElementKey] != nil
         ? record.culturalElementKey
         : nil
       return AttractionPoint(
-        key: key,
+        key: record.attractionKey,
         name: name,
         culturalElementKey: elementKey,
         latitude: record.latitude,
         longitude: record.longitude
       )
     }
-    .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+    .sorted {
+      ($0.name, $0.key, $0.latitude, $0.longitude)
+        < ($1.name, $1.key, $1.latitude, $1.longitude)
+    }
   }
 
   // MARK: - User knowledge graph

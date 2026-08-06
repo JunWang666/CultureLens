@@ -100,6 +100,8 @@ import SwiftUI
     private lazy var previewLayer = AVCaptureVideoPreviewLayer(
       session: cameraSession.session
     )
+    private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
+    private var rotationObservation: NSKeyValueObservation?
 
     init(coordinator: CameraCaptureView.Coordinator) {
       cameraSession = CameraSession(
@@ -130,6 +132,30 @@ import SwiftUI
       view.backgroundColor = .clear
       previewLayer.videoGravity = .resizeAspectFill
       view.layer.addSublayer(previewLayer)
+      if let device = AVCaptureDevice.default(
+        .builtInWideAngleCamera,
+        for: .video,
+        position: .back
+      ) {
+        let rotationCoordinator = AVCaptureDevice.RotationCoordinator(
+          device: device,
+          previewLayer: previewLayer
+        )
+        self.rotationCoordinator = rotationCoordinator
+        // Polling in `viewDidLayoutSubviews` alone misses the 180°
+        // landscapeLeft ↔ landscapeRight flip, where the view's bounds
+        // barely change and layout may not run. The coordinator's angle is
+        // KVO-observable, so reapply it whenever it changes.
+        rotationObservation = rotationCoordinator.observe(
+          \.videoRotationAngleForHorizonLevelPreview,
+          options: [.initial, .new]
+        ) { [weak self] _, _ in
+          Task { @MainActor [weak self] in
+            self?.updatePreviewRotation()
+          }
+        }
+      }
+      updatePreviewRotation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -148,10 +174,30 @@ import SwiftUI
       CATransaction.setDisableActions(true)
       previewLayer.frame = view.bounds
       CATransaction.commit()
+      updatePreviewRotation()
+    }
+
+    /// Keeps the preview upright when the interface rotates (notably on
+    /// iPad, where all orientations are supported). The preview layer's
+    /// connection only exists once the session is running, so this reapplies
+    /// the coordinator's angle both on layout and on KVO change.
+    private func updatePreviewRotation() {
+      guard
+        let rotationCoordinator,
+        let connection = previewLayer.connection
+      else { return }
+      let angle = rotationCoordinator.videoRotationAngleForHorizonLevelPreview
+      if connection.isVideoRotationAngleSupported(angle) {
+        connection.videoRotationAngle = angle
+      }
     }
 
     func capturePhoto() {
-      cameraSession.capturePhoto { [weak coordinator] data in
+      // Read on the main thread so the photo's EXIF orientation matches what
+      // the user currently sees on screen.
+      let rotationAngle =
+        rotationCoordinator?.videoRotationAngleForHorizonLevelCapture ?? 90
+      cameraSession.capturePhoto(rotationAngle: rotationAngle) { [weak coordinator] data in
         guard let coordinator else { return }
         Task { @MainActor [coordinator] in
           coordinator.completion(data)
@@ -215,6 +261,7 @@ import SwiftUI
     }
 
     func capturePhoto(
+      rotationAngle: CGFloat,
       completion: @escaping @Sendable (Data?) -> Void
     ) {
       sessionQueue.async { [weak self] in
@@ -229,6 +276,12 @@ import SwiftUI
         }
 
         self.photoCompletion = completion
+        if
+          let connection = self.photoOutput.connection(with: .video),
+          connection.isVideoRotationAngleSupported(rotationAngle)
+        {
+          connection.videoRotationAngle = rotationAngle
+        }
         let settings = AVCapturePhotoSettings()
         settings.photoQualityPrioritization = self.photoOutput.maxPhotoQualityPrioritization
         self.photoOutput.capturePhoto(with: settings, delegate: self)

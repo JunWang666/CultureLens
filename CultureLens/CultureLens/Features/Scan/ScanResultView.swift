@@ -31,14 +31,26 @@ struct ScanResultView: View {
     return result
   }
 
-  /// 图谱成员判定用的 key：景点候选优先用景点 key，与保存时记录的 key 一致。
+  /// 图谱成员判定用的 key：候选页一律用其绑定的文化元素 key（景点候选的
+  /// `culturalElementKey` 就是绑定元素），不再把 attractionKey 当元素 key 存。
   private var graphElementKey: String? {
-    candidate?.attractionKey ?? object.culturalElementKey
+    candidate?.culturalElementKey ?? object.culturalElementKey
+  }
+
+  /// 图谱成员身份统一为元素节点 UUID：景点页、候选页与节点页落在同一节点上，
+  /// 跨扫描去重，且在用户图谱中始终是 pack-backed 节点而非游离节点。
+  private var graphNodeID: UUID {
+    if let key = graphElementKey,
+      KnowledgeStore.shared?.element(key: key) != nil
+    {
+      return DeterministicID.culturalElement(key)
+    }
+    return object.id
   }
 
   private var isInCultureGraph: Bool {
     knowledgeProgressStore.isInGraph(
-      object.id,
+      graphNodeID,
       elementKey: graphElementKey
     )
   }
@@ -167,7 +179,6 @@ struct ScanResultView: View {
           result: explanationInput,
           isDemo: session.isDemo,
           siteContext: siteContext,
-          demoMarkdown: demoExplanationMarkdown,
           onExplained: markExplained
         )
         if let candidate {
@@ -649,7 +660,7 @@ struct ScanResultView: View {
     try modelContext.save()
     knowledgeProgressStore.setLevel(
       .contact,
-      for: object.id,
+      for: graphNodeID,
       source: .manual,
       elementKey: graphElementKey
     )
@@ -678,26 +689,11 @@ struct ScanResultView: View {
       )
     }
   }
-
-  private var demoExplanationMarkdown: String {
-    let relatedNames = graphObject.concepts.prefix(2).map(\.name).joined(separator: "、")
-    let nextStep =
-      relatedNames.isEmpty
-      ? "- \(String(localized: "从关系图选择一个相邻概念继续探索。"))"
-      : "- \(String(localized: "继续观察或追问它与\(relatedNames)的关系。"))"
-    return """
-      ## \(String(localized: "文化背景"))
-      \(object.summary)
-
-      ## \(String(localized: "下一步建议"))
-      \(nextStep)
-      """
-  }
 }
 
 extension ScanResultView {
   /// 知识节点展示入口：由知识库对象合成会话，复用扫描结果页布局。
-  /// 合成会话标记为 demo（讲解走本地内容、不打网关），知识模式不写扫描历史。
+  /// 与真实扫描一样走 AI 讲解（`streamExplanation`）；知识模式不写扫描历史。
   init(knowledgeObject object: CultureObject) {
     let result = RecognitionResult(
       id: object.id,
@@ -714,7 +710,7 @@ extension ScanResultView {
         result: result,
         place: nil,
         createdAt: Date(),
-        isDemo: true
+        isDemo: false
       ),
       presentation: .knowledge
     )

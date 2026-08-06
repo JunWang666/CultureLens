@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 /// Three-tier user knowledge of a culture graph node.
-enum KnowledgeLevel: String, Codable, Hashable, CaseIterable, Sendable {
+nonisolated enum KnowledgeLevel: String, Codable, Hashable, CaseIterable, Sendable {
   case contact = "接触"
   case understand = "理解"
   case master = "掌握"
@@ -34,7 +34,7 @@ enum KnowledgeLevel: String, Codable, Hashable, CaseIterable, Sendable {
 }
 
 /// How a knowledge progress row was last written.
-enum KnowledgeProgressSource: String, Codable, Hashable, CaseIterable, Sendable {
+nonisolated enum KnowledgeProgressSource: String, Codable, Hashable, CaseIterable, Sendable {
   case manual
   case migration
   case scan

@@ -294,7 +294,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
 /// Maps stored (Chinese) publisher names to the active app language for
 /// display. Stored values are never mutated — provenance tests depend on them.
 enum KnowledgePublisherDisplay {
-  static func name(for publisher: String) -> String {
+  nonisolated static func name(for publisher: String) -> String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:
       return publisher

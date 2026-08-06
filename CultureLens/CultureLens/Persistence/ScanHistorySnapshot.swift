@@ -1,6 +1,6 @@
 import Foundation
 
-struct ScanHistorySnapshot: Codable, Hashable, Sendable {
+nonisolated struct ScanHistorySnapshot: Codable, Hashable, Sendable {
     let result: RecognitionResult
     let selectedObject: CultureObject
     let selectedCandidateID: UUID?

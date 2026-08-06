@@ -987,15 +987,16 @@ struct CultureLensTests {
             latitude: 30.24,
             longitude: 120.14
           ),
-          // Second record of the same attraction: merged, first wins.
+          // Second record of the same attraction at the same site: merged,
+          // first wins.
           KnowledgePack.IntroductionRecord(
             key: "i2",
             name: "介绍二",
             introduction: emptyIntroduction,
             culturalElementKey: "e0",
             attractionKey: "a1",
-            latitude: 30.25,
-            longitude: 120.15
+            latitude: 30.24,
+            longitude: 120.14
           ),
           // Unresolvable cultural element: point stays, navigation key drops.
           KnowledgePack.IntroductionRecord(
@@ -1019,6 +1020,187 @@ struct CultureLensTests {
     #expect(points[0].culturalElementKey == "e0")
     #expect(points[1].name == "景点二")
     #expect(points[1].culturalElementKey == nil)
+  }
+
+  @Test func attractionPointsSplitSameAttractionAcrossLocations() {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "poi-split-test",
+        elements: [
+          KnowledgePack.Element(key: "e0", name: "元素 0", introduction: emptyIntroduction)
+        ],
+        attractions: [
+          KnowledgePack.Attraction(key: "a1", name: "展品一"),
+        ],
+        relations: [],
+        introductions: [
+          // Same attraction key hosted at two different sites (e.g. an exhibit
+          // shown in two museums): one point per site, not first-record-wins.
+          KnowledgePack.IntroductionRecord(
+            key: "i1",
+            name: "甲馆展陈",
+            introduction: emptyIntroduction,
+            culturalElementKey: "e0",
+            attractionKey: "a1",
+            latitude: 30.3905,
+            longitude: 119.9945
+          ),
+          KnowledgePack.IntroductionRecord(
+            key: "i2",
+            name: "乙馆展陈",
+            introduction: emptyIntroduction,
+            culturalElementKey: "e0",
+            attractionKey: "a1",
+            latitude: 30.1628,
+            longitude: 120.0975
+          ),
+        ]
+      )
+    )
+
+    let points = store.attractionPoints()
+    #expect(points.count == 2)
+    #expect(Set(points.map(\.id)).count == 2)
+    #expect(points.allSatisfy { $0.key == "a1" && $0.name == "展品一" })
+    #expect(Set(points.map(\.latitude)) == [30.3905, 30.1628])
+  }
+
+  // MARK: - Recognition mapping with shared attraction/element keys
+
+  /// Pack data intentionally shares key strings between an attraction and its
+  /// bound element. These tests pin the resolution order: the place wins when
+  /// the visual target *is* the attraction; exhibits inside it stay nodes.
+  private func makeSharedKeyKnowledge() -> RecognitionKnowledgeSet {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    func element(_ key: String, _ name: String) -> RecognitionElement {
+      RecognitionElement(
+        key: key,
+        name: name,
+        introduction: emptyIntroduction,
+        nearbyContexts: [],
+        relatedElements: [],
+        graphElements: [],
+        graphRelations: [],
+        sources: []
+      )
+    }
+    return RecognitionKnowledgeSet(
+      version: "mapper-test",
+      elements: [
+        element("leifeng-pagoda-and-evening-glow", "雷峰塔与雷峰夕照"),
+        element("jade-cong-wang", "良渚玉琮王"),
+        element("zhijiang-campus", "之江馆区"),
+      ],
+      attractionCandidates: [
+        AttractionCandidate(
+          key: "leifeng-pagoda-and-evening-glow",
+          name: "雷峰塔",
+          culturalElementKey: "leifeng-pagoda-and-evening-glow",
+          summary: "",
+          distanceMeters: 0
+        ),
+        AttractionCandidate(
+          key: "zhijiang-campus",
+          name: "之江馆区",
+          culturalElementKey: "zhijiang-campus",
+          summary: "",
+          distanceMeters: 0
+        ),
+      ],
+      totalElements: 3,
+      nearbyContextCount: 0,
+      locationMatched: true
+    )
+  }
+
+  private func makeDecision(
+    culturalElementKey: String,
+    attractionKey: String,
+    canonicalName: String,
+    category: String
+  ) -> ProviderRecognition {
+    ProviderRecognition(
+      culturalElementKey: culturalElementKey,
+      attractionKey: attractionKey,
+      canonicalName: canonicalName,
+      category: category,
+      confidence: 0.9,
+      summary: "summary",
+      rationale: "rationale",
+      uncertainty: "",
+      timePeriod: "",
+      region: "",
+      alternatives: [
+        ProviderCandidate(
+          culturalElementKey: "",
+          canonicalName: "备选",
+          category: "其他",
+          confidence: 0.3,
+          rationale: "alt"
+        )
+      ]
+    )
+  }
+
+  @Test func placeScanResolvesAsAttractionWhenBothKeysShareTheElementKey() {
+    let result = RecognitionResponseMapper.mapResponse(
+      requestID: "req-1",
+      usedPlaceContext: true,
+      decision: makeDecision(
+        culturalElementKey: "leifeng-pagoda-and-evening-glow",
+        attractionKey: "leifeng-pagoda-and-evening-glow",
+        canonicalName: "雷峰塔",
+        category: "建筑构件"
+      ),
+      modelIdentifier: "test-model",
+      knowledge: makeSharedKeyKnowledge()
+    )
+    #expect(result.resolutionStatus == "attraction")
+    #expect(result.object.canonicalName == "雷峰塔")
+    // Graph membership identity is always the bound element node.
+    #expect(
+      result.object.id
+        == DeterministicID.culturalElement("leifeng-pagoda-and-evening-glow")
+    )
+    #expect(result.object.culturalElementKey == "leifeng-pagoda-and-evening-glow")
+  }
+
+  @Test func placeScanResolvesAsAttractionWhenOnlyElementKeyIsFilled() {
+    let result = RecognitionResponseMapper.mapResponse(
+      requestID: "req-2",
+      usedPlaceContext: true,
+      decision: makeDecision(
+        culturalElementKey: "leifeng-pagoda-and-evening-glow",
+        attractionKey: "",
+        canonicalName: "雷峰塔",
+        category: "建筑构件"
+      ),
+      modelIdentifier: "test-model",
+      knowledge: makeSharedKeyKnowledge()
+    )
+    #expect(result.resolutionStatus == "attraction")
+    #expect(result.object.canonicalName == "雷峰塔")
+  }
+
+  @Test func exhibitInsideAttractionStaysCatalogResolved() {
+    // 玉琮王 framed inside 之江馆区: name mismatches the attraction and the
+    // category is an artefact, so the result must remain the exhibit node.
+    let result = RecognitionResponseMapper.mapResponse(
+      requestID: "req-3",
+      usedPlaceContext: true,
+      decision: makeDecision(
+        culturalElementKey: "jade-cong-wang",
+        attractionKey: "zhijiang-campus",
+        canonicalName: "玉琮王",
+        category: "器物"
+      ),
+      modelIdentifier: "test-model",
+      knowledge: makeSharedKeyKnowledge()
+    )
+    #expect(result.resolutionStatus == "resolved")
+    #expect(result.object.canonicalName == "良渚玉琮王")
+    #expect(result.object.id == DeterministicID.culturalElement("jade-cong-wang"))
   }
 
   @Test func userGraphLayoutPlacesShortestHopLayersOutward() throws {

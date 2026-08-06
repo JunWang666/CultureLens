@@ -215,7 +215,7 @@ nonisolated struct PromptLanguagePolicy: Sendable {
 }
 
 /// Headings / excerpt labels the citation parser accepts for any language.
-enum CitationMarkup {
+nonisolated enum CitationMarkup {
   static let sourceHeadingAliases: [String] = [
     "引用来源",
     "Sources",

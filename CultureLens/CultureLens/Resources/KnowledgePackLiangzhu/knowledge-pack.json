@@ -1,5 +1,5 @@
 {
-  "version": "liangzhu-v2",
+  "version": "liangzhu-v3",
   "source_language": "zh-Hans",
   "elements": [
     {
@@ -104,7 +104,7 @@
           }
         ]
       },
-      "conceptKind": "审美"
+      "conceptKind": "基础知识"
     },
     {
       "key": "liangzhu-ancient-city",
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "conceptKind": "审美"
+      "conceptKind": "基础知识"
     },
     {
       "key": "liangzhu-water-system",
@@ -234,7 +234,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "jade-cong-ritual",
@@ -260,7 +260,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "制度"
     },
     {
       "key": "jade-bi",
@@ -286,7 +286,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "jade-yue",
@@ -312,7 +312,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "god-man-beast-mask",
@@ -601,32 +601,6 @@
       "conceptKind": "制度"
     },
     {
-      "key": "hemudu-comparison",
-      "name": "良渚与河姆渡",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "河姆渡文化与良渚文化同为浙江新石器时代的重要考古学文化，但时间有先后：河姆渡大约距今6000年至7000年，良渚距今5300年至4000年，两者在时间上前后相接。"
-          },
-          {
-            "type": "paragraph",
-            "text": "河姆渡以人工栽培的水稻、干栏式建筑、中国最早的木制饰品与漆器为代表，石器数量较少，多的是木器和骨器；良渚则以玉礼器、城墙水利、石犁稻耕和原始文字为代表，出现了专业化分工与阶级分化。"
-          },
-          {
-            "type": "paragraph",
-            "text": "如果把河姆渡看作“稻作的奠基”，良渚则是“稻作与王权的结合”；两者在农业传承与生活方式上，构成一条江南地区连续的发展线索。"
-          },
-          {
-            "type": "paragraph",
-            "text": "在良渚展厅看到石犁、玉器时，试着想想河姆渡时期更朴素的骨耜与漆器——一段从“稻之家园”到“稻之城邦”的变化，就在你脑海里贯通了。"
-          }
-        ]
-      },
-      "conceptKind": "相似对象"
-    },
-    {
       "key": "contemporary-cultures",
       "name": "同时期的中华文明星光",
       "introduction": {
@@ -650,7 +624,7 @@
           }
         ]
       },
-      "conceptKind": "相似对象"
+      "conceptKind": "基础知识"
     },
     {
       "key": "liangzhu-in-zhejiang-museum",
@@ -679,499 +653,17 @@
       "conceptKind": "地域"
     }
   ],
-  "relations": [
-    {
-      "elementKey": "liangzhu-culture-overview",
-      "relatedElementKey": "liangzhu-chronology",
-      "kind": "理解前先懂",
-      "explanation": "先懂良渚的年代分期，才能理解其文化总貌。"
-    },
-    {
-      "elementKey": "liangzhu-chronology",
-      "relatedElementKey": "liangzhu-culture-overview",
-      "kind": "解释",
-      "explanation": "以年代分期为线索，可解释良渚文化的整体兴衰。"
-    },
-    {
-      "elementKey": "liangzhu-culture-overview",
-      "relatedElementKey": "liangzhu-distribution",
-      "kind": "理解前先懂",
-      "explanation": "了解良渚的地理分布，是理解其文化面貌的空间前提。"
-    },
-    {
-      "elementKey": "liangzhu-distribution",
-      "relatedElementKey": "liangzhu-culture-overview",
-      "kind": "体现",
-      "explanation": "环太湖的遗址分布，体现良渚文化的整体势力范围。"
-    },
-    {
-      "elementKey": "liangzhu-culture-overview",
-      "relatedElementKey": "world-heritage-status",
-      "kind": "解释",
-      "explanation": "良渚的文明成就，解释了它何以成为五千年文明实证。"
-    },
-    {
-      "elementKey": "world-heritage-status",
-      "relatedElementKey": "liangzhu-culture-overview",
-      "kind": "象征",
-      "explanation": "世界遗产身份，象征良渚作为中华文明源头的地位。"
-    },
-    {
-      "elementKey": "liangzhu-culture-overview",
-      "relatedElementKey": "liangzhu-society",
-      "kind": "理解前先懂",
-      "explanation": "理解良渚总览的文明高度，先要懂得其神权社会。"
-    },
-    {
-      "elementKey": "liangzhu-society",
-      "relatedElementKey": "liangzhu-culture-overview",
-      "kind": "体现",
-      "explanation": "神权与社会分化，是良渚文化整体面貌的核心体现。"
-    },
-    {
-      "elementKey": "liangzhu-chronology",
-      "relatedElementKey": "rice-agriculture",
-      "kind": "体现",
-      "explanation": "良渚的千年年代跨度里，体现着稻作农业的成熟。"
-    },
-    {
-      "elementKey": "rice-agriculture",
-      "relatedElementKey": "liangzhu-chronology",
-      "kind": "解释",
-      "explanation": "稻作农业的成熟，是判断良渚文明水平的重要依据。"
-    },
-    {
-      "elementKey": "liangzhu-chronology",
-      "relatedElementKey": "shi-xingeng-discovery",
-      "kind": "理解前先懂",
-      "explanation": "先了解良渚的年代，才能理解施昕更发现的意义。"
-    },
-    {
-      "elementKey": "shi-xingeng-discovery",
-      "relatedElementKey": "liangzhu-chronology",
-      "kind": "产生于",
-      "explanation": "良渚年代的确定，诞生于施昕更的考古发掘。"
-    },
-    {
-      "elementKey": "liangzhu-chronology",
-      "relatedElementKey": "contemporary-cultures",
-      "kind": "解释",
-      "explanation": "以年代对照，可解释良渚与红山等文化同处共时。"
-    },
-    {
-      "elementKey": "contemporary-cultures",
-      "relatedElementKey": "liangzhu-chronology",
-      "kind": "相似于",
-      "explanation": "同时代诸文化年代相近，便于与良渚相互参照。"
-    },
-    {
-      "elementKey": "liangzhu-distribution",
-      "relatedElementKey": "mojiaoshan-center",
-      "kind": "位于",
-      "explanation": "莫角山遗址位于良渚遗址群的中心位置。"
-    },
-    {
-      "elementKey": "mojiaoshan-center",
-      "relatedElementKey": "liangzhu-distribution",
-      "kind": "体现",
-      "explanation": "莫角山作为中心，体现遗址群向心分布的空间格局。"
-    },
-    {
-      "elementKey": "mojiaoshan-center",
-      "relatedElementKey": "liangzhu-ancient-city",
-      "kind": "组成",
-      "explanation": "莫角山台地是良渚古城宫殿区的重要组成部分。"
-    },
-    {
-      "elementKey": "liangzhu-ancient-city",
-      "relatedElementKey": "mojiaoshan-center",
-      "kind": "位于",
-      "explanation": "莫角山位于古城内城中心，是宫殿区的所在。"
-    },
-    {
-      "elementKey": "mojiaoshan-center",
-      "relatedElementKey": "site-park",
-      "kind": "位于",
-      "explanation": "莫角山台地位于良渚古城遗址公园的核心区域。"
-    },
-    {
-      "elementKey": "site-park",
-      "relatedElementKey": "mojiaoshan-center",
-      "kind": "体现",
-      "explanation": "遗址公园让莫角山这座权力中心成为可亲历的现场。"
-    },
-    {
-      "elementKey": "mojiaoshan-center",
-      "relatedElementKey": "fanshan-cemetery",
-      "kind": "体现",
-      "explanation": "莫角山的政治权力，体现在反山王陵的玉器随葬中。"
-    },
-    {
-      "elementKey": "fanshan-cemetery",
-      "relatedElementKey": "mojiaoshan-center",
-      "kind": "位于",
-      "explanation": "反山贵族墓地邻近莫角山，同属良渚权力核心区。"
-    },
-    {
-      "elementKey": "liangzhu-ancient-city",
-      "relatedElementKey": "liangzhu-water-system",
-      "kind": "组成",
-      "explanation": "外围水利系统是良渚古城整体营建的重要组成。"
-    },
-    {
-      "elementKey": "liangzhu-water-system",
-      "relatedElementKey": "liangzhu-ancient-city",
-      "kind": "位于",
-      "explanation": "水利系统位于古城外围，拱卫着城墙与内城。"
-    },
-    {
-      "elementKey": "liangzhu-ancient-city",
-      "relatedElementKey": "world-heritage-status",
-      "kind": "体现",
-      "explanation": "古城的完整营建，是良渚入选世界遗产的核心见证。"
-    },
-    {
-      "elementKey": "world-heritage-status",
-      "relatedElementKey": "liangzhu-ancient-city",
-      "kind": "象征",
-      "explanation": "世界遗产身份，象征古城作为文明实证的地位。"
-    },
-    {
-      "elementKey": "liangzhu-water-system",
-      "relatedElementKey": "rice-agriculture",
-      "kind": "用于",
-      "explanation": "水利系统用于灌溉稻田，支撑集约式稻作农业。"
-    },
-    {
-      "elementKey": "rice-agriculture",
-      "relatedElementKey": "liangzhu-water-system",
-      "kind": "产生于",
-      "explanation": "稻作的规模化催生治水需求，水利系统由此营建。"
-    },
-    {
-      "elementKey": "liangzhu-water-system",
-      "relatedElementKey": "world-heritage-status",
-      "kind": "体现",
-      "explanation": "外围水利系统体现良渚作为早期国家的组织能力。"
-    },
-    {
-      "elementKey": "world-heritage-status",
-      "relatedElementKey": "liangzhu-water-system",
-      "kind": "解释",
-      "explanation": "世界遗产认证，佐证了良渚水利工程的历史价值。"
-    },
-    {
-      "elementKey": "liangzhu-water-system",
-      "relatedElementKey": "liangzhu-society",
-      "kind": "体现",
-      "explanation": "集体治水的营建，体现良渚社会的高度组织动员。"
-    },
-    {
-      "elementKey": "liangzhu-society",
-      "relatedElementKey": "liangzhu-water-system",
-      "kind": "产生于",
-      "explanation": "良渚复杂社会因应集体合作治水的需求而产生。"
-    },
-    {
-      "elementKey": "fanshan-cemetery",
-      "relatedElementKey": "yaoshan-altar",
-      "kind": "相似于",
-      "explanation": "反山与瑶山墓地，在用玉制度与性质上十分相似。"
-    },
-    {
-      "elementKey": "yaoshan-altar",
-      "relatedElementKey": "fanshan-cemetery",
-      "kind": "组成",
-      "explanation": "瑶山与反山同列良渚最高等级的王陵墓地。"
-    },
-    {
-      "elementKey": "fanshan-cemetery",
-      "relatedElementKey": "jade-cong-wang",
-      "kind": "产生于",
-      "explanation": "玉琮王出土于反山第12号贵族墓葬。"
-    },
-    {
-      "elementKey": "jade-cong-wang",
-      "relatedElementKey": "fanshan-cemetery",
-      "kind": "位于",
-      "explanation": "玉琮王出自反山王陵，是最高等级的随葬品。"
-    },
-    {
-      "elementKey": "fanshan-cemetery",
-      "relatedElementKey": "site-park",
-      "kind": "位于",
-      "explanation": "反山贵族墓地位于良渚古城遗址公园内。"
-    },
-    {
-      "elementKey": "site-park",
-      "relatedElementKey": "fanshan-cemetery",
-      "kind": "体现",
-      "explanation": "遗址公园让反山王陵成为可见可走的考古现场。"
-    },
-    {
-      "elementKey": "yaoshan-altar",
-      "relatedElementKey": "liangzhu-society",
-      "kind": "受规制于",
-      "explanation": "瑶山祭坛的祭祀与葬制，受良渚神权体制的规制。"
-    },
-    {
-      "elementKey": "liangzhu-society",
-      "relatedElementKey": "yaoshan-altar",
-      "kind": "体现",
-      "explanation": "良渚的神权体制，在瑶山祭坛中体现得最为集中。"
-    },
-    {
-      "elementKey": "yaoshan-altar",
-      "relatedElementKey": "god-man-beast-mask",
-      "kind": "体现",
-      "explanation": "瑶山祭坛的神权色彩，与兽面纹的神灵意象呼应。"
-    },
-    {
-      "elementKey": "god-man-beast-mask",
-      "relatedElementKey": "yaoshan-altar",
-      "kind": "位于",
-      "explanation": "兽面纹玉器大量出土于瑶山等祭祀遗址中。"
-    },
-    {
-      "elementKey": "jade-cong-wang",
-      "relatedElementKey": "jade-cong-ritual",
-      "kind": "体现",
-      "explanation": "玉琮王是琮作为沟通天地礼器的极致体现。"
-    },
-    {
-      "elementKey": "jade-cong-ritual",
-      "relatedElementKey": "jade-cong-wang",
-      "kind": "解释",
-      "explanation": "琮的礼器内涵，解释了玉琮王为何贵为琮王。"
-    },
-    {
-      "elementKey": "jade-cong-wang",
-      "relatedElementKey": "liangzhu-museum",
-      "kind": "位于",
-      "explanation": "玉琮王在良渚博物院的展厅中陈列展出。"
-    },
-    {
-      "elementKey": "liangzhu-museum",
-      "relatedElementKey": "jade-cong-wang",
-      "kind": "体现",
-      "explanation": "博物院以玉琮王为核心，展现良渚玉礼体系。"
-    },
-    {
-      "elementKey": "jade-cong-wang",
-      "relatedElementKey": "liangzhu-in-zhejiang-museum",
-      "kind": "位于",
-      "explanation": "玉琮王是浙博《浙江一万年》陈列的重要展品。"
-    },
-    {
-      "elementKey": "liangzhu-in-zhejiang-museum",
-      "relatedElementKey": "jade-cong-wang",
-      "kind": "体现",
-      "explanation": "浙博以玉琮王开篇，体现浙江最早的文明线索。"
-    },
-    {
-      "elementKey": "jade-cong-ritual",
-      "relatedElementKey": "jade-bi",
-      "kind": "相似于",
-      "explanation": "琮与璧同为良渚祭天礼地的核心礼器。"
-    },
-    {
-      "elementKey": "jade-bi",
-      "relatedElementKey": "jade-cong-ritual",
-      "kind": "组成",
-      "explanation": "玉璧常与玉琮配合，组成成套的随葬礼器。"
-    },
-    {
-      "elementKey": "jade-cong-ritual",
-      "relatedElementKey": "jade-crafting",
-      "kind": "制作采用",
-      "explanation": "玉琮的制作采用良渚精湛的阴线雕琢工艺。"
-    },
-    {
-      "elementKey": "jade-crafting",
-      "relatedElementKey": "jade-cong-ritual",
-      "kind": "解释",
-      "explanation": "良渚制玉工艺，解释了玉琮兽面纹精雕的由来。"
-    },
-    {
-      "elementKey": "jade-bi",
-      "relatedElementKey": "jade-yue",
-      "kind": "相似于",
-      "explanation": "玉璧与玉钺同属良渚重要的权威玉器。"
-    },
-    {
-      "elementKey": "jade-yue",
-      "relatedElementKey": "jade-bi",
-      "kind": "组成",
-      "explanation": "玉钺常与玉琮、玉璧一同出现在大墓随葬中。"
-    },
-    {
-      "elementKey": "jade-yue",
-      "relatedElementKey": "liangzhu-society",
-      "kind": "象征",
-      "explanation": "玉钺象征军权与王权，对应社会权力的分化。"
-    },
-    {
-      "elementKey": "liangzhu-society",
-      "relatedElementKey": "jade-yue",
-      "kind": "体现",
-      "explanation": "军权与神权并行，体现在玉钺与玉琮的权力组合中。"
-    },
-    {
-      "elementKey": "jade-crafting",
-      "relatedElementKey": "god-man-beast-mask",
-      "kind": "制作采用",
-      "explanation": "神人兽面纹的制作采用繁复的阴线雕琢技术。"
-    },
-    {
-      "elementKey": "god-man-beast-mask",
-      "relatedElementKey": "jade-crafting",
-      "kind": "体现",
-      "explanation": "兽面纹的精工细刻，体现良渚玉器工艺的极致。"
-    },
-    {
-      "elementKey": "jade-crafting",
-      "relatedElementKey": "liangzhu-symbols",
-      "kind": "解释",
-      "explanation": "玉器作坊的技艺，解释了器物刻符的工艺来源。"
-    },
-    {
-      "elementKey": "liangzhu-symbols",
-      "relatedElementKey": "jade-crafting",
-      "kind": "制作采用",
-      "explanation": "原始文字符号的制作采用与玉器相同的刻划手法。"
-    },
-    {
-      "elementKey": "liangzhu-pottery",
-      "relatedElementKey": "rice-agriculture",
-      "kind": "用于",
-      "explanation": "陶器用于盛放稻米等日常饮食，伴随稻作生活。"
-    },
-    {
-      "elementKey": "rice-agriculture",
-      "relatedElementKey": "liangzhu-pottery",
-      "kind": "受到影响",
-      "explanation": "稻作农业的发展，影响到陶器的器形与需求。"
-    },
-    {
-      "elementKey": "liangzhu-pottery",
-      "relatedElementKey": "hemudu-comparison",
-      "kind": "相似于",
-      "explanation": "良渚陶器与河姆渡陶器同为浙江新石器遗物。"
-    },
-    {
-      "elementKey": "hemudu-comparison",
-      "relatedElementKey": "liangzhu-pottery",
-      "kind": "解释",
-      "explanation": "与河姆渡对照，可解释良渚陶器工艺的进步。"
-    },
-    {
-      "elementKey": "silk-and-weaving",
-      "relatedElementKey": "rice-agriculture",
-      "kind": "产生于",
-      "explanation": "丝帛纺织与稻作，同属良渚多样的经济生活。"
-    },
-    {
-      "elementKey": "rice-agriculture",
-      "relatedElementKey": "silk-and-weaving",
-      "kind": "组成",
-      "explanation": "丝帛与稻作、家畜饲养共同组成良渚的经济生活。"
-    },
-    {
-      "elementKey": "silk-and-weaving",
-      "relatedElementKey": "hemudu-comparison",
-      "kind": "相似于",
-      "explanation": "钱山漾丝帛与河姆渡遗存同证江南纺织源流。"
-    },
-    {
-      "elementKey": "hemudu-comparison",
-      "relatedElementKey": "silk-and-weaving",
-      "kind": "解释",
-      "explanation": "以河姆渡为参照，可解释江南养蚕织丝的传统。"
-    },
-    {
-      "elementKey": "liangzhu-symbols",
-      "relatedElementKey": "god-man-beast-mask",
-      "kind": "产生于",
-      "explanation": "刻符与兽面纹，共同生长于良渚的装饰传统。"
-    },
-    {
-      "elementKey": "god-man-beast-mask",
-      "relatedElementKey": "liangzhu-symbols",
-      "kind": "制作采用",
-      "explanation": "兽面纹与刻符的制作采用相近的雕刻手法。"
-    },
-    {
-      "elementKey": "shi-xingeng-discovery",
-      "relatedElementKey": "liangzhu-museum",
-      "kind": "产生于",
-      "explanation": "良渚博物院的研究与陈列，始于施昕更的发现。"
-    },
-    {
-      "elementKey": "liangzhu-museum",
-      "relatedElementKey": "shi-xingeng-discovery",
-      "kind": "体现",
-      "explanation": "博物院发现求真展厅，体现施昕更的发掘历程。"
-    },
-    {
-      "elementKey": "liangzhu-museum",
-      "relatedElementKey": "site-park",
-      "kind": "相似于",
-      "explanation": "博物院与遗址公园同为了解良渚文化的场所。"
-    },
-    {
-      "elementKey": "site-park",
-      "relatedElementKey": "liangzhu-museum",
-      "kind": "组成",
-      "explanation": "遗址公园与博物院互补，组成完整的观展路线。"
-    },
-    {
-      "elementKey": "liangzhu-museum",
-      "relatedElementKey": "liangzhu-in-zhejiang-museum",
-      "kind": "相似于",
-      "explanation": "良渚博物院与浙博都系统展出良渚玉器。"
-    },
-    {
-      "elementKey": "liangzhu-in-zhejiang-museum",
-      "relatedElementKey": "liangzhu-museum",
-      "kind": "理解前先懂",
-      "explanation": "先逛良渚博物院，再在浙博中认出同源玉器体系。"
-    },
-    {
-      "elementKey": "site-park",
-      "relatedElementKey": "world-heritage-status",
-      "kind": "体现",
-      "explanation": "遗址公园正是世界遗产良渚古城的现场呈现。"
-    },
-    {
-      "elementKey": "world-heritage-status",
-      "relatedElementKey": "site-park",
-      "kind": "解释",
-      "explanation": "世界遗产认证，解释了遗址公园的价值所在。"
-    },
-    {
-      "elementKey": "hemudu-comparison",
-      "relatedElementKey": "contemporary-cultures",
-      "kind": "相似于",
-      "explanation": "河姆渡的比较，可延伸到同时代的满天星光。"
-    },
-    {
-      "elementKey": "contemporary-cultures",
-      "relatedElementKey": "hemudu-comparison",
-      "kind": "解释",
-      "explanation": "与其他文化对照，可解释良渚文明的多源共生。"
-    }
-  ],
   "attractions": [
     {
       "key": "liangzhu-museum",
       "name": "良渚博物院"
     },
     {
-      "key": "liangzhu-site-park",
+      "key": "site-park",
       "name": "良渚古城遗址公园"
     },
     {
-      "key": "yaoshan-site-park",
+      "key": "yaoshan-altar",
       "name": "瑶山遗址公园"
     },
     {
@@ -1197,10 +689,266 @@
     {
       "key": "fanshan-cemetery",
       "name": "反山贵族墓地"
+    }
+  ],
+  "relations": [
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "理解前先懂",
+      "explanation": "先懂良渚的年代分期，才能理解其文化总貌。"
     },
     {
-      "key": "yaoshan-altar",
-      "name": "瑶山祭坛与墓葬"
+      "elementKey": "liangzhu-distribution",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "理解前先懂",
+      "explanation": "了解环太湖的地理分布，是理解良渚文化面貌的空间前提。"
+    },
+    {
+      "elementKey": "liangzhu-society",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "理解前先懂",
+      "explanation": "理解良渚的文明高度，先要懂得其神权与社会分化。"
+    },
+    {
+      "elementKey": "zhonghua-civilization",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "理解前先懂",
+      "explanation": "把良渚放进中华文明五千年的探源视野，才能理解『实证五千年』的分量。"
+    },
+    {
+      "elementKey": "liangzhu-culture-overview",
+      "relatedElementKey": "hemudu-culture",
+      "kind": "解释",
+      "explanation": "河姆渡更早的稻作与定居传统，解释了良渚为何能在环太湖兴起。"
+    },
+    {
+      "elementKey": "world-heritage-status",
+      "relatedElementKey": "liangzhu-culture-overview",
+      "kind": "象征",
+      "explanation": "世界遗产身份，象征良渚作为中华文明五千年实证的地位。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "shi-xingeng-discovery",
+      "kind": "解释",
+      "explanation": "良渚年代的确定，要从施昕更1936年的发掘讲起。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "contemporary-cultures",
+      "kind": "解释",
+      "explanation": "以年代对照可理解：良渚与红山等文化同处满天星斗的共时格局。"
+    },
+    {
+      "elementKey": "liangzhu-chronology",
+      "relatedElementKey": "xia-dynasty",
+      "kind": "相似于",
+      "explanation": "良渚晚期与传说中的夏代年代相近，可对照理解早期国家的形成。"
+    },
+    {
+      "elementKey": "rice-agriculture",
+      "relatedElementKey": "liangzhu-chronology",
+      "kind": "解释",
+      "explanation": "稻作农业的成熟，是判断良渚文明水平的重要依据。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "liangzhu-distribution",
+      "kind": "位于",
+      "explanation": "莫角山台地位于良渚遗址群的中心位置。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "liangzhu-ancient-city",
+      "kind": "位于",
+      "explanation": "莫角山位于古城内城中心，是宫殿区所在。"
+    },
+    {
+      "elementKey": "liangzhu-ancient-city",
+      "relatedElementKey": "liangzhu-water-system",
+      "kind": "组成",
+      "explanation": "外围水利系统是良渚古城整体营建的重要组成。"
+    },
+    {
+      "elementKey": "mojiaoshan-center",
+      "relatedElementKey": "site-park",
+      "kind": "位于",
+      "explanation": "莫角山台地位于良渚古城遗址公园的核心区域。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "用于",
+      "explanation": "水利系统用于灌溉稻田，支撑集约式稻作农业。"
+    },
+    {
+      "elementKey": "liangzhu-water-system",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "体现",
+      "explanation": "集体治水的营建，体现良渚社会高度的组织动员能力。"
+    },
+    {
+      "elementKey": "liangzhu-ancient-city",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "体现",
+      "explanation": "古城与外围水利的完整营建，是良渚入选世界遗产的核心见证。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "mojiaoshan-center",
+      "kind": "位于",
+      "explanation": "反山贵族墓地邻近莫角山，同属良渚权力核心区。"
+    },
+    {
+      "elementKey": "fanshan-cemetery",
+      "relatedElementKey": "site-park",
+      "kind": "位于",
+      "explanation": "反山贵族墓地位于良渚古城遗址公园内。"
+    },
+    {
+      "elementKey": "yaoshan-altar",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "相似于",
+      "explanation": "瑶山与反山同列良渚最高等级的王陵墓地，用玉制度相近。"
+    },
+    {
+      "elementKey": "yaoshan-altar",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "受规制于",
+      "explanation": "瑶山祭坛的祭祀与葬制，受良渚神权体制的规制。"
+    },
+    {
+      "elementKey": "god-man-beast-mask",
+      "relatedElementKey": "yaoshan-altar",
+      "kind": "位于",
+      "explanation": "兽面纹玉器大量出土于瑶山等祭祀遗址中。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "fanshan-cemetery",
+      "kind": "产生于",
+      "explanation": "玉琮王出土于反山第12号贵族墓葬。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "jade-cong-ritual",
+      "kind": "体现",
+      "explanation": "玉琮王是琮作为沟通天地礼器的极致体现。"
+    },
+    {
+      "elementKey": "jade-cong-ritual",
+      "relatedElementKey": "jade-crafting",
+      "kind": "制作采用",
+      "explanation": "玉琮的制作采用良渚精湛的阴线雕琢工艺。"
+    },
+    {
+      "elementKey": "god-man-beast-mask",
+      "relatedElementKey": "jade-crafting",
+      "kind": "制作采用",
+      "explanation": "神人兽面纹以繁复的阴线雕琢技术制成。"
+    },
+    {
+      "elementKey": "liangzhu-symbols",
+      "relatedElementKey": "jade-crafting",
+      "kind": "制作采用",
+      "explanation": "原始刻符采用与玉器相同的刻划手法。"
+    },
+    {
+      "elementKey": "jade-cong-ritual",
+      "relatedElementKey": "jade-bi",
+      "kind": "相似于",
+      "explanation": "琮与璧同为良渚祭天礼地的核心礼器，常成套随葬。"
+    },
+    {
+      "elementKey": "jade-bi",
+      "relatedElementKey": "jade-yue",
+      "kind": "相似于",
+      "explanation": "璧与钺同属良渚权威玉器，常同出于大墓随葬。"
+    },
+    {
+      "elementKey": "jade-yue",
+      "relatedElementKey": "liangzhu-society",
+      "kind": "象征",
+      "explanation": "玉钺象征军权与王权，对应社会权力的分化。"
+    },
+    {
+      "elementKey": "liangzhu-symbols",
+      "relatedElementKey": "god-man-beast-mask",
+      "kind": "相似于",
+      "explanation": "刻符与兽面纹同生于良渚的装饰与信仰传统。"
+    },
+    {
+      "elementKey": "liangzhu-pottery",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "用于",
+      "explanation": "陶器用于盛放稻米等日常饮食，伴随稻作生活。"
+    },
+    {
+      "elementKey": "liangzhu-pottery",
+      "relatedElementKey": "hemudu-culture",
+      "kind": "相似于",
+      "explanation": "良渚陶器与河姆渡陶器同为浙江新石器遗物，可对照工艺进步。"
+    },
+    {
+      "elementKey": "silk-and-weaving",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "相似于",
+      "explanation": "丝帛纺织与稻作同属良渚多样的经济生活。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "位于",
+      "explanation": "玉琮王在良渚博物院的展厅中陈列展出。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "no-overseas-treasures",
+      "kind": "受规制于",
+      "explanation": "玉琮王列入禁止出国（境）展览文物名录，只能在境内展出。"
+    },
+    {
+      "elementKey": "jade-cong-wang",
+      "relatedElementKey": "liangzhu-in-zhejiang-museum",
+      "kind": "位于",
+      "explanation": "玉琮王是浙博之江馆区《浙江一万年》陈列的重要展品。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "shi-xingeng-discovery",
+      "kind": "解释",
+      "explanation": "良渚博物院的学术根基，要追溯到施昕更的首次发掘与《良渚》报告。"
+    },
+    {
+      "elementKey": "liangzhu-museum",
+      "relatedElementKey": "site-park",
+      "kind": "相似于",
+      "explanation": "博物院与遗址公园互补，组成完整的良渚观展路线。"
+    },
+    {
+      "elementKey": "liangzhu-in-zhejiang-museum",
+      "relatedElementKey": "liangzhu-museum",
+      "kind": "理解前先懂",
+      "explanation": "先逛良渚博物院建立整体认识，再在浙博中认出同源玉器体系。"
+    },
+    {
+      "elementKey": "liangzhu-in-zhejiang-museum",
+      "relatedElementKey": "zhijiang-campus",
+      "kind": "位于",
+      "explanation": "浙博里的良渚位于之江馆区《浙江一万年》陈列。"
+    },
+    {
+      "elementKey": "site-park",
+      "relatedElementKey": "world-heritage-status",
+      "kind": "体现",
+      "explanation": "遗址公园正是世界遗产良渚古城的现场呈现。"
+    },
+    {
+      "elementKey": "contemporary-cultures",
+      "relatedElementKey": "hemudu-culture",
+      "kind": "组成",
+      "explanation": "河姆渡是与良渚前后相继的江南文明星光之一。"
     }
   ],
   "introductions": [
@@ -1429,7 +1177,7 @@
         ]
       },
       "culturalElementKey": "site-park",
-      "attractionKey": "liangzhu-site-park",
+      "attractionKey": "site-park",
       "latitude": 30.39666667,
       "longitude": 119.98527778
     },
@@ -1450,7 +1198,7 @@
         ]
       },
       "culturalElementKey": "yaoshan-altar",
-      "attractionKey": "yaoshan-site-park",
+      "attractionKey": "yaoshan-altar",
       "latitude": 30.371,
       "longitude": 119.936
     }
@@ -1510,7 +1258,7 @@
         "liangzhu-pottery",
         "silk-and-weaving",
         "liangzhu-symbols",
-        "hemudu-comparison",
+        "hemudu-culture",
         "contemporary-cultures",
         "liangzhu-culture-overview"
       ],
@@ -2072,30 +1820,6 @@
             ]
           }
         },
-        "hemudu-comparison": {
-          "name": "Liangzhu and Hemudu",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "The Hemudu and Liangzhu cultures are both major Neolithic archaeological cultures of Zhejiang, but they differ in date: Hemudu flourished around 7000–6000 years ago and Liangzhu around 5300–4000 years ago, following one another in sequence."
-              },
-              {
-                "type": "paragraph",
-                "text": "Hemudu is represented by cultivated rice, stilt-house architecture, and the earliest wooden ornaments and lacquerware in China; stone tools are comparatively few, with wooden and bone implements more common. Liangzhu, by contrast, is represented by jade ritual objects, city walls and water management, stone-plow rice farming and proto-writing, and shows specialized division of labour and class differentiation."
-              },
-              {
-                "type": "paragraph",
-                "text": "If Hemudu is the 'foundation of rice agriculture', then Liangzhu is 'rice agriculture combined with royal power'. In farming tradition and way of life, the two form an unbroken thread of development in the Jiangnan region."
-              },
-              {
-                "type": "paragraph",
-                "text": "When you see stone plows and jades in the Liangzhu galleries, imagine the plainer bone spades and lacquerware of the Hemudu period — and the arc from 'a homeland of rice' to 'a city-state of rice' runs through your mind."
-              }
-            ]
-          }
-        },
         "contemporary-cultures": {
           "name": "The Stars of Chinese Civilization in Liangzhu's Time",
           "introduction": {
@@ -2149,10 +1873,10 @@
         "liangzhu-museum": {
           "name": "Liangzhu Museum"
         },
-        "liangzhu-site-park": {
+        "site-park": {
           "name": "Liangzhu Ancient City Archaeological Site Park"
         },
-        "yaoshan-site-park": {
+        "yaoshan-altar": {
           "name": "Yaoshan Archaeological Site Park"
         }
       },
@@ -2279,9 +2003,5 @@
         }
       }
     }
-  },
-  "manifest": {
-    "packVersion": "liangzhu-v2",
-    "generatedAt": "2026-08-05T08:01:46Z"
   }
 }

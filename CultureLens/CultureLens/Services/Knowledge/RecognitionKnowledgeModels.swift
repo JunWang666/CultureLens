@@ -110,7 +110,11 @@ nonisolated struct RecognitionElement: Sendable {
 
 /// A bundled-pack attraction as a map point ("所有兴趣点"足迹地图), aggregated
 /// from the pack's on-site introduction records which carry the coordinates.
+/// Identity is per physical location: the same attraction key at different
+/// sites produces separate points.
 nonisolated struct AttractionPoint: Sendable, Hashable, Identifiable {
+  /// Namespaced deterministic UUID (attraction key + rounded coordinates).
+  let id: UUID
   /// Attraction key from the pack.
   let key: String
   let name: String
@@ -119,8 +123,6 @@ nonisolated struct AttractionPoint: Sendable, Hashable, Identifiable {
   let latitude: Double
   let longitude: Double
 
-  var id: String { key }
-
   init(
     key: String,
     name: String,
@@ -128,6 +130,11 @@ nonisolated struct AttractionPoint: Sendable, Hashable, Identifiable {
     latitude: Double,
     longitude: Double
   ) {
+    self.id = DeterministicID.attractionPoint(
+      key: key,
+      latitude: latitude,
+      longitude: longitude
+    )
     self.key = key
     self.name = name
     self.culturalElementKey = culturalElementKey
@@ -143,6 +150,10 @@ nonisolated struct AttractionCandidate: Sendable {
   let summary: String
   let distanceMeters: Double
   let sources: [KnowledgePack.Source]
+
+  /// Attraction-namespace identity; never collides with the bound element's
+  /// `DeterministicID.culturalElement` even when both share the same key.
+  var id: UUID { DeterministicID.attraction(key) }
 
   init(
     key: String,

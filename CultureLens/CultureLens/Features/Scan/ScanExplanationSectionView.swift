@@ -1,14 +1,12 @@
 import SwiftUI
 
 /// 扫描结果与候选详情共用的 AI 文化背景讲解区块：
-/// 负责流式加载、骨架屏、断流保留与失败重试。演示模式使用本地内容，
-/// 不请求网关。
+/// 负责流式加载、骨架屏、断流保留与失败重试。演示模式不请求网关，
+/// 也不显示任何本地拼凑的讲解——没有 LLM 请求就没有这个区块。
 struct ScanExplanationSectionView: View {
   let result: RecognitionResult
   let isDemo: Bool
   let siteContext: String?
-  /// 演示模式下的本地讲解 Markdown。
-  let demoMarkdown: String
   /// 讲解加载成功后的回调（例如记录「接触」等级）。
   var onExplained: (() -> Void)? = nil
 
@@ -18,15 +16,13 @@ struct ScanExplanationSectionView: View {
   @State private var knowledgeContextSummary: LocalizedStringKey = "从你的文化图谱调整解释深度"
   private let explanationService = CultureExplanationService.live()
 
-  private var object: CultureObject {
-    result.object
-  }
-
   var body: some View {
-    content
-      .task(id: result.id) {
-        await loadExplanation()
-      }
+    if !isDemo {
+      content
+        .task(id: result.id) {
+          await loadExplanation()
+        }
+    }
   }
 
   @ViewBuilder
@@ -102,24 +98,6 @@ struct ScanExplanationSectionView: View {
 
     guard let explanationService else {
       explanationState = .failed(String(localized: "讲解服务暂不可用。"))
-      return
-    }
-    // Demo / sample recognition should not call the live chat gateway.
-    if isDemo {
-      explanationState = .loaded(
-        PersonalizedExplanation(
-          markdown: demoMarkdown,
-          citations: [
-            KnowledgeCitation(
-              key: object.culturalElementKey ?? object.id.uuidString,
-              name: object.canonicalName,
-              fragment: object.summary,
-              sources: object.sources
-            )
-          ],
-          modelIdentifier: "local-demo"
-        )
-      )
       return
     }
 

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 /// User-facing content language for UI chrome and LLM output.
-enum AppLanguage: String, CaseIterable, Identifiable, Codable, Sendable {
+nonisolated enum AppLanguage: String, CaseIterable, Identifiable, Codable, Sendable {
   case zhHans = "zh-Hans"
   case english = "en"
 
@@ -45,7 +45,7 @@ enum AppLanguage: String, CaseIterable, Identifiable, Codable, Sendable {
 }
 
 /// Persisted language preference. `.system` follows the device locale.
-enum AppLanguagePreference: String, CaseIterable, Identifiable, Codable, Sendable {
+nonisolated enum AppLanguagePreference: String, CaseIterable, Identifiable, Codable, Sendable {
   case system
   case zhHans = "zh-Hans"
   case english = "en"
@@ -78,7 +78,7 @@ enum AppLanguagePreference: String, CaseIterable, Identifiable, Codable, Sendabl
 @Observable
 @MainActor
 final class AppLanguageStore {
-  static let preferenceKey = "culturelens.appLanguagePreference"
+  nonisolated static let preferenceKey = "culturelens.appLanguagePreference"
 
   var preference: AppLanguagePreference {
     didSet {

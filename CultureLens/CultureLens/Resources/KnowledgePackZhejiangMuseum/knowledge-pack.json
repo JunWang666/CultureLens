@@ -1,5 +1,5 @@
 {
-  "version": "zhejiang-museum-v3",
+  "version": "zhejiang-museum-v4",
   "source_language": "zh-Hans",
   "elements": [
     {
@@ -208,111 +208,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
-    },
-    {
-      "key": "liangzhu-culture",
-      "name": "良渚文化",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "良渚文化距今5300年至4000年，是中国新石器时代考古学文化之一，出现并发展于长江下游环太湖地区，共发现500多处遗址，以良渚遗址附近的莫角山为中心区。"
-          },
-          {
-            "type": "paragraph",
-            "text": "良渚文化最主要的特征是玉器的使用和随葬，包括大件的玉琮、玉璧、玉钺；其中玉琮是工艺最精、最具权威性的玉器，往往刻有精致的兽面纹，被视为神灵的图象，玉钺则是军权、王权的象征。良渚先民还善用石犁耕作，稻米开始成为主要粮食来源，并有原始文字。"
-          },
-          {
-            "type": "paragraph",
-            "text": "良渚文化的政治体为酋邦，也有学者认为已出现国家雏形；它能动员大量劳动力，建造大型祭祀场所、城墙及防洪土墙，社会成员地位分化，形成贵族和普通平民阶层。良渚玉器上的兽面纹与商代青铜器的饕餮纹有许多共同特点，学者李学勤认为虽不是直接承袭，却有密切的联系。"
-          },
-          {
-            "type": "paragraph",
-            "text": "看良渚文物时，把目光落在玉琮、玉璧、玉钺的形制与兽面纹上，就能从一件件玉器里读出一个擅长组织劳动力、也崇尚玉礼的史前社会。"
-          }
-        ]
-      },
-      "conceptKind": "历史"
-    },
-    {
-      "key": "liangzhu-cong-wang",
-      "name": "良渚玉琮王",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "良渚玉琮王出自反山12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，被学界视为“琮王”，也是浙江省博物馆十大镇馆之宝之一。"
-          },
-          {
-            "type": "paragraph",
-            "text": "反山12号墓是良渚贵族墓地中最高等级的墓葬之一；除玉琮王外，该墓还出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米，头尾两端安有玉件，是军权、王权的象征。反山20号墓随葬玉器总计达547件，应为最高首领的墓葬。"
-          },
-          {
-            "type": "paragraph",
-            "text": "琮是用于祭地的礼器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地。良渚玉材出自江苏溧阳天目山余脉小梅岭的透闪石矿，而这样的玉琮王如今列入禁止出境（境）展览文物，展于之江馆区《浙江一万年》陈列。"
-          },
-          {
-            "type": "paragraph",
-            "text": "看玉琮王时，先看它外方内圆、射出的四个角，再看每面刻的兽面纹，就能明白它既是良渚工艺的极致，也是一件沟通天地的礼器。"
-          }
-        ]
-      },
-      "conceptKind": "技法"
-    },
-    {
-      "key": "liangzhu-heritage",
-      "name": "良渚古城遗址与世界遗产",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "良渚遗址位于中国浙江省杭州市余杭区良渚街道、瓶窑镇，部分位于湖州市德清县下渚湖街道，是以良渚古城遗址为中心的遗址群，总面积34平方公里，年代为公元前3300年至公元前2000年。"
-          },
-          {
-            "type": "paragraph",
-            "text": "良渚古城遗址是良渚文化最重要、最具代表性的遗址，被誉为“中华第一城”或“中华五千年文明实证”；2019年7月6日，良渚古城遗址因符合基准（iii）、（iv）被列入世界文化遗产。"
-          },
-          {
-            "type": "paragraph",
-            "text": "城址由宫殿区、内城与外城组成，占地面积881.45公顷；外围水利系统包括谷口高坝、平原低坝与山前长堤，山前长堤又称塘山遗址，全长约5公里。良渚遗址于1994年列入中国申报世界文化遗产预备名单，1996年被列为第四批全国重点文物保护单位，2010年10月9日由国家文物局公布为首批国家考古遗址公园之一。"
-          },
-          {
-            "type": "paragraph",
-            "text": "在博物馆里看到的玉琮、玉璧，很多都来自这片被列入世界遗产的遗址群。看展时把这些玉器与“良渚古城”四个字连起来，就能从一件件文物跳到那片五千年文明实证的水乡城邦。"
-          }
-        ]
-      },
-      "conceptKind": "地域"
-    },
-    {
-      "key": "cong-ritual-jade",
-      "name": "琮：祭地的礼器",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "琮是中国古代用于祭祀的玉质筒状物，外型方内洞圆，最早见于安徽潜山薛家岗第三期文化，距今约5100年。"
-          },
-          {
-            "type": "paragraph",
-            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”。"
-          },
-          {
-            "type": "paragraph",
-            "text": "有意思的是，乾隆皇帝时期出土的玉琮还无人知晓用途，乾隆自行考证认为它是古人搬运重物用的配重品，取名“杠头”并加装铜内胆作为笔筒、花瓶使用，直到乾隆去世90多年后才考证出它是礼器琮。"
-          },
-          {
-            "type": "paragraph",
-            "text": "再看展厅里的良渚玉琮，先记住“外方内圆”四个字：方为地、圆为天，一件琮就把古人对天地秩序的想象握在了手里。"
-          }
-        ]
-      },
-      "conceptKind": "功能"
+      "conceptKind": "基础知识"
     },
     {
       "key": "yue-bronze-swords",
@@ -364,7 +260,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "wuyue-state",
@@ -442,7 +338,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "yue-kiln",
@@ -520,7 +416,7 @@
           }
         ]
       },
-      "conceptKind": "审美"
+      "conceptKind": "基础知识"
     },
     {
       "key": "southern-song-guan-ware",
@@ -572,7 +468,7 @@
           }
         ]
       },
-      "conceptKind": "审美"
+      "conceptKind": "基础知识"
     },
     {
       "key": "huang-gongwang",
@@ -728,7 +624,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "qi-lacquer-donation",
@@ -802,33 +698,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
-    },
-    {
-      "key": "shi-xingeng-discovery",
-      "name": "施昕更与良渚的发现",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "良渚文化的发现，与浙江省博物馆（当时称西湖博物馆）的一位绘图员施昕更密切相关。1936年12月，施昕更在余杭良渚镇考古，发掘出“良渚文化”遗址。"
-          },
-          {
-            "type": "paragraph",
-            "text": "1936年，施昕更在余杭良渚镇附近棋盘坟发现一两片黑色有光的陶片，同年开始在良渚镇附近发掘，发现更多黑陶和石器；1937年春，他写作《良渚》（又名《杭县第二区黑陶文化遗址的初步报告》），使良渚文化受到考古学界关注。"
-          },
-          {
-            "type": "paragraph",
-            "text": "另一史料记载，施昕更1936年12月至1937年3月间在良渚一带进行了三次试掘，发现茅庵里、棋盘坟等12处遗址；1959年，考古学家夏鼐将这一文化类型命名为“良渚文化”。"
-          },
-          {
-            "type": "paragraph",
-            "text": "看良渚玉器时，不妨想一想：这些精美玉器的起点，是一位博物馆绘图员在1936年从几片黑色陶片开始的探访——博物馆与考古，正是这样互相成就的。"
-          }
-        ]
-      },
-      "conceptKind": "人物"
+      "conceptKind": "基础知识"
     },
     {
       "key": "jiyue-bronze-house",
@@ -854,7 +724,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "caisu-mud-bodhisattva",
@@ -872,7 +742,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "hemudu-painted-pottery",
@@ -898,7 +768,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "hemudu-bone-plough",
@@ -924,7 +794,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "zhang-cheng-red-lacquer",
@@ -950,7 +820,7 @@
           }
         ]
       },
-      "conceptKind": "技法"
+      "conceptKind": "基础知识"
     },
     {
       "key": "tang-guqin-tradition",
@@ -977,620 +847,56 @@
         ]
       },
       "conceptKind": "技法"
-    }
-  ],
-  "relations": [
-    {
-      "elementKey": "asoka-pagoda",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "相似于",
-      "explanation": "鎏金银阿育王塔与彩凤鸣岐同列十大镇馆之宝，同属馆藏中最具代表性的传世重器。"
-    },
-    {
-      "elementKey": "asoka-pagoda",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "鎏金银阿育王塔是浙博十大镇馆之宝之一，共同构成馆藏最具代表性的十件文物。"
-    },
-    {
-      "elementKey": "asoka-pagoda",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "象征",
-      "explanation": "鎏金银阿育王塔出自雷峰塔地宫，象征吴越国王崇佛造塔的虔诚与传统。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "asoka-pagoda",
-      "kind": "相似于",
-      "explanation": "彩凤鸣岐与鎏金银阿育王塔都入选十大镇馆之宝，同为浙博最具代表性的镇馆重器。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "guqin-world",
-      "kind": "体现",
-      "explanation": "彩凤鸣岐是古琴艺术在浙博的实物代表，集中体现唐宋以来斫琴与琴学传统。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "相似于",
-      "explanation": "彩凤鸣岐琴面以大漆髹涂、日久生断纹，与馆藏漆器同属髹漆工艺的谱系。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "彩凤鸣岐是浙博十大镇馆之宝之一，位列馆藏最具代表性的十件文物之中。"
-    },
-    {
-      "elementKey": "caisu-mud-bodhisattva",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "受到影响",
-      "explanation": "北宋彩塑泥菩萨承续吴越崇佛造像的传统，与吴越佛教遗存一脉相承。"
-    },
-    {
-      "elementKey": "cong-ritual-jade",
-      "relatedElementKey": "liangzhu-cong-wang",
-      "kind": "体现",
-      "explanation": "琮以方地圆天的祭地礼制，在重达3500克的良渚玉琮王上得到最完整体现。"
-    },
-    {
-      "elementKey": "cong-ritual-jade",
-      "relatedElementKey": "liangzhu-heritage",
-      "kind": "产生于",
-      "explanation": "琮类玉器大量出自良渚古城遗址群，其形制与礼制扎根于良渚社会。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "huang-gongwang",
-      "kind": "产生于",
-      "explanation": "《富春山居图》是黄公望晚年所作，产生于他对富春江山水的长期观察与提炼。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "剩山图是浙博十大镇馆之宝之一，代表馆藏书画的最高水准。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "位于",
-      "explanation": "《富春山居图》的剩山图现藏于之江馆区，是馆区书画展陈中的镇馆之宝。"
-    },
-    {
-      "elementKey": "guqin-world",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "体现",
-      "explanation": "彩凤鸣岐是古琴艺术传承至今的实物代表，古琴的形制与音韵世界正体现在这张唐琴上。"
-    },
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "hemudu-double-bird",
-      "kind": "体现",
-      "explanation": "孤山馆区代表的浙博馆藏包含河姆渡文物，双鸟朝阳纹牙雕是其中最著名的线雕作品。"
-    },
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "huang-binhong",
-      "kind": "体现",
-      "explanation": "孤山馆区的书画收藏以黄宾虹捐赠作品为重要组成，体现了浙博与这位画家的渊源。"
-    },
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "zhejiang-museum-history",
-      "kind": "体现",
-      "explanation": "孤山馆区是浙博最早落成的馆区，体现并见证了浙博从西湖博物馆起步的馆史。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-double-bird",
-      "kind": "体现",
-      "explanation": "河姆渡文化的线雕工艺与鸟日崇拜，正体现在这件牙雕的太阳纹与双鸟纹中。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "liangzhu-culture",
-      "kind": "解释",
-      "explanation": "河姆渡的稻作与定居传统，解释了良渚文化为何能在环太湖一带兴起。"
-    },
-    {
-      "elementKey": "hemudu-double-bird",
-      "relatedElementKey": "gushan-campus",
-      "kind": "位于",
-      "explanation": "双鸟朝阳纹牙雕作为浙博镇馆之宝藏于馆中，孤山馆区是浙博馆藏的根基所在。"
-    },
-    {
-      "elementKey": "hemudu-double-bird",
-      "relatedElementKey": "hemudu-culture",
-      "kind": "产生于",
-      "explanation": "双鸟朝阳纹牙雕出土于河姆渡遗址，由河姆渡先民以线雕技艺制作而成。"
-    },
-    {
-      "elementKey": "hemudu-double-bird",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "双鸟朝阳纹牙雕是浙博十大镇馆之宝之一，代表河姆渡工艺的最高成就。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "gushan-campus",
-      "kind": "受到影响",
-      "explanation": "黄宾虹晚年定居杭州栖霞岭，深受西湖山水与浙博文化氛围的滋养，与孤山结缘深厚。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "huang-gongwang",
-      "kind": "相似于",
-      "explanation": "黄宾虹与黄公望同为山水画大家，一为元四家之首、一为近代巨匠，都在浙博留下名作。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "museum-collection-system",
-      "kind": "组成",
-      "explanation": "黄宾虹捐赠的五千余件作品与手稿，是浙博书画收藏的重要支柱。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "sha-menghai",
-      "kind": "相似于",
-      "explanation": "黄宾虹与沙孟海都是与浙博渊源深厚的艺文名家，一主绘画、一主书法篆刻。"
-    },
-    {
-      "elementKey": "huang-gongwang",
-      "relatedElementKey": "fuchun-shanju-tu",
-      "kind": "解释",
-      "explanation": "黄公望50岁学画、晚年入道的经历，解释了《富春山居图》沉静而苍润的笔意。"
-    },
-    {
-      "elementKey": "huang-gongwang",
-      "relatedElementKey": "huang-binhong",
-      "kind": "相似于",
-      "explanation": "黄公望与黄宾虹同为山水画大家，其名作先后入藏浙博，构成馆藏书画的两座高峰。"
-    },
-    {
-      "elementKey": "jiyue-bronze-house",
-      "relatedElementKey": "shili-hongzhuang",
-      "kind": "相似于",
-      "explanation": "伎乐铜屋凝固越人乐舞，十里红妆记录宁绍婚俗，同是浙江民间生活的写照。"
-    },
-    {
-      "elementKey": "jiyue-bronze-house",
-      "relatedElementKey": "yue-bronze-swords",
-      "kind": "制作采用",
-      "explanation": "伎乐铜屋的制作采用了越国高超的青铜铸造技术，与越剑一脉相承。"
-    },
-    {
-      "elementKey": "liangzhu-cong-wang",
-      "relatedElementKey": "cong-ritual-jade",
-      "kind": "理解前先懂",
-      "explanation": "先懂琮是外方内圆的祭地礼器，才能看懂玉琮王的形制与礼制意义。"
-    },
-    {
-      "elementKey": "liangzhu-cong-wang",
-      "relatedElementKey": "liangzhu-culture",
-      "kind": "产生于",
-      "explanation": "良渚玉琮王出自反山贵族墓地，是良渚玉礼文化最直接的代表性产物。"
-    },
-    {
-      "elementKey": "liangzhu-cong-wang",
-      "relatedElementKey": "no-overseas-treasures",
-      "kind": "受规制于",
-      "explanation": "良渚玉琮王受禁止出国（境）展览文物名录保护，只能在境内展出。"
-    },
-    {
-      "elementKey": "liangzhu-culture",
-      "relatedElementKey": "hemudu-culture",
-      "kind": "受到影响",
-      "explanation": "良渚文化的兴起，受到了更早河姆渡稻作经济与定居传统的影响。"
-    },
-    {
-      "elementKey": "liangzhu-culture",
-      "relatedElementKey": "liangzhu-cong-wang",
-      "kind": "体现",
-      "explanation": "良渚玉礼文化的最高成就，体现在重达3500克的玉琮王身上。"
-    },
-    {
-      "elementKey": "liangzhu-culture",
-      "relatedElementKey": "liangzhu-heritage",
-      "kind": "体现",
-      "explanation": "良渚文化的组织能力与玉礼制度，在良渚古城遗址的格局中得到集中体现。"
-    },
-    {
-      "elementKey": "liangzhu-culture",
-      "relatedElementKey": "shi-xingeng-discovery",
-      "kind": "产生于",
-      "explanation": "“良渚文化”这一概念的提出，产生于施昕更1936年的考古发现与后续命名。"
-    },
-    {
-      "elementKey": "liangzhu-heritage",
-      "relatedElementKey": "cong-ritual-jade",
-      "kind": "解释",
-      "explanation": "良渚古城遗址出土的大量玉琮，解释了琮作为祭地礼器的功能与地位。"
-    },
-    {
-      "elementKey": "liangzhu-heritage",
-      "relatedElementKey": "liangzhu-culture",
-      "kind": "解释",
-      "explanation": "良渚古城遗址是良渚文化最完整的现场，解释了良渚社会的组织、玉礼与水利。"
-    },
-    {
-      "elementKey": "liangzhu-heritage",
-      "relatedElementKey": "shi-xingeng-discovery",
-      "kind": "解释",
-      "explanation": "施昕更1936年的发掘让良渚遗址进入学界视野，解释了这一遗址群如何被认识。"
-    },
-    {
-      "elementKey": "longquan-boat-drip",
-      "relatedElementKey": "longquan-kiln",
-      "kind": "产生于",
-      "explanation": "舟形砚滴是龙泉窑烧造的青瓷文房器，出自龙泉窑系的制瓷传统。"
-    },
-    {
-      "elementKey": "longquan-boat-drip",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "舟形砚滴是浙博十大镇馆之宝之一，代表龙泉青瓷中文房器的最高水准。"
-    },
-    {
-      "elementKey": "longquan-kiln",
-      "relatedElementKey": "longquan-boat-drip",
-      "kind": "体现",
-      "explanation": "龙泉窑的粉青、梅子青釉色，在小巧的舟形砚滴上得到了温润的体现。"
-    },
-    {
-      "elementKey": "longquan-kiln",
-      "relatedElementKey": "yue-kiln",
-      "kind": "受到影响",
-      "explanation": "龙泉窑的青瓷传统受到了越窑的影响，是越窑衰落后浙江青瓷的又一高峰。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "huang-binhong",
-      "kind": "体现",
-      "explanation": "浙博的馆藏体系体现于黄宾虹捐赠作品这样的书画支柱上，来源多元而深厚。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "体现",
-      "explanation": "曹其镛夫妇捐赠的160件漆器是馆藏漆器门类的支柱，体现了馆藏来源的多元。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "体现",
-      "explanation": "十大镇馆之宝从十余万件馆藏中评选产生，体现了浙博收藏体系最具代表性的门类与水准。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "wu-changshuo",
-      "kind": "体现",
-      "explanation": "吴昌硕遗属捐赠的文物是浙博书画印收藏的一部分，体现了馆藏来源的多元。"
-    },
-    {
-      "elementKey": "no-overseas-treasures",
-      "relatedElementKey": "liangzhu-cong-wang",
-      "kind": "体现",
-      "explanation": "良渚玉琮王体现了禁止出国（境）展览文物名录所珍视的国宝保护价值。"
-    },
-    {
-      "elementKey": "no-overseas-treasures",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "位于",
-      "explanation": "禁止出国（境）展览的五件（组）文物全部位于之江馆区《浙江一万年》陈列中。"
-    },
-    {
-      "elementKey": "qi-lacquer-donation",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "相似于",
-      "explanation": "曹其镛夫妇捐赠的漆器与彩凤鸣岐七弦琴，同属以大漆为材的髹漆工艺谱系。"
-    },
-    {
-      "elementKey": "qi-lacquer-donation",
-      "relatedElementKey": "museum-collection-system",
-      "kind": "组成",
-      "explanation": "曹其镛夫妇捐赠的160件（组）漆器，是浙博馆藏漆器门类的重要组成。"
-    },
-    {
-      "elementKey": "qi-lacquer-donation",
-      "relatedElementKey": "shili-hongzhuang",
-      "kind": "相似于",
-      "explanation": "捐赠漆器的雕漆技艺与十里红妆的泥金彩漆，同是浙江髹漆工艺的两种面貌。"
-    },
-    {
-      "elementKey": "sha-menghai",
-      "relatedElementKey": "huang-binhong",
-      "kind": "相似于",
-      "explanation": "沙孟海与黄宾虹同是浙博渊源深厚的艺文名家，一以书法篆刻著称，一以绘画名世。"
-    },
-    {
-      "elementKey": "sha-menghai",
-      "relatedElementKey": "wu-changshuo",
-      "kind": "相似于",
-      "explanation": "沙孟海与吴昌硕都是书法篆刻大家，也都与浙博和西泠印社关系密切。"
-    },
-    {
-      "elementKey": "sha-menghai",
-      "relatedElementKey": "zhejiang-museum-history",
-      "kind": "组成",
-      "explanation": "沙孟海曾任浙博历史部主任与名誉馆长，是浙博馆史的重要组成。"
-    },
-    {
-      "elementKey": "shi-xingeng-discovery",
-      "relatedElementKey": "liangzhu-culture",
-      "kind": "解释",
-      "explanation": "施昕更在良渚的试掘与《良渚》报告，解释了良渚文化如何被命名并为学界所知。"
-    },
-    {
-      "elementKey": "shi-xingeng-discovery",
-      "relatedElementKey": "liangzhu-heritage",
-      "kind": "解释",
-      "explanation": "施昕更1936年的考古发掘，解释了良渚古城遗址如何被发现并进入保护视野。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "jiyue-bronze-house",
-      "kind": "相似于",
-      "explanation": "十里红妆的嫁妆排场与伎乐铜屋的乐舞场景，都是浙江民间生活与仪式的写照。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "相似于",
-      "explanation": "十里红妆的泥金彩漆与捐赠漆器的剔红技艺，同属浙江髹漆工艺的不同面貌。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "wan-gong-jiao",
-      "kind": "体现",
-      "explanation": "十里红妆以万工轿为最华重的嫁妆，体现了宁绍婚俗的排场与朱金木雕工艺。"
-    },
-    {
-      "elementKey": "southern-song-guan-ware",
-      "relatedElementKey": "yue-kiln",
-      "kind": "受到影响",
-      "explanation": "南宋官窑的青瓷技艺受到了越窑的影响，同属浙江青瓷谱系的关键环节。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "asoka-pagoda",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了阿育王塔为何作为吴越佛教文物的代表入选。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了彩凤鸣岐作为传世唐琴的代表地位。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "fuchun-shanju-tu",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了剩山图作为中国传世名画的代表价值。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "hemudu-double-bird",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了双鸟朝阳纹牙雕作为史前工艺代表的地位。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "longquan-boat-drip",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了舟形砚滴作为龙泉文房器精品的代表价值。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "museum-collection-system",
-      "kind": "体现",
-      "explanation": "十大镇馆之宝体现了浙博十余万件馆藏中最具代表性的门类与水准。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "zhejiang-yue-sword",
-      "kind": "解释",
-      "explanation": "十大镇馆之宝的评选，解释了越王者旨於睗剑作为青铜兵器代表的地位。"
-    },
-    {
-      "elementKey": "wan-gong-jiao",
-      "relatedElementKey": "shili-hongzhuang",
-      "kind": "用于",
-      "explanation": "万工轿用于宁绍婚俗的迎娶排场，是十里红妆中最华重的嫁妆。"
-    },
-    {
-      "elementKey": "wu-changshuo",
-      "relatedElementKey": "museum-collection-system",
-      "kind": "组成",
-      "explanation": "吴昌硕遗属捐赠的文物，是浙博书画与印章收藏的重要组成。"
-    },
-    {
-      "elementKey": "wu-changshuo",
-      "relatedElementKey": "sha-menghai",
-      "kind": "相似于",
-      "explanation": "吴昌硕与沙孟海同以书法篆刻著称，是浙博书画印收藏中前后相承的两位大家。"
-    },
-    {
-      "elementKey": "wuyue-buddhist-art",
-      "relatedElementKey": "asoka-pagoda",
-      "kind": "体现",
-      "explanation": "鎏金银阿育王塔是吴越佛教造塔传统的代表作，体现了宝箧印式塔的形制与信仰。"
-    },
-    {
-      "elementKey": "wuyue-buddhist-art",
-      "relatedElementKey": "caisu-mud-bodhisattva",
-      "kind": "体现",
-      "explanation": "北宋彩塑泥菩萨承续吴越佛教造像传统，体现了浙江佛教雕塑的一脉相承。"
-    },
-    {
-      "elementKey": "wuyue-buddhist-art",
-      "relatedElementKey": "wuyue-state",
-      "kind": "产生于",
-      "explanation": "吴越佛教的兴盛产生于吴越国王的崇佛国策，佛塔与经卷皆由此而来。"
-    },
-    {
-      "elementKey": "wuyue-state",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "解释",
-      "explanation": "吴越国王崇佛造塔、广印经书，解释了佛教为何成为吴越文化的重要组成。"
-    },
-    {
-      "elementKey": "wuyue-state",
-      "relatedElementKey": "yue-bronze-swords",
-      "kind": "受到影响",
-      "explanation": "吴越国地处古越之地，其文化受到了越国青铜剑传统的深远影响。"
-    },
-    {
-      "elementKey": "wuyue-state",
-      "relatedElementKey": "zhejiang-yue-sword",
-      "kind": "受到影响",
-      "explanation": "吴越国自认承续古越之统，其“越”之国名与尚武风气受到了越王剑传统的影响。"
-    },
-    {
-      "elementKey": "yue-bronze-swords",
-      "relatedElementKey": "jiyue-bronze-house",
-      "kind": "解释",
-      "explanation": "越国青铜铸造技术深厚，伎乐铜屋正是这一技术在礼乐器物上的运用与佐证。"
-    },
-    {
-      "elementKey": "yue-bronze-swords",
-      "relatedElementKey": "wuyue-state",
-      "kind": "解释",
-      "explanation": "越国青铜剑传统印证了浙江古地的尚武与铸艺，解释了吴越国青铜文化的源头。"
-    },
-    {
-      "elementKey": "yue-bronze-swords",
-      "relatedElementKey": "zhejiang-yue-sword",
-      "kind": "解释",
-      "explanation": "越国善铸剑的传统，解释了者旨於睗剑为何制作精湛、带铭而珍贵。"
-    },
-    {
-      "elementKey": "yue-kiln",
-      "relatedElementKey": "longquan-kiln",
-      "kind": "解释",
-      "explanation": "越窑是浙江青瓷的源头，解释了龙泉窑为何能在此基础上创出粉青、梅子青。"
-    },
-    {
-      "elementKey": "yue-kiln",
-      "relatedElementKey": "southern-song-guan-ware",
-      "kind": "解释",
-      "explanation": "越窑的千峰翠色与青瓷传统，解释了南宋官窑青瓷的釉色与地位。"
-    },
-    {
-      "elementKey": "zhejiang-museum-history",
-      "relatedElementKey": "gushan-campus",
-      "kind": "解释",
-      "explanation": "浙博从西湖博物馆到今天的馆史，解释了孤山馆区为何是最古老、最具精神意义的馆区。"
-    },
-    {
-      "elementKey": "zhejiang-museum-history",
-      "relatedElementKey": "sha-menghai",
-      "kind": "解释",
-      "explanation": "浙博的历史沿革解释了沙孟海为何兼任历史部主任、出任名誉馆长。"
-    },
-    {
-      "elementKey": "zhejiang-museum-history",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "解释",
-      "explanation": "浙博馆史的最新篇章解释了之江馆区为何成为如今的新主场与《浙江一万年》的展场。"
-    },
-    {
-      "elementKey": "zhejiang-yue-sword",
-      "relatedElementKey": "top-ten-treasures",
-      "kind": "组成",
-      "explanation": "越王者旨於睗剑是浙博十大镇馆之宝之一，是青铜兵器门类的代表。"
-    },
-    {
-      "elementKey": "zhejiang-yue-sword",
-      "relatedElementKey": "wuyue-state",
-      "kind": "解释",
-      "explanation": "越王者旨於睗剑印证了古越的青铜与尚武传统，解释了吴越国“越”字国号的历史渊源。"
-    },
-    {
-      "elementKey": "zhejiang-yue-sword",
-      "relatedElementKey": "yue-bronze-swords",
-      "kind": "产生于",
-      "explanation": "越王者旨於睗剑产生于越国青铜铸造传统，是这一传统中最具代表性的精品。"
-    },
-    {
-      "elementKey": "zhijiang-campus",
-      "relatedElementKey": "fuchun-shanju-tu",
-      "kind": "体现",
-      "explanation": "之江馆区的书画展陈以剩山图这样的镇馆之宝为最大看点。"
-    },
-    {
-      "elementKey": "zhijiang-campus",
-      "relatedElementKey": "no-overseas-treasures",
-      "kind": "体现",
-      "explanation": "之江馆区《浙江一万年》陈列集中展出五件禁止出境国宝，体现了馆区的分量。"
-    },
-    {
-      "elementKey": "zhijiang-campus",
-      "relatedElementKey": "zhejiang-museum-history",
-      "kind": "产生于",
-      "explanation": "之江馆区是浙博馆史在新世纪的延续，于2023年作为新主场对外开放。"
-    },
-    {
-      "elementKey": "hemudu-painted-pottery",
-      "relatedElementKey": "hemudu-culture",
-      "kind": "产生于",
-      "explanation": "河姆渡绘纹陶器出土于河姆渡遗址，是河姆渡先民手工制作的器物。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-painted-pottery",
-      "kind": "体现",
-      "explanation": "河姆渡文化的陶器制作与纹样信仰，体现在绘纹陶器的绳纹与动植物图案上。"
-    },
-    {
-      "elementKey": "hemudu-bone-plough",
-      "relatedElementKey": "hemudu-culture",
-      "kind": "产生于",
-      "explanation": "河姆渡骨耜出土于河姆渡遗址，是“耜耕农业”的标志性骨制农具。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-bone-plough",
-      "kind": "体现",
-      "explanation": "河姆渡文化的稻作与骨器传统，体现在骨耜这样翻地种稻的农具上。"
-    },
-    {
-      "elementKey": "zhang-cheng-red-lacquer",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "产生于",
-      "explanation": "张成剔红婴戏图盘来自曹其镛夫妇2012年的捐赠，是这批漆器中价值最高的一件。"
-    },
-    {
-      "elementKey": "qi-lacquer-donation",
-      "relatedElementKey": "zhang-cheng-red-lacquer",
-      "kind": "解释",
-      "explanation": "曹其镛夫妇的漆器捐赠中，张成剔红婴戏图盘是最能代表其价值的国宝级藏品。"
-    },
-    {
-      "elementKey": "tang-guqin-tradition",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "体现",
-      "explanation": "唐代古琴传统与“唐圆”之说，在彩凤鸣岐这张流传至今的唐琴上得到了体现。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "tang-guqin-tradition",
-      "kind": "产生于",
-      "explanation": "彩凤鸣岐产生于唐代斫琴传统，是“唐圆”之说在传世实物中的代表。"
-    },
-    {
-      "elementKey": "tang-guqin-tradition",
-      "relatedElementKey": "guqin-world",
-      "kind": "组成",
-      "explanation": "唐代斫琴传统是古琴发展史中的关键一环，其唐琴至今是传世古琴的珍品。"
     },
     {
-      "elementKey": "guqin-world",
-      "relatedElementKey": "tang-guqin-tradition",
-      "kind": "解释",
-      "explanation": "古琴艺术从唐到宋的传承脉络，解释了唐代古琴为何被视为传世稀宝。"
+      "key": "huang-binhong-memorial",
+      "name": "黄宾虹纪念室",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "黄宾虹纪念室位于杭州栖霞岭黄宾虹故居内，邻近浙博孤山馆区。画家晚年在此定居作画，窗外的西湖山水直接走进了他的画面。"
+          },
+          {
+            "type": "paragraph",
+            "text": "纪念室保存黄宾虹的画具、手稿与生活场景。他去世后，家属将五千余件作品与手稿捐赠浙博，成为馆藏书画的支柱——看懂这间纪念室，就看懂了浙博与这位画家的渊源。"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "黄宾虹",
+          "publisher": "维基百科",
+          "url": "https://zh.wikipedia.org/wiki/黄宾虹"
+        }
+      ],
+      "conceptKind": "基础知识"
+    },
+    {
+      "key": "sha-menghai-residence",
+      "name": "沙孟海旧居",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "沙孟海旧居是书法篆刻大家沙孟海晚年在杭州的生活与创作场所。沙孟海曾任浙博历史部主任、名誉馆长，是连接书法、印学与博物馆事业的关键人物。"
+          },
+          {
+            "type": "paragraph",
+            "text": "旧居陈列其书作、用印与生活遗物。沙孟海师承吴昌硕一脉，又与西泠印社渊源深厚——从旧居出发，可以把浙博、西泠印社与近代书法史串成一条线。"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "沙孟海",
+          "publisher": "维基百科",
+          "url": "https://zh.wikipedia.org/wiki/沙孟海"
+        }
+      ],
+      "conceptKind": "基础知识"
     }
   ],
   "attractions": [
@@ -1619,11 +925,11 @@
       "name": "五代鎏金银阿育王塔"
     },
     {
-      "key": "liangzhu-cong-wang",
+      "key": "jade-cong-wang",
       "name": "良渚玉琮王"
     },
     {
-      "key": "cong-ritual-jade",
+      "key": "jade-cong-ritual",
       "name": "琮：祭地的礼器"
     },
     {
@@ -1665,6 +971,350 @@
     {
       "key": "hemudu-bone-plough",
       "name": "河姆渡骨耜"
+    }
+  ],
+  "relations": [
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "zhejiang-museum-history",
+      "kind": "体现",
+      "explanation": "孤山馆区是浙博最早落成的馆区，见证从西湖博物馆起步的馆史。"
+    },
+    {
+      "elementKey": "zhijiang-campus",
+      "relatedElementKey": "zhejiang-museum-history",
+      "kind": "体现",
+      "explanation": "之江馆区是浙博馆史在新世纪的延续，2023年作为新主场开放。"
+    },
+    {
+      "elementKey": "gushan-campus",
+      "relatedElementKey": "zhijiang-campus",
+      "kind": "相似于",
+      "explanation": "孤山与之江两大馆区一老一新，共同承载浙博馆藏。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "museum-collection-system",
+      "kind": "体现",
+      "explanation": "十大镇馆之宝从十余万件馆藏中评选产生，体现收藏体系的最高水准。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "jade-cong-wang",
+      "kind": "组成",
+      "explanation": "良渚玉琮王是十大镇馆之宝之首，代表史前玉礼文明。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "hemudu-double-bird",
+      "kind": "组成",
+      "explanation": "双鸟朝阳纹牙雕代表河姆渡工艺的最高成就。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "zhejiang-yue-sword",
+      "kind": "组成",
+      "explanation": "越王者旨於睗剑是青铜兵器门类的代表。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "asoka-pagoda",
+      "kind": "组成",
+      "explanation": "鎏金银阿育王塔是吴越佛教文物的代表。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "cai-feng-ming-qi",
+      "kind": "组成",
+      "explanation": "彩凤鸣岐是传世唐琴的代表。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "longquan-boat-drip",
+      "kind": "组成",
+      "explanation": "舟形砚滴代表龙泉青瓷文房器的最高水准。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "fuchun-shanju-tu",
+      "kind": "组成",
+      "explanation": "剩山图代表馆藏书画的最高水准。"
+    },
+    {
+      "elementKey": "top-ten-treasures",
+      "relatedElementKey": "wan-gong-jiao",
+      "kind": "组成",
+      "explanation": "万工轿代表清末民初朱金木雕工艺的巅峰。"
+    },
+    {
+      "elementKey": "no-overseas-treasures",
+      "relatedElementKey": "zhijiang-campus",
+      "kind": "位于",
+      "explanation": "禁止出国（境）展览的五件（组）文物全部位于之江馆区。"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "huang-binhong",
+      "kind": "组成",
+      "explanation": "黄宾虹家属捐赠的五千余件作品与手稿，是书画收藏的重要支柱。"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "qi-lacquer-donation",
+      "kind": "组成",
+      "explanation": "曹其镛夫妇捐赠的160件漆器，是馆藏漆器门类的支柱。"
+    },
+    {
+      "elementKey": "museum-collection-system",
+      "relatedElementKey": "wu-changshuo",
+      "kind": "组成",
+      "explanation": "吴昌硕遗属捐赠的文物，是书画印收藏的重要组成。"
+    },
+    {
+      "elementKey": "zhejiang-museum-history",
+      "relatedElementKey": "sha-menghai",
+      "kind": "组成",
+      "explanation": "沙孟海曾任历史部主任与名誉馆长，是浙博馆史的重要组成。"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-double-bird",
+      "kind": "组成",
+      "explanation": "双鸟朝阳纹牙雕是河姆渡线雕工艺与鸟日崇拜的代表遗物。"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-painted-pottery",
+      "kind": "组成",
+      "explanation": "绘纹陶器的绳纹与动植物图案，是河姆渡陶器传统的代表。"
+    },
+    {
+      "elementKey": "hemudu-culture",
+      "relatedElementKey": "hemudu-bone-plough",
+      "kind": "组成",
+      "explanation": "骨耜是河姆渡『耜耕农业』的标志性农具。"
+    },
+    {
+      "elementKey": "hemudu-double-bird",
+      "relatedElementKey": "gushan-campus",
+      "kind": "位于",
+      "explanation": "双鸟朝阳纹牙雕作为镇馆之宝，长期于孤山馆区展陈。"
+    },
+    {
+      "elementKey": "hemudu-bone-plough",
+      "relatedElementKey": "rice-agriculture",
+      "kind": "体现",
+      "explanation": "骨耜翻地种稻，体现江南稻作农业七千年的悠久源头。"
+    },
+    {
+      "elementKey": "zhonghua-civilization",
+      "relatedElementKey": "hemudu-culture",
+      "kind": "组成",
+      "explanation": "河姆渡七千年的稻作遗存，是中华文明多元源头之一。"
+    },
+    {
+      "elementKey": "zhejiang-yue-sword",
+      "relatedElementKey": "yue-bronze-swords",
+      "kind": "体现",
+      "explanation": "者旨於睗剑的精湛铸工与鸟篆铭文，体现越国青铜剑传统的最高水准。"
+    },
+    {
+      "elementKey": "jiyue-bronze-house",
+      "relatedElementKey": "yue-bronze-swords",
+      "kind": "制作采用",
+      "explanation": "伎乐铜屋采用越国高超的青铜铸造技术，与越剑一脉相承。"
+    },
+    {
+      "elementKey": "zhejiang-yue-sword",
+      "relatedElementKey": "spring-autumn-warring-states",
+      "kind": "产生于",
+      "explanation": "越国崛起于春秋末期，越王剑产生于诸侯争霸的时代。"
+    },
+    {
+      "elementKey": "five-dynasties-ten-kingdoms",
+      "relatedElementKey": "wuyue-state",
+      "kind": "组成",
+      "explanation": "吴越国是十国之一，以保境安民、纳土归宋著称。"
+    },
+    {
+      "elementKey": "wuyue-state",
+      "relatedElementKey": "zhejiang-yue-sword",
+      "kind": "解释",
+      "explanation": "吴越国的『越』字国号与尚武风气，要从越王剑代表的古越传统理解。"
+    },
+    {
+      "elementKey": "wuyue-buddhist-art",
+      "relatedElementKey": "wuyue-state",
+      "kind": "产生于",
+      "explanation": "吴越佛教的兴盛，产生于钱氏国王崇佛造塔的国策。"
+    },
+    {
+      "elementKey": "chinese-buddhism",
+      "relatedElementKey": "wuyue-buddhist-art",
+      "kind": "理解前先懂",
+      "explanation": "先了解佛教中国化的脉络，再看吴越如何把崇佛变成国策。"
+    },
+    {
+      "elementKey": "asoka-pagoda",
+      "relatedElementKey": "wuyue-buddhist-art",
+      "kind": "体现",
+      "explanation": "鎏金银阿育王塔出自雷峰塔地宫，是吴越宝箧印式塔传统的代表作。"
+    },
+    {
+      "elementKey": "caisu-mud-bodhisattva",
+      "relatedElementKey": "wuyue-buddhist-art",
+      "kind": "受到影响",
+      "explanation": "北宋彩塑泥菩萨承续吴越崇佛造像的传统。"
+    },
+    {
+      "elementKey": "longquan-kiln",
+      "relatedElementKey": "yue-kiln",
+      "kind": "解释",
+      "explanation": "越窑是浙江青瓷的源头，解释了龙泉窑粉青、梅子青釉色的来路。"
+    },
+    {
+      "elementKey": "southern-song-guan-ware",
+      "relatedElementKey": "yue-kiln",
+      "kind": "受到影响",
+      "explanation": "南宋官窑的青瓷技艺深受越窑传统影响。"
+    },
+    {
+      "elementKey": "longquan-boat-drip",
+      "relatedElementKey": "longquan-kiln",
+      "kind": "体现",
+      "explanation": "龙泉窑粉青、梅子青的温润釉色，在小巧的舟形砚滴上集中体现。"
+    },
+    {
+      "elementKey": "southern-song-guan-ware",
+      "relatedElementKey": "song-dynasty",
+      "kind": "产生于",
+      "explanation": "官窑随宋室南渡设于临安，产生于南宋宫廷用瓷的需求。"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "huang-gongwang",
+      "kind": "解释",
+      "explanation": "黄公望五十岁学画、晚年入道的经历，解释了《富春山居图》沉静苍润的笔意。"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "yuan-dynasty",
+      "kind": "产生于",
+      "explanation": "《富春山居图》成画于元代，是元四家山水画的高峰。"
+    },
+    {
+      "elementKey": "chinese-landscape-painting",
+      "relatedElementKey": "fuchun-shanju-tu",
+      "kind": "理解前先懂",
+      "explanation": "先了解中国山水画『可游可居』的传统，再看富春山居图的长卷叙事。"
+    },
+    {
+      "elementKey": "fuchun-shanju-tu",
+      "relatedElementKey": "zhijiang-campus",
+      "kind": "位于",
+      "explanation": "《富春山居图》的剩山图现藏于之江馆区。"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "huang-gongwang",
+      "kind": "相似于",
+      "explanation": "黄宾虹与黄公望同为山水画大家，名作先后入藏浙博。"
+    },
+    {
+      "elementKey": "huang-binhong",
+      "relatedElementKey": "gushan-campus",
+      "kind": "受到影响",
+      "explanation": "黄宾虹晚年定居栖霞岭，深受西湖山水与孤山文化氛围滋养。"
+    },
+    {
+      "elementKey": "huang-binhong-memorial",
+      "relatedElementKey": "huang-binhong",
+      "kind": "解释",
+      "explanation": "纪念室陈列的画具与手稿，帮助理解黄宾虹晚年的创作状态。"
+    },
+    {
+      "elementKey": "huang-binhong-memorial",
+      "relatedElementKey": "gushan-campus",
+      "kind": "位于",
+      "explanation": "黄宾虹纪念室位于栖霞岭故居，邻近孤山馆区。"
+    },
+    {
+      "elementKey": "sha-menghai",
+      "relatedElementKey": "wu-changshuo",
+      "kind": "相似于",
+      "explanation": "沙孟海与吴昌硕同以书法篆刻著称，是前后相承的两位大家。"
+    },
+    {
+      "elementKey": "sha-menghai-residence",
+      "relatedElementKey": "sha-menghai",
+      "kind": "解释",
+      "explanation": "旧居保存的书作与用印，帮助理解沙孟海晚年的艺术与生活。"
+    },
+    {
+      "elementKey": "wu-changshuo",
+      "relatedElementKey": "xiling-seal-art",
+      "kind": "解释",
+      "explanation": "吴昌硕首任西泠印社社长，其金石画风要从印学传统理解。"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "guqin-world",
+      "kind": "体现",
+      "explanation": "彩凤鸣岐是古琴音韵世界流传至今的实物代表。"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "tang-guqin-tradition",
+      "kind": "产生于",
+      "explanation": "彩凤鸣岐产生于唐代斫琴传统，是『唐圆』之说的实物印证。"
+    },
+    {
+      "elementKey": "tang-guqin-tradition",
+      "relatedElementKey": "tang-dynasty",
+      "kind": "产生于",
+      "explanation": "唐代是古琴艺术的成熟期，传世名琴多出于此时。"
+    },
+    {
+      "elementKey": "guqin-world",
+      "relatedElementKey": "tang-guqin-tradition",
+      "kind": "组成",
+      "explanation": "唐代斫琴传统是古琴发展史中的关键一环。"
+    },
+    {
+      "elementKey": "qi-lacquer-donation",
+      "relatedElementKey": "zhang-cheng-red-lacquer",
+      "kind": "组成",
+      "explanation": "张成剔红婴戏图盘是这批捐赠漆器中价值最高的国宝。"
+    },
+    {
+      "elementKey": "cai-feng-ming-qi",
+      "relatedElementKey": "qi-lacquer-donation",
+      "kind": "相似于",
+      "explanation": "唐琴的大漆髹涂与馆藏漆器同属髹漆工艺谱系。"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "wan-gong-jiao",
+      "kind": "组成",
+      "explanation": "万工轿是十里红妆中最华重的嫁妆，集朱金木雕工艺之大成。"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "qi-lacquer-donation",
+      "kind": "相似于",
+      "explanation": "十里红妆的泥金彩漆与捐赠漆器的剔红，同属浙江髹漆工艺。"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "jiyue-bronze-house",
+      "kind": "相似于",
+      "explanation": "嫁妆排场与伎乐乐舞，都是浙江民间生活与仪式的写照。"
+    },
+    {
+      "elementKey": "shili-hongzhuang",
+      "relatedElementKey": "qing-dynasty",
+      "kind": "产生于",
+      "explanation": "十里红妆的婚俗排场成形于明清时期的宁绍地区。"
     }
   ],
   "introductions": [
@@ -1934,8 +1584,8 @@
           }
         ]
       },
-      "culturalElementKey": "liangzhu-cong-wang",
-      "attractionKey": "liangzhu-cong-wang",
+      "culturalElementKey": "jade-cong-wang",
+      "attractionKey": "jade-cong-wang",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
@@ -1955,8 +1605,8 @@
           }
         ]
       },
-      "culturalElementKey": "cong-ritual-jade",
-      "attractionKey": "cong-ritual-jade",
+      "culturalElementKey": "jade-cong-ritual",
+      "attractionKey": "jade-cong-ritual",
       "latitude": 30.16277778,
       "longitude": 120.0975
     },
@@ -2202,10 +1852,10 @@
         "hemudu-double-bird",
         "hemudu-painted-pottery",
         "hemudu-bone-plough",
-        "liangzhu-culture",
-        "liangzhu-cong-wang",
-        "liangzhu-heritage",
-        "cong-ritual-jade",
+        "liangzhu-culture-overview",
+        "jade-cong-wang",
+        "liangzhu-ancient-city",
+        "jade-cong-ritual",
         "shi-xingeng-discovery"
       ],
       "minContacted": 4
@@ -2217,7 +1867,7 @@
       "elementKeys": [
         "top-ten-treasures",
         "hemudu-double-bird",
-        "liangzhu-cong-wang",
+        "jade-cong-wang",
         "zhejiang-yue-sword",
         "asoka-pagoda",
         "cai-feng-ming-qi",
@@ -2450,102 +2100,6 @@
               {
                 "type": "paragraph",
                 "text": "When you come upon this carving in the gallery, first look at the concentric-circle sun at its centre, then the two birds gazing up at each other on either side - an imagining of light and birds from seven thousand years ago, preserved to this day through a few engraved lines."
-              }
-            ]
-          }
-        },
-        "liangzhu-culture": {
-          "name": "The Liangzhu Culture",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "Dating from 5,300 to 4,000 years ago, the Liangzhu culture was a Neolithic archaeological culture of China that arose and developed in the region around Lake Taihu in the lower Yangtze. More than 500 sites have been discovered, with Mojiaoshan, near the Liangzhu site, at their centre."
-              },
-              {
-                "type": "paragraph",
-                "text": "The most distinctive feature of the Liangzhu culture is the use and burial of jades, including large cong tubes, bi discs and yue axes. The cong is the most finely crafted and most authoritative of these jades, often engraved with delicate beast-face patterns that were regarded as images of deities, while the yue axe symbolized military and royal power. The Liangzhu people also farmed skillfully with stone ploughs, rice became the principal food source, and a proto-writing system appeared."
-              },
-              {
-                "type": "paragraph",
-                "text": "The Liangzhu political organization was a chiefdom, though some scholars argue it already resembled an incipient state. It could mobilize large numbers of laborers to build grand ritual precincts, city walls and flood-control embankments, and its society was stratified into aristocratic and commoner classes. The beast-face motifs on Liangzhu jades share many features with the taotie motifs on Shang dynasty bronzes; the scholar Li Xueqin held that, while not a direct inheritance, the connection was close."
-              },
-              {
-                "type": "paragraph",
-                "text": "When viewing Liangzhu artefacts, fix your eye on the forms and beast-face patterns of the cong, bi and yue, and you can read from jade object after jade object a prehistoric society skilled at organizing labor and devoted to the ritual of jade."
-              }
-            ]
-          }
-        },
-        "liangzhu-cong-wang": {
-          "name": "The King Jade Cong of Liangzhu",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "The King Jade Cong of Liangzhu comes from Tomb 12 at Fanshan. Weighing 3,500 grams and engraved with exquisite beast-face patterns, it is regarded by scholars as the 'king of cong tubes' and is one of the top ten treasures of the Zhejiang Museum."
-              },
-              {
-                "type": "paragraph",
-                "text": "Tomb 12 at Fanshan is one of the highest-ranking burials in the Liangzhu aristocratic cemetery. Besides the King Cong, it also yielded a superbly made jade yue axe regarded as the 'king of yue axes', with a wooden handle 70-80 cm long fitted with jade fittings at both ends - a symbol of military and royal power. Tomb 20 at Fanshan, containing as many as 547 jade objects, is thought to be the burial of the supreme leader."
-              },
-              {
-                "type": "paragraph",
-                "text": "The cong was a ritual object used in sacrifices to the earth. The ancients believed that 'the heavens are round and the earth is square', so they offered round bi discs to heaven and square cong tubes to earth. The jade of Liangzhu came from a tremolite deposit at Xiaomeiling, in the foothills of the Tianmu Mountains at Liyang, Jiangsu. Today this King Jade Cong is on the list of artefacts barred from overseas exhibition and is displayed in the 'Ten Thousand Years of Zhejiang' gallery at the Zhijiang Campus."
-              },
-              {
-                "type": "paragraph",
-                "text": "When you view the King Cong, first take in its square exterior, round inner bore and four projecting corners, then study the beast-face patterns engraved on each side. You will see it is at once the summit of Liangzhu craftsmanship and a ritual object linking heaven and earth."
-              }
-            ]
-          }
-        },
-        "liangzhu-heritage": {
-          "name": "The Liangzhu Ancient City Site and World Heritage",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "The Liangzhu site lies in Liangzhu Subdistrict and Pingyao Town of Yuhang District, Hangzhou, Zhejiang, China, with part extending into Xiazhu Lake Subdistrict of Deqing County, Huzhou. It is a cluster of sites centred on the Liangzhu Ancient City site, covering 34 square kilometres in total and dating from 3300 to 2000 BC."
-              },
-              {
-                "type": "paragraph",
-                "text": "The Liangzhu Ancient City site is the most important and representative site of the Liangzhu culture, hailed as 'China's first city' and 'living proof of five thousand years of Chinese civilization'. On 6 July 2019, meeting criteria (iii) and (iv), it was inscribed on the UNESCO World Heritage List."
-              },
-              {
-                "type": "paragraph",
-                "text": "The city site comprises a palace area, an inner city and an outer city, covering 881.45 hectares. The surrounding water management system included high dams at mountain valleys, low dams on the plain and a long levee at the foot of the hills, the last known as the Tangshan site, about five kilometres in total length. The Liangzhu site was placed on China's Tentative List for World Heritage in 1994, designated a Major Historical and Cultural Site Protected at the National Level (4th batch) in 1996, and named among the first National Archaeological Site Parks by the State Administration of Cultural Heritage on 9 October 2010."
-              },
-              {
-                "type": "paragraph",
-                "text": "Many of the cong and bi jades you see in the museum come from this World Heritage site cluster. Connect these jades with the name 'Liangzhu Ancient City' as you look, and each artefact will carry you back to that waterbound city-state bearing witness to five thousand years of civilization."
-              }
-            ]
-          }
-        },
-        "cong-ritual-jade": {
-          "name": "The Cong: A Ritual Object for Sacrificing to the Earth",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "The cong is an ancient Chinese tubular jade object used in sacrifices: square on the outside with a round bore. Its earliest appearances are found in the third phase of the Xuejiagang culture at Qianshan, Anhui, some 5,100 years ago."
-              },
-              {
-                "type": "paragraph",
-                "text": "Among jades, the cong was the object used to sacrifice to the earth. The ancients believed that 'the heavens are round and the earth is square', so they offered round bi discs to heaven and square cong tubes to earth. The Rites of Zhou (Zhouli) records: 'Six objects were made of jade to honor heaven, earth and the four directions: a dark-green bi to honor heaven, and a yellow cong to honor earth.'"
-              },
-              {
-                "type": "paragraph",
-                "text": "Curiously, when a jade cong was unearthed during the reign of the Qianlong emperor, nobody knew what it was for. Qianlong himself concluded it was a counterweight used by the ancients to move heavy objects; he named it 'gangtou' (pole end) and fitted it with a copper lining to use as a brush pot or vase. Only more than 90 years after his death was it identified as the ritual object we now call the cong."
-              },
-              {
-                "type": "paragraph",
-                "text": "Look again at the Liangzhu cong in the gallery, and first remember 'square outside, round within': the square is the earth, the circle the heavens - a single cong holds in your hand the ancient imagination of cosmic order."
               }
             ]
           }
@@ -3002,30 +2556,6 @@
             ]
           }
         },
-        "shi-xingeng-discovery": {
-          "name": "Shi Xingeng and the Discovery of Liangzhu",
-          "introduction": {
-            "schemaVersion": 1,
-            "blocks": [
-              {
-                "type": "paragraph",
-                "text": "The discovery of the Liangzhu culture is closely bound up with Shi Xingeng, a draughtsman at the Zhejiang Museum (then called the West Lake Museum). In December 1936, Shi Xingeng carried out archaeology at Liangzhu township in Yuhang and excavated the site of the 'Liangzhu culture'."
-              },
-              {
-                "type": "paragraph",
-                "text": "In 1936, Shi Xingeng found a black, glossy potsherd near Qipanfen close to Liangzhu township in Yuhang, and that same year began excavating around the township, uncovering more black pottery and stone tools. In the spring of 1937 he wrote Liangzhu (also titled A Preliminary Report on the Black Pottery Culture Site of the Second District of Hang County), which brought the Liangzhu culture to the attention of the archaeological world."
-              },
-              {
-                "type": "paragraph",
-                "text": "According to another account, between December 1936 and March 1937 Shi Xingeng carried out three test excavations in the Liangzhu area, identifying twelve sites including Mao'anli and Qipanfen. In 1959, the archaeologist Xia Nai named this cultural type the 'Liangzhu culture'."
-              },
-              {
-                "type": "paragraph",
-                "text": "As you look at the Liangzhu jades, reflect: these exquisite jades began with a museum draughtsman and a few black potsherds in 1936 - museums and archaeology advance each other in just this way."
-              }
-            ]
-          }
-        },
         "jiyue-bronze-house": {
           "name": "The Spring and Autumn Bronze House of Musicians",
           "introduction": {
@@ -3158,6 +2688,30 @@
               {
                 "type": "paragraph",
                 "text": "When you look at a Tang zither in the gallery, first take in its rounded outline, crackle patterns and name, then weigh the precision behind the old saying 'the Tang is round' - roundness is one feature of Tang instruments, but not the only criterion."
+              }
+            ]
+          }
+        },
+        "huang-binhong-memorial": {
+          "name": "Huang Binhong Memorial Room",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "This memorial room preserves the late-life studio of Huang Binhong, the modern landscape master who lived beside West Lake. His family donated over five thousand works to the Zhejiang Museum, forming a pillar of its painting collection."
+              }
+            ]
+          }
+        },
+        "sha-menghai-residence": {
+          "name": "Former Residence of Sha Menghai",
+          "introduction": {
+            "schemaVersion": 1,
+            "blocks": [
+              {
+                "type": "paragraph",
+                "text": "The former residence of Sha Menghai, master calligrapher and honorary director of the Zhejiang Museum, preserves his works, seals, and everyday objects, linking the museum with modern Chinese calligraphy and the Xiling Seal Art Society."
               }
             ]
           }
@@ -3380,9 +2934,5 @@
         }
       }
     }
-  },
-  "manifest": {
-    "packVersion": "zhejiang-museum-v3",
-    "generatedAt": "2026-08-05T08:01:46Z"
   }
 }

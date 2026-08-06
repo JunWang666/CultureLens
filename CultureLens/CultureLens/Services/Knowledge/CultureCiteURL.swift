@@ -2,7 +2,7 @@ import Foundation
 
 /// Parses / rewrites CultureLens inline citation URLs produced by ask prompts:
 /// `https://culturelens.local/cite?citationMarker=9F742443&citationTitle=…&citationA11yValue=…&elementKey=…`
-enum CultureCiteURL {
+nonisolated enum CultureCiteURL {
   static let citationMarker = "9F742443"
 
   static func isCiteURL(_ url: URL) -> Bool {
@@ -275,7 +275,7 @@ enum CultureCiteURL {
 }
 
 private extension String {
-  var nonEmpty: String? {
+  nonisolated var nonEmpty: String? {
     let trimmed = trimmingCharacters(in: .whitespacesAndNewlines)
     return trimmed.isEmpty ? nil : trimmed
   }

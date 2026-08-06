@@ -6,6 +6,7 @@ struct ScanView: View {
 
     @Environment(\.recognitionService) private var recognitionService
     @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var coordinator = ScanCoordinator()
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var lastScanInput: LastScanInput?
@@ -23,9 +24,18 @@ struct ScanView: View {
     @State private var previewPlace: PlaceContext?
     @State private var isResolvingPreviewPlace = false
     @State private var locationProvider = LocationContextProvider()
+    @State private var containerSize: CGSize = .zero
 
     private var isReviewing: Bool {
         pendingReview != nil
+    }
+
+    /// On iPad in landscape the shutter/album/torch cluster pins to the
+    /// trailing edge (right hand) as a vertical column, matching how iPads
+    /// are typically held; everywhere else it stays a bottom-centered row.
+    private var usesSideControls: Bool {
+        horizontalSizeClass == .regular
+            && containerSize.width > containerSize.height
     }
 
     var body: some View {
@@ -93,21 +103,29 @@ struct ScanView: View {
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
 
-                if isReviewing, !coordinator.phase.isWorking {
-                    if case .failed = coordinator.phase {
-                        EmptyView()
-                    } else if reviewPrepareError == nil {
-                        reviewBottomActions
-                    }
-                } else if !isReviewing {
-                    bottomActions
+                if !usesSideControls {
+                    controlButtons
                 }
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 18)
+
+            if usesSideControls {
+                HStack {
+                    Spacer(minLength: 0)
+                    controlButtons
+                }
+                .padding(.trailing, 20)
+                .transition(.opacity)
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
         .foregroundStyle(.white)
+        .onGeometryChange(for: CGSize.self) { proxy in
+            proxy.size
+        } action: { newSize in
+            containerSize = newSize
+        }
         .animation(.easeInOut(duration: 0.22), value: coordinator.phase.isWorking)
         .animation(.easeInOut(duration: 0.22), value: isReviewing)
         .task(id: selectedPhoto) {
@@ -173,13 +191,24 @@ struct ScanView: View {
         }
     }
 
+    /// The dashed viewfinder scales with the container so it stays usable in
+    /// landscape and on iPad, instead of a fixed portrait-only box.
     private var viewfinder: some View {
-        RoundedRectangle(cornerRadius: 34, style: .continuous)
+        let maxWidth =
+            containerSize.width > 0
+            ? min(containerSize.width * 0.62, 360)
+            : 320
+        let maxHeight =
+            containerSize.height > 0
+            ? min(containerSize.height * 0.48, 390)
+            : 390
+
+        return RoundedRectangle(cornerRadius: 34, style: .continuous)
             .stroke(
                 CultureTheme.antiqueGold.opacity(0.78),
                 style: StrokeStyle(lineWidth: 1.5, dash: [12, 8])
             )
-            .frame(maxWidth: 320, maxHeight: 390)
+            .frame(maxWidth: maxWidth, maxHeight: maxHeight)
             .overlay(alignment: .top) {
                 Text("将建筑、器物或纹样放入框内")
                     .font(.caption.weight(.medium))
@@ -189,6 +218,19 @@ struct ScanView: View {
                     .offset(y: 18)
             }
             .accessibilityHidden(true)
+    }
+
+    @ViewBuilder
+    private var controlButtons: some View {
+        if isReviewing, !coordinator.phase.isWorking {
+            if case .failed = coordinator.phase {
+                EmptyView()
+            } else if reviewPrepareError == nil {
+                reviewBottomActions
+            }
+        } else if !isReviewing {
+            bottomActions
+        }
     }
 
     @ViewBuilder
@@ -217,8 +259,16 @@ struct ScanView: View {
         }
     }
 
+    /// Row in portrait, vertical column when pinned to the trailing edge in
+    /// iPad landscape (`usesSideControls`).
+    private var controlsLayout: AnyLayout {
+        usesSideControls
+            ? AnyLayout(VStackLayout(spacing: 18))
+            : AnyLayout(HStackLayout(spacing: 18))
+    }
+
     private var cameraActionButtons: some View {
-        HStack(spacing: 18) {
+        controlsLayout {
             PhotosPicker(
                 selection: $selectedPhoto,
                 matching: .images,
@@ -269,7 +319,7 @@ struct ScanView: View {
     }
 
     private var reviewActionButtons: some View {
-        HStack(spacing: 18) {
+        controlsLayout {
             Button {
                 cancelReview()
             } label: {

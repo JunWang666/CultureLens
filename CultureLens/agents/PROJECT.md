@@ -4,7 +4,7 @@
 
 与 CultureLens 相同的产品体验（扫描识别文化现场、附近推荐、知识图谱、历史），但识别管线完全在端侧运行：
 
-- 本地知识库（西湖内容包：34 元素 / 7 景点 / 44 关系 / 19 介绍）替代 PostgreSQL。
+- 本地知识库（西湖内容包：70 元素 / 23 景点 / 114 关系 / 65 介绍，2026-08 重构为 v4）替代 PostgreSQL。
 - 本地完成候选挑选（Haversine 附近查询、优先级排序 top 12、BFS 图谱、景点绑定）与 prompt 拼接（v5 模板 + 候选 JSON），逻辑 1:1 移植自 Go 后端 `internal/knowledge`、`internal/recognition`、`internal/providers/googleai`。
 - LLM 调用直连 Cloudflare AI Gateway 的 OpenAI 兼容端点：识别用 `dynamic/culturelens`（多模态），讲解与追问用 `dynamic/chat`（追问可附现场照片，同样走 `image_url`）；key 硬编码于 `Services/LLM/LLMGatewayConfig.swift`（本期接受的安全取舍）。
 - 文化问答会话经 JSON 文件（`ChatHistoryStore` → `CultureLens/ChatHistory/conversations.json`）本地持久化，图片落盘于 Application Support `CultureLens/Chats/`。
@@ -14,6 +14,10 @@
 
 1. **Cloudflare AI Gateway**：`https://gateway.ai.cloudflare.com/v1/<account>/apps/compat/chat/completions`，多模态 image_url 与 `response_format: json_schema` 已实测可用（实际模型 gemini-3.6-flash）。
 2. **Cloudflare R2 图床**：介绍富文本中的 `image` block 直接引用 R2 URL，本地库只存 URL 不存图片。后端 `contentadmin` 校验已放宽接受 image block。
+
+## 身份模型：命名空间 UUID
+
+字符串 key 只作为数据与 prompt 契约（pack JSON、LLM 输出、引用 URL）；凡身份决策一律用命名空间确定性 UUID（`DeterministicID`）：元素节点 `culturalElement`、景点 `attraction`、地图点 `attractionPoint`（key + 坐标 3 位小数，同一 attraction key 在不同地点各出一钉）。知识包中 attraction 与其绑定元素**有意共用 key**；识别映射按「景点优先、展品回落节点」的顺序解析（`RecognitionResponseMapper.responseObject`），图谱成员身份永远是绑定元素的 UUID。
 
 ## 多语言
 
@@ -40,7 +44,7 @@
 - 抽象阶梯：`DesignSystem/AbstractionLadderView`（纵向祖先链 + 同级 chips），曾接入扫描结果页（对象/概念详情复用该页）；因展示价值有限当前已在 `ScanResultView` 隐藏，组件保留，恢复时还原该处调用即可。
 - 图谱渲染：`RadialGraphLayout` 共享内核（重心排序 + 方向分层偏置，确定性 O(V+E)），对象图谱与用户图谱共用，内核支持多中心（中心簇均布内圈小圆，各自向外发散）；边按 5 个语义族着色/线型/图标，图例可点选筛选；用户图谱接入捏合缩放、搜索筛选、列表模式、可搜索多选中心（默认全部已加入节点为中心）、截断提示、前置未掌握标记与扫描已记录朱砂徽章。
 - 足迹三模式：`CultureMapView` 分段切换「地图足迹 / 时间线足迹 / 兴趣点」；兴趣点来自 `KnowledgeStore.attractionPoints()`（按 knowledge pack 现场介绍聚合坐标），已到访（命中扫描记录的 `culturalElementKey`）用朱砂 checkmark 标记，可跳转知识节点详情。
-- 未实施：0006 阶段 2（补 kind / conceptKind / 前置边覆盖、`产生于` 取向审计、多包合并与 UUID 迁移）——属于内容与数据迁移工作，需单独评估。
+- 内容重构（2026-08 完成）：四包边已按统一方向语义重写（kind / conceptKind / 前置边覆盖、`产生于` 取向审计、跨包重复实体合并、跨包前置边接入历史包地基），规范见 `agents/KNOWLEDGE_PACK_GUIDE.md`。仍遗留：UUID 迁移未做；西湖包 en 正文翻译待补。
 
 ## 已移除的后端
 

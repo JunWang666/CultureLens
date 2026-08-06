@@ -17,9 +17,15 @@ struct OnDeviceRecognitionTests {
   private func element(
     _ key: String,
     _ name: String,
-    intro: String = "元素介绍。"
+    intro: String = "元素介绍。",
+    contentRole: ContentRole = .sight
   ) -> KnowledgePack.Element {
-    KnowledgePack.Element(key: key, name: name, introduction: doc([intro]))
+    KnowledgePack.Element(
+      key: key,
+      name: name,
+      introduction: doc([intro]),
+      contentRole: contentRole
+    )
   }
 
   private func introduction(
@@ -175,7 +181,8 @@ struct OnDeviceRecognitionTests {
       KnowledgePack.Element(
         key: String(format: "w%02d", $0),
         name: String(format: "西湖%02d", $0),
-        introduction: empty
+        introduction: empty,
+        contentRole: .sight
       )
     }
     let westIntros: [KnowledgePack.IntroductionRecord] = (1...8).map {
@@ -204,7 +211,12 @@ struct OnDeviceRecognitionTests {
     let liangzhu = KnowledgePack(
       version: "liangzhu-test",
       elements: [
-        KnowledgePack.Element(key: "jade-cong-wang", name: "玉琮王", introduction: empty)
+        KnowledgePack.Element(
+          key: "jade-cong-wang",
+          name: "玉琮王",
+          introduction: empty,
+          contentRole: .sight
+        )
       ],
       attractions: [KnowledgePack.Attraction(key: "liangzhu-museum", name: "良渚博物院")],
       relations: [],
@@ -235,8 +247,8 @@ struct OnDeviceRecognitionTests {
       pack: KnowledgePack(
         version: "sparse-test",
         elements: [
-          KnowledgePack.Element(key: "root", name: "根", introduction: empty),
-          KnowledgePack.Element(key: "extra", name: "补充", introduction: empty),
+          KnowledgePack.Element(key: "root", name: "根", introduction: empty, contentRole: .sight),
+          KnowledgePack.Element(key: "extra", name: "补充", introduction: empty, contentRole: .sight),
         ],
         attractions: [KnowledgePack.Attraction(key: "only", name: "唯一景点")],
         relations: [],
@@ -256,6 +268,86 @@ struct OnDeviceRecognitionTests {
     let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
     #expect(set.attractionCandidates.count == 1)
     #expect(set.elements.map(\.key) == ["root", "extra"])
+  }
+
+  @Test func recognitionCatalogFillSkipsCulturalHistoryNodes() throws {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "role-filter-test",
+        elements: [
+          KnowledgePack.Element(key: "spot", name: "看点甲", introduction: empty, contentRole: .sight),
+          KnowledgePack.Element(
+            key: "lore",
+            name: "文化史乙",
+            introduction: empty,
+            contentRole: .culturalHistory
+          ),
+        ],
+        attractions: [KnowledgePack.Attraction(key: "only", name: "唯一景点")],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "i1",
+            name: "介绍",
+            introduction: empty,
+            culturalElementKey: "spot",
+            attractionKey: "only",
+            latitude: 30.0,
+            longitude: 120.0
+          )
+        ]
+      )
+    )
+    let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
+    #expect(set.elements.map(\.key) == ["spot"])
+    #expect(store.catalogCandidateContexts().map(\.key) == ["spot"])
+    #expect(store.sightElements.map(\.key) == ["spot"])
+    #expect(store.culturalHistoryElements.map(\.key) == ["lore"])
+    #expect(
+      Set(store.catalogCandidateContexts(includingRoles: [.sight, .culturalHistory]).map(\.key))
+        == ["spot", "lore"]
+    )
+  }
+
+  @Test func recognitionKeepsAttractionBoundCulturalHistory() throws {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "bound-history-test",
+        elements: [
+          KnowledgePack.Element(
+            key: "lore",
+            name: "典故",
+            introduction: empty,
+            contentRole: .culturalHistory
+          ),
+          KnowledgePack.Element(
+            key: "other-sight",
+            name: "远处看点",
+            introduction: empty,
+            contentRole: .sight
+          ),
+        ],
+        attractions: [KnowledgePack.Attraction(key: "bridge", name: "断桥")],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "i1",
+            name: "断桥传说",
+            introduction: empty,
+            culturalElementKey: "lore",
+            attractionKey: "bridge",
+            latitude: 30.0,
+            longitude: 120.0
+          )
+        ]
+      )
+    )
+    let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
+    // Bound cultural-history stays; unbound sight may fill because attractions < 3.
+    #expect(set.elements.map(\.key).contains("lore"))
+    #expect(set.elements.first?.key == "lore")
   }
 
   // MARK: - BFS graph (postgres.go recognitionGraph)
@@ -503,6 +595,8 @@ struct OnDeviceRecognitionTests {
     #expect(pack.elements.first?.introduction.plainText == "介绍一。")
     #expect(pack.elements.first?.sources.isEmpty == true)
     #expect(pack.elements.first?.conceptKind == nil)
+    #expect(pack.elements.first?.contentRole == ContentRole.culturalHistory.rawValue)
+    #expect(pack.elements.first?.resolvedContentRole == .culturalHistory)
     #expect(pack.introductions.first?.culturalElementKey == "e1")
     #expect(pack.introductions.first?.coordinateSourceUrl == "https://example.com/source")
     #expect(pack.introductions.first?.sources.count == 1)
@@ -511,6 +605,41 @@ struct OnDeviceRecognitionTests {
     #expect(pack.relations.first?.relatedElementKey == "e2")
     #expect(pack.relations.first?.kind == nil)
     #expect(pack.relations.first?.explanation == nil)
+  }
+
+  @Test func knowledgePackDecodesContentRole() throws {
+    let payload = Data(
+      #"""
+      {
+        "version": "role-v1",
+        "elements": [
+          {
+            "key": "s1",
+            "name": "看点一",
+            "contentRole": "看点",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "实物。" }]
+            }
+          },
+          {
+            "key": "h1",
+            "name": "史一",
+            "contentRole": "文化历史",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "背景。" }]
+            }
+          }
+        ],
+        "attractions": [],
+        "relations": [],
+        "introductions": []
+      }
+      """#.utf8
+    )
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: payload)
+    #expect(pack.elements.map(\.resolvedContentRole) == [.sight, .culturalHistory])
   }
 
   @Test func knowledgePackDecodesOptionalRelationAndConceptTyping() throws {

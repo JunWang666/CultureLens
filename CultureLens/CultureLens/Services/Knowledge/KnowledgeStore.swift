@@ -176,6 +176,10 @@ nonisolated struct KnowledgeStore: Sendable {
   /// Duplicate directory names (e.g. Fallback after West Lake) are skipped when
   /// their content would only repeat already-loaded keys — callers that need
   /// raw per-pack lists should use this before `mergePacks`.
+  ///
+  /// Each directory may split elements by `ContentRole` into sibling files
+  /// (`elements-sight.json`, `elements-history.json`); those are merged into
+  /// the main `knowledge-pack.json` (whose `elements` array may be empty).
   static func discoverPacks(in bundle: Bundle) throws -> [KnowledgePack] {
     var packs: [KnowledgePack] = []
     var seenVersions = Set<String>()
@@ -183,7 +187,8 @@ nonisolated struct KnowledgeStore: Sendable {
       guard let url = packURL(in: bundle, directory: directory) else { continue }
       do {
         let data = try Data(contentsOf: url)
-        let pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
+        var pack = try JSONDecoder().decode(KnowledgePack.self, from: data)
+        pack = try mergingRoleElementFiles(into: pack, directory: directory, bundle: bundle)
         // Skip Fallback when the primary West Lake pack (same version family)
         // was already loaded from ODR / KnowledgePack.
         if directory == .fallback, packs.contains(where: { $0.version == pack.version }) {
@@ -199,6 +204,71 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
     return packs
+  }
+
+  /// Sidecar filenames for role-split element arrays next to `knowledge-pack.json`.
+  private static let roleElementFileNames: [(file: String, role: ContentRole)] = [
+    ("elements-sight", .sight),
+    ("elements-history", .culturalHistory),
+  ]
+
+  /// Loads optional `elements-sight.json` / `elements-history.json` and appends
+  /// them to `pack.elements`. Inline elements in the main file still win on
+  /// key collision. Sidecar entries missing `contentRole` inherit the file's role.
+  private static func mergingRoleElementFiles(
+    into pack: KnowledgePack,
+    directory: KnowledgePackDirectory,
+    bundle: Bundle
+  ) throws -> KnowledgePack {
+    var elementsByKey = Dictionary(
+      pack.elements.map { ($0.key, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
+    var didLoadSidecar = false
+    for (name, role) in roleElementFileNames {
+      guard let url = elementFileURL(named: name, directory: directory, bundle: bundle)
+      else { continue }
+      let data = try Data(contentsOf: url)
+      let file = try JSONDecoder().decode(KnowledgePackElementFile.self, from: data)
+      didLoadSidecar = true
+      for raw in file.elements where elementsByKey[raw.key] == nil {
+        // Filename is authoritative for role-split sidecars.
+        elementsByKey[raw.key] = KnowledgePack.Element(
+          key: raw.key,
+          name: raw.name,
+          introduction: raw.introduction,
+          sources: raw.sources,
+          conceptKind: raw.conceptKind,
+          contentRole: role
+        )
+      }
+    }
+    guard didLoadSidecar else { return pack }
+    let merged = elementsByKey.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+    return KnowledgePack(
+      version: pack.version,
+      sourceLanguage: pack.sourceLanguage,
+      elements: merged,
+      attractions: pack.attractions,
+      relations: pack.relations,
+      introductions: pack.introductions,
+      themes: pack.themes,
+      locales: pack.locales
+    )
+  }
+
+  private static func elementFileURL(
+    named name: String,
+    directory: KnowledgePackDirectory,
+    bundle: Bundle
+  ) -> URL? {
+    for subdirectory in directory.subdirectoryCandidates {
+      if let url = bundle.url(forResource: name, withExtension: "json", subdirectory: subdirectory)
+      {
+        return url
+      }
+    }
+    return bundledResourceURL(name, "json", subdirectory: directory.rawValue, bundle: bundle)
   }
 
   /// Merges packs; earlier entries win on element / attraction / introduction /
@@ -317,6 +387,26 @@ nonisolated struct KnowledgeStore: Sendable {
 
   var elements: [KnowledgePack.Element] {
     orderedElementKeys.compactMap { elementsByKey[$0] }
+  }
+
+  /// Elements filtered to one or more `ContentRole` values (name, key order).
+  func elements(roles: Set<ContentRole>) -> [KnowledgePack.Element] {
+    guard !roles.isEmpty else { return [] }
+    return elements.filter { roles.contains($0.resolvedContentRole) }
+  }
+
+  func elements(role: ContentRole) -> [KnowledgePack.Element] {
+    elements(roles: [role])
+  }
+
+  /// Photographable / on-site targets (`ContentRole.sight`).
+  var sightElements: [KnowledgePack.Element] {
+    elements(role: .sight)
+  }
+
+  /// Background cultural / historical nodes without their own physical target.
+  var culturalHistoryElements: [KnowledgePack.Element] {
+    elements(role: .culturalHistory)
   }
 
   func element(key: String) -> KnowledgePack.Element? {
@@ -572,11 +662,25 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
-  /// Lightweight candidate contexts for every element — used to backfill
-  /// `cultural_element_key` after recognition when the prompt only carried a
-  /// location-narrowed subset.
+  /// Lightweight candidate contexts for every **看点** element — used to
+  /// backfill `cultural_element_key` after recognition when the prompt only
+  /// carried a location-narrowed subset. Cultural-history nodes stay out of
+  /// this catalog so name binding prefers photographable targets.
   func catalogCandidateContexts() -> [KnowledgeCandidateContext] {
-    elements.map {
+    sightElements.map {
+      KnowledgeCandidateContext(
+        key: $0.key,
+        name: $0.name,
+        introduction: $0.introduction,
+        nearbyContexts: []
+      )
+    }
+  }
+
+  /// Full-pack catalog (both roles) for callers that need name resolution
+  /// against cultural-history nodes as well (e.g. graph / Q&A).
+  func catalogCandidateContexts(includingRoles roles: Set<ContentRole>) -> [KnowledgeCandidateContext] {
+    elements(roles: roles).map {
       KnowledgeCandidateContext(
         key: $0.key,
         name: $0.name,
@@ -970,8 +1074,10 @@ nonisolated struct KnowledgeStore: Sendable {
 
   /// Cultural-content candidates for the recognition prompt, nearest-first:
   /// 1. Elements bound to the selected nearby attractions (roots, then others)
+  ///    — any `contentRole`, because introductions may cite cultural-history
+  ///    nodes that explain a place
   /// 2. Only when nearby attractions < 3: other in-radius elements by distance,
-  ///    then remaining catalog keys by name
+  ///    then remaining **看点** catalog keys by name (not 文化历史)
   private func prioritizedRecognitionKeys(
     nearby: [NearbyAttractionIntroduction],
     attractionRoots: [String: String],
@@ -1007,6 +1113,7 @@ nonisolated struct KnowledgeStore: Sendable {
       if prioritizedKeys.count >= limit { return prioritizedKeys }
     }
     for key in orderedElementKeys {
+      guard elementsByKey[key]?.resolvedContentRole == .sight else { continue }
       append(key)
       if prioritizedKeys.count >= limit { return prioritizedKeys }
     }

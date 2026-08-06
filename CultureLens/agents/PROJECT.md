@@ -30,6 +30,7 @@
 - 内置回退：`Resources/KnowledgePackFallback/`（西湖副本，不打 tag），保证首启与离线可用。
 - 运行时：`KnowledgePackLoader` 取 ODR 西湖包，再与 bundle 内其余包 `KnowledgeStore.mergePacks` 合并；键冲突时先到先得（西湖 / 良渚优先于浙博同名 `shi-xingeng-discovery`）。
 - 知识包当前以仓库内 JSON 为源；需要更新时编辑对应目录并同步 `pack-manifest.json`。
+- 元素按 `ContentRole`（`看点` / `文化历史`）显式标注；每个包目录拆为 `knowledge-pack.json`（关系 / 景点 / 介绍 / 主题 / locales）+ `elements-sight.json` + `elements-history.json`，`KnowledgeStore.discoverPacks` 加载时合并。识别候选目录与无景点时的 catalog fill 只收 `看点`；景点绑定的介绍仍可引用 `文化历史` 节点。
 
 ## 抽象轴与图谱渲染（0006 / 0007）
 

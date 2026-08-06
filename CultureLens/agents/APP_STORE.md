@@ -8,7 +8,7 @@
 
 ## ODR（On-Demand Resources）
 
-- Tag：`knowledge-base`，内容 = 西湖包 `knowledge-pack.json` + `pack-manifest.json`（约 36KB）。
+- Tag：`knowledge-base`，内容 = 西湖包 `knowledge-pack.json` + `elements-sight.json` + `elements-history.json` + `pack-manifest.json`。
 - 良渚 / 浙博 / 中国历史包作为普通 bundle 资源（`KnowledgePackLiangzhu` 等子目录）打进 App，运行时与西湖包合并。
 - 工程配置：西湖包以显式 file reference 加入 Resources phase，`ASSET_TAGS = ("knowledge-base")`；通过 `membershipExceptions` 避免与同步 group 重复打包。其余三包用 `explicitFolders` 保留子目录，避免同名 JSON 互相覆盖。
 - 当前设置 `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base"`：西湖 asset pack **随 App 首装一起下发**；将来可拆独立 tag 做按需下载。

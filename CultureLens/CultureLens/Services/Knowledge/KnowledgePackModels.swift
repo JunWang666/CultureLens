@@ -93,23 +93,33 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     let sources: [Source]
     /// Optional `ConceptKind.rawValue`; omitted in older packs.
     let conceptKind: String?
+    /// `ContentRole.rawValue`. Older packs / fixtures without the field decode as
+    /// `.culturalHistory`; production packs set it explicitly (and split files
+    /// by role under `elements-sight.json` / `elements-history.json`).
+    let contentRole: String
+
+    var resolvedContentRole: ContentRole {
+      ContentRole(rawValue: contentRole) ?? .culturalHistory
+    }
 
     init(
       key: String,
       name: String,
       introduction: RichTextDocument,
       sources: [Source] = [],
-      conceptKind: String? = nil
+      conceptKind: String? = nil,
+      contentRole: ContentRole = .culturalHistory
     ) {
       self.key = key
       self.name = name
       self.introduction = introduction
       self.sources = sources
       self.conceptKind = conceptKind
+      self.contentRole = contentRole.rawValue
     }
 
     enum CodingKeys: String, CodingKey {
-      case key, name, introduction, sources, conceptKind
+      case key, name, introduction, sources, conceptKind, contentRole
     }
 
     init(from decoder: Decoder) throws {
@@ -119,6 +129,13 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       introduction = try container.decode(RichTextDocument.self, forKey: .introduction)
       sources = try container.decodeIfPresent([Source].self, forKey: .sources) ?? []
       conceptKind = try container.decodeIfPresent(String.self, forKey: .conceptKind)
+      if let raw = try container.decodeIfPresent(String.self, forKey: .contentRole),
+        ContentRole(rawValue: raw) != nil
+      {
+        contentRole = raw
+      } else {
+        contentRole = ContentRole.culturalHistory.rawValue
+      }
     }
   }
 
@@ -291,9 +308,11 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
   }
 }
 
-/// Maps stored (Chinese) publisher names to the active app language for
-/// display. Stored values are never mutated — provenance tests depend on them.
-enum KnowledgePublisherDisplay {
+/// Sidecar JSON for role-split element lists (`elements-sight.json` /
+/// `elements-history.json`). Same element shape as the main pack.
+nonisolated struct KnowledgePackElementFile: Decodable, Sendable {
+  let elements: [KnowledgePack.Element]
+}
   static func name(for publisher: String) -> String {
     switch AppLanguageStore.currentLanguage() {
     case .zhHans:

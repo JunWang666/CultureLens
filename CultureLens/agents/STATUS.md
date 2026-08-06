@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-06 知识包 `ContentRole`：有实体「看点」与无实体「文化历史」分文件（`elements-sight.json` / `elements-history.json`）并在元素上显式标注；识别 catalog / 无景点 fill 只收看点，问答兜底优先文化历史。
 - 2026-08-05 足迹升级为三模式地图（地图足迹 / 时间线足迹 / 兴趣点，`KnowledgeStore.attractionPoints()` 聚合知识包景点坐标，已到访景点朱砂标记可跳详情）；用户图谱支持多高亮中心（多源 BFS，空选择默认全部已加入节点，`RadialGraphLayout` 多中心内圈簇布局），扫描已记录节点加显眼朱砂徽章；中英词条同步。
 - 2026-08-05 浙博 / 良渚包按「有实体即景点」改数据：玉琮王等可拍文物升为 `attractions` 并带展陈坐标；馆区景点保留但不独占附近候选。
 - 2026-08-05 多知识包：良渚 / 浙博 / 中国历史打进 App，`KnowledgeStore.mergePacks` + `KnowledgePackLoader` 与西湖 ODR 合并；识别名允许子串绑定（如「玉琮」→「玉琮王」）。

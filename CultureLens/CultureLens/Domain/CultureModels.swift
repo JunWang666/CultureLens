@@ -35,6 +35,21 @@ enum ConceptKind: String, Codable, Hashable, CaseIterable {
   }
 }
 
+/// Pack-level content class: photographable / on-site targets vs background knowledge.
+enum ContentRole: String, Codable, Hashable, CaseIterable {
+  /// Physical entity the visitor can look at or photograph (景点、文物、遗址等).
+  case sight = "看点"
+  /// Abstract cultural / historical knowledge without its own physical target.
+  case culturalHistory = "文化历史"
+
+  var systemImage: String {
+    switch self {
+    case .sight: "eye"
+    case .culturalHistory: "books.vertical"
+    }
+  }
+}
+
 struct KnowledgeSource: Identifiable, Codable, Hashable {
   let id: UUID
   var title: String

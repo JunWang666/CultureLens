@@ -1091,13 +1091,17 @@ struct CultureMapView: View {
                 .foregroundStyle(visited ? CultureTheme.cinnabar : CultureTheme.inkPrimary)
                 .background(CultureTheme.canvas, in: Circle())
                 .shadow(radius: 2, y: 1)
-            Text(point.name)
-                .font(.caption2.weight(.semibold))
-                .foregroundStyle(CultureTheme.inkPrimary)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(.ultraThinMaterial, in: Capsule())
-                .lineLimit(1)
+            LocalizedPackText(
+                source: point.name,
+                cacheNamespace: "attraction",
+                cacheKey: point.key ?? point.attractionId.uuidString.lowercased()
+            )
+            .font(.caption2.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(.ultraThinMaterial, in: Capsule())
+            .lineLimit(1)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(visited ? "\(point.name)，已到访" : point.name)
@@ -1319,10 +1323,14 @@ struct CultureMapView: View {
                 .frame(width: 34, height: 34)
                 .background(CultureTheme.canvas, in: RoundedRectangle(cornerRadius: 9))
 
-            Text(point.name)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(CultureTheme.inkPrimary)
-                .lineLimit(2)
+            LocalizedPackText(
+                source: point.name,
+                cacheNamespace: "attraction",
+                cacheKey: point.key ?? point.attractionId.uuidString.lowercased()
+            )
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .lineLimit(2)
 
             Spacer(minLength: 0)
 

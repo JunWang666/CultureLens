@@ -7,6 +7,7 @@
 ## 已完成
 
 - 2026-08-06 多语言扩展日语 / 俄语：`AppLanguage` 与设置语言偏好增加 `ja` / `ru`；`Localizable.xcstrings` 补齐静态 UI 译文；`PromptLanguagePolicy` / 引用解析 / TTS 语音 / 枚举展示名支持目标语言；知识包正文仍不打包日俄译文，详情与缺 overlay 文案继续走 `KnowledgeTranslationService` 即时翻译。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
+- 2026-08-06 补齐知识库即时翻译漏网：附近看点、文化系列表/详情、地图兴趣点、图谱摘要/中心选择、分享卡摘要、抽象阶梯、关系说明与知识节点导航标题等原先直接展示中文包文案的位置，统一接入 `LocalizedPackText` / `KnowledgeTranslationService`；`localizedName`/`localizedText`/`localizedNameAndText` 优先读 pack locale overlay，避免英文区域包已有译文仍走 LLM。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
 - 2026-08-07 文化回顾：详情主图自动取介绍富文本第一张图；iPad 横屏改 `SplitDetailLayout`；支持整页分享（LLM 写介绍词 + 杂志风 PNG）；详情刊头同步展示同一介绍词（本地模板先占位，缓存命中或生成后替换）；设置新增 Seedream 封面生成开关（默认关，仅无介绍主图时调用）。见 `design/0025-culture-review-hero-and-share.md`。
 - 2026-08-07 探索首页新增「你知道吗？」文化问答：从当前知识包可解析的已接触节点出发，通过 `dynamic/chat` 生成严格校验的三选一题目，答题后展示正误、解释并可回到来源节点；相同节点、语言与知识正文优先读取磁盘缓存，缓存纳入统一用量统计和清理。双栏布局固定在左栏「附近看点」下方，单栏紧随附近看点；无节点、加载、失败、重试与换题状态完整。新增 JSON 契约和缓存测试 4 项通过，iOS Simulator App build、`build-for-testing` 与定向测试均通过。见 `design/0023-did-you-know-quiz.md`。
 - 2026-08-07 探索页「点亮图鉴」完成视觉资产升级：为 16 条当前文化系、6 枚探索徽章及未知主题图像兜底生成海报感大图；统一采用朱砂/墨色对角色块、金色分界和放大文化剪影（`design/0024`），不再在文化系或徽章上回退 SF Symbol。文化系详情页在标题左侧复用同一张小型海报图。保留进度环、未解锁去色状态、庆祝弹层和既有 VoiceOver 文本。

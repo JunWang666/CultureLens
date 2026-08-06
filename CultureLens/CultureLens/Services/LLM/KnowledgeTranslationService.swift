@@ -98,6 +98,13 @@ actor KnowledgeTranslationService {
     language: AppLanguage
   ) async -> String {
     if language.isKnowledgeSource { return sourceName }
+    if let overlayName = packOverlayName(
+      cacheNamespace: cacheNamespace,
+      key: key,
+      language: language
+    ) {
+      return overlayName
+    }
     let cacheKey = "\(cacheNamespace):\(language.rawValue):\(key)"
     if let cached = memoryCache[cacheKey] {
       return cached.name
@@ -126,6 +133,13 @@ actor KnowledgeTranslationService {
     language: AppLanguage
   ) async -> String {
     if language.isKnowledgeSource { return sourceText }
+    if let overlayText = packOverlayText(
+      cacheNamespace: cacheNamespace,
+      key: key,
+      language: language
+    ) {
+      return overlayText
+    }
     // Distinct from the name-only cache entry: a cached name translation has
     // an empty plainText and must not satisfy a fragment lookup.
     let cacheKey = "\(cacheNamespace)|text:\(language.rawValue):\(key)"
@@ -157,24 +171,119 @@ actor KnowledgeTranslationService {
     language: AppLanguage
   ) async -> (name: String, text: String) {
     if language.isKnowledgeSource { return (sourceName, sourceText) }
+    let overlayName = packOverlayName(
+      cacheNamespace: cacheNamespace,
+      key: key,
+      language: language
+    )
+    let overlayText = packOverlayText(
+      cacheNamespace: cacheNamespace,
+      key: key,
+      language: language
+    )
+    if let overlayName, let overlayText {
+      return (overlayName, overlayText)
+    }
     // Pair-specific key: name-only cache entries carry an empty plainText.
     let cacheKey = "\(cacheNamespace)|pair:\(language.rawValue):\(key)"
     if let cached = memoryCache[cacheKey] {
       return (cached.name, cached.plainText)
     }
-    guard let gatewayClient else { return (sourceName, sourceText) }
+    guard let gatewayClient else {
+      return (overlayName ?? sourceName, overlayText ?? sourceText)
+    }
     do {
       let translated = try await translate(
         client: gatewayClient,
-        name: sourceName,
-        plainText: sourceText,
+        name: overlayName ?? sourceName,
+        plainText: overlayText ?? sourceText,
         language: language
       )
       memoryCache[cacheKey] = translated
       persistCache()
       return (translated.name, translated.plainText)
     } catch {
-      return (sourceName, sourceText)
+      return (overlayName ?? sourceName, overlayText ?? sourceText)
+    }
+  }
+
+  /// Bundled locale overlay name when the namespace maps to a pack entity.
+  private func packOverlayName(
+    cacheNamespace: String,
+    key: String,
+    language: AppLanguage
+  ) -> String? {
+    guard let pack = KnowledgeStore.shared?.pack else { return nil }
+    let localization = KnowledgeLocalization(pack: pack)
+    switch packOverlayKind(cacheNamespace) {
+    case .element:
+      guard let text = localization.elementText(key: key, language: language),
+        text.language == language
+      else { return nil }
+      return text.name
+    case .attraction:
+      guard let result = localization.attractionName(key: key, language: language),
+        !result.isSourceFallback
+      else { return nil }
+      return result.name
+    case .introduction:
+      guard let text = localization.introductionText(key: key, language: language),
+        text.language == language
+      else { return nil }
+      return text.name
+    case .none:
+      return nil
+    }
+  }
+
+  /// Bundled locale overlay body text when present (not a source-language fallback).
+  private func packOverlayText(
+    cacheNamespace: String,
+    key: String,
+    language: AppLanguage
+  ) -> String? {
+    guard let pack = KnowledgeStore.shared?.pack else { return nil }
+    let localization = KnowledgeLocalization(pack: pack)
+    switch packOverlayKind(cacheNamespace) {
+    case .element:
+      guard let text = localization.elementText(key: key, language: language),
+        text.language == language,
+        !text.isSourceFallback,
+        let introduction = text.introduction
+      else { return nil }
+      let plain = KnowledgeStore.richTextPlainText(introduction)
+      return plain.isEmpty ? nil : plain
+    case .introduction:
+      guard let text = localization.introductionText(key: key, language: language),
+        text.language == language,
+        !text.isSourceFallback,
+        let introduction = text.introduction
+      else { return nil }
+      let plain = KnowledgeStore.richTextPlainText(introduction)
+      return plain.isEmpty ? nil : plain
+    case .attraction, .none:
+      return nil
+    }
+  }
+
+  private enum PackOverlayKind {
+    case element
+    case attraction
+    case introduction
+    case none
+  }
+
+  private func packOverlayKind(_ cacheNamespace: String) -> PackOverlayKind {
+    switch cacheNamespace {
+    case "element", "didYouKnow.elementName":
+      return .element
+    case "attraction":
+      return .attraction
+    case "introduction":
+      return .introduction
+    default:
+      // Themes, recognition summaries, relation blurbs, etc. have no pack overlay.
+      return .none
     }
   }
 

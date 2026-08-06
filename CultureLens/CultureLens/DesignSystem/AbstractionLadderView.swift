@@ -77,6 +77,7 @@ struct AbstractionLadderView: View {
         VStack(alignment: .leading, spacing: 0) {
           ladderRow(
             title: rootName,
+            titleKey: store?.elementKey(for: rootID) ?? rootID.uuidString.lowercased(),
             subtitle: "当前对象",
             elementID: nil,
             isRoot: true
@@ -85,6 +86,8 @@ struct AbstractionLadderView: View {
             connector
             ladderRow(
               title: rung.ancestor.name,
+              titleKey: store?.elementKey(for: rung.ancestor.id)
+                ?? rung.ancestor.id.uuidString.lowercased(),
               subtitle: rung.ancestor.kind?.rawValue,
               elementID: rung.ancestor.id,
               isRoot: false
@@ -111,6 +114,7 @@ struct AbstractionLadderView: View {
   @ViewBuilder
   private func ladderRow(
     title: String,
+    titleKey: String,
     subtitle: String?,
     elementID: UUID?,
     isRoot: Bool
@@ -122,10 +126,14 @@ struct AbstractionLadderView: View {
         .padding(.leading, 18)
 
       VStack(alignment: .leading, spacing: 2) {
-        Text(title)
-          .font(.subheadline.weight(.semibold))
-          .foregroundStyle(CultureTheme.inkPrimary)
-          .lineLimit(1)
+        LocalizedPackText(
+          source: title,
+          cacheNamespace: "element",
+          cacheKey: titleKey
+        )
+        .font(.subheadline.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkPrimary)
+        .lineLimit(1)
         if let subtitle {
           Text(subtitle)
             .font(.caption2)
@@ -167,15 +175,19 @@ struct AbstractionLadderView: View {
       HStack(spacing: 8) {
         ForEach(siblings, id: \.id) { element in
           NavigationLink(value: AppRoute.knowledgeElement(element.id)) {
-            Text(element.name)
-              .font(.caption.weight(.semibold))
-              .foregroundStyle(CultureTheme.inkSecondary)
-              .padding(.horizontal, 10)
-              .padding(.vertical, 6)
-              .background(CultureTheme.canvas, in: Capsule())
-              .overlay {
-                Capsule().stroke(CultureTheme.hairline, lineWidth: 1)
-              }
+            LocalizedPackText(
+              source: element.name,
+              cacheNamespace: "element",
+              cacheKey: element.key ?? element.id.uuidString.lowercased()
+            )
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkSecondary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(CultureTheme.canvas, in: Capsule())
+            .overlay {
+              Capsule().stroke(CultureTheme.hairline, lineWidth: 1)
+            }
           }
           .buttonStyle(.plain)
         }

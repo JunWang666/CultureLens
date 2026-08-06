@@ -4,12 +4,19 @@ struct ThemeDetailView: View {
   let themeKey: String
 
   @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
+  @Environment(AppLanguageStore.self) private var languageStore
+  @State private var resolvedNavigationTitle: String?
 
   private var theme: KnowledgePack.Theme? {
     KnowledgeStore.shared?.pack.themes.first {
       $0.key == themeKey || $0.id.uuidString.caseInsensitiveCompare(themeKey) == .orderedSame
         || $0.sortKey == themeKey
     }
+  }
+
+  private var themeCacheKey: String? {
+    guard let theme else { return nil }
+    return theme.key ?? theme.id.uuidString.lowercased()
   }
 
   private var contactedIDs: Set<UUID> {
@@ -58,16 +65,25 @@ struct ThemeDetailView: View {
               HStack(alignment: .top, spacing: 14) {
                 ThemeSeriesThumbnail(theme: theme)
 
-                Text(theme.name)
-                  .font(CultureTypography.title(.largeTitle))
-                  .foregroundStyle(CultureTheme.inkPrimary)
-                  .frame(maxWidth: .infinity, alignment: .leading)
+                LocalizedPackText(
+                  source: theme.name,
+                  cacheNamespace: "theme",
+                  cacheKey: themeCacheKey
+                )
+                .font(CultureTypography.title(.largeTitle))
+                .foregroundStyle(CultureTheme.inkPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
               }
 
-              Text(theme.summary)
-                .font(CultureTypography.body(.title3))
-                .foregroundStyle(CultureTheme.inkSecondary)
-                .lineSpacing(5)
+              LocalizedPackText(
+                source: theme.summary,
+                cacheNamespace: "theme",
+                cacheKey: themeCacheKey,
+                kind: .fragment
+              )
+              .font(CultureTypography.body(.title3))
+              .foregroundStyle(CultureTheme.inkSecondary)
+              .lineSpacing(5)
 
               MagazineDoubleRule()
                 .padding(.top, 6)
@@ -117,7 +133,28 @@ struct ThemeDetailView: View {
         ContentUnavailableView("主题暂不可用", systemImage: "list.bullet.rectangle")
       }
     }
-    .cultureNavigationTitle(theme.map { LocalizedStringKey($0.name) } ?? "主题")
+    .cultureNavigationTitle(
+      resolvedNavigationTitle.map { LocalizedStringKey($0) } ?? "主题"
+    )
+    .task(id: "\(themeCacheKey ?? "")|\(languageStore.language.rawValue)") {
+      await reloadNavigationTitle()
+    }
+  }
+
+  @MainActor
+  private func reloadNavigationTitle() async {
+    resolvedNavigationTitle = nil
+    guard let theme, let themeCacheKey else { return }
+    if languageStore.language.isKnowledgeSource {
+      resolvedNavigationTitle = theme.name
+      return
+    }
+    resolvedNavigationTitle = await KnowledgeTranslationService.shared.localizedName(
+      cacheNamespace: "theme",
+      key: themeCacheKey,
+      sourceName: theme.name,
+      language: languageStore.language
+    )
   }
 
   @ViewBuilder
@@ -125,6 +162,7 @@ struct ThemeDetailView: View {
     if let element = KnowledgeStore.shared?.element(id: id) {
       let name = element.name
       let summary = KnowledgeStore.richTextPlainText(element.introduction)
+      let elementKey = element.key ?? element.id.uuidString.lowercased()
 
       NavigationLink(value: AppRoute.knowledgeElement(element.id)) {
         HStack(alignment: .top, spacing: 14) {
@@ -138,14 +176,23 @@ struct ThemeDetailView: View {
           }
 
           VStack(alignment: .leading, spacing: 4) {
-            Text(name)
-              .font(CultureTypography.title(.headline))
-              .foregroundStyle(CultureTheme.inkPrimary)
+            LocalizedPackText(
+              source: name,
+              cacheNamespace: "element",
+              cacheKey: elementKey
+            )
+            .font(CultureTypography.title(.headline))
+            .foregroundStyle(CultureTheme.inkPrimary)
             if !summary.isEmpty {
-              Text(summary)
-                .font(.caption)
-                .foregroundStyle(CultureTheme.inkSecondary)
-                .lineLimit(2)
+              LocalizedPackText(
+                source: summary,
+                cacheNamespace: "element",
+                cacheKey: elementKey,
+                kind: .fragment
+              )
+              .font(.caption)
+              .foregroundStyle(CultureTheme.inkSecondary)
+              .lineLimit(2)
             }
           }
 
@@ -186,4 +233,5 @@ private struct ThemeSeriesThumbnail: View {
     ThemeDetailView(themeKey: "moon-pools-reflection")
   }
   .environment(KnowledgeProgressStore())
+  .environment(AppLanguageStore())
 }

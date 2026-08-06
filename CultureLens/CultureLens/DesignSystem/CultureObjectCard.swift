@@ -47,10 +47,16 @@ struct CultureObjectCard: View {
         .foregroundStyle(CultureTheme.cinnabar)
         .lineLimit(1)
 
-        Text(object.summary)
-          .font(CultureTypography.body(.subheadline))
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .lineLimit(3)
+        LocalizedPackText(
+          source: object.summary,
+          cacheNamespace: "object.summary",
+          cacheKey: object.culturalElementID.map { $0.uuidString.lowercased() }
+            ?? KnowledgeStore.shared?.elementKey(for: object.id),
+          kind: .fragment
+        )
+        .font(CultureTypography.body(.subheadline))
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .lineLimit(3)
       }
       .padding(16)
     }

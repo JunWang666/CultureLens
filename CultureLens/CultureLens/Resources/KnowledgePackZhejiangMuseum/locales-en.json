@@ -1,6 +1,6 @@
 {
   "elements": {
-    "zhejiang-museum-history": {
+    "9d5f30ce-f7b7-5897-b564-e02a11a0fea7": {
       "name": "The History of the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -8,6 +8,11 @@
           {
             "type": "paragraph",
             "text": "Founded in November 1929, the Zhejiang Museum is one of the earliest regional comprehensive museums in China. It was once known as the 'Zhejiang West Lake Museum' and the 'Provincial West Lake Museum'. Its beginnings lie right by West Lake, closely tied to the legacy of the modern West Lake Exposition."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhejiang-museum-history.jpg",
+            "caption": "The History of the Zhejiang Museum"
           },
           {
             "type": "paragraph",
@@ -24,7 +29,7 @@
         ]
       }
     },
-    "gushan-campus": {
+    "917dfb28-49c6-5a13-975c-0901a3248fc5": {
       "name": "The Gushan Campus and 'A Museum in a Garden, a Garden in a Museum'",
       "introduction": {
         "schemaVersion": 1,
@@ -32,6 +37,11 @@
           {
             "type": "paragraph",
             "text": "The Gushan Campus is the oldest campus of the Zhejiang Museum, set at the southern foot of Solitary Hill (Gushan) by West Lake in Hangzhou. It adjoins the Bai Causeway and the 'Autumn Moon over the Calm Lake' scenic spot to the east and the Xiling Seal Art Society to the west. Completed in the autumn of 1993 and covering 20,400 square metres, its buildings form a layout described as 'a museum in a garden, a garden in a museum'."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/gushan-campus.jpg",
+            "caption": "The Gushan Campus and 'A Museum in a Garden, a Garden in a Museum'"
           },
           {
             "type": "paragraph",
@@ -48,7 +58,7 @@
         ]
       }
     },
-    "zhijiang-campus": {
+    "f1967937-d54e-5f3a-8492-b74f2d81f6a9": {
       "name": "The Zhijiang Campus and 'Ten Thousand Years of Zhejiang'",
       "introduction": {
         "schemaVersion": 1,
@@ -56,6 +66,11 @@
           {
             "type": "paragraph",
             "text": "The Zhijiang Campus is the new main venue of the Zhejiang Museum. Located in the Zhijiang Cultural Center of Hangzhou, it opened to the public on 29 August 2023, covering about 54,400 square metres with a floor area of 100,000 square metres."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhijiang-campus.jpg",
+            "caption": "The Zhijiang Campus and 'Ten Thousand Years of Zhejiang'"
           },
           {
             "type": "paragraph",
@@ -72,7 +87,7 @@
         ]
       }
     },
-    "museum-collection-system": {
+    "95906076-3c48-5762-ad31-2eebe2a9bd42": {
       "name": "A Collection of Over One Hundred Thousand Objects and Its System",
       "introduction": {
         "schemaVersion": 1,
@@ -80,6 +95,11 @@
           {
             "type": "paragraph",
             "text": "The Zhejiang Museum holds more than one hundred thousand artefacts that span virtually every period of Zhejiang's history, a comprehensive regional collection built up through local archaeology and donations."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/museum-collection-system.jpg",
+            "caption": "A Collection of Over One Hundred Thousand Objects and Its System"
           },
           {
             "type": "paragraph",
@@ -96,7 +116,7 @@
         ]
       }
     },
-    "top-ten-treasures": {
+    "162ffb68-7b96-5a03-aef2-73709620ccb1": {
       "name": "The Selection of the Top Ten Treasures",
       "introduction": {
         "schemaVersion": 1,
@@ -104,6 +124,11 @@
           {
             "type": "paragraph",
             "text": "In June 2009, to mark the 80th anniversary of its founding, the Zhejiang Museum launched a 'Top Ten Treasures' selection. Over the course of one month, a combination of visitor votes and expert opinion produced a list of the ten most representative artefacts in the collection."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/top-ten-treasures.jpg",
+            "caption": "The Selection of the Top Ten Treasures"
           },
           {
             "type": "paragraph",
@@ -120,7 +145,7 @@
         ]
       }
     },
-    "no-overseas-treasures": {
+    "7cb89f30-5375-5ddd-8a2a-68e8dc74462a": {
       "name": "Artefacts Barred from Overseas Exhibition",
       "introduction": {
         "schemaVersion": 1,
@@ -128,6 +153,11 @@
           {
             "type": "paragraph",
             "text": "Some of China's most important artefacts are placed by the state on a national list barring them from overseas exhibition. They may only be shown within China and may not be lent abroad for touring shows. Five groups of artefacts at the Zhejiang Museum are on this list."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/no-overseas-treasures.jpg",
+            "caption": "Artefacts Barred from Overseas Exhibition"
           },
           {
             "type": "paragraph",
@@ -144,7 +174,7 @@
         ]
       }
     },
-    "hemudu-culture": {
+    "fb207661-23da-54bc-af3c-aee4dbb88931": {
       "name": "The Hemudu Culture",
       "introduction": {
         "schemaVersion": 1,
@@ -152,6 +182,11 @@
           {
             "type": "paragraph",
             "text": "The Hemudu culture was a Neolithic culture distributed across the plains on the southern shore of Hangzhou Bay in Zhejiang, China, extending to the Zhoushan Islands, dating from roughly 6,000 to 7,000 years ago. It takes its name from the Hemudu site in Yuyao, where it was first excavated."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-culture.png",
+            "caption": "The Hemudu Culture"
           },
           {
             "type": "paragraph",
@@ -168,7 +203,7 @@
         ]
       }
     },
-    "hemudu-double-bird": {
+    "7761fd8c-06f2-5e4a-8343-5144175672c2": {
       "name": "Ivory Carving of Twin Birds Facing the Sun",
       "introduction": {
         "schemaVersion": 1,
@@ -176,6 +211,11 @@
           {
             "type": "paragraph",
             "text": "The ivory carving of twin birds facing the sun is a masterpiece of line engraving from the Hemudu culture and one of the top ten treasures of the Zhejiang Museum. It was made by the Hemudu people of the Neolithic age, some 6,000 to 7,000 years ago."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-double-bird.jpg",
+            "caption": "Ivory Carving of Twin Birds Facing the Sun"
           },
           {
             "type": "paragraph",
@@ -192,7 +232,7 @@
         ]
       }
     },
-    "yue-bronze-swords": {
+    "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919": {
       "name": "The Bronze Sword Tradition of the Yue State",
       "introduction": {
         "schemaVersion": 1,
@@ -200,6 +240,11 @@
           {
             "type": "paragraph",
             "text": "The state of Yue was one of the principal sources of smelting materials such as copper and tin in the pre-Qin period. That the Yue people excelled at making swords and blades was a universally acknowledged fact before the Western Han. Works such as the Rites of Zhou, the Zhuangzi, the Strategies of the Warring States and the Huainanzi all praise the quality of Yue weapons. Yue also boasted the renowned swordmaker Ou Yezi and the sword connoisseur Xue Zhu."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/yue-bronze-swords.jpg",
+            "caption": "The Bronze Sword Tradition of the Yue State"
           },
           {
             "type": "paragraph",
@@ -216,7 +261,7 @@
         ]
       }
     },
-    "zhejiang-yue-sword": {
+    "c93861c2-1ccb-5cc1-a394-e3e67da38c5d": {
       "name": "The Sword of King Zhejiyushi of Yue",
       "introduction": {
         "schemaVersion": 1,
@@ -224,6 +269,11 @@
           {
             "type": "paragraph",
             "text": "The Sword of King Zhejiyushi of Yue is a bronze sword cast during the reign of King Zhejiyushi of the Spring and Autumn period. It is one of the top ten treasures of the Zhejiang Museum. Although Zhejiyushi reigned for only six years, he had bronze swords cast in great numbers."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhejiang-yue-sword.png",
+            "caption": "The Sword of King Zhejiyushi of Yue"
           },
           {
             "type": "paragraph",
@@ -240,7 +290,7 @@
         ]
       }
     },
-    "wuyue-state": {
+    "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9": {
       "name": "The Wuyue Kingdom and Its Policy of Protecting the Realm",
       "introduction": {
         "schemaVersion": 1,
@@ -248,6 +298,11 @@
           {
             "type": "paragraph",
             "text": "Wuyue (16 June 907 - 9 June 978) was one of the Ten Kingdoms of the Five Dynasties and Ten Kingdoms period. Founded by Qian Liu in 907 with its capital at Hangzhou (the 'Western Capital'), it was the only state never conquered by force during the Northern Song's founding wars."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wuyue-state.png",
+            "caption": "The Wuyue Kingdom and Its Policy of Protecting the Realm"
           },
           {
             "type": "paragraph",
@@ -264,7 +319,7 @@
         ]
       }
     },
-    "wuyue-buddhist-art": {
+    "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20": {
       "name": "Wuyue Buddhism and the Jewel Casket Stupa",
       "introduction": {
         "schemaVersion": 1,
@@ -272,6 +327,11 @@
           {
             "type": "paragraph",
             "text": "Buddhism was a central part of Wuyue culture, and every king of Wuyue was a devout believer. By the reign of King Zhongyi the kingdom boasted 84,000 stupas and pagodas, including such famous ones as Hangzhou's Baochu Pagoda and Leifeng Pagoda today."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wuyue-buddhist-art.jpg",
+            "caption": "Wuyue Buddhism and the Jewel Casket Stupa"
           },
           {
             "type": "paragraph",
@@ -288,7 +348,7 @@
         ]
       }
     },
-    "asoka-pagoda": {
+    "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7": {
       "name": "The Five Dynasties Gilded Silver Asoka Pagoda",
       "introduction": {
         "schemaVersion": 1,
@@ -296,6 +356,11 @@
           {
             "type": "paragraph",
             "text": "The Five Dynasties Wuyue gilded silver Asoka Pagoda is one of the top ten treasures of the Zhejiang Museum. A small pagoda-shaped artefact of the jewel casket stupa type, it came from the excavation of the Leifeng Pagoda site."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/asoka-pagoda.jpg",
+            "caption": "The Five Dynasties Gilded Silver Asoka Pagoda"
           },
           {
             "type": "paragraph",
@@ -312,7 +377,7 @@
         ]
       }
     },
-    "yue-kiln": {
+    "7354cd7a-a6a2-56d7-b7a6-dfb871129047": {
       "name": "The Yue Kiln and Secret-Colour Celadon",
       "introduction": {
         "schemaVersion": 1,
@@ -320,6 +385,11 @@
           {
             "type": "paragraph",
             "text": "The Yue kiln was a porcelain kiln of Shaoxing's Yue Prefecture in Zhejiang during the Tang and Five Dynasties periods, with its main kiln sites spread around Shanglin Lake in Cixi. As Shaoxing was called 'Yue Prefecture' under the Sui and Tang dynasties, the kiln took the name 'Yue'."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/yue-kiln.jpg",
+            "caption": "The Yue Kiln and Secret-Colour Celadon"
           },
           {
             "type": "paragraph",
@@ -336,7 +406,7 @@
         ]
       }
     },
-    "longquan-kiln": {
+    "7f792a90-7796-57ed-bc27-e69b3fe33fbc": {
       "name": "The Longquan Kiln and Its Powder-Blue and Plum-Green Glazes",
       "introduction": {
         "schemaVersion": 1,
@@ -344,6 +414,11 @@
           {
             "type": "paragraph",
             "text": "Longquan celadon was a system of kilns centred on the ancient kiln sites of Longquan city in Zhejiang, with branches spread widely across the surrounding region. The Longquan kiln is generally held to have reached its golden age in the Southern Song."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/longquan-kiln.jpg",
+            "caption": "The Longquan Kiln and Its Powder-Blue and Plum-Green Glazes"
           },
           {
             "type": "paragraph",
@@ -360,7 +435,7 @@
         ]
       }
     },
-    "longquan-boat-drip": {
+    "7a93901c-1ccc-51e6-ae5e-392a22bc1abe": {
       "name": "The Yuan Longquan Kiln Boat-Shaped Water Dropper",
       "introduction": {
         "schemaVersion": 1,
@@ -368,6 +443,11 @@
           {
             "type": "paragraph",
             "text": "The Yuan Longquan kiln boat-shaped water dropper is one of the top ten treasures of the Zhejiang Museum. It is a celadon scholar's object of the Longquan kiln family - a small vessel used in the study to hold water for grinding ink."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/longquan-boat-drip.jpg",
+            "caption": "The Yuan Longquan Kiln Boat-Shaped Water Dropper"
           },
           {
             "type": "paragraph",
@@ -384,7 +464,7 @@
         ]
       }
     },
-    "southern-song-guan-ware": {
+    "ce41ce0d-05c3-5a8b-a586-16218e70392d": {
       "name": "The Southern Song Guan (Imperial) Kiln",
       "introduction": {
         "schemaVersion": 1,
@@ -392,6 +472,11 @@
           {
             "type": "paragraph",
             "text": "The Southern Song Guan Kiln Campus of the Hangzhou West Lake Museum (formerly the Southern Song Guan Kiln Museum) is located in Hangzhou, Zhejiang. Built on the site of the Southern Song imperial kiln at Jiaotanxia, it is the first museum in China devoted to ceramics and built around an ancient kiln site, and the most direct place to learn about the Southern Song Guan kiln."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/southern-song-guan-ware.jpg",
+            "caption": "The Southern Song Guan (Imperial) Kiln"
           },
           {
             "type": "paragraph",
@@ -408,7 +493,7 @@
         ]
       }
     },
-    "fuchun-shanju-tu": {
+    "03450361-df1d-50fc-89cc-848d880e1783": {
       "name": "The Dwelling in the Fuchun Mountains and the Remaining Mountain Scroll",
       "introduction": {
         "schemaVersion": 1,
@@ -416,6 +501,11 @@
           {
             "type": "paragraph",
             "text": "The Dwelling in the Fuchun Mountains is the work of Huang Gongwang, a painter active at the end of the Song and the beginning of the Yuan dynasty. Painted between 1347 and 1350 against the backdrop of the Fuchun River in Zhejiang, it is his masterpiece, praised by later generations as the 'Lanting of painting' and the 'supreme divine work of landscape painting', and it is counted among China's ten greatest surviving paintings."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/fuchun-shanju-tu.jpg",
+            "caption": "The Dwelling in the Fuchun Mountains and the Remaining Mountain Scroll"
           },
           {
             "type": "paragraph",
@@ -432,7 +522,7 @@
         ]
       }
     },
-    "huang-gongwang": {
+    "058e20d5-373f-5423-b6d6-4adb8f88c144": {
       "name": "Huang Gongwang and the Fuchun River",
       "introduction": {
         "schemaVersion": 1,
@@ -440,6 +530,11 @@
           {
             "type": "paragraph",
             "text": "Huang Gongwang (1269-1354), courtesy name Zijiu, with the sobriquets Dachi, Dachi Daoren and Yifeng Daoren, was a Yuan-dynasty painter from Changshu Prefecture, Pingjiang Circuit (today's Changshu, Suzhou, Jiangsu). Honoured as the first of the 'Four Great Masters of the Yuan', he is named alongside Wu Zhen, Ni Zan and Wang Meng."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-gongwang.jpg",
+            "caption": "Huang Gongwang and the Fuchun River"
           },
           {
             "type": "paragraph",
@@ -456,7 +551,7 @@
         ]
       }
     },
-    "huang-binhong": {
+    "d402f589-b0e2-59f7-96ee-d53df0019cb1": {
       "name": "Huang Binhong and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -464,6 +559,11 @@
           {
             "type": "paragraph",
             "text": "Huang Binhong (27 January 1865 - 25 March 1955), personal name Zhi, courtesy names Pucun and Puren, and known by the sobriquets Yuxiang, Honglu and Hongsou, adopted the name Binhong in middle age and is known by it. Born in Jinhua, Zhejiang, with ancestral roots in Tandu village, western She County, Anhui, he was a modern Chinese landscape painter."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-binhong.jpg",
+            "caption": "Huang Binhong and the Zhejiang Museum"
           },
           {
             "type": "paragraph",
@@ -480,7 +580,7 @@
         ]
       }
     },
-    "sha-menghai": {
+    "25847815-97a4-5692-860f-fa04a848bf53": {
       "name": "Sha Menghai and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -488,6 +588,11 @@
           {
             "type": "paragraph",
             "text": "Sha Menghai (11 June 1900 - 10 October 1992), originally named Sha Wenruo, courtesy name Menghai, with the sobriquets Shacun, Lansha, Shihuang and Jueming, came from Sha village in Tangxi township, Yin County, Zhejiang (today's Yinzhou District, Ningbo). He was a Chinese calligrapher and seal carver, and a master whose ties to the Zhejiang Museum ran deep."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/sha-menghai.jpg",
+            "caption": "Sha Menghai and the Zhejiang Museum"
           },
           {
             "type": "paragraph",
@@ -504,7 +609,7 @@
         ]
       }
     },
-    "wu-changshuo": {
+    "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90": {
       "name": "Wu Changshuo and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,
@@ -512,6 +617,11 @@
           {
             "type": "paragraph",
             "text": "Wu Changshuo (12 September 1844 - 29 November 1927) came from Zhangwu village, Anji County, Huzhou, Zhejiang. A seal carver active in the late Qing and early Republic, he was also accomplished in calligraphy and painting."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wu-changshuo.png",
+            "caption": "Wu Changshuo and the Zhejiang Museum"
           },
           {
             "type": "paragraph",
@@ -528,7 +638,7 @@
         ]
       }
     },
-    "guqin-world": {
+    "c5978321-c18b-582e-bcac-e1990d4561ac": {
       "name": "The Guqin and the Chinese World of Sound",
       "introduction": {
         "schemaVersion": 1,
@@ -536,6 +646,11 @@
           {
             "type": "paragraph",
             "text": "The guqin (seven-stringed zither) is one of the oldest instruments in Chinese history and an object through which the Chinese have given voice to sound and feeling. On 7 November 2003, the art of the guqin was inscribed by UNESCO on the second Representative List of the Intangible Cultural Heritage of Humanity; on 20 May 2006, the State Council added the guqin to the first national list of intangible cultural heritage."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/guqin-world.jpg",
+            "caption": "The Guqin and the Chinese World of Sound"
           },
           {
             "type": "paragraph",
@@ -552,7 +667,7 @@
         ]
       }
     },
-    "cai-feng-ming-qi": {
+    "b78c3e13-f4fd-5626-8150-4744854e50d8": {
       "name": "The Tang Seven-Stringed Zither 'Cai Feng Ming Qi'",
       "introduction": {
         "schemaVersion": 1,
@@ -560,6 +675,11 @@
           {
             "type": "paragraph",
             "text": "The Tang seven-stringed zither 'Cai Feng Ming Qi' ('A Colorful Phoenix Sings at Qishan') is one of the top ten treasures of the Zhejiang Museum. Made in the Tang dynasty, it is a celebrated surviving guqin and a representative piece in the museum's guqin collection."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/cai-feng-ming-qi.jpg",
+            "caption": "The Tang Seven-Stringed Zither 'Cai Feng Ming Qi'"
           },
           {
             "type": "paragraph",
@@ -576,7 +696,7 @@
         ]
       }
     },
-    "qi-lacquer-donation": {
+    "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a": {
       "name": "The Lacquerware Donated by Mr. and Mrs. Cao Qiyong",
       "introduction": {
         "schemaVersion": 1,
@@ -584,6 +704,11 @@
           {
             "type": "paragraph",
             "text": "In 2012, the Hong Kong industrialist Mr. Cao Qiyong, a noted native of Zhejiang, and his wife donated 160 pieces (groups) of lacquerware they had treasured for years to the Zhejiang Museum. Spanning from the Song to the Qing dynasties, this collection is an important source of the museum's lacquer holdings."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/qi-lacquer-donation.jpg",
+            "caption": "The Lacquerware Donated by Mr. and Mrs. Cao Qiyong"
           },
           {
             "type": "paragraph",
@@ -600,7 +725,7 @@
         ]
       }
     },
-    "shili-hongzhuang": {
+    "a3c5b4b8-d016-5690-81d6-458cceeee4e3": {
       "name": "Shili Hongzhuang and the Marriage Customs of Ningbo and Shaoxing",
       "introduction": {
         "schemaVersion": 1,
@@ -608,6 +733,11 @@
           {
             "type": "paragraph",
             "text": "Shili hongzhuang ('a ten-li red trousseau') is a marriage custom of eastern Zhejiang, centred on Ninghai County. It takes its name from the practice in which a daughter's dowry - from beds and furniture down to needles, thread and headdresses - was so complete that the procession bearing it stretched for ten li (roughly five kilometres). The custom began in the Southern Song and flourished in the Ming and Qing dynasties."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/shili-hongzhuang.jpg",
+            "caption": "Shili Hongzhuang and the Marriage Customs of Ningbo and Shaoxing"
           },
           {
             "type": "paragraph",
@@ -624,7 +754,7 @@
         ]
       }
     },
-    "wan-gong-jiao": {
+    "5429373a-0fd2-5912-b210-49ad3bcdc724": {
       "name": "The Republican-Era Ten-Thousand-Work Sedan Chair",
       "introduction": {
         "schemaVersion": 1,
@@ -632,6 +762,11 @@
           {
             "type": "paragraph",
             "text": "The Republican-era ten-thousand-work sedan chair is one of the top ten treasures of the Zhejiang Museum. It is the most magnificent and massive item of dowry in the shili hongzhuang marriage custom of the Ningbo-Shaoxing region."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wan-gong-jiao.jpg",
+            "caption": "The Republican-Era Ten-Thousand-Work Sedan Chair"
           },
           {
             "type": "paragraph",
@@ -644,7 +779,7 @@
         ]
       }
     },
-    "jiyue-bronze-house": {
+    "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842": {
       "name": "The Spring and Autumn Bronze House of Musicians",
       "introduction": {
         "schemaVersion": 1,
@@ -652,6 +787,11 @@
           {
             "type": "paragraph",
             "text": "The Spring and Autumn bronze house of musicians is one of the top ten treasures of the Zhejiang Museum. A bronze object on the theme of a house and its musicians, it comes from the Shaoxing area, the heartland of the state of Yue."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/jiyue-bronze-house.jpg",
+            "caption": "The Spring and Autumn Bronze House of Musicians"
           },
           {
             "type": "paragraph",
@@ -668,7 +808,7 @@
         ]
       }
     },
-    "caisu-mud-bodhisattva": {
+    "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272": {
       "name": "The Northern Song Painted Clay Standing Bodhisattva",
       "introduction": {
         "schemaVersion": 1,
@@ -678,13 +818,18 @@
             "text": "The Northern Song painted clay standing bodhisattva is one of the top ten treasures of the Zhejiang Museum - a polychrome clay sculpture of a bodhisattva from the Song dynasty."
           },
           {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/caisu-mud-bodhisattva.jpg",
+            "caption": "The Northern Song Painted Clay Standing Bodhisattva"
+          },
+          {
             "type": "paragraph",
             "text": "Compared with bronze or porcelain, clay Buddhist images are far harder to preserve; that a painted clay bodhisattva of the Northern Song should survive to this day is remarkable in itself. Like the Buddhist remains of the Five Dynasties Wuyue kingdom, it reminds you, as you look at the sculptures at the Zhejiang Museum, to notice the other path Song sculpture took in materials and form."
           }
         ]
       }
     },
-    "hemudu-painted-pottery": {
+    "ac565d24-9a02-5a99-8acc-cb885f30883d": {
       "name": "Decorated Pottery of the Hemudu Culture",
       "introduction": {
         "schemaVersion": 1,
@@ -692,6 +837,11 @@
           {
             "type": "paragraph",
             "text": "The decorated pottery of the Hemudu culture was made by hand by the Hemudu people, with patterns painted or incised on the surface. These pots are important physical evidence for understanding Hemudu life and beliefs. They are thick, grey-black in colour, and often bear cord-marking or motifs of plants and animals."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-painted-pottery.jpg",
+            "caption": "Decorated Pottery of the Hemudu Culture"
           },
           {
             "type": "paragraph",
@@ -708,7 +858,7 @@
         ]
       }
     },
-    "hemudu-bone-plough": {
+    "9abf276c-9bef-5142-8dda-d964bcdb8015": {
       "name": "The Bone Plough of Hemudu",
       "introduction": {
         "schemaVersion": 1,
@@ -716,6 +866,11 @@
           {
             "type": "paragraph",
             "text": "The bone plough is a bone digging tool for turning soil unearthed at the Hemudu site. It was the Hemudu people's trusty implement for tilling the land and planting rice, and it is the emblematic artefact of what is called 'plough-till agriculture'."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-bone-plough.jpg",
+            "caption": "The Bone Plough of Hemudu"
           },
           {
             "type": "paragraph",
@@ -732,7 +887,7 @@
         ]
       }
     },
-    "zhang-cheng-red-lacquer": {
+    "e50f9576-9d0d-506d-a71d-e893854c5e5f": {
       "name": "Zhang Cheng's Carved Red-Lacquer Plate of Children at Play",
       "introduction": {
         "schemaVersion": 1,
@@ -740,6 +895,11 @@
           {
             "type": "paragraph",
             "text": "Zhang Cheng's carved red-lacquer plate of children at play is a work by the master Yuan lacquer carver Zhang Cheng. It ranks as a national-treasure-grade artefact, one of only four known pieces bearing the mark 'made by Zhang Cheng', and the crowning piece of the Zhejiang Museum's lacquer collection."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhang-cheng-red-lacquer.jpg",
+            "caption": "Zhang Cheng's Carved Red-Lacquer Plate of Children at Play"
           },
           {
             "type": "paragraph",
@@ -756,7 +916,7 @@
         ]
       }
     },
-    "tang-guqin-tradition": {
+    "71261568-8116-57fb-8221-e32f8dbbfe77": {
       "name": "Tang-Dynasty Guqin and the Saying 'The Tang Is Round'",
       "introduction": {
         "schemaVersion": 1,
@@ -764,6 +924,11 @@
           {
             "type": "paragraph",
             "text": "Tang-dynasty guqin are the earliest reliably dated instruments among surviving zithers, and rare treasures within China's guqin-making tradition. 'The Tang is round' (Tang yuan) is an old saying about guqin form that has come down to our own day."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/tang-guqin-tradition.jpg",
+            "caption": "Tang-Dynasty Guqin and the Saying 'The Tang Is Round'"
           },
           {
             "type": "paragraph",
@@ -780,7 +945,7 @@
         ]
       }
     },
-    "huang-binhong-memorial": {
+    "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e": {
       "name": "Huang Binhong Memorial Room",
       "introduction": {
         "schemaVersion": 1,
@@ -788,11 +953,16 @@
           {
             "type": "paragraph",
             "text": "This memorial room preserves the late-life studio of Huang Binhong, the modern landscape master who lived beside West Lake. His family donated over five thousand works to the Zhejiang Museum, forming a pillar of its painting collection."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-binhong-memorial.jpg",
+            "caption": "Huang Binhong Memorial Room"
           }
         ]
       }
     },
-    "sha-menghai-residence": {
+    "beae431c-6816-5890-8ebe-39df230ebe3c": {
       "name": "Former Residence of Sha Menghai",
       "introduction": {
         "schemaVersion": 1,
@@ -800,27 +970,32 @@
           {
             "type": "paragraph",
             "text": "The former residence of Sha Menghai, master calligrapher and honorary director of the Zhejiang Museum, preserves his works, seals, and everyday objects, linking the museum with modern Chinese calligraphy and the Xiling Seal Art Society."
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/sha-menghai-residence.jpg",
+            "caption": "Former Residence of Sha Menghai"
           }
         ]
       }
     }
   },
   "attractions": {
-    "zhijiang-campus": {
+    "f0f5b61e-f773-5975-b59e-65a23d726ea6": {
       "name": "Zhijiang Campus"
     },
-    "gushan-campus": {
+    "49e6e5b7-7656-506e-966d-4889b903de31": {
       "name": "Gushan Campus"
     },
-    "huang-binhong-memorial": {
+    "3617c401-555e-5c3a-a818-7a2554886b0b": {
       "name": "Huang Binhong Memorial Room"
     },
-    "sha-menghai-residence": {
+    "a2184653-deae-5b85-bc3e-3752107d82cf": {
       "name": "Former Residence of Sha Menghai"
     }
   },
   "introductions": {
-    "zhijiang-campus.zhejiang-wannian-guobao": {
+    "cc5357fc-e089-511d-9166-86cdb144adef": {
       "name": "Ten Thousand Years of Zhejiang and the Five National Treasures",
       "introduction": {
         "schemaVersion": 1,
@@ -840,7 +1015,7 @@
         ]
       }
     },
-    "zhijiang-campus.fuchun-shanshui": {
+    "0abc9dd1-6c4c-5aa8-905c-1af7c3a2aab2": {
       "name": "Between Mountain and Water: The Digital Exhibition of the Dwelling in the Fuchun Mountains",
       "introduction": {
         "schemaVersion": 1,
@@ -860,7 +1035,7 @@
         ]
       }
     },
-    "zhijiang-campus.taigu-guqin": {
+    "3fc8e5c1-c715-5ba8-b0df-2011a9adc717": {
       "name": "Sound of Antiquity: The Guqin Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -880,7 +1055,7 @@
         ]
       }
     },
-    "gushan-campus.zhongyuan-wenge": {
+    "babdee75-1d7d-592e-bbc7-e8b2adcbd5e1": {
       "name": "A Museum in a Garden, a Garden in a Museum, and the Wenglan Pavilion",
       "introduction": {
         "schemaVersion": 1,
@@ -900,7 +1075,7 @@
         ]
       }
     },
-    "gushan-campus.kunshan-pianyu": {
+    "b4ff9e8e-d21b-54e6-b0b3-435789170b3a": {
       "name": "Jade Fragments from Mount Kun: The Ceramics Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -920,7 +1095,7 @@
         ]
       }
     },
-    "gushan-campus.leifeng-ta-wenwu": {
+    "6f9f4661-1191-55d4-a8c6-5308da697c0e": {
       "name": "The Leifeng Pagoda Artefacts Gallery",
       "introduction": {
         "schemaVersion": 1,
@@ -940,7 +1115,7 @@
         ]
       }
     },
-    "huang-binhong-memorial.qixialing": {
+    "e0cc4c3d-b661-5ba2-8ce6-eb4a6abf590b": {
       "name": "Huang Binhong's Later Years at Qixia Ridge",
       "introduction": {
         "schemaVersion": 1,
@@ -960,7 +1135,7 @@
         ]
       }
     },
-    "huang-binhong-memorial.wuqian-zuoping": {
+    "bdf9a18b-f88b-5397-b4c8-51aa27f44a16": {
       "name": "Five Thousand Works and the Memorial Room",
       "introduction": {
         "schemaVersion": 1,
@@ -980,7 +1155,7 @@
         ]
       }
     },
-    "sha-menghai-residence.longlu-du": {
+    "562b8103-e326-55c2-8d20-d775b1f9f5d2": {
       "name": "The Former Residence of Sha Menghai on Longyou Road",
       "introduction": {
         "schemaVersion": 1,
@@ -1000,7 +1175,7 @@
         ]
       }
     },
-    "sha-menghai-residence.shufa-zhuanke": {
+    "cde3c3cc-de7a-5299-a660-3e868432c3bb": {
       "name": "Calligraphy, Seal Carving and the Zhejiang Museum",
       "introduction": {
         "schemaVersion": 1,

@@ -26,7 +26,7 @@ struct CultureContentService: Sendable {
       _ limit: Int
     ) async throws -> NearbyRecommendationsResponse
 
-  /// Local implementation backed by the bundled knowledge pack; performs the
+  /// Local implementation backed by the loaded knowledge packs; performs the
   /// same Haversine query the Go backend ran in PostgreSQL.
   static func live() -> CultureContentService {
     CultureContentService { latitude, longitude, radiusMeters, limit in
@@ -53,15 +53,15 @@ struct CultureContentService: Sendable {
         totalMatches: result.totalMatches,
         introductions: result.introductions.map {
           AttractionIntroductionRecommendation(
-            key: $0.key,
+            key: $0.key ?? $0.attractionId.uuidString.lowercased(),
             name: $0.name,
             introduction: $0.introduction,
             culturalElement: ContentReference(
-              key: $0.culturalElementKey,
+              key: $0.culturalElementId.uuidString.lowercased(),
               name: $0.culturalElementName
             ),
             attraction: ContentReference(
-              key: $0.attractionKey,
+              key: $0.attractionKey ?? $0.attractionId.uuidString.lowercased(),
               name: $0.attractionName
             ),
             location: ContentCoordinate(

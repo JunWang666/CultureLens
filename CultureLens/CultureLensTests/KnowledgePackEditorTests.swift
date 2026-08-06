@@ -137,7 +137,7 @@ struct KnowledgePackEditorTests {
       ),
     ]
     let pack = draft.buildPack()
-    #expect(pack.attractions.map(\.key) == ["tower"])
+    #expect(pack.attractions.compactMap(\.key) == ["tower"])
     #expect(pack.attractions.first?.name == "塔")
     #expect(pack.elements.count == 2)
   }

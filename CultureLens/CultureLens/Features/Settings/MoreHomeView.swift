@@ -51,10 +51,10 @@ struct MoreHomeView: View {
     .padding(18)
     .background(
       CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
     )
     .overlay {
-      RoundedRectangle(cornerRadius: 20, style: .continuous)
+      RoundedRectangle(cornerRadius: 12, style: .continuous)
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
   }

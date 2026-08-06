@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "893ee811-737d-54ca-a22a-d3a1fce35880",
       "key": "mojiaoshan-center",
       "name": "莫角山：良渚的权力中心",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "莫角山遗址是良渚文化的中心所在，东西长670米、南北宽450米，面积达30余万平方米，相对高度约8米，整个良渚遗址群以它为中心、围绕它而分布，可说是政治权力中心。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/mojiaoshan-center.jpg",
+            "caption": "The view of Mojiaoshan Relic Site of Liangzhu Culture, located at Yuhang Dist, Hangzhou, Zhejiang, China."
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
       "key": "fanshan-cemetery",
       "name": "反山贵族墓地",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "反山贵族墓地位于良渚古城附近，是一座人工堆筑修整过的高台墓地，东西约100米、南北约30米，各墓均有墓坑，随葬品以玉器为主，总计有千件。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/fanshan-cemetery.jpg",
+            "caption": "​杭州良渚遗址公园——反山遗址大棚"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "2af8cfef-b959-5152-8e81-c5f5a625e158",
       "key": "yaoshan-altar",
       "name": "瑶山祭坛与墓葬",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "瑶山遗址位于良渚古城东北约5公里，占地约66.56公顷，有一座正南北方向、呈方形的祭坛，用于举行重大祭祀活动，祭坛废弃后成为一处高等级贵族墓地。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/yaoshan-altar.jpg",
+            "caption": "​大瑶山隧道广端，题字使用爨体。"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "422ecaac-9557-58b5-973a-5c181d410c71",
       "key": "jade-cong-wang",
       "name": "玉琮王",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "玉琮王出土于反山第12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，因体量与工艺均为良渚玉器之冠而被视为“琮王”，是良渚博物院与浙江省博物馆共同呈现的重要国宝。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-cong-wang.jpg",
+            "caption": "​良渚玉琮王"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e5ac2ef8-9095-57a6-808c-43df7159b392",
       "key": "jade-cong-ritual",
       "name": "琮：沟通天地的礼器",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "琮是中国古代用于祭祀的玉质筒状物，外型状似笔筒，外型方内洞圆；最早的玉琮见于安徽潜山薛家岗第三期文化，距今约5100年。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-cong-ritual.jpg",
+            "caption": "​玉琮 良渚文化 1987年余杭瑶山出土  礼器"
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
       "key": "jade-bi",
       "name": "玉璧",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "玉璧是圆形、中有圆孔的扁玉器，与玉琮同为良渚最重要的礼器之一，常与玉琮配合出现在祭祀与随葬之中。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-bi.jpg",
+            "caption": "玉璧"
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "484417c0-6068-54d5-9d51-97659064a65b",
       "key": "jade-yue",
       "name": "玉钺与军权王权",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "玉钺按武器石钺制成，在良渚是军权、王权的象征，是贵族墓葬中仅次于玉琮的权威玉器。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-yue.jpg",
+            "caption": "​玉钺 新石器时代 红山文化（约前4700年-前2900年）一级文物 辽宁朝阳11.26系列盗掘古文化遗址古墓葬案追缴"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "88f77240-6a4c-57c9-9322-443456b25598",
       "key": "liangzhu-museum",
       "name": "良渚博物院",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "良渚博物院位于浙江省杭州市余杭区良渚街道美丽洲公园内，是一座展览、陈列、研究良渚文化的专题类博物馆，前身为1994年成立开馆的良渚文化博物馆。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-museum.jpg",
+            "caption": "​良渚博物院，第一二展厅之间的庭院。"
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
       "key": "site-park",
       "name": "良渚古城遗址公园",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "良渚古城遗址公园是以良渚古城遗址为中心的考古遗址公园，你可以在这一片被列入世界遗产的土地上，直接看到五千年前的城、墙、水利与王陵。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/site-park.jpg",
+            "caption": "​良渚古城遗址公园"
           },
           {
             "type": "paragraph",
@@ -246,38 +300,47 @@
   ],
   "attractions": [
     {
+      "id": "569034e5-d306-5605-b1d8-754c8e8041f7",
       "key": "liangzhu-museum",
       "name": "良渚博物院"
     },
     {
+      "id": "a0c85a81-92bb-51a4-8e99-4230136a5643",
       "key": "site-park",
       "name": "良渚古城遗址公园"
     },
     {
+      "id": "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25",
       "key": "yaoshan-altar",
       "name": "瑶山遗址公园"
     },
     {
+      "id": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "key": "jade-cong-wang",
       "name": "玉琮王"
     },
     {
+      "id": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "key": "jade-cong-ritual",
       "name": "琮：沟通天地的礼器"
     },
     {
+      "id": "2214c758-79d5-58bc-963d-17178b204af5",
       "key": "jade-bi",
       "name": "玉璧"
     },
     {
+      "id": "fda7f090-f56b-5e48-a8a7-2916beb3c469",
       "key": "jade-yue",
       "name": "玉钺与军权王权"
     },
     {
+      "id": "fa150bb0-7779-54e4-84dd-2e3dd817658a",
       "key": "mojiaoshan-center",
       "name": "莫角山：良渚的权力中心"
     },
     {
+      "id": "dd5d6d7b-2529-5301-8fac-5a6325df37a7",
       "key": "fanshan-cemetery",
       "name": "反山贵族墓地"
     }

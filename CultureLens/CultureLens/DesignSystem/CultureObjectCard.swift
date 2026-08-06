@@ -27,7 +27,8 @@ struct CultureObjectCard: View {
         LocalizedPackText(
           source: object.canonicalName,
           cacheNamespace: "element",
-          cacheKey: object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+          cacheKey: object.culturalElementID.map { $0.uuidString.lowercased() }
+            ?? KnowledgeStore.shared?.elementKey(for: object.id)
         )
         .font(.cultureSerif(.title3))
         .foregroundStyle(CultureTheme.inkPrimary)

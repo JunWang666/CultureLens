@@ -43,11 +43,12 @@ enum KnowledgePackExporter {
     let stamped = pack.withStampedContentRoles()
     let encoder = makeEncoder()
 
+    let attractionKeys = Set(stamped.attractions.compactMap(\.key))
     let sightElements = stamped.elements.filter {
-      $0.resolvedContentRole(attractionKeys: Set(stamped.attractions.map(\.key))) == .sight
+      $0.resolvedContentRole(attractionKeys: attractionKeys) == .sight
     }
     let historyElements = stamped.elements.filter {
-      $0.resolvedContentRole(attractionKeys: Set(stamped.attractions.map(\.key))) == .history
+      $0.resolvedContentRole(attractionKeys: attractionKeys) == .history
     }
 
     var files: [String: Data] = [:]

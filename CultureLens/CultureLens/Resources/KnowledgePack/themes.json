@@ -1,63 +1,67 @@
 {
   "themes": [
     {
+      "id": "0184308b-9edb-5ba3-837e-ec85912960cf",
       "key": "moon-pools-reflection",
       "name": "月影三潭",
       "summary": "从三座水中石塔、圆孔透光到中秋赏月，理解「印月」如何把光影、器物与节令叠合为一处湖上景观。",
-      "elementKeys": [
-        "three-pools-mirroring-moon",
-        "three-pools-stone-pagodas",
-        "three-pools-round-openings",
-        "three-pools-light-mechanism",
-        "west-lake-moon-viewing",
-        "mid-autumn-west-lake",
-        "one-yuan-three-pools-symbol"
+      "elementIds": [
+        "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+        "67c74434-c86f-5d34-bba5-927ae2affcd7",
+        "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
+        "113dc571-9fc8-5982-a349-5d8905b8d1b9",
+        "8ddba328-608b-57b4-81bb-f383b22c1310",
+        "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
+        "e58c5e31-a4b0-5cac-bc18-58a88dda0fe6"
       ],
       "minContacted": 4
     },
     {
+      "id": "a806dae8-81c7-5f78-beeb-9ecfff0ef0de",
       "key": "west-lake-ten-scenes-gaze",
       "name": "十景如何被看见",
       "summary": "沿着西湖十景的命名传统，体会地点、季节、天气与观看方向如何共同构成一套文化观看方法。",
-      "elementKeys": [
-        "west-lake-ten-scenes",
-        "west-lake-ten-scenes-system",
-        "su-causeway-spring-dawn",
-        "pinghu-autumn-moon",
-        "leifeng-pagoda-and-evening-glow",
-        "quyuan-lotus-summer",
-        "huagang-fish-viewing",
-        "liulang-wenying-soundscape",
-        "nanping-evening-bell",
-        "shuangfeng-cloud-peaks"
+      "elementIds": [
+        "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+        "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+        "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+        "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
+        "23bd1809-9de0-5cba-b72c-c822987ed091",
+        "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
+        "7aa489c9-6efc-54da-8486-914cbab0267b",
+        "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
+        "db6089df-2ae1-508c-b2bc-e8316c287306",
+        "77347f66-53d0-5e01-a359-01bc66ca8330"
       ],
       "minContacted": 5
     },
     {
+      "id": "22f585e5-fb93-5062-a84f-0bd2ea2d2ef1",
       "key": "pagoda-lake-silhouette",
       "name": "塔影与湖山对景",
       "summary": "雷峰、保俶与湖岸塔影如何组织远望、对景与传说记忆，让塔成为湖山中的垂直文化标记。",
-      "elementKeys": [
-        "west-lake-pagoda-landscape",
-        "leifeng-pagoda-and-evening-glow",
-        "baochu-leifeng-twin-tower",
-        "legend-of-the-white-snake",
-        "liuhe-pagoda-river",
-        "baochu-pagoda"
+      "elementIds": [
+        "359c601d-38fc-5368-ae98-929ad425dc77",
+        "23bd1809-9de0-5cba-b72c-c822987ed091",
+        "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+        "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
+        "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+        "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd"
       ],
       "minContacted": 3
     },
     {
+      "id": "4ff2c8ac-dd92-5aec-980c-5c45a43ea209",
       "key": "causeway-governance-poetry",
       "name": "长堤、治理与诗意",
       "summary": "苏堤、白堤传统把水利、交通与游赏叠合；苏轼、白居易的治理实践如何沉淀为可步行的文化景观。",
-      "elementKeys": [
-        "west-lake-causeway-waterworks",
-        "su-causeway-spring-dawn",
-        "su-shi-and-west-lake",
-        "bai-juyi-and-west-lake",
-        "causeway-willow-peach",
-        "moving-view-changing-scenery"
+      "elementIds": [
+        "085b790e-08f7-5811-8073-8c996202b225",
+        "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+        "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+        "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
+        "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
+        "0512b97c-833f-5004-bd51-8822cd29ed3e"
       ],
       "minContacted": 3
     }

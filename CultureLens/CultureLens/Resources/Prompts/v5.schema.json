@@ -4,11 +4,11 @@
   "properties": {
     "attraction_key": {
       "type": "string",
-      "description": "当画面目标明确是 nearby_contexts 中的景点时返回对应 attraction_key，否则返回空字符串。"
+      "description": "当画面目标明确是附近景点候选中的一个时，返回该候选的短数字 id（1–2 位）；否则返回空字符串。不得发明候选集合之外的 id。"
     },
     "cultural_element_key": {
       "type": "string",
-      "description": "命中本次文化内容候选时必须返回该候选原始 key（不得只填名字而留空），且必须与 canonical_name 来自同一条候选；未收录对象返回空字符串。"
+      "description": "命中本次文化内容候选时必须返回该候选的短数字 id（1–2 位，不得只填名字而留空），且必须与 canonical_name 来自同一条候选；未收录对象返回空字符串。不得发明候选集合之外的 id。"
     },
     "canonical_name": {
       "type": "string",
@@ -55,7 +55,7 @@
         "properties": {
           "cultural_element_key": {
             "type": "string",
-            "description": "命中本次文化内容候选时必须返回该候选原始 key（不得只填名字而留空），且必须与该项 canonical_name 来自同一条候选；未收录对象返回空字符串。"
+            "description": "命中本次文化内容候选时必须返回该候选的短数字 id（1–2 位，不得只填名字而留空），且必须与该项 canonical_name 来自同一条候选；未收录对象返回空字符串。不得发明候选集合之外的 id。"
           },
           "canonical_name": {
             "type": "string",

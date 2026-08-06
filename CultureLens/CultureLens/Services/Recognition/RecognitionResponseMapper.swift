@@ -20,7 +20,7 @@ nonisolated enum RecognitionResponseMapper {
     candidates: [KnowledgeCandidateContext]
   ) {
     if decision.culturalElementKey.isEmpty {
-      decision.culturalElementKey = resolveElementKey(
+      decision.culturalElementKey = resolveElementID(
         forName: decision.canonicalName,
         candidates: candidates
       )
@@ -28,14 +28,14 @@ nonisolated enum RecognitionResponseMapper {
     // Model often returns「其他」+ empty key when the exhibit was missing from the
     // prompt candidates, while still describing it in summary/rationale.
     if decision.culturalElementKey.isEmpty {
-      let fromText = resolveElementKey(
+      let fromText = resolveElementID(
         fromText: decision.summary + "\n" + decision.rationale,
         candidates: candidates
       )
       if !fromText.isEmpty {
         decision.culturalElementKey = fromText
         if let matched = candidates.first(where: {
-          $0.key.caseInsensitiveCompare(fromText) == .orderedSame
+          $0.id.caseInsensitiveCompare(fromText) == .orderedSame
         }) {
           decision.canonicalName = matched.name
         }
@@ -43,7 +43,7 @@ nonisolated enum RecognitionResponseMapper {
     }
     for index in decision.alternatives.indices
     where decision.alternatives[index].culturalElementKey.isEmpty {
-      decision.alternatives[index].culturalElementKey = resolveElementKey(
+      decision.alternatives[index].culturalElementKey = resolveElementID(
         forName: decision.alternatives[index].canonicalName,
         candidates: candidates
       )
@@ -52,7 +52,8 @@ nonisolated enum RecognitionResponseMapper {
 
   /// Exact normalized-name match first; otherwise a unique / closest candidate
   /// whose name contains the query (or vice versa). Lets "玉琮" bind to "玉琮王".
-  static func resolveElementKey(
+  /// Writes the candidate's `id` (short id in prompt path; UUID string after rewrite).
+  static func resolveElementID(
     forName name: String,
     candidates: [KnowledgeCandidateContext]
   ) -> String {
@@ -61,11 +62,11 @@ nonisolated enum RecognitionResponseMapper {
     // 「其他」/ Other is a schema sentinel, never a pack name.
     if normalized == "其他" || normalized == "other" { return "" }
 
-    var keyByName: [String: String] = [:]
+    var idByName: [String: String] = [:]
     for candidate in candidates {
-      keyByName[normalizeEntityName(candidate.name)] = candidate.key
+      idByName[normalizeEntityName(candidate.name)] = candidate.id
     }
-    if let exact = keyByName[normalized] { return exact }
+    if let exact = idByName[normalized] { return exact }
 
     let fuzzy = candidates.filter { candidate in
       let candidateName = normalizeEntityName(candidate.name)
@@ -73,7 +74,7 @@ nonisolated enum RecognitionResponseMapper {
       return candidateName.contains(normalized) || normalized.contains(candidateName)
     }
     guard !fuzzy.isEmpty else { return "" }
-    if fuzzy.count == 1 { return fuzzy[0].key }
+    if fuzzy.count == 1 { return fuzzy[0].id }
 
     // Prefer names that contain the query (玉琮 → 玉琮王 over unrelated short keys),
     // then the smallest length gap so "玉琮王" beats "良渚玉琮王".
@@ -85,21 +86,21 @@ nonisolated enum RecognitionResponseMapper {
       let leftGap = abs(left.count - normalized.count)
       let rightGap = abs(right.count - normalized.count)
       if leftGap != rightGap { return leftGap < rightGap }
-      return (left, lhs.key) < (right, rhs.key)
-    }?.key ?? ""
+      return (left, lhs.id) < (right, rhs.id)
+    }?.id ?? ""
   }
 
   /// Finds a catalog element mentioned in free text (summary / rationale).
   /// Prefers the longest candidate name whose normalized form (or a prefix of
   /// length ≥ 2) appears in the text — so「……玉琮……」binds to「玉琮王」.
-  static func resolveElementKey(
+  static func resolveElementID(
     fromText text: String,
     candidates: [KnowledgeCandidateContext]
   ) -> String {
     let normalizedText = normalizeEntityName(text)
     guard !normalizedText.isEmpty else { return "" }
 
-    var bestKey = ""
+    var bestID = ""
     var bestScore = 0
     for candidate in candidates {
       let name = normalizeEntityName(candidate.name)
@@ -118,10 +119,25 @@ nonisolated enum RecognitionResponseMapper {
       }
       if score > bestScore {
         bestScore = score
-        bestKey = candidate.key
+        bestID = candidate.id
       }
     }
-    return bestKey
+    return bestID
+  }
+
+  /// Compatibility alias used by older call sites / tests.
+  static func resolveElementKey(
+    forName name: String,
+    candidates: [KnowledgeCandidateContext]
+  ) -> String {
+    resolveElementID(forName: name, candidates: candidates)
+  }
+
+  static func resolveElementKey(
+    fromText text: String,
+    candidates: [KnowledgeCandidateContext]
+  ) -> String {
+    resolveElementID(fromText: text, candidates: candidates)
   }
 
   // MARK: - validateDecision (pipeline.go:268-364)
@@ -141,11 +157,11 @@ nonisolated enum RecognitionResponseMapper {
       (0...1).contains(decision.confidence),
       (1...3).contains(decision.alternatives.count),
       isValidKnowledgeReference(
-        key: decision.culturalElementKey,
+        id: decision.culturalElementKey,
         name: decision.canonicalName,
         candidates: candidates
       ),
-      isValidAttractionReference(key: decision.attractionKey, candidates: attractions)
+      isValidAttractionReference(id: decision.attractionKey, candidates: attractions)
     else {
       throw invalid()
     }
@@ -153,9 +169,9 @@ nonisolated enum RecognitionResponseMapper {
     var seenNames: Set<String> = [
       decision.canonicalName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     ]
-    var seenKeys = Set<String>()
+    var seenIDs = Set<String>()
     if !decision.culturalElementKey.isEmpty {
-      seenKeys.insert(decision.culturalElementKey.lowercased())
+      seenIDs.insert(decision.culturalElementKey.lowercased())
     }
     for candidate in decision.alternatives {
       let name = candidate.canonicalName
@@ -167,7 +183,7 @@ nonisolated enum RecognitionResponseMapper {
         validCategories.contains(candidate.category),
         (0...1).contains(candidate.confidence),
         isValidKnowledgeReference(
-          key: candidate.culturalElementKey,
+          id: candidate.culturalElementKey,
           name: candidate.canonicalName,
           candidates: candidates
         ),
@@ -176,7 +192,7 @@ nonisolated enum RecognitionResponseMapper {
         throw invalid()
       }
       if !candidate.culturalElementKey.isEmpty,
-        !seenKeys.insert(candidate.culturalElementKey.lowercased()).inserted
+        !seenIDs.insert(candidate.culturalElementKey.lowercased()).inserted
       {
         throw invalid()
       }
@@ -184,21 +200,21 @@ nonisolated enum RecognitionResponseMapper {
   }
 
   private static func isValidAttractionReference(
-    key: String,
+    id: String,
     candidates: [AttractionCandidateContext]
   ) -> Bool {
-    guard !key.isEmpty else { return true }
-    return candidates.contains { $0.key.caseInsensitiveCompare(key) == .orderedSame }
+    guard !id.isEmpty else { return true }
+    return candidates.contains { $0.id.caseInsensitiveCompare(id) == .orderedSame }
   }
 
   private static func isValidKnowledgeReference(
-    key: String,
+    id: String,
     name: String,
     candidates: [KnowledgeCandidateContext]
   ) -> Bool {
-    guard !key.isEmpty else { return true }
+    guard !id.isEmpty else { return true }
     for candidate in candidates
-    where candidate.key.caseInsensitiveCompare(key) == .orderedSame {
+    where candidate.id.caseInsensitiveCompare(id) == .orderedSame {
       return namesAreCompatible(name, candidate.name)
     }
     return false
@@ -222,15 +238,15 @@ nonisolated enum RecognitionResponseMapper {
     modelIdentifier: String,
     knowledge: RecognitionKnowledgeSet
   ) -> RecognitionResult {
-    var elementsByKey: [String: RecognitionElement] = [:]
+    var elementsByID: [UUID: RecognitionElement] = [:]
     for element in knowledge.elements {
-      elementsByKey[element.key.lowercased()] = element
+      elementsByID[element.id] = element
     }
 
     let (object, resolutionStatus) = responseObject(
       requestID: requestID,
       decision: decision,
-      elements: elementsByKey,
+      elements: elementsByID,
       attractions: knowledge.attractionCandidates
     )
 
@@ -248,7 +264,7 @@ nonisolated enum RecognitionResponseMapper {
           candidate,
           requestID: requestID,
           index: index,
-          elements: elementsByKey,
+          elements: elementsByID,
           attractions: knowledge.attractionCandidates
         )
       )
@@ -256,10 +272,9 @@ nonisolated enum RecognitionResponseMapper {
 
     // Append nearby attraction candidates (geographic, not visual).
     var attractionCount = 0
+    let decisionAttractionID = UUID(uuidString: decision.attractionKey)
     for attraction in knowledge.attractionCandidates {
-      if !decision.attractionKey.isEmpty,
-        attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame
-      {
+      if let decisionAttractionID, attraction.id == decisionAttractionID {
         continue
       }
       alternatives.append(attractionCandidate(attraction))
@@ -288,17 +303,22 @@ nonisolated enum RecognitionResponseMapper {
   private static func responseObject(
     requestID: String,
     decision: ProviderRecognition,
-    elements: [String: RecognitionElement],
+    elements: [UUID: RecognitionElement],
     attractions: [AttractionCandidate]
   ) -> (CultureObject, String) {
-    // Attraction beats element when the visual target *is* the place. Pack data
-    // intentionally shares key strings between an attraction and its bound
-    // element, so an element-key hit alone must not hijack place scans.
-    if !decision.attractionKey.isEmpty {
-      for attraction in attractions
-      where attraction.key.caseInsensitiveCompare(decision.attractionKey) == .orderedSame {
-        guard shouldResolveAsAttraction(decision: decision, attraction: attraction),
-          let element = elements[attraction.culturalElementKey.lowercased()]
+    let decisionAttractionID = UUID(uuidString: decision.attractionKey)
+    let decisionElementID = UUID(uuidString: decision.culturalElementKey)
+
+    // Attraction beats element when the visual target *is* the place.
+    // Attraction and element UUIDs differ even when they once shared a slug.
+    if let decisionAttractionID {
+      for attraction in attractions where attraction.id == decisionAttractionID {
+        guard shouldResolveAsAttraction(
+          decision: decision,
+          attraction: attraction,
+          decisionElementID: decisionElementID
+        ),
+          let element = elements[attraction.culturalElementId]
         else { continue }
         var object = knowledgeCultureObject(element: element, decision: decision)
         object.canonicalName = attraction.name
@@ -306,14 +326,12 @@ nonisolated enum RecognitionResponseMapper {
       }
     }
 
-    // The model may only fill cultural_element_key with a key that is shared by
-    // an attraction; when the name matches the attraction's name it still means
-    // the place, not the concept node.
-    if !decision.culturalElementKey.isEmpty {
-      for attraction in attractions
-      where attraction.key.caseInsensitiveCompare(decision.culturalElementKey) == .orderedSame {
+    // Model may only fill cultural_element_key; when the name matches an
+    // attraction bound to that element it still means the place, not the concept.
+    if let decisionElementID {
+      for attraction in attractions where attraction.culturalElementId == decisionElementID {
         guard namesAreCompatible(decision.canonicalName, attraction.name),
-          let element = elements[attraction.culturalElementKey.lowercased()]
+          let element = elements[attraction.culturalElementId]
         else { continue }
         var object = knowledgeCultureObject(element: element, decision: decision)
         object.canonicalName = attraction.name
@@ -322,12 +340,9 @@ nonisolated enum RecognitionResponseMapper {
     }
 
     // A model may set attraction_key for "I'm at this museum" while the framed
-    // target is an exhibit (玉琮) with an empty cultural_element_key — that
-    // must stay catalog-resolved, not collapse into the attraction root
-    // (之江馆区 / 馆史). Neither branch above fires in that case.
-    if let element = elements[decision.culturalElementKey.lowercased()],
-      !decision.culturalElementKey.isEmpty
-    {
+    // target is an exhibit with a filled cultural_element_key — stay catalog-
+    // resolved when the attraction branch above did not fire.
+    if let decisionElementID, let element = elements[decisionElementID] {
       return (knowledgeCultureObject(element: element, decision: decision), "resolved")
     }
 
@@ -355,15 +370,13 @@ nonisolated enum RecognitionResponseMapper {
   /// or spatial category), not when attraction_key is merely scene context.
   private static func shouldResolveAsAttraction(
     decision: ProviderRecognition,
-    attraction: AttractionCandidate
+    attraction: AttractionCandidate,
+    decisionElementID: UUID?
   ) -> Bool {
     if normalizeEntityName(decision.canonicalName) == normalizeEntityName(attraction.name) {
       return true
     }
-    if !decision.culturalElementKey.isEmpty,
-      decision.culturalElementKey.caseInsensitiveCompare(attraction.culturalElementKey)
-        == .orderedSame
-    {
+    if let decisionElementID, decisionElementID == attraction.culturalElementId {
       return true
     }
     return decision.category == "空间"
@@ -383,11 +396,11 @@ nonisolated enum RecognitionResponseMapper {
       element.graphElements.isEmpty ? element.relatedElements : element.graphElements
     let graphRelations =
       element.graphRelations.isEmpty
-      ? fallbackGraphRelations(elementKey: element.key, related: element.relatedElements)
+      ? fallbackGraphRelations(elementID: element.id, related: element.relatedElements)
       : element.graphRelations
     return CultureObject(
-      id: DeterministicID.culturalElement(element.key),
-      culturalElementKey: element.key,
+      id: element.id,
+      culturalElementID: element.id,
       canonicalName: element.name,
       summary: summary,
       category: ObjectCategory(rawValue: decision.category) ?? .other,
@@ -403,7 +416,7 @@ nonisolated enum RecognitionResponseMapper {
 
   private static func graphConcept(element: KnowledgeGraphElement) -> CultureConcept {
     CultureConcept(
-      id: DeterministicID.culturalElement(element.key),
+      id: element.id,
       name: element.name,
       kind: CulturalElementPresentation.conceptKind(element.conceptKind),
       summary: KnowledgeStore.richTextPlainText(element.introduction),
@@ -414,17 +427,17 @@ nonisolated enum RecognitionResponseMapper {
   private static func graphRelation(edge: KnowledgeGraphRelation) -> CultureRelation {
     CultureRelation(
       id: DeterministicID.v5(
-        name: edge.elementKey + ":" + edge.relatedElementKey + ":" + edge.kind
+        name: edge.elementId.uuidString + ":" + edge.relatedElementId.uuidString + ":" + edge.kind
       ),
-      sourceID: DeterministicID.culturalElement(edge.elementKey),
-      targetID: DeterministicID.culturalElement(edge.relatedElementKey),
+      sourceID: edge.elementId,
+      targetID: edge.relatedElementId,
       kind: RelationKind(rawValue: edge.kind) ?? .explains,
       explanation: edge.explanation
     )
   }
 
   private static func fallbackGraphRelations(
-    elementKey: String,
+    elementID: UUID,
     related: [KnowledgeGraphElement]
   ) -> [KnowledgeGraphRelation] {
     let explanation: String
@@ -437,8 +450,8 @@ nonisolated enum RecognitionResponseMapper {
     }
     return related.map {
       KnowledgeGraphRelation(
-        elementKey: elementKey,
-        relatedElementKey: $0.key,
+        elementId: elementID,
+        relatedElementId: $0.id,
         kind: "解释",
         explanation: explanation
       )
@@ -449,39 +462,35 @@ nonisolated enum RecognitionResponseMapper {
     _ candidate: ProviderCandidate,
     requestID: String,
     index: Int,
-    elements: [String: RecognitionElement],
+    elements: [UUID: RecognitionElement],
     attractions: [AttractionCandidate]
   ) -> RecognitionCandidate {
     let category = ObjectCategory(rawValue: candidate.category) ?? .other
     let symbol = artworkSymbol(for: candidate.category)
     var summary: String? = nil
     var resolutionStatus = "visual"
+    let elementID = UUID(uuidString: candidate.culturalElementKey)
 
-    if !candidate.culturalElementKey.isEmpty,
-      let element = elements[candidate.culturalElementKey.lowercased()]
-    {
+    if let elementID, let element = elements[elementID] {
       let plain = KnowledgeStore.richTextPlainText(element.introduction)
       summary = plain.isEmpty ? nil : plain
       resolutionStatus = "resolved"
     }
 
-    // 视觉备选的名称与附近景点候选一致时，视为命中该景点并带上景点 key。
-    // 注意不能按文化元素 key 匹配：景点绑定的元素往往是文化概念（如
-    // “西湖塔影与湖山构景”），命中元素不等于备选本身是景点。
+    // 视觉备选的名称与附近景点候选一致时，视为命中该景点并带上景点 id。
+    // 注意不能按文化元素 id 匹配：景点绑定的元素往往是文化概念，命中元素不等于备选本身是景点。
     let normalizedName = normalizeEntityName(candidate.canonicalName)
-    let attractionKey = attractions.first {
+    let attractionID = attractions.first {
       normalizeEntityName($0.name) == normalizedName
-    }?.key
+    }?.id
 
     return RecognitionCandidate(
       id: DeterministicID.v5(
         name: requestID + ":visual:" + String(index) + ":"
           + candidate.canonicalName.lowercased()
       ),
-      attractionKey: attractionKey,
-      culturalElementKey: candidate.culturalElementKey.isEmpty
-        ? nil
-        : candidate.culturalElementKey,
+      attractionID: attractionID,
+      culturalElementID: elementID,
       canonicalName: candidate.canonicalName,
       category: category,
       confidence: candidate.confidence,
@@ -504,9 +513,9 @@ nonisolated enum RecognitionResponseMapper {
       rationale = "根据当前位置列出的附近景点，仍需结合画面确认。"
     }
     return RecognitionCandidate(
-      id: DeterministicID.attraction(attraction.key),
-      attractionKey: attraction.key,
-      culturalElementKey: attraction.culturalElementKey,
+      id: attraction.id,
+      attractionID: attraction.id,
+      culturalElementID: attraction.culturalElementId,
       canonicalName: attraction.name,
       category: .space,
       confidence: 0,

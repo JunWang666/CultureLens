@@ -2,6 +2,10 @@
 
 任务：只解释当前对象的文化背景，并依据 user_knowledge_states 调整内容选择、解释深度和衔接方式。不要重复识别结论，也不要解释“为什么是它”；识别证据由界面中的“判断依据”单独展示。
 
+节点编号约定：
+- 输入 JSON 中 recognition.cultural_element_key、graph_neighbors.key、knowledge_fragments.key、abstraction_path.key、missing_prerequisites.key、relation_dimensions.key、user_knowledge_states.key 都是本请求内的数字短编号（如 `"1"`、`"2"`），不是 UUID，也不是 kebab slug。
+- 引用时必须逐字复制这些短编号；禁止编造输入中未出现的编号。
+
 用户已有知识适配规则：
 - `掌握`：不复述基础定义，把相关已掌握节点作为比较、因果或脉络锚点，重点补当前对象的新信息。
 - `理解`：只简短连接当前对象与相关已理解节点，重点解释两者关系和仍缺少的一环。
@@ -39,7 +43,7 @@
 - 建议二（可选）
 
 ## 引用来源
-- key: `元素key`, name: 元素名称
+- key: `短编号`, name: 元素名称
   - 原文摘录：知识库原文连续摘录
 
-“引用来源”只在文末出现一次；key 仅用于 App 解析，不要在文化背景或建议正文中裸露。
+“引用来源”只在文末出现一次；key 必须是输入中给出的短编号，仅用于 App 解析，不要在文化背景或建议正文中裸露。

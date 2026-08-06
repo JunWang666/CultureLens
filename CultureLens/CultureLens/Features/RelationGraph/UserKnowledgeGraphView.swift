@@ -30,9 +30,7 @@ struct UserKnowledgeGraphView: View {
     @State private var displayMode: DisplayMode = .graph
     @State private var zoomScale: CGFloat = 1
     @State private var fittedZoomScale: CGFloat = 1
-    @State private var didInitializeZoom = false
     @State private var centerRequest = 0
-    @GestureState private var transientMagnification: CGFloat = 1
 
     @State private var searchText = ""
     @State private var kindFilter: ConceptKind?
@@ -181,8 +179,7 @@ struct UserKnowledgeGraphView: View {
     /// Nodes already captured in scan history get a prominent badge.
     private var recordedNodeIDs: Set<UUID> {
         Set(
-            records.compactMap { $0.savedObject?.culturalElementKey }
-                .map(DeterministicID.culturalElement)
+            records.compactMap { $0.savedObject?.culturalElementID }
         )
     }
 
@@ -312,72 +309,52 @@ struct UserKnowledgeGraphView: View {
     // MARK: - Graph canvas
 
     private func graphViewport(_ state: RenderState) -> some View {
-        let contentSize = CGSize(
-            width: state.layout.size.width + 36,
-            height: state.layout.size.height + 36
-        )
-        let effectiveScale = GraphZoom.clamped(zoomScale * transientMagnification)
+        // Pinch zoom is delegated to UIScrollView (ZoomableScrollView), so it
+        // is anchored at the finger centroid instead of the canvas center.
+        ZoomableScrollView(
+            contentSize: CGSize(
+                width: state.layout.size.width + 36,
+                height: state.layout.size.height + 36
+            ),
+            zoomScale: $zoomScale,
+            fittedZoomScale: $fittedZoomScale,
+            centerRequest: $centerRequest,
+            centerPoint: contentCenterPoint(in: state),
+            fitOnAppear: true
+        ) {
+            ZStack {
+                edgeCanvas(state)
 
-        return GeometryReader { proxy in
-            let scaledSize = CGSize(
-                width: contentSize.width * effectiveScale,
-                height: contentSize.height * effectiveScale
-            )
-
-            ScrollViewReader { scrollProxy in
-                ScrollView([.horizontal, .vertical]) {
-                    ZStack {
-                        edgeCanvas(state)
-
-                        ForEach(state.snapshot.nodes) { node in
-                            graphNodeButton(node, snapshot: state.snapshot)
-                                .id(node.id)
-                                .position(state.layout.positions[node.id] ?? .zero)
-                                .opacity(nodeOpacity(node, snapshot: state.snapshot))
-                        }
-                    }
-                    .frame(width: state.layout.size.width, height: state.layout.size.height)
-                    .padding(18)
-                    .scaleEffect(effectiveScale)
-                    .frame(width: scaledSize.width, height: scaledSize.height)
-                    .frame(
-                        width: max(scaledSize.width, proxy.size.width),
-                        height: max(scaledSize.height, proxy.size.height)
-                    )
-                }
-                .defaultScrollAnchor(.center)
-                .scrollIndicators(.visible)
-                .simultaneousGesture(
-                    MagnifyGesture()
-                        .updating($transientMagnification) { value, state, _ in
-                            state = value.magnification
-                        }
-                        .onEnded { value in
-                            zoomScale = GraphZoom.clamped(zoomScale * value.magnification)
-                        }
-                )
-                .onAppear {
-                    configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
-                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
-                }
-                .onChange(of: proxy.size) {
-                    fittedZoomScale = GraphZoom.fittedScale(
-                        contentSize: contentSize,
-                        viewportSize: proxy.size
-                    )
-                }
-                .onChange(of: state.snapshot.centerID) {
-                    selectedNodeID = nil
-                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
-                }
-                .onChange(of: centerRequest) {
-                    scrollToCenter(state.snapshot.centerID, proxy: scrollProxy)
+                ForEach(state.snapshot.nodes) { node in
+                    graphNodeButton(node, snapshot: state.snapshot)
+                        .position(state.layout.positions[node.id] ?? .zero)
+                        .opacity(nodeOpacity(node, snapshot: state.snapshot))
                 }
             }
+            .frame(width: state.layout.size.width, height: state.layout.size.height)
+            .padding(18)
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("以可选择节点为中心的可缩放文化知识图谱")
         .accessibilityHint("双指缩放，单指拖动画布，点按节点查看邻居")
+        .onChange(of: state.snapshot.centerID) {
+            selectedNodeID = nil
+            centerRequest += 1
+        }
+    }
+
+    /// `padding(18)` sits inside the hosted content, so content coordinates
+    /// are offset by 18 from layout coordinates.
+    private func contentCenterPoint(in state: RenderState) -> CGPoint {
+        if let centerID = state.snapshot.centerID,
+            let position = state.layout.positions[centerID]
+        {
+            return CGPoint(x: position.x + 18, y: position.y + 18)
+        }
+        return CGPoint(
+            x: (state.layout.size.width + 36) / 2,
+            y: (state.layout.size.height + 36) / 2
+        )
     }
 
     private func edgeCanvas(_ state: RenderState) -> some View {
@@ -631,8 +608,12 @@ struct UserKnowledgeGraphView: View {
 
     @ViewBuilder
     private func graphNodeActions(_ node: UserKnowledgeGraphNode) -> some View {
-        if let route = route(for: node) {
-            NavigationLink(value: route) {
+        // The canvas is hosted in a UIHostingController (ZoomableScrollView),
+        // so NavigationLink has no stack to push into — route via onNavigate.
+        if let route = route(for: node), let onNavigate {
+            Button {
+                onNavigate(route)
+            } label: {
                 Label("查看详情", systemImage: "arrow.right.circle")
             }
         }
@@ -652,7 +633,7 @@ struct UserKnowledgeGraphView: View {
                             level,
                             for: node.id,
                             source: .manual,
-                            elementKey: node.elementKey
+                            elementID: node.id
                         )
                     }
                 } label: {
@@ -858,10 +839,15 @@ struct UserKnowledgeGraphView: View {
     // MARK: - Rebuild & resolution
 
     private func route(for node: UserKnowledgeGraphNode) -> AppRoute? {
+        if knowledgeStore?.element(id: node.id) != nil {
+            return .knowledgeElement(node.id)
+        }
         if let elementKey = node.elementKey,
-            knowledgeStore?.element(key: elementKey) != nil
+            let id = knowledgeStore?.resolveElementID(elementKey)
+                ?? UUID(uuidString: elementKey),
+            knowledgeStore?.element(id: id) != nil
         {
-            return .knowledgeElement(elementKey)
+            return .knowledgeElement(id)
         }
         if object(id: node.id) != nil {
             return .object(node.id)
@@ -913,20 +899,22 @@ struct UserKnowledgeGraphView: View {
         // Missing prerequisites of the primary center: closure minus nodes
         // the user already understands or masters.
         if let centerID = snapshot.centerID,
-            let centerKey = knowledgeStore.elementKey(for: centerID)
+            knowledgeStore.element(id: centerID) != nil
         {
-            let knownKeys = Set(
-                progressStore.entriesByID.values.compactMap { entry in
-                    entry.level == .contact ? nil : entry.elementKey
+            let knownIDs = Set(
+                progressStore.entriesByID.values.compactMap { entry -> UUID? in
+                    entry.level == .contact
+                      ? nil
+                      : (entry.elementKey.flatMap(UUID.init(uuidString:)) ?? entry.nodeID)
                 }
             )
             missingPrerequisiteIDs = Set(
                 knowledgeStore.missingPrerequisites(
-                    key: centerKey,
-                    known: knownKeys,
+                    id: centerID,
+                    known: knownIDs,
                     maxCount: 12
                 )
-                .map { DeterministicID.culturalElement($0.key) }
+                .map(\.id)
             )
         } else {
             missingPrerequisiteIDs = []
@@ -1005,26 +993,6 @@ struct UserKnowledgeGraphView: View {
             return indexed
         }
         return SampleCultureData.concept(id: id)
-    }
-
-    private func configureInitialZoom(contentSize: CGSize, viewportSize: CGSize) {
-        fittedZoomScale = GraphZoom.fittedScale(
-            contentSize: contentSize,
-            viewportSize: viewportSize
-        )
-        guard !didInitializeZoom else { return }
-        zoomScale = fittedZoomScale
-        didInitializeZoom = true
-        centerRequest += 1
-    }
-
-    private func scrollToCenter(_ id: UUID?, proxy: ScrollViewProxy) {
-        guard let id else { return }
-        DispatchQueue.main.async {
-            withAnimation(.easeOut(duration: 0.22)) {
-                proxy.scrollTo(id, anchor: .center)
-            }
-        }
     }
 
     private func nodeCaption(_ node: UserKnowledgeGraphNode, isCenter: Bool) -> String {

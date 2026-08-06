@@ -23,8 +23,13 @@ enum KnowledgePackValidator {
   nonisolated static func validate(_ pack: KnowledgePack) -> [KnowledgePackIssue] {
     var issues: [KnowledgePackIssue] = []
     let stamped = pack.withStampedContentRoles()
-    let elementKeys = Set(stamped.elements.map(\.key))
-    let attractionKeys = Set(stamped.attractions.map(\.key))
+    let elementKeys = Set(stamped.elements.compactMap(\.key))
+    let elementIDs = Set(stamped.elements.map(\.id))
+    let attractionKeys = Set(stamped.attractions.compactMap(\.key))
+    let attractionIDs = Set(stamped.attractions.map(\.id))
+    let elementLabel: (UUID) -> String = { id in
+      stamped.elements.first { $0.id == id }.flatMap(\.key) ?? id.uuidString
+    }
 
     if stamped.version.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
       issues.append(.init(severity: .error, message: "包版本号不能为空。"))
@@ -32,32 +37,34 @@ enum KnowledgePackValidator {
 
     var seenElementKeys = Set<String>()
     for element in stamped.elements {
-      if element.key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+      let key = element.key ?? ""
+      if key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
         issues.append(.init(severity: .error, message: "存在空的元素 key。"))
-      } else if !seenElementKeys.insert(element.key).inserted {
-        issues.append(.init(severity: .error, message: "重复的元素 key：\(element.key)"))
+      } else if !seenElementKeys.insert(key).inserted {
+        issues.append(.init(severity: .error, message: "重复的元素 key：\(key)"))
       }
       if element.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-        issues.append(.init(severity: .error, message: "元素「\(element.key)」缺少名称。"))
+        issues.append(.init(severity: .error, message: "元素「\(key)」缺少名称。"))
       }
       if element.conceptKind == nil {
-        issues.append(.init(severity: .warning, message: "元素「\(element.key)」缺少 conceptKind。"))
+        issues.append(.init(severity: .warning, message: "元素「\(key)」缺少 conceptKind。"))
       } else if let raw = element.conceptKind, ConceptKind(rawValue: raw) == nil {
         issues.append(
-          .init(severity: .error, message: "元素「\(element.key)」的 conceptKind 无效：\(raw)")
+          .init(severity: .error, message: "元素「\(key)」的 conceptKind 无效：\(raw)")
         )
       }
       if element.introduction.blocks.isEmpty {
-        issues.append(.init(severity: .warning, message: "元素「\(element.key)」介绍为空。"))
+        issues.append(.init(severity: .warning, message: "元素「\(key)」介绍为空。"))
       }
     }
 
     for attraction in stamped.attractions {
-      if !elementKeys.contains(attraction.key) {
+      let key = attraction.key ?? attraction.id.uuidString
+      if let attractionKey = attraction.key, !elementKeys.contains(attractionKey) {
         issues.append(
           .init(
             severity: .error,
-            message: "景点「\(attraction.key)」没有同 key 的元素节点。"
+            message: "景点「\(key)」没有同 key 的元素节点。"
           )
         )
       }
@@ -67,7 +74,7 @@ enum KnowledgePackValidator {
         issues.append(
           .init(
             severity: .error,
-            message: "景点「\(attraction.key)」对应元素的 contentRole 应为看点。"
+            message: "景点「\(key)」对应元素的 contentRole 应为看点。"
           )
         )
       }
@@ -75,31 +82,35 @@ enum KnowledgePackValidator {
 
     for element in stamped.elements
     where element.resolvedContentRole(attractionKeys: attractionKeys) == .sight
-      && !attractionKeys.contains(element.key)
     {
-      issues.append(
-        .init(
-          severity: .warning,
-          message: "看点「\(element.key)」未列入 attractions[]。"
+      guard let key = element.key else { continue }
+      if !attractionKeys.contains(key) {
+        issues.append(
+          .init(
+            severity: .warning,
+            message: "看点「\(key)」未列入 attractions[]。"
+          )
         )
-      )
+      }
     }
 
     var missingKind = 0
     for relation in stamped.relations {
-      if !elementKeys.contains(relation.elementKey) {
+      let from = elementLabel(relation.elementId)
+      let to = elementLabel(relation.relatedElementId)
+      if !elementIDs.contains(relation.elementId) {
         issues.append(
           .init(
             severity: .error,
-            message: "关系起点「\(relation.elementKey)」不存在。"
+            message: "关系起点「\(from)」不存在。"
           )
         )
       }
-      if !elementKeys.contains(relation.relatedElementKey) {
+      if !elementIDs.contains(relation.relatedElementId) {
         issues.append(
           .init(
             severity: .error,
-            message: "关系终点「\(relation.relatedElementKey)」不存在。"
+            message: "关系终点「\(to)」不存在。"
           )
         )
       }
@@ -108,7 +119,7 @@ enum KnowledgePackValidator {
           issues.append(
             .init(
               severity: .error,
-              message: "关系 kind 无效：\(kind)（\(relation.elementKey) → \(relation.relatedElementKey)）"
+              message: "关系 kind 无效：\(kind)（\(from) → \(to)）"
             )
           )
         }
@@ -119,7 +130,7 @@ enum KnowledgePackValidator {
         issues.append(
           .init(
             severity: .warning,
-            message: "关系缺少 explanation：\(relation.elementKey) → \(relation.relatedElementKey)"
+            message: "关系缺少 explanation：\(from) → \(to)"
           )
         )
       }
@@ -143,41 +154,43 @@ enum KnowledgePackValidator {
     }
 
     for intro in stamped.introductions {
-      if !attractionKeys.contains(intro.attractionKey) {
+      let introKey = intro.key ?? intro.id.uuidString
+      if !attractionIDs.contains(intro.attractionId) {
         issues.append(
           .init(
             severity: .error,
-            message: "介绍「\(intro.key)」的 attractionKey「\(intro.attractionKey)」不存在。"
+            message: "介绍「\(introKey)」的 attractionId「\(intro.attractionId.uuidString)」不存在。"
           )
         )
       }
-      if !elementKeys.contains(intro.culturalElementKey) {
+      if !elementIDs.contains(intro.culturalElementId) {
         issues.append(
           .init(
             severity: .error,
-            message: "介绍「\(intro.key)」的 culturalElementKey「\(intro.culturalElementKey)」不存在。"
+            message: "介绍「\(introKey)」的 culturalElementId「\(intro.culturalElementId.uuidString)」不存在。"
           )
         )
       }
       if !(-90...90).contains(intro.latitude) || !(-180...180).contains(intro.longitude) {
         issues.append(
-          .init(severity: .error, message: "介绍「\(intro.key)」坐标超出范围。")
+          .init(severity: .error, message: "介绍「\(introKey)」坐标超出范围。")
         )
       }
     }
 
     for theme in stamped.themes {
-      for key in theme.elementKeys where !elementKeys.contains(key) {
+      let themeKey = theme.key ?? theme.id.uuidString
+      for elementId in theme.elementIds where !elementIDs.contains(elementId) {
         issues.append(
           .init(
             severity: .error,
-            message: "主题「\(theme.key)」引用了不存在的元素「\(key)」。"
+            message: "主题「\(themeKey)」引用了不存在的元素「\(elementLabel(elementId))」。"
           )
         )
       }
       if theme.minContacted < 1 {
         issues.append(
-          .init(severity: .warning, message: "主题「\(theme.key)」的 minContacted 应 ≥ 1。")
+          .init(severity: .warning, message: "主题「\(themeKey)」的 minContacted 应 ≥ 1。")
         )
       }
     }
@@ -195,11 +208,14 @@ enum KnowledgePackValidator {
 
   /// DFS for a cycle along audited upward edges (`isAuditedUpward`).
   nonisolated static func firstUpwardCycle(in pack: KnowledgePack) -> [String]? {
+    let label: (UUID) -> String = { id in
+      pack.elements.first { $0.id == id }.flatMap(\.key) ?? id.uuidString
+    }
     var adjacency: [String: [String]] = [:]
     for relation in pack.relations {
       guard let raw = relation.kind, let kind = RelationKind(rawValue: raw), kind.isAuditedUpward
       else { continue }
-      adjacency[relation.elementKey, default: []].append(relation.relatedElementKey)
+      adjacency[label(relation.elementId), default: []].append(label(relation.relatedElementId))
     }
 
     var visiting = Set<String>()

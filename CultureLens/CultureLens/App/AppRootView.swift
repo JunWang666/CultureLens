@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct AppRootView: View {
     private let recognitionService: RecognitionService
@@ -19,6 +19,7 @@ struct AppRootView: View {
     @State private var sessionStore = ScanSessionStore()
     @State private var knowledgeProgressStore = KnowledgeProgressStore()
     @State private var chatHistoryStore = ChatHistoryStore()
+    @State private var knowledgeResourcesReady = false
     @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
     private var historyRecords: [ScanHistoryRecord]
 
@@ -92,7 +93,7 @@ struct AppRootView: View {
         .environment(chatHistoryStore)
         .environment(sessionStore)
         .environment(\.locale, languageStore.locale)
-        .id(languageStore.language.rawValue)
+        .id("\(languageStore.language.rawValue)-\(knowledgeResourcesReady)")
         .onChange(of: horizontalSizeClass) { _, newValue in
             adaptSelection(for: newValue)
         }
@@ -107,6 +108,9 @@ struct AppRootView: View {
         }
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
+            if await KnowledgePackLoader.shared.store(fallback: nil) != nil {
+                knowledgeResourcesReady = true
+            }
         }
     }
 
@@ -190,14 +194,15 @@ struct AppRootView: View {
                 ScanResultView(
                     knowledgeObject: CultureObject(
                         knowledgeConcept: concept,
-                        elementKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+                        elementID: id
                     )
                 )
             } else {
-                ContentUnavailableView("未找到文化关系", systemImage: "point.3.connected.trianglepath.dotted")
+                ContentUnavailableView(
+                    "未找到文化关系", systemImage: "point.3.connected.trianglepath.dotted")
             }
-        case .knowledgeElement(let key):
-            if let element = KnowledgeStore.shared?.element(key: key) {
+        case .knowledgeElement(let id):
+            if let element = KnowledgeStore.shared?.element(id: id) {
                 ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
             } else {
                 ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
@@ -219,8 +224,7 @@ struct AppRootView: View {
                 ContentUnavailableView("扫描结果已过期", systemImage: "clock.badge.exclamationmark")
             }
         case .scanCandidate(let sessionID, let candidateID):
-            if
-                let session = sessionStore.session(id: sessionID),
+            if let session = sessionStore.session(id: sessionID),
                 let candidate = session.result.alternatives.first(
                     where: { $0.id == candidateID }
                 )
@@ -281,8 +285,8 @@ struct AppRootView: View {
             return session.result.rationale
         }
         if let record = historyRecords.first(where: { $0.cultureObjectID == objectID }),
-           let rationale = record.historySnapshot?.result.rationale
-            ?? record.legacyResultSnapshot?.rationale
+            let rationale = record.historySnapshot?.result.rationale
+                ?? record.legacyResultSnapshot?.rationale
         {
             return rationale
         }

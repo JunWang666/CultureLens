@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "09d1daac-ed74-587b-aa70-1ce187d7c781",
       "key": "great-wall",
       "name": "长城",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "长城是在中国大陆华北一带历朝修筑的大规模军用隔离墙的统称，东西段与前后关卡加总起来可绵延上万华里（约4500公里至6000公里），因此又称作万里长城。长城在春秋战国时期即已修筑，齐长城是中原历史上建筑最早的长城。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/great-wall.jpg",
+            "caption": "The Great Wall of China at Jinshanling"
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
       "key": "grand-canal",
       "name": "京杭大运河",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "京杭大运河北起北京通州五河交汇处，南至杭州，流经北京、天津、河北、山东、江苏和浙江等地，沟通海河、黄河、淮河、长江和钱塘江五大水系，全长1794公里。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/grand-canal.jpg",
+            "caption": "​京杭大运河杭州端起点，拱宸桥沿岸景观。画面上南下北，右侧为桥西历史文化景区。"
           },
           {
             "type": "paragraph",
@@ -57,10 +69,12 @@
   ],
   "attractions": [
     {
+      "id": "2d39c655-cd6f-5dc1-9931-5b1ca79c05ed",
       "key": "great-wall",
       "name": "长城"
     },
     {
+      "id": "5964012f-2efe-5a85-a99f-a9b5a2ad3341",
       "key": "grand-canal",
       "name": "京杭大运河"
     }

@@ -1,9 +1,8 @@
 import Foundation
+import Synchronization
 
 /// Locates a bundled resource whether the build system flattened the
 /// synchronized group into the bundle root or preserved subdirectories.
-/// `subdirectory` candidates cover both the ODR pack layout and the embedded
-/// fallback copy (`Resources/KnowledgePackFallback/`).
 nonisolated func bundledResourceURL(
   _ name: String,
   _ ext: String,
@@ -12,9 +11,7 @@ nonisolated func bundledResourceURL(
 ) -> URL? {
   let subdirectories = [
     subdirectory,
-    "KnowledgePackFallback",
     "Resources/\(subdirectory)",
-    "Resources/KnowledgePackFallback",
   ]
   for candidate in subdirectories {
     if let url = bundle.url(forResource: name, withExtension: ext, subdirectory: candidate) {
@@ -25,14 +22,13 @@ nonisolated func bundledResourceURL(
 }
 
 /// Known knowledge-pack resource directories, in merge priority order.
-/// Earlier packs win on key collision. `KnowledgePackFallback` is last so the
-/// ODR / primary West Lake pack overrides the embedded duplicate.
+/// Earlier packs win on id collision. Every production directory is assigned
+/// its own ODR tag; ordinary bundle discovery remains available for tests.
 nonisolated enum KnowledgePackDirectory: String, CaseIterable, Sendable {
   case westLake = "KnowledgePack"
   case chineseHistory = "KnowledgePackChineseHistory"
   case liangzhu = "KnowledgePackLiangzhu"
   case zhejiangMuseum = "KnowledgePackZhejiangMuseum"
-  case fallback = "KnowledgePackFallback"
 
   var subdirectoryCandidates: [String] {
     [rawValue, "Resources/\(rawValue)"]
@@ -57,8 +53,8 @@ enum KnowledgeStoreError: LocalizedError {
 }
 
 /// In-memory port of the Go backend's knowledge repository
-/// (`internal/knowledge/postgres.go`), backed by the bundled knowledge pack
-/// instead of PostgreSQL.
+/// (`internal/knowledge/postgres.go`), backed by locally decoded knowledge
+/// packs instead of PostgreSQL.
 nonisolated struct KnowledgeStore: Sendable {
   static let defaultCandidateLimit = 12
   static let maximumObjectLimit = 48
@@ -72,68 +68,82 @@ nonisolated struct KnowledgeStore: Sendable {
 
   let pack: KnowledgePack
 
-  /// Element keys in `ListCulturalElements` order (`ORDER BY name, key`).
-  private let orderedElementKeys: [String]
-  private let elementsByKey: [String: KnowledgePack.Element]
-  private let elementKeysByID: [UUID: String]
-  /// Source pack `version` for each element key (first pack wins on collision).
-  private let packVersionByElementKey: [String: String]
+  /// Element IDs in `ListCulturalElements` order (`ORDER BY name, sortKey`).
+  private let orderedElementIDs: [UUID]
+  private let elementsByID: [UUID: KnowledgePack.Element]
+  private let attractionsByID: [UUID: KnowledgePack.Attraction]
+  /// Slug → UUID for migration / debug lookups (keys are lowercased).
+  private let elementIDsByKey: [String: UUID]
+  /// Source pack `version` for each element id (first pack wins on collision).
+  private let packVersionByElementID: [UUID: String]
   /// Directed pack relations in stable lexicographic order. Endpoint order and
   /// optional `kind` / `explanation` are preserved so typed edges stay usable
   /// downstream; adjacency treats them as undirected for BFS.
   private let relations: [KnowledgePack.Relation]
-  private let adjacency: [String: [String]]
-  /// Directed indexes keyed by endpoint. `outgoingEdges[k]` lists edges whose
-  /// source is `k` (target in `DirectedRelationEdge.key`); `incomingEdges[k]`
-  /// lists edges whose target is `k` (source in `.key`).
-  private let outgoingEdges: [String: [DirectedRelationEdge]]
-  private let incomingEdges: [String: [DirectedRelationEdge]]
+  private let adjacency: [UUID: [UUID]]
+  /// Directed indexes keyed by endpoint. `outgoingEdges[id]` lists edges whose
+  /// source is `id` (target in `DirectedRelationEdge.id`); `incomingEdges[id]`
+  /// lists edges whose target is `id` (source in `.id`).
+  private let outgoingEdges: [UUID: [DirectedRelationEdge]]
+  private let incomingEdges: [UUID: [DirectedRelationEdge]]
+  private let introductionsByID: [UUID: KnowledgePack.IntroductionRecord]
+  /// Optional slug → introduction for lookups that still use intro keys.
   private let introductionsByKey: [String: KnowledgePack.IntroductionRecord]
 
-  init(pack: KnowledgePack, packVersionByElementKey: [String: String] = [:]) {
+  init(pack: KnowledgePack, packVersionByElementID: [UUID: String] = [:]) {
     let pack = pack.withStampedContentRoles()
     self.pack = pack
-    elementsByKey = Dictionary(
-      pack.elements.map { ($0.key, $0) },
+    elementsByID = Dictionary(
+      pack.elements.map { ($0.id, $0) },
       uniquingKeysWith: { first, _ in first }
     )
-    elementKeysByID = Dictionary(
-      pack.elements.map { (DeterministicID.culturalElement($0.key), $0.key) },
+    attractionsByID = Dictionary(
+      pack.attractions.map { ($0.id, $0) },
       uniquingKeysWith: { first, _ in first }
     )
-    if packVersionByElementKey.isEmpty {
-      self.packVersionByElementKey = Dictionary(
-        uniqueKeysWithValues: pack.elements.map { ($0.key, pack.version) }
+    elementIDsByKey = Dictionary(
+      pack.elements.compactMap { element -> (String, UUID)? in
+        guard let key = element.key?.lowercased(), !key.isEmpty else { return nil }
+        return (key, element.id)
+      },
+      uniquingKeysWith: { first, _ in first }
+    )
+    if packVersionByElementID.isEmpty {
+      self.packVersionByElementID = Dictionary(
+        uniqueKeysWithValues: pack.elements.map { ($0.id, pack.version) }
       )
     } else {
-      self.packVersionByElementKey = packVersionByElementKey
+      self.packVersionByElementID = packVersionByElementID
     }
-    orderedElementKeys = pack.elements
-      .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
-      .map(\.key)
+    orderedElementIDs = pack.elements
+      .sorted { ($0.name, $0.sortKey) < ($1.name, $1.sortKey) }
+      .map(\.id)
     let normalizedRelations = pack.relations
-      .sorted { ($0.elementKey, $0.relatedElementKey) < ($1.elementKey, $1.relatedElementKey) }
+      .sorted {
+        ($0.elementId.uuidString, $0.relatedElementId.uuidString)
+          < ($1.elementId.uuidString, $1.relatedElementId.uuidString)
+      }
     relations = normalizedRelations
-    var adjacencySets: [String: Set<String>] = [:]
+    var adjacencySets: [UUID: Set<UUID>] = [:]
     for relation in normalizedRelations {
-      adjacencySets[relation.elementKey, default: []].insert(relation.relatedElementKey)
-      adjacencySets[relation.relatedElementKey, default: []].insert(relation.elementKey)
+      adjacencySets[relation.elementId, default: []].insert(relation.relatedElementId)
+      adjacencySets[relation.relatedElementId, default: []].insert(relation.elementId)
     }
-    adjacency = adjacencySets.mapValues { $0.sorted() }
-    var outgoing: [String: [DirectedRelationEdge]] = [:]
-    var incoming: [String: [DirectedRelationEdge]] = [:]
+    adjacency = adjacencySets.mapValues { $0.sorted { $0.uuidString < $1.uuidString } }
+    var outgoing: [UUID: [DirectedRelationEdge]] = [:]
+    var incoming: [UUID: [DirectedRelationEdge]] = [:]
     for relation in normalizedRelations {
       let kind = relation.kind.flatMap { RelationKind(rawValue: $0) }
-      outgoing[relation.elementKey, default: []].append(
+      outgoing[relation.elementId, default: []].append(
         DirectedRelationEdge(
-          key: relation.relatedElementKey,
+          id: relation.relatedElementId,
           kind: kind,
           explanation: relation.explanation
         )
       )
-      incoming[relation.relatedElementKey, default: []].append(
+      incoming[relation.relatedElementId, default: []].append(
         DirectedRelationEdge(
-          key: relation.elementKey,
+          id: relation.elementId,
           kind: kind,
           explanation: relation.explanation
         )
@@ -141,8 +151,15 @@ nonisolated struct KnowledgeStore: Sendable {
     }
     outgoingEdges = outgoing
     incomingEdges = incoming
+    introductionsByID = Dictionary(
+      pack.introductions.map { ($0.id, $0) },
+      uniquingKeysWith: { first, _ in first }
+    )
     introductionsByKey = Dictionary(
-      pack.introductions.map { ($0.key, $0) },
+      pack.introductions.compactMap { record -> (String, KnowledgePack.IntroductionRecord)? in
+        guard let key = record.key?.lowercased(), !key.isEmpty else { return nil }
+        return (key, record)
+      },
       uniquingKeysWith: { first, _ in first }
     )
   }
@@ -158,16 +175,16 @@ nonisolated struct KnowledgeStore: Sendable {
   static func store(merging packs: [KnowledgePack]) -> KnowledgeStore {
     KnowledgeStore(
       pack: mergePacks(packs.map { $0.withStampedContentRoles() }),
-      packVersionByElementKey: packVersionsByElement(from: packs)
+      packVersionByElementID: packVersionsByElement(from: packs)
     )
   }
 
-  /// First-seen pack version for each element key.
-  static func packVersionsByElement(from packs: [KnowledgePack]) -> [String: String] {
-    var map: [String: String] = [:]
+  /// First-seen pack version for each element id.
+  static func packVersionsByElement(from packs: [KnowledgePack]) -> [UUID: String] {
+    var map: [UUID: String] = [:]
     for pack in packs {
-      for element in pack.elements where map[element.key] == nil {
-        map[element.key] = pack.version
+      for element in pack.elements where map[element.id] == nil {
+        map[element.id] = pack.version
       }
     }
     return map
@@ -176,9 +193,7 @@ nonisolated struct KnowledgeStore: Sendable {
   /// Decodes packs from `bundle` in `KnowledgePackDirectory` priority order.
   /// Each directory is assembled from `knowledge-pack.json` plus optional
   /// sidecar files (`elements-sight`, `elements-history`, `introductions`,
-  /// `themes`, `locales-<lang>`). Duplicate directory names (e.g. Fallback
-  /// after West Lake) are skipped when their content would only repeat
-  /// already-loaded keys.
+  /// `themes`, `locales-<lang>`). Same `version` is loaded once.
   static func discoverPacks(in bundle: Bundle) throws -> [KnowledgePack] {
     var packs: [KnowledgePack] = []
     var seenVersions = Set<String>()
@@ -186,11 +201,6 @@ nonisolated struct KnowledgeStore: Sendable {
       guard let url = packURL(in: bundle, directory: directory) else { continue }
       do {
         let pack = try loadPack(fromBaseURL: url)
-        // Skip Fallback when the primary West Lake pack (same version family)
-        // was already loaded from ODR / KnowledgePack.
-        if directory == .fallback, packs.contains(where: { $0.version == pack.version }) {
-          continue
-        }
         if seenVersions.insert(pack.version).inserted {
           packs.append(pack)
         }
@@ -227,12 +237,14 @@ nonisolated struct KnowledgeStore: Sendable {
       if !sight.elements.isEmpty { elements.append(contentsOf: sight.elements) }
       if !sight.attractions.isEmpty { attractions = sight.attractions }
     }
-    if let history = try decodeSidecar("elements-history", as: KnowledgePackHistorySidecar.self),
+    if let history = try decodeSidecar(
+      "elements-history", as: KnowledgePackHistorySidecar.self),
       !history.elements.isEmpty
     {
       elements.append(contentsOf: history.elements)
     }
-    if let intro = try decodeSidecar("introductions", as: KnowledgePackIntroductionsSidecar.self),
+    if let intro = try decodeSidecar(
+      "introductions", as: KnowledgePackIntroductionsSidecar.self),
       !intro.introductions.isEmpty
     {
       introductions = intro.introductions
@@ -263,9 +275,9 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
 
-    // Deduplicate elements by key (first wins: sight before history append).
-    var seenElementKeys = Set<String>()
-    elements = elements.filter { seenElementKeys.insert($0.key).inserted }
+    // Deduplicate elements by id (first wins: sight before history append).
+    var seenElementIDs = Set<UUID>()
+    elements = elements.filter { seenElementIDs.insert($0.id).inserted }
 
     pack = KnowledgePack(
       version: pack.version,
@@ -281,8 +293,9 @@ nonisolated struct KnowledgeStore: Sendable {
   }
 
   /// Merges packs; earlier entries win on element / attraction / introduction /
-  /// theme key collisions. Relations whose endpoints both survive are kept.
-  /// Locale overlays are unioned per language, with earlier packs winning keys.
+  /// theme id collisions. Relations whose endpoints both survive are kept.
+  /// Locale overlays are unioned per language, with earlier packs winning keys
+  /// (UUID strings).
   static func mergePacks(_ packs: [KnowledgePack]) -> KnowledgePack {
     guard let first = packs.first else {
       return KnowledgePack(
@@ -295,10 +308,10 @@ nonisolated struct KnowledgeStore: Sendable {
     }
     if packs.count == 1 { return first }
 
-    var elements: [String: KnowledgePack.Element] = [:]
-    var attractions: [String: KnowledgePack.Attraction] = [:]
-    var introductions: [String: KnowledgePack.IntroductionRecord] = [:]
-    var themes: [String: KnowledgePack.Theme] = [:]
+    var elements: [UUID: KnowledgePack.Element] = [:]
+    var attractions: [UUID: KnowledgePack.Attraction] = [:]
+    var introductions: [UUID: KnowledgePack.IntroductionRecord] = [:]
+    var themes: [UUID: KnowledgePack.Theme] = [:]
     var relations: [KnowledgePack.Relation] = []
     var seenRelation = Set<String>()
     var locales: [String: KnowledgePack.LocaleOverlay] = [:]
@@ -306,22 +319,22 @@ nonisolated struct KnowledgeStore: Sendable {
 
     for pack in packs {
       if sourceLanguage == nil { sourceLanguage = pack.sourceLanguage }
-      for element in pack.elements where elements[element.key] == nil {
-        elements[element.key] = element
+      for element in pack.elements where elements[element.id] == nil {
+        elements[element.id] = element
       }
-      for attraction in pack.attractions where attractions[attraction.key] == nil {
-        attractions[attraction.key] = attraction
+      for attraction in pack.attractions where attractions[attraction.id] == nil {
+        attractions[attraction.id] = attraction
       }
-      for introduction in pack.introductions where introductions[introduction.key] == nil {
-        introductions[introduction.key] = introduction
+      for introduction in pack.introductions where introductions[introduction.id] == nil {
+        introductions[introduction.id] = introduction
       }
-      for theme in pack.themes where themes[theme.key] == nil {
-        themes[theme.key] = theme
+      for theme in pack.themes where themes[theme.id] == nil {
+        themes[theme.id] = theme
       }
       for relation in pack.relations {
         let signature = [
-          relation.elementKey,
-          relation.relatedElementKey,
+          relation.elementId.uuidString,
+          relation.relatedElementId.uuidString,
           relation.kind ?? "",
           relation.explanation ?? "",
         ].joined(separator: "\u{1f}")
@@ -346,31 +359,37 @@ nonisolated struct KnowledgeStore: Sendable {
 
     // Drop relations that point at elements lost to collision filtering.
     relations = relations.filter {
-      elements[$0.elementKey] != nil && elements[$0.relatedElementKey] != nil
+      elements[$0.elementId] != nil && elements[$0.relatedElementId] != nil
     }
-    // Themes may reference keys from their home pack only; drop dangling keys.
+    // Themes may reference ids from their home pack only; drop dangling ids.
     let cleanedThemes = themes.values.map { theme in
       KnowledgePack.Theme(
+        id: theme.id,
         key: theme.key,
         name: theme.name,
         summary: theme.summary,
-        elementKeys: theme.elementKeys.filter { elements[$0] != nil },
+        elementIds: theme.elementIds.filter { elements[$0] != nil },
         minContacted: theme.minContacted
       )
     }
-    .filter { !$0.elementKeys.isEmpty }
-    .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+    .filter { !$0.elementIds.isEmpty }
+    .sorted { ($0.name, $0.sortKey) < ($1.name, $1.sortKey) }
 
     let version = packs.map(\.version).joined(separator: "+")
     return KnowledgePack(
       version: version,
       sourceLanguage: sourceLanguage,
-      elements: elements.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
-      attractions: attractions.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
-      relations: relations.sorted {
-        ($0.elementKey, $0.relatedElementKey) < ($1.elementKey, $1.relatedElementKey)
+      elements: elements.values.sorted { ($0.name, $0.sortKey) < ($1.name, $1.sortKey) },
+      attractions: attractions.values.sorted {
+        ($0.name, $0.sortKey) < ($1.name, $1.sortKey)
       },
-      introductions: introductions.values.sorted { ($0.name, $0.key) < ($1.name, $1.key) },
+      relations: relations.sorted {
+        ($0.elementId.uuidString, $0.relatedElementId.uuidString)
+          < ($1.elementId.uuidString, $1.relatedElementId.uuidString)
+      },
+      introductions: introductions.values.sorted {
+        ($0.name, $0.sortKey) < ($1.name, $1.sortKey)
+      },
       themes: cleanedThemes,
       locales: locales.isEmpty ? nil : locales
     )
@@ -389,13 +408,22 @@ nonisolated struct KnowledgeStore: Sendable {
     return nil
   }
 
-  /// Shared store cached on first access; `nil` when the bundle lacks a pack.
-  static let shared: KnowledgeStore? = try? KnowledgeStore.load()
+  /// Thread-safe runtime snapshot. It starts with any ordinary bundle packs
+  /// (useful in tests), then the ODR loader replaces it with the merged store.
+  private static let sharedState = Mutex<KnowledgeStore?>(try? KnowledgeStore.load())
+
+  static var shared: KnowledgeStore? {
+    sharedState.withLock { $0 }
+  }
+
+  static func installShared(_ store: KnowledgeStore) {
+    sharedState.withLock { $0 = store }
+  }
 
   // MARK: - Basic lookups
 
   var elements: [KnowledgePack.Element] {
-    orderedElementKeys.compactMap { elementsByKey[$0] }
+    orderedElementIDs.compactMap { elementsByID[$0] }
   }
 
   /// Scannable sight elements only (`ContentRole.sight`).
@@ -408,26 +436,50 @@ nonisolated struct KnowledgeStore: Sendable {
     elements.filter { $0.resolvedContentRole() == .history }
   }
 
-  func element(key: String) -> KnowledgePack.Element? {
-    elementsByKey[key]
-  }
-
-  func elementKey(for nodeID: UUID) -> String? {
-    elementKeysByID[nodeID]
-  }
-
   func element(id: UUID) -> KnowledgePack.Element? {
-    elementKeysByID[id].flatMap { elementsByKey[$0] }
+    elementsByID[id]
+  }
+
+  func attraction(id: UUID) -> KnowledgePack.Attraction? {
+    attractionsByID[id]
+  }
+
+  /// Resolves via slug map, or accepts a UUID string.
+  func element(key: String) -> KnowledgePack.Element? {
+    resolveElementID(key).flatMap { elementsByID[$0] }
+  }
+
+  /// Optional pack slug for a node id.
+  func elementKey(for nodeID: UUID) -> String? {
+    elementsByID[nodeID]?.key
+  }
+
+  /// Accepts a UUID string or kebab slug (case-insensitive).
+  func resolveElementID(_ string: String) -> UUID? {
+    let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty else { return nil }
+    if let uuid = UUID(uuidString: trimmed) {
+      return uuid
+    }
+    return elementIDsByKey[trimmed.lowercased()]
+  }
+
+  func introduction(id: UUID) -> KnowledgePack.IntroductionRecord? {
+    introductionsByID[id]
   }
 
   func introduction(key: String) -> KnowledgePack.IntroductionRecord? {
-    introductionsByKey[key]
+    let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
+    if let uuid = UUID(uuidString: trimmed) {
+      return introductionsByID[uuid]
+    }
+    return introductionsByKey[trimmed.lowercased()]
   }
 
-  func cultureConcept(elementKey: String) -> CultureConcept? {
-    guard let element = elementsByKey[elementKey] else { return nil }
+  func cultureConcept(elementID: UUID) -> CultureConcept? {
+    guard let element = elementsByID[elementID] else { return nil }
     return CultureConcept(
-      id: DeterministicID.culturalElement(element.key),
+      id: element.id,
       name: element.name,
       kind: CulturalElementPresentation.conceptKind(element.conceptKind),
       summary: Self.richTextPlainText(element.introduction),
@@ -435,33 +487,59 @@ nonisolated struct KnowledgeStore: Sendable {
     )
   }
 
+  func cultureConcept(elementKey: String) -> CultureConcept? {
+    resolveElementID(elementKey).flatMap(cultureConcept(elementID:))
+  }
+
   /// Best-effort reverse lookup when a citation URL only carries a display name.
   func elementKey(matchingName name: String) -> String? {
     let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
     guard !trimmed.isEmpty else { return nil }
-    if let exact = elementsByKey.first(where: { $0.value.name == trimmed })?.key {
-      return exact
+    if let exact = elementsByID.values.first(where: { $0.name == trimmed }) {
+      return exact.key ?? exact.id.uuidString
     }
-    return elementsByKey.first(where: { $0.value.name.contains(trimmed) || trimmed.contains($0.value.name) })?
-      .key
+    return elementsByID.values.first(where: {
+      $0.name.contains(trimmed) || trimmed.contains($0.name)
+    }).map { $0.key ?? $0.id.uuidString }
+  }
+
+  /// Best-effort reverse lookup returning the element UUID.
+  func elementID(matchingName name: String) -> UUID? {
+    let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty else { return nil }
+    if let exact = elementsByID.values.first(where: { $0.name == trimmed }) {
+      return exact.id
+    }
+    return elementsByID.values.first(where: {
+      $0.name.contains(trimmed) || trimmed.contains($0.name)
+    })?.id
   }
 
   /// Rich introduction for detail pages; falls back to `nil` when unresolved.
+  func introductionDocument(elementID: UUID) -> RichTextDocument? {
+    elementsByID[elementID]?.introduction
+  }
+
   func introductionDocument(elementKey: String) -> RichTextDocument? {
-    elementsByKey[elementKey]?.introduction
+    resolveElementID(elementKey).flatMap(introductionDocument(elementID:))
   }
 
   func introductionDocument(nodeID: UUID) -> RichTextDocument? {
-    element(id: nodeID)?.introduction
+    introductionDocument(elementID: nodeID)
   }
 
   /// Trusted external sources for an element: pack-level `sources` plus
   /// provenance URLs from linked on-site introductions (Wikipedia, Amap, …).
-  func trustedSources(forElementKey key: String) -> [KnowledgeSource] {
-    packSources(forElementKey: key).map { $0.asKnowledgeSource() }
+  func trustedSources(forElementID id: UUID) -> [KnowledgeSource] {
+    packSources(forElementID: id).map { $0.asKnowledgeSource() }
   }
 
-  func packSources(forElementKey key: String) -> [KnowledgePack.Source] {
+  func trustedSources(forElementKey key: String) -> [KnowledgeSource] {
+    guard let id = resolveElementID(key) else { return [] }
+    return trustedSources(forElementID: id)
+  }
+
+  func packSources(forElementID id: UUID) -> [KnowledgePack.Source] {
     var result: [KnowledgePack.Source] = []
     var seen = Set<String>()
 
@@ -476,32 +554,33 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
 
-    if let element = elementsByKey[key] {
+    if let element = elementsByID[id] {
       append(element.sources)
     }
-    for record in pack.introductions
-    where record.culturalElementKey.caseInsensitiveCompare(key) == .orderedSame {
+    for record in pack.introductions where record.culturalElementId == id {
       append(record.sources)
     }
     return result
   }
 
+  func packSources(forElementKey key: String) -> [KnowledgePack.Source] {
+    guard let id = resolveElementID(key) else { return [] }
+    return packSources(forElementID: id)
+  }
+
   // MARK: - Attraction points (POI map)
 
-  /// All attractions in the bundled packs as map points, aggregated from the
+  /// All attractions in the loaded packs as map points, aggregated from the
   /// on-site introduction records (which carry the coordinates). Records
-  /// cluster per physical location (attraction key + coordinates rounded to 3
-  /// decimals): the same attraction key hosted at different sites — across
-  /// packs or across intro records — yields one point per site instead of
-  /// collapsing into the first record's location.
+  /// cluster per physical location (attraction id + coordinates rounded to 3
+  /// decimals): the same attraction hosted at different sites — across packs
+  /// or across intro records — yields one point per site instead of collapsing
+  /// into the first record's location.
   func attractionPoints() -> [AttractionPoint] {
-    var nameByAttraction: [String: String] = [:]
-    for attraction in pack.attractions {
-      nameByAttraction[attraction.key] = attraction.name
-    }
     var firstRecordByLocation: [String: KnowledgePack.IntroductionRecord] = [:]
     for record in pack.introductions {
-      let locationKey = record.attractionKey + "|"
+      let locationKey =
+        record.attractionId.uuidString + "|"
         + String(format: "%.3f", record.latitude) + ","
         + String(format: "%.3f", record.longitude)
       if firstRecordByLocation[locationKey] == nil {
@@ -509,22 +588,25 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
     return firstRecordByLocation.values.compactMap { record in
-      let name = nameByAttraction[record.attractionKey] ?? record.name
+      let attraction = attractionsByID[record.attractionId]
+      let name = attraction?.name ?? record.name
       guard !name.isEmpty else { return nil }
-      let elementKey = elementsByKey[record.culturalElementKey] != nil
-        ? record.culturalElementKey
+      let culturalElementId =
+        elementsByID[record.culturalElementId] != nil
+        ? record.culturalElementId
         : nil
       return AttractionPoint(
-        key: record.attractionKey,
+        attractionId: record.attractionId,
+        key: attraction?.key,
         name: name,
-        culturalElementKey: elementKey,
+        culturalElementId: culturalElementId,
         latitude: record.latitude,
         longitude: record.longitude
       )
     }
     .sorted {
-      ($0.name, $0.key, $0.latitude, $0.longitude)
-        < ($1.name, $1.key, $1.latitude, $1.longitude)
+      ($0.name, $0.sortKey, $0.latitude, $0.longitude)
+        < ($1.name, $1.sortKey, $1.latitude, $1.longitude)
     }
   }
 
@@ -549,35 +631,32 @@ nonisolated struct KnowledgeStore: Sendable {
       uniquingKeysWith: { first, _ in first }
     )
     let joinedIDs = Set(seedByID.keys)
-    let joinedElementKeys = Set(joinedIDs.compactMap { elementKeysByID[$0] })
+    let joinedElementIDs = Set(joinedIDs.filter { elementsByID[$0] != nil })
 
     let defaultCenterIDs: [UUID] = {
-      let packBacked = orderedElementKeys
-        .filter { joinedElementKeys.contains($0) }
-        .map(DeterministicID.culturalElement)
+      let packBacked = orderedElementIDs.filter { joinedElementIDs.contains($0) }
       if !packBacked.isEmpty { return packBacked }
       return joinedSeeds.sorted {
-        if $0.name != $1.name { return $0.name.localizedCompare($1.name) == .orderedAscending }
+        if $0.name != $1.name {
+          return $0.name.localizedCompare($1.name) == .orderedAscending
+        }
         return $0.id.uuidString < $1.id.uuidString
       }.prefix(1).map(\.id)
     }()
     var seenCenterIDs = Set<UUID>()
     let requestedCenters = requestedCenterIDs.filter { id in
-      (elementKeysByID[id] != nil || joinedIDs.contains(id))
+      (elementsByID[id] != nil || joinedIDs.contains(id))
         && seenCenterIDs.insert(id).inserted
     }
     let centerIDs = requestedCenters.isEmpty ? defaultCenterIDs : requestedCenters
-    var seenCenterKeys = Set<String>()
-    let centerKeys = centerIDs.compactMap { elementKeysByID[$0] }
-      .filter { seenCenterKeys.insert($0).inserted }
 
-    var hops: [String: Int] = [:]
-    var queue: [String] = []
+    var hops: [UUID: Int] = [:]
+    var queue: [UUID] = []
     var queueIndex = 0
     var isTruncated = false
-    for key in centerKeys {
-      hops[key] = 0
-      queue.append(key)
+    for id in centerIDs where elementsByID[id] != nil {
+      hops[id] = 0
+      queue.append(id)
     }
 
     while queueIndex < queue.count {
@@ -596,23 +675,22 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
 
-    var visibleElementKeys = joinedElementKeys
-    visibleElementKeys.formUnion(hops.keys)
-    var nodes = visibleElementKeys.compactMap { key -> UserKnowledgeGraphNode? in
-      guard let element = elementsByKey[key] else { return nil }
-      let id = DeterministicID.culturalElement(key)
+    var visibleElementIDs = joinedElementIDs
+    visibleElementIDs.formUnion(hops.keys)
+    var nodes = visibleElementIDs.compactMap { id -> UserKnowledgeGraphNode? in
+      guard let element = elementsByID[id] else { return nil }
       return UserKnowledgeGraphNode(
         id: id,
-        elementKey: key,
+        elementKey: element.key,
         name: element.name,
         summary: Self.richTextPlainText(element.introduction),
         kind: CulturalElementPresentation.conceptKind(element.conceptKind),
-        hop: hops[key] ?? depthLimit + 1,
+        hop: hops[id] ?? depthLimit + 1,
         isJoined: joinedIDs.contains(id)
       )
     }
 
-    for seed in joinedSeeds where elementKeysByID[seed.id] == nil {
+    for seed in joinedSeeds where elementsByID[seed.id] == nil {
       nodes.append(
         UserKnowledgeGraphNode(
           id: seed.id,
@@ -633,15 +711,16 @@ nonisolated struct KnowledgeStore: Sendable {
 
     let edges = relations.compactMap { relation -> UserKnowledgeGraphEdge? in
       guard
-        visibleElementKeys.contains(relation.elementKey),
-        visibleElementKeys.contains(relation.relatedElementKey)
+        visibleElementIDs.contains(relation.elementId),
+        visibleElementIDs.contains(relation.relatedElementId)
       else { return nil }
       return UserKnowledgeGraphEdge(
         id: DeterministicID.v5(
-          name: "culturelens:user-graph:\(relation.elementKey):\(relation.relatedElementKey)"
+          name:
+            "culturelens:user-graph:\(relation.elementId.uuidString):\(relation.relatedElementId.uuidString)"
         ),
-        sourceID: DeterministicID.culturalElement(relation.elementKey),
-        targetID: DeterministicID.culturalElement(relation.relatedElementKey),
+        sourceID: relation.elementId,
+        targetID: relation.relatedElementId,
         kind: relation.kind.flatMap { RelationKind(rawValue: $0) },
         explanation: relation.explanation
       )
@@ -673,13 +752,13 @@ nonisolated struct KnowledgeStore: Sendable {
   }
 
   /// Lightweight candidate contexts for **sight** elements — used to backfill
-  /// `cultural_element_key` after recognition when the prompt only carried a
+  /// cultural element identity after recognition when the prompt only carried a
   /// location-narrowed subset. Abstract cultural-history nodes are excluded
   /// so the model only binds scans to scannable entities.
   func catalogCandidateContexts() -> [KnowledgeCandidateContext] {
     sightElements.map {
       KnowledgeCandidateContext(
-        key: $0.key,
+        id: $0.id.uuidString,
         name: $0.name,
         introduction: $0.introduction,
         nearbyContexts: []
@@ -687,50 +766,57 @@ nonisolated struct KnowledgeStore: Sendable {
     }
   }
 
-  /// Builds a recognition element (with BFS graph) for a single pack key.
-  func recognitionElement(forKey key: String) -> RecognitionElement? {
-    guard let element = elementsByKey[key] else { return nil }
-    let graph = recognitionGraph(rootKey: key, maxDepth: 3, maxNodes: 32)
+  /// Builds a recognition element (with BFS graph) for a single pack element.
+  func recognitionElement(forID id: UUID) -> RecognitionElement? {
+    guard let element = elementsByID[id] else { return nil }
+    let graph = recognitionGraph(rootID: id, maxDepth: 3, maxNodes: 32)
     return RecognitionElement(
+      id: element.id,
       key: element.key,
       name: element.name,
       introduction: element.introduction,
       nearbyContexts: [],
-      relatedElements: relatedElements(forKey: key, limit: Self.maximumObjectLimit),
+      relatedElements: relatedElements(forID: id, limit: Self.maximumObjectLimit),
       graphElements: graph.elements,
       graphRelations: graph.relations,
-      sources: packSources(forElementKey: key)
+      sources: packSources(forElementID: id)
     )
   }
 
+  func recognitionElement(forKey key: String) -> RecognitionElement? {
+    resolveElementID(key).flatMap(recognitionElement(forID:))
+  }
+
   /// Undirected related elements, mirroring `ListRelatedCulturalElements`
-  /// (`ORDER BY related.name, related.key`, default limit 12, max 20).
+  /// (`ORDER BY related.name, related.sortKey`, default limit 12, max 20).
   func relatedElements(
-    forKey key: String,
+    forID id: UUID,
     limit: Int = KnowledgeStore.defaultCandidateLimit
   ) -> [KnowledgeGraphElement] {
     let limit = clampedLimit(limit)
-    var seen = Set<String>()
-    var neighbors: [String] = []
+    var seen = Set<UUID>()
+    var neighbors: [UUID] = []
     for relation in relations {
-      let neighbor: String?
-      if relation.elementKey == key {
-        neighbor = relation.relatedElementKey
-      } else if relation.relatedElementKey == key {
-        neighbor = relation.elementKey
+      let neighbor: UUID?
+      if relation.elementId == id {
+        neighbor = relation.relatedElementId
+      } else if relation.relatedElementId == id {
+        neighbor = relation.elementId
       } else {
         neighbor = nil
       }
-      guard let neighbor, elementsByKey[neighbor] != nil, seen.insert(neighbor).inserted
+      guard let neighbor, elementsByID[neighbor] != nil, seen.insert(neighbor).inserted
       else { continue }
       neighbors.append(neighbor)
     }
-    return neighbors
-      .compactMap { elementsByKey[$0] }
-      .sorted { ($0.name, $0.key) < ($1.name, $1.key) }
+    return
+      neighbors
+      .compactMap { elementsByID[$0] }
+      .sorted { ($0.name, $0.sortKey) < ($1.name, $1.sortKey) }
       .prefix(limit)
       .map {
         KnowledgeGraphElement(
+          id: $0.id,
           key: $0.key,
           name: $0.name,
           introduction: $0.introduction,
@@ -739,86 +825,115 @@ nonisolated struct KnowledgeStore: Sendable {
       }
   }
 
+  func relatedElements(
+    forKey key: String,
+    limit: Int = KnowledgeStore.defaultCandidateLimit
+  ) -> [KnowledgeGraphElement] {
+    guard let id = resolveElementID(key) else { return [] }
+    return relatedElements(forID: id, limit: limit)
+  }
+
   // MARK: - Abstraction axis traversal (design 0006)
 
-  /// Edges whose other endpoint is more abstract than `key`: audited upward
+  /// Edges whose other endpoint is more abstract than `id`: audited upward
   /// outgoing edges (位于/体现/受到影响/受规制于/解释) plus incoming 组成 edges
   /// (a 组成 source is the whole, hence the parent). `产生于` stays out until
   /// its orientation audit lands; pass `includeUnaudited` to opt in.
-  func upward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
-    let outgoingUp = outgoingEdges[key, default: []].filter { edge in
+  func upward(id: UUID, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    let outgoingUp = outgoingEdges[id, default: []].filter { edge in
       guard edge.kind?.abstractionDirection == .up else { return false }
       return includeUnaudited || edge.kind?.isAuditedUpward == true
     }
-    let incomingDown = incomingEdges[key, default: []].filter {
+    let incomingDown = incomingEdges[id, default: []].filter {
       $0.kind?.abstractionDirection == .down
     }
     return outgoingUp + incomingDown
   }
 
-  /// Edges whose other endpoint is more concrete than `key`.
-  func downward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
-    let outgoingDown = outgoingEdges[key, default: []].filter {
+  func upward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    guard let id = resolveElementID(key) else { return [] }
+    return upward(id: id, includeUnaudited: includeUnaudited)
+  }
+
+  /// Edges whose other endpoint is more concrete than `id`.
+  func downward(id: UUID, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    let outgoingDown = outgoingEdges[id, default: []].filter {
       $0.kind?.abstractionDirection == .down
     }
-    let incomingUp = incomingEdges[key, default: []].filter { edge in
+    let incomingUp = incomingEdges[id, default: []].filter { edge in
       guard edge.kind?.abstractionDirection == .up else { return false }
       return includeUnaudited || edge.kind?.isAuditedUpward == true
     }
     return outgoingDown + incomingUp
   }
 
-  /// Same-level edges (相似于 plus the orientation-pending kinds treated as
-  /// lateral until audited: 用于/象征/制作采用).
-  func lateral(key: String) -> [DirectedRelationEdge] {
-    outgoingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
-      + incomingEdges[key, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+  func downward(key: String, includeUnaudited: Bool = false) -> [DirectedRelationEdge] {
+    guard let id = resolveElementID(key) else { return [] }
+    return downward(id: id, includeUnaudited: includeUnaudited)
   }
 
-  /// Outgoing + incoming edges of `key` filtered to the given relation kinds,
-  /// direction-agnostic (`edge.key` is always the *other* endpoint). Used by
+  /// Same-level edges (相似于 plus the orientation-pending kinds treated as
+  /// lateral until audited: 用于/象征/制作采用).
+  func lateral(id: UUID) -> [DirectedRelationEdge] {
+    outgoingEdges[id, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+      + incomingEdges[id, default: []].filter { $0.kind?.abstractionDirection == .lateral }
+  }
+
+  func lateral(key: String) -> [DirectedRelationEdge] {
+    guard let id = resolveElementID(key) else { return [] }
+    return lateral(id: id)
+  }
+
+  /// Outgoing + incoming edges of `id` filtered to the given relation kinds,
+  /// direction-agnostic (`edge.id` is always the *other* endpoint). Used by
   /// the explanation contract's relation dimensions (历史时期/地域文化/…),
   /// where the edge's `explanation` text carries the semantics and direction
   /// is deliberately not interpreted (`产生于` is still orientation-pending).
-  func edges(key: String, kinds: Set<RelationKind>) -> [DirectedRelationEdge] {
-    var seen = Set<String>()
+  func edges(id: UUID, kinds: Set<RelationKind>) -> [DirectedRelationEdge] {
+    var seen = Set<UUID>()
     var result: [DirectedRelationEdge] = []
-    for edge in outgoingEdges[key, default: []] + incomingEdges[key, default: []] {
-      guard let kind = edge.kind, kinds.contains(kind), seen.insert(edge.key).inserted
+    for edge in outgoingEdges[id, default: []] + incomingEdges[id, default: []] {
+      guard let kind = edge.kind, kinds.contains(kind), seen.insert(edge.id).inserted
       else { continue }
       result.append(edge)
     }
     return result
   }
 
+  func edges(key: String, kinds: Set<RelationKind>) -> [DirectedRelationEdge] {
+    guard let id = resolveElementID(key) else { return [] }
+    return edges(id: id, kinds: kinds)
+  }
+
   /// BFS over upward edges, grouped by first-arrival level. A node reached
   /// again through a cycle keeps its earliest level, so results stay
   /// deterministic even while the pack still contains unaudited edges.
-  func ancestors(key: String, maxLevels: Int = 5) -> [AbstractionLevel] {
-    var levelByKey: [String: Int] = [key: 0]
-    var edgeByKey: [String: DirectedRelationEdge] = [:]
-    var queue: [String] = [key]
+  func ancestors(id: UUID, maxLevels: Int = 5) -> [AbstractionLevel] {
+    var levelByID: [UUID: Int] = [id: 0]
+    var edgeByID: [UUID: DirectedRelationEdge] = [:]
+    var queue: [UUID] = [id]
     var queueIndex = 0
     while queueIndex < queue.count {
       let current = queue[queueIndex]
       queueIndex += 1
-      let currentLevel = levelByKey[current] ?? 0
+      let currentLevel = levelByID[current] ?? 0
       guard currentLevel < maxLevels else { continue }
-      for edge in upward(key: current) {
-        guard elementsByKey[edge.key] != nil, levelByKey[edge.key] == nil else { continue }
-        levelByKey[edge.key] = currentLevel + 1
-        edgeByKey[edge.key] = edge
-        queue.append(edge.key)
+      for edge in upward(id: current) {
+        guard elementsByID[edge.id] != nil, levelByID[edge.id] == nil else { continue }
+        levelByID[edge.id] = currentLevel + 1
+        edgeByID[edge.id] = edge
+        queue.append(edge.id)
       }
     }
 
     var elementsByLevel: [Int: [AbstractionAncestor]] = [:]
-    for (ancestorKey, level) in levelByKey where level > 0 {
-      guard let element = elementsByKey[ancestorKey] else { continue }
-      let edge = edgeByKey[ancestorKey]
+    for (ancestorID, level) in levelByID where level > 0 {
+      guard let element = elementsByID[ancestorID] else { continue }
+      let edge = edgeByID[ancestorID]
       elementsByLevel[level, default: []].append(
         AbstractionAncestor(
-          key: ancestorKey,
+          id: ancestorID,
+          key: element.key,
           name: element.name,
           kind: edge?.kind,
           explanation: edge?.explanation
@@ -832,48 +947,61 @@ nonisolated struct KnowledgeStore: Sendable {
           let lhsPriority = $0.kind?.abstractionBackbonePriority ?? .max
           let rhsPriority = $1.kind?.abstractionBackbonePriority ?? .max
           if lhsPriority != rhsPriority { return lhsPriority < rhsPriority }
-          return ($0.name, $0.key) < ($1.name, $1.key)
+          return ($0.name, $0.key ?? $0.id.uuidString) < (
+            $1.name, $1.key ?? $1.id.uuidString
+          )
         }
       )
     }
   }
 
-  /// Nodes sharing at least one upward parent with `key` (同级相关).
-  func siblings(key: String) -> [String] {
-    var result = Set<String>()
-    for parent in upward(key: key) {
-      for child in downward(key: parent.key) where child.key != key {
-        if elementsByKey[child.key] != nil {
-          result.insert(child.key)
+  func ancestors(key: String, maxLevels: Int = 5) -> [AbstractionLevel] {
+    guard let id = resolveElementID(key) else { return [] }
+    return ancestors(id: id, maxLevels: maxLevels)
+  }
+
+  /// Nodes sharing at least one upward parent with `id` (同级相关).
+  func siblings(id: UUID) -> [UUID] {
+    var result = Set<UUID>()
+    for parent in upward(id: id) {
+      for child in downward(id: parent.id) where child.id != id {
+        if elementsByID[child.id] != nil {
+          result.insert(child.id)
         }
       }
     }
-    return result.sorted()
+    return result.sorted { $0.uuidString < $1.uuidString }
   }
 
-  /// Transitive closure of `理解前先懂` edges pointing at `key` (an edge's
+  func siblings(key: String) -> [UUID] {
+    guard let id = resolveElementID(key) else { return [] }
+    return siblings(id: id)
+  }
+
+  /// Transitive closure of `理解前先懂` edges pointing at `id` (an edge's
   /// source is the prerequisite, its target the dependent), minus the `known`
-  /// element keys, in dependency order (nearest prerequisite first).
+  /// element ids, in dependency order (nearest prerequisite first).
   func missingPrerequisites(
-    key: String,
-    known: Set<String>,
+    id: UUID,
+    known: Set<UUID>,
     maxCount: Int = 3
   ) -> [MissingPrerequisite] {
-    var visited: Set<String> = [key]
-    var queue: [String] = [key]
+    var visited: Set<UUID> = [id]
+    var queue: [UUID] = [id]
     var queueIndex = 0
     var missing: [MissingPrerequisite] = []
     while queueIndex < queue.count {
       let current = queue[queueIndex]
       queueIndex += 1
       for edge in incomingEdges[current, default: []]
-      where edge.kind == .prerequisiteFor && visited.insert(edge.key).inserted {
-        queue.append(edge.key)
-        guard !known.contains(edge.key), let element = elementsByKey[edge.key]
+      where edge.kind == .prerequisiteFor && visited.insert(edge.id).inserted {
+        queue.append(edge.id)
+        guard !known.contains(edge.id), let element = elementsByID[edge.id]
         else { continue }
         missing.append(
           MissingPrerequisite(
-            key: edge.key,
+            id: edge.id,
+            key: element.key,
             name: element.name,
             excerpt: Self.richTextPlainText(element.introduction)
           )
@@ -882,6 +1010,16 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
     return missing
+  }
+
+  func missingPrerequisites(
+    key: String,
+    known: Set<String>,
+    maxCount: Int = 3
+  ) -> [MissingPrerequisite] {
+    guard let id = resolveElementID(key) else { return [] }
+    let knownIDs = Set(known.compactMap(resolveElementID))
+    return missingPrerequisites(id: id, known: knownIDs, maxCount: maxCount)
   }
 
   // MARK: - Nearby introductions (Haversine, content.sql:209-267)
@@ -898,7 +1036,8 @@ nonisolated struct KnowledgeStore: Sendable {
     let radians = Double.pi / 180
     let deltaLatitude = (toLatitude - fromLatitude) * radians
     let deltaLongitude = (toLongitude - fromLongitude) * radians
-    let a = pow(sin(deltaLatitude / 2), 2)
+    let a =
+      pow(sin(deltaLatitude / 2), 2)
       + cos(fromLatitude * radians) * cos(toLatitude * radians)
       * pow(sin(deltaLongitude / 2), 2)
     return earthRadiusMeters * 2 * asin(min(1, sqrt(a)))
@@ -922,8 +1061,8 @@ nonisolated struct KnowledgeStore: Sendable {
 
     let matched: [NearbyAttractionIntroduction] = pack.introductions.compactMap { record in
       guard
-        let element = elementsByKey[record.culturalElementKey],
-        let attraction = pack.attractions.first(where: { $0.key == record.attractionKey })
+        let element = elementsByID[record.culturalElementId],
+        let attraction = attractionsByID[record.attractionId]
       else { return nil }
       let distance = Self.haversineDistanceMeters(
         fromLatitude: record.latitude,
@@ -936,8 +1075,9 @@ nonisolated struct KnowledgeStore: Sendable {
         key: record.key,
         name: record.name,
         introduction: record.introduction,
-        culturalElementKey: element.key,
+        culturalElementId: element.id,
         culturalElementName: element.name,
+        attractionId: attraction.id,
         attractionKey: attraction.key,
         attractionName: attraction.name,
         latitude: record.latitude,
@@ -947,7 +1087,7 @@ nonisolated struct KnowledgeStore: Sendable {
       )
     }
     .sorted {
-      ($0.distanceMeters, $0.name, $0.key) < ($1.distanceMeters, $1.name, $1.key)
+      ($0.distanceMeters, $0.name, $0.sortKey) < ($1.distanceMeters, $1.name, $1.sortKey)
     }
 
     return NearbyIntroductionResult(
@@ -966,7 +1106,7 @@ nonisolated struct KnowledgeStore: Sendable {
     let limit = clampedLimit(limit)
 
     var nearby: [NearbyAttractionIntroduction] = []
-    if let latitude, let longitude, !orderedElementKeys.isEmpty {
+    if let latitude, let longitude, !orderedElementIDs.isEmpty {
       nearby = try nearbyIntroductions(
         latitude: latitude,
         longitude: longitude,
@@ -975,38 +1115,42 @@ nonisolated struct KnowledgeStore: Sendable {
       ).introductions
     }
 
-    var attractionRoots: [String: String] = [:]
-    var attractionNames: [String: String] = [:]
-    var attractionBindings: [String: Set<String>] = [:]
+    var attractionRoots: [UUID: UUID] = [:]
+    var attractionNames: [UUID: String] = [:]
+    var attractionBindings: [UUID: Set<UUID>] = [:]
     var attractionCandidates: [AttractionCandidate] = []
-    var seenAttractions = Set<String>()
+    var seenAttractions = Set<UUID>()
     for introduction in nearby {
-      // Prefer the scannable sight that shares the attraction key (实体即景点).
+      // Prefer the scannable sight that shares the attraction slug (实体即景点).
       // History intro bindings stay in nearby_contexts / post-bind graph only.
       let preferredRoot =
-        sightElementKey(forAttraction: introduction.attractionKey)
-        ?? (isSight(introduction.culturalElementKey) ? introduction.culturalElementKey : nil)
-      if attractionRoots[introduction.attractionKey] == nil {
+        sightElementID(forAttraction: introduction.attractionId)
+        ?? (isSight(introduction.culturalElementId) ? introduction.culturalElementId : nil)
+      if attractionRoots[introduction.attractionId] == nil {
         if let preferredRoot {
-          attractionRoots[introduction.attractionKey] = preferredRoot
+          attractionRoots[introduction.attractionId] = preferredRoot
         }
-        attractionNames[introduction.attractionKey] = introduction.attractionName
+        attractionNames[introduction.attractionId] = introduction.attractionName
       }
-      if let root = attractionRoots[introduction.attractionKey] {
-        attractionBindings[introduction.attractionKey, default: []].insert(root)
+      if let root = attractionRoots[introduction.attractionId] {
+        attractionBindings[introduction.attractionId, default: []].insert(root)
       }
       // History targets remain graph bindings under the sight root after resolve.
-      attractionBindings[introduction.attractionKey, default: []]
-        .insert(introduction.culturalElementKey)
+      attractionBindings[introduction.attractionId, default: []]
+        .insert(introduction.culturalElementId)
 
-      guard seenAttractions.insert(introduction.attractionKey).inserted else { continue }
+      guard seenAttractions.insert(introduction.attractionId).inserted else { continue }
       guard attractionCandidates.count < Self.maximumAttractionCandidates else { continue }
-      let rootKey = attractionRoots[introduction.attractionKey] ?? preferredRoot ?? ""
+      let rootID = attractionRoots[introduction.attractionId] ?? preferredRoot
+      guard let rootID else { continue }
+      let rootElement = elementsByID[rootID]
       attractionCandidates.append(
         AttractionCandidate(
+          id: introduction.attractionId,
           key: introduction.attractionKey,
           name: introduction.attractionName,
-          culturalElementKey: rootKey,
+          culturalElementId: rootID,
+          culturalElementKey: rootElement?.key,
           summary: Self.richTextPlainText(introduction.introduction, separator: "\n\n"),
           distanceMeters: introduction.distanceMeters,
           sources: introduction.sources
@@ -1014,42 +1158,42 @@ nonisolated struct KnowledgeStore: Sendable {
       )
     }
 
-    let selectedAttractionKeys = Set(attractionCandidates.map(\.key))
-    let prioritizedKeys = prioritizedRecognitionKeys(
+    let selectedAttractionIDs = Set(attractionCandidates.map(\.id))
+    let prioritizedIDs = prioritizedRecognitionIDs(
       nearby: nearby,
       attractionRoots: attractionRoots,
-      selectedAttractionKeys: selectedAttractionKeys,
+      selectedAttractionIDs: selectedAttractionIDs,
       allowCulturalCatalogFill: attractionCandidates.count
         < Self.minimumAttractionsBeforeCulturalFill,
       limit: limit
     )
 
     // Attach every on-site intro to the sight root for that attraction so the
-    // model still sees history context without being allowed to cite it as key.
-    var nearbyContexts: [String: [NearbyAttractionIntroduction]] = [:]
+    // model still sees history context without being allowed to cite it as id.
+    var nearbyContexts: [UUID: [NearbyAttractionIntroduction]] = [:]
     for introduction in nearby {
-      let attachKey =
-        attractionRoots[introduction.attractionKey]
-        ?? sightElementKey(forAttraction: introduction.attractionKey)
-      guard let attachKey, elementsByKey[attachKey] != nil else { continue }
-      nearbyContexts[attachKey, default: []].append(introduction)
+      let attachID =
+        attractionRoots[introduction.attractionId]
+        ?? sightElementID(forAttraction: introduction.attractionId)
+      guard let attachID, elementsByID[attachID] != nil else { continue }
+      nearbyContexts[attachID, default: []].append(introduction)
     }
 
     var elements: [RecognitionElement] = []
-    elements.reserveCapacity(prioritizedKeys.count)
-    for key in prioritizedKeys {
-      guard let element = elementsByKey[key] else { continue }
-      var graph = recognitionGraph(rootKey: key, maxDepth: 3, maxNodes: 32)
+    elements.reserveCapacity(prioritizedIDs.count)
+    for id in prioritizedIDs {
+      guard let element = elementsByID[id] else { continue }
+      var graph = recognitionGraph(rootID: id, maxDepth: 3, maxNodes: 32)
       graph = appendAttractionBindings(
-        rootKey: key,
+        rootID: id,
         attractionRoots: attractionRoots,
         attractionNames: attractionNames,
         bindings: attractionBindings,
         graphElements: graph.elements,
         graphRelations: graph.relations
       )
-      let contexts = nearbyContexts[key] ?? []
-      var elementSources = packSources(forElementKey: key)
+      let contexts = nearbyContexts[id] ?? []
+      var elementSources = packSources(forElementID: id)
       var seenSourceURLs = Set(
         elementSources.compactMap { $0.url?.lowercased() }
       )
@@ -1062,12 +1206,13 @@ nonisolated struct KnowledgeStore: Sendable {
       }
       elements.append(
         RecognitionElement(
+          id: element.id,
           key: element.key,
           name: element.name,
           introduction: element.introduction,
           nearbyContexts: contexts,
           relatedElements: relatedElements(
-            forKey: key,
+            forID: id,
             limit: Self.maximumObjectLimit
           ),
           graphElements: graph.elements,
@@ -1081,7 +1226,7 @@ nonisolated struct KnowledgeStore: Sendable {
       version: pack.version,
       elements: elements,
       attractionCandidates: attractionCandidates,
-      totalElements: orderedElementKeys.count,
+      totalElements: orderedElementIDs.count,
       nearbyContextCount: nearby.count,
       locationMatched: !nearby.isEmpty
     )
@@ -1089,90 +1234,99 @@ nonisolated struct KnowledgeStore: Sendable {
 
   /// Cultural-content candidates for the recognition prompt — **sights only**.
   /// History nodes may appear in nearby_contexts / graph after binding, but the
-  /// model must not cite them as `cultural_element_key`.
+  /// model must not cite them as the primary cultural element id.
   /// Priority:
   /// 1. Sight roots for selected nearby attractions
   /// 2. Other sight elements bound via introductions to those attractions
   /// 3. Only when nearby attractions < 3: remaining sight catalog by name
-  private func prioritizedRecognitionKeys(
+  private func prioritizedRecognitionIDs(
     nearby: [NearbyAttractionIntroduction],
-    attractionRoots: [String: String],
-    selectedAttractionKeys: Set<String>,
+    attractionRoots: [UUID: UUID],
+    selectedAttractionIDs: Set<UUID>,
     allowCulturalCatalogFill: Bool,
     limit: Int
-  ) -> [String] {
-    var prioritizedKeys: [String] = []
-    var seen = Set<String>()
+  ) -> [UUID] {
+    var prioritizedIDs: [UUID] = []
+    var seen = Set<UUID>()
 
-    func appendSight(_ key: String) {
-      guard isSight(key), seen.insert(key).inserted else { return }
-      prioritizedKeys.append(key)
+    func appendSight(_ id: UUID) {
+      guard isSight(id), seen.insert(id).inserted else { return }
+      prioritizedIDs.append(id)
     }
 
-    let selectedNearby = nearby.filter { selectedAttractionKeys.contains($0.attractionKey) }
+    let selectedNearby = nearby.filter { selectedAttractionIDs.contains($0.attractionId) }
 
     for introduction in selectedNearby {
-      if let key = attractionRoots[introduction.attractionKey] {
-        appendSight(key)
-        if prioritizedKeys.count >= limit { return prioritizedKeys }
+      if let id = attractionRoots[introduction.attractionId] {
+        appendSight(id)
+        if prioritizedIDs.count >= limit { return prioritizedIDs }
       }
-      // Entity-as-attraction: inject the attraction key itself when it is a sight.
-      appendSight(introduction.attractionKey)
-      if prioritizedKeys.count >= limit { return prioritizedKeys }
+      // Entity-as-attraction: inject the sight that shares the attraction slug.
+      if let sightID = sightElementID(forAttraction: introduction.attractionId) {
+        appendSight(sightID)
+        if prioritizedIDs.count >= limit { return prioritizedIDs }
+      }
     }
     for introduction in selectedNearby {
-      appendSight(introduction.culturalElementKey)
-      if prioritizedKeys.count >= limit { return prioritizedKeys }
+      appendSight(introduction.culturalElementId)
+      if prioritizedIDs.count >= limit { return prioritizedIDs }
     }
 
-    guard allowCulturalCatalogFill else { return prioritizedKeys }
+    guard allowCulturalCatalogFill else { return prioritizedIDs }
 
     for introduction in nearby {
-      appendSight(introduction.attractionKey)
-      appendSight(introduction.culturalElementKey)
-      if prioritizedKeys.count >= limit { return prioritizedKeys }
+      if let sightID = sightElementID(forAttraction: introduction.attractionId) {
+        appendSight(sightID)
+      }
+      appendSight(introduction.culturalElementId)
+      if prioritizedIDs.count >= limit { return prioritizedIDs }
     }
-    for key in orderedElementKeys {
-      appendSight(key)
-      if prioritizedKeys.count >= limit { return prioritizedKeys }
+    for id in orderedElementIDs {
+      appendSight(id)
+      if prioritizedIDs.count >= limit { return prioritizedIDs }
     }
-    return prioritizedKeys
+    return prioritizedIDs
   }
 
   /// True when the element exists and resolves to `ContentRole.sight`.
-  private func isSight(_ key: String) -> Bool {
-    guard let element = elementsByKey[key] else { return false }
+  private func isSight(_ id: UUID) -> Bool {
+    guard let element = elementsByID[id] else { return false }
     return element.resolvedContentRole() == .sight
   }
 
-  /// Sight element that shares the attraction key, when present.
-  private func sightElementKey(forAttraction attractionKey: String) -> String? {
-    isSight(attractionKey) ? attractionKey : nil
+  /// Sight element that shares the attraction slug, when present (实体即景点).
+  private func sightElementID(forAttraction attractionId: UUID) -> UUID? {
+    guard let attraction = attractionsByID[attractionId],
+      let slug = attraction.key?.lowercased(),
+      let elementID = elementIDsByKey[slug],
+      isSight(elementID)
+    else { return nil }
+    return elementID
   }
 
   // MARK: - Graph traversal (postgres.go recognitionGraph / appendAttractionBindings)
 
   private func recognitionGraph(
-    rootKey: String,
+    rootID: UUID,
     maxDepth: Int,
     maxNodes: Int
   ) -> (elements: [KnowledgeGraphElement], relations: [KnowledgeGraphRelation]) {
-    var depths = [rootKey: 0]
-    var queue = [rootKey]
+    var depths = [rootID: 0]
+    var queue = [rootID]
     while !queue.isEmpty && depths.count < maxNodes + 1 {
       let current = queue.removeFirst()
       let depth = depths[current] ?? 0
       guard depth < maxDepth else { continue }
       for relation in relations {
-        let next: String
-        if relation.elementKey == current {
-          next = relation.relatedElementKey
-        } else if relation.relatedElementKey == current {
-          next = relation.elementKey
+        let next: UUID
+        if relation.elementId == current {
+          next = relation.relatedElementId
+        } else if relation.relatedElementId == current {
+          next = relation.elementId
         } else {
           continue
         }
-        guard elementsByKey[next] != nil else { continue }
+        guard elementsByID[next] != nil else { continue }
         if depths[next] == nil && depths.count < maxNodes + 1 {
           depths[next] = depth + 1
           queue.append(next)
@@ -1180,14 +1334,16 @@ nonisolated struct KnowledgeStore: Sendable {
       }
     }
 
-    let sortedKeys = depths.keys.sorted {
-      (depths[$0] ?? 0, $0) < (depths[$1] ?? 0, $1)
+    let sortedIDs = depths.keys.sorted {
+      (depths[$0] ?? 0, $0.uuidString) < (depths[$1] ?? 0, $1.uuidString)
     }
-    let graphElements = sortedKeys
-      .filter { $0 != rootKey }
-      .compactMap { elementsByKey[$0] }
+    let graphElements =
+      sortedIDs
+      .filter { $0 != rootID }
+      .compactMap { elementsByID[$0] }
       .map {
         KnowledgeGraphElement(
+          id: $0.id,
           key: $0.key,
           name: $0.name,
           introduction: $0.introduction,
@@ -1195,11 +1351,11 @@ nonisolated struct KnowledgeStore: Sendable {
         )
       }
     let graphRelations = relations.compactMap { relation -> KnowledgeGraphRelation? in
-      guard depths[relation.elementKey] != nil, depths[relation.relatedElementKey] != nil
+      guard depths[relation.elementId] != nil, depths[relation.relatedElementId] != nil
       else { return nil }
       return KnowledgeGraphRelation(
-        elementKey: relation.elementKey,
-        relatedElementKey: relation.relatedElementKey,
+        elementId: relation.elementId,
+        relatedElementId: relation.relatedElementId,
         kind: relation.kind ?? "解释",
         explanation: relation.explanation
           ?? String(localized: "文化内容库记录了两个概念之间的显式关联。")
@@ -1209,53 +1365,59 @@ nonisolated struct KnowledgeStore: Sendable {
   }
 
   private func appendAttractionBindings(
-    rootKey: String,
-    attractionRoots: [String: String],
-    attractionNames: [String: String],
-    bindings: [String: Set<String>],
+    rootID: UUID,
+    attractionRoots: [UUID: UUID],
+    attractionNames: [UUID: String],
+    bindings: [UUID: Set<UUID>],
     graphElements: [KnowledgeGraphElement],
     graphRelations: [KnowledgeGraphRelation]
   ) -> (elements: [KnowledgeGraphElement], relations: [KnowledgeGraphRelation]) {
     var graphElements = graphElements
     var graphRelations = graphRelations
-    var seenElements: Set<String> = [rootKey]
-    seenElements.formUnion(graphElements.map(\.key))
+    var seenElements: Set<UUID> = [rootID]
+    seenElements.formUnion(graphElements.map(\.id))
     var seenEdges = Set<String>()
     for relation in graphRelations {
-      seenEdges.insert(relation.elementKey + "\0" + relation.relatedElementKey)
-      seenEdges.insert(relation.relatedElementKey + "\0" + relation.elementKey)
+      seenEdges.insert(
+        relation.elementId.uuidString + "\0" + relation.relatedElementId.uuidString)
+      seenEdges.insert(
+        relation.relatedElementId.uuidString + "\0" + relation.elementId.uuidString)
     }
 
-    for attractionKey in attractionRoots.keys.sorted()
-    where attractionRoots[attractionKey] == rootKey {
-      for boundKey in (bindings[attractionKey] ?? []).sorted() {
-        guard boundKey != rootKey else { continue }
-        if !seenElements.contains(boundKey) {
-          guard let element = elementsByKey[boundKey] else { continue }
+    for attractionID in attractionRoots.keys.sorted(by: { $0.uuidString < $1.uuidString })
+    where attractionRoots[attractionID] == rootID {
+      for boundID in (bindings[attractionID] ?? []).sorted(by: {
+        $0.uuidString < $1.uuidString
+      }) {
+        guard boundID != rootID else { continue }
+        if !seenElements.contains(boundID) {
+          guard let element = elementsByID[boundID] else { continue }
           graphElements.append(
             KnowledgeGraphElement(
+              id: element.id,
               key: element.key,
               name: element.name,
               introduction: element.introduction,
               conceptKind: element.conceptKind
             )
           )
-          seenElements.insert(boundKey)
+          seenElements.insert(boundID)
         }
-        let edgeKey = rootKey + "\0" + boundKey
+        let edgeKey = rootID.uuidString + "\0" + boundID.uuidString
         guard !seenEdges.contains(edgeKey) else { continue }
         graphRelations.append(
           KnowledgeGraphRelation(
-            elementKey: rootKey,
-            relatedElementKey: boundKey,
+            elementId: rootID,
+            relatedElementId: boundID,
             kind: "解释",
             explanation: String(
-              localized: "该文化元素通过“\(attractionNames[attractionKey] ?? "")”的现场介绍直接关联到当前景点。"
+              localized:
+                "该文化元素通过“\(attractionNames[attractionID] ?? "")”的现场介绍直接关联到当前景点。"
             )
           )
         )
         seenEdges.insert(edgeKey)
-        seenEdges.insert(boundKey + "\0" + rootKey)
+        seenEdges.insert(boundID.uuidString + "\0" + rootID.uuidString)
       }
     }
     return (graphElements, graphRelations)

@@ -16,23 +16,31 @@ struct CultureRelationGraphView: View {
 
   let object: CultureObject
   var presentation: Presentation = .inlineInteractive
+  /// Fullscreen canvas content lives in a UIHostingController (see
+  /// `ZoomableScrollView`), where `NavigationLink` has no surrounding
+  /// NavigationStack — node taps go through this closure instead.
+  var onNavigate: ((AppRoute) -> Void)? = nil
 
   @Environment(\.dismiss) private var dismiss
   @State private var displayMode: DisplayMode = .graph
   @State private var isFullscreenPresented = false
+  @State private var fullscreenPath = NavigationPath()
   @State private var zoomScale: CGFloat = 1
   @State private var fittedZoomScale: CGFloat = 1
-  @State private var didInitializeZoom = false
   @State private var centerRequest = 0
   /// Layout is computed once per object instead of on every body evaluation,
   /// so pinch-to-zoom frames never rerun the BFS.
   @State private var layout: GraphLayout
   @State private var hiddenFamilies: Set<RelationSemanticFamily> = []
-  @GestureState private var transientMagnification: CGFloat = 1
 
-  init(object: CultureObject, presentation: Presentation = .inlineInteractive) {
+  init(
+    object: CultureObject,
+    presentation: Presentation = .inlineInteractive,
+    onNavigate: ((AppRoute) -> Void)? = nil
+  ) {
     self.object = object
     self.presentation = presentation
+    self.onNavigate = onNavigate
     _layout = State(initialValue: GraphLayout(object: object))
   }
 
@@ -50,8 +58,12 @@ struct CultureRelationGraphView: View {
     case .expandablePreview:
       expandablePreview
         .fullScreenCover(isPresented: $isFullscreenPresented) {
-          NavigationStack {
-            CultureRelationGraphView(object: object, presentation: .fullscreen)
+          NavigationStack(path: $fullscreenPath) {
+            CultureRelationGraphView(
+              object: object,
+              presentation: .fullscreen,
+              onNavigate: { route in fullscreenPath.append(route) }
+            )
               .navigationDestination(for: AppRoute.self) { route in
                 fullscreenDestination(for: route)
               }
@@ -225,8 +237,8 @@ struct CultureRelationGraphView: View {
   }
 
   private var isMatchedToKnowledgeBase: Bool {
-    guard let key = object.culturalElementKey else { return false }
-    return KnowledgeStore.shared?.element(key: key) != nil
+    guard let id = object.culturalElementID else { return false }
+    return KnowledgeStore.shared?.element(id: id) != nil
   }
 
   private func header(showsDisplayModePicker: Bool) -> some View {
@@ -364,61 +376,40 @@ struct CultureRelationGraphView: View {
   }
 
   private var zoomableGraph: some View {
-    let contentSize = CGSize(width: layout.size.width + 36, height: layout.size.height + 36)
-    let effectiveScale = GraphZoom.clamped(zoomScale * transientMagnification)
-
-    return GeometryReader { proxy in
-      let scaledSize = CGSize(
-        width: contentSize.width * effectiveScale,
-        height: contentSize.height * effectiveScale
-      )
-
-      ScrollViewReader { scrollProxy in
-        ScrollView([.horizontal, .vertical]) {
-          graphCanvas(layout: layout, linksEnabled: true)
-            .padding(18)
-            .scaleEffect(effectiveScale)
-            .frame(width: scaledSize.width, height: scaledSize.height)
-            .frame(
-              width: max(scaledSize.width, proxy.size.width),
-              height: max(scaledSize.height, proxy.size.height)
-            )
-        }
-        .defaultScrollAnchor(.center)
-        .scrollIndicators(.visible)
-        .simultaneousGesture(
-          MagnifyGesture()
-            .updating($transientMagnification) { value, state, _ in
-              state = value.magnification
-            }
-            .onEnded { value in
-              zoomScale = GraphZoom.clamped(zoomScale * value.magnification)
-            }
-        )
-        .onAppear {
-          configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
-          centerGraph(using: scrollProxy)
-        }
-        .onChange(of: proxy.size) {
-          updateFittedZoom(contentSize: contentSize, viewportSize: proxy.size)
-        }
-        .onChange(of: object.id) {
-          layout = GraphLayout(object: object)
-          didInitializeZoom = false
-          configureInitialZoom(contentSize: contentSize, viewportSize: proxy.size)
-          centerGraph(using: scrollProxy)
-        }
-        .onChange(of: centerRequest) {
-          centerGraph(using: scrollProxy)
-        }
-      }
-      .accessibilityElement(children: .contain)
-      .accessibilityLabel("\(object.canonicalName)可缩放有向文化知识图谱")
-      .accessibilityHint("双指缩放，单指拖动画布")
+    // Pinch zoom is delegated to UIScrollView (ZoomableScrollView), so it is
+    // anchored at the finger centroid instead of the canvas center.
+    ZoomableScrollView(
+      contentSize: CGSize(
+        width: layout.size.width + 36,
+        height: layout.size.height + 36
+      ),
+      zoomScale: $zoomScale,
+      fittedZoomScale: $fittedZoomScale,
+      centerRequest: $centerRequest,
+      centerPoint: contentCenterPoint(for: object.id)
+    ) {
+      graphCanvas(layout: layout, linksEnabled: true)
+        .padding(18)
     }
+    .accessibilityElement(children: .contain)
+    .accessibilityLabel("\(object.canonicalName)可缩放有向文化知识图谱")
+    .accessibilityHint("双指缩放，单指拖动画布")
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(CultureTheme.surface)
     .ignoresSafeArea()
+    .onChange(of: object.id) {
+      layout = GraphLayout(object: object)
+      zoomScale = 1
+      centerRequest += 1
+    }
+  }
+
+  /// `padding(18)` sits inside the hosted content, so content coordinates are
+  /// offset by 18 from layout coordinates.
+  private func contentCenterPoint(for id: UUID) -> CGPoint {
+    let position = layout.positions[id]
+      ?? CGPoint(x: layout.size.width / 2, y: layout.size.height / 2)
+    return CGPoint(x: position.x + 18, y: position.y + 18)
   }
 
   private func graphCanvas(layout: GraphLayout, linksEnabled: Bool) -> some View {
@@ -444,7 +435,15 @@ struct CultureRelationGraphView: View {
 
       ForEach(object.concepts) { concept in
         if let position = layout.positions[concept.id] {
-          if linksEnabled {
+          if let onNavigate {
+            Button {
+              onNavigate(.concept(concept.id))
+            } label: {
+              conceptNode(concept)
+            }
+            .buttonStyle(.plain)
+            .position(position)
+          } else if linksEnabled {
             NavigationLink(value: AppRoute.concept(concept.id)) {
               conceptNode(concept)
             }
@@ -583,21 +582,6 @@ struct CultureRelationGraphView: View {
     }
   }
 
-  private func configureInitialZoom(contentSize: CGSize, viewportSize: CGSize) {
-    updateFittedZoom(contentSize: contentSize, viewportSize: viewportSize)
-    guard !didInitializeZoom else { return }
-    zoomScale = 1
-    didInitializeZoom = true
-    centerRequest += 1
-  }
-
-  private func updateFittedZoom(contentSize: CGSize, viewportSize: CGSize) {
-    fittedZoomScale = GraphZoom.fittedScale(
-      contentSize: contentSize,
-      viewportSize: viewportSize
-    )
-  }
-
   @ViewBuilder
   private func fullscreenDestination(for route: AppRoute) -> some View {
     switch route {
@@ -606,7 +590,7 @@ struct CultureRelationGraphView: View {
         ScanResultView(
           knowledgeObject: CultureObject(
             knowledgeConcept: concept,
-            elementKey: KnowledgeStore.shared?.elementKey(for: concept.id)
+            elementID: concept.id
           )
         )
       } else {
@@ -615,8 +599,8 @@ struct CultureRelationGraphView: View {
           systemImage: "point.3.connected.trianglepath.dotted"
         )
       }
-    case .knowledgeElement(let key):
-      if let element = KnowledgeStore.shared?.element(key: key) {
+    case .knowledgeElement(let id):
+      if let element = KnowledgeStore.shared?.element(id: id) {
         ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
       } else {
         ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
@@ -685,7 +669,8 @@ struct CultureRelationGraphView: View {
   }
 
   private var objectElementKey: String? {
-    object.culturalElementKey ?? KnowledgeStore.shared?.elementKey(for: object.id)
+    object.culturalElementID.map(\.uuidString)
+      ?? KnowledgeStore.shared?.elementKey(for: object.id)
   }
 
   private func elementKey(for id: UUID) -> String? {

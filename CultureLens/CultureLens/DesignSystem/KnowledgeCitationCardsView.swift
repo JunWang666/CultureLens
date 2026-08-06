@@ -85,11 +85,15 @@ struct KnowledgeCitationCardsView: View {
         .buttonStyle(.plain)
         .accessibilityHint("查看知识节点详情")
       case .appRoute:
-        NavigationLink(value: AppRoute.knowledgeElement(citation.key)) {
+        if let id = citation.elementID() {
+          NavigationLink(value: AppRoute.knowledgeElement(id)) {
+            cardLabel(citation)
+          }
+          .buttonStyle(.plain)
+          .accessibilityHint("查看知识节点详情")
+        } else {
           cardLabel(citation)
         }
-        .buttonStyle(.plain)
-        .accessibilityHint("查看知识节点详情")
       }
 
       if !citation.sources.isEmpty {

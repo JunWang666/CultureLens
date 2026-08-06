@@ -3,7 +3,7 @@ import Foundation
 nonisolated enum AppRoute: Hashable {
     case object(UUID)
     case concept(UUID)
-    case knowledgeElement(String)
+    case knowledgeElement(UUID)
     case ask(UUID)
     /// General cultural Q&A from the home chat card (no specific object).
     case chat

@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "3b970416-1756-55e8-8a1e-fca23a4cc03d",
       "key": "liangzhu-culture-overview",
       "name": "良渚文化总览",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化距今5300年至4000年，是中国新石器时代考古学文化之一，出现并发展于长江下游环太湖地区，共发现500多处遗址，以良渚遗址附近的莫角山为中心区，被视为中国史前文明的重要摇篮。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-culture-overview.png",
+            "caption": "​良渚文化區"
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
       "key": "liangzhu-chronology",
       "name": "良渚的年代与分期",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化的年代，通行说法是距今5300年至4000年；遗址年代的标法则为公元前3300年至公元前2000年，馆内的标牌与书籍多采用这一主口径。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-chronology.jpg",
+            "caption": "​良渚古城莫角山遗址土台"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "343c405b-8a86-5177-89a6-76e25c53c37e",
       "key": "liangzhu-distribution",
       "name": "环太湖的分布与遗址群",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化分布于长江下游环太湖地区，文化区总面积约36500平方公里，平原面积约占整体面积的六分之五，平均河道密度达每平方公里3至4公里。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-distribution.jpg",
+            "caption": "​良渚遗址群——汇观山祭坛"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
       "key": "liangzhu-ancient-city",
       "name": "良渚古城与城墙",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "良渚古城遗址是良渚文化最重要、最具代表性的遗址，被誉为“中华第一城”或“中华五千年文明实证”；城址是良渚古城遗址的核心，由宫殿区、内城与外城组成，占地面积881.45公顷。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-ancient-city.jpg",
+            "caption": "​良渚古城高坝遗址（老虎岭遗址）"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d8dd65b0-c448-59b1-8626-7524c383e81d",
       "key": "liangzhu-water-system",
       "name": "良渚水利系统",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "良渚外围水利系统是良渚文化宏大工程中的一环，由谷口高坝、平原低坝与山前长堤组成，展现了中国最早的一批水利营建。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-water-system.jpg",
+            "caption": "​瓶窑镇良渚水利设施标志"
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "5109ed5d-faa6-5146-94f7-3316cc6cadaf",
       "key": "god-man-beast-mask",
       "name": "神人兽面纹",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "神人兽面纹（兽面纹）是良渚玉器上最经典的纹样，常刻在玉琮、玉钺的器面或玉饰上，被视为良渚“神灵的图象”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/god-man-beast-mask.jpg",
+            "caption": "​良渚出土神人兽面纹玉钺"
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c41fc4b3-78f5-534f-8d98-5f4e27f31247",
       "key": "jade-crafting",
       "name": "良渚玉器工艺与玉料来源",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "良渚玉器的玉材主要出自江苏溧阳天目山余脉小梅岭的透闪石矿；良渚遗址群的塘山背遗址及江苏句容丁沙地等遗址都发现有玉器加工作坊。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-crafting.jpg",
+            "caption": "​十节玉琮，金沙遗址，中国成都"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a3471eec-6d2a-5c85-89ec-04ae746c44a8",
       "key": "liangzhu-pottery",
       "name": "良渚陶器",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化的陶器以磨光黑陶著称，最能让人联想到它与山东龙山文化的呼应；这也是良渚考古一开始就引人注目的遗物。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-pottery.jpg",
+            "caption": "​生活用陶器一组，依次为陶鼎、陶豆、陶壶，浙江余杭庙前遗址出土，良渚博物院藏。"
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a157e85d-7d02-5790-8f29-6efcf18152b8",
       "key": "rice-agriculture",
       "name": "稻作农业",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "稻作农业是良渚文化的经济基础，良渚先民善用石犁耕作，稻米开始成为主要粮食来源，使它成为中国史前稻作文明的重要代表。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/rice-agriculture.jpg",
+            "caption": "稻作农业"
           },
           {
             "type": "paragraph",
@@ -244,6 +298,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "64602982-75d9-569c-863d-4e323bc833f0",
       "key": "liangzhu-society",
       "name": "神权与社会分化",
       "introduction": {
@@ -252,6 +307,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化属神权体制，社会成员地位分化，形成贵族和普通平民阶层，这正是良渚呈现“早期国家”形态的重要表现。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-society.png",
+            "caption": "Map of Shang Dynasty from Bamboo Annals"
           },
           {
             "type": "paragraph",
@@ -271,6 +331,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c0412b19-5da7-5fcb-ac78-4f5fc8df557d",
       "key": "silk-and-weaving",
       "name": "丝帛与纺织",
       "introduction": {
@@ -279,6 +340,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化的另一项成果是丝帛的问世，这是它留给后世的珍贵遗产，钱山漾的丝带与丝帛正是最直接的见证。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/silk-and-weaving.jpg",
+            "caption": "Flower-patterned silk from the Tomb No. 1 at Mawangdui, Changsha, Hunan province, China, dated to the 2nd century BC during the Western Han Dynasty (202 BC - 9 AD). See :[1] China Institute/ NOBLE TOMBS AT MAWANGDUI (exhibition). See also : [2] Archaeology, a publication of the Archaeological Instit"
           },
           {
             "type": "paragraph",
@@ -298,6 +364,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e31f52c9-e16b-56fb-ad11-b41a8d6337ec",
       "key": "liangzhu-symbols",
       "name": "刻符与原始文字",
       "introduction": {
@@ -306,6 +373,11 @@
           {
             "type": "paragraph",
             "text": "良渚文化已有形成中的文字或原始文字，虽不是成熟的文字体系，但已出现可识的符号，是理解良渚“文明”进程的钥匙之一。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-symbols.png",
+            "caption": "Freehand drawing of Zhou Dynasty Oracle Bone Script"
           },
           {
             "type": "paragraph",
@@ -325,6 +397,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d48d7adb-49d2-5879-9dd2-381f6bc9f06a",
       "key": "shi-xingeng-discovery",
       "name": "施昕更与良渚的发现",
       "introduction": {
@@ -333,6 +406,11 @@
           {
             "type": "paragraph",
             "text": "施昕更（1912年—1939年），生于浙江省杭县（今余杭区）良渚镇，是地质矿物学家、考古学家，也是良渚遗址最早的科考发掘者，被誉为“良渚文化探索先驱的杰出代表”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/shi-xingeng-discovery.png",
+            "caption": "​施昕更在瑞安快活照相馆拍摄的大头照。"
           },
           {
             "type": "paragraph",
@@ -352,6 +430,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "3f22446b-b6cd-5876-9df4-c9b72dc99f8f",
       "key": "world-heritage-status",
       "name": "世界遗产：中华五千年文明实证",
       "introduction": {
@@ -360,6 +439,11 @@
           {
             "type": "paragraph",
             "text": "2019年7月6日，良渚古城遗址因符合世界遗产基准（iii）、（iv），被联合国教科文组织列入《世界遗产名录》，是实证中华五千多年文明史的圣地。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/world-heritage-status.jpg",
+            "caption": "​泰山的日出"
           },
           {
             "type": "paragraph",
@@ -379,6 +463,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a47145b5-c9d7-5ba5-bdef-f280d3125b08",
       "key": "contemporary-cultures",
       "name": "同时期的中华文明星光",
       "introduction": {
@@ -387,6 +472,11 @@
           {
             "type": "paragraph",
             "text": "良渚所处的时代，并非只有这一支文化；在中国北方和长江流域，同时活跃着红山文化、凌家滩文化等，共同构成中华文明起源阶段的“满天星光”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/contemporary-cultures.jpg",
+            "caption": "Neolithic jade dragon, H. 26 cm, Hongshan Culture, Inner Mongolia, excavated in Sanxingtala, Ju Ud (act. Chifeng), 1973. National Museum of China, Beijing"
           },
           {
             "type": "paragraph",
@@ -406,6 +496,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e45da344-5dfc-5602-b582-33f67c8a312c",
       "key": "liangzhu-in-zhejiang-museum",
       "name": "浙博里的良渚",
       "introduction": {
@@ -414,6 +505,11 @@
           {
             "type": "paragraph",
             "text": "在浙江省博物馆（之江馆区）的《浙江一万年》陈列中，良渚文化的若干重宝被放在显要位置，是浙江人的“玉礼”记忆最重要的开篇。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-in-zhejiang-museum.jpg",
+            "caption": "Located at Hangzhou, China."
           },
           {
             "type": "paragraph",

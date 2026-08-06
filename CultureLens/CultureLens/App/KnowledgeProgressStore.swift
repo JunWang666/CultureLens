@@ -8,6 +8,8 @@ final class KnowledgeProgressStore {
   /// Legacy UserDefaults key. Rows migrate into SwiftData as `.understand`.
   nonisolated static let defaultStorageKey = "culturelens.understood-node-ids.v1"
   nonisolated static let migrationFlagKey = "culturelens.knowledge-progress.migrated-v2"
+  nonisolated static let elementKeyUUIDMigrationFlagKey =
+    "culturelens.knowledge-progress.element-key-uuid-v1"
 
   private(set) var entriesByID: [UUID: KnowledgeProgressEntry] = [:]
 
@@ -15,8 +17,10 @@ final class KnowledgeProgressStore {
   @ObservationIgnored private let userDefaults: UserDefaults
   @ObservationIgnored private let storageKey: String
   @ObservationIgnored private let migrationFlagKey: String
+  @ObservationIgnored private let elementKeyUUIDMigrationFlagKey: String
 
   /// In-memory entry used by the store and prompt assembly.
+  /// `elementKey` persists a UUID string (legacy kebab slugs are migrated on load).
   struct KnowledgeProgressEntry: Hashable, Sendable {
     let nodeID: UUID
     var level: KnowledgeLevel
@@ -32,11 +36,14 @@ final class KnowledgeProgressStore {
   init(
     userDefaults: UserDefaults = .standard,
     storageKey: String = KnowledgeProgressStore.defaultStorageKey,
-    migrationFlagKey: String = KnowledgeProgressStore.migrationFlagKey
+    migrationFlagKey: String = KnowledgeProgressStore.migrationFlagKey,
+    elementKeyUUIDMigrationFlagKey: String = KnowledgeProgressStore
+      .elementKeyUUIDMigrationFlagKey
   ) {
     self.userDefaults = userDefaults
     self.storageKey = storageKey
     self.migrationFlagKey = migrationFlagKey
+    self.elementKeyUUIDMigrationFlagKey = elementKeyUUIDMigrationFlagKey
     // Provisional in-memory seed so UI works before SwiftData configure.
     if !userDefaults.bool(forKey: migrationFlagKey) {
       let legacyIDs =
@@ -63,33 +70,37 @@ final class KnowledgeProgressStore {
   func configure(modelContext: ModelContext) {
     self.modelContext = modelContext
     migrateFromUserDefaultsIfNeeded()
+    migrateElementKeysToUUIDIfNeeded()
     reload()
   }
 
-  func isInGraph(_ nodeID: UUID, elementKey: String? = nil) -> Bool {
-    entry(for: nodeID, elementKey: elementKey) != nil
+  func isInGraph(_ nodeID: UUID, elementID: UUID? = nil) -> Bool {
+    entry(for: nodeID, elementID: elementID) != nil
   }
 
-  func level(for nodeID: UUID, elementKey: String? = nil) -> KnowledgeLevel? {
-    entry(for: nodeID, elementKey: elementKey)?.level
+  func level(for nodeID: UUID, elementID: UUID? = nil) -> KnowledgeLevel? {
+    entry(for: nodeID, elementID: elementID)?.level
   }
 
-  /// Resolves by node ID first, then by shared knowledge-pack element key so the
+  /// Resolves by node ID first, then by shared cultural-element UUID so the
   /// same attraction is treated as one graph node across scans.
-  func entry(for nodeID: UUID, elementKey: String? = nil) -> KnowledgeProgressEntry? {
+  func entry(for nodeID: UUID, elementID: UUID? = nil) -> KnowledgeProgressEntry? {
     if let entry = entriesByID[nodeID] {
       return entry
     }
-    guard let elementKey, !elementKey.isEmpty else { return nil }
-    return entriesByID.values.first { $0.elementKey == elementKey }
+    guard let elementID else { return nil }
+    let key = elementID.uuidString
+    return entriesByID.values.first {
+      $0.elementKey?.caseInsensitiveCompare(key) == .orderedSame
+    }
   }
 
   /// Binary join/leave kept for graph UI; joining defaults to `.contact`.
-  func toggleGraphMembership(_ nodeID: UUID, elementKey: String? = nil) {
-    if isInGraph(nodeID, elementKey: elementKey) {
-      remove(nodeID, elementKey: elementKey)
+  func toggleGraphMembership(_ nodeID: UUID, elementID: UUID? = nil) {
+    if isInGraph(nodeID, elementID: elementID) {
+      remove(nodeID, elementID: elementID)
     } else {
-      setLevel(.contact, for: nodeID, source: .manual, elementKey: elementKey)
+      setLevel(.contact, for: nodeID, source: .manual, elementID: elementID)
     }
   }
 
@@ -97,31 +108,32 @@ final class KnowledgeProgressStore {
     _ level: KnowledgeLevel,
     for nodeID: UUID,
     source: KnowledgeProgressSource,
-    elementKey: String? = nil
+    elementID: UUID? = nil
   ) {
     let now = Date()
-    let existing = entry(for: nodeID, elementKey: elementKey)
+    let existing = entry(for: nodeID, elementID: elementID)
     let storedID = existing?.nodeID ?? nodeID
+    let storedKey = elementID.map { $0.uuidString } ?? existing?.elementKey
     var entry = existing
       ?? KnowledgeProgressEntry(
         nodeID: storedID,
         level: level,
         updatedAt: now,
         source: source,
-        elementKey: elementKey
+        elementKey: storedKey
       )
     entry.level = level
     entry.updatedAt = now
     entry.source = source
-    if let elementKey {
-      entry.elementKey = elementKey
+    if let elementID {
+      entry.elementKey = elementID.uuidString
     }
     entriesByID[storedID] = entry
     persist(entry)
   }
 
-  func remove(_ nodeID: UUID, elementKey: String? = nil) {
-    let storedID = entry(for: nodeID, elementKey: elementKey)?.nodeID ?? nodeID
+  func remove(_ nodeID: UUID, elementID: UUID? = nil) {
+    let storedID = entry(for: nodeID, elementID: elementID)?.nodeID ?? nodeID
     entriesByID.removeValue(forKey: storedID)
     guard let modelContext else { return }
     let predicate = #Predicate<KnowledgeProgressRecord> { $0.nodeID == storedID }
@@ -134,6 +146,7 @@ final class KnowledgeProgressStore {
   }
 
   /// Builds prompt-ready states for nodes that map into the knowledge pack.
+  /// Keys are UUID strings (prefer pack element id) before short-ID encoding.
   func userKnowledgeStates(knowledgeStore: KnowledgeStore?) -> [UserKnowledgeStateContext] {
     guard let knowledgeStore else {
       return entriesByID.values.compactMap { entry in
@@ -148,9 +161,15 @@ final class KnowledgeProgressStore {
     }
 
     return entriesByID.values.compactMap { entry -> UserKnowledgeStateContext? in
-      let key = entry.elementKey ?? knowledgeStore.elementKey(for: entry.nodeID)
-      guard let key, let element = knowledgeStore.element(key: key) else { return nil }
-      return UserKnowledgeStateContext(key: element.key, name: element.name, level: entry.level)
+      let element =
+        knowledgeStore.element(id: entry.nodeID)
+        ?? entry.elementKey.flatMap { knowledgeStore.element(key: $0) }
+      guard let element else { return nil }
+      return UserKnowledgeStateContext(
+        key: element.id.uuidString.lowercased(),
+        name: element.name,
+        level: entry.level
+      )
     }
     .sorted { ($0.key, $0.level) < ($1.key, $1.level) }
   }
@@ -170,7 +189,7 @@ final class KnowledgeProgressStore {
             level: record.level,
             updatedAt: record.updatedAt,
             source: record.source,
-            elementKey: record.elementKey
+            elementKey: Self.normalizedElementKey(record.elementKey)
           )
         )
       }
@@ -224,5 +243,33 @@ final class KnowledgeProgressStore {
     }
     try? modelContext.save()
     userDefaults.set(true, forKey: migrationFlagKey)
+  }
+
+  /// Rewrites kebab `elementKey` values to UUIDv5 strings. `nodeID` already
+  /// matches the element UUID for pack-backed rows.
+  private func migrateElementKeysToUUIDIfNeeded() {
+    guard let modelContext else { return }
+    guard !userDefaults.bool(forKey: elementKeyUUIDMigrationFlagKey) else { return }
+
+    let descriptor = FetchDescriptor<KnowledgeProgressRecord>()
+    let records = (try? modelContext.fetch(descriptor)) ?? []
+    var changed = false
+    for record in records {
+      guard let key = record.elementKey, !key.isEmpty else { continue }
+      if UUID(uuidString: key) != nil { continue }
+      record.elementKey = DeterministicID.culturalElement(key).uuidString
+      changed = true
+    }
+    if changed {
+      try? modelContext.save()
+    }
+    userDefaults.set(true, forKey: elementKeyUUIDMigrationFlagKey)
+  }
+
+  /// Normalizes a stored element key to a UUID string when it is a legacy slug.
+  nonisolated private static func normalizedElementKey(_ key: String?) -> String? {
+    guard let key, !key.isEmpty else { return nil }
+    if UUID(uuidString: key) != nil { return key }
+    return DeterministicID.culturalElement(key).uuidString
   }
 }

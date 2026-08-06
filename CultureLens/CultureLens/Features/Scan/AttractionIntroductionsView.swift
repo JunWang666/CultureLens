@@ -4,7 +4,7 @@ import SwiftUI
 /// 从原候选详情页抽出，供扫描结果页在展示景点候选时复用。
 struct AttractionIntroductionsView: View {
   let place: PlaceContext?
-  let attractionKey: String
+  let attractionID: UUID
   /// 候选自带的介绍（用于去重，也决定空态是否展示）。
   let existingSummary: String?
   private let contentService: CultureContentService
@@ -13,12 +13,12 @@ struct AttractionIntroductionsView: View {
 
   init(
     place: PlaceContext?,
-    attractionKey: String,
+    attractionID: UUID,
     existingSummary: String?,
     contentService: CultureContentService = .live()
   ) {
     self.place = place
-    self.attractionKey = attractionKey
+    self.attractionID = attractionID
     self.existingSummary = existingSummary
     self.contentService = contentService
   }
@@ -43,7 +43,7 @@ struct AttractionIntroductionsView: View {
 
   var body: some View {
     content
-      .task(id: attractionKey) {
+      .task(id: attractionID) {
         await loadIntroductions()
       }
   }
@@ -115,9 +115,14 @@ struct AttractionIntroductionsView: View {
         50_000,
         20
       )
+      let targetKey = attractionID.uuidString.lowercased()
+      let slug = KnowledgeStore.shared?.attraction(id: attractionID)?.key
       state = .loaded(
-        response.introductions.filter {
-          $0.attraction.key == attractionKey
+        response.introductions.filter { intro in
+          intro.attraction.key.caseInsensitiveCompare(targetKey) == .orderedSame
+            || (slug.map {
+              intro.attraction.key.caseInsensitiveCompare($0) == .orderedSame
+            } ?? false)
         }
       )
     } catch is CancellationError {

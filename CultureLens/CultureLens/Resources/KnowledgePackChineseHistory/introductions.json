@@ -1,12 +1,9 @@
 {
   "introductions": [
     {
+      "id": "0236f60d-b30e-5728-bc5c-2fd63e8c6919",
       "key": "great-wall.badaling",
       "name": "八达岭长城",
-      "culturalElementKey": "great-wall",
-      "attractionKey": "great-wall",
-      "latitude": 40.4319,
-      "longitude": 116.5704,
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -27,15 +24,16 @@
             "text": "站在八达岭的城墙上，把万里长城四个字放回时间里：它从春秋战国时期开始修筑，秦始皇连接旧墙后始称万里长城，明长城则是现存最完整的部分。"
           }
         ]
-      }
+      },
+      "culturalElementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "attractionId": "2d39c655-cd6f-5dc1-9931-5b1ca79c05ed",
+      "latitude": 40.4319,
+      "longitude": 116.5704
     },
     {
+      "id": "c6ee3c4f-432d-55f2-a4f6-fb68019dd22b",
       "key": "great-wall.jiayuguan",
       "name": "嘉峪关",
-      "culturalElementKey": "great-wall",
-      "attractionKey": "great-wall",
-      "latitude": 39.8022,
-      "longitude": 98.5143,
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -56,15 +54,16 @@
             "text": "看嘉峪关，记住两个最：它是明长城最西端的关口，也是天下第一雄关。"
           }
         ]
-      }
+      },
+      "culturalElementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "attractionId": "2d39c655-cd6f-5dc1-9931-5b1ca79c05ed",
+      "latitude": 39.8022,
+      "longitude": 98.5143
     },
     {
+      "id": "880f9542-3771-5ebb-8162-e37cc5aa6303",
       "key": "grand-canal.gongchen-bridge",
       "name": "拱宸桥",
-      "culturalElementKey": "grand-canal",
-      "attractionKey": "grand-canal",
-      "latitude": 30.2536,
-      "longitude": 120.1469,
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -85,15 +84,16 @@
             "text": "站在拱宸桥边，记住北京到杭州、五大水系相连，就抓住了这条运河的基本骨架。"
           }
         ]
-      }
+      },
+      "culturalElementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "attractionId": "5964012f-2efe-5a85-a99f-a9b5a2ad3341",
+      "latitude": 30.2536,
+      "longitude": 120.1469
     },
     {
+      "id": "892dd3cb-b87c-56cb-8c6b-f2bf3cc15753",
       "key": "grand-canal.hangzhou-section",
       "name": "杭州运河段",
-      "culturalElementKey": "grand-canal",
-      "attractionKey": "grand-canal",
-      "latitude": 30.2536,
-      "longitude": 120.1469,
       "introduction": {
         "schemaVersion": 1,
         "blocks": [
@@ -114,7 +114,11 @@
             "text": "记京杭大运河，记住全线1794公里、沟通五大水系，它的每一个转折都连着中国南北方的一千多年漕运史。"
           }
         ]
-      }
+      },
+      "culturalElementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "attractionId": "5964012f-2efe-5a85-a99f-a9b5a2ad3341",
+      "latitude": 30.2536,
+      "longitude": 120.1469
     }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
       "key": "chinese-dynasty-overview",
       "name": "中国历代王朝脉络",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "中国历史通常从传说时代一路延伸到帝制终结。中华文明探源工程认为，距今5800年前后中国多个区域相继出现明显社会分化，进入文明起源加速阶段；距今约3800年以后，以二里头文化为代表的中原地区进入王朝时代，早期广域王权国家逐步形成。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/chinese-dynasty-overview.png",
+            "caption": "​中国历史朝代年表（由SVG生成的简体中文版）"
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "40678ced-1a79-542a-98b3-c176df713e7a",
       "key": "xia-dynasty",
       "name": "夏朝",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "夏朝约存在于公元前2070年至前1600年，是中国历史记载的第一个中原部族世袭制朝代。根据史书记载，禹传位于子启，改变原始部落的禅让制，由天下为公转变为家天下，开创中国近四千年世袭王位之先河。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/xia-dynasty.png",
+            "caption": "Xia Dynasty"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "687f092d-7c06-556a-ada0-d193b707b01e",
       "key": "shang-dynasty",
       "name": "商朝",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "商朝约建立于公元前1600年前后，至公元前1046年前后为周所取代，延续五百余年；因其有当时文字记载遗留至今，也是中国进入信史时期的最早朝代。商代出现的甲骨文和金文是已经发现的中国最早的文字。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/shang-dynasty.png",
+            "caption": "Yinxu Royal Tombs"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "23ba68c7-be2d-5074-984c-64512433e8d6",
       "key": "zhou-dynasty",
       "name": "周朝",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "周朝是中国历史上继商朝之后的世袭王朝，分西周（前1046年—前771年）与东周（前770年—前256年）两段；西周由周武王灭商立国，定都镐京，东周定都雒邑（今河南洛阳）。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/zhou-dynasty.png",
+            "caption": "周朝"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "f8b84323-80b9-591a-91d0-1c7579d27011",
       "key": "spring-autumn-warring-states",
       "name": "春秋战国",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "春秋战国是东周时期的历史分段：春秋时期一般指公元前770年至前476年；战国时期的起点有不同划分，常见说法包括前475年，或以前403年周天子正式承认韩、赵、魏为诸侯作为标志，终点为前221年秦统一六国。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/spring-autumn-warring-states.png",
+            "caption": "​春秋诸侯大国简图"
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
       "key": "qin-dynasty",
       "name": "秦朝",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "秦朝（前221年—前207年）是中国历史上首个大一统中央集权的帝国，皇室为嬴姓。前230年至前221年，秦王政陆续攻灭其他六个主要诸侯国，统一中原，自称\"始皇帝\"，从此中国有了皇帝的称号。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/qin-dynasty.jpg",
+            "caption": "秦朝"
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
       "key": "han-dynasty",
       "name": "汉朝",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "汉朝（前202年—9年，25年—220年）是中国历史上第二个大一统帝制朝代，分西汉（前202年—9年）与东汉（25年—220年）两个时期，两汉合共29位皇帝，国祚406年。西汉首位皇帝是高祖刘邦，东汉第一位皇帝是光武帝刘秀。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/han-dynasty.png",
+            "caption": "​汉高帝十二年（前195年）的诸侯国和汉郡。此时汉朝共分封十个王国，其中同姓九个，异姓一个（长沙国），天子直辖区包括京师内史共十五郡。参见周振鹤《西汉政区地理》。"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
       "key": "three-kingdoms",
       "name": "三国",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "三国（狭义220年—280年）是曹魏、蜀汉及孙吴三个国家并立的中国历史时期，其前奏可追溯至184年的黄巾之乱。200年官渡之战中曹操击败北方最大势力袁绍，208年又在赤壁之战中被孙权与刘备联军击败，形成三国鼎立的雏型。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/three-kingdoms.png",
+            "caption": "​三国"
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
       "key": "jin-dynasty",
       "name": "两晋",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "晋朝分西晋与东晋，合称两晋。西晋（265年—316年）由晋武帝司马炎建立，首都在洛阳；东晋（317年—420年）由晋元帝司马睿建立，首都在建康（今江苏南京），两晋国祚154年。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/jin-dynasty.png",
+            "caption": "Western Jeun Dynasty 280 CE.png"
           },
           {
             "type": "paragraph",
@@ -244,6 +298,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "85f88308-831c-5be6-a232-82f86df1b030",
       "key": "southern-northern-dynasties",
       "name": "南北朝",
       "introduction": {
@@ -252,6 +307,11 @@
           {
             "type": "paragraph",
             "text": "南北朝（420年—589年）由420年刘宋代晋起，至589年隋灭陈止。南朝包含刘宋、南齐、萧梁、陈四朝，皆建都于建康；北朝包含北魏、东魏、西魏、北齐和北周五朝。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/southern-northern-dynasties.png",
+            "caption": "Southern and Northern Dynasties 440 CE.png"
           },
           {
             "type": "paragraph",
@@ -271,6 +331,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
       "key": "sui-dynasty",
       "name": "隋朝",
       "introduction": {
@@ -279,6 +340,11 @@
           {
             "type": "paragraph",
             "text": "隋朝（581年—619年）由隋文帝杨坚受禅建立，至619年王世充废隋恭帝杨侗为止，国祚仅38年。589年隋灭南陈，结束自西晋永嘉之乱以来280多年南北分裂的局面。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/sui-dynasty.png",
+            "caption": "Sui Dynasty 589~609 CE.png"
           },
           {
             "type": "paragraph",
@@ -298,6 +364,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
       "key": "tang-dynasty",
       "name": "唐朝",
       "introduction": {
@@ -306,6 +373,11 @@
           {
             "type": "paragraph",
             "text": "唐朝（618年—907年）由唐高祖李渊建立，国祚289年，历22位皇帝（包括武则天），是当时世界上最强大的国家之一。618年李渊迫使隋恭帝禅让建国唐朝，都城大兴改名为长安。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/tang-dynasty.png",
+            "caption": "​唐疆"
           },
           {
             "type": "paragraph",
@@ -325,6 +397,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "04942ef0-d853-5849-942d-f30154c16e45",
       "key": "five-dynasties-ten-kingdoms",
       "name": "五代十国",
       "introduction": {
@@ -333,6 +406,11 @@
           {
             "type": "paragraph",
             "text": "五代十国（狭义907年—960年）由中国唐朝灭亡开始，至宋朝统一大部分汉地为止，实质上是晚唐政治与藩镇割据的延续。907年梁王朱温篡唐建立后梁，标志着五代十国开始。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/five-dynasties-ten-kingdoms.png",
+            "caption": "​后梁前期"
           },
           {
             "type": "paragraph",
@@ -352,6 +430,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
       "key": "song-dynasty",
       "name": "宋朝",
       "introduction": {
@@ -360,6 +439,11 @@
           {
             "type": "paragraph",
             "text": "宋朝（960年—1279年）分北宋与南宋，合称两宋，国祚共319年，是中国建立皇帝制度后国祚延续最长的中国朝代。960年赵匡胤发动陈桥兵变称帝，即宋太祖，定国号宋，定都开封。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/song-dynasty.png",
+            "caption": "​北宋疆域图"
           },
           {
             "type": "paragraph",
@@ -379,6 +463,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
       "key": "yuan-dynasty",
       "name": "元朝",
       "introduction": {
@@ -387,6 +472,11 @@
           {
             "type": "paragraph",
             "text": "元朝（1260年或1271年—1368年），国号大元，是中国历史上由蒙古族建立的王朝，共11位皇帝，国祚98年。铁木真于1206年被尊为成吉思汗，大蒙古国建立；1271年忽必烈定汉文国号为大元，定都大都（今北京）。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/yuan-dynasty.png",
+            "caption": "This is a map of the Yuan dynasty based on File:Yuan Dynasty revised.png, showing the Yuan dynasty ruled during the reign of Kublai Khan aka Emperor Shizu of Yuan, approximately in the 1290s. Background using File:Map of Eurasia.png."
           },
           {
             "type": "paragraph",
@@ -406,6 +496,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "899b4244-f44c-5596-ab6e-567b29f583f7",
       "key": "ming-dynasty",
       "name": "明朝",
       "introduction": {
@@ -414,6 +505,11 @@
           {
             "type": "paragraph",
             "text": "明朝（1368年—1644年）是继元朝之后的大一统王朝，也是最后一个由汉族建立的大一统王朝，历经12世、16位皇帝，国祚276年。1368年朱元璋于应天府（今南京）称帝，即明太祖，定国号大明。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/ming-dynasty.png",
+            "caption": "​明朝"
           },
           {
             "type": "paragraph",
@@ -433,6 +529,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
       "key": "qing-dynasty",
       "name": "清朝",
       "introduction": {
@@ -441,6 +538,11 @@
           {
             "type": "paragraph",
             "text": "清朝（1636年或1644年—1912年），国号大清，是中国历史上由满族建立的大一统朝代，也是中国历史上最后一个帝制王朝；自皇太极定国号大清起，共经历11位皇帝。1616年努尔哈赤建立后金汗国，1636年皇太极在盛京称帝，改国号为大清。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/qing-dynasty.png",
+            "caption": "Flag of the Chinese Empire under the Qing dynasty (1889-1912), details per the restoration of Beiyang fleet researcher [1]."
           },
           {
             "type": "paragraph",
@@ -460,6 +562,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "707c0481-01fa-5c61-ab0f-24448b981e4a",
       "key": "imperial-examination",
       "name": "科举制度",
       "introduction": {
@@ -468,6 +571,11 @@
           {
             "type": "paragraph",
             "text": "科举是通过考试来选拔官员的制度，源自中国，并传播至汉字文化圈其他国家，直接催生了不论门第、以考试产生的士大夫阶层。科举始于605年时的隋朝，由隋文帝首创、隋炀帝实施，发展并定型于唐朝至武周，一直延续到清末。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/imperial-examination.jpg",
+            "caption": "Civil service exam candidates gather around the wall where results had been posted. Artwork by Qiu Ying (仇英 c.1540). en:Qiu Ying painted this image of candidates who had taken the en:civil service exams as the waited at the wall where officials would post the scores."
           },
           {
             "type": "paragraph",
@@ -487,6 +595,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
       "key": "silk-road",
       "name": "丝绸之路",
       "introduction": {
@@ -495,6 +604,11 @@
           {
             "type": "paragraph",
             "text": "丝绸之路指从汉唐古都长安或洛阳出发，经甘肃、新疆，到中亚、西亚、欧洲，并联结地中海各国的陆上通道；因为由这条路西运的货物中以丝绸制品的影响最大，故得此名。丝绸之路一词最早来自德国地理学家费迪南·冯·李希霍芬男爵1877年出版的地图集。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/silk-road.jpg",
+            "caption": "​丝绸之路路线图"
           },
           {
             "type": "paragraph",
@@ -514,6 +628,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a",
       "key": "four-great-inventions",
       "name": "四大发明",
       "introduction": {
@@ -522,6 +637,11 @@
           {
             "type": "paragraph",
             "text": "四大发明是关于中国科学技术史的一种观点，指古代中国的四种发明，一般是指造纸术、指南针、火药及印刷术。美国学者托马斯·弗朗西斯·卡特在1925年出版的《中国印刷术的发明和它的西传》一书序言中首次明确提出四大发明的说法。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/four-great-inventions.png",
+            "caption": "Drawing of an early Mongolian soldier lighting a rocket"
           },
           {
             "type": "paragraph",
@@ -541,6 +661,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "948bb138-1ced-515b-b776-dfe22278d01d",
       "key": "twenty-four-histories",
       "name": "二十四史",
       "introduction": {
@@ -549,6 +670,11 @@
           {
             "type": "paragraph",
             "text": "二十四史为中国各朝代撰写的二十四部史书的总称，是获历朝历代纳为正统的史书，故又称正史，记载逾四千年的中国历史，上起传说的黄帝，止于明崇祯十七年（1644年），计3213卷，统一使用分本纪、列传的纪传体编写。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/twenty-four-histories.jpg",
+            "caption": "​二十四史书柜-杭州国家版本馆"
           },
           {
             "type": "paragraph",
@@ -568,6 +694,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
       "key": "confucius-and-confucianism",
       "name": "孔子与儒家",
       "introduction": {
@@ -576,6 +703,11 @@
           {
             "type": "paragraph",
             "text": "孔子（前551年—前479年），姓子，氏孔，名丘，字仲尼，是中国春秋时代鲁国官员、思想家和教育家，也是中国儒家思想的创始者、哲学与伦理学的奠基者。前551年孔子出生于鲁国曲阜附近的陬邑。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/confucius-and-confucianism.jpeg",
+            "caption": "Obverse side of a South Korean note of 1000 won, serie 다"
           },
           {
             "type": "paragraph",
@@ -595,6 +727,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "b486685f-18a1-5090-994b-139b73689036",
       "key": "laozi-and-taoism",
       "name": "老子与道家",
       "introduction": {
@@ -603,6 +736,11 @@
           {
             "type": "paragraph",
             "text": "李聃（前571年—不详），世人尊称其为老子；据传老聃生于东周的楚国苦县厉乡曲仁里，在春秋时期任东周王国守藏室内的柱下史。老子被尊为道家及道教的奠基者、东方三大圣人之一。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/laozi-and-taoism.jpg",
+            "caption": "The subject deals with the story of Laotzu riding an ox through a pass. It is said that with the fall of the Chou dynasty, Laotzu decided to travel west through the Han Valley Pass. The Pass Commissioner, Yin-hsi, noticed a trail of vapor emanating from the east, deducing that a sage must be approac"
           },
           {
             "type": "paragraph",
@@ -622,6 +760,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
       "key": "hundred-schools",
       "name": "诸子百家",
       "introduction": {
@@ -630,6 +769,11 @@
           {
             "type": "paragraph",
             "text": "诸子百家是后世对华夏先秦学术思想人物和派别之总称，诸子指老子、庄子、孔子、孟子、荀子、墨子、列子、孙子、申子、韩非子、鬼谷子等学术思想代表人物。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/hundred-schools.png",
+            "caption": "​諸子百家出生地"
           },
           {
             "type": "paragraph",
@@ -649,6 +793,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "264e378e-2460-5b0c-8974-3d6ce6b72775",
       "key": "zhonghua-civilization",
       "name": "中华文明五千年",
       "introduction": {
@@ -657,6 +802,11 @@
           {
             "type": "paragraph",
             "text": "中华文明通常被视为有五千年历史。中华文明探源工程认为，距今5800年前后，中国多个区域相继出现明显社会分化，进入文明起源加速阶段。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/zhonghua-civilization.jpg",
+            "caption": "2011 深圳 莲花山顶－邓小平头像"
           },
           {
             "type": "paragraph",
@@ -676,6 +826,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a791db39-bcee-5907-9942-1efbe6a100f4",
       "key": "qin-shi-huang",
       "name": "秦始皇",
       "introduction": {
@@ -684,6 +835,11 @@
           {
             "type": "paragraph",
             "text": "秦始皇（前259年—前210年），嬴姓，名政，生于赵国首都邯郸，是秦庄襄王及王后赵姬之子。他十三岁即位，三十九岁时灭亡六国建立秦朝，自称始皇帝，是中国史上第一位使用皇帝称号的君主，被明代思想家李贽誉为千古一帝。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/qin-shi-huang.jpg",
+            "caption": "Qin Shi Huang, the first emperor of China"
           },
           {
             "type": "paragraph",
@@ -703,6 +859,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
       "key": "han-wudi",
       "name": "汉武帝",
       "introduction": {
@@ -711,6 +868,11 @@
           {
             "type": "paragraph",
             "text": "汉武帝刘彻（前156年—前87年），于公元前141年至前87年在位，共在位54年。他为汉景帝刘启第十子，七岁被立为太子，十六岁登基，在位期间首次使用年号纪年，中国历史上首个年号为建元。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/han-wudi.jpg",
+            "caption": "Emperor Wu of Han in Sancai Tuhui by WangQi"
           },
           {
             "type": "paragraph",
@@ -730,6 +892,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "b606e202-ef33-5e44-8266-ce40598494fd",
       "key": "tang-taizong",
       "name": "唐太宗",
       "introduction": {
@@ -738,6 +901,11 @@
           {
             "type": "paragraph",
             "text": "李世民（598年—649年），唐高祖李渊次子，是唐朝第二位皇帝。武德九年六月初四（626年7月2日），李世民在玄武门伏击，亲自射杀皇太子李建成，尉迟敬德杀死齐王李元吉，史称玄武门之变；同年九月高祖退位，李世民登基为唐太宗，次年改元贞观。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/tang-taizong.jpg",
+            "caption": "​全圖近乎三公尺，仰頭才能瞻望唐太宗（598-649）面容，巨大的身形創造出令人難以忽視的威儀。唐太宗袍服上的團龍花紋，吻部已出現兩個鼻孔，較接近明代造型。推測此軸與其他同樣尺寸的帝王像、功臣像，為明代祭祀歷代帝王賢臣的系列作品，曾一起懸掛，以供敬仰。"
           },
           {
             "type": "paragraph",
@@ -757,6 +925,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d9dc4898-8d93-59b7-9b79-320d60801d58",
       "key": "zheng-he",
       "name": "郑和下西洋",
       "introduction": {
@@ -765,6 +934,11 @@
           {
             "type": "paragraph",
             "text": "郑和（1371年—1433年），原姓马，小名三宝，云南昆阳人，明成祖赐姓郑，故称郑和，是明朝军事家、航海家、外交家及宦官。郑和奉明成祖之命七次远航，历时二十八年，访问三十多个西太平洋和印度洋沿岸国家和地区，史称郑和下西洋，总航程达七万多海里。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/zheng-he.jpg",
+            "caption": "南京郑和南路宝船厂遗址公园郑和铜像"
           },
           {
             "type": "paragraph",
@@ -784,6 +958,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
       "key": "yue-fei",
       "name": "岳飞",
       "introduction": {
@@ -792,6 +967,11 @@
           {
             "type": "paragraph",
             "text": "岳飞（1103年—1142年），字鹏举，宋朝相州汤阴人，是南宋抗金名将。从建炎二年（1128年）遇宗泽起，到绍兴十一年（1141年）为止的十余年间，岳飞率领岳家军与金军进行过数百次大小战斗。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/yue-fei.jpg",
+            "caption": "杭州岳飞墓"
           },
           {
             "type": "paragraph",
@@ -811,6 +991,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
       "key": "wang-anshi",
       "name": "王安石",
       "introduction": {
@@ -819,6 +1000,11 @@
           {
             "type": "paragraph",
             "text": "王安石（1021年—1086年），字介甫，号半山，抚州临川县人，北宋政治家、文学家、思想家、改革家，封荆国公，谥曰文，被后世称为唐宋八大家之一。庆历二年（1042年）三月，时年二十二的王安石进士及第。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/wang-anshi.jpg",
+            "caption": "王安石"
           },
           {
             "type": "paragraph",
@@ -838,6 +1024,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "354ea9d5-7830-548f-8847-1d193625d358",
       "key": "kangxi",
       "name": "康熙帝",
       "introduction": {
@@ -846,6 +1033,11 @@
           {
             "type": "paragraph",
             "text": "康熙帝（1654年—1722年），名玄烨，爱新觉罗氏，于1661年至1722年在位，年号康熙，庙号圣祖。玄烨为顺治帝第三子，1661年顺治帝驾崩时登基，只有虚岁八岁。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/kangxi.jpg",
+            "caption": "​清 佚名 《清圣祖康熙皇帝朝服像》"
           },
           {
             "type": "paragraph",
@@ -865,6 +1057,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "32c66150-415c-5830-9fa7-637b517458b5",
       "key": "wenjing-prosperity",
       "name": "文景之治",
       "introduction": {
@@ -873,6 +1066,11 @@
           {
             "type": "paragraph",
             "text": "文景之治是指汉文帝和汉景帝统治的时期，是中国历史上的一个治世，也是中国历史上大一统王朝的首个盛世，奠定了其后汉武帝将汉朝推上顶峰的基础。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/wenjing-prosperity.jpg",
+            "caption": "Depiction of Emperor Wen of Han from the Sancai Tuhui, a Ming dynasty leishu encyclopedia"
           },
           {
             "type": "paragraph",
@@ -892,6 +1090,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
       "key": "zhenguan-rule",
       "name": "贞观之治",
       "introduction": {
@@ -900,6 +1099,11 @@
           {
             "type": "paragraph",
             "text": "贞观之治是指唐太宗在位23年（公元627年—649年）期间的清明政治。唐太宗在位二十三年仅使用了一个年号，即贞观，故史称贞观之治，是唐朝的第一个治世。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/zhenguan-rule.jpg",
+            "caption": "大唐不夜城——贞观之治雕塑"
           },
           {
             "type": "paragraph",
@@ -919,6 +1123,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a",
       "key": "kaiyuan-flourishing",
       "name": "开元盛世",
       "introduction": {
@@ -927,6 +1132,11 @@
           {
             "type": "paragraph",
             "text": "开元盛世，亦称开元之治、开元之隆，是唐朝在唐玄宗的统治时期所出现的盛世。唐玄宗治国的前三十年以开元作为年号，励精图治、任用贤能，使大唐国力升至顶峰。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/kaiyuan-flourishing.jpg",
+            "caption": "​唐玄宗"
           },
           {
             "type": "paragraph",
@@ -946,6 +1156,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "04e81c89-e1c1-5c19-800e-f25d24c3b203",
       "key": "an-lushan-rebellion",
       "name": "安史之乱",
       "introduction": {
@@ -954,6 +1165,11 @@
           {
             "type": "paragraph",
             "text": "安史之乱（755年—763年）是中国唐朝中期爆发的一场大规模内战，原文载历时七年余。叛乱最初由三镇节度使安禄山及其部将史思明发动，以讨伐外戚杨国忠为名率兵入朝，横跨唐玄宗、唐肃宗和唐代宗三位皇帝的统治。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/an-lushan-rebellion.png",
+            "caption": "​安史之亂地圖"
           },
           {
             "type": "paragraph",
@@ -973,6 +1189,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd",
       "key": "jingkang-incident",
       "name": "靖康之变",
       "introduction": {
@@ -981,6 +1198,11 @@
           {
             "type": "paragraph",
             "text": "靖康之变，又称靖康之耻，指1125年至1127年女真族攻陷北宋首都汴梁（今河南省开封市），掳走皇帝宋钦宗、太上皇宋徽宗、几乎全部宋太宗一系皇族、后妃、官吏及逾十万首都平民的重大战争。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/jingkang-incident.jpg",
+            "caption": "Reconstruction model of ancient city Bianjing (汴京)/Eastern Capital (东京), capital of the Northern Song (960 - 1127 AD)."
           },
           {
             "type": "paragraph",
@@ -1000,6 +1222,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "bf64a656-a4a8-51da-86ca-f0e16eb5871c",
       "key": "opium-war",
       "name": "鸦片战争",
       "introduction": {
@@ -1008,6 +1231,11 @@
           {
             "type": "paragraph",
             "text": "鸦片战争是19世纪中叶大清帝国与西方列强之间发生的两场冲突；因第一场冲突由鸦片禁令而引发，第二场冲突被视为第一场冲突的延续，故被统称为鸦片战争。第一次鸦片战争于1840年由英国对中国发动，1842年以签订《南京条约》结束。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/opium-war.jpg",
+            "caption": "The East India Company iron steam ship Nemesis, commanded by Lieutenant W. H. Hall, with boats from the Sulphur, Calliope, Larne and Starling, destroying the Chinese war junks in Anson's Bay, on 7 January 1841. An engagement in the First Opium War (1839-42), showing the ‘Nemesis’ (right background, "
           },
           {
             "type": "paragraph",
@@ -1027,6 +1255,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
       "key": "mid-autumn-festival",
       "name": "中秋节",
       "introduction": {
@@ -1035,6 +1264,11 @@
           {
             "type": "paragraph",
             "text": "中秋节是农历八月十五的传统节日，核心是『团圆』：在外的人赶回家中，全家聚齐，一起吃月饼、赏圆月。月饼切成扇形分食，象征人月两圆。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/mid-autumn-festival.jpg",
+            "caption": "澳門中秋節月餅造型花燈"
           },
           {
             "type": "paragraph",
@@ -1057,6 +1291,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2bb7596f-1001-57d1-8230-2ec58490981e",
       "key": "chinese-buddhism",
       "name": "中国佛教",
       "introduction": {
@@ -1065,6 +1300,11 @@
           {
             "type": "paragraph",
             "text": "佛教于两汉之际从古印度传入中国，经过数百年的本土化，与本土的儒家、道家思想交融，形成独具特色的中国佛教。寺院、佛塔、石窟造像随之成为中国城乡最常见的文化景观。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/chinese-buddhism.jpg",
+            "caption": "​漢武帝將其部眾討凶奴,並獲得二金(人),(各)長丈餘,刊〔列〕之於甘泉宮,帝(以)為大神,常行拜褐時。"
           },
           {
             "type": "paragraph",
@@ -1087,6 +1327,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
       "key": "tea-culture",
       "name": "中国茶文化",
       "introduction": {
@@ -1095,6 +1336,11 @@
           {
             "type": "paragraph",
             "text": "中国人饮茶已有数千年历史。唐代陆羽写成世界上第一部茶学专著《茶经》，把采茶、制茶、煮水、品饮整理成完整体系，饮茶从此从日常解渴上升为文化生活。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/tea-culture.jpg",
+            "caption": "Chinese tea ceremony in hanfu"
           },
           {
             "type": "paragraph",
@@ -1117,6 +1363,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "be77359e-4b0a-541b-83e4-3af6a9234a17",
       "key": "chinese-calligraphy",
       "name": "中国书法",
       "introduction": {
@@ -1125,6 +1372,11 @@
           {
             "type": "paragraph",
             "text": "书法是把汉字书写升华为艺术的独特传统。汉字由象形发展而来，每个字本身就是结构的艺术；毛笔的提按顿挫，又让书写带上了书写者的性情与修养。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/chinese-calligraphy.jpg",
+            "caption": "zh:王羲之的《zh:兰亭序》，原件已经失佚，这是唐代zh:冯承素的zh:摹本，又称“神龙本兰亭”，现藏zh:北京博物馆。"
           },
           {
             "type": "paragraph",
@@ -1147,6 +1399,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "bb8c2784-d40b-50f3-b07b-6d6f20eaedd5",
       "key": "chinese-landscape-painting",
       "name": "中国山水画",
       "introduction": {
@@ -1155,6 +1408,11 @@
           {
             "type": "paragraph",
             "text": "山水画是中国绘画的第一大科。它不以写实复制风景为目标，而追求『可游可居』：观者仿佛在画中行走，山水成为心灵的居所。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/chinese-landscape-painting.jpg",
+            "caption": "Beginning of spring, Guo Xi. Northern Song. Ink and light colors on silk."
           },
           {
             "type": "paragraph",

@@ -1,17 +1,21 @@
 import Foundation
 import Testing
+
 @testable import CultureLens
 
 struct InternationalizationTests {
   @Test func systemPreferenceResolvesChineseLocales() {
     #expect(
-      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "zh-Hans")) == .zhHans
+      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "zh-Hans"))
+        == .zhHans
     )
     #expect(
-      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "zh_CN")) == .zhHans
+      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "zh_CN"))
+        == .zhHans
     )
     #expect(
-      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "en_US")) == .english
+      AppLanguagePreference.system.resolved(deviceLocale: Locale(identifier: "en_US"))
+        == .english
     )
     #expect(AppLanguagePreference.english.resolved() == .english)
     #expect(AppLanguagePreference.zhHans.resolved() == .zhHans)
@@ -60,7 +64,7 @@ struct InternationalizationTests {
       - key: `three-pools-mirroring-moon`, name: Three Pools Mirroring the Moon
         - Source excerpt: Stone pagodas, lamp holes, water, and moonlight.
       """
-    let parsed = CultureChatService.parseAnswer(markdown)
+    let parsed = CultureChatService.parseAnswer(markdown, store: nil)
     #expect(parsed.body.contains("West Lake night scenery"))
     #expect(!parsed.body.contains("## Sources"))
     #expect(parsed.citations.count == 1)
@@ -139,11 +143,12 @@ struct InternationalizationTests {
     #expect(en.name == "Element One")
     #expect(en.isSourceFallback == false)
     #expect(en.introduction?.plainText == "Intro")
-    #expect(localization.attractionName(key: "a1", language: .english)?.name == "Attraction One")
+    #expect(
+      localization.attractionName(key: "a1", language: .english)?.name == "Attraction One")
   }
 
-  @Test func bundledKnowledgePackExposesMultilingualSchema() throws {
-    let store = try KnowledgeStore.load(bundle: .main)
+  @Test func bundledKnowledgePackExposesMultilingualSchema() async throws {
+    let store = try #require(await KnowledgePackLoader.shared.store(fallback: nil))
     #expect(store.pack.sourceLanguage == "zh-Hans" || store.pack.sourceLanguage == nil)
     // Regional packs may ship `locales.en`; West Lake may still be empty.
     let localeCount = store.pack.locales?.count ?? 0

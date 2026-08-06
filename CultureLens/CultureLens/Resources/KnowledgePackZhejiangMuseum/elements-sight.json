@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "917dfb28-49c6-5a13-975c-0901a3248fc5",
       "key": "gushan-campus",
       "name": "孤山馆区与“园中馆、馆中园”",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "孤山馆区是浙江省博物馆最早的馆区，位于杭州西湖孤山南麓，东衔白堤和平湖秋月，西接西泠印社，于1993年秋竣工，占地面积20400平方米，馆舍形成“园中馆、馆中园”的格局。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/gushan-campus.jpg",
+            "caption": "​大水法残迹"
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "f1967937-d54e-5f3a-8492-b74f2d81f6a9",
       "key": "zhijiang-campus",
       "name": "之江馆区与《浙江一万年》",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "之江馆区是浙江省博物馆的新主场，位于杭州之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhijiang-campus.jpg",
+            "caption": "​之江文化中心（浙江省博物馆、浙江省文学馆、浙江省图书馆）"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7761fd8c-06f2-5e4a-8343-5144175672c2",
       "key": "hemudu-double-bird",
       "name": "双鸟朝阳纹牙雕",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "双鸟朝阳纹牙雕是河姆渡文化线雕的代表作，也是浙江省博物馆十大镇馆之宝之一，属于新石器时代距今约6000至7000年的河姆渡先民之手。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-double-bird.jpg",
+            "caption": "​新石器时代河姆渡文化双鸟朝阳纹牙雕，1977年出土于余姚河姆渡遗址T226(3B):79，浙江省博物馆藏"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
       "key": "zhejiang-yue-sword",
       "name": "越王者旨於睗剑",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "越王者旨於睗剑是春秋时期越国君主者旨於睗时期铸造的铜剑，也是浙江省博物馆十大镇馆之宝之一；者旨於睗虽在位仅六年，但曾大量铸造铜剑。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhejiang-yue-sword.png",
+            "caption": "​正面（上）为“戉（越）王戉（越）王”；反面（下）为“者旨於睗” 苏州博物馆藏"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
       "key": "asoka-pagoda",
       "name": "五代鎏金银阿育王塔",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "五代·吴越鎏金银阿育王塔是浙江省博物馆十大镇馆之宝之一，是宝箧印式塔一类的小型塔式文物，出自雷峰塔遗址的发掘。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/asoka-pagoda.jpg",
+            "caption": "​吴越国银阿育王塔。杭州雷峰塔遗址出土，浙江省博物馆藏。"
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
       "key": "longquan-boat-drip",
       "name": "元龙泉窑舟形砚滴",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "元·龙泉窑舟形砚滴是浙江省博物馆十大镇馆之宝之一，是一件龙泉窑系的青瓷文房器，属于书斋里用来盛水研墨的小器皿。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/longquan-boat-drip.jpg",
+            "caption": "Collected and exhibited in Zhejiang Provincial Museum."
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "03450361-df1d-50fc-89cc-848d880e1783",
       "key": "fuchun-shanju-tu",
       "name": "《富春山居图》与剩山图",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "《富春山居图》是宋末元初画家黄公望的作品，创作于1347年至1350年，以浙江富春江为背景，是黄公望的代表作，获后世赞誉为“画中之兰亭”“山水画第一神品”，为中国十大传世名画之一。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/fuchun-shanju-tu.jpg",
+            "caption": "《富春山居图》与剩山图"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "b78c3e13-f4fd-5626-8150-4744854e50d8",
       "key": "cai-feng-ming-qi",
       "name": "唐“彩凤鸣岐”七弦琴",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "唐·“彩凤鸣岐”七弦琴是浙江省博物馆十大镇馆之宝之一，是一张唐代制作的传世古琴，也是浙博古琴收藏中的代表性藏品。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/cai-feng-ming-qi.jpg",
+            "caption": "Collected and exhibited in Zhejiang Provincial Museum."
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5429373a-0fd2-5912-b210-49ad3bcdc724",
       "key": "wan-gong-jiao",
       "name": "民国万工轿",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "民国·万工轿是浙江省博物馆十大镇馆之宝之一，是宁绍“十里红妆”婚俗中最华重的一件嫁妆。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wan-gong-jiao.jpg",
+            "caption": "litter in the Zhenjiang Provincial Museum"
           },
           {
             "type": "paragraph",
@@ -240,6 +294,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
       "key": "jiyue-bronze-house",
       "name": "春秋伎乐铜屋",
       "introduction": {
@@ -248,6 +303,11 @@
           {
             "type": "paragraph",
             "text": "春秋·伎乐铜屋是浙江省博物馆十大镇馆之宝之一，是一件以房屋与乐人为主题的青铜器，出自越国所在的绍兴一带。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/jiyue-bronze-house.jpg",
+            "caption": "​伎乐铜屋 屋内"
           },
           {
             "type": "paragraph",
@@ -267,6 +327,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272",
       "key": "caisu-mud-bodhisattva",
       "name": "北宋彩塑泥菩萨立像",
       "introduction": {
@@ -275,6 +336,11 @@
           {
             "type": "paragraph",
             "text": "北宋·彩塑泥菩萨立像是浙江省博物馆十大镇馆之宝之一，是一件宋代泥质彩塑的菩萨造像。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/caisu-mud-bodhisattva.jpg",
+            "caption": "彩塑泥菩萨立像 北宋(960-1127)  1965年温州白象塔出土"
           },
           {
             "type": "paragraph",
@@ -286,6 +352,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "ac565d24-9a02-5a99-8acc-cb885f30883d",
       "key": "hemudu-painted-pottery",
       "name": "河姆渡绘纹陶器",
       "introduction": {
@@ -294,6 +361,11 @@
           {
             "type": "paragraph",
             "text": "河姆渡绘纹陶器是河姆渡文化先民手工制作、并在表面绘刻纹样的陶器，是了解河姆渡人生活与信仰的重要实物。它们厚实、呈灰黑色，表面常有绳纹或动植物图案。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-painted-pottery.jpg",
+            "caption": "河姆渡遗址发掘现场"
           },
           {
             "type": "paragraph",
@@ -313,6 +385,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "9abf276c-9bef-5142-8dda-d964bcdb8015",
       "key": "hemudu-bone-plough",
       "name": "河姆渡骨耜",
       "introduction": {
@@ -321,6 +394,11 @@
           {
             "type": "paragraph",
             "text": "骨耜是河姆渡遗址出土的骨制翻地农具，是河姆渡人翻地种稻的得力工具，也是“耜耕农业”的标志性器物。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-bone-plough.jpg",
+            "caption": "​河姆渡遗址还原区"
           },
           {
             "type": "paragraph",
@@ -340,6 +418,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e50f9576-9d0d-506d-a71d-e893854c5e5f",
       "key": "zhang-cheng-red-lacquer",
       "name": "张成剔红婴戏图盘",
       "introduction": {
@@ -348,6 +427,11 @@
           {
             "type": "paragraph",
             "text": "张成剔红婴戏图盘是元代雕漆名家张成创作的漆器，堪称国宝级文物，是目前已知的4件“张成造”之一，也是浙江省博物馆漆器收藏中的顶级藏品。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhang-cheng-red-lacquer.jpg",
+            "caption": "​剔红牡丹纹盒 明永乐 香港嘉德2019秋"
           },
           {
             "type": "paragraph",
@@ -367,6 +451,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e",
       "key": "huang-binhong-memorial",
       "name": "黄宾虹纪念室",
       "introduction": {
@@ -375,6 +460,11 @@
           {
             "type": "paragraph",
             "text": "黄宾虹纪念室位于杭州栖霞岭黄宾虹故居内，邻近浙博孤山馆区。画家晚年在此定居作画，窗外的西湖山水直接走进了他的画面。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-binhong-memorial.jpg",
+            "caption": "​歙县黄宾虹故居，庭院。"
           },
           {
             "type": "paragraph",
@@ -393,6 +483,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "beae431c-6816-5890-8ebe-39df230ebe3c",
       "key": "sha-menghai-residence",
       "name": "沙孟海旧居",
       "introduction": {
@@ -401,6 +492,11 @@
           {
             "type": "paragraph",
             "text": "沙孟海旧居是书法篆刻大家沙孟海晚年在杭州的生活与创作场所。沙孟海曾任浙博历史部主任、名誉馆长，是连接书法、印学与博物馆事业的关键人物。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/sha-menghai-residence.jpg",
+            "caption": "​沙孟海旧居，位于中国浙江省杭州市龙游路15号，是中国当代书法家沙孟海晚年居住的地方。"
           },
           {
             "type": "paragraph",
@@ -421,74 +517,92 @@
   ],
   "attractions": [
     {
+      "id": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
       "key": "zhijiang-campus",
       "name": "之江馆区与《浙江一万年》"
     },
     {
+      "id": "49e6e5b7-7656-506e-966d-4889b903de31",
       "key": "gushan-campus",
       "name": "孤山馆区"
     },
     {
+      "id": "3617c401-555e-5c3a-a818-7a2554886b0b",
       "key": "huang-binhong-memorial",
       "name": "黄宾虹纪念室"
     },
     {
+      "id": "a2184653-deae-5b85-bc3e-3752107d82cf",
       "key": "sha-menghai-residence",
       "name": "沙孟海旧居"
     },
     {
+      "id": "562d57eb-4410-5aed-9742-4fef593dde73",
       "key": "fuchun-shanju-tu",
       "name": "《富春山居图》与剩山图"
     },
     {
+      "id": "2ac5840a-ee1a-5a45-b60b-8f2621b58a94",
       "key": "asoka-pagoda",
       "name": "五代鎏金银阿育王塔"
     },
     {
+      "id": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
       "key": "jade-cong-wang",
       "name": "良渚玉琮王"
     },
     {
+      "id": "0bc1bc7d-f299-5797-afab-371c8981906e",
       "key": "jade-cong-ritual",
       "name": "琮：祭地的礼器"
     },
     {
+      "id": "64a8b3bf-f875-55fa-8f9b-5a618f4b0c1c",
       "key": "hemudu-double-bird",
       "name": "双鸟朝阳纹牙雕"
     },
     {
+      "id": "a84b4d12-e868-58c8-9220-f641c1e90255",
       "key": "zhejiang-yue-sword",
       "name": "越王者旨於睗剑"
     },
     {
+      "id": "beb47b78-8d66-5e73-b740-aadc9bbaabbc",
       "key": "cai-feng-ming-qi",
       "name": "唐“彩凤鸣岐”七弦琴"
     },
     {
+      "id": "b854e452-202c-5960-bcd9-6c873557535a",
       "key": "jiyue-bronze-house",
       "name": "春秋伎乐铜屋"
     },
     {
+      "id": "68e7c909-3e8e-5b52-9933-b2c899c6afcf",
       "key": "longquan-boat-drip",
       "name": "元龙泉窑舟形砚滴"
     },
     {
+      "id": "e3f2a77b-d4ce-5c19-8d40-e39ee90b7078",
       "key": "caisu-mud-bodhisattva",
       "name": "北宋彩塑泥菩萨立像"
     },
     {
+      "id": "c843da49-7cb4-5f6c-8a8c-5d21052d68fe",
       "key": "wan-gong-jiao",
       "name": "民国万工轿"
     },
     {
+      "id": "b831e26f-5a8a-5a50-8ca1-2f80d7c74cb3",
       "key": "zhang-cheng-red-lacquer",
       "name": "张成剔红婴戏图盘"
     },
     {
+      "id": "398dfaf3-8b22-51f9-8fee-3f6412549aa4",
       "key": "hemudu-painted-pottery",
       "name": "河姆渡绘纹陶器"
     },
     {
+      "id": "a98b42ef-06e2-567d-9409-b20920f310a6",
       "key": "hemudu-bone-plough",
       "name": "河姆渡骨耜"
     }

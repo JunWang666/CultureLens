@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
       "key": "yue-fei-memorial-culture",
       "name": "岳飞纪念与忠烈祠祀",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "岳飞墓庙把人物记忆、墓葬祭祀和公共价值表达放在同一空间中。后世不断重修与讲述，使这里成为理解忠诚观念如何进入地方文化记忆的重要现场。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/yue-fei-memorial-culture.jpg",
+            "caption": "​岳飛（1103年3月24日—1142年1月27日），字鵬舉，宋朝相州湯陰（今河南省安陽市湯陰縣）人，南宋抗金名將。"
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
       "key": "siku-quanshu-library",
       "name": "《四库全书》与皇家藏书楼",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "文澜阁属于为收藏《四库全书》而营建的藏书楼体系。它把典籍保存、皇家文化工程和江南园林空间叠合在一起，建筑本身也承担了知识秩序的象征。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/siku-quanshu-library.jpg",
+            "caption": "​《四库全书》 编撰于清朝乾隆年间，是中国前现代最大的一部官修丛书，在中国文化教育和学术思想的历史上具有重要的历史地位。 文津阁版是乾隆年间创作的一本手抄本。 共包括 36,304 册，分 6,144 盒 128 个书架放置。 全书共 79,309 卷 （章节），最初保藏在热河（今承德）颐和园文津阁内。 1914 年，成为首都图书馆（今中国国家图书馆）藏品的一部分。 全片分为四个部分：经、史、子、集，分别以四季的颜色装订，以便浏览。 文津阁版基于故宫博物院保存的书籍、清朝编纂的书籍、四面八方进贡的书籍、以及根据 《永乐大典》重新编辑的书籍。中国国家图书馆馆藏的全套 《四库全书》 保存了大量的文"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
       "key": "three-pools-mirroring-moon",
       "name": "三潭印月",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "三潭映月把三座石塔、灯孔、水面、月色与倒影组织为一个可远观、可行走、可反复讲述的景名。它既指向具体水面标志，也指向西湖把人工构景转化为诗意观看的传统。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/three-pools-mirroring-moon.jpg",
+            "caption": "​杭州西湖小瀛洲"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
       "key": "pinghu-autumn-moon",
       "name": "平湖秋月",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "平湖秋月强调开阔湖面、秋夜月色和远山轮廓；三潭印月则更关注塔孔、灯影、月影和水波的多重叠加。二者展示了同一月题如何形成不同观看逻辑。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/pinghu-autumn-moon.jpg",
+            "caption": "Pinghu Qiuyue"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
       "key": "su-causeway-spring-dawn",
       "name": "苏堤春晓",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "苏堤由治湖工程形成，六桥、堤岸和桃柳又让水利设施转化为春季游赏景观。“苏堤春晓”与三潭石塔可以放在同一条苏轼治湖故事线中理解。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/su-causeway-spring-dawn.jpg",
+            "caption": "Sudi Chunxiao"
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "23bd1809-9de0-5cba-b72c-c822987ed091",
       "key": "leifeng-pagoda-and-evening-glow",
       "name": "雷峰塔与雷峰夕照",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "从三潭印月水域常可把雷峰塔纳入远景。今天的雷峰塔在保护并展示古塔遗址的基础上重建，既连接吴越国佛塔历史，也连接雷峰夕照的景名和后世民间叙事。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/leifeng-pagoda-and-evening-glow.jpg",
+            "caption": "​晚霞下的雷峰塔"
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
       "key": "west-lake-winter-snow",
       "name": "西湖冬雪与断桥",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "雪后的西湖常常变成黑白灰的平面：结冰的水面、未化的积雪与裸露的堤岸互相对照。断桥残雪的关键不在于把“断”当成破损，而是观察石桥阳面积雪先融、背阴残雪留存时，桥身在白色背景下若隐若现的视觉张力。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/west-lake-winter-snow.jpg",
+            "caption": "​断桥边的雪景 2018年12月09日摄于杭州西湖"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
       "key": "quyuan-lotus-summer",
       "name": "曲院风荷与荷塘夏日",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "曲院风荷以大片荷塘、临水廊桥与岸上亭台组织夏季湖景。风过荷叶时波光与深色叶片相互流动，观看的重点是塘面尺度、花影、风感与水下结构，而不只是识别单独一朵花。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/quyuan-lotus-summer.jpg",
+            "caption": "Qu Yuan Feng He"
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "7aa489c9-6efc-54da-8486-914cbab0267b",
       "key": "huagang-fish-viewing",
       "name": "花港观鱼与园林观鱼",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "花港观鱼把曲池、鱼影、水草与岸边回廊编成连续观看。观鱼介于凝视与游走之间：人停步时鱼游动，人移动时倒影变形，池水的清澈程度决定画面的疏密。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/huagang-fish-viewing.jpg",
+            "caption": "Huagang Guan Yu"
           },
           {
             "type": "paragraph",
@@ -244,6 +298,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
       "key": "liulang-wenying-soundscape",
       "name": "柳浪闻莺与春景声景",
       "introduction": {
@@ -252,6 +307,11 @@
           {
             "type": "paragraph",
             "text": "柳浪闻莺提示西湖十景中也包含声音与季节。春日新柳成排，鸟鸣与行人、车流、湖浪连成一片；理解这处景名需要把植物、光线、鸟声与城市环境放在一起聆听，而不是只看垂枝。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/liulang-wenying-soundscape.jpg",
+            "caption": "Liu Lang Wen Ying"
           },
           {
             "type": "paragraph",
@@ -271,6 +331,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "77347f66-53d0-5e01-a359-01bc66ca8330",
       "key": "shuangfeng-cloud-peaks",
       "name": "双峰插云与南北高峰",
       "introduction": {
@@ -279,6 +340,11 @@
           {
             "type": "paragraph",
             "text": "双峰插云看重云雾、高度与观看位置的关系。南北两峰在雨雪、晨昏、雾中忽隐忽现，可远观而不必登顶；其价值在于山、雾、天与想象之间的层次，而非一个固定的观景台。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/shuangfeng-cloud-peaks.jpg",
+            "caption": "​雙峰插雲"
           },
           {
             "type": "paragraph",
@@ -298,6 +364,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "85ea281c-8741-505e-a7f0-62400f5b33ba",
       "key": "lingyin-zen-grove",
       "name": "灵隐的山林禅寺",
       "introduction": {
@@ -306,6 +373,11 @@
           {
             "type": "paragraph",
             "text": "灵隐寺以大殿、庭院、溪泉与古树把宗教空间与自然山林叠合。从山门进入，建筑逐层升高、林木逐渐围合。参访时注意中轴线的秩序与两侧溪泉、岩刻对空间的松动。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/lingyin-zen-grove.jpg",
+            "caption": "​灵隐寺大雄宝殿"
           },
           {
             "type": "paragraph",
@@ -325,6 +397,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e383a049-b7f3-53d5-96fb-301ea2297c49",
       "key": "hupao-spring-tea",
       "name": "虎跑泉与泉水",
       "introduction": {
@@ -333,6 +406,11 @@
           {
             "type": "paragraph",
             "text": "虎跑以泉亭、石崖和泉水泡茶的传统知名。泉水经岩层过滤、口感清冽，和茶形成“泉茶相配”的范例；春夏水位与口感不同，用于冲泡时的温度与器具变化也值得留意。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/hupao-spring-tea.jpg",
+            "caption": "​虎跑梦泉hyhhhthl"
           },
           {
             "type": "paragraph",
@@ -352,6 +430,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
       "key": "liuhe-pagoda-river",
       "name": "六和塔与钱塘江",
       "introduction": {
@@ -360,6 +439,11 @@
           {
             "type": "paragraph",
             "text": "钱塘江在六和塔一带折向开阔，塔、江、潮与地平线连成一体。塔身为高度标尺，江面为运动界面；重点观塔与观江相互生成，是理解塔如何对水域起作用的上佳点位。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/liuhe-pagoda-river.jpg",
+            "caption": "Liuhe Pagoda, view from the opposite side of the Qiantang River"
           },
           {
             "type": "paragraph",
@@ -379,6 +463,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
       "key": "xiling-seal-art",
       "name": "西泠印社与孤山篆刻",
       "introduction": {
@@ -387,6 +472,11 @@
           {
             "type": "paragraph",
             "text": "西泠印社以印学与孤山庭园亭阁相连，是西湖文人传统的方寸之地。印章把文字、石料与金石观念压缩在一方空间；在孤山上看印，山色与印的叙事互文并呈。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/xiling-seal-art.jpg",
+            "caption": "​西泠印社建社廿週年紀念社門，建於1923年。兩側題字為“石藏東漢名三老，社結西泠紀廿年。”"
           },
           {
             "type": "paragraph",
@@ -406,6 +496,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "6836d943-c2ca-5696-8cd9-7ba71db683be",
       "key": "huxinting-islet",
       "name": "湖心亭与中国四大名亭",
       "introduction": {
@@ -414,6 +505,11 @@
           {
             "type": "paragraph",
             "text": "湖心亭位于杭州西湖之上，旧为湖心寺，是中国四大名亭之一。亭在外西湖的中心，四面环水，古人谓其“环岛皆水，环水皆山”，凭栏四望湖山尽收眼底；“湖心平眺”也因此被列为清代西湖十八景之一。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/huxinting-islet.jpg",
+            "caption": "湖心亭"
           },
           {
             "type": "paragraph",
@@ -433,6 +529,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
       "key": "yang-gong-causeway",
       "name": "杨公堤与明代西湖疏浚",
       "introduction": {
@@ -441,6 +538,11 @@
           {
             "type": "paragraph",
             "text": "杨公堤位于杭州西湖西侧、西里湖上，北起仁寿山，南至赤山埠，连接丁家山、眠牛山等西湖中的小岛，与苏堤、白堤并称“西湖三堤”。它原称西山路，因西湖西侧逐渐淤积成陆，现已与西湖西岸连为一体。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/yang-gong-causeway.jpg",
+            "caption": "​杭州西湖杨公堤"
           },
           {
             "type": "paragraph",
@@ -460,6 +562,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
       "key": "baoshi-hill-cinnabar-glow",
       "name": "宝石山与宝石流霞",
       "introduction": {
@@ -468,6 +571,11 @@
           {
             "type": "paragraph",
             "text": "宝石山是杭州西湖北侧的一座小山，南临西湖，东、北两面为繁华市区，西连葛岭，是俯瞰西湖美景的一处佳地，山高约二百米。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/baoshi-hill-cinnabar-glow.jpg",
+            "caption": "​黄龙洞至断桥一线：保俶塔和城市合影"
           },
           {
             "type": "paragraph",
@@ -487,6 +595,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d0352861-3d2c-5301-a662-cd042e449e6a",
       "key": "gushan-island",
       "name": "孤山与“孤山不孤”",
       "introduction": {
@@ -495,6 +604,11 @@
           {
             "type": "paragraph",
             "text": "孤山位于西湖北侧外西湖中，海拔35米，面积约0.22平方公里，为栖霞岭的支脉，是西湖中最大的天然岛屿。南宋咸淳《临安志》载它“一屿耸立，旁无联附，为湖山胜绝处”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/gushan-island.jpg",
+            "caption": "​杭州孤山公園"
           },
           {
             "type": "paragraph",
@@ -514,6 +628,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
       "key": "qianwang-temple-wuyue",
       "name": "钱王祠与吴越国",
       "introduction": {
@@ -522,6 +637,11 @@
           {
             "type": "paragraph",
             "text": "钱王祠位于杭州西湖东岸、柳浪闻莺公园内，是纪念五代十国时期吴越国王的祠庙，原称“表忠观”。宋熙宁十年（1077年）于西湖东岸建“表忠观”以纪念吴越国王钱镠，清代以后通称“钱王祠”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/qianwang-temple-wuyue.jpg",
+            "caption": "​中國杭州錢王祠。"
           },
           {
             "type": "paragraph",
@@ -541,6 +661,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
       "key": "baochu-pagoda",
       "name": "保俶塔",
       "introduction": {
@@ -549,6 +670,11 @@
           {
             "type": "paragraph",
             "text": "你眼前这座立在宝石山脊上的瘦高塔就是保俶塔。塔身实心、八面七级，高约45米，像一枚纤细的针立在湖北岸的山脊线上——与南岸雷峰塔的厚重正好相反。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/baochu-pagoda.jpg",
+            "caption": "Baochu Pagoda"
           },
           {
             "type": "paragraph",
@@ -571,6 +697,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "cccf0722-3380-5fe3-960a-5947bbb8104b",
       "key": "jingci-temple",
       "name": "净慈寺",
       "introduction": {
@@ -579,6 +706,11 @@
           {
             "type": "paragraph",
             "text": "你眼前的净慈寺是西湖南岸的千年古刹，依山而建，殿宇沿中轴线层层升高。进寺后留意听钟声——著名的『南屏晚钟』就出自这里。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/jingci-temple.jpg",
+            "caption": "​杭州净慈寺，西湖十景之一“南屏晚钟”，即指净慈寺传出的钟声。"
           },
           {
             "type": "paragraph",
@@ -601,6 +733,7 @@
       "contentRole": "看点"
     },
     {
+      "id": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
       "key": "longjing-village",
       "name": "龙井村",
       "introduction": {
@@ -609,6 +742,11 @@
           {
             "type": "paragraph",
             "text": "你眼前的龙井村是狮峰山下的茶村，也是『龙井茶』这个名字的源头。村里家家户户种茶、炒茶，清明前后整个村子都飘着茶香。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/longjing-village.jpg",
+            "caption": "​杭州龙井村西湖龙井茶园"
           },
           {
             "type": "paragraph",
@@ -633,94 +771,117 @@
   ],
   "attractions": [
     {
+      "id": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
       "key": "leifeng-pagoda-and-evening-glow",
       "name": "雷峰塔"
     },
     {
+      "id": "d10ba550-da02-5864-b01a-d6430d8b587f",
       "key": "baochu-pagoda",
       "name": "保俶塔"
     },
     {
+      "id": "972bbaf8-1b55-5043-8d74-d40856ab6492",
       "key": "jingci-temple",
       "name": "净慈寺"
     },
     {
+      "id": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
       "key": "yue-fei-memorial-culture",
       "name": "岳王庙"
     },
     {
+      "id": "65265052-5508-57df-a81a-2c027576f5b7",
       "key": "siku-quanshu-library",
       "name": "文澜阁"
     },
     {
+      "id": "bad747f4-43a2-5202-8274-d549c7c45887",
       "key": "su-causeway-spring-dawn",
       "name": "苏堤"
     },
     {
+      "id": "f4394af7-0206-5c20-a486-00d4d768e64a",
       "key": "three-pools-mirroring-moon",
       "name": "三潭印月"
     },
     {
+      "id": "29584556-38e5-5478-b694-c4da40593c03",
       "key": "west-lake-winter-snow",
       "name": "断桥"
     },
     {
+      "id": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
       "key": "pinghu-autumn-moon",
       "name": "平湖秋月"
     },
     {
+      "id": "660de823-9bec-50ac-a588-f5f5387dc225",
       "key": "quyuan-lotus-summer",
       "name": "曲院风荷"
     },
     {
+      "id": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
       "key": "huagang-fish-viewing",
       "name": "花港观鱼"
     },
     {
+      "id": "98ea122d-7182-50df-952b-399961d1f0af",
       "key": "liulang-wenying-soundscape",
       "name": "柳浪闻莺"
     },
     {
+      "id": "adaf1aa2-a082-5e05-8c67-022a131da536",
       "key": "shuangfeng-cloud-peaks",
       "name": "双峰插云"
     },
     {
+      "id": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
       "key": "lingyin-zen-grove",
       "name": "灵隐寺·飞来峰"
     },
     {
+      "id": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
       "key": "longjing-village",
       "name": "龙井村"
     },
     {
+      "id": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
       "key": "hupao-spring-tea",
       "name": "虎跑公园"
     },
     {
+      "id": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
       "key": "liuhe-pagoda-river",
       "name": "六和塔"
     },
     {
+      "id": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
       "key": "xiling-seal-art",
       "name": "西泠印社·孤山"
     },
     {
+      "id": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
       "key": "huxinting-islet",
       "name": "湖心亭"
     },
     {
+      "id": "a9155563-096d-57ba-affb-4c0544a3f559",
       "key": "yang-gong-causeway",
       "name": "杨公堤"
     },
     {
+      "id": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
       "key": "baoshi-hill-cinnabar-glow",
       "name": "宝石山"
     },
     {
+      "id": "efbadb98-a165-5a95-9b5b-fb7f22a91aec",
       "key": "gushan-island",
       "name": "孤山"
     },
     {
+      "id": "91998805-9ab0-5d8c-8a61-e59a5ef7a8cf",
       "key": "qianwang-temple-wuyue",
       "name": "钱王祠"
     }

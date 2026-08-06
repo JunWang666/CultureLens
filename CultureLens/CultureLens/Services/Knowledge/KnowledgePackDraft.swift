@@ -50,7 +50,21 @@ final class KnowledgePackDraft: Identifiable {
     updatedAt: Date = Date()
   ) {
     let stamped = pack.withStampedContentRoles()
-    let attractionKeys = Set(stamped.attractions.map(\.key))
+    let attractionKeys = Set(stamped.attractions.compactMap(\.key))
+    let elementKeyByID = Dictionary(
+      stamped.elements.compactMap { element -> (UUID, String)? in
+        guard let key = element.key else { return nil }
+        return (element.id, key)
+      },
+      uniquingKeysWith: { first, _ in first }
+    )
+    let attractionKeyByID = Dictionary(
+      stamped.attractions.compactMap { attraction -> (UUID, String)? in
+        guard let key = attraction.key else { return nil }
+        return (attraction.id, key)
+      },
+      uniquingKeysWith: { first, _ in first }
+    )
     self.init(
       id: id,
       version: stamped.version,
@@ -62,9 +76,19 @@ final class KnowledgePackDraft: Identifiable {
         )
       },
       attractions: stamped.attractions.map(EditableAttraction.init(from:)),
-      relations: stamped.relations.map(EditableRelation.init(from:)),
-      introductions: stamped.introductions.map(EditableIntroduction.init(from:)),
-      themes: stamped.themes.map(EditableTheme.init(from:)),
+      relations: stamped.relations.map {
+        EditableRelation(from: $0, elementKeyByID: elementKeyByID)
+      },
+      introductions: stamped.introductions.map {
+        EditableIntroduction(
+          from: $0,
+          elementKeyByID: elementKeyByID,
+          attractionKeyByID: attractionKeyByID
+        )
+      },
+      themes: stamped.themes.map {
+        EditableTheme(from: $0, elementKeyByID: elementKeyByID)
+      },
       englishLocales: Self.englishLocales(from: stamped.locales?["en"]),
       updatedAt: updatedAt,
       displayName: displayName ?? stamped.version
@@ -180,7 +204,8 @@ struct EditableElement: Identifiable, Hashable, Sendable {
 
   init(from element: KnowledgePack.Element, attractionKeys: Set<String>) {
     self.init(
-      key: element.key,
+      id: element.id,
+      key: element.key ?? "",
       name: element.name,
       contentRole: element.resolvedContentRole(attractionKeys: attractionKeys),
       conceptKind: ConceptKind(rawValue: element.conceptKind ?? "") ?? .foundation,
@@ -213,7 +238,7 @@ struct EditableAttraction: Identifiable, Hashable, Sendable {
   }
 
   init(from attraction: KnowledgePack.Attraction) {
-    self.init(key: attraction.key, name: attraction.name)
+    self.init(id: attraction.id, key: attraction.key ?? "", name: attraction.name)
   }
 
   func asPackAttraction() -> KnowledgePack.Attraction {
@@ -245,10 +270,11 @@ struct EditableRelation: Identifiable, Hashable, Sendable {
     self.explanation = explanation
   }
 
-  init(from relation: KnowledgePack.Relation) {
+  init(from relation: KnowledgePack.Relation, elementKeyByID: [UUID: String]) {
     self.init(
-      elementKey: relation.elementKey,
-      relatedElementKey: relation.relatedElementKey,
+      elementKey: elementKeyByID[relation.elementId] ?? relation.elementId.uuidString,
+      relatedElementKey: elementKeyByID[relation.relatedElementId]
+        ?? relation.relatedElementId.uuidString,
       kind: RelationKind(rawValue: relation.kind ?? "") ?? .explains,
       explanation: relation.explanation ?? ""
     )
@@ -297,12 +323,19 @@ struct EditableIntroduction: Identifiable, Hashable, Sendable {
     self.introductionText = introductionText
   }
 
-  init(from record: KnowledgePack.IntroductionRecord) {
+  init(
+    from record: KnowledgePack.IntroductionRecord,
+    elementKeyByID: [UUID: String],
+    attractionKeyByID: [UUID: String]
+  ) {
     self.init(
-      key: record.key,
+      id: record.id,
+      key: record.key ?? "",
       name: record.name,
-      culturalElementKey: record.culturalElementKey,
-      attractionKey: record.attractionKey,
+      culturalElementKey: elementKeyByID[record.culturalElementId]
+        ?? record.culturalElementId.uuidString,
+      attractionKey: attractionKeyByID[record.attractionId]
+        ?? record.attractionId.uuidString,
       latitude: String(record.latitude),
       longitude: String(record.longitude),
       coordinateSourceUrl: record.coordinateSourceUrl ?? "",
@@ -348,12 +381,14 @@ struct EditableTheme: Identifiable, Hashable, Sendable {
     self.minContacted = minContacted
   }
 
-  init(from theme: KnowledgePack.Theme) {
+  init(from theme: KnowledgePack.Theme, elementKeyByID: [UUID: String]) {
+    let keys = theme.elementIds.map { elementKeyByID[$0] ?? $0.uuidString }
     self.init(
-      key: theme.key,
+      id: theme.id,
+      key: theme.key ?? "",
       name: theme.name,
       summary: theme.summary,
-      elementKeysText: theme.elementKeys.joined(separator: ", "),
+      elementKeysText: keys.joined(separator: ", "),
       minContacted: theme.minContacted
     )
   }

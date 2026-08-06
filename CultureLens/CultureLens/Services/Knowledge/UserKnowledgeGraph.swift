@@ -16,7 +16,9 @@ nonisolated struct UserKnowledgeGraphSeed: Hashable {
 }
 
 nonisolated struct UserKnowledgeGraphNode: Identifiable, Hashable {
+  /// Pack element UUID (or seed id when the node is not pack-backed).
   let id: UUID
+  /// Optional pack slug for migration / debug; prefer `id` for identity.
   let elementKey: String?
   let name: String
   let summary: String

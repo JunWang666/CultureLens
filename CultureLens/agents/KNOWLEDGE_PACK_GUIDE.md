@@ -89,17 +89,26 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`。运行时 `Knowl
 
 `conceptKind` 仍描述文化角色（基础知识 / 历史 / 人物…），与 `contentRole` 正交：玉琮王是「看点」+「基础知识」，宋朝是「文化历史」+「历史」。
 
-### key 规范
+### 身份：UUID 主键 + 可选 slug
+
+- 每个 entity（element / attraction / introduction / theme）以 **`id: UUID`** 为运行时主键；可选 `key` 是人类可读 kebab slug，用于编辑与迁移。
+- 跨引用一律用 UUID：`relations[].elementId` / `relatedElementId`，`themes[].elementIds`，`introductions[].culturalElementId` / `attractionId`。
+- 遗留 JSON 仍可写 `elementKey` / `culturalElementKey` / `elementKeys`；解码时经 `DeterministicID` 铸成与 slug 对应的 UUIDv5。
+- **attraction 与其绑定元素可共用 slug**，但 UUID 命名空间不同（`culturalElement` vs `attraction`）。
+- slug / `key` 一旦发布尽量不要改（已有进度行会按 UUIDv5(slug) 对齐）；新内容以 pack 内显式 `id` 为准。
+- 当前包版本：西湖 `hangzhou-west-lake-v6`、中国历史 `chinese-history-v5`、良渚 `liangzhu-v5`、浙博 `zhejiang-museum-v6`。
+
+### key / slug 规范
 
 - 小写 kebab-case 英文，描述实体本身而非视角：`leifeng-pagoda` ✓，`leifeng-pagoda-and-evening-glow` ✗（那是两个节点）。
-- **同一实体全库共用一个 key**。玉琮王在良渚包和浙博包必须是同一个 `jade-cong-wang`，靠合并去重；不允许出现 `jade-cong-wang` / `liangzhu-cong-wang` 两份。新增节点前先在全部包里搜一遍同名实体。
-- **attraction 与其绑定元素共用 key 是设计特性**（景点就是图谱里的实体节点）。代码侧靠命名空间 UUID 消歧（元素 `culturalElement` / 景点 `attraction` / 地图点 `attractionPoint`，见 `agents/PROJECT.md`「身份模型」），不要因为"key 撞名"给景点另造 key。
-- key 一旦发布不要改（用户图谱进度、UUIDv5 都按 key 派生）。
+- **同一实体全库共用一个 slug**。玉琮王在良渚包和浙博包必须是同一个 `jade-cong-wang`，靠合并去重；不允许出现 `jade-cong-wang` / `liangzhu-cong-wang` 两份。新增节点前先在全部包里搜一遍同名实体。
+- **attraction 与其绑定元素共用 slug 是设计特性**（景点就是图谱里的实体节点）。代码侧靠命名空间 UUID 消歧（元素 `culturalElement` / 景点 `attraction` / 地图点 `attractionPoint`，见 `agents/PROJECT.md`「身份模型」），不要因为"key 撞名"给景点另造 key。
 
 ### elements（看点 / 文化历史 sidecar）
 
 ```json
 {
+  "id": "…-uuidv5-from-slug…",
   "key": "three-pools-mirroring-moon",
   "name": "三潭印月",
   "contentRole": "看点",
@@ -121,24 +130,25 @@ JSON 结构见 `Services/Knowledge/KnowledgePackModels.swift`。运行时 `Knowl
 ### attractions[] 与 introductions[]
 
 - **每个景点 key 必须同时存在于 `elements[]`**——扫描识别命中 attraction 后要能落进图谱节点。西湖包 19/23 景点无对应节点的现状属于缺陷，新包不允许。
-- `introductions[]` 的 `attractionKey` 与 `culturalElementKey` 对景点节点填同一个 key；`latitude/longitude` 必填，`coordinateSourceUrl` 注明坐标出处。
-- 现场介绍可把 `culturalElementKey` 指到文化历史节点（例如展厅景点绑定「施昕更发现」），识别 catalog 仍只收看点。
+- `introductions[]` 的 `attractionId` / `culturalElementId`（或遗留 `attractionKey` / `culturalElementKey`）对景点节点指向同一实体；`latitude/longitude` 必填，`coordinateSourceUrl` 注明坐标出处。
+- 现场介绍可把 `culturalElementId` 指到文化历史节点（例如展厅景点绑定「施昕更发现」），识别 catalog 仍只收看点。
 
 ### relations[]
 
 ```json
 {
-  "elementKey": "three-pools-round-openings",
-  "relatedElementKey": "three-pools-light-mechanism",
+  "elementId": "…",
+  "relatedElementId": "…",
   "kind": "理解前先懂",
   "explanation": "先认识塔身圆孔，才能理解月光、塔灯与水面如何共同「印月」。"
 }
 ```
 
+- 也可用遗留 `elementKey` / `relatedElementKey`（解码铸 UUIDv5）。
 - `kind` 与 `explanation` **必填**，缺 kind 的边渲染层没有方向可画，等于废边。
-- `explanation` 的方向必须与边的方向一致：读作「`elementKey` （kind） `relatedElementKey`」，解释里先出现的概念应是边的起点一侧。
+- `explanation` 的方向必须与边的方向一致：读作「起点 （kind） 终点」，解释里先出现的概念应是边的起点一侧。
 
-**12 种 kind 的方向语义**（`elementKey` = A，`relatedElementKey` = B）：
+**12 种 kind 的方向语义**（起点 = A，终点 = B）：
 
 | kind | 读法 | 方向规则 | 典型场景 |
 |---|---|---|---|
@@ -211,7 +221,7 @@ python3 - <<'EOF'
 import json, glob, sys, os
 ok = True
 dirs = [d for d in glob.glob('CultureLens/CultureLens/Resources/KnowledgePack*')
-        if 'Fallback' not in d and os.path.isdir(d)]
+        if os.path.isdir(d)]
 
 def load_pack(d):
     main = json.load(open(f'{d}/knowledge-pack.json'))

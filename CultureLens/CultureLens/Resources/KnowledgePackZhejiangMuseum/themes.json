@@ -1,67 +1,71 @@
 {
   "themes": [
     {
+      "id": "402cc54a-0375-5fa2-9bf6-cebec508c076",
       "key": "prehistoric-civilization-dawn",
       "name": "从河姆渡到良渚",
       "summary": "从七千年前河姆渡的干栏、稻作与骨耜，到五千年前良渚的玉琮、古城与水利，一条考古线索看浙江文明的源头如何成形。",
-      "elementKeys": [
-        "hemudu-culture",
-        "hemudu-double-bird",
-        "hemudu-painted-pottery",
-        "hemudu-bone-plough",
-        "liangzhu-culture-overview",
-        "jade-cong-wang",
-        "liangzhu-ancient-city",
-        "jade-cong-ritual",
-        "shi-xingeng-discovery"
+      "elementIds": [
+        "fb207661-23da-54bc-af3c-aee4dbb88931",
+        "7761fd8c-06f2-5e4a-8343-5144175672c2",
+        "ac565d24-9a02-5a99-8acc-cb885f30883d",
+        "9abf276c-9bef-5142-8dda-d964bcdb8015",
+        "3b970416-1756-55e8-8a1e-fca23a4cc03d",
+        "422ecaac-9557-58b5-973a-5c181d410c71",
+        "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
+        "e5ac2ef8-9095-57a6-808c-43df7159b392",
+        "d48d7adb-49d2-5879-9dd2-381f6bc9f06a"
       ],
       "minContacted": 4
     },
     {
+      "id": "6b4cd71b-50f5-5ec7-a60d-ce20fea38b6e",
       "key": "top-ten-treasures-trail",
       "name": "镇馆之宝巡礼",
       "summary": "跟着浙博十大镇馆之宝的榜单逐个寻访，从七千年前的牙雕到民国的万工轿，在一件件器物里拼出浙江手艺与历史的截面。",
-      "elementKeys": [
-        "top-ten-treasures",
-        "hemudu-double-bird",
-        "jade-cong-wang",
-        "zhejiang-yue-sword",
-        "asoka-pagoda",
-        "cai-feng-ming-qi",
-        "longquan-boat-drip",
-        "fuchun-shanju-tu",
-        "jiyue-bronze-house",
-        "wan-gong-jiao"
+      "elementIds": [
+        "162ffb68-7b96-5a03-aef2-73709620ccb1",
+        "7761fd8c-06f2-5e4a-8343-5144175672c2",
+        "422ecaac-9557-58b5-973a-5c181d410c71",
+        "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+        "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
+        "b78c3e13-f4fd-5626-8150-4744854e50d8",
+        "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
+        "03450361-df1d-50fc-89cc-848d880e1783",
+        "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
+        "5429373a-0fd2-5912-b210-49ad3bcdc724"
       ],
       "minContacted": 5
     },
     {
+      "id": "9ac2e68a-ea43-5b09-ac10-db2b1e82f4c9",
       "key": "literati-and-elegant-objects",
       "name": "文人与雅器",
       "summary": "从《富春山居图》的剩山图到“彩凤鸣岐”的唐琴，再到黄公望、黄宾虹、沙孟海、吴昌硕这些名字，看浙江文人的笔墨与器物如何互相成就。",
-      "elementKeys": [
-        "fuchun-shanju-tu",
-        "huang-gongwang",
-        "guqin-world",
-        "cai-feng-ming-qi",
-        "tang-guqin-tradition",
-        "huang-binhong",
-        "sha-menghai",
-        "wu-changshuo"
+      "elementIds": [
+        "03450361-df1d-50fc-89cc-848d880e1783",
+        "058e20d5-373f-5423-b6d6-4adb8f88c144",
+        "c5978321-c18b-582e-bcac-e1990d4561ac",
+        "b78c3e13-f4fd-5626-8150-4744854e50d8",
+        "71261568-8116-57fb-8221-e32f8dbbfe77",
+        "d402f589-b0e2-59f7-96ee-d53df0019cb1",
+        "25847815-97a4-5692-860f-fa04a848bf53",
+        "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90"
       ],
       "minContacted": 4
     },
     {
+      "id": "fd8e46c0-b939-5b08-8142-fbd56586cf8b",
       "key": "wuyue-swords-and-pagodas",
       "name": "吴越的剑与塔",
       "summary": "把越王剑的锋芒与吴越佛国的塔影并置，从者旨於睗剑到鎏金银阿育王塔，看一个靠航海与信仰立国的王国如何把威权与慈悲铸进器物。",
-      "elementKeys": [
-        "wuyue-state",
-        "wuyue-buddhist-art",
-        "zhejiang-yue-sword",
-        "yue-bronze-swords",
-        "asoka-pagoda",
-        "caisu-mud-bodhisattva"
+      "elementIds": [
+        "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
+        "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20",
+        "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+        "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919",
+        "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
+        "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272"
       ],
       "minContacted": 3
     }

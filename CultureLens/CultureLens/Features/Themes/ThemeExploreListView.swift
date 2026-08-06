@@ -7,16 +7,18 @@ struct ThemeExploreListView: View {
     KnowledgeStore.shared?.pack.themes ?? []
   }
 
-  private var contactedKeys: Set<String> {
+  private var contactedIDs: Set<UUID> {
     Set(
-      knowledgeProgressStore.entriesByID.values.compactMap(\.elementKey)
+      knowledgeProgressStore.entriesByID.values.compactMap { entry in
+        entry.elementKey.flatMap(UUID.init(uuidString:)) ?? entry.nodeID
+      }
     )
   }
 
   private var progressList: [ThemeProgress] {
     ThemeProgressCalculator.progressList(
       themes: themes,
-      contactedElementKeys: contactedKeys,
+      contactedElementIds: contactedIDs,
       knowledgeStore: KnowledgeStore.shared
     )
   }
@@ -34,14 +36,14 @@ struct ThemeExploreListView: View {
       } else {
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 16) {
-            EditorialHeader(
-              eyebrow: nil,
-              title: "主题探索",
-              message: "沿着一条文化线索连续点亮节点，把零散识别收成可完成的探索路径。"
+            MagazinePageHeader(
+              eyebrow: "SERIES",
+              title: "文化系",
+              message: "沿着一条文化线索连续点亮节点。每完成一系，就为你的文化图鉴盖下一枚印章。"
             )
 
-            ForEach(progressList, id: \.theme.key) { progress in
-              NavigationLink(value: AppRoute.theme(progress.theme.key)) {
+            ForEach(progressList, id: \.theme.id) { progress in
+              NavigationLink(value: AppRoute.theme(progress.theme.sortKey)) {
                 themeRow(progress)
               }
               .buttonStyle(.plain)
@@ -53,7 +55,7 @@ struct ThemeExploreListView: View {
         }
       }
     }
-    .cultureNavigationTitle("主题探索")
+    .cultureNavigationTitle("文化系")
   }
 
   private func themeRow(_ progress: ThemeProgress) -> some View {
@@ -78,7 +80,7 @@ struct ThemeExploreListView: View {
       ProgressView(value: progress.fractionComplete)
         .tint(CultureTheme.cinnabar)
 
-      Text("\(progress.totalCount) 个相关节点 · 完成需点亮 \(progress.requiredCount) 个")
+      Text("\(progress.totalCount) 个相关节点 · 点亮本系需收集 \(progress.requiredCount) 个")
         .font(.caption)
         .foregroundStyle(CultureTheme.inkSecondary)
     }
@@ -86,10 +88,10 @@ struct ThemeExploreListView: View {
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(
       CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous)
+      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
     )
     .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous)
+      RoundedRectangle(cornerRadius: 12, style: .continuous)
         .stroke(CultureTheme.hairline, lineWidth: 1)
     }
     .accessibilityElement(children: .combine)

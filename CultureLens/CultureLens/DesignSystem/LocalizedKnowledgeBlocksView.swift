@@ -5,6 +5,7 @@ import SwiftUI
 /// While a translation is in flight a shimmering skeleton is shown instead of
 /// the untranslated fallback, so source-language content never flashes first.
 struct LocalizedKnowledgeBlocksView: View {
+  let elementID: UUID?
   let elementKey: String?
   let fallbackName: String
   let fallbackSummary: String
@@ -15,6 +16,22 @@ struct LocalizedKnowledgeBlocksView: View {
   @State private var title: String = ""
   @State private var document: RichTextDocument?
   @State private var isLoading = false
+
+  init(
+    elementID: UUID? = nil,
+    elementKey: String? = nil,
+    fallbackName: String,
+    fallbackSummary: String,
+    textFont: Font = .title3,
+    textColor: Color = CultureTheme.inkPrimary
+  ) {
+    self.elementID = elementID
+    self.elementKey = elementKey
+    self.fallbackName = fallbackName
+    self.fallbackSummary = fallbackSummary
+    self.textFont = textFont
+    self.textColor = textColor
+  }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -33,7 +50,9 @@ struct LocalizedKnowledgeBlocksView: View {
           .lineSpacing(6)
       }
     }
-    .task(id: "\(elementKey ?? "")|\(languageStore.language.rawValue)") {
+    .task(
+      id: "\(elementID?.uuidString ?? "")|\(elementKey ?? "")|\(languageStore.language.rawValue)"
+    ) {
       await reload()
     }
   }
@@ -42,18 +61,23 @@ struct LocalizedKnowledgeBlocksView: View {
   private func reload() async {
     title = fallbackName
     document = nil
-    guard let elementKey,
-      let store = KnowledgeStore.shared
-    else {
-      return
-    }
+    guard let store = KnowledgeStore.shared else { return }
+    let resolvedID =
+      elementID
+      ?? elementKey.flatMap { store.resolveElementID($0) }
+    let resolvedKey =
+      resolvedID.flatMap { store.elementKey(for: $0) }
+      ?? elementKey
+    guard resolvedID != nil || resolvedKey != nil else { return }
 
     isLoading = true
     defer { isLoading = false }
 
     let language = languageStore.language
     let localization = KnowledgeLocalization(pack: store.pack)
-    let introduction = store.introductionDocument(elementKey: elementKey)
+    let introduction =
+      resolvedID.flatMap { store.introductionDocument(elementID: $0) }
+      ?? resolvedKey.flatMap { store.introductionDocument(elementKey: $0) }
     let sourcePlain: String
     if let introduction {
       sourcePlain = KnowledgeStore.richTextPlainText(introduction)
@@ -61,7 +85,10 @@ struct LocalizedKnowledgeBlocksView: View {
       sourcePlain = ""
     }
     let sourceName =
-      store.pack.elements.first(where: { $0.key == elementKey })?.name ?? fallbackName
+      resolvedID.flatMap { store.element(id: $0)?.name }
+      ?? resolvedKey.flatMap { store.element(key: $0)?.name }
+      ?? fallbackName
+    let lookupKey = resolvedKey ?? resolvedID?.uuidString.lowercased() ?? ""
 
     if language.isKnowledgeSource {
       document = introduction
@@ -69,7 +96,8 @@ struct LocalizedKnowledgeBlocksView: View {
       return
     }
 
-    if let overlay = localization.elementText(key: elementKey, language: language),
+    if !lookupKey.isEmpty,
+      let overlay = localization.elementText(key: lookupKey, language: language),
       !overlay.isSourceFallback
     {
       title = overlay.name
@@ -78,7 +106,7 @@ struct LocalizedKnowledgeBlocksView: View {
     }
 
     let localized = await KnowledgeTranslationService.shared.localizedElement(
-      key: elementKey,
+      key: lookupKey.isEmpty ? (resolvedID?.uuidString.lowercased() ?? "") : lookupKey,
       sourceName: sourceName,
       sourcePlainText: sourcePlain.isEmpty ? fallbackSummary : sourcePlain,
       language: language,

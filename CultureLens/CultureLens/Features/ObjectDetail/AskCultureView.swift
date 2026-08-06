@@ -12,7 +12,7 @@ struct AskCultureView: View {
   @Environment(ChatHistoryStore.self) private var chatHistoryStore
   @StateObject private var model = AskCultureChatModel()
   @FocusState private var isComposerFocused: Bool
-  @State private var selectedCitationKey: String?
+  @State private var selectedCitationID: UUID?
   @State private var showHistorySheet = false
   @State private var showAttachMenu = false
   @State private var selectedPhoto: PhotosPickerItem?
@@ -67,14 +67,14 @@ struct AskCultureView: View {
       )
     }
     .environment(\.openURL, OpenURLAction { url in
-      if let key = CultureCiteURL.elementKey(from: url) {
-        selectedCitationKey = key
+      if let id = CultureCiteURL.elementID(from: url) {
+        selectedCitationID = id
         return .handled
       }
       return .systemAction(url)
     })
-    .navigationDestination(item: $selectedCitationKey) { key in
-      if let element = KnowledgeStore.shared?.element(key: key) {
+    .navigationDestination(item: $selectedCitationID) { id in
+      if let element = KnowledgeStore.shared?.element(id: id) {
         ScanResultView(knowledgeObject: CultureObject(knowledgeElement: element))
       } else {
         ContentUnavailableView("知识节点暂不可用", systemImage: "externaldrive.badge.questionmark")
@@ -238,7 +238,7 @@ struct AskCultureView: View {
           !message.isStreaming
         {
           KnowledgeCitationCardsView(citations: message.citations) { citation in
-            selectedCitationKey = citation.key
+            selectedCitationID = citation.elementID()
           }
         }
       }
@@ -811,14 +811,14 @@ final class AskCultureChatModel: ObservableObject {
       isSending = false
       persistConversation()
 
-      if let object, let key = object.culturalElementKey {
-        let current = knowledgeProgressStore.level(for: object.id, elementKey: key)
+      if let object, let elementID = object.culturalElementID {
+        let current = knowledgeProgressStore.level(for: object.id, elementID: elementID)
         if current == nil || current == .contact {
           knowledgeProgressStore.setLevel(
             .understand,
             for: object.id,
             source: .ask,
-            elementKey: key
+            elementID: elementID
           )
         }
       }

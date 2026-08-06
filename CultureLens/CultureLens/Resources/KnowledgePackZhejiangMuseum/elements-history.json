@@ -1,6 +1,7 @@
 {
   "elements": [
     {
+      "id": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7",
       "key": "zhejiang-museum-history",
       "name": "浙江省博物馆的历史沿革",
       "introduction": {
@@ -9,6 +10,11 @@
           {
             "type": "paragraph",
             "text": "浙江省博物馆始建于1929年11月，是中国最早的地方综合性博物馆之一，曾名“浙江省西湖博物馆”“浙江省立西湖博物馆”。它的起点就在西湖边，与近代西湖博览会的余绪紧紧相连。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhejiang-museum-history.jpg",
+            "caption": "Located at Hangzhou, China."
           },
           {
             "type": "paragraph",
@@ -28,6 +34,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "95906076-3c48-5762-ad31-2eebe2a9bd42",
       "key": "museum-collection-system",
       "name": "十万余件馆藏与收藏体系",
       "introduction": {
@@ -36,6 +43,11 @@
           {
             "type": "paragraph",
             "text": "浙江省博物馆收藏有十万余件文物，时间上几乎覆盖浙江历史的每一段，是一座靠本省考古与捐献积累起来的地方综合收藏。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/museum-collection-system.jpg",
+            "caption": "​中国国家博物馆西门。"
           },
           {
             "type": "paragraph",
@@ -55,6 +67,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "162ffb68-7b96-5a03-aef2-73709620ccb1",
       "key": "top-ten-treasures",
       "name": "十大镇馆之宝评选",
       "introduction": {
@@ -63,6 +76,11 @@
           {
             "type": "paragraph",
             "text": "2009年6月，浙江省博物馆推出“浙江省博物馆建馆80周年‘十大镇馆之宝’”评选活动，活动为期一个月，根据观众投票结合专家意见评选出馆藏中最有代表性的十件文物。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/top-ten-treasures.jpg",
+            "caption": "浙江省博物馆"
           },
           {
             "type": "paragraph",
@@ -82,6 +100,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7cb89f30-5375-5ddd-8a2a-68e8dc74462a",
       "key": "no-overseas-treasures",
       "name": "禁止出国（境）展览文物",
       "introduction": {
@@ -90,6 +109,11 @@
           {
             "type": "paragraph",
             "text": "中国有一部分极其重要的文物被国家列入禁止出国（境）展览名录，只能在境内展出、不得外借出境巡展。浙江省博物馆共有五件（组）文物入选。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/no-overseas-treasures.jpg",
+            "caption": "​这件\"苦笋帖\"是唐代草书大家怀素的传世亲笔墨迹之一．文字不多，总共才14字，不仅能使我们观赏到那娴熟的笔法和行云施雨、走蛇舞龙般的线条之美，同时还能直接感受到作者书写时的内在气质。"
           },
           {
             "type": "paragraph",
@@ -109,6 +133,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "fb207661-23da-54bc-af3c-aee4dbb88931",
       "key": "hemudu-culture",
       "name": "河姆渡文化",
       "introduction": {
@@ -117,6 +142,11 @@
           {
             "type": "paragraph",
             "text": "河姆渡文化是分布于中国浙江杭州湾南岸平原地区至舟山群岛的新石器时代文化，年代大约在距今6000年到7000年之前，因以余姚河姆渡遗址发掘最早而得名。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-culture.png",
+            "caption": "Area of the Hemudu culture (5000–4500 BC) in eastern China, based on Liu Li and Chen Xingcan (2012), The Archaeology of China: From the Late Paleolithic to the Early Bronze Age, Cambridge University Press, ISBN 978-0-521-64310-8, p170."
           },
           {
             "type": "paragraph",
@@ -136,6 +166,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919",
       "key": "yue-bronze-swords",
       "name": "越国青铜剑传统",
       "introduction": {
@@ -144,6 +175,11 @@
           {
             "type": "paragraph",
             "text": "越国是先秦金锡等冶炼原材料的主要产地之一，越人善治刀剑是西汉以前一般人公认的事实；《周礼》《庄子》《战国策》《淮南子》等书中都高度评价越国兵器质量，越国还有治剑名匠欧冶子、相剑家薛烛。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/yue-bronze-swords.jpg",
+            "caption": "Bronze sword used by King Goujian of Yue"
           },
           {
             "type": "paragraph",
@@ -163,6 +199,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
       "key": "wuyue-state",
       "name": "吴越国与保境安民",
       "introduction": {
@@ -171,6 +208,11 @@
           {
             "type": "paragraph",
             "text": "吴越（907年6月16日—978年6月9日）是五代十国时期的十国之一，由钱镠在907年所建，都城为西府杭州，是北宋开国战争期间唯一没有被宋朝使用武力攻下的国家。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wuyue-state.png",
+            "caption": "​五代十國初期"
           },
           {
             "type": "paragraph",
@@ -190,6 +232,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20",
       "key": "wuyue-buddhist-art",
       "name": "吴越佛教与宝箧印式塔",
       "introduction": {
@@ -198,6 +241,11 @@
           {
             "type": "paragraph",
             "text": "佛教是吴越国文化的重要组成部分，历代吴越国王均笃信佛教；忠懿王时期境内佛塔达到8万4千座，有名的如今天杭州的保俶塔、雷峰塔。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wuyue-buddhist-art.jpg",
+            "caption": "​泉州洛阳桥，桥身中部的“月光菩萨塔”（宝箧印经式塔），塔身东面刻有梵文；南面刻有佛教揭语“諸佛出世，欲令眾生，開示悟人，佛之知見，使得清淨。”"
           },
           {
             "type": "paragraph",
@@ -217,6 +265,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7354cd7a-a6a2-56d7-b7a6-dfb871129047",
       "key": "yue-kiln",
       "name": "越窑与秘色瓷",
       "introduction": {
@@ -225,6 +274,11 @@
           {
             "type": "paragraph",
             "text": "越窑是唐朝、五代时浙江绍兴越州的瓷窑，窑址主要分布于慈溪的上林湖一带；隋朝、唐朝时绍兴叫“越州”，因此得名“越窑”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/yue-kiln.jpg",
+            "caption": "​法门寺珍宝馆秘色瓷器"
           },
           {
             "type": "paragraph",
@@ -244,6 +298,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "7f792a90-7796-57ed-bc27-e69b3fe33fbc",
       "key": "longquan-kiln",
       "name": "龙泉窑与粉青梅子青",
       "introduction": {
@@ -252,6 +307,11 @@
           {
             "type": "paragraph",
             "text": "龙泉青瓷是以浙江省龙泉市古代窑址为核心、分支广布周边的瓷窑系统，一般认为龙泉窑的鼎盛时期在南宋。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/longquan-kiln.jpg",
+            "caption": "Palace Museum, Beijing. Celadon vase with dish shaped mouth, Longquan Ware, Zhejiang province.  Southern Song Dynasty 1127-1279 A.D."
           },
           {
             "type": "paragraph",
@@ -271,6 +331,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "ce41ce0d-05c3-5a8b-a586-16218e70392d",
       "key": "southern-song-guan-ware",
       "name": "南宋官窑",
       "introduction": {
@@ -279,6 +340,11 @@
           {
             "type": "paragraph",
             "text": "杭州西湖博物馆总馆南宋官窑馆区（即原南宋官窑博物馆）位于浙江省杭州市，以郊坛下南宋官窑遗址为基础，是中国第一座依托古窑址建立的陶瓷专题博物馆，也是了解南宋官窑最直接的地方。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/southern-song-guan-ware.jpg",
+            "caption": "​南宋官窑博物馆，位于中国浙江省杭州市。"
           },
           {
             "type": "paragraph",
@@ -298,6 +364,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "058e20d5-373f-5423-b6d6-4adb8f88c144",
       "key": "huang-gongwang",
       "name": "黄公望与富春江",
       "introduction": {
@@ -306,6 +373,11 @@
           {
             "type": "paragraph",
             "text": "黄公望（1269年—1354年），字子久，号大痴、大痴道人、一峰道人，平江路常熟州（今江苏省苏州市常熟市）人，元朝画家，尊为“元四家”之首，与吴镇、倪瓒、王蒙并称“元四大家”。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-gongwang.jpg",
+            "caption": "Huang_Gongwang._Dwelling_in_the_Fuchun_Mountains._detail._National_Palace_Museum,_Taipei."
           },
           {
             "type": "paragraph",
@@ -325,6 +397,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
       "key": "huang-binhong",
       "name": "黄宾虹与浙博",
       "introduction": {
@@ -333,6 +406,11 @@
           {
             "type": "paragraph",
             "text": "黄宾虹（1865年1月27日—1955年3月25日），名质，字朴存、朴人，别号予向、虹庐、虹叟，中年更号宾虹，以号著称，祖籍安徽歙县西乡潭渡村，生于浙江金华，是中国近代山水画画家。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-binhong.jpg",
+            "caption": "黄宾虹与浙博"
           },
           {
             "type": "paragraph",
@@ -352,6 +430,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "25847815-97a4-5692-860f-fa04a848bf53",
       "key": "sha-menghai",
       "name": "沙孟海与浙博",
       "introduction": {
@@ -360,6 +439,11 @@
           {
             "type": "paragraph",
             "text": "沙孟海（1900年6月11日—1992年10月10日），原名沙文若，字孟海，号沙邨、兰沙、石荒、决明等，浙江省鄞县（现宁波市鄞州区）塘溪镇沙村人，是中国书法家、篆刻家，也是与浙江省博物馆渊源很深的一位大家。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/sha-menghai.jpg",
+            "caption": "​沙孟海旧居，位于中国浙江省杭州市龙游路15号，是中国当代书法家沙孟海晚年居住的地方。"
           },
           {
             "type": "paragraph",
@@ -379,6 +463,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90",
       "key": "wu-changshuo",
       "name": "吴昌硕与浙博",
       "introduction": {
@@ -387,6 +472,11 @@
           {
             "type": "paragraph",
             "text": "吴昌硕（1844年9月12日—1927年11月29日），浙江省湖州安吉县鄣吴村人，清末民初篆刻家，亦工书法、绘画。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wu-changshuo.png",
+            "caption": "呉昌碩の肖像写真"
           },
           {
             "type": "paragraph",
@@ -406,6 +496,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "c5978321-c18b-582e-bcac-e1990d4561ac",
       "key": "guqin-world",
       "name": "古琴与中国人的音韵世界",
       "introduction": {
@@ -414,6 +505,11 @@
           {
             "type": "paragraph",
             "text": "古琴是中国历史最悠久的乐器之一，也是中国人寄托音韵与心境的器物。2003年11月7日，古琴艺术被联合国教科文组织列入世界第二批人类非物质文化遗产代表作名录；2006年5月20日，国务院将古琴列入第一批国家级非物质文化遗产名录。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/guqin-world.jpg",
+            "caption": "A picture of the guqin Lingfeng Shenyun (靈峰神韻) in the Zhongni form"
           },
           {
             "type": "paragraph",
@@ -433,6 +529,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a",
       "key": "qi-lacquer-donation",
       "name": "曹其镛夫妇捐赠的漆器",
       "introduction": {
@@ -441,6 +538,11 @@
           {
             "type": "paragraph",
             "text": "2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这批漆器时间跨度从宋代到清代，是浙博漆器收藏的重要来源。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/qi-lacquer-donation.jpg",
+            "caption": "Japanese lacquered spoons, 20th century (Negoro-nuri)"
           },
           {
             "type": "paragraph",
@@ -460,6 +562,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
       "key": "shili-hongzhuang",
       "name": "十里红妆与宁绍婚俗",
       "introduction": {
@@ -468,6 +571,11 @@
           {
             "type": "paragraph",
             "text": "十里红妆是以浙江省宁海县为主的浙江东部地区存在的一种婚俗，得名于当地嫁女时嫁妆从床铺家具到针线头面一应俱全、迎送嫁妆的队伍绵延十里；婚俗始于南宋，盛于明清时期。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/shili-hongzhuang.jpg",
+            "caption": "十里红妆与宁绍婚俗"
           },
           {
             "type": "paragraph",
@@ -487,6 +595,7 @@
       "contentRole": "文化历史"
     },
     {
+      "id": "71261568-8116-57fb-8221-e32f8dbbfe77",
       "key": "tang-guqin-tradition",
       "name": "唐代古琴与“唐圆”",
       "introduction": {
@@ -495,6 +604,11 @@
           {
             "type": "paragraph",
             "text": "唐代古琴是传世古琴中年代最早且可信的一批，也是中国斫琴传统里的稀世珍宝；“唐圆”则是古琴形制里流传至今的一句老话。"
+          },
+          {
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/tang-guqin-tradition.jpg",
+            "caption": "A picture of the guqin Lingfeng Shenyun (靈峰神韻) in the Zhongni form"
           },
           {
             "type": "paragraph",

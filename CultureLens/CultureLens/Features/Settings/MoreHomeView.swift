@@ -74,15 +74,15 @@ private extension MoreHomeView {
     Destination(
       id: "history",
       title: "足迹",
-      message: "在地图与时间线里回看扫描记录。",
+      message: "在地图上回看扫描记录与兴趣点。",
       systemImage: "map",
       route: .footprint,
       accessibilityID: "more.openHistory"
     ),
     Destination(
       id: "review",
-      title: "文化回顾",
-      message: "把相近时间与地点的扫描收成一次参观汇总。",
+      title: "回顾",
+      message: "按时间线回看扫描，或把相近识别收成参观汇总。",
       systemImage: "book.pages",
       route: .visitTrips,
       accessibilityID: "more.openReview"

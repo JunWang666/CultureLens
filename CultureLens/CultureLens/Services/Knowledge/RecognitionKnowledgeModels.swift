@@ -361,12 +361,25 @@ nonisolated struct KnowledgeCandidateContext: Encodable, Sendable {
     case nearbyContexts = "nearby_contexts"
   }
 
-  /// `nearby_contexts` carries `omitempty` on the Go side; skip it when empty.
+  /// Drop introduction bodies (and nearby contexts) when the prompt would
+  /// otherwise include too many nearby attractions.
+  func omittingIntroductions() -> KnowledgeCandidateContext {
+    KnowledgeCandidateContext(
+      id: id,
+      name: name,
+      introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+      nearbyContexts: []
+    )
+  }
+
+  /// `nearby_contexts` / empty `introduction` omit like Go `omitempty`.
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(id, forKey: .id)
     try container.encode(name, forKey: .name)
-    try container.encode(introduction, forKey: .introduction)
+    if !introduction.blocks.isEmpty {
+      try container.encode(introduction, forKey: .introduction)
+    }
     if !nearbyContexts.isEmpty {
       try container.encode(nearbyContexts, forKey: .nearbyContexts)
     }

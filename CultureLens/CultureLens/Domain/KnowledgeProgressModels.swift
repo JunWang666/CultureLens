@@ -109,7 +109,7 @@ extension Array where Element == KnowledgeCitation {
 }
 
 /// Knowledge-aware cultural background constrained to knowledge-base fragments.
-nonisolated struct PersonalizedExplanation: Hashable, Sendable {
+nonisolated struct PersonalizedExplanation: Codable, Hashable, Sendable {
   let markdown: String
   let citations: [KnowledgeCitation]
   let modelIdentifier: String

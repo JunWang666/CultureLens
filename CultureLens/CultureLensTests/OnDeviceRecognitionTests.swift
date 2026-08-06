@@ -297,6 +297,98 @@ struct OnDeviceRecognitionTests {
     #expect(set.elements[0].nearbyContexts.map(\.key) == ["i1"])
   }
 
+  @Test func recognitionKnowledgeIncludesAllAttractionsWithinOneKilometer() throws {
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    // ~0.0005° longitude ≈ 48 m at lat 30; 15 attractions stay well inside 1 km.
+    let count = 15
+    let elements = (1...count).map {
+      KnowledgePack.Element(
+        key: "att-\($0)",
+        name: "景点\($0)",
+        introduction: empty
+      )
+    }
+    let attractions = (1...count).map {
+      KnowledgePack.Attraction(key: "att-\($0)", name: "景点\($0)")
+    }
+    let intros: [KnowledgePack.IntroductionRecord] = (1...count).map {
+      KnowledgePack.IntroductionRecord(
+        key: "i\($0)",
+        name: "介绍\($0)",
+        introduction: empty,
+        culturalElementKey: "att-\($0)",
+        attractionKey: "att-\($0)",
+        latitude: 30.0,
+        longitude: 120.0 + Double($0) * 0.0005
+      )
+    }
+    // ~1.1 km east — must be excluded from recognition candidates.
+    let farElements = [
+      KnowledgePack.Element(key: "att-far", name: "远处", introduction: empty)
+    ]
+    let farAttractions = [
+      KnowledgePack.Attraction(key: "att-far", name: "远处")
+    ]
+    let farIntros = [
+      KnowledgePack.IntroductionRecord(
+        key: "i-far",
+        name: "远处介绍",
+        introduction: empty,
+        culturalElementKey: "att-far",
+        attractionKey: "att-far",
+        latitude: 30.0,
+        longitude: 120.012
+      )
+    ]
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "dense-1km",
+        elements: elements + farElements,
+        attractions: attractions + farAttractions,
+        relations: [],
+        introductions: intros + farIntros
+      )
+    )
+
+    let set = try store.recognitionKnowledge(latitude: 30.0, longitude: 120.0, limit: 12)
+    #expect(set.attractionCandidates.count == count)
+    #expect(set.attractionCandidates.map(\.key) == (1...count).map { "att-\($0)" })
+    #expect(!set.attractionCandidates.contains { $0.key == "att-far" })
+    #expect(Set(set.elements.map(\.key)) == Set((1...count).map { "att-\($0)" }))
+    #expect(set.attractionCandidates.count > KnowledgeStore.introductionOmissionAttractionThreshold)
+  }
+
+  @Test func knowledgeCandidateContextOmitsIntroductionBodiesWhenAsked() throws {
+    let candidate = KnowledgeCandidateContext(
+      id: "1",
+      name: "断桥",
+      introduction: doc(["断桥残雪的介绍。"]),
+      nearbyContexts: [
+        PlaceKnowledgeContext(
+          introductionId: "i1",
+          introductionName: "现场",
+          introduction: doc(["现场长文。"]),
+          attractionId: "a1",
+          attractionName: "断桥"
+        )
+      ]
+    )
+    let stripped = candidate.omittingIntroductions()
+    #expect(stripped.id == "1")
+    #expect(stripped.name == "断桥")
+    #expect(stripped.introduction.blocks.isEmpty)
+    #expect(stripped.nearbyContexts.isEmpty)
+
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys]
+    let json = String(decoding: try encoder.encode(stripped), as: UTF8.self)
+    #expect(json == #"{"id":"1","name":"断桥"}"#)
+
+    let withIntro = String(decoding: try encoder.encode(candidate), as: UTF8.self)
+    #expect(withIntro.contains("\"introduction\""))
+    #expect(withIntro.contains("\"nearby_contexts\""))
+  }
+
   // MARK: - BFS graph (postgres.go recognitionGraph)
 
   @Test func recognitionGraphRespectsDepthCap() throws {

@@ -1088,6 +1088,52 @@ struct CultureLensTests {
     #expect(Set(points.map(\.latitude)) == [30.3905, 30.1628])
   }
 
+  @Test func attractionPointNavigatesToSightRootInsteadOfFirstContextIntroduction() throws {
+    let emptyIntroduction = RichTextDocument(schemaVersion: 1, blocks: [])
+    let sightKey = "three-pools-mirroring-moon"
+    let contextKey = "west-lake-moon-viewing"
+    let store = KnowledgeStore(
+      pack: KnowledgePack(
+        version: "poi-navigation-root-test",
+        elements: [
+          KnowledgePack.Element(
+            key: sightKey,
+            name: "三潭印月",
+            introduction: emptyIntroduction,
+            contentRole: ContentRole.sight.rawValue
+          ),
+          KnowledgePack.Element(
+            key: contextKey,
+            name: "西湖月景与倒影营造",
+            introduction: emptyIntroduction,
+            contentRole: ContentRole.history.rawValue
+          ),
+        ],
+        attractions: [
+          KnowledgePack.Attraction(key: sightKey, name: "三潭印月")
+        ],
+        relations: [],
+        introductions: [
+          KnowledgePack.IntroductionRecord(
+            key: "three-pools.context-first",
+            name: "三潭印月的光与倒影",
+            introduction: emptyIntroduction,
+            culturalElementKey: contextKey,
+            attractionKey: sightKey,
+            latitude: 30.240833,
+            longitude: 120.140278
+          )
+        ]
+      )
+    )
+
+    let point = try #require(store.attractionPoints().first)
+    let elementID = try #require(point.culturalElementId)
+    #expect(point.name == "三潭印月")
+    #expect(elementID == DeterministicID.culturalElement(sightKey))
+    #expect(store.element(id: elementID)?.name == "三潭印月")
+  }
+
   // MARK: - Recognition mapping with shared attraction/element keys
 
   /// Pack data intentionally shares key strings between an attraction and its

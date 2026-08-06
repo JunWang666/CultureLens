@@ -14,13 +14,27 @@ struct ScanExplanationSectionView: View {
   @State private var explanationState: ExplanationLoadState = .idle
   @State private var explanationStreamSource: GrowingMarkdownSource?
   @State private var knowledgeContextSummary: LocalizedStringKey = "从你的文化图谱调整解释深度"
+  @State private var operationNotice: String?
   private let explanationService = CultureExplanationService.live()
 
   var body: some View {
     if !isDemo {
       content
         .task(id: result.id) {
-          await loadExplanation()
+          await loadExplanation(forceRefresh: false)
+        }
+        .alert(
+          "讲解操作未完成",
+          isPresented: Binding(
+            get: { operationNotice != nil },
+            set: { if !$0 { operationNotice = nil } }
+          )
+        ) {
+          Button("好", role: .cancel) {
+            operationNotice = nil
+          }
+        } message: {
+          Text(operationNotice ?? "")
         }
     }
   }
@@ -53,21 +67,29 @@ struct ScanExplanationSectionView: View {
     case .loaded(let explanation):
       PersonalizedExplanationView(
         explanation: explanation,
-        knowledgeContextSummary: knowledgeContextSummary
+        knowledgeContextSummary: knowledgeContextSummary,
+        onRegenerate: {
+          Task { await loadExplanation(forceRefresh: true) }
+        }
+      )
+    case .regenerating(let explanation):
+      PersonalizedExplanationView(
+        explanation: explanation,
+        knowledgeContextSummary: knowledgeContextSummary,
+        isRegenerating: true
       )
     case .partial(let explanation, let message):
       VStack(alignment: .leading, spacing: 12) {
         PersonalizedExplanationView(
           explanation: explanation,
-          knowledgeContextSummary: knowledgeContextSummary
+          knowledgeContextSummary: knowledgeContextSummary,
+          onRegenerate: {
+            Task { await loadExplanation(forceRefresh: true) }
+          }
         )
         Label("连接中断，已保留收到的内容。\(message)", systemImage: "wifi.exclamationmark")
           .font(.footnote)
           .foregroundStyle(CultureTheme.cinnabar)
-        Button("重新生成") {
-          Task { await loadExplanation() }
-        }
-        .buttonStyle(.bordered)
       }
     case .failed(let message):
       VStack(alignment: .leading, spacing: 10) {
@@ -78,7 +100,7 @@ struct ScanExplanationSectionView: View {
           .font(.footnote)
           .foregroundStyle(CultureTheme.inkSecondary)
         Button("重试") {
-          Task { await loadExplanation() }
+          Task { await loadExplanation(forceRefresh: false) }
         }
         .buttonStyle(.bordered)
       }
@@ -88,13 +110,30 @@ struct ScanExplanationSectionView: View {
   }
 
   @MainActor
-  private func loadExplanation() async {
+  private func loadExplanation(forceRefresh: Bool) async {
+    let previousExplanation = forceRefresh ? currentExplanation : nil
     explanationStreamSource?.finish()
+    operationNotice = nil
 
     let userKnowledgeStates = knowledgeProgressStore.userKnowledgeStates(
       knowledgeStore: KnowledgeStore.shared
     )
     knowledgeContextSummary = knowledgeContextSummary(for: userKnowledgeStates)
+
+    let storageKey = CultureExplanationStore.key(
+      result: result,
+      siteContext: siteContext,
+      language: AppLanguageStore.currentLanguage()
+    )
+    if !forceRefresh,
+      let stored = await CultureExplanationStore.shared.explanation(for: storageKey)
+    {
+      guard !Task.isCancelled else { return }
+      explanationStreamSource = nil
+      explanationState = .loaded(stored)
+      onExplained?()
+      return
+    }
 
     guard let explanationService else {
       explanationState = .failed(String(localized: "讲解服务暂不可用。"))
@@ -103,7 +142,11 @@ struct ScanExplanationSectionView: View {
 
     let streamSource = GrowingMarkdownSource()
     explanationStreamSource = streamSource
-    explanationState = .loading(isThinking: false)
+    if let previousExplanation {
+      explanationState = .regenerating(previousExplanation)
+    } else {
+      explanationState = .loading(isThinking: false)
+    }
     var latestBody = ""
     var modelIdentifier = LLMGatewayConfig.chat.model
 
@@ -116,27 +159,33 @@ struct ScanExplanationSectionView: View {
         try Task.checkCancellation()
         switch event {
         case .thinking:
-          if latestBody.isEmpty {
+          if latestBody.isEmpty, previousExplanation == nil {
             explanationState = .loading(isThinking: true)
           }
         case .delta(let snapshot):
           let body = CultureChatService.displayBody(from: snapshot)
           guard !body.isEmpty else { continue }
           latestBody = body
-          explanationState = .streaming
-          streamSource.yield(body)
+          if previousExplanation == nil {
+            explanationState = .streaming
+            streamSource.yield(body)
+          }
         case .finished(let model, let content):
           modelIdentifier = model
           let parsed = CultureChatService.parseAnswer(content)
           latestBody = parsed.body
           streamSource.finish()
-          explanationState = .loaded(
-            PersonalizedExplanation(
-              markdown: parsed.body,
-              citations: parsed.citations,
-              modelIdentifier: model
-            )
+          let explanation = PersonalizedExplanation(
+            markdown: parsed.body,
+            citations: parsed.citations,
+            modelIdentifier: model
           )
+          explanationState = .loaded(explanation)
+          do {
+            try await CultureExplanationStore.shared.save(explanation, for: storageKey)
+          } catch {
+            operationNotice = String(localized: "讲解已生成，但未能保存到本地。")
+          }
         }
       }
 
@@ -144,7 +193,10 @@ struct ScanExplanationSectionView: View {
     } catch {
       streamSource.finish()
       guard !Task.isCancelled else { return }
-      if !latestBody.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+      if let previousExplanation {
+        explanationState = .loaded(previousExplanation)
+        operationNotice = String(localized: "重新生成失败，已保留原讲解。")
+      } else if !latestBody.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
         explanationState = .partial(
           PersonalizedExplanation(
             markdown: latestBody,
@@ -156,6 +208,16 @@ struct ScanExplanationSectionView: View {
       } else {
         explanationState = .failed(error.localizedDescription)
       }
+    }
+  }
+
+  private var currentExplanation: PersonalizedExplanation? {
+    switch explanationState {
+    case .loaded(let explanation), .regenerating(let explanation),
+      .partial(let explanation, _):
+      explanation
+    case .idle, .loading, .streaming, .failed:
+      nil
     }
   }
 

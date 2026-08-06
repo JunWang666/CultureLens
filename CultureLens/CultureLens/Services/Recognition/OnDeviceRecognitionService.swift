@@ -50,7 +50,14 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     // if a catalog-only hit is later rewritten through the same session.
     idSession.registerElements(store.sightElements.map(\.id))
 
-    let promptKnowledge = Self.withShortElementIDs(knowledgeCandidates, session: idSession)
+    let omitIntroductions =
+      knowledge.attractionCandidates.count
+      > KnowledgeStore.introductionOmissionAttractionThreshold
+    let promptKnowledge = Self.withShortElementIDs(
+      knowledgeCandidates,
+      session: idSession,
+      omitIntroductions: omitIntroductions
+    )
     let promptAttractions = Self.withShortAttractionIDs(
       attractionCandidates, session: idSession)
 
@@ -158,18 +165,20 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
 
   private static func withShortElementIDs(
     _ candidates: [KnowledgeCandidateContext],
-    session: LLMIDSession
+    session: LLMIDSession,
+    omitIntroductions: Bool = false
   ) -> [KnowledgeCandidateContext] {
     candidates.map { candidate in
       let short =
         UUID(uuidString: candidate.id).flatMap { session.shortID(forElement: $0) }
         ?? candidate.id
-      return KnowledgeCandidateContext(
+      let remapped = KnowledgeCandidateContext(
         id: short,
         name: candidate.name,
         introduction: candidate.introduction,
         nearbyContexts: candidate.nearbyContexts
       )
+      return omitIntroductions ? remapped.omittingIntroductions() : remapped
     }
   }
 

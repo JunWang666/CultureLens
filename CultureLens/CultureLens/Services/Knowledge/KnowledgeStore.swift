@@ -59,12 +59,17 @@ nonisolated struct KnowledgeStore: Sendable {
   static let defaultCandidateLimit = 12
   static let maximumObjectLimit = 48
   static let maximumGraphExpansionNodes = 48
+  /// Explore / content nearby search default (not recognition).
   static let defaultRadiusMeters = 50_000.0
+  /// Recognition only considers on-site introductions within this radius.
+  /// Every unique attraction inside the radius is passed to the vision model.
+  static let recognitionRadiusMeters = 1_000.0
   /// Pull unbound cultural nodes into the recognition prompt only when fewer
   /// than this many nearby attractions are available.
   static let minimumAttractionsBeforeCulturalFill = 3
-  /// Cap nearby attraction candidates sent to the model (nearest first).
-  static let maximumAttractionCandidates = 8
+  /// When more than this many nearby attractions are sent, prompt assembly
+  /// omits introduction / nearby_contexts text to keep the payload small.
+  static let introductionOmissionAttractionThreshold = 10
 
   let pack: KnowledgePack
 
@@ -591,10 +596,16 @@ nonisolated struct KnowledgeStore: Sendable {
       let attraction = attractionsByID[record.attractionId]
       let name = attraction?.name ?? record.name
       guard !name.isEmpty else { return nil }
+      // A physical attraction can have many introduction records at the same
+      // coordinate, including history/context elements. The map marker names
+      // the attraction, so its navigation target must be the scannable sight
+      // that shares the attraction slug rather than whichever introduction
+      // happened to be encountered first.
       let culturalElementId =
-        elementsByID[record.culturalElementId] != nil
-        ? record.culturalElementId
-        : nil
+        sightElementID(forAttraction: record.attractionId)
+        ?? (elementsByID[record.culturalElementId] != nil
+          ? record.culturalElementId
+          : nil)
       return AttractionPoint(
         attractionId: record.attractionId,
         key: attraction?.key,
@@ -1110,7 +1121,7 @@ nonisolated struct KnowledgeStore: Sendable {
       nearby = try nearbyIntroductions(
         latitude: latitude,
         longitude: longitude,
-        radiusMeters: Self.defaultRadiusMeters,
+        radiusMeters: Self.recognitionRadiusMeters,
         limit: max(Self.maximumObjectLimit, pack.introductions.count)
       ).introductions
     }
@@ -1140,7 +1151,6 @@ nonisolated struct KnowledgeStore: Sendable {
         .insert(introduction.culturalElementId)
 
       guard seenAttractions.insert(introduction.attractionId).inserted else { continue }
-      guard attractionCandidates.count < Self.maximumAttractionCandidates else { continue }
       let rootID = attractionRoots[introduction.attractionId] ?? preferredRoot
       guard let rootID else { continue }
       let rootElement = elementsByID[rootID]
@@ -1236,9 +1246,9 @@ nonisolated struct KnowledgeStore: Sendable {
   /// History nodes may appear in nearby_contexts / graph after binding, but the
   /// model must not cite them as the primary cultural element id.
   /// Priority:
-  /// 1. Sight roots for selected nearby attractions
+  /// 1. Sight roots for selected nearby attractions (uncapped — all within 1 km)
   /// 2. Other sight elements bound via introductions to those attractions
-  /// 3. Only when nearby attractions < 3: remaining sight catalog by name
+  /// 3. Only when nearby attractions < 3: remaining sight catalog by name (capped)
   private func prioritizedRecognitionIDs(
     nearby: [NearbyAttractionIntroduction],
     attractionRoots: [UUID: UUID],
@@ -1259,17 +1269,14 @@ nonisolated struct KnowledgeStore: Sendable {
     for introduction in selectedNearby {
       if let id = attractionRoots[introduction.attractionId] {
         appendSight(id)
-        if prioritizedIDs.count >= limit { return prioritizedIDs }
       }
       // Entity-as-attraction: inject the sight that shares the attraction slug.
       if let sightID = sightElementID(forAttraction: introduction.attractionId) {
         appendSight(sightID)
-        if prioritizedIDs.count >= limit { return prioritizedIDs }
       }
     }
     for introduction in selectedNearby {
       appendSight(introduction.culturalElementId)
-      if prioritizedIDs.count >= limit { return prioritizedIDs }
     }
 
     guard allowCulturalCatalogFill else { return prioritizedIDs }

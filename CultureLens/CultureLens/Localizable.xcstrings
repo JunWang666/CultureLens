@@ -38,6 +38,22 @@
         }
       }
     },
+    "\n另有 %lld 个文件导入失败。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n%lld more files failed to import."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n另有 %lld 个文件导入失败。"
+          }
+        }
+      }
+    },
     "\n可确认的附近景点候选 JSON：" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -106,192 +122,6 @@
         }
       }
     },
-    "- 从关系图选择一个相邻概念继续探索。" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- Pick a neighboring concept from the relation graph to explore next."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- 从关系图选择一个相邻概念继续探索。"
-          }
-        }
-      }
-    },
-    "- 继续观察或追问它与\\(relatedNames)的关系。" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- 继续观察或追问它与\\(relatedNames)的关系。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- 继续观察或追问它与\\(relatedNames)的关系。"
-          }
-        }
-      }
-    },
-    "（附图片）" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(with image)"
-          }
-        }
-      }
-    },
-    ")”的现场介绍直接关联到当前景点。" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ")”的现场介绍直接关联到当前景点。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ")”的现场介绍直接关联到当前景点。"
-          }
-        }
-      }
-    },
-    "《四库全书》与皇家藏书楼" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "《四库全书》与皇家藏书楼"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "《四库全书》与皇家藏书楼"
-          }
-        }
-      }
-    },
-    "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
-          }
-        }
-      }
-    },
-    "/ %lld 个节点" : {
-
-    },
-    "/%lld" : {
-
-    },
-    "\\(Int(recommendation.distanceMeters.rounded())) 米" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(Int(recommendation.distanceMeters.rounded())) 米"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(Int(recommendation.distanceMeters.rounded())) 米"
-          }
-        }
-      }
-    },
-    "\\(node.hop) 跳" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(node.hop) 跳"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(node.hop) 跳"
-          }
-        }
-      }
-    },
-    "\\(object.canonicalName)可缩放有向文化知识图谱" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)可缩放有向文化知识图谱"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)可缩放有向文化知识图谱"
-          }
-        }
-      }
-    },
-    "\\(object.canonicalName)有向文化知识图谱" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)有向文化知识图谱"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)有向文化知识图谱"
-          }
-        }
-      }
-    },
-    "\\(object.canonicalName)示意图" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)示意图"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "\\(object.canonicalName)示意图"
-          }
-        }
-      }
-    },
     "%.1f 公里" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -331,6 +161,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ km"
+          }
+        }
+      }
+    },
+    "%@关系" : {
+
+    },
+    "%@可缩放有向文化知识图谱" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoomable directed cultural knowledge graph of %@"
+          }
+        }
+      }
+    },
+    "%@有向文化知识图谱" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Directed cultural knowledge graph of %@"
+          }
+        }
+      }
+    },
+    "%@示意图" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagram of %@"
           }
         }
       }
@@ -384,39 +247,6 @@
         }
       }
     },
-    "%@关系" : {
-
-    },
-    "%@可缩放有向文化知识图谱" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zoomable directed cultural knowledge graph of %@"
-          }
-        }
-      }
-    },
-    "%@有向文化知识图谱" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Directed cultural knowledge graph of %@"
-          }
-        }
-      }
-    },
-    "%@示意图" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diagram of %@"
-          }
-        }
-      }
-    },
     "%lld" : {
 
     },
@@ -453,6 +283,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld relations"
+          }
+        }
+      }
+    },
+    "%lld 分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分钟"
+          }
+        }
+      }
+    },
+    "%lld 小时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld hr"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 小时"
+          }
+        }
+      }
+    },
+    "%lld 小时 %lld 分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld hr %2$lld min"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld 小时 %2$lld 分钟"
           }
         }
       }
@@ -540,6 +418,63 @@
         }
       }
     },
+    ")”的现场介绍直接关联到当前景点。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ")”的现场介绍直接关联到当前景点。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ")”的现场介绍直接关联到当前景点。"
+          }
+        }
+      }
+    },
+    "- 从关系图选择一个相邻概念继续探索。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Pick a neighboring concept from the relation graph to explore next."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- 从关系图选择一个相邻概念继续探索。"
+          }
+        }
+      }
+    },
+    "- 继续观察或追问它与\\(relatedNames)的关系。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- 继续观察或追问它与\\(relatedNames)的关系。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- 继续观察或追问它与\\(relatedNames)的关系。"
+          }
+        }
+      }
+    },
+    "/ %lld 个节点" : {
+
+    },
+    "/%lld" : {
+
+    },
     "3D 俯视" : {
       "localizations" : {
         "en" : {
@@ -556,6 +491,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CultureLens"
+          }
+        }
+      }
+    },
+    "CultureLens 只读取你选择的路线，并把副本保存在 App 内；不会修改 Fitness 或健康中的原记录。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CultureLens only reads the routes you select and saves copies in the app. It never changes the original Fitness or Health records."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CultureLens 只读取你选择的路线，并把副本保存在 App 内；不会修改 Fitness 或健康中的原记录。"
           }
         }
       }
@@ -577,8 +528,147 @@
         }
       }
     },
+    "GPX 中没有可绘制的运动轨迹。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This GPX file contains no drawable workout track."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPX 中没有可绘制的运动轨迹。"
+          }
+        }
+      }
+    },
     "NEW BADGE" : {
 
+    },
+    "\\(Int(recommendation.distanceMeters.rounded())) 米" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(Int(recommendation.distanceMeters.rounded())) 米"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(Int(recommendation.distanceMeters.rounded())) 米"
+          }
+        }
+      }
+    },
+    "\\(node.hop) 跳" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(node.hop) 跳"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(node.hop) 跳"
+          }
+        }
+      }
+    },
+    "\\(object.canonicalName)可缩放有向文化知识图谱" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)可缩放有向文化知识图谱"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)可缩放有向文化知识图谱"
+          }
+        }
+      }
+    },
+    "\\(object.canonicalName)有向文化知识图谱" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)有向文化知识图谱"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)有向文化知识图谱"
+          }
+        }
+      }
+    },
+    "\\(object.canonicalName)示意图" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)示意图"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\\(object.canonicalName)示意图"
+          }
+        }
+      }
+    },
+    "·" : {
+
+    },
+    "《四库全书》与皇家藏书楼" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "《四库全书》与皇家藏书楼"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "《四库全书》与皇家藏书楼"
+          }
+        }
+      }
+    },
+    "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「文化背景」用 2–4 个短段落，总长度尽量控制在 320 个汉字内；「下一步建议」每条尽量不超过 40 个汉字。"
+          }
+        }
+      }
     },
     "一次参观里，识别被聚合成可回看的文化路径。" : {
       "localizations" : {
@@ -870,7 +960,6 @@
       }
     },
     "主题探索" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -983,6 +1072,39 @@
         }
       }
     },
+    "从 Fitness 导入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import from Fitness"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从 Fitness 导入"
+          }
+        }
+      }
+    },
+    "从 Fitness 或 GPX 文件中选择轨迹" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose tracks from Fitness or GPX files"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从 Fitness 或 GPX 文件中选择轨迹"
+          }
+        }
+      }
+    },
     "从%@出发的文化脉络阶梯" : {
 
     },
@@ -1044,6 +1166,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "从制范到合范、浇铸和修整，器物保留了工艺流程的痕迹。细看接缝与纹饰，可以反向理解制作方法。"
+          }
+        }
+      }
+    },
+    "从文件中选择 GPX 轨迹" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose GPX tracks from Files"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从文件中选择 GPX 轨迹"
+          }
+        }
+      }
+    },
+    "从文件导入 GPX" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import GPX from Files"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从文件导入 GPX"
           }
         }
       }
@@ -1204,34 +1359,6 @@
         }
       }
     },
-    "位置：\\(record.placeName ?? " : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "位置：\\(record.placeName ?? "
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "位置：\\(record.placeName ?? "
-          }
-        }
-      }
-    },
-    "位置：%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location: %@"
-          }
-        }
-      }
-    },
     "位置匹配到 \\(knowledge.nearbyContextCount) 条景点现场介绍，整理出 \\(knowledge.attractionCandidates.count) 个附近景点候选；文化元素仅作为解释知识。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1265,6 +1392,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "位置没有缩小当前 3 条内置知识库候选，样例仍按视觉特征给出结果。"
+          }
+        }
+      }
+    },
+    "位置：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location: %@"
+          }
+        }
+      }
+    },
+    "位置：\\(record.placeName ?? " : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置：\\(record.placeName ?? "
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置：\\(record.placeName ?? "
           }
         }
       }
@@ -1333,6 +1488,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "使用位置"
+          }
+        }
+      }
+    },
+    "使用最新文化图谱重新生成并替换当前讲解" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regenerate and replace this explanation using your latest culture graph"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用最新文化图谱重新生成并替换当前讲解"
           }
         }
       }
@@ -1473,6 +1644,16 @@
         }
       }
     },
+    "全屏查看%@文化知识图谱" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View the cultural knowledge graph of %@ full screen"
+          }
+        }
+      }
+    },
     "全屏查看\\(object.canonicalName)文化知识图谱" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1486,16 +1667,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "全屏查看\\(object.canonicalName)文化知识图谱"
-          }
-        }
-      }
-    },
-    "全屏查看%@文化知识图谱" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "View the cultural knowledge graph of %@ full screen"
           }
         }
       }
@@ -1687,23 +1858,6 @@
         }
       }
     },
-    "最终确认" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Final confirmation"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最终确认"
-          }
-        }
-      }
-    },
     "准备扫描" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1748,6 +1902,22 @@
         }
       }
     },
+    "划船" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rowing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "划船"
+          }
+        }
+      }
+    },
     "列表" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1775,6 +1945,22 @@
         }
       }
     },
+    "删除“%@”" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete “%@”"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除“%@”"
+          }
+        }
+      }
+    },
     "删除记录" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1788,6 +1974,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "删除记录"
+          }
+        }
+      }
+    },
+    "删除轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Track"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除轨迹"
+          }
+        }
+      }
+    },
+    "删除运动轨迹？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete workout track?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除运动轨迹？"
           }
         }
       }
@@ -1856,6 +2074,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "制度与语境"
+          }
+        }
+      }
+    },
+    "刷新讲解" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh Explanation"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新讲解"
           }
         }
       }
@@ -1948,6 +2183,22 @@
         }
       }
     },
+    "单板滑雪" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snowboarding"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "单板滑雪"
+          }
+        }
+      }
+    },
     "卫星地图" : {
       "localizations" : {
         "en" : {
@@ -2019,6 +2270,33 @@
         }
       }
     },
+    "历史扫描地图，包含 %lld 个位置记录" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map of past scans with %lld location records"
+          }
+        }
+      }
+    },
+    "历史扫描地图，包含 %lld 个位置记录和 %lld 条运动轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map of past scans with %1$lld location records and %2$lld workout tracks"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "历史扫描地图，包含 %1$lld 个位置记录和 %2$lld 条运动轨迹"
+          }
+        }
+      }
+    },
     "历史扫描地图，包含 \\(locatedRecords.count) 个位置记录" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2032,16 +2310,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "历史扫描地图，包含 \\(locatedRecords.count) 个位置记录"
-          }
-        }
-      }
-    },
-    "历史扫描地图，包含 %lld 个位置记录" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Map of past scans with %lld location records"
           }
         }
       }
@@ -2065,6 +2333,22 @@
     },
     "双击切换显示" : {
 
+    },
+    "双击切换选择状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to toggle selection"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "双击切换选择状态"
+          }
+        }
+      }
     },
     "双指缩放，单指拖动画布" : {
       "extractionState" : "manual",
@@ -2211,6 +2495,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "受规制于"
+          }
+        }
+      }
+    },
+    "只会显示当前健康权限可读取、并且带 GPS 路线的运动记录。你也可以在健康 App 中检查 CultureLens 的访问权限。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only workouts with GPS routes that your current Health permissions allow are shown. You can also check CultureLens access in the Health app."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "只会显示当前健康权限可读取、并且带 GPS 路线的运动记录。你也可以在健康 App 中检查 CultureLens 的访问权限。"
           }
         }
       }
@@ -2433,6 +2733,22 @@
         }
       }
     },
+    "回顾方式" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review Mode"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回顾方式"
+          }
+        }
+      }
+    },
     "围绕「%@」的参观" : {
       "localizations" : {
         "en" : {
@@ -2504,6 +2820,23 @@
         }
       }
     },
+    "图片" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图片"
+          }
+        }
+      }
+    },
     "图片中的朱红色矩形框由应用添加，用来标记用户要识别的目标。请只识别框内对象，并使用框外完整画面理解场景、尺度和相邻结构。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2517,6 +2850,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "图片中的朱红色矩形框由应用添加，用来标记用户要识别的目标。请只识别框内对象，并使用框外完整画面理解场景、尺度和相邻结构。"
+          }
+        }
+      }
+    },
+    "图片内容为空。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The image is empty."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图片内容为空。"
           }
         }
       }
@@ -2544,6 +2893,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Image question"
+          }
+        }
+      }
+    },
+    "图片服务返回了无效响应。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The image service returned an invalid response."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图片服务返回了无效响应。"
+          }
+        }
+      }
+    },
+    "图片预览准备失败，请稍后重试。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't prepare the image preview. Please try again."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图片预览准备失败，请稍后重试。"
           }
         }
       }
@@ -2646,23 +3028,6 @@
         }
       }
     },
-    "在图片上画一条斜线即可框选，不选则识别整张图片" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Draw a diagonal on the image to select an area; with no selection, the whole image is recognized"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在图片上画一条斜线即可框选，不选则识别整张图片"
-          }
-        }
-      }
-    },
     "在图片上画一条斜线即可框选…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2680,7 +3045,57 @@
         }
       }
     },
+    "在图片上画一条斜线即可框选，不选则识别整张图片" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draw a diagonal on the image to select an area; with no selection, the whole image is recognized"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在图片上画一条斜线即可框选，不选则识别整张图片"
+          }
+        }
+      }
+    },
+    "在地图上回看扫描记录与兴趣点。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisit your scans and points of interest on the map."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在地图上回看扫描记录与兴趣点。"
+          }
+        }
+      }
+    },
+    "在地图上显示" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show on Map"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在地图上显示"
+          }
+        }
+      }
+    },
     "在地图与时间线里回看扫描记录。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2726,6 +3141,55 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leave a cultural footprint in your first city"
+          }
+        }
+      }
+    },
+    "在线图片、AI 文化讲解和即时译文会保存在本地，切换页面时无需重新加载。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Online images, AI culture explanations, and instant translations are saved locally so switching pages does not reload them."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在线图片、AI 文化讲解和即时译文会保存在本地，切换页面时无需重新加载。"
+          }
+        }
+      }
+    },
+    "在线图片和即时译文会缓存在本地；AI 文化讲解会作为内容持久保存。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Online images and instant translations are cached locally; AI culture explanations are saved as persistent content."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在线图片和即时译文会缓存在本地；AI 文化讲解会作为内容持久保存。"
+          }
+        }
+      }
+    },
+    "在线图片和即时译文缓存会被删除；AI 讲解、扫描历史、问答记录、文化图谱和资源包不会受影响。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cached online images and instant translations will be deleted. AI explanations, scan history, chat records, the culture graph, and knowledge packs will not be affected."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在线图片和即时译文缓存会被删除；AI 讲解、扫描历史、问答记录、文化图谱和资源包不会受影响。"
           }
         }
       }
@@ -3116,6 +3580,54 @@
         }
       }
     },
+    "导入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入"
+          }
+        }
+      }
+    },
+    "导入的运动轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imported Workout"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入的运动轨迹"
+          }
+        }
+      }
+    },
+    "导入运动轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Workout Track"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入运动轨迹"
+          }
+        }
+      }
+    },
     "封面故事" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3274,6 +3786,22 @@
         }
       }
     },
+    "已从 Fitness 保存 %lld 条运动轨迹，共 %lld 个轨迹点。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved %1$lld workout tracks from Fitness with %2$lld track points."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已从 Fitness 保存 %1$lld 条运动轨迹，共 %2$lld 个轨迹点。"
+          }
+        }
+      }
+    },
     "已保存" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3287,6 +3815,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已保存"
+          }
+        }
+      }
+    },
+    "已保存 %lld 条运动轨迹，共 %lld 个轨迹点。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved %1$lld workout tracks with %2$lld track points."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "已保存 %1$lld 条运动轨迹，共 %2$lld 个轨迹点。"
           }
         }
       }
@@ -3325,23 +3869,6 @@
         }
       }
     },
-    "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层"
-          }
-        }
-      }
-    },
     "已加入 %lld 个，展示 %lld 个，向外 3 层" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3355,6 +3882,23 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "已加入 %1$lld 个，展示 %2$lld 个，向外 3 层"
+          }
+        }
+      }
+    },
+    "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已加入 \\(progressStore.graphNodeIDs.count) 个 · 展示 \\(snapshot.nodes.count) 个 · 向外 3 层"
           }
         }
       }
@@ -3400,6 +3944,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Completed"
+          }
+        }
+      }
+    },
+    "已导入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imported"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已导入"
+          }
+        }
+      }
+    },
+    "已导入轨迹（%lld）" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imported Tracks (%lld)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已导入轨迹（%lld）"
           }
         }
       }
@@ -3503,6 +4079,32 @@
         }
       }
     },
+    "已结合文化图谱中 %lld 个接触过的节点补齐基础" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fills in the basics from %lld encountered nodes in your culture graph"
+          }
+        }
+      }
+    },
+    "已结合文化图谱中 %lld 个节点，其中 %lld 个已理解或掌握" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Based on %lld nodes in your culture graph, %lld understood or mastered"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "已结合文化图谱中 %1$lld 个节点，其中 %2$lld 个已理解或掌握"
+          }
+        }
+      }
+    },
     "已结合文化图谱中 \\(states.count) 个接触过的节点补齐基础" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3537,28 +4139,19 @@
         }
       }
     },
-    "已结合文化图谱中 %lld 个接触过的节点补齐基础" : {
+    "已缓存的在线图片、AI 讲解和即时译文会被删除；扫描历史、问答记录、文化图谱和资源包不会受影响。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fills in the basics from %lld encountered nodes in your culture graph"
-          }
-        }
-      }
-    },
-    "已结合文化图谱中 %lld 个节点，其中 %lld 个已理解或掌握" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Based on %lld nodes in your culture graph, %lld understood or mastered"
+            "value" : "Cached online images, AI explanations, and instant translations will be deleted. Scan history, chat records, the culture graph, and knowledge packs will not be affected."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "已结合文化图谱中 %1$lld 个节点，其中 %2$lld 个已理解或掌握"
+            "state" : "translated",
+            "value" : "已缓存的在线图片、AI 讲解和即时译文会被删除；扫描历史、问答记录、文化图谱和资源包不会受影响。"
           }
         }
       }
@@ -3613,6 +4206,17 @@
         }
       }
     },
+    "已识别 · %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recognized · %@"
+          }
+        }
+      }
+    },
     "已识别 · \\(object.confidence, format: .percent.precision(.fractionLength(0)))" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3630,17 +4234,6 @@
         }
       }
     },
-    "已识别 · %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recognized · %@"
-          }
-        }
-      }
-    },
     "已达到完成条件。可以继续点亮其余节点，加深理解。" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3648,6 +4241,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Completion goal reached. You can keep lighting up the remaining nodes to deepen your understanding."
+          }
+        }
+      }
+    },
+    "已选择" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已选择"
           }
         }
       }
@@ -3682,19 +4291,18 @@
         }
       }
     },
-    "应用内缺少响应结构资源（\\(name)）。" : {
-      "extractionState" : "manual",
+    "带路线的运动记录" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "应用内缺少响应结构资源（\\(name)）。"
+            "value" : "Workouts with Routes"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "应用内缺少响应结构资源（\\(name)）。"
+            "value" : "带路线的运动记录"
           }
         }
       }
@@ -3716,19 +4324,19 @@
         }
       }
     },
-    "应用内缺少提示词资源（\\(name)）。" : {
+    "应用内缺少响应结构资源（\\(name)）。" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "应用内缺少提示词资源（\\(name)）。"
+            "value" : "应用内缺少响应结构资源（\\(name)）。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "应用内缺少提示词资源（\\(name)）。"
+            "value" : "应用内缺少响应结构资源（\\(name)）。"
           }
         }
       }
@@ -3746,6 +4354,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "应用内缺少提示词资源（%@）。"
+          }
+        }
+      }
+    },
+    "应用内缺少提示词资源（\\(name)）。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用内缺少提示词资源（\\(name)）。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用内缺少提示词资源（\\(name)）。"
           }
         }
       }
@@ -3963,6 +4588,16 @@
     "当前对象 %@" : {
 
     },
+    "当前对象，%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current object, %@"
+          }
+        }
+      }
+    },
     "当前对象，\\(object.canonicalName)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3976,16 +4611,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "当前对象，\\(object.canonicalName)"
-          }
-        }
-      }
-    },
-    "当前对象，%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current object, %@"
           }
         }
       }
@@ -4050,6 +4675,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "当前默认以全部已加入节点为中心向外发散。"
+          }
+        }
+      }
+    },
+    "徒步" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiking"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "徒步"
           }
         }
       }
@@ -4206,6 +4847,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "我还能在哪里看到相似对象？"
+          }
+        }
+      }
+    },
+    "户外步行" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoor Walk"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "户外步行"
+          }
+        }
+      }
+    },
+    "户外跑步" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoor Run"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "户外跑步"
+          }
+        }
+      }
+    },
+    "户外运动" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoor Workout"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "户外运动"
+          }
+        }
+      }
+    },
+    "户外骑行" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoor Cycle"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "户外骑行"
           }
         }
       }
@@ -4580,6 +5285,7 @@
       }
     },
     "把相近时间与地点的扫描收成一次参观汇总。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4656,6 +5362,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "拖动画布"
+          }
+        }
+      }
+    },
+    "按时间线回看扫描，或把相近识别收成参观汇总。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse scans on a timeline, or collect nearby recognitions into a visit summary."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按时间线回看扫描，或把相近识别收成参观汇总。"
           }
         }
       }
@@ -4807,6 +5529,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "数据库中没有匹配到这个景点的现场介绍。"
+          }
+        }
+      }
+    },
+    "文件不是有效的 GPX 轨迹。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file is not a valid GPX track."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件不是有效的 GPX 轨迹。"
           }
         }
       }
@@ -5289,12 +6027,60 @@
         }
       }
     },
+    "无法删除轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Delete Track"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法删除轨迹"
+          }
+        }
+      }
+    },
     "无法定位" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to Locate"
+          }
+        }
+      }
+    },
+    "无法导入轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Import Track"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法导入轨迹"
+          }
+        }
+      }
+    },
+    "无法读取 Fitness 记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Read Fitness Workouts"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法读取 Fitness 记录"
           }
         }
       }
@@ -5333,6 +6119,22 @@
         }
       }
     },
+    "无法读取这个轨迹文件。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This track file could not be read."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法读取这个轨迹文件。"
+          }
+        }
+      }
+    },
     "无法读取附近内容" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5367,6 +6169,16 @@
         }
       }
     },
+    "无法连接识别服务：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't connect to the recognition service: %@"
+          }
+        }
+      }
+    },
     "无法连接识别服务：\\(message)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5380,16 +6192,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法连接识别服务：\\(message)"
-          }
-        }
-      }
-    },
-    "无法连接识别服务：%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couldn't connect to the recognition service: %@"
           }
         }
       }
@@ -5461,6 +6263,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示足迹照片"
+          }
+        }
+      }
+    },
+    "显示运动轨迹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Workout Tracks"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示运动轨迹"
           }
         }
       }
@@ -5541,6 +6359,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "More"
+          }
+        }
+      }
+    },
+    "最终确认" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Final confirmation"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最终确认"
           }
         }
       }
@@ -5788,6 +6623,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未记录位置"
+          }
+        }
+      }
+    },
+    "未选择" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not selected"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未选择"
           }
         }
       }
@@ -6112,6 +6963,22 @@
         }
       }
     },
+    "桨板" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paddle Sports"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "桨板"
+          }
+        }
+      }
+    },
     "榫卯不是单一形状，而是一套让不同方向木件连接的办法。观察接合方向与受力路径，能区分结构构件和后加装饰。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6146,6 +7013,17 @@
         }
       }
     },
+    "模型：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model: %@"
+          }
+        }
+      }
+    },
     "模型：\\(record.modelIdentifier)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6159,17 +7037,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "模型：\\(record.modelIdentifier)"
-          }
-        }
-      }
-    },
-    "模型：%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Model: %@"
           }
         }
       }
@@ -6208,6 +7075,38 @@
         }
       }
     },
+    "正在导入 %lld/%lld…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing %1$lld/%2$lld…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在导入 %1$lld/%2$lld…"
+          }
+        }
+      }
+    },
+    "正在导入…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在导入…"
+          }
+        }
+      }
+    },
     "正在思考" : {
       "localizations" : {
         "en" : {
@@ -6224,18 +7123,12 @@
         }
       }
     },
-    "正在思考…" : {
+    "正在思考%@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thinking…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在思考…"
+            "value" : "Thinking%@"
           }
         }
       }
@@ -6257,12 +7150,18 @@
         }
       }
     },
-    "正在思考%@" : {
+    "正在思考…" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thinking%@"
+            "value" : "Thinking…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在思考…"
           }
         }
       }
@@ -6409,6 +7308,22 @@
         }
       }
     },
+    "正在读取带路线的运动记录…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading workouts with routes…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在读取带路线的运动记录…"
+          }
+        }
+      }
+    },
     "正在读取景点介绍…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6494,6 +7409,22 @@
         }
       }
     },
+    "正在重新生成讲解" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regenerating explanation"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在重新生成讲解"
+          }
+        }
+      }
+    },
     "此资源包当前不在设备上。" : {
       "localizations" : {
         "en" : {
@@ -6541,19 +7472,23 @@
     "没有匹配的节点" : {
 
     },
-    "沿着一条文化线索连续点亮节点，把零散识别收成可完成的探索路径。" : {
-      "extractionState" : "stale",
+    "没有可导入的路线" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Light up nodes along a cultural thread, turning scattered recognitions into a completable path of discovery."
+            "value" : "No Routes to Import"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可导入的路线"
           }
         }
       }
     },
     "沿着一条文化线索连续点亮节点。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6569,6 +7504,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Illuminate connected nodes along a cultural thread. Each completed series adds a seal to your atlas."
+          }
+        }
+      }
+    },
+    "沿着一条文化线索连续点亮节点，把零散识别收成可完成的探索路径。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light up nodes along a cultural thread, turning scattered recognitions into a completable path of discovery."
           }
         }
       }
@@ -6631,6 +7577,54 @@
         }
       }
     },
+    "清理" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清理"
+          }
+        }
+      }
+    },
+    "清理缓存" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Cache"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清理缓存"
+          }
+        }
+      }
+    },
+    "清理网络缓存？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Network Cache?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清理网络缓存？"
+          }
+        }
+      }
+    },
     "清除搜索" : {
       "localizations" : {
         "en" : {
@@ -6643,6 +7637,38 @@
     },
     "清除筛选" : {
 
+    },
+    "游泳" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swimming"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "游泳"
+          }
+        }
+      }
+    },
+    "滑冰" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skating"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "滑冰"
+          }
+        }
+      }
     },
     "演示结果" : {
       "extractionState" : "manual",
@@ -6678,22 +7704,22 @@
         }
       }
     },
-    "点亮 3 条文化系并走过 2 座城市" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Illuminate 3 cultural series across 2 cities"
-          }
-        }
-      }
-    },
     "点亮 10 个文化节点" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Illuminate 10 cultural nodes"
+          }
+        }
+      }
+    },
+    "点亮 3 条文化系并走过 2 座城市" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Illuminate 3 cultural series across 2 cities"
           }
         }
       }
@@ -7057,6 +8083,22 @@
         }
       }
     },
+    "看懂%@前，建议先了解 %lld 项基础知识" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before understanding %@, we recommend learning %lld basics first"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "看懂%1$@前，建议先了解 %2$lld 项基础知识"
+          }
+        }
+      }
+    },
     "看懂\\(object.canonicalName)前，建议先了解 \\(prerequisiteCount) 项基础知识" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7070,22 +8112,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "看懂\\(object.canonicalName)前，建议先了解 \\(prerequisiteCount) 项基础知识"
-          }
-        }
-      }
-    },
-    "看懂%@前，建议先了解 %lld 项基础知识" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Before understanding %@, we recommend learning %lld basics first"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "看懂%1$@前，建议先了解 %2$lld 项基础知识"
           }
         }
       }
@@ -7232,23 +8258,6 @@
         }
       }
     },
-    "知识库数据包无法读取：\\(detail)" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "知识库数据包无法读取：\\(detail)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "知识库数据包无法读取：\\(detail)"
-          }
-        }
-      }
-    },
     "知识库数据包无法读取：%@" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7262,6 +8271,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "知识库数据包无法读取：%@"
+          }
+        }
+      }
+    },
+    "知识库数据包无法读取：\\(detail)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识库数据包无法读取：\\(detail)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "知识库数据包无法读取：\\(detail)"
           }
         }
       }
@@ -7428,28 +8454,8 @@
         }
       }
     },
-    "视觉备选" : {
+    "离你最近的文化现场" : {
 
-    },
-    "视觉备选 · %@" : {
-
-    },
-    "视觉模型结果" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visual model result"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "视觉模型结果"
-          }
-        }
-      }
     },
     "离你最近的文化现场，点开看详情" : {
       "extractionState" : "manual",
@@ -7542,6 +8548,17 @@
         }
       }
     },
+    "类别：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category: %@"
+          }
+        }
+      }
+    },
     "类别：\\(record.categoryRawValue)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7555,17 +8572,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "类别：\\(record.categoryRawValue)"
-          }
-        }
-      }
-    },
-    "类别：%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Category: %@"
           }
         }
       }
@@ -7709,6 +8715,22 @@
         }
       }
     },
+    "缓存已清理" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cache cleared"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "缓存已清理"
+          }
+        }
+      }
+    },
     "缺少识别对象，无法生成讲解。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7722,6 +8744,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "缺少识别对象，无法生成讲解。"
+          }
+        }
+      }
+    },
+    "网络缓存" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Cache"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络缓存"
           }
         }
       }
@@ -7861,6 +8899,29 @@
         }
       }
     },
+    "视觉备选" : {
+
+    },
+    "视觉备选 · %@" : {
+
+    },
+    "视觉模型结果" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visual model result"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视觉模型结果"
+          }
+        }
+      }
+    },
     "解释" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7884,6 +8945,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leave a mark through the cities you visit and the cultural threads you connect"
+          }
+        }
+      }
+    },
+    "记录中没有可绘制的运动轨迹。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This record contains no drawable workout track."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录中没有可绘制的运动轨迹。"
+          }
+        }
+      }
+    },
+    "讲解已生成，但未能保存到本地。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The explanation was generated but could not be saved locally."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "讲解已生成，但未能保存到本地。"
+          }
+        }
+      }
+    },
+    "讲解操作未完成" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation Not Completed"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "讲解操作未完成"
           }
         }
       }
@@ -7949,6 +9058,16 @@
         }
       }
     },
+    "识别服务暂时不可用（%lld）。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The recognition service is temporarily unavailable (%lld)."
+          }
+        }
+      }
+    },
     "识别服务暂时不可用（\\(statusCode)）。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7962,16 +9081,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "识别服务暂时不可用（\\(statusCode)）。"
-          }
-        }
-      }
-    },
-    "识别服务暂时不可用（%lld）。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The recognition service is temporarily unavailable (%lld)."
           }
         }
       }
@@ -8010,10 +9119,10 @@
         }
       }
     },
-    "识别模型的备选判断，与画面特征相关。" : {
+    "识别模型的备选判断与附近可确认的景点。" : {
 
     },
-    "识别模型的备选判断与附近可确认的景点。" : {
+    "识别模型的备选判断，与画面特征相关。" : {
 
     },
     "识别记录" : {
@@ -8101,6 +9210,16 @@
         }
       }
     },
+    "该文化元素通过“%@”的现场介绍直接关联到当前景点。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This cultural element is linked to the current attraction via the on-site introduction of “%@”."
+          }
+        }
+      }
+    },
     "该文化元素通过“\\(attractionNames[attractionKey] ?? " : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8114,16 +9233,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "该文化元素通过“\\(attractionNames[attractionKey] ?? "
-          }
-        }
-      }
-    },
-    "该文化元素通过“%@”的现场介绍直接关联到当前景点。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This cultural element is linked to the current attraction via the on-site introduction of “%@”."
           }
         }
       }
@@ -8250,6 +9359,22 @@
         }
       }
     },
+    "请稍后再试。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please try again later."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请稍后再试。"
+          }
+        }
+      }
+    },
     "调整掌握程度" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8337,6 +9462,22 @@
         }
       }
     },
+    "越野滑雪" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cross-Country Skiing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "越野滑雪"
+          }
+        }
+      }
+    },
     "足迹" : {
       "localizations" : {
         "en" : {
@@ -8377,6 +9518,134 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "跨地域传播"
+          }
+        }
+      }
+    },
+    "轨迹副本将从 App 中移除，但不会删除 Fitness 或健康中的原记录。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The track copy will be removed from the app. The original Fitness or Health record will not be deleted."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹副本将从 App 中移除，但不会删除 Fitness 或健康中的原记录。"
+          }
+        }
+      }
+    },
+    "轨迹将从 App 中移除，但不会删除原来的 GPX 文件。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The track will be removed from the app. The original GPX file will not be deleted."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹将从 App 中移除，但不会删除原来的 GPX 文件。"
+          }
+        }
+      }
+    },
+    "轨迹已导入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track Imported"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹已导入"
+          }
+        }
+      }
+    },
+    "轨迹已读取，但无法保存在 App 中。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The track was read but could not be saved in the app."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹已读取，但无法保存在 App 中。"
+          }
+        }
+      }
+    },
+    "轨迹文件过大，暂不支持超过 50 MB 的文件。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The track file is too large. Files over 50 MB are not supported."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹文件过大，暂不支持超过 50 MB 的文件。"
+          }
+        }
+      }
+    },
+    "轨迹点过多，暂不支持超过 200,000 个点的文件。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The track has too many points. Tracks over 200,000 points are not supported."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轨迹点过多，暂不支持超过 200,000 个点的文件。"
+          }
+        }
+      }
+    },
+    "轮椅步行配速" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wheelchair Walk Pace"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轮椅步行配速"
+          }
+        }
+      }
+    },
+    "轮椅跑步配速" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wheelchair Run Pace"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轮椅跑步配速"
           }
         }
       }
@@ -8547,6 +9816,22 @@
         }
       }
     },
+    "这台设备不支持读取 Fitness 与健康数据。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This device doesn't support reading Fitness and Health data."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这台设备不支持读取 Fitness 与健康数据。"
+          }
+        }
+      }
+    },
     "这是已审核知识库中的对照候选，但框选处缺少放射状花瓣与连续纹样。" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8587,6 +9872,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This cultural series is illuminated. Keep collecting its remaining nodes to complete the thread."
+          }
+        }
+      }
+    },
+    "这条运动记录已不可用，请刷新后重试。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This workout is no longer available. Refresh and try again."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这条运动记录已不可用，请刷新后重试。"
+          }
+        }
+      }
+    },
+    "这条运动记录没有可读取的 GPS 路线。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This workout doesn't have a readable GPS route."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这条运动记录没有可读取的 GPS 路线。"
+          }
+        }
+      }
+    },
+    "这条运动路线已经保存在 App 中" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This workout route is already saved in the app"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这条运动路线已经保存在 App 中"
           }
         }
       }
@@ -8635,6 +9968,16 @@
         }
       }
     },
+    "连接中断，已保留收到的内容。%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connection interrupted; received content was kept. %@"
+          }
+        }
+      }
+    },
     "连接中断，已保留收到的内容。\\(message)" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8648,16 +9991,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "连接中断，已保留收到的内容。\\(message)"
-          }
-        }
-      }
-    },
-    "连接中断，已保留收到的内容。%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connection interrupted; received content was kept. %@"
           }
         }
       }
@@ -8730,6 +10063,38 @@
         }
       }
     },
+    "部分缓存未能清理，请稍后重试" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some cached data could not be cleared. Try again later."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部分缓存未能清理，请稍后重试"
+          }
+        }
+      }
+    },
+    "部分轨迹已导入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some Tracks Imported"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部分轨迹已导入"
+          }
+        }
+      }
+    },
     "重叠的兴趣点" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8777,6 +10142,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新生成"
+          }
+        }
+      }
+    },
+    "重新生成失败，已保留原讲解。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regeneration failed. The original explanation was kept."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新生成失败，已保留原讲解。"
+          }
+        }
+      }
+    },
+    "重新读取" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Again"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新读取"
           }
         }
       }
@@ -9070,6 +10467,22 @@
         }
       }
     },
+    "高山滑雪" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downhill Skiing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高山滑雪"
+          }
+        }
+      }
+    },
     "魏晋南北朝以后" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9134,6 +10547,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "鼎的用途超出炊煮，逐渐成为礼仪与权力秩序的一部分。"
+          }
+        }
+      }
+    },
+    "（附图片）" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(with image)"
           }
         }
       }

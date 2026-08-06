@@ -3,6 +3,8 @@ import SwiftUI
 
 struct VisitTripListView: View {
   var showsBackButton: Bool = true
+  /// When true, omit page chrome already provided by `ReviewHomeView`.
+  var embedsInReviewHub: Bool = false
 
   @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
   private var records: [ScanHistoryRecord]
@@ -12,38 +14,50 @@ struct VisitTripListView: View {
   }
 
   var body: some View {
-    ZStack {
-      CulturePageBackground()
-
-      if trips.isEmpty {
-        ContentUnavailableView {
-          Label("还没有文化回顾", systemImage: "book.closed")
-        } description: {
-          Text("完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。")
-        }
+    Group {
+      if embedsInReviewHub {
+        tripContent
       } else {
-        ScrollView {
-          LazyVStack(alignment: .leading, spacing: 16) {
+        ZStack {
+          CulturePageBackground()
+          tripContent
+        }
+        .cultureNavigationTitle("文化回顾", showsBackButton: showsBackButton)
+      }
+    }
+  }
+
+  @ViewBuilder
+  private var tripContent: some View {
+    if trips.isEmpty {
+      ContentUnavailableView {
+        Label("还没有文化回顾", systemImage: "book.closed")
+      } description: {
+        Text("完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。")
+      }
+    } else {
+      ScrollView {
+        LazyVStack(alignment: .leading, spacing: 16) {
+          if !embedsInReviewHub {
             MagazinePageHeader(
               eyebrow: "JOURNAL",
               title: "文化回顾",
               message: "把一次参观里点亮的节点、走过的景点与新认识的关系收成可回看的行程。"
             )
-
-            ForEach(trips) { trip in
-              NavigationLink(value: AppRoute.visitTrip(trip.id)) {
-                tripRow(trip)
-              }
-              .buttonStyle(.plain)
-            }
           }
-          .padding(.horizontal, CultureTheme.pagePadding)
-          .padding(.top, 20)
-          .padding(.bottom, 40)
+
+          ForEach(trips) { trip in
+            NavigationLink(value: AppRoute.visitTrip(trip.id)) {
+              tripRow(trip)
+            }
+            .buttonStyle(.plain)
+          }
         }
+        .padding(.horizontal, CultureTheme.pagePadding)
+        .padding(.top, embedsInReviewHub ? 8 : 20)
+        .padding(.bottom, 40)
       }
     }
-    .cultureNavigationTitle("文化回顾", showsBackButton: showsBackButton)
   }
 
   private func tripRow(_ trip: VisitTrip) -> some View {

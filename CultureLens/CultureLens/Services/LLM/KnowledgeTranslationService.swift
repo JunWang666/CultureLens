@@ -178,6 +178,12 @@ actor KnowledgeTranslationService {
     }
   }
 
+  /// Removes generated translations while leaving bundled locale overlays untouched.
+  func clearCache() {
+    memoryCache.removeAll()
+    UserDefaults.standard.removeObject(forKey: defaultsKey)
+  }
+
   private func translate(
     client: LLMGatewayClient,
     name: String,

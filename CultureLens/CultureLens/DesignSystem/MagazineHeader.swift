@@ -84,6 +84,25 @@ struct MagazinePageHeader: View {
   }
 }
 
+/// 朱砂方印（白文）：纸色字压在朱砂方章上，轻微歪斜模拟手盖。
+/// 字是装饰性单字（如「访」「藏」），不进本地化目录。
+struct SealBadge: View {
+  let character: String
+  var size: CGFloat = 26
+
+  var body: some View {
+    Text(verbatim: character)
+      .font(.magazineDisplay(size: size * 0.58))
+      .foregroundStyle(CultureTheme.canvas)
+      .frame(width: size, height: size)
+      .background(
+        CultureTheme.cinnabar,
+        in: RoundedRectangle(cornerRadius: size * 0.16, style: .continuous)
+      )
+      .rotationEffect(.degrees(-3))
+  }
+}
+
 extension View {
   /// 统一暖调照片处理：轻降饱和 + 纸色正片叠底，
   /// 让不同来源的照片看起来像同一本杂志的图。

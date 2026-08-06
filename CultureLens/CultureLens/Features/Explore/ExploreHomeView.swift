@@ -124,46 +124,71 @@ struct ExploreHomeView: View {
   }
 
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @Environment(\.locale) private var locale
 
-  /// iPad 等 regular 宽度下使用双栏：左栏附近看点，右栏收集与发现流。
-  private var isWideLayout: Bool {
-    horizontalSizeClass == .regular
+  private var isChineseLocale: Bool {
+    locale.identifier.hasPrefix("zh")
   }
 
   var body: some View {
-    ZStack {
-      CulturePageBackground()
+    // 用外层 GeometryReader 量视口（与 SplitDetailLayout 相同），不要量 ScrollView
+    // 内容高度——内容永远更高，会把横屏也误判成单栏。
+    GeometryReader { proxy in
+      let isWideLayout = horizontalSizeClass == .regular
+        && proxy.size.width > proxy.size.height
 
-      ScrollView {
-        VStack(alignment: .leading, spacing: 32) {
-          masthead
+      ZStack {
+        CulturePageBackground()
 
-          if isWideLayout {
-            HStack(alignment: .top, spacing: 36) {
-              VStack(alignment: .leading, spacing: 32) {
-                nearbySection
+        ScrollView {
+          VStack(alignment: .leading, spacing: 32) {
+            masthead
+
+            if isWideLayout {
+              // 附近无内容时左栏很空，把封面故事挪到左栏平衡版面
+              let nearbyHasItems = recommendationState.hasItems
+              HStack(alignment: .top, spacing: 36) {
+                VStack(alignment: .leading, spacing: 32) {
+                  nearbySection
+                  if !nearbyHasItems {
+                    dailySection(keepsColumnWidth: true)
+                  }
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+
+                VStack(alignment: .leading, spacing: 32) {
+                  illuminationSection
+                  collectionSection
+                  if nearbyHasItems {
+                    dailySection(keepsColumnWidth: true)
+                  }
+                  nextDiscoveriesSection
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
               }
-              .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-
-              VStack(alignment: .leading, spacing: 32) {
-                illuminationSection
-                collectionSection
-                dailySection
-                nextDiscoveriesSection
-              }
-              .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            } else {
+              // 竖屏单列：附近看点在上，点亮 / 收集 / 封面故事 / 下一看点依次在下
+              nearbySection
+              illuminationSection
+              collectionSection
+              dailySection(keepsColumnWidth: false)
+              nextDiscoveriesSection
             }
-          } else {
-            nearbySection
-            illuminationSection
-            collectionSection
-            dailySection
-            nextDiscoveriesSection
+
+            // 页脚：细线 + 饰花收版
+            HStack(spacing: 14) {
+              Rectangle().fill(CultureTheme.hairline).frame(height: 1)
+              Text(verbatim: "❖")
+                .font(.caption)
+                .foregroundStyle(CultureTheme.cinnabar)
+              Rectangle().fill(CultureTheme.hairline).frame(height: 1)
+            }
+            .accessibilityHidden(true)
           }
+          .padding(.horizontal, CultureTheme.pagePadding)
+          .padding(.top, 28)
+          .padding(.bottom, 40)
         }
-        .padding(.horizontal, CultureTheme.pagePadding)
-        .padding(.top, 28)
-        .padding(.bottom, 40)
       }
     }
     .cultureNavigationTitle("探索", showsBackButton: false)
@@ -220,11 +245,37 @@ struct ExploreHomeView: View {
     .accessibilityElement(children: .combine)
   }
 
+  /// 期号（当年第几天）+ 农历日期（中文环境）+ 城市。
   private var mastheadDateline: String {
-    let date = Date.now.formatted(date: .long, time: .omitted)
-    guard let placeName, !placeName.isEmpty else { return date }
-    return "\(date) · \(placeName)"
+    let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: .now) ?? 1
+    var parts = ["NO.\(dayOfYear)"]
+    if isChineseLocale {
+      parts.append(lunarDateString)
+    } else {
+      parts.append(Date.now.formatted(date: .long, time: .omitted))
+    }
+    if let placeName, !placeName.isEmpty {
+      parts.append(placeName)
+    }
+    return parts.joined(separator: " · ")
   }
+
+  /// 「丙午年六月廿四」式农历日期；ICU 对日中数码不本地化，日序手动转汉字。
+  private var lunarDateString: String {
+    let chinese = Calendar(identifier: .chinese)
+    let formatter = DateFormatter()
+    formatter.calendar = chinese
+    formatter.locale = Locale(identifier: "zh_Hans_CN")
+    formatter.dateFormat = "U年MMMM"
+    let day = chinese.component(.day, from: .now)
+    return formatter.string(from: .now) + Self.lunarDayNames[min(max(day, 1), 30) - 1]
+  }
+
+  private static let lunarDayNames = [
+    "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",
+    "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
+    "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十",
+  ]
 
   @ViewBuilder
   private var nearbySection: some View {
@@ -253,7 +304,7 @@ struct ExploreHomeView: View {
   }
 
   @ViewBuilder
-  private var dailySection: some View {
+  private func dailySection(keepsColumnWidth: Bool) -> some View {
     if let daily = dailyElement {
       HStack(alignment: .firstTextBaseline) {
         MagazineSectionHeader(eyebrow: "COVER STORY", "封面故事", subtitle: "每天轮换一个文化细节")
@@ -270,7 +321,8 @@ struct ExploreHomeView: View {
 
       CoverStoryFeature(
         element: daily,
-        isCollected: contactedIDs.contains(daily.id)
+        isCollected: contactedIDs.contains(daily.id),
+        keepsColumnWidth: keepsColumnWidth
       )
     }
   }
@@ -314,6 +366,7 @@ struct ExploreHomeView: View {
             ?? DeterministicID.culturalElement(recommendation.culturalElement.key)
           NavigationLink(value: AppRoute.knowledgeElement(elementID)) {
             NearbyEditorialRow(
+              number: index + 1,
               recommendation: recommendation,
               isVisited: contactedIDs.contains(elementID)
             )
@@ -481,6 +534,12 @@ private enum RecommendationState {
   case loaded([AttractionIntroductionRecommendation])
   case empty
   case failed(String)
+
+  /// 只有真正拿到条目才视为有内容；加载中 / 空 / 失败都算左栏空旷。
+  var hasItems: Bool {
+    if case .loaded = self { return true }
+    return false
+  }
 }
 
 // MARK: - 点亮图鉴
@@ -895,8 +954,9 @@ private struct ThinProgressRule: View {
 
 // MARK: - 附近看点条目
 
-/// 编辑式条目：宋体标题 + 元信息 + 摘要，行间细线分隔，无卡片。
+/// 编辑式条目：大号编号 + 宋体标题 + 元信息 + 摘要，行间细线分隔，无卡片。
 private struct NearbyEditorialRow: View {
+  let number: Int
   let recommendation: AttractionIntroductionRecommendation
   var isVisited: Bool = false
 
@@ -905,49 +965,57 @@ private struct NearbyEditorialRow: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      HStack(alignment: .top, spacing: 14) {
-        VStack(alignment: .leading, spacing: 8) {
-          HStack(alignment: .firstTextBaseline) {
-            Text(recommendation.name)
-              .font(.magazineDisplay(.title3))
-              .foregroundStyle(CultureTheme.inkPrimary)
-            Spacer(minLength: 12)
-            if isVisited {
-              Image(systemName: "checkmark.seal.fill")
-                .font(.caption)
+    HStack(alignment: .top, spacing: 14) {
+      // 目录式大号编号
+      Text(String(format: "%02d", number))
+        .font(.magazineDisplay(size: 26))
+        .foregroundStyle(CultureTheme.inkPrimary.opacity(0.32))
+        .frame(width: 38, alignment: .leading)
+        .padding(.top, 16)
+        .accessibilityHidden(true)
+
+      VStack(alignment: .leading, spacing: 8) {
+        HStack(alignment: .top, spacing: 14) {
+          VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline) {
+              Text(recommendation.name)
+                .font(.magazineDisplay(.title3))
+                .foregroundStyle(CultureTheme.inkPrimary)
+              Spacer(minLength: 12)
+              if isVisited {
+                SealBadge(character: "访", size: 22)
+                  .accessibilityLabel("已到访")
+              }
+              Text(distanceText)
+                .font(.caption.monospacedDigit())
                 .foregroundStyle(CultureTheme.cinnabar)
-                .accessibilityLabel("已到访")
             }
-            Text(distanceText)
-              .font(.caption.monospacedDigit())
-              .foregroundStyle(CultureTheme.cinnabar)
+
+            Text("\(recommendation.attraction.name) · \(recommendation.culturalElement.name)")
+              .font(.caption)
+              .foregroundStyle(CultureTheme.inkSecondary)
           }
 
-          Text("\(recommendation.attraction.name) · \(recommendation.culturalElement.name)")
-            .font(.caption)
-            .foregroundStyle(CultureTheme.inkSecondary)
+          if let thumbnailURL {
+            CachedAsyncImage(url: thumbnailURL) { phase in
+              if case .success(let image) = phase {
+                image
+                  .resizable()
+                  .scaledToFill()
+                  .magazinePhoto()
+              }
+            }
+            .frame(width: 88, height: 66)
+            .clipped()
+          }
         }
 
-        if let thumbnailURL {
-          AsyncImage(url: thumbnailURL) { phase in
-            if case .success(let image) = phase {
-              image
-                .resizable()
-                .scaledToFill()
-                .magazinePhoto()
-            }
-          }
-          .frame(width: 88, height: 66)
-          .clipped()
-        }
+        Text(recommendation.introduction.plainText)
+          .font(.subheadline)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .lineSpacing(3)
+          .lineLimit(3)
       }
-
-      Text(recommendation.introduction.plainText)
-        .font(.subheadline)
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .lineSpacing(3)
-        .lineLimit(3)
     }
     .padding(.vertical, 14)
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -966,13 +1034,19 @@ private struct NearbyEditorialRow: View {
 
 // MARK: - 封面故事
 
-/// 杂志封面故事：巨型首字水印 + 宋体大标题 + 导语。
-/// 知识包图片到位后自动切换为大图版式（图在上，文在下，直角满宽）。
+/// 墨版封面故事：墨底反白与整页纸面形成强对比。
+/// 无图且中文环境下标题竖排（中式编辑排版）；知识包图片到位后切换大图版式。
 private struct CoverStoryFeature: View {
   let element: KnowledgePack.Element
   let isCollected: Bool
+  /// 双栏布局时保持栏宽；单列（含 iPad 竖屏）整块出血到屏幕边缘。
+  var keepsColumnWidth: Bool = false
 
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @Environment(\.locale) private var locale
+
+  private var isChineseLocale: Bool {
+    locale.identifier.hasPrefix("zh")
+  }
 
   private var coverImageURL: URL? {
     element.introduction.imageBlocks.first?.imageURL
@@ -980,89 +1054,134 @@ private struct CoverStoryFeature: View {
 
   var body: some View {
     NavigationLink(value: AppRoute.knowledgeElement(element.id)) {
-      ZStack(alignment: .topTrailing) {
-        // 巨型首字水印，向版心外出血
-        Text(String(element.name.prefix(1)))
-          .font(.magazineDisplay(size: 170))
-          .foregroundStyle(CultureTheme.inkPrimary.opacity(0.05))
-          .offset(x: 14, y: -36)
-          .allowsHitTesting(false)
-          .accessibilityHidden(true)
-
-        VStack(alignment: .leading, spacing: 14) {
-          if let coverImageURL {
-            AsyncImage(
-              url: coverImageURL,
-              transaction: Transaction(animation: .easeOut(duration: 0.3))
-            ) { phase in
-              switch phase {
-              case .success(let image):
-                image
-                  .resizable()
-                  .scaledToFill()
-                  .frame(maxWidth: .infinity)
-                  .frame(height: 240)
-                  .clipped()
-                  .magazinePhoto()
-                  .transition(.opacity)
-              case .failure:
-                EmptyView()
-              case .empty:
-                Rectangle()
-                  .fill(CultureTheme.inkSecondary.opacity(0.08))
-                  .frame(maxWidth: .infinity)
-                  .frame(height: 240)
-              @unknown default:
-                EmptyView()
-              }
-            }
-            .frame(maxWidth: .infinity)
-            // iPhone 上图片出血到屏幕边缘；iPad 双栏里保持栏宽
-            .padding(
-              .horizontal,
-              horizontalSizeClass == .regular ? 0 : -CultureTheme.pagePadding
-            )
-          }
-
-          HStack(alignment: .firstTextBaseline) {
-            LocalizedPackText(
-              source: element.name,
-              cacheNamespace: "element",
-              cacheKey: element.key
-            )
-            .font(.magazineDisplay(size: 30))
-            .foregroundStyle(CultureTheme.inkPrimary)
-
-            Spacer(minLength: 12)
-
-            Label(
-              isCollected ? "已收集" : "未收集",
-              systemImage: isCollected ? "checkmark.seal.fill" : "circle.dashed"
-            )
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(
-              isCollected ? CultureTheme.cinnabar : CultureTheme.inkSecondary
-            )
-          }
-
-          LocalizedPackText(
-            source: element.introduction.plainText,
-            cacheNamespace: "element",
-            cacheKey: element.key,
-            kind: .fragment
-          )
-          .font(.subheadline)
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .lineSpacing(4)
-          .lineLimit(4)
+      VStack(alignment: .leading, spacing: 0) {
+        if let coverImageURL {
+          coverPhoto(coverImageURL)
         }
+
+        ZStack(alignment: .topTrailing) {
+          if coverImageURL != nil {
+            // 有图时以金色首字水印衬底
+            Text(String(element.name.prefix(1)))
+              .font(.magazineDisplay(size: 150))
+              .foregroundStyle(CultureTheme.antiqueGold.opacity(0.14))
+              .offset(x: 12, y: -32)
+              .allowsHitTesting(false)
+              .accessibilityHidden(true)
+          }
+
+          if coverImageURL == nil, isChineseLocale {
+            // 无图：导语在左，标题竖排在右
+            HStack(alignment: .top, spacing: 20) {
+              VStack(alignment: .leading, spacing: 12) {
+                collectedMeta
+                fragmentText
+              }
+              .frame(maxWidth: .infinity, alignment: .leading)
+
+              verticalTitle
+            }
+          } else {
+            VStack(alignment: .leading, spacing: 12) {
+              HStack(alignment: .firstTextBaseline) {
+                LocalizedPackText(
+                  source: element.name,
+                  cacheNamespace: "element",
+                  cacheKey: element.key
+                )
+                .font(.magazineDisplay(size: 30))
+                .foregroundStyle(CultureTheme.canvas)
+
+                Spacer(minLength: 12)
+
+                collectedMeta
+              }
+
+              fragmentText
+            }
+          }
+        }
+        .padding(22)
       }
-      .clipped()
       .frame(maxWidth: .infinity, alignment: .leading)
+      .background(CultureTheme.inkPrimary)
+      .clipped()
+      // 单列时整块墨版出血到屏幕边缘；双栏里保持栏宽
+      .padding(
+        .horizontal,
+        keepsColumnWidth ? 0 : -CultureTheme.pagePadding
+      )
       .contentShape(Rectangle())
     }
     .buttonStyle(.plain)
     .accessibilityIdentifier("explore.dailyCard")
+  }
+
+  private func coverPhoto(_ url: URL) -> some View {
+    CachedAsyncImage(
+      url: url,
+      transaction: Transaction(animation: .easeOut(duration: 0.3))
+    ) { phase in
+      switch phase {
+      case .success(let image):
+        image
+          .resizable()
+          .scaledToFill()
+          .frame(maxWidth: .infinity)
+          .frame(height: 240)
+          .clipped()
+          .magazinePhoto()
+          .transition(.opacity)
+      case .failure:
+        EmptyView()
+      case .empty:
+        Rectangle()
+          .fill(Color.white.opacity(0.08))
+          .frame(maxWidth: .infinity)
+          .frame(height: 240)
+      @unknown default:
+        EmptyView()
+      }
+    }
+    .frame(maxWidth: .infinity)
+  }
+
+  /// 竖排标题：逐字纵排，自上至下。
+  private var verticalTitle: some View {
+    VStack(spacing: 0) {
+      ForEach(Array(element.name.enumerated()), id: \.offset) { _, character in
+        Text(String(character))
+          .font(.magazineDisplay(size: 28))
+          .foregroundStyle(CultureTheme.canvas)
+      }
+    }
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(element.name)
+  }
+
+  private var collectedMeta: some View {
+    HStack(spacing: 8) {
+      if isCollected {
+        SealBadge(character: "藏", size: 24)
+      }
+      Text(isCollected ? "已收集" : "未收集")
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(CultureTheme.canvas.opacity(isCollected ? 0.6 : 0.45))
+    }
+    .accessibilityElement(children: .combine)
+  }
+
+  private var fragmentText: some View {
+    LocalizedPackText(
+      source: element.introduction.plainText,
+      cacheNamespace: "element",
+      cacheKey: element.key,
+      kind: .fragment
+    )
+    .font(.subheadline)
+    .foregroundStyle(CultureTheme.canvas.opacity(0.72))
+    .lineSpacing(4)
+    .lineLimit(4)
   }
 }
 

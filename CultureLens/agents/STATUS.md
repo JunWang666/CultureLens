@@ -6,6 +6,16 @@
 
 ## 已完成
 
+- 2026-08-06 AI 文化讲解从 Caches 缓存升级为 Application Support 正式持久记录：同一对象 / 扫描结果按地点与语言稳定读取，不因知识进度、模型或 prompt 变化自动消失，也不受“清理缓存”影响；讲解组件右上角新增重新生成按钮，生成期间保留旧内容，成功后覆盖保存，失败则保留原讲解。见 `design/0018-durable-explanation-storage-and-regeneration.md`。
+- 2026-08-06 时间线足迹从足迹地图模式挪到回顾 Tab：`ReviewHomeView` 用工具栏菜单切换「时间线足迹 / 文化回顾」；足迹页仅保留地图足迹与兴趣点。更多页文案同步更新。
+- 2026-08-06 AI 文化讲解改为更有现场感的个性化同伴语气：从资料中确实存在的线索或观看角度切入，以自然的引导与节奏展开；优先衔接用户已理解 / 掌握节点，并借已有兴趣重心选择补充角度，不暴露画像或猜测用户偏好。事实来源与引用约束不放宽；讲解缓存升级至 v2，旧文案不再命中。设计见 `design/0017-lively-personalized-explanation-voice.md`。
+- 2026-08-06 识别候选改为 1 km 内全量景点：取消最多 8 个景点截断，对应看点根全部进入文化内容候选；附近景点超过 10 个时 prompt 只保留 id/name、省略 introduction 与 nearby_contexts。探索页附近推荐半径不变。新增相关单测 2 项通过；顺手修复探索页 `NearbyEditorialRow` 缺 `number` 参数导致的编译错误。设计见 `design/0015-recognition-1km-all-attractions.md`。
+- 2026-08-06 网络产物统一缓存：在线知识图片改为内存 + Caches 磁盘缓存并复用于 Quick Look；个性化 AI 文化讲解按识别输入、地点、用户知识状态、语言和模型持久化，页面重建优先命中缓存且提供显式「刷新讲解」；设置新增统一清理图片 / 讲解 / 即时译文缓存，不影响历史、聊天图片、图谱、轨迹与知识资源包。新增 3 项缓存单测全部通过，并通过通用 iOS 真机 Debug build 与 `build-for-testing`。见 `design/0014-network-image-and-llm-result-caching.md`。
+- 2026-08-06 足迹支持直接从 Apple Fitness / 健康导入运动路线：只读申请 `HKWorkout` 与 `HKWorkoutRoute`，仅展示实际含 GPS 路线的最近记录，支持多选、按 Workout UUID 幂等导入、独立路线分段和 App 内持久化；删除只影响本地副本。工程已启用 HealthKit capability / entitlement 与读取用途说明，旧 GPX JSON 保持兼容；存储 smoke test、iOS SDK 类型检查、通用 iOS 真机 Debug 构建及 `build-for-testing` 均通过，真实 Fitness 授权和历史数据读取待真机验证。设计见 `design/0013-fitness-workout-route-import.md`。
+- 2026-08-06 知识详情在线图片支持点击后用系统 Quick Look（`QLPreviewController`）全屏放大查看：成功加载的 HTTPS 图可点，下载到临时文件后预览，关闭清理；复用既有加载 / 失败 / 重试链路。见 `design/0008-knowledge-detail-remote-images.md`。
+- 2026-08-06 Debug / Release 暂时均启用 `EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE`，使四个 ODR 知识包在 Xcode 侧载与无资源服务器的安装方式中随 App 一起交付；ODR tag、initial-install 与资源包管理器保留。
+- 2026-08-06 足迹支持从“文件”批量导入 GPX 运动轨迹：兼容 track / route 与多分段，保留名称、源时间、海拔和完整轨迹点，以独立 JSON 文件持久化到 Application Support，不修改 SwiftData schema；地图足迹叠加彩色轨迹折线，超长分段渲染采样但完整数据保留，并提供显示/隐藏、聚焦和确认删除。新增解析、限制、采样、持久化与删除测试 6 项通过，iOS 18.6 Simulator Debug 编译通过。设计见 `design/0012-imported-workout-tracks.md`。
+- 2026-08-06 足迹页的地图足迹 / 兴趣点改为复用同一张 `Map` 与同一套相机状态；切换前固定当前实际相机并关闭模式切换动画，只替换标注层，避免底图重新创建或按新标注自动取景造成跳跃。兴趣点载入 / 空状态改为地图上方提示，搜索、定位和 3D 俯视统一操作共享相机；兴趣点聚合跨度设有上限，避免足迹或 GPX 的远距离视图把城市内大量兴趣点错误堆叠；兴趣点导航优先绑定 attraction 同 slug 的看点根元素，避免三潭印月等景点误跳到首条文化历史介绍。设计见 `design/0011-shared-footprint-poi-map-camera.md`。
 - 2026-08-06 探索页新增「点亮图鉴」仪式：复用主题进度点亮文化系，从扫描历史派生已点亮城市，并按首个节点 / 首个文化系 / 首座城市 / 现场扫描数 / 节点数 / 跨城探索解锁六枚徽章；新徽章提供单次庆祝覆盖层、成功触感与 Reduce Motion 适配。城市和徽章均从现有数据派生，不改 SwiftData schema；新增规则单测 3 项通过，iOS Simulator Debug build 通过。设计见 `design/0010-exploration-illumination-and-badges.md`。
 - 2026-08-06 设置新增「资源包管理」：展示四个知识包的可用状态、版本与内容数量，并支持缺失时逐包下载 / 重试；西湖 / 中国历史 / 良渚 / 浙博均改为独立 ODR tag，四个 tag 全部设为 initial-install，默认随 App 首装交付。通用 iOS Simulator App build 已通过并确认产出四个独立 asset pack，主 App bundle 不再重复包含知识 JSON。设计见 `design/0009-settings-knowledge-pack-manager.md`。
 - 2026-08-06 知识包 UUID 主键迁移完成：entities 以 `id: UUID` 为运行时身份，`key` 为可选 slug；relations / themes / introductions 跨引用改 UUID；识别 / 引用 / 主题进度 / 图谱 API 对齐；LLM 经 `LLMIDSession` 使用 per-request 短 ID 并在入 App 前还原。包版本：西湖 v6 / 历史 v5 / 良渚 v5 / 浙博 v6。单元测试与 `LLMIDSessionTests` 已更新。
@@ -45,7 +55,7 @@
 2. 图谱渲染、性能与交互整备，见 `design/0007-graph-rendering-performance-and-interaction.md`：
    重心排序与边内缩、图谱 Tab 缺失的缩放、用户图谱丢失的关系类型、`joinedSeeds` 解码风暴。
    方向分层布局与 `0006` 阶段 1 合并实施。
-3. 真机验证：扫描识别三态、分层讲解、多轮追问（含历史恢复与图片上传）、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback、文化回顾 / 主题探索 / 卡片分享、语言切换与知识译文。
+3. 真机验证：Fitness / 健康授权与含 GPS 路线的运动记录导入、扫描识别三态、分层讲解、多轮追问（含历史恢复与图片上传）、附近推荐、ODR 下载路径（TestFlight 最佳）、离线 fallback、文化回顾 / 主题探索 / 卡片分享、语言切换与知识译文。
 4. 归档 + 导出 ipa，确认 OnDemandResources 拆分；按 `APP_STORE.md` 检查单准备上架。
 5. R2 bucket 开通公开读并补内容图片 URL；admin 侧维护含 image block 的介绍。
 6. 补隐私清单（照片经 AI Gateway 发 Google 需如实声明；问答上传图片同属此声明）。

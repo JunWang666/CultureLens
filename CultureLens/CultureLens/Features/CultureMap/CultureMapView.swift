@@ -2,20 +2,20 @@ import ImageIO
 import MapKit
 import SwiftData
 import SwiftUI
+import UniformTypeIdentifiers
 
-/// Scan footprint map + timeline + all knowledge-pack points of interest,
+/// Scan footprint map + all knowledge-pack points of interest,
 /// edge-to-edge under the system navigation toolbar.
+/// Chronological timeline lives under the Review tab (`ScanTimelineView`).
 struct CultureMapView: View {
     enum DisplayMode: String, CaseIterable, Identifiable {
         case map = "地图足迹"
-        case timeline = "时间线足迹"
         case pois = "兴趣点"
         var id: Self { self }
 
         var systemImage: String {
             switch self {
             case .map: "map"
-            case .timeline: "clock.arrow.circlepath"
             case .pois: "mappin.and.ellipse"
             }
         }
@@ -49,25 +49,25 @@ struct CultureMapView: View {
     }
 
     var showsBackButton: Bool = false
-    let startScan: () -> Void
 
-    @Environment(\.modelContext) private var modelContext
     @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
     private var records: [ScanHistoryRecord]
 
     @State private var displayMode: DisplayMode = .map
     @State private var selectedRecordID: UUID?
-    @State private var mapPosition: MapCameraPosition = .automatic
-    @State private var historyCamera: MapCamera?
+    /// Prefer the user until the first explicit 2 km framing resolves.
+    @State private var mapPosition: MapCameraPosition = .userLocation(
+        followsHeading: false,
+        fallback: .automatic
+    )
+    @State private var mapCamera: MapCamera?
     @State private var visibleSpan: MKCoordinateSpan?
-    @State private var historySearchRegion: MKCoordinateRegion?
+    @State private var mapSearchRegion: MKCoordinateRegion?
+    @State private var didApplyInitialUserLocation = false
     @State private var clusterPicker: RecordCluster?
 
     @State private var knowledgeStore: KnowledgeStore?
     @State private var didAttemptStoreLoad = false
-    @State private var poiCameraPosition: MapCameraPosition = .automatic
-    @State private var poiCamera: MapCamera?
-    @State private var poiSearchRegion: MKCoordinateRegion?
     @State private var poiClusterPicker: POICluster?
 
     @State private var baseMapStyle: BaseMapStyle = .standard
@@ -81,6 +81,14 @@ struct CultureMapView: View {
     @State private var isLocatingUser = false
     @State private var locationAlert: LocationAlert?
     @State private var locationProvider = LocationContextProvider()
+
+    @State private var importedTracks: [ImportedTrack] = []
+    @State private var showsImportedTracks = true
+    @State private var isChoosingTrackFiles = false
+    @State private var isImportingTracks = false
+    @State private var trackImportSheet: TrackImportSheet?
+    @State private var trackImportNotice: TrackImportNotice?
+    @State private var pendingTrackDeletion: ImportedTrack?
 
     @FocusState private var isMapSearchFocused: Bool
 
@@ -151,6 +159,18 @@ struct CultureMapView: View {
         let message: String
     }
 
+    private struct TrackImportNotice: Identifiable {
+        let id = UUID()
+        let title: String
+        let message: String
+    }
+
+    private enum TrackImportSheet: String, Identifiable {
+        case fitness
+
+        var id: String { rawValue }
+    }
+
     /// Fallback span derived from the records' bounding box before the camera reports one.
     private var boundingSpan: MKCoordinateSpan {
         let latitudes = locatedRecords.compactMap(\.latitude)
@@ -189,8 +209,17 @@ struct CultureMapView: View {
 
     /// The same clustering behavior is used for knowledge-pack points of interest.
     private var poiClusters: [POICluster] {
-        let span = poiSearchRegion?.span
+        // The shared camera can be zoomed out to a whole GPX track (or farther)
+        // before POI mode is selected. Letting that very large span drive the
+        // proximity threshold would merge unrelated sites across the city into
+        // one stack. Keep clustering responsive while nearby, but cap its
+        // effective span so a distant footprint view does not over-cluster POIs.
+        let visibleSpan = visibleSpan
             ?? MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let clusteringSpan = MKCoordinateSpan(
+            latitudeDelta: min(visibleSpan.latitudeDelta, 0.05),
+            longitudeDelta: min(visibleSpan.longitudeDelta, 0.05)
+        )
         var result: [POICluster] = []
         for point in poiPoints {
             let coordinate = CLLocationCoordinate2D(
@@ -198,7 +227,7 @@ struct CultureMapView: View {
                 longitude: point.longitude
             )
             if let index = result.firstIndex(where: {
-                coordinatesAreClose($0.center, coordinate, in: span)
+                coordinatesAreClose($0.center, coordinate, in: clusteringSpan)
             }) {
                 result[index].points.append(point)
             } else {
@@ -222,20 +251,9 @@ struct CultureMapView: View {
             CulturePageBackground()
                 .ignoresSafeArea()
 
-            Group {
-                if displayMode == .pois {
-                    poiContent
-                        .ignoresSafeArea()
-                } else if displayMode == .map {
-                    historyMap
-                        .ignoresSafeArea()
-                } else if records.isEmpty {
-                    emptyState
-                } else {
-                    timelineScroll
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            sharedMap
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(!showsBackButton)
@@ -250,8 +268,29 @@ struct CultureMapView: View {
             knowledgeStore = await KnowledgePackLoader.shared.store()
             didAttemptStoreLoad = true
         }
+        .task {
+            importedTracks = (try? await ImportedTrackStore.shared.load()) ?? []
+        }
+        .task {
+            await applyInitialUserLocationIfNeeded()
+        }
         .task(id: searchText) {
             await searchPlaces()
+        }
+        .fileImporter(
+            isPresented: $isChoosingTrackFiles,
+            allowedContentTypes: [.gpx, .xml],
+            allowsMultipleSelection: true,
+            onCompletion: handleTrackFileSelection
+        )
+        .sheet(item: $trackImportSheet) { destination in
+            switch destination {
+            case .fitness:
+                FitnessWorkoutImportView(
+                    importedSourceIdentifiers: fitnessWorkoutSourceIdentifiers,
+                    onImported: handleFitnessTracksImported
+                )
+            }
         }
         .alert(item: $locationAlert) { alert in
             Alert(
@@ -259,6 +298,29 @@ struct CultureMapView: View {
                 message: Text(alert.message),
                 dismissButton: .default(Text("好"))
             )
+        }
+        .alert(item: $trackImportNotice) { notice in
+            Alert(
+                title: Text(notice.title),
+                message: Text(notice.message),
+                dismissButton: .default(Text("好"))
+            )
+        }
+        .confirmationDialog(
+            "删除运动轨迹？",
+            isPresented: pendingTrackDeletionBinding,
+            presenting: pendingTrackDeletion
+        ) { track in
+            Button("删除“\(track.name)”", role: .destructive) {
+                deleteImportedTrack(track)
+            }
+            Button("取消", role: .cancel) {}
+        } message: { track in
+            if track.sourceKind == .appleFitness {
+                Text("轨迹副本将从 App 中移除，但不会删除 Fitness 或健康中的原记录。")
+            } else {
+                Text("轨迹将从 App 中移除，但不会删除原来的 GPX 文件。")
+            }
         }
         .onChange(of: displayMode) {
             clusterPicker = nil
@@ -281,9 +343,28 @@ struct CultureMapView: View {
         }
     }
 
+    private var importTrackMenu: some View {
+        Menu {
+            Button {
+                trackImportSheet = .fitness
+            } label: {
+                Label("从 Fitness 导入", systemImage: "heart.fill")
+            }
+
+            Button {
+                isChoosingTrackFiles = true
+            } label: {
+                Label("从文件导入 GPX", systemImage: "doc.badge.plus")
+            }
+        } label: {
+            Label("导入运动轨迹", systemImage: "doc.badge.plus")
+        }
+        .disabled(isImportingTracks)
+    }
+
     private var displayModeMenu: some View {
         Menu {
-            Picker("显示方式", selection: $displayMode) {
+            Picker("显示方式", selection: displayModeBinding) {
                 ForEach(DisplayMode.allCases) { mode in
                     Label(LocalizedStringKey(mode.rawValue), systemImage: mode.systemImage)
                         .tag(mode)
@@ -310,11 +391,64 @@ struct CultureMapView: View {
             Toggle(isOn: threeDimensionalViewBinding) {
                 Label("3D 俯视", systemImage: "view.3d")
             }
+
+            Divider()
+
+            importTrackMenu
+
+            if !importedTracks.isEmpty {
+                Toggle(isOn: $showsImportedTracks) {
+                    Label("显示运动轨迹", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                }
+
+                Menu {
+                    ForEach(importedTracks) { track in
+                        Menu {
+                            Button {
+                                focus(on: track)
+                            } label: {
+                                Label("在地图上显示", systemImage: "scope")
+                            }
+
+                            Button(role: .destructive) {
+                                pendingTrackDeletion = track
+                            } label: {
+                                Label("删除轨迹", systemImage: "trash")
+                            }
+                        } label: {
+                            Label(track.name, systemImage: "figure.run")
+                        }
+                    }
+                } label: {
+                    Label("已导入轨迹（\(importedTracks.count)）", systemImage: "figure.run")
+                }
+            }
         } label: {
             Image(systemName: displayMode.systemImage)
         }
         .accessibilityLabel("显示方式")
         .accessibilityValue(LocalizedStringKey(displayMode.rawValue))
+    }
+
+    /// Pinning `.automatic` to the camera currently on screen prevents MapKit
+    /// from reframing when the annotation collection changes between map modes.
+    private var displayModeBinding: Binding<DisplayMode> {
+        Binding(
+            get: { displayMode },
+            set: { newValue in
+                guard let camera = mapCamera ?? mapPosition.camera else {
+                    displayMode = newValue
+                    return
+                }
+
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) {
+                    mapPosition = .camera(camera)
+                    displayMode = newValue
+                }
+            }
+        )
     }
 
     private var threeDimensionalViewBinding: Binding<Bool> {
@@ -338,21 +472,7 @@ struct CultureMapView: View {
         .accessibilityLabel("定位我的位置")
     }
 
-    private var emptyState: some View {
-        ContentUnavailableView {
-            Label("还没有扫描足迹", systemImage: "map")
-        } description: {
-            Text("完成一次扫描并确认结果，它会出现在这里。")
-        } actions: {
-            Button("开始扫描", action: startScan)
-                .buttonStyle(.borderedProminent)
-                .tint(CultureTheme.cinnabar)
-        }
-        .padding(CultureTheme.pagePadding)
-    }
-
-    @ViewBuilder
-    private var historyMap: some View {
+    private var sharedMap: some View {
         Map(position: $mapPosition) {
             UserAnnotation()
 
@@ -365,7 +485,26 @@ struct CultureMapView: View {
                 .tint(.blue)
             }
 
-            ForEach(clusters) { cluster in
+            if displayMode == .map, showsImportedTracks {
+                ForEach(importedTracks) { track in
+                    ForEach(track.segments) { segment in
+                        MapPolyline(coordinates: segment.sampledPoints().map(\.coordinate))
+                            .stroke(
+                                trackColor(for: track),
+                                style: StrokeStyle(
+                                    lineWidth: 4,
+                                    lineCap: .round,
+                                    lineJoin: .round
+                                )
+                            )
+                    }
+                }
+            }
+
+            // Keep history and POI annotations in separate, stable builder
+            // slots. This prevents MapKit from reusing an annotation view from
+            // the previous mode at the new collection's coordinate.
+            ForEach(displayMode == .map ? clusters : []) { cluster in
                 if cluster.records.count == 1, let record = cluster.records.first,
                    let latitude = record.latitude, let longitude = record.longitude {
                     Annotation(
@@ -389,82 +528,8 @@ struct CultureMapView: View {
                     }
                 }
             }
-        }
-        .mapStyle(baseMapStyle.mapStyle)
-        .onMapCameraChange(frequency: .onEnd) { context in
-            historyCamera = context.camera
-            if displayMode == .map {
-                is3DViewEnabled = context.camera.pitch > 1
-            }
-            visibleSpan = context.region.span
-            historySearchRegion = context.region
-        }
-        .overlay(alignment: .topLeading) {
-            if locatedRecords.isEmpty, selectedSearchResult == nil {
-                noLocatedHistoryCallout
-            }
-        }
-        .overlay(alignment: .bottomLeading) {
-            mapSearchPanel
-        }
-        .accessibilityLabel("历史扫描地图，包含 \(locatedRecords.count) 个位置记录")
-    }
 
-    private var noLocatedHistoryCallout: some View {
-        Label("还没有带位置的足迹", systemImage: "location.slash")
-            .font(.callout.weight(.semibold))
-            .foregroundStyle(CultureTheme.inkPrimary)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(CultureTheme.surface, in: Capsule())
-            .overlay {
-                Capsule().stroke(CultureTheme.hairline, lineWidth: 1)
-            }
-            .safeAreaPadding(.leading, 12)
-            .safeAreaPadding(.top, 12)
-    }
-
-    // MARK: - All points of interest (knowledge pack)
-
-    @ViewBuilder
-    private var poiContent: some View {
-        if knowledgeStore == nil {
-            if didAttemptStoreLoad {
-                ContentUnavailableView(
-                    "知识包暂不可用",
-                    systemImage: "externaldrive.badge.exclamationmark",
-                    description: Text("知识包没有成功载入，兴趣点地图暂时不可用。")
-                )
-                .padding(CultureTheme.pagePadding)
-            } else {
-                ProgressView("正在载入兴趣点…")
-            }
-        } else if poiPoints.isEmpty {
-            ContentUnavailableView(
-                "知识包中没有兴趣点",
-                systemImage: "mappin.slash",
-                description: Text("当前知识包没有带位置信息的景点。")
-            )
-            .padding(CultureTheme.pagePadding)
-        } else {
-            poiMap
-        }
-    }
-
-    private var poiMap: some View {
-        Map(position: $poiCameraPosition) {
-            UserAnnotation()
-
-            if let selectedSearchResult {
-                Marker(
-                    selectedSearchResult.name,
-                    systemImage: "mappin.and.ellipse",
-                    coordinate: selectedSearchResult.coordinate
-                )
-                .tint(.blue)
-            }
-
-            ForEach(poiClusters) { cluster in
+            ForEach(displayMode == .pois && knowledgeStore != nil ? poiClusters : []) { cluster in
                 if cluster.points.count == 1, let point = cluster.points.first {
                     Annotation(
                         "",
@@ -490,72 +555,274 @@ struct CultureMapView: View {
         }
         .mapStyle(baseMapStyle.mapStyle)
         .onMapCameraChange(frequency: .onEnd) { context in
-            poiCamera = context.camera
-            if displayMode == .pois {
-                is3DViewEnabled = context.camera.pitch > 1
+            mapCamera = context.camera
+            is3DViewEnabled = context.camera.pitch > 1
+            visibleSpan = context.region.span
+            mapSearchRegion = context.region
+        }
+        .overlay(alignment: .topLeading) {
+            if displayMode == .map,
+               locatedRecords.isEmpty,
+               (!showsImportedTracks || importedTracks.isEmpty),
+               selectedSearchResult == nil {
+                mapStatusCallout("还没有带位置的足迹", systemImage: "location.slash")
+            } else if displayMode == .pois {
+                poiAvailabilityCallout
             }
-            poiSearchRegion = context.region
         }
         .overlay(alignment: .bottomLeading) {
             mapSearchPanel
         }
-        .accessibilityLabel("知识包兴趣点地图，包含 \(poiPoints.count) 个景点")
+        .accessibilityLabel(
+            displayMode == .pois
+                ? Text("知识包兴趣点地图，包含 \(poiPoints.count) 个景点")
+                : Text(
+                    "历史扫描地图，包含 \(locatedRecords.count) 个位置记录和 \(importedTracks.count) 条运动轨迹"
+                )
+        )
+    }
+
+    @ViewBuilder
+    private var poiAvailabilityCallout: some View {
+        if knowledgeStore == nil {
+            if didAttemptStoreLoad {
+                mapStatusCallout(
+                    "知识包暂不可用",
+                    systemImage: "externaldrive.badge.exclamationmark"
+                )
+            } else {
+                mapStatusCallout("正在载入兴趣点…", systemImage: "arrow.clockwise")
+            }
+        } else if poiPoints.isEmpty {
+            mapStatusCallout("知识包中没有兴趣点", systemImage: "mappin.slash")
+        }
+    }
+
+    private func mapStatusCallout(_ title: LocalizedStringKey, systemImage: String) -> some View {
+        Label(title, systemImage: systemImage)
+            .font(.callout.weight(.semibold))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(CultureTheme.surface, in: Capsule())
+            .overlay {
+                Capsule().stroke(CultureTheme.hairline, lineWidth: 1)
+            }
+            .safeAreaPadding(.leading, 12)
+            .safeAreaPadding(.top, 12)
     }
 
     private func set3DViewEnabled(_ enabled: Bool) {
         is3DViewEnabled = enabled
 
-        let currentCamera: MapCamera?
-        switch displayMode {
-        case .map, .timeline:
-            currentCamera = historyCamera ?? mapPosition.camera
-        case .pois:
-            currentCamera = poiCamera ?? poiCameraPosition.camera
-        }
-        guard var camera = currentCamera else { return }
+        guard var camera = mapCamera ?? mapPosition.camera else { return }
 
         camera.pitch = enabled ? 55 : 0
         withAnimation {
-            switch displayMode {
-            case .map, .timeline:
-                mapPosition = .camera(camera)
-            case .pois:
-                poiCameraPosition = .camera(camera)
-            }
+            mapPosition = .camera(camera)
         }
     }
 
-    private func locateUser() {
+    /// Centers the shared map on the user at a ~2 km visible width.
+    private func locateUser(showsErrorAlert: Bool = true) {
         guard !isLocatingUser else { return }
         isLocatingUser = true
 
         Task {
             defer { isLocatingUser = false }
-            do {
-                let place = try await locationProvider.requestBestPlace()
-                let region = MKCoordinateRegion(
-                    center: CLLocationCoordinate2D(
-                        latitude: place.latitude,
-                        longitude: place.longitude
-                    ),
-                    latitudinalMeters: 2_000,
-                    longitudinalMeters: 2_000
-                )
+            await centerMapOnUserLocation(animated: true, showsErrorAlert: showsErrorAlert)
+        }
+    }
+
+    /// One-shot framing when the footprint tab first appears.
+    private func applyInitialUserLocationIfNeeded() async {
+        guard !didApplyInitialUserLocation else { return }
+        didApplyInitialUserLocation = true
+        guard !isLocatingUser else { return }
+        isLocatingUser = true
+        defer { isLocatingUser = false }
+        await centerMapOnUserLocation(animated: false, showsErrorAlert: false)
+    }
+
+    private func centerMapOnUserLocation(animated: Bool, showsErrorAlert: Bool) async {
+        do {
+            let place = try await locationProvider.requestBestPlace()
+            let region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(
+                    latitude: place.latitude,
+                    longitude: place.longitude
+                ),
+                latitudinalMeters: 2_000,
+                longitudinalMeters: 2_000
+            )
+            let apply = {
+                is3DViewEnabled = false
+                mapPosition = .region(region)
+            }
+            if animated {
                 withAnimation {
-                    is3DViewEnabled = false
-                    if displayMode == .pois {
-                        poiCameraPosition = .region(region)
-                    } else {
-                        displayMode = .map
-                        mapPosition = .region(region)
-                    }
+                    apply()
                 }
-            } catch is CancellationError {
-                return
-            } catch {
+            } else {
+                apply()
+            }
+        } catch is CancellationError {
+            return
+        } catch {
+            if showsErrorAlert {
                 locationAlert = LocationAlert(message: error.localizedDescription)
             }
         }
+    }
+
+    private var pendingTrackDeletionBinding: Binding<Bool> {
+        Binding(
+            get: { pendingTrackDeletion != nil },
+            set: { isPresented in
+                if !isPresented {
+                    pendingTrackDeletion = nil
+                }
+            }
+        )
+    }
+
+    private var fitnessWorkoutSourceIdentifiers: Set<String> {
+        Set(
+            importedTracks.compactMap { track in
+                guard track.sourceKind == .appleFitness else { return nil }
+                return track.sourceIdentifier
+            }
+        )
+    }
+
+    private func handleFitnessTracksImported(_ tracks: [ImportedTrack]) {
+        guard !tracks.isEmpty else { return }
+        let importedIDs = Set(tracks.map(\.id))
+        importedTracks = tracks + importedTracks.filter { !importedIDs.contains($0.id) }
+        showsImportedTracks = true
+        if let lastImported = tracks.last {
+            focus(on: lastImported)
+        }
+
+        let pointCount = tracks.reduce(0) { $0 + $1.pointCount }
+        trackImportNotice = TrackImportNotice(
+            title: String(localized: "轨迹已导入"),
+            message: String(
+                localized: "已从 Fitness 保存 \(tracks.count) 条运动轨迹，共 \(pointCount) 个轨迹点。"
+            )
+        )
+    }
+
+    private func handleTrackFileSelection(_ result: Result<[URL], any Error>) {
+        switch result {
+        case .failure(let error):
+            trackImportNotice = TrackImportNotice(
+                title: String(localized: "无法导入轨迹"),
+                message: error.localizedDescription
+            )
+        case .success(let urls):
+            guard !urls.isEmpty else { return }
+            isImportingTracks = true
+
+            Task {
+                var successes: [ImportedTrack] = []
+                var failures: [String] = []
+
+                for url in urls {
+                    do {
+                        successes.append(try await ImportedTrackStore.shared.importGPX(from: url))
+                    } catch {
+                        failures.append("\(url.lastPathComponent)：\(error.localizedDescription)")
+                    }
+                }
+
+                if !successes.isEmpty {
+                    importedTracks = (try? await ImportedTrackStore.shared.load())
+                        ?? (successes + importedTracks)
+                    showsImportedTracks = true
+                    if let lastImported = successes.last {
+                        focus(on: lastImported)
+                    }
+                }
+
+                isImportingTracks = false
+                if failures.isEmpty {
+                    let pointCount = successes.reduce(0) { $0 + $1.pointCount }
+                    trackImportNotice = TrackImportNotice(
+                        title: String(localized: "轨迹已导入"),
+                        message: String(
+                            localized: "已保存 \(successes.count) 条运动轨迹，共 \(pointCount) 个轨迹点。"
+                        )
+                    )
+                } else {
+                    let summary = failures.prefix(3).joined(separator: "\n")
+                    let remaining = max(failures.count - 3, 0)
+                    let suffix = remaining > 0
+                        ? String(localized: "\n另有 \(remaining) 个文件导入失败。")
+                        : ""
+                    trackImportNotice = TrackImportNotice(
+                        title: successes.isEmpty
+                            ? String(localized: "无法导入轨迹")
+                            : String(localized: "部分轨迹已导入"),
+                        message: summary + suffix
+                    )
+                }
+            }
+        }
+    }
+
+    private func focus(on track: ImportedTrack) {
+        let points = track.segments.flatMap(\.points)
+        guard
+            let minimumLatitude = points.map(\.latitude).min(),
+            let maximumLatitude = points.map(\.latitude).max(),
+            let minimumLongitude = points.map(\.longitude).min(),
+            let maximumLongitude = points.map(\.longitude).max()
+        else { return }
+
+        let region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: (minimumLatitude + maximumLatitude) / 2,
+                longitude: (minimumLongitude + maximumLongitude) / 2
+            ),
+            span: MKCoordinateSpan(
+                latitudeDelta: max((maximumLatitude - minimumLatitude) * 1.25, 0.005),
+                longitudeDelta: max((maximumLongitude - minimumLongitude) * 1.25, 0.005)
+            )
+        )
+
+        withAnimation {
+            displayMode = .map
+            showsImportedTracks = true
+            is3DViewEnabled = false
+            mapPosition = .region(region)
+        }
+    }
+
+    private func deleteImportedTrack(_ track: ImportedTrack) {
+        pendingTrackDeletion = nil
+        Task {
+            do {
+                try await ImportedTrackStore.shared.delete(track)
+                importedTracks.removeAll { $0.id == track.id }
+            } catch {
+                trackImportNotice = TrackImportNotice(
+                    title: String(localized: "无法删除轨迹"),
+                    message: String(localized: "请稍后再试。")
+                )
+            }
+        }
+    }
+
+    private func trackColor(for track: ImportedTrack) -> Color {
+        let seed = track.id.uuidString.utf8.reduce(UInt64(0)) {
+            ($0 &* 31 &+ UInt64($1)) % 360
+        }
+        return Color(
+            hue: Double(seed) / 360,
+            saturation: 0.78,
+            brightness: 0.76
+        )
     }
 
     @ViewBuilder
@@ -742,12 +1009,7 @@ struct CultureMapView: View {
     }
 
     private var activeSearchRegion: MKCoordinateRegion? {
-        switch displayMode {
-        case .map, .timeline:
-            historySearchRegion
-        case .pois:
-            poiSearchRegion
-        }
+        mapSearchRegion
     }
 
     private func selectSearchResult(_ result: PlaceSearchResult) {
@@ -758,12 +1020,7 @@ struct CultureMapView: View {
             span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         )
         withAnimation {
-            if displayMode == .pois {
-                poiCameraPosition = .region(region)
-            } else {
-                displayMode = .map
-                mapPosition = .region(region)
-            }
+            mapPosition = .region(region)
         }
 
         searchText = ""
@@ -1076,85 +1333,6 @@ struct CultureMapView: View {
         .accessibilityLabel(visited ? "\(point.name)，已到访" : point.name)
     }
 
-    private var timelineScroll: some View {
-        ScrollView {
-            LazyVStack(spacing: 14) {
-                ForEach(records) { record in
-                    NavigationLink(value: AppRoute.history(record.recordID)) {
-                        historyCard(record)
-                    }
-                    .buttonStyle(.plain)
-                    .contextMenu {
-                        Button("删除记录", role: .destructive) {
-                            delete(record)
-                        }
-                    }
-                }
-            }
-            .padding(.horizontal, CultureTheme.pagePadding)
-            .padding(.top, 8)
-            .padding(.bottom, 40)
-        }
-        .safeAreaPadding(.top, 4)
-    }
-
-    private func historyCard(_ record: ScanHistoryRecord) -> some View {
-        HStack(spacing: 14) {
-            Image(systemName: symbol(for: record))
-                .font(.title2)
-                .foregroundStyle(CultureTheme.antiqueGold)
-                .frame(width: 54, height: 54)
-                .background(CultureTheme.inkPrimary, in: RoundedRectangle(cornerRadius: 16))
-
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    Text(record.canonicalName)
-                        .font(.headline)
-                        .foregroundStyle(CultureTheme.inkPrimary)
-                    Spacer()
-                    Text(record.confidence, format: .percent.precision(.fractionLength(0)))
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(CultureTheme.cinnabar)
-                }
-
-                Text(record.createdAt, format: .dateTime.year().month().day().hour().minute())
-                    .font(.caption)
-                    .foregroundStyle(CultureTheme.inkSecondary)
-
-                Label(
-                    locationText(for: record),
-                    systemImage: record.place == nil ? "location.slash" : "location"
-                )
-                .font(.caption)
-                .foregroundStyle(CultureTheme.inkSecondary)
-            }
-
-            Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-        .padding(16)
-        .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 20))
-        .overlay {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityHint("打开历史扫描详情")
-    }
-
-    /// 坐标已记录但地名缺失时（如照片 EXIF 定位、逆地理编码失败）显示坐标兜底。
-    private func locationText(for record: ScanHistoryRecord) -> String {
-        if let placeName = record.placeName, !placeName.isEmpty {
-            return placeName
-        }
-        if let latitude = record.latitude, let longitude = record.longitude {
-            return String(localized: "已记录位置")
-                + String(format: " %.3f, %.3f", latitude, longitude)
-        }
-        return String(localized: "未记录位置")
-    }
-
     private func symbol(for record: ScanHistoryRecord) -> String {
         switch ObjectCategory(rawValue: record.categoryRawValue) {
         case .architecture: "building.columns"
@@ -1165,14 +1343,12 @@ struct CultureMapView: View {
         case .other, nil: "sparkles"
         }
     }
+}
 
-    private func delete(_ record: ScanHistoryRecord) {
-        let path = record.imageRelativePath
-        modelContext.delete(record)
-        try? modelContext.save()
-        Task {
-            try? await ScanMediaStore.shared.delete(relativePath: path)
-        }
+private extension UTType {
+    static var gpx: UTType {
+        UTType(filenameExtension: "gpx")
+            ?? UTType(importedAs: "com.topografix.gpx", conformingTo: .data)
     }
 }
 
@@ -1232,7 +1408,7 @@ private struct ScanMapThumbnail: View {
 
 #Preview {
     NavigationStack {
-        CultureMapView(showsBackButton: false) {}
+        CultureMapView(showsBackButton: false)
     }
     .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
     .environment(AppLanguageStore())

@@ -5,8 +5,9 @@ enum AppTab: String, CaseIterable, Identifiable {
     case chat
     case scan
     case graph
-    /// Scan footprint map + timeline (split from former Profile).
+    /// Scan footprint map (split from former Profile).
     case history
+    /// Timeline + visit-trip review hub.
     case review
     case settings
     /// Compact-only overflow container for secondary tabs.

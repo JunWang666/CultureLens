@@ -5,6 +5,8 @@ import SwiftUI
 struct PersonalizedExplanationView: View {
   let explanation: PersonalizedExplanation
   let knowledgeContextSummary: LocalizedStringKey
+  var isRegenerating = false
+  var onRegenerate: (() -> Void)? = nil
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
@@ -26,10 +28,27 @@ struct PersonalizedExplanationView: View {
   }
 
   private var explanationHeader: some View {
-    Label(knowledgeContextSummary, systemImage: "person.text.rectangle")
-      .font(.caption.weight(.semibold))
-      .foregroundStyle(CultureTheme.inkSecondary)
-      .fixedSize(horizontal: false, vertical: true)
+    HStack(alignment: .firstTextBaseline, spacing: 12) {
+      Label(knowledgeContextSummary, systemImage: "person.text.rectangle")
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .fixedSize(horizontal: false, vertical: true)
+
+      Spacer(minLength: 8)
+
+      if isRegenerating {
+        ProgressView()
+          .controlSize(.small)
+          .accessibilityLabel("正在重新生成讲解")
+      } else if let onRegenerate {
+        Button("重新生成", systemImage: "arrow.clockwise", action: onRegenerate)
+          .labelStyle(.iconOnly)
+          .buttonStyle(.plain)
+          .foregroundStyle(CultureTheme.cinnabar)
+          .accessibilityHint("使用最新文化图谱重新生成并替换当前讲解")
+          .accessibilityIdentifier("explanation.regenerate")
+      }
+    }
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
@@ -70,6 +89,7 @@ enum ExplanationLoadState: Equatable {
   case loading(isThinking: Bool)
   case streaming
   case loaded(PersonalizedExplanation)
+  case regenerating(PersonalizedExplanation)
   case partial(PersonalizedExplanation, message: String)
   case failed(String)
 }

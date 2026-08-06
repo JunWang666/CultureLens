@@ -13,6 +13,10 @@ App 当前会在 `KnowledgePackLoader` 中自动加载并合并四个知识包�
 
 因此首次安装仍默认随 App 一起交付，但每个包拥有独立的可用状态与下载重试能力，后续可以只调整某个 tag 的分发策略。
 
+当前 Debug 与 Release 均启用 `EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE`。因此 Xcode
+侧载、Ad Hoc 等没有 ODR 托管服务器的安装方式也会把四个 asset pack 嵌入 App
+产物；保留 ODR tag 与运行时请求机制，以便后续重新切回 App Store 托管分发。
+
 ## 目标
 
 - 在「设置」中增加「资源包管理」入口。

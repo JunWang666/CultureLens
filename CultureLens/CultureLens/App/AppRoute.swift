@@ -10,8 +10,9 @@ nonisolated enum AppRoute: Hashable {
     case scanResult(UUID)
     case scanCandidate(sessionID: UUID, candidateID: UUID)
     case history(UUID)
-    /// Scan footprint map + timeline (pushed from「更多」on compact).
+    /// Scan footprint map (pushed from「更多」on compact).
     case footprint
+    /// Review hub: timeline + visit trips (pushed from「更多」on compact).
     case visitTrips
     case visitTrip(UUID)
     case themes

@@ -12,6 +12,8 @@ struct SettingsView: View {
         LazyVStack(alignment: .leading, spacing: 16) {
           LanguageSettingsSection()
 
+          CacheSettingsSection()
+
           NavigationLink {
             KnowledgePackManagerView()
           } label: {

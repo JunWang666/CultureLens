@@ -69,7 +69,7 @@ struct AppRootView: View {
             }
 
             if showsSecondaryTabsInline {
-                // Peer tabs so 足迹 / 文化回顾 / 设置 all stay in the top tab bar.
+                // Peer tabs so 足迹 / 回顾 / 设置 all stay in the top tab bar.
                 historyTab
                 reviewTab
                 settingsTab
@@ -117,9 +117,7 @@ struct AppRootView: View {
     private var historyTab: some TabContent<AppTab> {
         Tab(AppTab.history.title, systemImage: AppTab.history.systemImage, value: .history) {
             appStack(path: $historyPath) {
-                CultureMapView(showsBackButton: false) {
-                    selectedTab = .scan
-                }
+                CultureMapView(showsBackButton: false)
             }
         }
     }
@@ -127,7 +125,9 @@ struct AppRootView: View {
     private var reviewTab: some TabContent<AppTab> {
         Tab(AppTab.review.title, systemImage: AppTab.review.systemImage, value: .review) {
             appStack(path: $reviewPath) {
-                VisitTripListView(showsBackButton: false)
+                ReviewHomeView(showsBackButton: false) {
+                    selectedTab = .scan
+                }
             }
         }
     }
@@ -236,11 +236,11 @@ struct AppRootView: View {
         case .history(let id):
             ScanHistoryDetailView(recordID: id)
         case .footprint:
-            CultureMapView(showsBackButton: true) {
+            CultureMapView(showsBackButton: true)
+        case .visitTrips:
+            ReviewHomeView(showsBackButton: true) {
                 selectedTab = .scan
             }
-        case .visitTrips:
-            VisitTripListView(showsBackButton: true)
         case .visitTrip(let id):
             VisitTripDetailView(tripID: id)
         case .themes:

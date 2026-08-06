@@ -63,7 +63,7 @@ struct CultureNavigationTitleModifier: ViewModifier {
                     ToolbarItem(placement: .principal) {
                         VStack(spacing: 2) {
                             Text(title)
-                                .font(.headline)
+                                .font(CultureTypography.title(.headline))
                             Text(subtitle)
                                 .font(.caption2)
                                 .foregroundStyle(CultureTheme.inkSecondary)
@@ -71,9 +71,16 @@ struct CultureNavigationTitleModifier: ViewModifier {
                     }
                 }
         } else {
+            // iPhone 无副标题也走 principal，确保导航栏用杂志宋体，不依赖 UIKit appearance 回退。
             content
-                .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(title)
+                            .font(CultureTypography.title(.headline))
+                            .foregroundStyle(CultureTheme.inkPrimary)
+                    }
+                }
         }
     }
 
@@ -84,7 +91,7 @@ struct CultureNavigationTitleModifier: ViewModifier {
             if let subtitle {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.headline)
+                        .font(CultureTypography.title(.headline))
                         .foregroundStyle(CultureTheme.inkPrimary)
                     Text(subtitle)
                         .font(.caption2)
@@ -92,7 +99,7 @@ struct CultureNavigationTitleModifier: ViewModifier {
                 }
             } else {
                 Text(title)
-                    .font(.headline)
+                    .font(CultureTypography.title(.headline))
                     .foregroundStyle(CultureTheme.inkPrimary)
             }
         }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Icon-only speak / stop control bound to `CultureTTSController.shared`.
+/// Speak control with pause / resume / stop — pause keeps position; stop ends the session.
 struct SpeakTextButton: View {
   let utteranceID: String
   let text: String
@@ -12,6 +12,7 @@ struct SpeakTextButton: View {
 
   private var isLoading: Bool { controller.isLoading(utteranceID: utteranceID) }
   private var isPlaying: Bool { controller.isPlaying(utteranceID: utteranceID) }
+  private var isPaused: Bool { controller.isPaused(utteranceID: utteranceID) }
   private var isActive: Bool { controller.isActive(utteranceID: utteranceID) }
 
   private var speakable: String {
@@ -24,9 +25,33 @@ struct SpeakTextButton: View {
         ProgressView()
           .controlSize(.small)
           .accessibilityLabel("正在准备朗读")
+      } else if isActive {
+        HStack(spacing: 12) {
+          Button(isPaused ? "继续朗读" : "暂停朗读", systemImage: isPaused ? "play.fill" : "pause.fill") {
+            controller.toggle(
+              utteranceID: utteranceID,
+              text: speakable,
+              language: languageStore.language
+            )
+          }
+          .labelStyle(.iconOnly)
+          .buttonStyle(.plain)
+          .foregroundStyle(CultureTheme.cinnabar)
+          .accessibilityHint(isPaused ? "从暂停处继续" : "暂停当前朗读")
+          .accessibilityIdentifier("tts.pause.\(utteranceID)")
+
+          Button("停止朗读", systemImage: "stop.fill") {
+            controller.stop()
+          }
+          .labelStyle(.iconOnly)
+          .buttonStyle(.plain)
+          .foregroundStyle(CultureTheme.inkSecondary)
+          .accessibilityHint("结束朗读，下次从头播放")
+          .accessibilityIdentifier("tts.stop.\(utteranceID)")
+        }
       } else {
-        Button(isPlaying ? "停止朗读" : accessibilityLabelKey, systemImage: systemImage) {
-          controller.toggle(
+        Button(accessibilityLabelKey, systemImage: "speaker.wave.2") {
+          controller.speak(
             utteranceID: utteranceID,
             text: speakable,
             language: languageStore.language
@@ -36,14 +61,10 @@ struct SpeakTextButton: View {
         .buttonStyle(.plain)
         .foregroundStyle(CultureTheme.cinnabar)
         .disabled(speakable.isEmpty)
-        .accessibilityHint(isPlaying ? "停止当前朗读" : "朗读当前内容")
+        .accessibilityHint("朗读当前内容")
         .accessibilityIdentifier("tts.speak.\(utteranceID)")
       }
     }
     .opacity(speakable.isEmpty ? 0.35 : 1)
-  }
-
-  private var systemImage: String {
-    isPlaying ? "stop.fill" : "speaker.wave.2"
   }
 }

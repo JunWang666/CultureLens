@@ -5,7 +5,7 @@ import SwiftUI
 /// accessibility, optional caption, and tap-to-open system Quick Look preview.
 struct RichTextBlocksView: View {
   let document: RichTextDocument
-  var textFont: Font = .body
+  var textFont: Font = CultureTypography.body(.body)
   var textColor: Color = CultureTheme.inkSecondary
 
   var body: some View {

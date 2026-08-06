@@ -245,7 +245,7 @@ struct CultureRelationGraphView: View {
     VStack(alignment: .leading, spacing: 10) {
       HStack(alignment: .firstTextBaseline) {
         Text("文化知识图谱")
-          .font(.cultureSerif(.title2))
+          .font(CultureTypography.title(.title2))
           .foregroundStyle(CultureTheme.inkPrimary)
 
         Spacer(minLength: 12)
@@ -651,7 +651,7 @@ struct CultureRelationGraphView: View {
       .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(relation.explanation)
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
     }

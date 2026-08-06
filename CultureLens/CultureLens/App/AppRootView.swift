@@ -7,6 +7,7 @@ struct AppRootView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(AppLanguageStore.self) private var languageStore
+    @Environment(TypographyPreferenceStore.self) private var typographyStore
     @State private var selectedTab: AppTab = .explore
     @State private var explorePath: [AppRoute] = []
     @State private var chatPath: [AppRoute] = []
@@ -88,6 +89,7 @@ struct AppRootView: View {
         .defaultAdaptableTabBarPlacement(.tabBar)
         .focusedSceneValue(\.selectedAppTab, $selectedTab)
         .tint(CultureTheme.cinnabar)
+        .environment(\.font, CultureTypography.body(.body))
         .environment(\.recognitionService, recognitionService)
         .environment(knowledgeProgressStore)
         .environment(chatHistoryStore)
@@ -170,10 +172,17 @@ struct AppRootView: View {
     ) -> some View {
         NavigationStack(path: path) {
             root()
+                // 字体偏好变更时刷新根页与已推入页，不重置 navigation path。
+                .id(typographyStore.revision)
                 .navigationDestination(for: AppRoute.self) { route in
                     destination(for: route)
+                        .id("\(typographyStore.revision)-\(routeRefreshID(route))")
                 }
         }
+    }
+
+    private func routeRefreshID(_ route: AppRoute) -> String {
+        String(describing: route)
     }
 
     @ViewBuilder
@@ -307,4 +316,6 @@ struct AppRootView: View {
 #Preview {
     AppRootView()
         .environment(AppLanguageStore())
+        .environment(TTSPreferenceStore())
+        .environment(TypographyPreferenceStore())
 }

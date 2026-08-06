@@ -9,7 +9,7 @@ struct LocalizedKnowledgeBlocksView: View {
   let elementKey: String?
   let fallbackName: String
   let fallbackSummary: String
-  var textFont: Font = .title3
+  var textFont: Font = CultureTypography.body(.title3)
   var textColor: Color = CultureTheme.inkPrimary
 
   @Environment(AppLanguageStore.self) private var languageStore
@@ -22,7 +22,7 @@ struct LocalizedKnowledgeBlocksView: View {
     elementKey: String? = nil,
     fallbackName: String,
     fallbackSummary: String,
-    textFont: Font = .title3,
+    textFont: Font = CultureTypography.body(.title3),
     textColor: Color = CultureTheme.inkPrimary
   ) {
     self.elementID = elementID

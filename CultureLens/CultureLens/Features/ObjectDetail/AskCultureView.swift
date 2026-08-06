@@ -129,7 +129,7 @@ struct AskCultureView: View {
 
           if let errorMessage = model.errorMessage {
             Text(errorMessage)
-              .font(.footnote)
+              .font(CultureTypography.body(.footnote))
               .foregroundStyle(CultureTheme.cinnabar)
               .padding(.horizontal, 4)
               .id("error")
@@ -153,7 +153,7 @@ struct AskCultureView: View {
   private var emptyState: some View {
     VStack(alignment: .leading, spacing: 16) {
       Text(isGeneralChat ? LocalizedStringKey("好奇什么，直接问") : "继续追问这个对象")
-        .font(.cultureSerif(.title2))
+        .font(CultureTypography.title(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(
@@ -161,7 +161,7 @@ struct AskCultureView: View {
           ? LocalizedStringKey("从知识库与你的文化图谱里找答案，也可以附一张现场照片。")
           : "围绕当前对象与图谱邻居提问；可附现场照片，内容约束在知识库片段内。"
       )
-      .font(.subheadline)
+      .font(CultureTypography.body(.subheadline))
       .foregroundStyle(CultureTheme.inkSecondary)
 
       FlowSuggestionRow(suggestions: model.suggestions) { text in
@@ -204,7 +204,7 @@ struct AskCultureView: View {
               }
               if !message.text.isEmpty {
                 Text(message.text)
-                  .font(.body)
+                  .font(CultureTypography.body(.body))
                   .foregroundStyle(.white)
                   .multilineTextAlignment(.leading)
                   .padding(.horizontal, 14)
@@ -281,7 +281,7 @@ struct AskCultureView: View {
       HStack(spacing: 8) {
         ProgressView()
         Text("正在组织回答…")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
     }
@@ -370,7 +370,7 @@ struct AskCultureView: View {
               .padding(10)
             }
           }
-          .font(.body)
+          .font(CultureTypography.body(.body))
           .frame(width: 210)
           .padding(6)
           .presentationCompactAdaptation(.popover)
@@ -382,7 +382,7 @@ struct AskCultureView: View {
           axis: .vertical
         )
         .focused($isComposerFocused)
-        .font(.body)
+        .font(CultureTypography.body(.body))
         .textFieldStyle(.plain)
         .lineLimit(1...4)
         .submitLabel(.send)
@@ -448,7 +448,7 @@ struct AskCultureView: View {
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
-    .default.withShouldAnimateText(value: true)
+    CultureMarkdownStyle.renderConfig(animated: true)
   }
 }
 
@@ -999,7 +999,7 @@ private struct ThinkingStatusView: View {
       HStack(spacing: 10) {
         ThinkingPulseDots()
         Text("正在思考\(dots)")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
           .monospacedDigit()
           .animation(nil, value: phase)
@@ -1037,7 +1037,7 @@ private struct FlowSuggestionRow: View {
           onTap(suggestion)
         } label: {
           Text(suggestion)
-            .font(.subheadline)
+            .font(CultureTypography.body(.subheadline))
             .foregroundStyle(CultureTheme.inkPrimary)
             .padding(.horizontal, 12)
             .padding(.vertical, 8)

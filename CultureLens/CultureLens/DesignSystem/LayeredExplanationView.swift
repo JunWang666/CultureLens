@@ -57,7 +57,7 @@ struct PersonalizedExplanationView: View {
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
-    .default.withShouldAnimateText(value: false)
+    CultureMarkdownStyle.renderConfig(animated: false)
   }
 }
 
@@ -82,7 +82,7 @@ struct StreamingPersonalizedExplanationView: View {
   }
 
   private static var markdownConfig: MarkdownRenderConfig {
-    .default.withShouldAnimateText(value: true)
+    CultureMarkdownStyle.renderConfig(animated: true)
   }
 }
 

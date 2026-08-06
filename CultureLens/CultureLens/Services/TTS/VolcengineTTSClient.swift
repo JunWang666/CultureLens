@@ -28,7 +28,8 @@ enum VolcengineTTSError: LocalizedError, Equatable {
   }
 }
 
-/// Calls Volcengine V3 HTTP Chunked unidirectional TTS and returns MP3 bytes.
+/// Calls Volcengine V3 HTTP Chunked unidirectional TTS and yields PCM audio
+/// frames as they arrive (s16le mono at `config.sampleRate`).
 nonisolated struct VolcengineTTSClient: Sendable {
   let config: VolcengineTTSConfig
   private let session: URLSession
@@ -41,15 +42,46 @@ nonisolated struct VolcengineTTSClient: Sendable {
       let configuration = URLSessionConfiguration.ephemeral
       configuration.timeoutIntervalForRequest = config.timeout
       configuration.timeoutIntervalForResource = config.timeout
+      // Prefer streaming: don't wait for the full body before delivering bytes.
+      configuration.httpMaximumConnectionsPerHost = 4
       self.session = URLSession(configuration: configuration)
     }
   }
 
-  func synthesize(
+  /// Streams decoded PCM chunks from the NDJSON chunked response.
+  func synthesizeStream(
     text: String,
     language: AppLanguage,
     requestID: UUID = UUID()
-  ) async throws -> Data {
+  ) -> AsyncThrowingStream<Data, Error> {
+    AsyncThrowingStream { continuation in
+      let task = Task {
+        do {
+          try await self.runStream(
+            text: text,
+            language: language,
+            requestID: requestID,
+            continuation: continuation
+          )
+          continuation.finish()
+        } catch is CancellationError {
+          continuation.finish()
+        } catch {
+          continuation.finish(throwing: error)
+        }
+      }
+      continuation.onTermination = { _ in
+        task.cancel()
+      }
+    }
+  }
+
+  private func runStream(
+    text: String,
+    language: AppLanguage,
+    requestID: UUID,
+    continuation: AsyncThrowingStream<Data, Error>.Continuation
+  ) async throws {
     guard config.hasCredentials else {
       throw VolcengineTTSError.missingCredentials
     }
@@ -79,6 +111,7 @@ nonisolated struct VolcengineTTSClient: Sendable {
     let additionsData = try JSONSerialization.data(withJSONObject: additions)
     let additionsString = String(data: additionsData, encoding: .utf8) ?? "{}"
 
+    // PCM streams into AVAudioEngine without waiting for a full MP3 file.
     let body: [String: Any] = [
       "user": [
         "uid": "culturelens"
@@ -87,7 +120,7 @@ nonisolated struct VolcengineTTSClient: Sendable {
         "text": trimmed,
         "speaker": config.speaker(for: language),
         "audio_params": [
-          "format": "mp3",
+          "format": "pcm",
           "sample_rate": config.sampleRate
         ],
         "additions": additionsString
@@ -113,67 +146,64 @@ nonisolated struct VolcengineTTSClient: Sendable {
       )
     }
 
+    var lineBuffer = Data()
+    var receivedAudio = false
+    var finished = false
+
     do {
-      let audio = try await Self.collectMP3(from: bytes)
-      guard !audio.isEmpty else {
-        throw VolcengineTTSError.emptyAudio
+      for try await byte in bytes {
+        try Task.checkCancellation()
+        lineBuffer.append(byte)
+        while let newline = lineBuffer.firstIndex(of: 0x0A) {
+          let lineData = lineBuffer.subdata(in: lineBuffer.startIndex..<newline)
+          lineBuffer.removeSubrange(lineBuffer.startIndex...newline)
+          let line = String(data: lineData, encoding: .utf8)?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+          guard !line.isEmpty else { continue }
+          let event = try Self.parseEvent(line)
+          switch event.kind {
+          case .audio(let chunk):
+            receivedAudio = true
+            continuation.yield(chunk)
+          case .finished:
+            finished = true
+          case .ignore:
+            break
+          }
+        }
+        if finished { break }
       }
-      return audio
+
+      if !finished {
+        let trailing = String(data: lineBuffer, encoding: .utf8)?
+          .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if !trailing.isEmpty {
+          let event = try Self.parseEvent(trailing)
+          switch event.kind {
+          case .audio(let chunk):
+            receivedAudio = true
+            continuation.yield(chunk)
+          case .finished:
+            finished = true
+          case .ignore:
+            break
+          }
+        }
+      }
     } catch let error as VolcengineTTSError {
       throw error
+    } catch is CancellationError {
+      throw CancellationError()
     } catch {
       throw VolcengineTTSError.transport(error.localizedDescription)
     }
-  }
 
-  /// Parses NDJSON chunked body: audio frames (`code == 0` + base64 `data`)
-  /// until terminal success (`code == 20000000`).
-  static func collectMP3(from bytes: URLSession.AsyncBytes) async throws -> Data {
-    var buffer = Data()
-    var audio = Data()
-    var finished = false
-
-    for try await byte in bytes {
-      buffer.append(byte)
-      while let newline = buffer.firstIndex(of: 0x0A) {
-        let lineData = buffer.subdata(in: buffer.startIndex..<newline)
-        buffer.removeSubrange(buffer.startIndex...newline)
-        let line = String(data: lineData, encoding: .utf8)?
-          .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        guard !line.isEmpty else { continue }
-        let event = try parseEvent(line)
-        switch event.kind {
-        case .audio(let chunk):
-          audio.append(chunk)
-        case .finished:
-          finished = true
-        case .ignore:
-          break
-        }
-      }
-      if finished { break }
-    }
-
-    if !finished {
-      let trailing = String(data: buffer, encoding: .utf8)?
-        .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      if !trailing.isEmpty {
-        let event = try parseEvent(trailing)
-        switch event.kind {
-        case .audio(let chunk):
-          audio.append(chunk)
-        case .finished:
-          finished = true
-        case .ignore:
-          break
-        }
-      }
-    }
-
-    guard finished || !audio.isEmpty else {
+    guard finished || receivedAudio else {
       throw VolcengineTTSError.invalidResponse
     }
-    return audio
+    guard receivedAudio else {
+      throw VolcengineTTSError.emptyAudio
+    }
   }
 
   /// Test helper: parse a single NDJSON line.

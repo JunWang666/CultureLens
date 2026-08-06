@@ -68,7 +68,7 @@ struct ThemeExploreListView: View {
     VStack(alignment: .leading, spacing: 12) {
       HStack(alignment: .firstTextBaseline) {
         Text(progress.theme.name)
-          .font(.magazineDisplay(.title3))
+          .font(CultureTypography.title(.title3))
           .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(progress.statusText)
@@ -79,7 +79,7 @@ struct ThemeExploreListView: View {
       }
 
       Text(progress.theme.summary)
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineLimit(3)
 

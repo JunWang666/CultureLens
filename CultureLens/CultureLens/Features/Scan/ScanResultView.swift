@@ -168,11 +168,21 @@ struct ScanResultView: View {
     return nil
   }
 
-  var body: some View {
-    ZStack {
-      CulturePageBackground()
+  /// Tags are only a fallback for an unbound main result. Candidate pages and
+  /// knowledge-node pages must never inherit observations from the source photo.
+  private var showsFreeformVisualTags: Bool {
+    candidate == nil && presentation != .knowledge && session.result.isFreeformVisualResult
+  }
 
-      SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
+  var body: some View {
+    Group {
+      if showsFreeformVisualTags {
+        FreeformVisualTagsResultView(session: session)
+      } else {
+        ZStack {
+          CulturePageBackground()
+
+          SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
         // 分栏布局下对象名提到左栏顶部（导航栏只显示页面标题）
         if isWide {
           LocalizedPackText(
@@ -180,7 +190,7 @@ struct ScanResultView: View {
             cacheNamespace: "element",
             cacheKey: objectElementKey
           )
-          .font(.cultureSerif(.largeTitle))
+          .font(CultureTypography.title(.largeTitle))
           .foregroundStyle(CultureTheme.inkPrimary)
         }
 
@@ -196,7 +206,7 @@ struct ScanResultView: View {
         if isWide, presentation != .history {
           recommendations
         }
-      } trailing: { isWide in
+          } trailing: { isWide in
         ScanExplanationSectionView(
           result: explanationInput,
           isDemo: session.isDemo,
@@ -231,6 +241,8 @@ struct ScanResultView: View {
         if !isWide, presentation != .history {
           recommendations
         }
+          }
+        }
       }
     }
     .cultureNavigationTitle(
@@ -245,6 +257,7 @@ struct ScanResultView: View {
 
   private var navigationTitle: LocalizedStringKey {
     if candidate != nil { return "候选详情" }
+    if showsFreeformVisualTags { return "画面观察" }
     switch presentation {
     case .knowledge:
       return LocalizedStringKey(object.canonicalName)
@@ -306,7 +319,7 @@ struct ScanResultView: View {
           cacheNamespace: "element",
           cacheKey: objectElementKey
         )
-        .font(.cultureSerif(.largeTitle))
+        .font(CultureTypography.title(.largeTitle))
         .foregroundStyle(CultureTheme.inkPrimary)
       }
 
@@ -317,7 +330,7 @@ struct ScanResultView: View {
             .compactMap { $0 }
             .joined(separator: " · ")
         )
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
       }
 
@@ -326,7 +339,7 @@ struct ScanResultView: View {
         elementKey: objectElementKey,
         fallbackName: object.canonicalName,
         fallbackSummary: object.summary,
-        textFont: .title3,
+        textFont: CultureTypography.body(.title3),
         textColor: CultureTheme.inkPrimary
       )
     }
@@ -353,7 +366,7 @@ struct ScanResultView: View {
       "根据本次扫描位置列为候选，尚未由画面确认。",
       systemImage: "location.fill"
     )
-    .font(.subheadline)
+    .font(CultureTypography.body(.subheadline))
     .foregroundStyle(CultureTheme.inkSecondary)
     .padding(.vertical, 16)
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -367,7 +380,7 @@ struct ScanResultView: View {
       Label("识别模型的备选判断，与画面特征相关。", systemImage: "eye")
       Text(candidate.rationale)
     }
-    .font(.subheadline)
+    .font(CultureTypography.body(.subheadline))
     .foregroundStyle(CultureTheme.inkSecondary)
     .padding(.vertical, 16)
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -378,16 +391,16 @@ struct ScanResultView: View {
   private var evidenceCard: some View {
     VStack(alignment: .leading, spacing: 14) {
       Text(verbatim: "EVIDENCE")
-        .font(.caption2.weight(.semibold))
+        .font(CultureTypography.eyebrow())
         .tracking(1.8)
         .foregroundStyle(CultureTheme.cinnabar)
 
       Text("判断依据")
-        .font(.magazineDisplay(.title3))
+        .font(CultureTypography.title(.title3))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(rationale)
-        .font(.body)
+        .font(CultureTypography.body(.body))
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineSpacing(5)
 
@@ -397,7 +410,7 @@ struct ScanResultView: View {
           .font(.headline)
           .foregroundStyle(CultureTheme.cinnabar)
         Text(uncertainty)
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
 
@@ -473,7 +486,7 @@ struct ScanResultView: View {
           cacheKey: candidate.culturalElementID.map { $0.uuidString.lowercased() }
             ?? KnowledgeStore.shared?.elementKey(for: candidate.id)
         )
-        .font(.magazineDisplay(.headline))
+        .font(CultureTypography.title(.headline))
         .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(
@@ -487,7 +500,7 @@ struct ScanResultView: View {
           .foregroundStyle(CultureTheme.inkSecondary)
       }
       Text(candidate.rationale)
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
       if let summary = candidate.informativeSummary {
         LocalizedPackText(
@@ -520,7 +533,7 @@ struct ScanResultView: View {
           cacheKey: candidate.attractionID.map { $0.uuidString.lowercased() }
           ?? KnowledgeStore.shared?.attraction(id: candidate.id).flatMap(\.key)
         )
-        .font(.magazineDisplay(.headline))
+        .font(CultureTypography.title(.headline))
         .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Image(systemName: "chevron.right")
@@ -535,7 +548,7 @@ struct ScanResultView: View {
           ?? KnowledgeStore.shared?.attraction(id: candidate.id).flatMap(\.key),
           kind: .fragment
         )
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineLimit(3)
       }

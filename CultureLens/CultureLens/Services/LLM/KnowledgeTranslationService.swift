@@ -184,6 +184,11 @@ actor KnowledgeTranslationService {
     UserDefaults.standard.removeObject(forKey: defaultsKey)
   }
 
+  /// Approximate persisted size of the on-device translation cache.
+  func diskUsageBytes() -> Int64 {
+    Int64(UserDefaults.standard.data(forKey: defaultsKey)?.count ?? 0)
+  }
+
   private func translate(
     client: LLMGatewayClient,
     name: String,

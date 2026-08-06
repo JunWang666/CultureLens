@@ -110,7 +110,7 @@ struct FitnessWorkoutImportView: View {
     List {
       Section {
         Text("CultureLens 只读取你选择的路线，并把副本保存在 App 内；不会修改 Fitness 或健康中的原记录。")
-          .font(.footnote)
+          .font(CultureTypography.body(.footnote))
           .foregroundStyle(.secondary)
       }
 
@@ -160,7 +160,7 @@ struct FitnessWorkoutImportView: View {
             .font(.body.weight(.semibold))
             .foregroundStyle(.primary)
           Text(workout.startedAt, format: .dateTime.year().month().day().hour().minute())
-            .font(.subheadline)
+            .font(CultureTypography.body(.subheadline))
             .foregroundStyle(.secondary)
           HStack(spacing: 5) {
             Text(durationText(workout.duration))

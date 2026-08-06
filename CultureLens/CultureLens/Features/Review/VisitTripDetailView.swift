@@ -17,94 +17,130 @@ struct VisitTripDetailView: View {
       CulturePageBackground()
 
       if let trip {
-        ScrollView {
-          LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
-            summaryHeader(trip)
-            statsRow(trip)
-
-            if !trip.attractionNames.isEmpty {
-              VStack(alignment: .leading, spacing: 10) {
-                MagazineSectionHeader(eyebrow: "SITES", "走过的景点")
-                Text(trip.attractionNames.joined(separator: " · "))
-                  .font(.body)
-                  .foregroundStyle(CultureTheme.inkSecondary)
-              }
-            }
-
-            if !trip.objects.isEmpty {
-              VStack(alignment: .leading, spacing: 14) {
-                MagazineSectionHeader(
-                  eyebrow: "CARDS",
-                  "文化卡片",
-                  subtitle: "本次点亮的对象，可直接分享。"
-                )
-
-                ForEach(trip.objects) { object in
-                  VStack(alignment: .leading, spacing: 10) {
-                    NavigationLink(value: AppRoute.object(object.id)) {
-                      CultureObjectCard(object: object, showsBrandMark: true)
-                    }
-                    .buttonStyle(.plain)
-
-                    ShareCultureCardButton(object: object, label: .titled)
-                      .buttonStyle(.bordered)
-                      .tint(CultureTheme.inkPrimary)
-                  }
-                }
-              }
-            }
-
-            VStack(alignment: .leading, spacing: 0) {
-              MagazineSectionHeader(eyebrow: "SCANS", "识别记录")
-                .padding(.bottom, 4)
-
-              ForEach(Array(trip.recordIDs.enumerated()), id: \.element) { index, recordID in
-                if let record = records.first(where: { $0.recordID == recordID }) {
-                  if index > 0 { EditorialRule() }
-                  NavigationLink(value: AppRoute.history(recordID)) {
-                    HStack {
-                      VStack(alignment: .leading, spacing: 4) {
-                        Text(record.canonicalName)
-                          .font(.magazineDisplay(.headline))
-                          .foregroundStyle(CultureTheme.inkPrimary)
-                        Text(
-                          record.createdAt,
-                          format: .dateTime.hour().minute()
-                        )
-                        .font(.caption)
-                        .foregroundStyle(CultureTheme.inkSecondary)
-                      }
-                      Spacer()
-                      Image(systemName: "chevron.right")
-                        .font(.caption)
-                        .foregroundStyle(CultureTheme.inkSecondary.opacity(0.7))
-                    }
-                    .padding(.vertical, CultureTheme.rowPadding)
-                    .contentShape(Rectangle())
-                  }
-                  .buttonStyle(.plain)
-                }
-              }
-              EditorialRule()
-            }
-
-            MagazineFooterOrnament()
-          }
-          .padding(.horizontal, CultureTheme.pagePadding)
-          .padding(.top, 20)
-          .padding(.bottom, 40)
+        SplitDetailLayout(topPadding: 16, bottomPadding: 40) { isWide in
+          leadingColumn(trip, isWide: isWide)
+        } trailing: { isWide in
+          trailingColumn(trip, isWide: isWide)
         }
       } else {
         ContentUnavailableView("找不到这次参观", systemImage: "book.closed")
       }
     }
     .cultureNavigationTitle(trip.map { LocalizedStringKey($0.title) } ?? "文化回顾")
+    .toolbar {
+      if let trip {
+        ToolbarItem(placement: .topBarTrailing) {
+          ShareVisitTripButton(trip: trip, label: .icon)
+        }
+      }
+    }
   }
 
-  private func summaryHeader(_ trip: VisitTrip) -> some View {
+  @ViewBuilder
+  private func leadingColumn(_ trip: VisitTrip, isWide: Bool) -> some View {
+    // Bleed hero to screen edges on phone / portrait; keep column width on iPad landscape.
+    VisitTripHeroView(trip: trip, height: isWide ? 360 : 240)
+      .clipShape(RoundedRectangle(cornerRadius: isWide ? 20 : 0, style: .continuous))
+      .padding(.horizontal, isWide ? 0 : -CultureTheme.pagePadding)
+
+    summaryHeader(trip, showTitle: true)
+
+    statsRow(trip)
+
+    ShareVisitTripButton(trip: trip, label: .titled)
+      .buttonStyle(.bordered)
+      .tint(CultureTheme.inkPrimary)
+
+    if isWide, !trip.attractionNames.isEmpty {
+      attractionsSection(trip)
+    }
+  }
+
+  @ViewBuilder
+  private func trailingColumn(_ trip: VisitTrip, isWide: Bool) -> some View {
+    if !isWide, !trip.attractionNames.isEmpty {
+      attractionsSection(trip)
+    }
+
+    if !trip.objects.isEmpty {
+      VStack(alignment: .leading, spacing: 14) {
+        MagazineSectionHeader(
+          eyebrow: "CARDS",
+          "文化卡片",
+          subtitle: "本次点亮的对象，可直接分享。"
+        )
+
+        let columns = isWide
+          ? [GridItem(.adaptive(minimum: 220), spacing: 16)]
+          : [GridItem(.flexible())]
+
+        LazyVGrid(columns: columns, spacing: 16) {
+          ForEach(trip.objects) { object in
+            VStack(alignment: .leading, spacing: 10) {
+              NavigationLink(value: AppRoute.object(object.id)) {
+                CultureObjectCard(object: object, showsBrandMark: true)
+              }
+              .buttonStyle(.plain)
+
+              ShareCultureCardButton(object: object, label: .titled)
+                .buttonStyle(.bordered)
+                .tint(CultureTheme.inkPrimary)
+            }
+          }
+        }
+      }
+    }
+
+    VStack(alignment: .leading, spacing: 0) {
+      MagazineSectionHeader(eyebrow: "SCANS", "识别记录")
+        .padding(.bottom, 4)
+
+      ForEach(Array(trip.recordIDs.enumerated()), id: \.element) { index, recordID in
+        if let record = records.first(where: { $0.recordID == recordID }) {
+          if index > 0 { EditorialRule() }
+          NavigationLink(value: AppRoute.history(recordID)) {
+            HStack {
+              VStack(alignment: .leading, spacing: 4) {
+                Text(record.canonicalName)
+                  .font(CultureTypography.title(.headline))
+                  .foregroundStyle(CultureTheme.inkPrimary)
+                Text(
+                  record.createdAt,
+                  format: .dateTime.hour().minute()
+                )
+                .font(.caption)
+                .foregroundStyle(CultureTheme.inkSecondary)
+              }
+              Spacer()
+              Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(CultureTheme.inkSecondary.opacity(0.7))
+            }
+            .padding(.vertical, CultureTheme.rowPadding)
+            .contentShape(Rectangle())
+          }
+          .buttonStyle(.plain)
+        }
+      }
+      EditorialRule()
+    }
+
+    MagazineFooterOrnament()
+  }
+
+  private func attractionsSection(_ trip: VisitTrip) -> some View {
+    VStack(alignment: .leading, spacing: 10) {
+      MagazineSectionHeader(eyebrow: "SITES", "走过的景点")
+      Text(trip.attractionNames.joined(separator: " · "))
+        .font(CultureTypography.body(.body))
+        .foregroundStyle(CultureTheme.inkSecondary)
+    }
+  }
+
+  private func summaryHeader(_ trip: VisitTrip, showTitle: Bool) -> some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(verbatim: "JOURNAL")
-        .font(.caption.weight(.semibold))
+        .font(CultureTypography.eyebrow(.caption))
         .tracking(2)
         .foregroundStyle(CultureTheme.cinnabar)
 
@@ -112,12 +148,14 @@ struct VisitTripDetailView: View {
         .font(.caption)
         .foregroundStyle(CultureTheme.cinnabar)
 
-      Text(trip.title)
-        .font(.magazineDisplay(.largeTitle))
-        .foregroundStyle(CultureTheme.inkPrimary)
+      if showTitle {
+        Text(trip.title)
+          .font(CultureTypography.title(.largeTitle))
+          .foregroundStyle(CultureTheme.inkPrimary)
+      }
 
       Text("一次参观里，识别被聚合成可回看的文化路径。")
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
 
       MagazineDoubleRule()
@@ -146,7 +184,7 @@ struct VisitTripDetailView: View {
   private func statCell(value: String, label: LocalizedStringKey) -> some View {
     VStack(spacing: 4) {
       Text(value)
-        .font(.magazineDisplay(size: 28))
+        .font(CultureTypography.display(size: 28))
         .foregroundStyle(CultureTheme.inkPrimary)
       Text(label)
         .font(.caption)
@@ -161,4 +199,6 @@ struct VisitTripDetailView: View {
     VisitTripDetailView(tripID: UUID())
   }
   .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
+  .environment(AppLanguageStore())
+  .environment(ImageGenerationPreferenceStore())
 }

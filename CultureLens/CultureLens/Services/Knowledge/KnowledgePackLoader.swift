@@ -1,7 +1,7 @@
 import Foundation
 
-/// Loads and merges the four independently tagged knowledge ODR packs.
-/// Every tag is currently initial-install, but each remains independently
+/// Loads the unified knowledge ODR pack (`knowledge-base`).
+/// The tag is currently initial-install, but remains independently
 /// queryable and downloadable from the settings resource manager.
 actor KnowledgePackLoader {
   static let shared = KnowledgePackLoader()
@@ -12,7 +12,7 @@ actor KnowledgePackLoader {
   /// ODR 请求不支持并发 begin；actor 在 await 处可重入，用共享 Task 去重。
   private var inFlightAccess: [KnowledgePackDirectory: Task<Bool, Error>] = [:]
 
-  /// Returns the merged ODR store. Missing initial-install resources are
+  /// Returns the ODR store. Missing initial-install resources are
   /// downloaded on demand; `fallback` keeps injected test stores supported.
   func store(fallback: KnowledgeStore? = KnowledgeStore.shared) async -> KnowledgeStore? {
     if let cachedStore { return cachedStore }
@@ -46,7 +46,7 @@ actor KnowledgePackLoader {
     return resources
   }
 
-  /// Downloads one missing ODR pack and refreshes the merged runtime snapshot.
+  /// Downloads one missing ODR pack and refreshes the runtime snapshot.
   func downloadOnDemandPack(_ directory: KnowledgePackDirectory) async throws {
     guard try await ensureAccess(to: directory, downloadIfNeeded: true) else {
       throw KnowledgeStoreError.packMissing
@@ -54,6 +54,22 @@ actor KnowledgePackLoader {
     guard loadPack(directory) != nil else {
       throw KnowledgeStoreError.packMissing
     }
+    cachedStore = await loadMergedStore(downloadIfNeeded: false)
+    if let cachedStore {
+      KnowledgeStore.installShared(cachedStore)
+    }
+  }
+
+  /// Ends access to one ODR pack. Embedded / sideload builds keep files on disk;
+  /// App Store installs may reclaim them later. Always clears the loader cache.
+  func releaseOnDemandPack(_ directory: KnowledgePackDirectory) async {
+    if let request = resourceRequests[directory] {
+      request.endAccessingResources()
+    }
+    resourceRequests[directory] = nil
+    accessedDirectories.remove(directory)
+    inFlightAccess[directory]?.cancel()
+    inFlightAccess[directory] = nil
     cachedStore = await loadMergedStore(downloadIfNeeded: false)
     if let cachedStore {
       KnowledgeStore.installShared(cachedStore)
@@ -123,17 +139,27 @@ actor KnowledgePackLoader {
 
   private func loadPack(_ directory: KnowledgePackDirectory) -> KnowledgePack? {
     let bundle = request(for: directory).bundle
-    // ODR asset pack 内文件是扁平的（根目录），bundle 资源则带目录前缀。
-    for subdirectory in directory.subdirectoryCandidates + [nil] {
-      guard
-        let url = bundle.url(
-          forResource: "knowledge-pack",
-          withExtension: "json",
-          subdirectory: subdirectory
-        )
-      else { continue }
-      return try? KnowledgeStore.loadPack(fromBaseURL: url)
+    // Prefer the directory-prefixed layout used by ordinary bundle copies.
+    // Fall back to the pack root only for true ODR asset packs, which flatten
+    // files. Multiple packs MUST NOT share the same root filename — with
+    // EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE that collision made every directory
+    // decode the same surviving knowledge-pack.json (e.g. all showed liangzhu-v6).
+    for subdirectory in directory.subdirectoryCandidates {
+      if let url = bundle.url(
+        forResource: "knowledge-pack",
+        withExtension: "json",
+        subdirectory: subdirectory
+      ) {
+        return try? KnowledgeStore.loadPack(fromBaseURL: url)
+      }
     }
-    return nil
+    guard
+      let url = bundle.url(
+        forResource: "knowledge-pack",
+        withExtension: "json",
+        subdirectory: nil
+      )
+    else { return nil }
+    return try? KnowledgeStore.loadPack(fromBaseURL: url)
   }
 }

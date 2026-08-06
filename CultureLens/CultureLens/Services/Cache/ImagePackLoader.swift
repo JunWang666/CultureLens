@@ -48,6 +48,15 @@ actor ImagePackLoader {
     }
   }
 
+  /// Ends access to the image ODR pack. Embedded builds keep files on disk.
+  func releaseOnDemandPack() async {
+    resourceRequest?.endAccessingResources()
+    resourceRequest = nil
+    hasAccess = false
+    inFlightAccess?.cancel()
+    inFlightAccess = nil
+  }
+
   /// Returns local file bytes for a hosted image URL when the ODR pack contains it.
   func dataIfAvailable(for url: URL) async -> Data? {
     guard let components = ImagePackPathMapping.resourceComponents(for: url) else {

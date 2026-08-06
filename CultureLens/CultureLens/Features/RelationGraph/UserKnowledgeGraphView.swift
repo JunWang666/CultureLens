@@ -567,7 +567,7 @@ struct UserKnowledgeGraphView: View {
 
             if !node.summary.isEmpty {
                 Text(node.summary)
-                    .font(.subheadline)
+                    .font(CultureTypography.body(.subheadline))
                     .foregroundStyle(CultureTheme.inkSecondary)
                     .lineLimit(4)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -12,8 +12,13 @@ import SwiftData
 struct CultureLensApp: App {
     private let modelContainer: ModelContainer
     @State private var languageStore = AppLanguageStore()
+    @State private var ttsPreferenceStore = TTSPreferenceStore()
+    @State private var typographyPreferenceStore = TypographyPreferenceStore()
+    @State private var imageGenerationPreferenceStore = ImageGenerationPreferenceStore()
 
     init() {
+        // 注册宋体，并把导航栏标题切到杂志字体。
+        CultureTypography.bootstrap()
         modelContainer = CultureLensModelContainer.make()
     }
 
@@ -21,6 +26,9 @@ struct CultureLensApp: App {
         WindowGroup {
             AppRootView()
                 .environment(languageStore)
+                .environment(ttsPreferenceStore)
+                .environment(typographyPreferenceStore)
+                .environment(imageGenerationPreferenceStore)
                 .environment(\.locale, languageStore.locale)
         }
         .modelContainer(modelContainer)

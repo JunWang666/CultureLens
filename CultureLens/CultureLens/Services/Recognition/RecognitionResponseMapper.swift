@@ -29,6 +29,11 @@ nonisolated enum RecognitionResponseMapper {
       validCategories.contains(decision.category),
       (0...1).contains(decision.confidence),
       (1...3).contains(decision.alternatives.count),
+      visualTagsAreValid(
+        decision.visualTags,
+        permitsFreeformFallback: decision.culturalElementKey.isEmpty && decision.attractionKey.isEmpty
+          && decision.category == "其他"
+      ),
       isValidKnowledgeReference(
         id: decision.culturalElementKey,
         name: decision.canonicalName,
@@ -70,6 +75,31 @@ nonisolated enum RecognitionResponseMapper {
         throw invalid()
       }
     }
+  }
+
+  /// Freeform tags are valid only when the model explicitly found no existing
+  /// cultural element *and* no nearby attraction. They are never a hint for
+  /// candidate resolution.
+  private static func visualTagsAreValid(
+    _ tags: [ProviderVisualTag],
+    permitsFreeformFallback: Bool
+  ) -> Bool {
+    guard permitsFreeformFallback else { return tags.isEmpty }
+    guard (3...6).contains(tags.count) else { return false }
+
+    var labels = Set<String>()
+    for tag in tags {
+      let label = tag.label.trimmingCharacters(in: .whitespacesAndNewlines)
+      let evidence = tag.evidence.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard
+        (1...24).contains(label.count),
+        (2...140).contains(evidence.count),
+        labels.insert(normalizeEntityName(label)).inserted
+      else {
+        return false
+      }
+    }
+    return true
   }
 
   private static func isValidAttractionReference(
@@ -159,6 +189,9 @@ nonisolated enum RecognitionResponseMapper {
       id: DeterministicID.v5(name: requestID + ":result"),
       object: object,
       alternatives: alternatives,
+      visualTags: decision.visualTags.map {
+        VisualTag(label: $0.label, evidence: $0.evidence)
+      },
       rationale: decision.rationale,
       uncertainty: uncertainty,
       modelIdentifier: modelIdentifier,

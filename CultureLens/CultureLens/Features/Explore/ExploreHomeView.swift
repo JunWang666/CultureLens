@@ -38,6 +38,15 @@ struct ExploreHomeView: View {
     (knowledgeStore?.elements ?? []).sorted { $0.sortKey < $1.sortKey }
   }
 
+  /// Knowledge-pack nodes the user has already encountered. The quiz section
+  /// receives concrete elements so it never asks the LLM about an unresolved
+  /// legacy progress row.
+  private var contactedElements: [KnowledgePack.Element] {
+    guard let store = knowledgeStore else { return [] }
+    return contactedIDs.compactMap { store.element(id: $0) }
+      .sorted { ($0.sortKey, $0.id.uuidString) < ($1.sortKey, $1.id.uuidString) }
+  }
+
   /// 每日确定性轮换：同一天所有用户看到同一元素，「换一个」只改本地 offset。
   private var dailyElement: KnowledgePack.Element? {
     let elements = sortedElements
@@ -115,11 +124,11 @@ struct ExploreHomeView: View {
   private var activeThemes: [ThemeProgress] {
     return Array(
       themeProgress
-      .filter { !$0.isComplete }
-      .sorted {
-        ($0.fractionComplete, $1.theme.sortKey) > ($1.fractionComplete, $0.theme.sortKey)
-      }
-      .prefix(3)
+        .filter { !$0.isComplete }
+        .sorted {
+          ($0.fractionComplete, $1.theme.sortKey) > ($1.fractionComplete, $0.theme.sortKey)
+        }
+        .prefix(3)
     )
   }
 
@@ -134,7 +143,8 @@ struct ExploreHomeView: View {
     // 用外层 GeometryReader 量视口（与 SplitDetailLayout 相同），不要量 ScrollView
     // 内容高度——内容永远更高，会把横屏也误判成单栏。
     GeometryReader { proxy in
-      let isWideLayout = horizontalSizeClass == .regular
+      let isWideLayout =
+        horizontalSizeClass == .regular
         && proxy.size.width > proxy.size.height
 
       ZStack {
@@ -150,6 +160,7 @@ struct ExploreHomeView: View {
               HStack(alignment: .top, spacing: 36) {
                 VStack(alignment: .leading, spacing: 32) {
                   nearbySection
+                  DidYouKnowQuizSection(elements: contactedElements)
                   if !nearbyHasItems {
                     dailySection(keepsColumnWidth: true)
                   }
@@ -167,8 +178,9 @@ struct ExploreHomeView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
               }
             } else {
-              // 竖屏单列：附近看点在上，点亮 / 收集 / 封面故事 / 下一看点依次在下
+              // 竖屏单列：附近看点与问答在上，其余栏目依次向下。
               nearbySection
+              DidYouKnowQuizSection(elements: contactedElements)
               illuminationSection
               collectionSection
               dailySection(keepsColumnWidth: false)
@@ -221,11 +233,11 @@ struct ExploreHomeView: View {
         .foregroundStyle(CultureTheme.inkSecondary)
 
       Text("探索")
-        .font(.magazineDisplay(size: 40))
+        .font(CultureTypography.display(size: 40))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text("看看附近的现场，翻翻你的收集，每天再认识一个新的文化细节。")
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineSpacing(3)
 
@@ -344,7 +356,7 @@ struct ExploreHomeView: View {
       HStack(spacing: 12) {
         ProgressView()
         Text("正在读取附近的数据库内容…")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
@@ -354,7 +366,8 @@ struct ExploreHomeView: View {
       VStack(alignment: .leading, spacing: 0) {
         ForEach(Array(recommendations.enumerated()), id: \.element.id) { index, recommendation in
           if index > 0 { EditorialRule() }
-          let elementID = KnowledgeStore.shared?.resolveElementID(recommendation.culturalElement.key)
+          let elementID =
+            KnowledgeStore.shared?.resolveElementID(recommendation.culturalElement.key)
             ?? DeterministicID.culturalElement(recommendation.culturalElement.key)
           NavigationLink(value: AppRoute.knowledgeElement(elementID)) {
             NearbyEditorialRow(
@@ -404,7 +417,7 @@ struct ExploreHomeView: View {
           .font(.headline)
           .foregroundStyle(CultureTheme.inkPrimary)
         Text(message)
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
     }
@@ -462,10 +475,10 @@ struct ExploreHomeView: View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(alignment: .firstTextBaseline, spacing: 10) {
         Text("\(collectedCount)")
-          .font(.magazineDisplay(size: 44))
+          .font(CultureTypography.display(size: 44))
           .foregroundStyle(CultureTheme.inkPrimary)
         Text("/ \(sortedElements.count) 个节点")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
         Spacer(minLength: 12)
         NavigationLink(value: AppRoute.themes) {
@@ -487,12 +500,12 @@ struct ExploreHomeView: View {
 
       if collectedCount == 0 {
         Text("还没有点亮任何节点。到扫描页拍下一个细节，或从下面的「封面故事」开始。")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
           .fixedSize(horizontal: false, vertical: true)
       } else if activeThemes.isEmpty {
         Text("所有主题都已完成。")
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       } else {
         ForEach(Array(activeThemes.enumerated()), id: \.element.theme.id) { index, progress in
@@ -501,7 +514,7 @@ struct ExploreHomeView: View {
             VStack(alignment: .leading, spacing: 8) {
               HStack(alignment: .firstTextBaseline) {
                 Text(progress.theme.name)
-                  .font(.magazineDisplay(.headline))
+                  .font(CultureTypography.title(.headline))
                   .foregroundStyle(CultureTheme.inkPrimary)
                   .lineLimit(1)
                 Spacer(minLength: 8)
@@ -599,7 +612,7 @@ private struct ExplorationIlluminationView: View {
     VStack(alignment: .leading, spacing: 2) {
       HStack(alignment: .firstTextBaseline, spacing: 2) {
         Text("\(value)")
-          .font(.magazineDisplay(size: 30))
+          .font(CultureTypography.display(size: 30))
           .foregroundStyle(CultureTheme.antiqueGold)
           .contentTransition(.numericText())
         if let total {
@@ -618,7 +631,7 @@ private struct ExplorationIlluminationView: View {
   private var culturalSeries: some View {
     VStack(alignment: .leading, spacing: 12) {
       HStack {
-        illuminationLabel("文化系", systemImage: "point.3.connected.trianglepath.dotted")
+        illuminationLabel("文化系")
         Spacer()
         NavigationLink(value: AppRoute.themes) {
           Text("查看全部")
@@ -684,7 +697,7 @@ private struct ExplorationIlluminationView: View {
 
   private var badgeShelf: some View {
     VStack(alignment: .leading, spacing: 12) {
-      illuminationLabel("文化徽章", systemImage: "seal")
+      illuminationLabel("文化徽章")
 
       LazyVGrid(columns: badgeColumns, alignment: .leading, spacing: 16) {
         ForEach(snapshot.badges) { badge in
@@ -696,9 +709,15 @@ private struct ExplorationIlluminationView: View {
 
   private func illuminationLabel(
     _ title: LocalizedStringKey,
-    systemImage: String
+    systemImage: String? = nil
   ) -> some View {
-    Label(title, systemImage: systemImage)
+    Group {
+      if let systemImage {
+        Label(title, systemImage: systemImage)
+      } else {
+        Text(title)
+      }
+    }
       .font(.caption.weight(.semibold))
       .tracking(0.8)
       .foregroundStyle(Color.white.opacity(0.82))
@@ -720,16 +739,18 @@ private struct CulturalSeriesSeal: View {
             style: StrokeStyle(lineWidth: 3, lineCap: .round)
           )
           .rotationEffect(.degrees(-90))
-        Image(systemName: progress.isComplete ? "seal.fill" : "sparkle")
-          .font(.title2)
-          .foregroundStyle(
-            progress.isComplete ? CultureTheme.antiqueGold : Color.white.opacity(0.72)
-          )
+        Image(ExplorationArtwork.seriesImageName(for: progress.theme))
+          .resizable()
+          .scaledToFill()
+          .frame(width: 46, height: 46)
+          .clipShape(Circle())
+          .saturation(progress.isComplete ? 1 : 0.2)
+          .opacity(progress.isComplete ? 1 : 0.72)
       }
       .frame(width: 54, height: 54)
 
       Text(progress.theme.name)
-        .font(.cultureSerif(.subheadline))
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(Color.white)
         .lineLimit(2)
         .frame(height: 38, alignment: .topLeading)
@@ -781,11 +802,13 @@ private struct ExplorationBadgeMedallion: View {
               : Color.white.opacity(0.12),
             lineWidth: 1
           )
-        Image(systemName: badge.kind.systemImage)
-          .font(.title3)
-          .foregroundStyle(
-            badge.isUnlocked ? CultureTheme.antiqueGold : Color.white.opacity(0.22)
-          )
+        Image(ExplorationArtwork.badgeImageName(for: badge.kind))
+          .resizable()
+          .scaledToFill()
+          .frame(width: 46, height: 46)
+          .clipShape(Circle())
+          .saturation(badge.isUnlocked ? 1 : 0)
+          .opacity(badge.isUnlocked ? 1 : 0.28)
       }
       .frame(width: 52, height: 52)
       .shadow(
@@ -843,9 +866,11 @@ private struct BadgeCelebrationOverlay: View {
             .strokeBorder(CultureTheme.antiqueGold.opacity(0.45), lineWidth: 1)
             .frame(width: 96, height: 96)
 
-          Image(systemName: badge.kind.systemImage)
-            .font(.system(size: 42, weight: .medium))
-            .foregroundStyle(CultureTheme.antiqueGold)
+          Image(ExplorationArtwork.badgeImageName(for: badge.kind))
+            .resizable()
+            .scaledToFill()
+            .frame(width: 96, height: 96)
+            .clipShape(Circle())
         }
         .scaleEffect(reduceMotion || revealed ? 1 : 0.72)
         .rotationEffect(.degrees(reduceMotion || revealed ? 0 : -8))
@@ -855,10 +880,10 @@ private struct BadgeCelebrationOverlay: View {
             .font(.caption)
             .foregroundStyle(CultureTheme.inkSecondary)
           Text(badge.kind.title)
-            .font(.magazineDisplay(size: 30))
+            .font(CultureTypography.display(size: 30))
             .foregroundStyle(CultureTheme.inkPrimary)
           Text(badge.kind.detail)
-            .font(.subheadline)
+            .font(CultureTypography.body(.subheadline))
             .foregroundStyle(CultureTheme.inkSecondary)
             .multilineTextAlignment(.center)
         }
@@ -897,11 +922,18 @@ private struct BadgeCelebrationOverlay: View {
       ForEach(0..<12, id: \.self) { index in
         let angle = Double(index) / 12 * Double.pi * 2
         let radius = min(proxy.size.width, proxy.size.height) * 0.34
-        Image(systemName: index.isMultiple(of: 3) ? "sparkle" : "circle.fill")
-          .font(index.isMultiple(of: 3) ? .caption : .system(size: 5))
-          .foregroundStyle(
-            index.isMultiple(of: 2) ? CultureTheme.antiqueGold : CultureTheme.cinnabar
-          )
+        let color = index.isMultiple(of: 2) ? CultureTheme.antiqueGold : CultureTheme.cinnabar
+        Group {
+          if index.isMultiple(of: 3) {
+            CelebrationSparkle()
+              .fill(color)
+              .frame(width: 12, height: 12)
+          } else {
+            Circle()
+              .fill(color)
+              .frame(width: 5, height: 5)
+          }
+        }
           .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
           .offset(
             x: revealed && !reduceMotion ? CGFloat(cos(angle)) * radius : 0,
@@ -912,6 +944,26 @@ private struct BadgeCelebrationOverlay: View {
     }
     .allowsHitTesting(false)
     .accessibilityHidden(true)
+  }
+}
+
+private struct CelebrationSparkle: Shape {
+  func path(in rect: CGRect) -> Path {
+    let center = CGPoint(x: rect.midX, y: rect.midY)
+    let points = [
+      CGPoint(x: center.x, y: rect.minY),
+      CGPoint(x: center.x + rect.width * 0.16, y: center.y - rect.height * 0.16),
+      CGPoint(x: rect.maxX, y: center.y),
+      CGPoint(x: center.x + rect.width * 0.16, y: center.y + rect.height * 0.16),
+      CGPoint(x: center.x, y: rect.maxY),
+      CGPoint(x: center.x - rect.width * 0.16, y: center.y + rect.height * 0.16),
+      CGPoint(x: rect.minX, y: center.y),
+      CGPoint(x: center.x - rect.width * 0.16, y: center.y - rect.height * 0.16),
+    ]
+    var path = Path()
+    path.addLines(points)
+    path.closeSubpath()
+    return path
   }
 }
 
@@ -931,7 +983,7 @@ private struct NearbyEditorialRow: View {
     HStack(alignment: .top, spacing: 14) {
       // 目录式大号编号
       Text(String(format: "%02d", number))
-        .font(.magazineDisplay(size: 26))
+        .font(CultureTypography.display(size: 26))
         .foregroundStyle(CultureTheme.inkPrimary.opacity(0.32))
         .frame(width: 38, alignment: .leading)
         .padding(.top, 16)
@@ -942,7 +994,7 @@ private struct NearbyEditorialRow: View {
           VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
               Text(recommendation.name)
-                .font(.magazineDisplay(.title3))
+                .font(CultureTypography.title(.title3))
                 .foregroundStyle(CultureTheme.inkPrimary)
               Spacer(minLength: 12)
               if isVisited {
@@ -974,7 +1026,7 @@ private struct NearbyEditorialRow: View {
         }
 
         Text(recommendation.introduction.plainText)
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
           .lineSpacing(3)
           .lineLimit(3)
@@ -1026,7 +1078,7 @@ private struct CoverStoryFeature: View {
           if coverImageURL != nil {
             // 有图时以金色首字水印衬底
             Text(String(element.name.prefix(1)))
-              .font(.magazineDisplay(size: 150))
+              .font(CultureTypography.display(size: 150))
               .foregroundStyle(CultureTheme.antiqueGold.opacity(0.14))
               .offset(x: 12, y: -32)
               .allowsHitTesting(false)
@@ -1052,7 +1104,7 @@ private struct CoverStoryFeature: View {
                   cacheNamespace: "element",
                   cacheKey: element.key
                 )
-                .font(.magazineDisplay(size: 30))
+                .font(CultureTypography.display(size: 30))
                 .foregroundStyle(CultureTheme.canvas)
 
                 Spacer(minLength: 12)
@@ -1114,7 +1166,7 @@ private struct CoverStoryFeature: View {
     VStack(spacing: 0) {
       ForEach(Array(element.name.enumerated()), id: \.offset) { _, character in
         Text(String(character))
-          .font(.magazineDisplay(size: 28))
+          .font(CultureTypography.display(size: 28))
           .foregroundStyle(CultureTheme.canvas)
       }
     }
@@ -1141,7 +1193,7 @@ private struct CoverStoryFeature: View {
       cacheKey: element.key,
       kind: .fragment
     )
-    .font(.subheadline)
+    .font(CultureTypography.body(.subheadline))
     .foregroundStyle(CultureTheme.canvas.opacity(0.72))
     .lineSpacing(4)
     .lineLimit(4)
@@ -1161,7 +1213,7 @@ private struct NextDiscoveryRow: View {
           cacheNamespace: "element",
           cacheKey: element.key
         )
-        .font(.magazineDisplay(.headline))
+        .font(CultureTypography.title(.headline))
         .foregroundStyle(CultureTheme.inkPrimary)
 
         LocalizedPackText(

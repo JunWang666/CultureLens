@@ -1,690 +1,1728 @@
 {
-  "version": "hangzhou-west-lake-v7",
-  "source_language": "zh-Hans",
   "relations": [
     {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
-      "kind": "位于",
-      "explanation": "三潭印月是西湖文化景观中的标志性构景点，人工标志与诗意观看在此叠加。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "67c74434-c86f-5d34-bba5-927ae2affcd7",
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "explanation": "安史之乱是唐朝由盛转衰的关键转折。",
       "kind": "组成",
-      "explanation": "三座水中石塔是三潭印月最醒目的实体，承担水域标志与构景焦点。"
+      "relatedElementId": "04e81c89-e1c1-5c19-800e-f25d24c3b203"
     },
     {
-      "elementId": "67c74434-c86f-5d34-bba5-927ae2affcd7",
-      "relatedElementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "explanation": "贞观之治是唐太宗在位二十三年的清明治世。",
       "kind": "组成",
-      "explanation": "每座石塔塔身分布圆孔，是灯光与月影故事的视觉入口。"
+      "relatedElementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6"
     },
     {
-      "elementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
-      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9",
-      "kind": "理解前先懂",
-      "explanation": "先认识塔身圆孔，才能理解月光、塔灯与水面如何共同『印月』。"
+      "elementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
+      "explanation": "唐承隋制，三省六部与科举在隋朝开创的格局上发展。",
+      "kind": "受到影响",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9"
     },
     {
-      "elementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
-      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9",
-      "kind": "解释",
-      "explanation": "西湖月景如何被机制化地营造，可以从三潭塔孔、灯影与倒影看懂。"
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "explanation": "儒家是诸子百家中影响最深远的流派。",
+      "kind": "组成",
+      "relatedElementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e"
     },
     {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "explanation": "道家是与儒家并立的重要流派。",
+      "kind": "组成",
+      "relatedElementId": "b486685f-18a1-5090-994b-139b73689036"
+    },
+    {
+      "elementId": "00d1c4f3-b945-536a-8b88-11cea0072fc1",
+      "explanation": "百家争鸣产生于春秋战国的社会剧变与思想解放。",
       "kind": "产生于",
-      "explanation": "今日所见三潭石塔传统，源于北宋苏轼疏浚时树立的水面界标。"
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
     },
     {
-      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
-      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
-      "kind": "解释",
-      "explanation": "北宋三潭石塔的治理语境，要放到苏轼主持疏浚的线索中理解。"
+      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
+      "explanation": "钱塘八景把江潮与湖山并置，观潮由此进入题名组景体系。",
+      "kind": "组成",
+      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba"
     },
     {
-      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "体现",
-      "explanation": "以有限水面标志组织远近虚实，呼应宋代在约束视角中安排光影的审美。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
-      "kind": "位于",
-      "explanation": "三潭石塔立于小瀛洲外湖面，岛上桥岸亭树支撑这一景的可走可观。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
-      "kind": "用于",
-      "explanation": "桥、岸、树木与亭台把三潭纳入框景借景，引导视线组织远山与倒影。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
-      "kind": "象征",
-      "explanation": "塔孔灯影与圆月意象，把团圆清赏的象征压缩进同一景名。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
-      "kind": "体现",
-      "explanation": "塔孔、灯影、月色与水波倒影，把西湖月景营造浓缩为一景。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "kind": "位于",
-      "explanation": "三潭印月是南宋西湖十景体系中的核心景目之一。"
-    },
-    {
-      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
+      "explanation": "元代钱塘八景以『钱塘』统称湖江，与西湖十景同属题名组景传统。",
       "kind": "相似于",
-      "explanation": "从三潭水域常把雷峰塔纳入远景，同属湖上塔影与夕照月色的对位关系。"
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab"
     },
     {
-      "elementId": "e58c5e31-a4b0-5cac-bc18-58a88dda0fe6",
-      "relatedElementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "kind": "产生于",
-      "explanation": "一元纸币背面图景取自三潭印月，使石塔成为高辨识度的国家图像符号。"
-    },
-    {
-      "elementId": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
-      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
-      "kind": "理解前先懂",
-      "explanation": "先了解中秋节团圆赏月的习俗，才能理解西湖中秋夜游的传统。"
-    },
-    {
-      "elementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
-      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "explanation": "小瀛洲是湖中三岛中最可游的一座。",
       "kind": "组成",
-      "explanation": "中秋西湖赏月常把平湖秋月与三潭印月并置，展示两种月题。"
+      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486"
     },
     {
-      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
-      "relatedElementId": "21117b05-6804-5961-986f-166884c84f64",
-      "kind": "制作采用",
-      "explanation": "岛上再分内湖、堤岸与小岛，采用湖中湖、岛中岛的多层嵌套手法。"
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "explanation": "阮公墩是湖中三岛之一，为清代阮元疏浚所成。",
+      "kind": "组成",
+      "relatedElementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5"
     },
     {
-      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
-      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
-      "kind": "制作采用",
-      "explanation": "小瀛洲以桥、岸、亭、树切分视域，把借景与框景落实为可步行的取景。"
+      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
+      "explanation": "湖心亭所在是湖中三岛之一。",
+      "kind": "组成",
+      "relatedElementId": "6836d943-c2ca-5696-8cd9-7ba71db683be"
     },
     {
-      "elementId": "21117b05-6804-5961-986f-166884c84f64",
-      "relatedElementId": "0512b97c-833f-5004-bd51-8822cd29ed3e",
-      "kind": "理解前先懂",
-      "explanation": "先理解湖中湖的嵌套边界，才能体会步移时同一景物如何不断改组。"
+      "elementId": "03450361-df1d-50fc-89cc-848d880e1783",
+      "explanation": "黄公望五十岁学画、晚年入道的经历，解释了《富春山居图》沉静苍润的笔意。",
+      "kind": "解释",
+      "relatedElementId": "058e20d5-373f-5423-b6d6-4adb8f88c144"
+    },
+    {
+      "elementId": "03450361-df1d-50fc-89cc-848d880e1783",
+      "explanation": "《富春山居图》成画于元代，是元四家山水画的高峰。",
+      "kind": "产生于",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74"
+    },
+    {
+      "elementId": "03450361-df1d-50fc-89cc-848d880e1783",
+      "explanation": "《富春山居图》的剩山图现藏于之江馆区。",
+      "kind": "位于",
+      "relatedElementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9"
+    },
+    {
+      "elementId": "04942ef0-d853-5849-942d-f30154c16e45",
+      "explanation": "唐亡后藩镇割据演变为五代十国的政权更迭。",
+      "kind": "产生于",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
+    },
+    {
+      "elementId": "04942ef0-d853-5849-942d-f30154c16e45",
+      "explanation": "吴越国是十国之一，以保境安民、纳土归宋著称。",
+      "kind": "组成",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "04e81c89-e1c1-5c19-800e-f25d24c3b203",
+      "explanation": "开元后期节度使坐大的隐患，解释了安史之乱为何爆发。",
+      "kind": "解释",
+      "relatedElementId": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a"
     },
     {
       "elementId": "0512b97c-833f-5004-bd51-8822cd29ed3e",
-      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
+      "explanation": "步移景异把框景借景从静止画框推展为连续行走中的动态取景。",
       "kind": "体现",
-      "explanation": "步移景异把框景借景从静止画框推展为连续行走中的动态取景。"
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc"
     },
     {
-      "elementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "体现",
-      "explanation": "有限边界引导视线、组织远近虚实，是宋代山水审美在园林现场的操作。"
-    },
-    {
-      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "explanation": "《四库全书》编纂于清乾隆年间，文澜阁为江南三阁之一。",
       "kind": "产生于",
-      "explanation": "南宋临安时期，西湖成为都城游赏与题名之地，十景观看方式由此成型。"
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b"
     },
     {
-      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "kind": "解释",
-      "explanation": "十景观看方式的具体内容，就是南宋定名的十景体系。"
-    },
-    {
-      "elementId": "f097d527-52d8-568b-890c-1325f4b99a40",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "体现",
-      "explanation": "临安都城语境下的湖山题名，把宋代山水审美落实为可传诵的四字景目。"
-    },
-    {
-      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
-      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
-      "kind": "理解前先懂",
-      "explanation": "先知道宋室南渡的历史，才能理解南宋临安与西湖十景的关系。"
-    },
-    {
-      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "理解前先懂",
-      "explanation": "先了解宋朝士大夫主政的时代气质，再理解宋代山水审美的简约与留白。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806",
-      "kind": "受规制于",
-      "explanation": "十景以四字景名的诗画规则，约束各地点如何被观看与传诵。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
-      "kind": "组成",
-      "explanation": "苏堤春晓是南宋十景之首，治湖长堤化作桃柳春景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
-      "kind": "组成",
-      "explanation": "平湖秋月以开阔湖面与秋夜月色列入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
-      "kind": "组成",
-      "explanation": "南屏晚钟把钟声、山体与黄昏纳入十景，提醒西湖体验也依赖声音。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
-      "kind": "组成",
-      "explanation": "断桥残雪以雪后桥面的黑白对比列入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
-      "kind": "组成",
-      "explanation": "曲院风荷以夏日荷塘与风列入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "7aa489c9-6efc-54da-8486-914cbab0267b",
-      "kind": "组成",
-      "explanation": "花港观鱼以曲池、鱼影与回廊列入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
-      "kind": "组成",
-      "explanation": "柳浪闻莺把声景与春柳纳入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "77347f66-53d0-5e01-a359-01bc66ca8330",
-      "kind": "组成",
-      "explanation": "双峰插云看重云雾、高度与远望位置的关系。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "kind": "组成",
-      "explanation": "雷峰夕照以塔影与夕阳列入南宋十景。"
-    },
-    {
-      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
-      "kind": "受到影响",
-      "explanation": "康熙南巡为十景题匾立碑，景名由此钦定流传。"
-    },
-    {
-      "elementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
-      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "kind": "受到影响",
-      "explanation": "1985新十景延续南宋十景的构景与题名方法，把观看推向山林泉声。"
-    },
-    {
-      "elementId": "25635e69-6a12-599d-857c-450ba4c60d3b",
-      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "kind": "受到影响",
-      "explanation": "2007三评西湖十景把题名传统延伸到当代城市栖居与夜色。"
-    },
-    {
-      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
-      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "kind": "相似于",
-      "explanation": "元代钱塘八景以『钱塘』统称湖江，与西湖十景同属题名组景传统。"
-    },
-    {
-      "elementId": "020cab5b-bcff-5d95-bc3f-204e142b05c9",
-      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba",
-      "kind": "组成",
-      "explanation": "钱塘八景把江潮与湖山并置，观潮由此进入题名组景体系。"
-    },
-    {
-      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
-      "relatedElementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef",
-      "kind": "解释",
-      "explanation": "西湖文化景观的普世价值，经由2011年列入世界遗产得到确认。"
-    },
-    {
-      "elementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef",
-      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
-      "kind": "解释",
-      "explanation": "西湖申遗的核心依据，要回到南宋以来十景题名的景观传统。"
-    },
-    {
-      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
-      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
-      "kind": "解释",
-      "explanation": "西湖堤岸水利的形态，要从苏轼疏浚筑堤的治理讲起。"
-    },
-    {
-      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
-      "relatedElementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
-      "kind": "解释",
-      "explanation": "更早的白居易治湖，解释了堤岸与诗人治理记忆如何叠合。"
-    },
-    {
-      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
-      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
-      "kind": "产生于",
-      "explanation": "苏堤由苏轼治湖工程形成，水利设施由此化为可吟咏的春景。"
-    },
-    {
-      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
-      "relatedElementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
-      "kind": "组成",
-      "explanation": "桃柳间植使长堤在春日被读成一条转动的彩色景观带。"
-    },
-    {
-      "elementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
-      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
-      "kind": "解释",
-      "explanation": "堤上桃柳最初为护岸固堤而植，其由来要放到堤岸水利中理解。"
-    },
-    {
-      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
-      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
-      "kind": "组成",
-      "explanation": "杨公堤延续堤岸水利传统，兼顾疏浚与游赏。"
-    },
-    {
-      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
-      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
-      "kind": "产生于",
-      "explanation": "杨公堤为明代杨孟瑛疏浚西湖所筑。"
-    },
-    {
-      "elementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5",
-      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225",
-      "kind": "产生于",
-      "explanation": "阮公墩为清代阮元疏浚西湖以葑泥堆成。"
-    },
-    {
-      "elementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
-      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
-      "kind": "产生于",
-      "explanation": "苏轼两仕杭州皆在北宋，其治湖与题咏是宋代士大夫文化的代表。"
-    },
-    {
-      "elementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
-      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077",
-      "kind": "产生于",
-      "explanation": "白居易任杭州刺史在唐代，治湖与吟咏是唐代诗人刺史传统的代表。"
-    },
-    {
-      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
-      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "kind": "组成",
-      "explanation": "雷峰塔影是西湖塔影构景在南岸的一端。"
-    },
-    {
-      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
-      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
-      "kind": "组成",
-      "explanation": "保俶塔瘦影是西湖塔影构景在北岸的一端。"
-    },
-    {
-      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
-      "relatedElementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
-      "kind": "组成",
-      "explanation": "六和塔把塔影传统从湖畔延伸到江岸。"
-    },
-    {
-      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
-      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
-      "kind": "体现",
-      "explanation": "塔与山脊、湖面的对位，是十景命名观看中常见的空间组织。"
-    },
-    {
-      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
-      "relatedElementId": "359c601d-38fc-5368-ae98-929ad425dc77",
-      "kind": "体现",
-      "explanation": "保俶与雷峰隔湖南北对景，是塔影构景中最经典的双塔格局。"
-    },
-    {
-      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
-      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "kind": "组成",
-      "explanation": "雷峰塔是南岸对景的一端，夕照轮廓与北岸瘦影互相标定。"
-    },
-    {
-      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
-      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
-      "kind": "组成",
-      "explanation": "保俶塔是北岸对景的一端。"
-    },
-    {
-      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
-      "kind": "解释",
-      "explanation": "雷峰塔的文化意义要从《白蛇传》讲起，并区分历史塔址与文学再创作。"
-    },
-    {
-      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
-      "kind": "相似于",
-      "explanation": "雷峰夕照与南屏晚钟同属南岸黄昏体验，一重光色轮廓，一重钟声回响。"
-    },
-    {
-      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
-      "kind": "产生于",
-      "explanation": "雷峰塔始建于五代吴越国，为钱俶供养舍利而建。"
-    },
-    {
-      "elementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
-      "kind": "产生于",
-      "explanation": "保俶塔相传建于吴越国时期，为祈保钱俶平安而得名。"
-    },
-    {
-      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
-      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
-      "kind": "组成",
-      "explanation": "保俶塔立于宝石山脊，是宝石流霞的垂直标记。"
-    },
-    {
-      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
-      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "explanation": "文澜阁位于孤山，是清代皇家藏书楼在江南的遗存。",
       "kind": "位于",
-      "explanation": "宝石流霞列入1985西湖新十景。"
+      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a"
     },
     {
-      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
-      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba",
-      "kind": "用于",
-      "explanation": "六和塔一带是观潮佳点，塔身帮助标定潮头与开阔江面。"
+      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "explanation": "文澜阁与印社同在孤山，分别以皇家藏书与方寸金石承载知识秩序。",
+      "kind": "相似于",
+      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0"
     },
     {
-      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
-      "kind": "产生于",
-      "explanation": "六和塔始建于吴越国，为镇钱塘江潮而建。"
+      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "explanation": "西湖堤岸水利的形态，要从苏轼疏浚筑堤的治理讲起。",
+      "kind": "解释",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8"
     },
     {
-      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
-      "relatedElementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
-      "kind": "理解前先懂",
-      "explanation": "先了解佛教中国化的脉络，再看西湖寺院如何与湖山城市共生。"
+      "elementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "explanation": "更早的白居易治湖，解释了堤岸与诗人治理记忆如何叠合。",
+      "kind": "解释",
+      "relatedElementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16"
     },
     {
-      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
+      "elementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "explanation": "现存长城主体为明朝大规模修筑的边防遗存。",
       "kind": "受到影响",
-      "explanation": "西湖寺院格局深受吴越国崇佛国策影响，雷峰、六和、净慈皆源于钱氏。"
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7"
     },
     {
-      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
-      "relatedElementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
-      "kind": "组成",
-      "explanation": "灵隐以殿宇、溪泉与古树把礼佛空间叠合山林，是西湖寺院文化的核心。"
-    },
-    {
-      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
-      "relatedElementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
-      "kind": "组成",
-      "explanation": "净慈寺是西湖南岸的寺院重镇，南屏晚钟由此传出。"
-    },
-    {
-      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
-      "relatedElementId": "3ff3b94d-b5d0-5baf-9b3b-cd0480e3d73b",
-      "kind": "组成",
-      "explanation": "飞来峰摩崖造像紧邻灵隐寺区，与寺院中轴线互为松紧。"
-    },
-    {
-      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
-      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
+      "elementId": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "explanation": "秦始皇连接战国旧墙，始有万里长城之称。",
       "kind": "产生于",
-      "explanation": "灵隐寺由印度僧人慧理创建于东晋咸和元年（326年）。"
+      "relatedElementId": "a791db39-bcee-5907-9942-1efbe6a100f4"
     },
     {
-      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
-      "kind": "产生于",
-      "explanation": "净慈寺前身为954年钱弘俶为永明延寿禅师所建的慧日永明院。"
-    },
-    {
-      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
-      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "唐朝是中国古代最开放强盛的王朝之一。",
       "kind": "组成",
-      "explanation": "南屏晚钟的钟声出自净慈寺，黄昏时响彻南屏山。"
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
     },
     {
-      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
-      "relatedElementId": "843e1bce-ea67-57de-a615-acd0d37575e6",
-      "kind": "解释",
-      "explanation": "净慈寺因济公传说家喻户晓，寺院的民俗形象要从济公讲起。"
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "五代十国是唐亡后政权频繁更迭的过渡时期。",
+      "kind": "组成",
+      "relatedElementId": "04942ef0-d853-5849-942d-f30154c16e45"
     },
     {
-      "elementId": "843e1bce-ea67-57de-a615-acd0d37575e6",
-      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
-      "kind": "产生于",
-      "explanation": "济公为南宋高僧，其传说产生于临安的市井文化。"
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "清朝是帝制时代的最后一个王朝。",
+      "kind": "组成",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b"
     },
     {
-      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
-      "relatedElementId": "c45fc9c7-d1e4-54df-bfe5-c6420cfebf38",
-      "kind": "解释",
-      "explanation": "虎跑的近代文化记忆，要从弘一法师在此落发出家讲起。"
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "三国是汉末群雄割据的鼎立时期。",
+      "kind": "组成",
+      "relatedElementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "周朝奠定礼乐制度与封建格局。",
+      "kind": "组成",
+      "relatedElementId": "23ba68c7-be2d-5074-984c-64512433e8d6"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "夏朝是脉络中由传说迈向王朝时代的开端。",
+      "kind": "组成",
+      "relatedElementId": "40678ced-1a79-542a-98b3-c176df713e7a"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "商朝以青铜文明与甲骨文著称。",
+      "kind": "组成",
+      "relatedElementId": "687f092d-7c06-556a-ada0-d193b707b01e"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "汉朝奠定汉民族与汉文化的基本格局。",
+      "kind": "组成",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "南北朝是南北政权并立、民族交融的时期。",
+      "kind": "组成",
+      "relatedElementId": "85f88308-831c-5be6-a232-82f86df1b030"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "明朝恢复汉人统治，修筑长城、远航西洋。",
+      "kind": "组成",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "秦朝是脉络中首个大一统帝国。",
+      "kind": "组成",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "隋朝重新统一南北，开创科举与大运河。",
+      "kind": "组成",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "元朝是蒙古建立的大一统王朝。",
+      "kind": "组成",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "两晋短暂统一后陷入长期南北分裂。",
+      "kind": "组成",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "宋朝以经济繁荣与文化精致著称，军事上偏于守势。",
+      "kind": "组成",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc",
+      "explanation": "春秋战国是东周王权衰落后的分裂与争鸣时代。",
+      "kind": "组成",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
     },
     {
       "elementId": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
-      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
-      "kind": "理解前先懂",
-      "explanation": "先了解中国茶文化与《茶经》传统，再看龙井为何居名茶之首。"
-    },
-    {
-      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
-      "relatedElementId": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
-      "kind": "组成",
-      "explanation": "龙井村是狮峰山下的核心产茶村落。"
-    },
-    {
-      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
-      "relatedElementId": "78a2e749-e5d9-5b12-a923-dbec8727f0b7",
-      "kind": "组成",
-      "explanation": "梅家坞是龙井茶主要产村，构成茶山生活的具体肌理。"
-    },
-    {
-      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
-      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
-      "kind": "用于",
-      "explanation": "虎跑清泉常用于冲泡龙井，泉茶相配是西湖饮茶传统。"
-    },
-    {
-      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
-      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
-      "kind": "位于",
-      "explanation": "虎跑梦泉列入1985西湖新十景。"
-    },
-    {
-      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
-      "relatedElementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22",
-      "kind": "解释",
-      "explanation": "龙井茶声名大振，与乾隆南巡封点御茶树直接相关。"
-    },
-    {
-      "elementId": "37defe3a-cea5-5250-a1a7-e64545cd114f",
-      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
-      "kind": "位于",
-      "explanation": "满陇桂雨列入1985新十景，以桂香把嗅觉写入景名。"
-    },
-    {
-      "elementId": "be77359e-4b0a-541b-83e4-3af6a9234a17",
-      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
-      "kind": "理解前先懂",
-      "explanation": "先了解书法与金石传统，再看西泠印社如何把篆刻变成学问。"
-    },
-    {
-      "elementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
-      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
-      "kind": "位于",
-      "explanation": "西泠印社嵌在孤山，把印学、庭园与金石观念写入西湖文人景观。"
-    },
-    {
-      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
-      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
-      "kind": "位于",
-      "explanation": "文澜阁位于孤山，是清代皇家藏书楼在江南的遗存。"
-    },
-    {
-      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
-      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
+      "explanation": "唐代陆羽《茶经》标志饮茶成为体系化的文化生活。",
       "kind": "产生于",
-      "explanation": "《四库全书》编纂于清乾隆年间，文澜阁为江南三阁之一。"
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
     },
     {
-      "elementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
-      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
-      "kind": "相似于",
-      "explanation": "文澜阁与印社同在孤山，分别以皇家藏书与方寸金石承载知识秩序。"
-    },
-    {
-      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
-      "relatedElementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
-      "kind": "解释",
-      "explanation": "孤山『梅妻鹤子』的隐逸形象，要从北宋隐士林逋讲起。"
-    },
-    {
-      "elementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "体现",
-      "explanation": "林逋的隐逸与咏梅，体现宋代士大夫的山水审美。"
-    },
-    {
-      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
-      "relatedElementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120",
-      "kind": "位于",
-      "explanation": "孤山是西湖『一山二塔三岛四堤五湖』格局中的一山。"
-    },
-    {
-      "elementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120",
-      "relatedElementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
-      "kind": "组成",
-      "explanation": "湖心三岛是西湖空间格局中的三岛。"
-    },
-    {
-      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
-      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
-      "kind": "组成",
-      "explanation": "小瀛洲是湖中三岛中最可游的一座。"
-    },
-    {
-      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
-      "relatedElementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
-      "kind": "组成",
-      "explanation": "湖心亭所在是湖中三岛之一。"
-    },
-    {
-      "elementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389",
-      "relatedElementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5",
-      "kind": "组成",
-      "explanation": "阮公墩是湖中三岛之一，为清代阮元疏浚所成。"
-    },
-    {
-      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
-      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
-      "kind": "用于",
-      "explanation": "湖心亭是湖上赏月与看雪的传统视点。"
-    },
-    {
-      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
-      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
-      "kind": "相似于",
-      "explanation": "《湖心亭看雪》与断桥残雪同属西湖冬雪的观看传统。"
-    },
-    {
-      "elementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
-      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
-      "kind": "解释",
-      "explanation": "断桥在《白蛇传》中是相会节点，冬雪现场因此承载文学地图的意义。"
-    },
-    {
-      "elementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
-      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "elementId": "0c724cb3-e019-58b0-8567-e1f8ccf39d7f",
+      "explanation": "先了解中国茶文化与《茶经》传统，再看龙井为何居名茶之首。",
       "kind": "理解前先懂",
-      "explanation": "先了解岳飞抗金与冤狱昭雪，再看岳庙的忠烈祠祀。"
+      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928"
     },
     {
-      "elementId": "bebc6818-5c37-509b-a08b-2ad5e0f09ea2",
-      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "elementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
+      "explanation": "清军入关取代明朝统治，建立清朝。",
+      "kind": "产生于",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7"
+    },
+    {
+      "elementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b",
+      "explanation": "鸦片战争揭开近代序幕，清朝统治由盛转衰。",
       "kind": "组成",
-      "explanation": "岳飞是西湖三杰中最广为人知的一位。"
+      "relatedElementId": "bf64a656-a4a8-51da-86ca-f0e16eb5871c"
     },
     {
       "elementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
-      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
+      "explanation": "岳飞冤狱与昭雪发生于南宋临安，祠祀传统由此延续。",
       "kind": "产生于",
-      "explanation": "岳飞冤狱与昭雪发生于南宋临安，祠祀传统由此延续。"
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40"
     },
     {
-      "elementId": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
-      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
-      "kind": "解释",
-      "explanation": "钱王祠的祠祀对象，要从吴越国钱氏保境安民的历史理解。"
+      "elementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18",
+      "explanation": "汉末黄巾之乱后群雄割据，曹魏代汉后进入三国。",
+      "kind": "产生于",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b"
     },
     {
-      "elementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
-      "relatedElementId": "354ea9d5-7830-548f-8847-1d193625d358",
-      "kind": "解释",
-      "explanation": "康熙南巡的题匾与景名钦定，要从康熙帝巩固江南统治的背景理解。"
-    },
-    {
-      "elementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22",
-      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
-      "kind": "受到影响",
-      "explanation": "乾隆南巡题咏，深受祖父康熙南巡传统的影响。"
-    },
-    {
-      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
-      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806",
-      "kind": "解释",
-      "explanation": "『山色空蒙雨亦奇』的诗意命名，解释了烟雨湖为何成为西湖经典面孔。"
-    },
-    {
-      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
-      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
-      "kind": "体现",
-      "explanation": "雨中虚实与墨色层次，贴近宋代山水的水墨意趣。"
-    },
-    {
-      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
-      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
-      "kind": "受到影响",
-      "explanation": "今日西湖文化景观的叠层，深受南宋临安城市与游赏传统塑造。"
-    },
-    {
-      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
-      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "剩山图代表馆藏书画的最高水准。",
       "kind": "组成",
-      "explanation": "湖滨与老城是湖山与城市的交界，决定市民如何日常进入西湖。"
+      "relatedElementId": "03450361-df1d-50fc-89cc-848d880e1783"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "良渚玉琮王是十大镇馆之宝之首，代表史前玉礼文明。",
+      "kind": "组成",
+      "relatedElementId": "422ecaac-9557-58b5-973a-5c181d410c71"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "万工轿代表清末民初朱金木雕工艺的巅峰。",
+      "kind": "组成",
+      "relatedElementId": "5429373a-0fd2-5912-b210-49ad3bcdc724"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "双鸟朝阳纹牙雕代表河姆渡工艺的最高成就。",
+      "kind": "组成",
+      "relatedElementId": "7761fd8c-06f2-5e4a-8343-5144175672c2"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "舟形砚滴代表龙泉青瓷文房器的最高水准。",
+      "kind": "组成",
+      "relatedElementId": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "十大镇馆之宝从十余万件馆藏中评选产生，体现收藏体系的最高水准。",
+      "kind": "体现",
+      "relatedElementId": "95906076-3c48-5762-ad31-2eebe2a9bd42"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "彩凤鸣岐是传世唐琴的代表。",
+      "kind": "组成",
+      "relatedElementId": "b78c3e13-f4fd-5626-8150-4744854e50d8"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "越王者旨於睗剑是青铜兵器门类的代表。",
+      "kind": "组成",
+      "relatedElementId": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d"
+    },
+    {
+      "elementId": "162ffb68-7b96-5a03-aef2-73709620ccb1",
+      "explanation": "鎏金银阿育王塔是吴越佛教文物的代表。",
+      "kind": "组成",
+      "relatedElementId": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7"
+    },
+    {
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "explanation": "龙井村是狮峰山下的核心产茶村落。",
+      "kind": "组成",
+      "relatedElementId": "024fb8dd-2ecc-50c1-947c-39b9af90e203"
+    },
+    {
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "explanation": "梅家坞是龙井茶主要产村，构成茶山生活的具体肌理。",
+      "kind": "组成",
+      "relatedElementId": "78a2e749-e5d9-5b12-a923-dbec8727f0b7"
+    },
+    {
+      "elementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "explanation": "龙井茶声名大振，与乾隆南巡封点御茶树直接相关。",
+      "kind": "解释",
+      "relatedElementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22"
+    },
+    {
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "explanation": "湖滨与老城是湖山与城市的交界，决定市民如何日常进入西湖。",
+      "kind": "组成",
+      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c"
+    },
+    {
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "explanation": "西湖文化景观的普世价值，经由2011年列入世界遗产得到确认。",
+      "kind": "解释",
+      "relatedElementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef"
+    },
+    {
+      "elementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "explanation": "今日西湖文化景观的叠层，深受南宋临安城市与游赏传统塑造。",
+      "kind": "受到影响",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40"
+    },
+    {
+      "elementId": "21117b05-6804-5961-986f-166884c84f64",
+      "explanation": "先理解湖中湖的嵌套边界，才能体会步移时同一景物如何不断改组。",
+      "kind": "理解前先懂",
+      "relatedElementId": "0512b97c-833f-5004-bd51-8822cd29ed3e"
+    },
+    {
+      "elementId": "23ba68c7-be2d-5074-984c-64512433e8d6",
+      "explanation": "周武王灭商建周，礼乐制度在商文化基础上损益而成。",
+      "kind": "产生于",
+      "relatedElementId": "687f092d-7c06-556a-ada0-d193b707b01e"
+    },
+    {
+      "elementId": "23ba68c7-be2d-5074-984c-64512433e8d6",
+      "explanation": "春秋战国是东周王权衰落后的历史分期。",
+      "kind": "组成",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
+    },
+    {
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "explanation": "雷峰塔的文化意义要从《白蛇传》讲起，并区分历史塔址与文学再创作。",
+      "kind": "解释",
+      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01"
+    },
+    {
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "explanation": "雷峰夕照与南屏晚钟同属南岸黄昏体验，一重光色轮廓，一重钟声回响。",
+      "kind": "相似于",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306"
+    },
+    {
+      "elementId": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "explanation": "雷峰塔始建于五代吴越国，为钱俶供养舍利而建。",
+      "kind": "产生于",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "25635e69-6a12-599d-857c-450ba4c60d3b",
+      "explanation": "2007三评西湖十景把题名传统延伸到当代城市栖居与夜色。",
+      "kind": "受到影响",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab"
+    },
+    {
+      "elementId": "25847815-97a4-5692-860f-fa04a848bf53",
+      "explanation": "沙孟海与吴昌硕同以书法篆刻著称，是前后相承的两位大家。",
+      "kind": "相似于",
+      "relatedElementId": "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90"
+    },
+    {
+      "elementId": "264e378e-2460-5b0c-8974-3d6ce6b72775",
+      "explanation": "先建立中华文明五千年连续发展的整体概念，再进入具体朝代的更替脉络。",
+      "kind": "理解前先懂",
+      "relatedElementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc"
+    },
+    {
+      "elementId": "264e378e-2460-5b0c-8974-3d6ce6b72775",
+      "explanation": "把良渚放进中华文明五千年的探源视野，才能理解『实证五千年』的分量。",
+      "kind": "理解前先懂",
+      "relatedElementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d"
+    },
+    {
+      "elementId": "264e378e-2460-5b0c-8974-3d6ce6b72775",
+      "explanation": "河姆渡七千年的稻作遗存，是中华文明多元源头之一。",
+      "kind": "组成",
+      "relatedElementId": "fb207661-23da-54bc-af3c-aee4dbb88931"
+    },
+    {
+      "elementId": "2af8cfef-b959-5152-8e81-c5f5a625e158",
+      "explanation": "瑶山祭坛的祭祀与葬制，受良渚神权体制的规制。",
+      "kind": "受规制于",
+      "relatedElementId": "64602982-75d9-569c-863d-4e323bc833f0"
+    },
+    {
+      "elementId": "2af8cfef-b959-5152-8e81-c5f5a625e158",
+      "explanation": "瑶山与反山同列良渚最高等级的王陵墓地，用玉制度相近。",
+      "kind": "相似于",
+      "relatedElementId": "cceb0298-98aa-56e7-9b5b-cf975d971b61"
+    },
+    {
+      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
+      "explanation": "先了解佛教中国化的脉络，再看吴越如何把崇佛变成国策。",
+      "kind": "理解前先懂",
+      "relatedElementId": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20"
+    },
+    {
+      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
+      "explanation": "佛教于两汉之际传入中国，逐渐本土化为中国文化的重要组成。",
+      "kind": "产生于",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b"
+    },
+    {
+      "elementId": "2bb7596f-1001-57d1-8230-2ec58490981e",
+      "explanation": "先了解佛教中国化的脉络，再看西湖寺院如何与湖山城市共生。",
+      "kind": "理解前先懂",
+      "relatedElementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa"
+    },
+    {
+      "elementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6",
+      "explanation": "贞观之治的成就，要放到太宗的用人与纳谏中理解。",
+      "kind": "解释",
+      "relatedElementId": "b606e202-ef33-5e44-8266-ce40598494fd"
+    },
+    {
+      "elementId": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20",
+      "explanation": "吴越佛教的兴盛，产生于钱氏国王崇佛造塔的国策。",
+      "kind": "产生于",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "32c66150-415c-5830-9fa7-637b517458b5",
+      "explanation": "文景之治积累的国力，是理解汉武帝功业的前提。",
+      "kind": "理解前先懂",
+      "relatedElementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3"
+    },
+    {
+      "elementId": "343c405b-8a86-5177-89a6-76e25c53c37e",
+      "explanation": "了解环太湖的地理分布，是理解良渚文化面貌的空间前提。",
+      "kind": "理解前先懂",
+      "relatedElementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d"
+    },
+    {
+      "elementId": "354ea9d5-7830-548f-8847-1d193625d358",
+      "explanation": "康熙的文治武功，体现清朝康乾盛世的开端。",
+      "kind": "体现",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b"
+    },
+    {
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "explanation": "雷峰塔影是西湖塔影构景在南岸的一端。",
+      "kind": "组成",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091"
+    },
+    {
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "explanation": "六和塔把塔影传统从湖畔延伸到江岸。",
+      "kind": "组成",
+      "relatedElementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2"
+    },
+    {
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "explanation": "塔与山脊、湖面的对位，是十景命名观看中常见的空间组织。",
+      "kind": "体现",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab"
+    },
+    {
+      "elementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "explanation": "保俶塔瘦影是西湖塔影构景在北岸的一端。",
+      "kind": "组成",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd"
+    },
+    {
+      "elementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
+      "explanation": "有限边界引导视线、组织远近虚实，是宋代山水审美在园林现场的操作。",
+      "kind": "体现",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "37defe3a-cea5-5250-a1a7-e64545cd114f",
+      "explanation": "满陇桂雨列入1985新十景，以桂香把嗅觉写入景名。",
+      "kind": "位于",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d"
+    },
+    {
+      "elementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d",
+      "explanation": "河姆渡更早的稻作与定居传统，解释了良渚为何能在环太湖兴起。",
+      "kind": "解释",
+      "relatedElementId": "fb207661-23da-54bc-af3c-aee4dbb88931"
+    },
+    {
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "explanation": "儒家经典被科举用作考试内容，成为读书入仕的阶梯。",
+      "kind": "用于",
+      "relatedElementId": "707c0481-01fa-5c61-ab0f-24448b981e4a"
+    },
+    {
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "explanation": "同为春秋思想源头，儒家重入世教化，道家贵自然无为。",
+      "kind": "相似于",
+      "relatedElementId": "b486685f-18a1-5090-994b-139b73689036"
+    },
+    {
+      "elementId": "3bbdeda6-c103-58e5-9f80-18dc6745769e",
+      "explanation": "孔子思想产生于春秋乱世，回应礼崩乐坏。",
+      "kind": "产生于",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
+    },
+    {
+      "elementId": "3f22446b-b6cd-5876-9df4-c9b72dc99f8f",
+      "explanation": "世界遗产身份，象征良渚作为中华文明五千年实证的地位。",
+      "kind": "象征",
+      "relatedElementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d"
+    },
+    {
+      "elementId": "40678ced-1a79-542a-98b3-c176df713e7a",
+      "explanation": "夏朝由传说迈向信史的过程，需要放到中华文明探源研究的语境中理解。",
+      "kind": "解释",
+      "relatedElementId": "264e378e-2460-5b0c-8974-3d6ce6b72775"
+    },
+    {
+      "elementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "explanation": "玉琮王列入禁止出国（境）展览文物名录，只能在境内展出。",
+      "kind": "受规制于",
+      "relatedElementId": "7cb89f30-5375-5ddd-8a2a-68e8dc74462a"
+    },
+    {
+      "elementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "explanation": "玉琮王在良渚博物院的展厅中陈列展出。",
+      "kind": "位于",
+      "relatedElementId": "88f77240-6a4c-57c9-9322-443456b25598"
+    },
+    {
+      "elementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "explanation": "玉琮王出土于反山第12号贵族墓葬。",
+      "kind": "产生于",
+      "relatedElementId": "cceb0298-98aa-56e7-9b5b-cf975d971b61"
+    },
+    {
+      "elementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "explanation": "玉琮王是浙博之江馆区《浙江一万年》陈列的重要展品。",
+      "kind": "位于",
+      "relatedElementId": "e45da344-5dfc-5602-b582-33f67c8a312c"
+    },
+    {
+      "elementId": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "explanation": "玉琮王是琮作为沟通天地礼器的极致体现。",
+      "kind": "体现",
+      "relatedElementId": "e5ac2ef8-9095-57a6-808c-43df7159b392"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "雷峰夕照以塔影与夕阳列入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "平湖秋月以开阔湖面与秋夜月色列入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "康熙南巡为十景题匾立碑，景名由此钦定流传。",
+      "kind": "受到影响",
+      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "双峰插云看重云雾、高度与远望位置的关系。",
+      "kind": "组成",
+      "relatedElementId": "77347f66-53d0-5e01-a359-01bc66ca8330"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "花港观鱼以曲池、鱼影与回廊列入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "7aa489c9-6efc-54da-8486-914cbab0267b"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "苏堤春晓是南宋十景之首，治湖长堤化作桃柳春景。",
+      "kind": "组成",
+      "relatedElementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "断桥残雪以雪后桥面的黑白对比列入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "十景以四字景名的诗画规则，约束各地点如何被观看与传诵。",
+      "kind": "受规制于",
+      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "曲院风荷以夏日荷塘与风列入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "南屏晚钟把钟声、山体与黄昏纳入十景，提醒西湖体验也依赖声音。",
+      "kind": "组成",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306"
+    },
+    {
+      "elementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9",
+      "explanation": "柳浪闻莺把声景与春柳纳入南宋十景。",
+      "kind": "组成",
+      "relatedElementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b"
+    },
+    {
+      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
+      "explanation": "岛上再分内湖、堤岸与小岛，采用湖中湖、岛中岛的多层嵌套手法。",
+      "kind": "制作采用",
+      "relatedElementId": "21117b05-6804-5961-986f-166884c84f64"
+    },
+    {
+      "elementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
+      "explanation": "小瀛洲以桥、岸、亭、树切分视域，把借景与框景落实为可步行的取景。",
+      "kind": "制作采用",
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc"
+    },
+    {
+      "elementId": "484417c0-6068-54d5-9d51-97659064a65b",
+      "explanation": "玉钺象征军权与王权，对应社会权力的分化。",
+      "kind": "象征",
+      "relatedElementId": "64602982-75d9-569c-863d-4e323bc833f0"
+    },
+    {
+      "elementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
+      "explanation": "中秋西湖赏月常把平湖秋月与三潭印月并置，展示两种月题。",
+      "kind": "组成",
+      "relatedElementId": "4f91e5eb-e1f0-5e73-869a-5280880c66e9"
+    },
+    {
+      "elementId": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd",
+      "explanation": "靖康之变的国耻，是理解岳飞抗金动力的前提。",
+      "kind": "理解前先懂",
+      "relatedElementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e"
+    },
+    {
+      "elementId": "5109ed5d-faa6-5146-94f7-3316cc6cadaf",
+      "explanation": "兽面纹玉器大量出土于瑶山等祭祀遗址中。",
+      "kind": "位于",
+      "relatedElementId": "2af8cfef-b959-5152-8e81-c5f5a625e158"
+    },
+    {
+      "elementId": "5109ed5d-faa6-5146-94f7-3316cc6cadaf",
+      "explanation": "神人兽面纹以繁复的阴线雕琢技术制成。",
+      "kind": "制作采用",
+      "relatedElementId": "c41fc4b3-78f5-534f-8d98-5f4e27f31247"
+    },
+    {
+      "elementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "explanation": "隋统一南北后大规模开凿运河，奠定后世漕运格局。",
+      "kind": "产生于",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9"
+    },
+    {
+      "elementId": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "explanation": "鸦片战争后通商口岸兴起，运河漕运地位渐衰。",
+      "kind": "受到影响",
+      "relatedElementId": "bf64a656-a4a8-51da-86ca-f0e16eb5871c"
+    },
+    {
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "explanation": "雷峰塔是南岸对景的一端，夕照轮廓与北岸瘦影互相标定。",
+      "kind": "组成",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091"
+    },
+    {
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "explanation": "保俶与雷峰隔湖南北对景，是塔影构景中最经典的双塔格局。",
+      "kind": "体现",
+      "relatedElementId": "359c601d-38fc-5368-ae98-929ad425dc77"
+    },
+    {
+      "elementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "explanation": "保俶塔是北岸对景的一端。",
+      "kind": "组成",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd"
+    },
+    {
+      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
+      "explanation": "『山色空蒙雨亦奇』的诗意命名，解释了烟雨湖为何成为西湖经典面孔。",
+      "kind": "解释",
+      "relatedElementId": "a6290195-a364-5dad-80c6-7def7178f806"
+    },
+    {
+      "elementId": "570b90f5-78d5-5ceb-86ea-d2af3b59f944",
+      "explanation": "雨中虚实与墨色层次，贴近宋代山水的水墨意趣。",
+      "kind": "体现",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3",
+      "explanation": "推恩令与开疆拓土，体现汉朝鼎盛时期的国力。",
+      "kind": "体现",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b"
+    },
+    {
+      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "explanation": "六和塔一带是观潮佳点，塔身帮助标定潮头与开阔江面。",
+      "kind": "用于",
+      "relatedElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba"
+    },
+    {
+      "elementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "explanation": "六和塔始建于吴越国，为镇钱塘江潮而建。",
+      "kind": "产生于",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "59e90047-4888-5b1f-8cb0-42f9d1e0e0f5",
+      "explanation": "阮公墩为清代阮元疏浚西湖以葑泥堆成。",
+      "kind": "产生于",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225"
+    },
+    {
+      "elementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f",
+      "explanation": "先认识塔身圆孔，才能理解月光、塔灯与水面如何共同『印月』。",
+      "kind": "理解前先懂",
+      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9"
+    },
+    {
+      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "explanation": "宝石流霞列入1985西湖新十景。",
+      "kind": "位于",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d"
+    },
+    {
+      "elementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "explanation": "保俶塔立于宝石山脊，是宝石流霞的垂直标记。",
+      "kind": "组成",
+      "relatedElementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd"
+    },
+    {
+      "elementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f",
+      "explanation": "堤上桃柳最初为护岸固堤而植，其由来要放到堤岸水利中理解。",
+      "kind": "解释",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225"
+    },
+    {
+      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "explanation": "北宋三潭石塔的治理语境，要放到苏轼主持疏浚的线索中理解。",
+      "kind": "解释",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8"
+    },
+    {
+      "elementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "explanation": "以有限水面标志组织远近虚实，呼应宋代在约束视角中安排光影的审美。",
+      "kind": "体现",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
+      "explanation": "古城与外围水利的完整营建，是良渚入选世界遗产的核心见证。",
+      "kind": "体现",
+      "relatedElementId": "3f22446b-b6cd-5876-9df4-c9b72dc99f8f"
+    },
+    {
+      "elementId": "61aa62f4-8cb8-5577-a7de-f4576b63fa9c",
+      "explanation": "外围水利系统是良渚古城整体营建的重要组成。",
+      "kind": "组成",
+      "relatedElementId": "d8dd65b0-c448-59b1-8626-7524c383e81d"
+    },
+    {
+      "elementId": "64602982-75d9-569c-863d-4e323bc833f0",
+      "explanation": "理解良渚的文明高度，先要懂得其神权与社会分化。",
+      "kind": "理解前先懂",
+      "relatedElementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d"
+    },
+    {
+      "elementId": "67c74434-c86f-5d34-bba5-927ae2affcd7",
+      "explanation": "每座石塔塔身分布圆孔，是灯光与月影故事的视觉入口。",
+      "kind": "组成",
+      "relatedElementId": "5ef10f1b-8759-57ac-811d-9cb24f7f935f"
     },
     {
       "elementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
-      "relatedElementId": "c16ab99a-cf45-5a9b-b898-75f1915eb2bc",
+      "explanation": "涌金、清波、钱塘等城门地名，解释了湖滨曾是旧城西界的空间记忆。",
       "kind": "解释",
-      "explanation": "涌金、清波、钱塘等城门地名，解释了湖滨曾是旧城西界的空间记忆。"
+      "relatedElementId": "c16ab99a-cf45-5a9b-b898-75f1915eb2bc"
+    },
+    {
+      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "explanation": "《湖心亭看雪》与断桥残雪同属西湖冬雪的观看传统。",
+      "kind": "相似于",
+      "relatedElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405"
+    },
+    {
+      "elementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "explanation": "湖心亭是湖上赏月与看雪的传统视点。",
+      "kind": "用于",
+      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310"
+    },
+    {
+      "elementId": "687f092d-7c06-556a-ada0-d193b707b01e",
+      "explanation": "商汤灭夏而建商，青铜文明在夏的世袭制度基础上成熟。",
+      "kind": "产生于",
+      "relatedElementId": "40678ced-1a79-542a-98b3-c176df713e7a"
+    },
+    {
+      "elementId": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
+      "explanation": "璧与钺同属良渚权威玉器，常同出于大墓随葬。",
+      "kind": "相似于",
+      "relatedElementId": "484417c0-6068-54d5-9d51-97659064a65b"
+    },
+    {
+      "elementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a",
+      "explanation": "康熙南巡的题匾与景名钦定，要从康熙帝巩固江南统治的背景理解。",
+      "kind": "解释",
+      "relatedElementId": "354ea9d5-7830-548f-8847-1d193625d358"
+    },
+    {
+      "elementId": "6f709cb8-6d36-52d1-aa7e-11ad643571ef",
+      "explanation": "西湖申遗的核心依据，要回到南宋以来十景题名的景观传统。",
+      "kind": "解释",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9"
+    },
+    {
+      "elementId": "707c0481-01fa-5c61-ab0f-24448b981e4a",
+      "explanation": "隋文帝首创、隋炀帝设进士科，科举制度产生于隋朝。",
+      "kind": "产生于",
+      "relatedElementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9"
+    },
+    {
+      "elementId": "707c0481-01fa-5c61-ab0f-24448b981e4a",
+      "explanation": "先了解科举取士的基本制度，才能理解王安石以经义取士的改革。",
+      "kind": "理解前先懂",
+      "relatedElementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1"
+    },
+    {
+      "elementId": "71261568-8116-57fb-8221-e32f8dbbfe77",
+      "explanation": "唐代是古琴艺术的成熟期，传世名琴多出于此时。",
+      "kind": "产生于",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
+    },
+    {
+      "elementId": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a",
+      "explanation": "张成剔红婴戏图盘是这批捐赠漆器中价值最高的国宝。",
+      "kind": "组成",
+      "relatedElementId": "e50f9576-9d0d-506d-a71d-e893854c5e5f"
+    },
+    {
+      "elementId": "7761fd8c-06f2-5e4a-8343-5144175672c2",
+      "explanation": "双鸟朝阳纹牙雕作为镇馆之宝，长期于孤山馆区展陈。",
+      "kind": "位于",
+      "relatedElementId": "917dfb28-49c6-5a13-975c-0901a3248fc5"
+    },
+    {
+      "elementId": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
+      "explanation": "龙泉窑粉青、梅子青的温润釉色，在小巧的舟形砚滴上集中体现。",
+      "kind": "体现",
+      "relatedElementId": "7f792a90-7796-57ed-bc27-e69b3fe33fbc"
+    },
+    {
+      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+      "explanation": "桃柳间植使长堤在春日被读成一条转动的彩色景观带。",
+      "kind": "组成",
+      "relatedElementId": "600ee6ee-322c-5a21-9d7a-4e9b9fcecc0f"
+    },
+    {
+      "elementId": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+      "explanation": "苏堤由苏轼治湖工程形成，水利设施由此化为可吟咏的春景。",
+      "kind": "产生于",
+      "relatedElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8"
+    },
+    {
+      "elementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
+      "explanation": "文景之治是汉初与民休息造就的治世。",
+      "kind": "组成",
+      "relatedElementId": "32c66150-415c-5830-9fa7-637b517458b5"
+    },
+    {
+      "elementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b",
+      "explanation": "汉承秦制，郡县制与皇帝制度皆延续秦朝的开创。",
+      "kind": "受到影响",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c"
+    },
+    {
+      "elementId": "7cb89f30-5375-5ddd-8a2a-68e8dc74462a",
+      "explanation": "禁止出国（境）展览的五件（组）文物全部位于之江馆区。",
+      "kind": "位于",
+      "relatedElementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9"
+    },
+    {
+      "elementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "explanation": "断桥在《白蛇传》中是相会节点，冬雪现场因此承载文学地图的意义。",
+      "kind": "解释",
+      "relatedElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01"
+    },
+    {
+      "elementId": "7f792a90-7796-57ed-bc27-e69b3fe33fbc",
+      "explanation": "越窑是浙江青瓷的源头，解释了龙泉窑粉青、梅子青釉色的来路。",
+      "kind": "解释",
+      "relatedElementId": "7354cd7a-a6a2-56d7-b7a6-dfb871129047"
+    },
+    {
+      "elementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
+      "explanation": "先了解岳飞抗金与冤狱昭雪，再看岳庙的忠烈祠祀。",
+      "kind": "理解前先懂",
+      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d"
+    },
+    {
+      "elementId": "7fe4714e-87b6-59f8-a022-8dd86cf4ad8e",
+      "explanation": "同为两宋名臣，一个变法受挫，一个蒙冤而亡，都壮志难酬。",
+      "kind": "相似于",
+      "relatedElementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1"
+    },
+    {
+      "elementId": "843e1bce-ea67-57de-a615-acd0d37575e6",
+      "explanation": "济公为南宋高僧，其传说产生于临安的市井文化。",
+      "kind": "产生于",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40"
+    },
+    {
+      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "explanation": "飞来峰摩崖造像紧邻灵隐寺区，与寺院中轴线互为松紧。",
+      "kind": "组成",
+      "relatedElementId": "3ff3b94d-b5d0-5baf-9b3b-cd0480e3d73b"
+    },
+    {
+      "elementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "explanation": "灵隐寺由印度僧人慧理创建于东晋咸和元年（326年）。",
+      "kind": "产生于",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73"
+    },
+    {
+      "elementId": "85f88308-831c-5be6-a232-82f86df1b030",
+      "explanation": "东晋灭亡后刘宋代晋，南北政权并立。",
+      "kind": "产生于",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73"
+    },
+    {
+      "elementId": "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90",
+      "explanation": "吴昌硕首任西泠印社社长，其金石画风要从印学传统理解。",
+      "kind": "解释",
+      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0"
+    },
+    {
+      "elementId": "88f77240-6a4c-57c9-9322-443456b25598",
+      "explanation": "良渚博物院的学术根基，要追溯到施昕更的首次发掘与《良渚》报告。",
+      "kind": "解释",
+      "relatedElementId": "d48d7adb-49d2-5879-9dd2-381f6bc9f06a"
+    },
+    {
+      "elementId": "88f77240-6a4c-57c9-9322-443456b25598",
+      "explanation": "博物院与遗址公园互补，组成完整的良渚观展路线。",
+      "kind": "相似于",
+      "relatedElementId": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca"
+    },
+    {
+      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "explanation": "十景观看方式的具体内容，就是南宋定名的十景体系。",
+      "kind": "解释",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9"
+    },
+    {
+      "elementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "explanation": "南宋临安时期，西湖成为都城游赏与题名之地，十景观看方式由此成型。",
+      "kind": "产生于",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40"
+    },
+    {
+      "elementId": "893ee811-737d-54ca-a22a-d3a1fce35880",
+      "explanation": "莫角山台地位于良渚遗址群的中心位置。",
+      "kind": "位于",
+      "relatedElementId": "343c405b-8a86-5177-89a6-76e25c53c37e"
+    },
+    {
+      "elementId": "893ee811-737d-54ca-a22a-d3a1fce35880",
+      "explanation": "莫角山位于古城内城中心，是宫殿区所在。",
+      "kind": "位于",
+      "relatedElementId": "61aa62f4-8cb8-5577-a7de-f4576b63fa9c"
+    },
+    {
+      "elementId": "893ee811-737d-54ca-a22a-d3a1fce35880",
+      "explanation": "莫角山台地位于良渚古城遗址公园的核心区域。",
+      "kind": "位于",
+      "relatedElementId": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca"
+    },
+    {
+      "elementId": "899b4244-f44c-5596-ab6e-567b29f583f7",
+      "explanation": "元末群雄并起，明军北伐攻克大都，元廷北退。",
+      "kind": "产生于",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74"
+    },
+    {
+      "elementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+      "explanation": "苏轼两仕杭州皆在北宋，其治湖与题咏是宋代士大夫文化的代表。",
+      "kind": "产生于",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "explanation": "西湖月景如何被机制化地营造，可以从三潭塔孔、灯影与倒影看懂。",
+      "kind": "解释",
+      "relatedElementId": "113dc571-9fc8-5982-a349-5d8905b8d1b9"
+    },
+    {
+      "elementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
+      "explanation": "1985新十景延续南宋十景的构景与题名方法，把观看推向山林泉声。",
+      "kind": "受到影响",
+      "relatedElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab"
+    },
+    {
+      "elementId": "917dfb28-49c6-5a13-975c-0901a3248fc5",
+      "explanation": "孤山馆区是浙博最早落成的馆区，见证从西湖博物馆起步的馆史。",
+      "kind": "体现",
+      "relatedElementId": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7"
+    },
+    {
+      "elementId": "917dfb28-49c6-5a13-975c-0901a3248fc5",
+      "explanation": "孤山与之江两大馆区一老一新，共同承载浙博馆藏。",
+      "kind": "相似于",
+      "relatedElementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9"
+    },
+    {
+      "elementId": "948bb138-1ced-515b-b776-dfe22278d01d",
+      "explanation": "二十四史以纪传体记录四千年王朝，是印证朝代更替的正史依据。",
+      "kind": "用于",
+      "relatedElementId": "0a53e8d3-2697-5cdf-b6fc-184d7ae8a5dc"
+    },
+    {
+      "elementId": "95906076-3c48-5762-ad31-2eebe2a9bd42",
+      "explanation": "曹其镛夫妇捐赠的160件漆器，是馆藏漆器门类的支柱。",
+      "kind": "组成",
+      "relatedElementId": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a"
+    },
+    {
+      "elementId": "95906076-3c48-5762-ad31-2eebe2a9bd42",
+      "explanation": "吴昌硕遗属捐赠的文物，是书画印收藏的重要组成。",
+      "kind": "组成",
+      "relatedElementId": "88e71f5d-0fd2-5907-a3ed-a4bb4aed0e90"
+    },
+    {
+      "elementId": "95906076-3c48-5762-ad31-2eebe2a9bd42",
+      "explanation": "黄宾虹家属捐赠的五千余件作品与手稿，是书画收藏的重要支柱。",
+      "kind": "组成",
+      "relatedElementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1"
+    },
+    {
+      "elementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
+      "explanation": "林逋的隐逸与咏梅，体现宋代士大夫的山水审美。",
+      "kind": "体现",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "explanation": "杨公堤延续堤岸水利传统，兼顾疏浚与游赏。",
+      "kind": "组成",
+      "relatedElementId": "085b790e-08f7-5811-8073-8c996202b225"
+    },
+    {
+      "elementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "explanation": "杨公堤为明代杨孟瑛疏浚西湖所筑。",
+      "kind": "产生于",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7"
+    },
+    {
+      "elementId": "9abf276c-9bef-5142-8dda-d964bcdb8015",
+      "explanation": "骨耜翻地种稻，体现江南稻作农业七千年的悠久源头。",
+      "kind": "体现",
+      "relatedElementId": "a157e85d-7d02-5790-8f29-6efcf18152b8"
+    },
+    {
+      "elementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c",
+      "explanation": "秦灭六国终结战国纷争，统一产生于分裂时代的终点。",
+      "kind": "产生于",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
+    },
+    {
+      "elementId": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7",
+      "explanation": "沙孟海曾任历史部主任与名誉馆长，是浙博馆史的重要组成。",
+      "kind": "组成",
+      "relatedElementId": "25847815-97a4-5692-860f-fa04a848bf53"
+    },
+    {
+      "elementId": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
+      "explanation": "先了解中秋节团圆赏月的习俗，才能理解西湖中秋夜游的传统。",
+      "kind": "理解前先懂",
+      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64"
+    },
+    {
+      "elementId": "9e5a9d35-d760-5ea6-bcdd-c6a58b209aab",
+      "explanation": "中秋赏月成俗于唐宋，至宋代成为全民团圆佳节。",
+      "kind": "产生于",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
+      "explanation": "白居易任杭州刺史在唐代，治湖与吟咏是唐代诗人刺史传统的代表。",
+      "kind": "产生于",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
+    },
+    {
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "explanation": "康熙三征噶尔丹安定西北，丝路沿线重归稳定。",
+      "kind": "受到影响",
+      "relatedElementId": "354ea9d5-7830-548f-8847-1d193625d358"
+    },
+    {
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "explanation": "汉武帝遣张骞凿空西域，丝绸之路由此正式开通。",
+      "kind": "产生于",
+      "relatedElementId": "573f9a4d-122a-5a93-8e43-9058d7da7da3"
+    },
+    {
+      "elementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236",
+      "explanation": "丝绸之路是四大发明西传中亚与欧洲的重要通道。",
+      "kind": "用于",
+      "relatedElementId": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a"
+    },
+    {
+      "elementId": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
+      "explanation": "先懂良渚的年代分期，才能理解其文化总貌。",
+      "kind": "理解前先懂",
+      "relatedElementId": "3b970416-1756-55e8-8a1e-fca23a4cc03d"
+    },
+    {
+      "elementId": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
+      "explanation": "良渚晚期与传说中的夏代年代相近，可对照理解早期国家的形成。",
+      "kind": "相似于",
+      "relatedElementId": "40678ced-1a79-542a-98b3-c176df713e7a"
+    },
+    {
+      "elementId": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
+      "explanation": "以年代对照可理解：良渚与红山等文化同处满天星斗的共时格局。",
+      "kind": "解释",
+      "relatedElementId": "a47145b5-c9d7-5ba5-bdef-f280d3125b08"
+    },
+    {
+      "elementId": "a0d2ece0-3148-51b3-992a-bc0f60391cf2",
+      "explanation": "良渚年代的确定，要从施昕更1936年的发掘讲起。",
+      "kind": "解释",
+      "relatedElementId": "d48d7adb-49d2-5879-9dd2-381f6bc9f06a"
+    },
+    {
+      "elementId": "a157e85d-7d02-5790-8f29-6efcf18152b8",
+      "explanation": "稻作农业的成熟，是判断良渚文明水平的重要依据。",
+      "kind": "解释",
+      "relatedElementId": "a0d2ece0-3148-51b3-992a-bc0f60391cf2"
+    },
+    {
+      "elementId": "a3471eec-6d2a-5c85-89ec-04ae746c44a8",
+      "explanation": "陶器用于盛放稻米等日常饮食，伴随稻作生活。",
+      "kind": "用于",
+      "relatedElementId": "a157e85d-7d02-5790-8f29-6efcf18152b8"
+    },
+    {
+      "elementId": "a3471eec-6d2a-5c85-89ec-04ae746c44a8",
+      "explanation": "良渚陶器与河姆渡陶器同为浙江新石器遗物，可对照工艺进步。",
+      "kind": "相似于",
+      "relatedElementId": "fb207661-23da-54bc-af3c-aee4dbb88931"
+    },
+    {
+      "elementId": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
+      "explanation": "十里红妆的婚俗排场成形于明清时期的宁绍地区。",
+      "kind": "产生于",
+      "relatedElementId": "0e5abdda-e97c-56a3-aa8b-0bdd64d2aa8b"
+    },
+    {
+      "elementId": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
+      "explanation": "万工轿是十里红妆中最华重的嫁妆，集朱金木雕工艺之大成。",
+      "kind": "组成",
+      "relatedElementId": "5429373a-0fd2-5912-b210-49ad3bcdc724"
+    },
+    {
+      "elementId": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
+      "explanation": "十里红妆的泥金彩漆与捐赠漆器的剔红，同属浙江髹漆工艺。",
+      "kind": "相似于",
+      "relatedElementId": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a"
+    },
+    {
+      "elementId": "a3c5b4b8-d016-5690-81d6-458cceeee4e3",
+      "explanation": "嫁妆排场与伎乐乐舞，都是浙江民间生活与仪式的写照。",
+      "kind": "相似于",
+      "relatedElementId": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842"
+    },
+    {
+      "elementId": "a47145b5-c9d7-5ba5-bdef-f280d3125b08",
+      "explanation": "河姆渡是与良渚前后相继的江南文明星光之一。",
+      "kind": "组成",
+      "relatedElementId": "fb207661-23da-54bc-af3c-aee4dbb88931"
+    },
+    {
+      "elementId": "a791db39-bcee-5907-9942-1efbe6a100f4",
+      "explanation": "秦始皇的统一功业与沉重徭役，集中体现了秦朝的崛起与速亡。",
+      "kind": "体现",
+      "relatedElementId": "9c7c8d88-0a78-5ed2-bc41-b5a586b60f1c"
+    },
+    {
+      "elementId": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
+      "explanation": "伎乐铜屋采用越国高超的青铜铸造技术，与越剑一脉相承。",
+      "kind": "制作采用",
+      "relatedElementId": "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919"
+    },
+    {
+      "elementId": "b606e202-ef33-5e44-8266-ce40598494fd",
+      "explanation": "唐太宗的治理把唐朝带入第一个治世。",
+      "kind": "体现",
+      "relatedElementId": "00c11eb4-c8d4-5af6-8a25-c666e8a2c077"
+    },
+    {
+      "elementId": "b78c3e13-f4fd-5626-8150-4744854e50d8",
+      "explanation": "彩凤鸣岐产生于唐代斫琴传统，是『唐圆』之说的实物印证。",
+      "kind": "产生于",
+      "relatedElementId": "71261568-8116-57fb-8221-e32f8dbbfe77"
+    },
+    {
+      "elementId": "b78c3e13-f4fd-5626-8150-4744854e50d8",
+      "explanation": "唐琴的大漆髹涂与馆藏漆器同属髹漆工艺谱系。",
+      "kind": "相似于",
+      "relatedElementId": "741fd9f5-cbb5-5a29-966d-750cfd5d2d6a"
+    },
+    {
+      "elementId": "b78c3e13-f4fd-5626-8150-4744854e50d8",
+      "explanation": "彩凤鸣岐是古琴音韵世界流传至今的实物代表。",
+      "kind": "体现",
+      "relatedElementId": "c5978321-c18b-582e-bcac-e1990d4561ac"
+    },
+    {
+      "elementId": "bb8c2784-d40b-50f3-b07b-6d6f20eaedd5",
+      "explanation": "先了解中国山水画『可游可居』的传统，再看富春山居图的长卷叙事。",
+      "kind": "理解前先懂",
+      "relatedElementId": "03450361-df1d-50fc-89cc-848d880e1783"
+    },
+    {
+      "elementId": "bb8c2784-d40b-50f3-b07b-6d6f20eaedd5",
+      "explanation": "山水画在两晋南北朝成为独立画科，与士人隐逸之风同生。",
+      "kind": "产生于",
+      "relatedElementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73"
+    },
+    {
+      "elementId": "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272",
+      "explanation": "北宋彩塑泥菩萨承续吴越崇佛造像的传统。",
+      "kind": "受到影响",
+      "relatedElementId": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20"
+    },
+    {
+      "elementId": "be46c5a9-5b9b-5fc1-992c-dd20a84846e9",
+      "explanation": "隋灭陈统一南北，终结数百年分裂。",
+      "kind": "产生于",
+      "relatedElementId": "85f88308-831c-5be6-a232-82f86df1b030"
+    },
+    {
+      "elementId": "be77359e-4b0a-541b-83e4-3af6a9234a17",
+      "explanation": "汉字书写在汉代隶变之后成为自觉的艺术。",
+      "kind": "产生于",
+      "relatedElementId": "7c6c8a18-1cf6-546c-bbdd-d35dfe36227b"
+    },
+    {
+      "elementId": "be77359e-4b0a-541b-83e4-3af6a9234a17",
+      "explanation": "先了解书法与金石传统，再看西泠印社如何把篆刻变成学问。",
+      "kind": "理解前先懂",
+      "relatedElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0"
+    },
+    {
+      "elementId": "beae431c-6816-5890-8ebe-39df230ebe3c",
+      "explanation": "旧居保存的书作与用印，帮助理解沙孟海晚年的艺术与生活。",
+      "kind": "解释",
+      "relatedElementId": "25847815-97a4-5692-860f-fa04a848bf53"
+    },
+    {
+      "elementId": "bebc6818-5c37-509b-a08b-2ad5e0f09ea2",
+      "explanation": "岳飞是西湖三杰中最广为人知的一位。",
+      "kind": "组成",
+      "relatedElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d"
+    },
+    {
+      "elementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74",
+      "explanation": "蒙古灭南宋建元，结束两宋与北方政权并立。",
+      "kind": "产生于",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "c0412b19-5da7-5fcb-ac78-4f5fc8df557d",
+      "explanation": "丝帛纺织与稻作同属良渚多样的经济生活。",
+      "kind": "相似于",
+      "relatedElementId": "a157e85d-7d02-5790-8f29-6efcf18152b8"
+    },
+    {
+      "elementId": "c3e7ae77-d004-5d88-ad02-5521a8c1c41a",
+      "explanation": "蒙元的驿站网络与东西往来，解释了四大发明为何在此时加速西传。",
+      "kind": "解释",
+      "relatedElementId": "befb141d-e5ed-5e65-9f84-0ef0a6534b74"
+    },
+    {
+      "elementId": "c46cbda4-2958-594d-8c84-9f3cf0e1f0d1",
+      "explanation": "王安石变法的成败，集中体现北宋中期的财政困境与改革尝试。",
+      "kind": "体现",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "c5978321-c18b-582e-bcac-e1990d4561ac",
+      "explanation": "唐代斫琴传统是古琴发展史中的关键一环。",
+      "kind": "组成",
+      "relatedElementId": "71261568-8116-57fb-8221-e32f8dbbfe77"
+    },
+    {
+      "elementId": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+      "explanation": "者旨於睗剑的精湛铸工与鸟篆铭文，体现越国青铜剑传统的最高水准。",
+      "kind": "体现",
+      "relatedElementId": "41f669fb-7ae0-5c9a-a7a9-21c6a6d1e919"
+    },
+    {
+      "elementId": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+      "explanation": "越国崛起于春秋末期，越王剑产生于诸侯争霸的时代。",
+      "kind": "产生于",
+      "relatedElementId": "f8b84323-80b9-591a-91d0-1c7579d27011"
+    },
+    {
+      "elementId": "cb090bbc-f775-58e6-9ef2-95e43fc1f14a",
+      "explanation": "开元盛世承继贞观之治打下的制度基础。",
+      "kind": "受到影响",
+      "relatedElementId": "2c5c0535-4a44-5d0b-b44c-c18ac2be8fb6"
+    },
+    {
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "explanation": "净慈寺因济公传说家喻户晓，寺院的民俗形象要从济公讲起。",
+      "kind": "解释",
+      "relatedElementId": "843e1bce-ea67-57de-a615-acd0d37575e6"
+    },
+    {
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "explanation": "南屏晚钟的钟声出自净慈寺，黄昏时响彻南屏山。",
+      "kind": "组成",
+      "relatedElementId": "db6089df-2ae1-508c-b2bc-e8316c287306"
+    },
+    {
+      "elementId": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "explanation": "净慈寺前身为954年钱弘俶为永明延寿禅师所建的慧日永明院。",
+      "kind": "产生于",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
+      "explanation": "反山贵族墓地邻近莫角山，同属良渚权力核心区。",
+      "kind": "位于",
+      "relatedElementId": "893ee811-737d-54ca-a22a-d3a1fce35880"
+    },
+    {
+      "elementId": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
+      "explanation": "反山贵族墓地位于良渚古城遗址公园内。",
+      "kind": "位于",
+      "relatedElementId": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca"
+    },
+    {
+      "elementId": "ce41ce0d-05c3-5a8b-a586-16218e70392d",
+      "explanation": "南宋官窑的青瓷技艺深受越窑传统影响。",
+      "kind": "受到影响",
+      "relatedElementId": "7354cd7a-a6a2-56d7-b7a6-dfb871129047"
+    },
+    {
+      "elementId": "ce41ce0d-05c3-5a8b-a586-16218e70392d",
+      "explanation": "官窑随宋室南渡设于临安，产生于南宋宫廷用瓷的需求。",
+      "kind": "产生于",
+      "relatedElementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c"
+    },
+    {
+      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "explanation": "孤山『梅妻鹤子』的隐逸形象，要从北宋隐士林逋讲起。",
+      "kind": "解释",
+      "relatedElementId": "95eb4f3a-7a95-570d-bae0-a0987c334967"
+    },
+    {
+      "elementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "explanation": "孤山是西湖『一山二塔三岛四堤五湖』格局中的一山。",
+      "kind": "位于",
+      "relatedElementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120"
+    },
+    {
+      "elementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
+      "explanation": "黄宾虹与黄公望同为山水画大家，名作先后入藏浙博。",
+      "kind": "相似于",
+      "relatedElementId": "058e20d5-373f-5423-b6d6-4adb8f88c144"
+    },
+    {
+      "elementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1",
+      "explanation": "黄宾虹晚年定居栖霞岭，深受西湖山水与孤山文化氛围滋养。",
+      "kind": "受到影响",
+      "relatedElementId": "917dfb28-49c6-5a13-975c-0901a3248fc5"
+    },
+    {
+      "elementId": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
+      "explanation": "钱王祠的祠祀对象，要从吴越国钱氏保境安民的历史理解。",
+      "kind": "解释",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
+      "explanation": "鎏金银阿育王塔出自雷峰塔地宫，是吴越宝箧印式塔传统的代表作。",
+      "kind": "体现",
+      "relatedElementId": "2efd7c8b-5a3d-5697-bd3d-d7b310cd0b20"
+    },
+    {
+      "elementId": "d8dd65b0-c448-59b1-8626-7524c383e81d",
+      "explanation": "集体治水的营建，体现良渚社会高度的组织动员能力。",
+      "kind": "体现",
+      "relatedElementId": "64602982-75d9-569c-863d-4e323bc833f0"
+    },
+    {
+      "elementId": "d8dd65b0-c448-59b1-8626-7524c383e81d",
+      "explanation": "水利系统用于灌溉稻田，支撑集约式稻作农业。",
+      "kind": "用于",
+      "relatedElementId": "a157e85d-7d02-5790-8f29-6efcf18152b8"
+    },
+    {
+      "elementId": "d9dc4898-8d93-59b7-9b79-320d60801d58",
+      "explanation": "七下西洋体现明初鼎盛时期的国威与海洋开拓。",
+      "kind": "体现",
+      "relatedElementId": "899b4244-f44c-5596-ab6e-567b29f583f7"
+    },
+    {
+      "elementId": "d9dc4898-8d93-59b7-9b79-320d60801d58",
+      "explanation": "郑和航线属于海上丝绸之路，连接西太平洋与印度洋。",
+      "kind": "位于",
+      "relatedElementId": "a0bcc44f-d5b6-57ba-8efc-9929a8712236"
     },
     {
       "elementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
-      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
+      "explanation": "柳浪闻莺临近湖滨城市界面，春日声景与城湖边界叠合。",
       "kind": "位于",
-      "explanation": "柳浪闻莺临近湖滨城市界面，春日声景与城湖边界叠合。"
+      "relatedElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c"
+    },
+    {
+      "elementId": "e03453b8-6b6a-53ef-9a91-b26aa83f2120",
+      "explanation": "湖心三岛是西湖空间格局中的三岛。",
+      "kind": "组成",
+      "relatedElementId": "02bf16bb-e2c9-51e2-b37b-7a8002231389"
+    },
+    {
+      "elementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "explanation": "西泠印社嵌在孤山，把印学、庭园与金石观念写入西湖文人景观。",
+      "kind": "位于",
+      "relatedElementId": "d0352861-3d2c-5301-a662-cd042e449e6a"
+    },
+    {
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "explanation": "灵隐以殿宇、溪泉与古树把礼佛空间叠合山林，是西湖寺院文化的核心。",
+      "kind": "组成",
+      "relatedElementId": "85ea281c-8741-505e-a7f0-62400f5b33ba"
+    },
+    {
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "explanation": "净慈寺是西湖南岸的寺院重镇，南屏晚钟由此传出。",
+      "kind": "组成",
+      "relatedElementId": "cccf0722-3380-5fe3-960a-5947bbb8104b"
+    },
+    {
+      "elementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "explanation": "西湖寺院格局深受吴越国崇佛国策影响，雷峰、六和、净慈皆源于钱氏。",
+      "kind": "受到影响",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "e31f52c9-e16b-56fb-ad11-b41a8d6337ec",
+      "explanation": "刻符与兽面纹同生于良渚的装饰与信仰传统。",
+      "kind": "相似于",
+      "relatedElementId": "5109ed5d-faa6-5146-94f7-3316cc6cadaf"
+    },
+    {
+      "elementId": "e31f52c9-e16b-56fb-ad11-b41a8d6337ec",
+      "explanation": "原始刻符采用与玉器相同的刻划手法。",
+      "kind": "制作采用",
+      "relatedElementId": "c41fc4b3-78f5-534f-8d98-5f4e27f31247"
+    },
+    {
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "explanation": "虎跑清泉常用于冲泡龙井，泉茶相配是西湖饮茶传统。",
+      "kind": "用于",
+      "relatedElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928"
+    },
+    {
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "explanation": "虎跑梦泉列入1985西湖新十景。",
+      "kind": "位于",
+      "relatedElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d"
+    },
+    {
+      "elementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "explanation": "虎跑的近代文化记忆，要从弘一法师在此落发出家讲起。",
+      "kind": "解释",
+      "relatedElementId": "c45fc9c7-d1e4-54df-bfe5-c6420cfebf38"
+    },
+    {
+      "elementId": "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e",
+      "explanation": "黄宾虹纪念室位于栖霞岭故居，邻近孤山馆区。",
+      "kind": "位于",
+      "relatedElementId": "917dfb28-49c6-5a13-975c-0901a3248fc5"
+    },
+    {
+      "elementId": "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e",
+      "explanation": "纪念室陈列的画具与手稿，帮助理解黄宾虹晚年的创作状态。",
+      "kind": "解释",
+      "relatedElementId": "d402f589-b0e2-59f7-96ee-d53df0019cb1"
+    },
+    {
+      "elementId": "e45da344-5dfc-5602-b582-33f67c8a312c",
+      "explanation": "先逛良渚博物院建立整体认识，再在浙博中认出同源玉器体系。",
+      "kind": "理解前先懂",
+      "relatedElementId": "88f77240-6a4c-57c9-9322-443456b25598"
+    },
+    {
+      "elementId": "e45da344-5dfc-5602-b582-33f67c8a312c",
+      "explanation": "浙博里的良渚位于之江馆区《浙江一万年》陈列。",
+      "kind": "位于",
+      "relatedElementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9"
+    },
+    {
+      "elementId": "e58c5e31-a4b0-5cac-bc18-58a88dda0fe6",
+      "explanation": "一元纸币背面图景取自三潭印月，使石塔成为高辨识度的国家图像符号。",
+      "kind": "产生于",
+      "relatedElementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9"
+    },
+    {
+      "elementId": "e5ac2ef8-9095-57a6-808c-43df7159b392",
+      "explanation": "琮与璧同为良渚祭天礼地的核心礼器，常成套随葬。",
+      "kind": "相似于",
+      "relatedElementId": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c"
+    },
+    {
+      "elementId": "e5ac2ef8-9095-57a6-808c-43df7159b392",
+      "explanation": "玉琮的制作采用良渚精湛的阴线雕琢工艺。",
+      "kind": "制作采用",
+      "relatedElementId": "c41fc4b3-78f5-534f-8d98-5f4e27f31247"
+    },
+    {
+      "elementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9",
+      "explanation": "吴越国的『越』字国号与尚武风气，要从越王剑代表的古越传统理解。",
+      "kind": "解释",
+      "relatedElementId": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "三潭印月是西湖文化景观中的标志性构景点，人工标志与诗意观看在此叠加。",
+      "kind": "位于",
+      "relatedElementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "从三潭水域常把雷峰塔纳入远景，同属湖上塔影与夕照月色的对位关系。",
+      "kind": "相似于",
+      "relatedElementId": "23bd1809-9de0-5cba-b72c-c822987ed091"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "桥、岸、树木与亭台把三潭纳入框景借景，引导视线组织远山与倒影。",
+      "kind": "用于",
+      "relatedElementId": "3631f63f-a6de-5376-b4db-7e1128771edc"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "三潭印月是南宋西湖十景体系中的核心景目之一。",
+      "kind": "位于",
+      "relatedElementId": "46312eec-2e0e-5b5c-9771-3b5989a393d9"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "三潭石塔立于小瀛洲外湖面，岛上桥岸亭树支撑这一景的可走可观。",
+      "kind": "位于",
+      "relatedElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "塔孔灯影与圆月意象，把团圆清赏的象征压缩进同一景名。",
+      "kind": "象征",
+      "relatedElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "今日所见三潭石塔传统，源于北宋苏轼疏浚时树立的水面界标。",
+      "kind": "产生于",
+      "relatedElementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "三座水中石塔是三潭印月最醒目的实体，承担水域标志与构景焦点。",
+      "kind": "组成",
+      "relatedElementId": "67c74434-c86f-5d34-bba5-927ae2affcd7"
+    },
+    {
+      "elementId": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "explanation": "塔孔、灯影、月色与水波倒影，把西湖月景营造浓缩为一景。",
+      "kind": "体现",
+      "relatedElementId": "8ddba328-608b-57b4-81bb-f383b22c1310"
+    },
+    {
+      "elementId": "ec78e61f-e1cf-551a-a597-57e9ecff9f22",
+      "explanation": "乾隆南巡题咏，深受祖父康熙南巡传统的影响。",
+      "kind": "受到影响",
+      "relatedElementId": "6e8daf2c-09cf-5379-8555-e0f399a4930a"
+    },
+    {
+      "elementId": "ee1cf7d4-b161-5adc-8c5c-449b413dbc73",
+      "explanation": "司马氏代魏建晋，灭吴后结束三国鼎立。",
+      "kind": "产生于",
+      "relatedElementId": "14ed5ae8-c992-57e4-baaf-9c73ff1e0b18"
+    },
+    {
+      "elementId": "f097d527-52d8-568b-890c-1325f4b99a40",
+      "explanation": "临安都城语境下的湖山题名，把宋代山水审美落实为可传诵的四字景目。",
+      "kind": "体现",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "f1967937-d54e-5f3a-8492-b74f2d81f6a9",
+      "explanation": "之江馆区是浙博馆史在新世纪的延续，2023年作为新主场开放。",
+      "kind": "体现",
+      "relatedElementId": "9d5f30ce-f7b7-5897-b564-e02a11a0fea7"
+    },
+    {
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "explanation": "赵匡胤陈桥兵变取代后周建宋，结束五代纷争。",
+      "kind": "产生于",
+      "relatedElementId": "04942ef0-d853-5849-942d-f30154c16e45"
+    },
+    {
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "explanation": "靖康之变导致北宋灭亡，宋室南渡。",
+      "kind": "组成",
+      "relatedElementId": "4d51b7d7-0922-56a5-9d99-a14a8a249bfd"
+    },
+    {
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "explanation": "先了解宋朝士大夫主政的时代气质，再理解宋代山水审美的简约与留白。",
+      "kind": "理解前先懂",
+      "relatedElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6"
+    },
+    {
+      "elementId": "f5ccd3e1-7645-5d89-9f3e-3295ba1a994c",
+      "explanation": "先知道宋室南渡的历史，才能理解南宋临安与西湖十景的关系。",
+      "kind": "理解前先懂",
+      "relatedElementId": "f097d527-52d8-568b-890c-1325f4b99a40"
+    },
+    {
+      "elementId": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
+      "explanation": "保俶塔相传建于吴越国时期，为祈保钱俶平安而得名。",
+      "kind": "产生于",
+      "relatedElementId": "e84ba7e7-7bc1-5891-ab65-edadd0f34cc9"
+    },
+    {
+      "elementId": "fb207661-23da-54bc-af3c-aee4dbb88931",
+      "explanation": "双鸟朝阳纹牙雕是河姆渡线雕工艺与鸟日崇拜的代表遗物。",
+      "kind": "组成",
+      "relatedElementId": "7761fd8c-06f2-5e4a-8343-5144175672c2"
+    },
+    {
+      "elementId": "fb207661-23da-54bc-af3c-aee4dbb88931",
+      "explanation": "骨耜是河姆渡『耜耕农业』的标志性农具。",
+      "kind": "组成",
+      "relatedElementId": "9abf276c-9bef-5142-8dda-d964bcdb8015"
+    },
+    {
+      "elementId": "fb207661-23da-54bc-af3c-aee4dbb88931",
+      "explanation": "绘纹陶器的绳纹与动植物图案，是河姆渡陶器传统的代表。",
+      "kind": "组成",
+      "relatedElementId": "ac565d24-9a02-5a99-8acc-cb885f30883d"
+    },
+    {
+      "elementId": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
+      "explanation": "遗址公园正是世界遗产良渚古城的现场呈现。",
+      "kind": "体现",
+      "relatedElementId": "3f22446b-b6cd-5876-9df4-c9b72dc99f8f"
     }
-  ]
+  ],
+  "source_language": "zh-Hans",
+  "version": "culturelens-v1"
 }

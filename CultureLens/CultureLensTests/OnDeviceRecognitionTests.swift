@@ -40,6 +40,14 @@ struct OnDeviceRecognitionTests {
     )
   }
 
+  private func freeformVisualTags() -> [ProviderVisualTag] {
+    [
+      ProviderVisualTag(label: "层叠出跳", evidence: "水平构件向外逐层延伸。"),
+      ProviderVisualTag(label: "风化石材", evidence: "表面有浅色剥蚀与颗粒质感。"),
+      ProviderVisualTag(label: "青绿设色", evidence: "局部青绿色彩与深色底面形成对比。"),
+    ]
+  }
+
   private func decision(
     culturalElementKey: String = "",
     attractionKey: String = "",
@@ -50,13 +58,16 @@ struct OnDeviceRecognitionTests {
       culturalElementKey: culturalElementKey,
       attractionKey: attractionKey,
       canonicalName: canonicalName,
-      category: "空间",
+      category: culturalElementKey.isEmpty && attractionKey.isEmpty ? "其他" : "空间",
       confidence: 0.8,
       summary: "一句话说明。",
       rationale: "可见特征依据。",
       uncertainty: "",
       timePeriod: "",
       region: "",
+      visualTags: culturalElementKey.isEmpty && attractionKey.isEmpty
+        ? freeformVisualTags()
+        : [],
       alternatives: alternatives ?? [
         ProviderCandidate(
           culturalElementKey: "",
@@ -669,6 +680,48 @@ struct OnDeviceRecognitionTests {
     #expect(throws: LLMGatewayError.self) {
       try RecognitionResponseMapper.validate(
         invalidCategory, candidates: candidates, attractions: [])
+    }
+  }
+
+  @Test func freeformVisualTagsAreAllowedOnlyWithoutExistingPoint() throws {
+    let fallback = decision()
+    try RecognitionResponseMapper.validate(fallback, candidates: candidates, attractions: [])
+    let mapped = RecognitionResponseMapper.mapResponse(
+      requestID: "freeform-visual-tags",
+      usedPlaceContext: false,
+      decision: fallback,
+      modelIdentifier: "test-model",
+      knowledge: RecognitionKnowledgeSet(
+        version: "test",
+        elements: [],
+        attractionCandidates: [],
+        totalElements: 0,
+        nearbyContextCount: 0,
+        locationMatched: false
+      )
+    )
+    #expect(mapped.isFreeformVisualResult)
+    #expect(mapped.visualTags.map(\.label) == ["层叠出跳", "风化石材", "青绿设色"])
+
+    var emptyFallback = decision()
+    emptyFallback.visualTags = []
+    #expect(throws: LLMGatewayError.self) {
+      try RecognitionResponseMapper.validate(emptyFallback, candidates: candidates, attractions: [])
+    }
+
+    var bound = decision(
+      culturalElementKey: "west-lake-ten-scenes",
+      canonicalName: "西湖十景的观看方式"
+    )
+    bound.visualTags = freeformVisualTags()
+    #expect(throws: LLMGatewayError.self) {
+      try RecognitionResponseMapper.validate(bound, candidates: candidates, attractions: [])
+    }
+
+    var wrongCategory = decision()
+    wrongCategory.category = "展品"
+    #expect(throws: LLMGatewayError.self) {
+      try RecognitionResponseMapper.validate(wrongCategory, candidates: candidates, attractions: [])
     }
   }
 
@@ -1555,7 +1608,7 @@ struct OnDeviceRecognitionTests {
     let store = await KnowledgePackLoader.shared.store()
     #expect(store != nil)
     guard let store else { return }
-    #expect(store.pack.version.contains("hangzhou-west-lake-v"))
+    #expect(store.pack.version == "culturelens-v1")
     #expect(store.element(key: "jade-cong-wang") != nil)
     #expect(!store.pack.elements.isEmpty)
     for element in store.pack.elements {

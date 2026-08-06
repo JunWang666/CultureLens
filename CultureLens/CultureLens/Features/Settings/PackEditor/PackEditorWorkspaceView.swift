@@ -222,7 +222,7 @@ struct PackEditorWorkspaceView: View {
         ForEach(issues) { issue in
           Label {
             Text(issue.message)
-              .font(.footnote)
+              .font(CultureTypography.body(.footnote))
           } icon: {
             Image(systemName: issue.severity == .error ? "xmark.octagon.fill" : "exclamationmark.triangle.fill")
               .foregroundStyle(issue.severity == .error ? CultureTheme.cinnabar : CultureTheme.antiqueGold)

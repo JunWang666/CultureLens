@@ -1,804 +1,9 @@
 {
-  "elements": [
-    {
-      "id": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
-      "key": "yue-fei-memorial-culture",
-      "name": "岳飞纪念与忠烈祠祀",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "岳飞墓庙把人物记忆、墓葬祭祀和公共价值表达放在同一空间中。后世不断重修与讲述，使这里成为理解忠诚观念如何进入地方文化记忆的重要现场。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/yue-fei-memorial-culture.jpg",
-            "caption": "​岳飛（1103年3月24日—1142年1月27日），字鵬舉，宋朝相州湯陰（今河南省安陽市湯陰縣）人，南宋抗金名將。"
-          },
-          {
-            "type": "paragraph",
-            "text": "岳王庙始建于南宋嘉定十四年（1221年），1961年被列为全国重点文物保护单位。庙前的事实链条尤其动人：岳飞于1142年被以莫须有的罪名处死后，遗体由狱卒隗顺盗出，葬于九曲丛祠旁，直到1162年宋孝宗下诏平反昭雪，才迁葬到今日所在。"
-          },
-          {
-            "type": "paragraph",
-            "text": "祠庙建筑讲述的是后世的态度：现今建筑样式为清康熙五十四年（1715年）所建，民国七年（1918年）大修，文化大革命期间（1966—1976年）遭到严重破坏，1979年全面重建。每一次重修都说明，祭祀岳飞不是一次性的仪式，而是一直在进行的文化行为。"
-          },
-          {
-            "type": "paragraph",
-            "text": "进入忠烈祠，殿中『心昭天日』横匾为叶剑英手书，『还我河山』匾额为岳飞手迹，岳飞彩色坐像高4.5米。读匾时不妨把碑刻文字与空间秩序放在一起看——从入口、祠庙到墓园，路线本身就在引导你从凭吊走向敬仰。"
-          }
-        ]
-      },
-      "conceptKind": "人物",
-      "contentRole": "看点"
-    },
-    {
-      "id": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
-      "key": "siku-quanshu-library",
-      "name": "《四库全书》与皇家藏书楼",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "文澜阁属于为收藏《四库全书》而营建的藏书楼体系。它把典籍保存、皇家文化工程和江南园林空间叠合在一起，建筑本身也承担了知识秩序的象征。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/siku-quanshu-library.jpg",
-            "caption": "​《四库全书》 编撰于清朝乾隆年间，是中国前现代最大的一部官修丛书，在中国文化教育和学术思想的历史上具有重要的历史地位。 文津阁版是乾隆年间创作的一本手抄本。 共包括 36,304 册，分 6,144 盒 128 个书架放置。 全书共 79,309 卷 （章节），最初保藏在热河（今承德）颐和园文津阁内。 1914 年，成为首都图书馆（今中国国家图书馆）藏品的一部分。 全片分为四个部分：经、史、子、集，分别以四季的颜色装订，以便浏览。 文津阁版基于故宫博物院保存的书籍、清朝编纂的书籍、四面八方进贡的书籍、以及根据 《永乐大典》重新编辑的书籍。中国国家图书馆馆藏的全套 《四库全书》 保存了大量的文"
-          },
-          {
-            "type": "paragraph",
-            "text": "文澜阁是清代为珍藏《四库全书》而建的七大藏书阁之一，也是南三阁中唯一幸存的一座。它始建于1782年（清乾隆四十七年），次年完工，由圣因寺后的玉兰堂改建而成，改建费用由浙江商人捐办——藏书楼的身份从一开始就与江南商人的文化捐赠绑在一起。"
-          },
-          {
-            "type": "paragraph",
-            "text": "建筑细节印证了它的皇家与藏书属性：文澜阁两层、重檐歇山顶，池塘格局仿宁波天一阁，池中有奇石『仙人峰』，池东为御碑亭。站在池边可以想见，水与石不只是园林装饰，更承担着藏书楼防火避险的功能性隐喻。"
-          },
-          {
-            "type": "paragraph",
-            "text": "这部《四库全书》的传奇远不止建阁：咸丰十一年（1861年）太平军攻占杭州时文澜阁倒塌，藏书散落民间，丁丙、丁申兄弟收集补抄又散尽家赀购书，1881年再度存入修复后的文澜阁；1937年抗战爆发后，阁书被装成139箱西迁，辗转富阳渔山、建德、龙泉、贵阳，1944年迁至重庆青木关，直到1946年7月5日才重回孤山。看这一座阁，其实是在读一部近代中国的藏书迁徙史。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
-      "key": "three-pools-mirroring-moon",
-      "name": "三潭印月",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "三潭映月把三座石塔、灯孔、水面、月色与倒影组织为一个可远观、可行走、可反复讲述的景名。它既指向具体水面标志，也指向西湖把人工构景转化为诗意观看的传统。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/three-pools-mirroring-moon.jpg",
-            "caption": "​杭州西湖小瀛洲"
-          },
-          {
-            "type": "paragraph",
-            "text": "三潭印月是西湖中最大的一个岛，面积6万平方米，又称小瀛洲。三座石塔立在岛南湖面上，塔高2.5米、露出水面2米，由基座、圆形塔身、宝盖、六边小亭、葫芦顶组成，塔身球形中空、周身开五个小圆孔，孔边饰浮雕花纹。"
-          },
-          {
-            "type": "paragraph",
-            "text": "石塔的来历分两层：最初为宋代苏轼疏浚西湖时在湖中立的界塔，『著令塔以内不许侵为菱荡』；苏轼所建三塔毁于元代，据清初文献记载现存三塔系清代康熙年间所建；另一说为明熹宗天启元年（1621年）重建，即『池外造小石塔三座，谓之三潭』。看塔时不妨记住：这是标界传统与景观塔传统的叠加。"
-          },
-          {
-            "type": "paragraph",
-            "text": "它还拥有一层现代身份：2004年发行的第五套人民币1元纸币背面采用了艺术处理后的三潭印月图景，而且现实中无法从这个角度拍到同样的画面。2013年7月29日晚，中南部的石塔曾被游船撞倒落入水中，经潜水员打捞后原位拼装，次日凌晨基本恢复原貌。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
-      "key": "pinghu-autumn-moon",
-      "name": "平湖秋月",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "平湖秋月强调开阔湖面、秋夜月色和远山轮廓；三潭印月则更关注塔孔、灯影、月影和水波的多重叠加。二者展示了同一月题如何形成不同观看逻辑。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/pinghu-autumn-moon.jpg",
-            "caption": "Pinghu Qiuyue"
-          },
-          {
-            "type": "paragraph",
-            "text": "平湖秋月位于西湖景区孤山东南角的滨湖地带、白堤西南侧起点，濒临外西湖。早在南宋，它就被视为十景之首：成书于嘉熙三年、被认为是最早记录西湖十景的《方舆胜览》将平湖秋月列为十景之首；清朝雍正《西湖志》更称此地『据全湖之胜』。"
-          },
-          {
-            "type": "paragraph",
-            "text": "这里的建筑史可以追溯到唐代：早在唐朝，此处就建有望湖亭，曾任杭州刺史的白居易在诗作《湖亭晚归》中也提到过此亭附近的白堤；南宋建皇家道观四圣延祥观时，望湖亭被迁往宝石山。今天你站立的湖岸，承载着唐代以来的层层选址。"
-          },
-          {
-            "type": "paragraph",
-            "text": "清康熙三十八年（1699年），康熙帝第三次南巡至西湖御题西湖十景，为立碑建亭，地方官将景址定为孤山东南角。据康熙五十七年（1718年）《钱塘县志》记载，当时将原有龙王堂『徙庙于亭后』作御书楼，楼前建有伸出湖面的石砌平台，旁构水轩，悬康熙御题『平湖秋月』匾额。这片伸向水面的平台，就是为赏月专门设计的观看设施。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
-      "key": "su-causeway-spring-dawn",
-      "name": "苏堤春晓",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "苏堤由治湖工程形成，六桥、堤岸和桃柳又让水利设施转化为春季游赏景观。“苏堤春晓”与三潭石塔可以放在同一条苏轼治湖故事线中理解。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/su-causeway-spring-dawn.jpg",
-            "caption": "Sudi Chunxiao"
-          },
-          {
-            "type": "paragraph",
-            "text": "苏堤的物理尺度很具体：南起南屏山下花港观鱼，北抵栖霞岭下曲院风荷和岳庙，全长2.797公里，把西里湖同外西湖分割开来；堤上六桥自南向北依次为映波、锁澜、望山、压堤、东浦、跨虹。走完六桥约等于读完半部西湖水利史。"
-          },
-          {
-            "type": "paragraph",
-            "text": "它的来历是北宋元祐五年（1090年）苏轼疏浚西湖时以淤泥和葑草筑成（另一说为1089年），后人为纪念他命名苏堤。民谣唱道：『西湖景致六条桥，一枝杨柳一枝桃。』堤上的柳与桃既护岸也造景，让水利设施长成了春天的模样。"
-          },
-          {
-            "type": "paragraph",
-            "text": "『苏堤春晓』在清康熙三十八年（1699年）获得御碑：碑立于苏堤压堤桥畔，正面为康熙帝题写的『蘇隄春曉』，背面及侧面为乾隆帝六次题诗。这块御碑1966年在文化大革命中被断为数截沉入湖中，文革后打捞出水修复，2023年入选《第一批古代名碑名刻文物名录》。站在碑前，能同时看见清代的皇家书写与当代的保护修复。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "23bd1809-9de0-5cba-b72c-c822987ed091",
-      "key": "leifeng-pagoda-and-evening-glow",
-      "name": "雷峰塔与雷峰夕照",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "从三潭印月水域常可把雷峰塔纳入远景。今天的雷峰塔在保护并展示古塔遗址的基础上重建，既连接吴越国佛塔历史，也连接雷峰夕照的景名和后世民间叙事。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/leifeng-pagoda-and-evening-glow.jpg",
-            "caption": "​晚霞下的雷峰塔"
-          },
-          {
-            "type": "paragraph",
-            "text": "雷峰塔原名皇妃塔，是五代吴越王钱俶所建、供养舍利的佛塔，建于972年至977年间；1924年9月25日，砖砌塔身坍塌，仅存遗址。今天我们看到的塔，是1999年浙江省委、省政府决定重建、2002年10月25日竣工的新塔，总高71.679米，五层八面，原址重建并覆盖了整个古塔遗址。"
-          },
-          {
-            "type": "paragraph",
-            "text": "『雷峰夕照』是南宋西湖十景之一，景目最早见于南宋《方舆胜览》卷一，称『雷峰落照』；清康熙三十八年（1699年），康熙帝御书十景时定名为『雷峰西照』，并立碑筑亭。名字从落照改成西照，说明景名本身经历过皇权的改写。"
-          },
-          {
-            "type": "paragraph",
-            "text": "这座塔还是文学叙事的坐标。《白蛇传》中，雷峰塔是法海镇压白娘子的地方，最早的成型故事即名《白娘子永镇雷峰塔》；塔塌之后，鲁迅以此为题材发表《论雷峰塔的倒掉》和《再论雷峰塔的倒掉》。从佛塔到夕照景名再到民间传说，它把宗教、景观与文学叠在同一座山上。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
-      "key": "west-lake-winter-snow",
-      "name": "西湖冬雪与断桥",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "雪后的西湖常常变成黑白灰的平面：结冰的水面、未化的积雪与裸露的堤岸互相对照。断桥残雪的关键不在于把“断”当成破损，而是观察石桥阳面积雪先融、背阴残雪留存时，桥身在白色背景下若隐若现的视觉张力。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/west-lake-winter-snow.jpg",
-            "caption": "​断桥边的雪景 2018年12月09日摄于杭州西湖"
-          },
-          {
-            "type": "paragraph",
-            "text": "断桥位于白堤东端，一端连着西湖北岸的北山路，一端沿白堤通往平湖秋月和孤山。它在南宋时又名宝祐桥，也称段家桥；现时桥梁为1921年重建。它与长桥、孤山并称『西湖三怪』——『长桥不长、孤山不孤、断桥不断』。"
-          },
-          {
-            "type": "paragraph",
-            "text": "『断桥残雪』的得名有明确说法：每当瑞雪初霁，站在宝石山上向南眺望，断桥的石桥拱面无遮无拦，冰雪在阳光下消融而桥的两端还在皑皑白雪覆盖下，远望去整座桥似断非断，故称断桥。关键不在桥真的断了，而在雪线造成的错觉。"
-          },
-          {
-            "type": "paragraph",
-            "text": "断桥还是《白蛇传》的叙事起点：白娘子和许仙在此最初邂逅，戏剧中称『断桥相会』。冬雪时走上桥，白堤的雪景与故事的记忆会同时叠加在桥面上——这座桥既是西湖三怪之一，也是中国最著名的爱情传说场景。"
-          }
-        ]
-      },
-      "conceptKind": "审美",
-      "contentRole": "看点"
-    },
-    {
-      "id": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
-      "key": "quyuan-lotus-summer",
-      "name": "曲院风荷与荷塘夏日",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "曲院风荷以大片荷塘、临水廊桥与岸上亭台组织夏季湖景。风过荷叶时波光与深色叶片相互流动，观看的重点是塘面尺度、花影、风感与水下结构，而不只是识别单独一朵花。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/quyuan-lotus-summer.jpg",
-            "caption": "Qu Yuan Feng He"
-          },
-          {
-            "type": "paragraph",
-            "text": "曲院风荷的得名经历过一次官方改名：南宋时此地有官家麯院制麯酿酒、荷花遍地，因称『麯院荷风』；清康熙三十八年（1699年），康熙帝改『麯院』为『曲院』、改『荷风』为『风荷』，从此称曲院风荷。"
-          },
-          {
-            "type": "paragraph",
-            "text": "它是中华人民共和国最大的荷花专类园，有200多个荷花品种，1983年整修后对外开放，占地28公顷。今天的规模说明，这片荷塘不是野生湿地，而是被精心经营为『最大』的专类园。"
-          },
-          {
-            "type": "paragraph",
-            "text": "这里也是现代杭州的国际舞台：2016年9月4日晚，G20杭州峰会文艺演出——水上情景表演交响音乐会《最忆是杭州》在此举行，这里也是《印象西湖》的举办地。景区内的『曲院风荷』御碑立于苏堤北侧跨虹桥畔，用太湖石制成，通高2.33米、宽1.12米、厚0.22米，正面为康熙帝1699年题写；1966年御碑被文物部门沉湖保存，碑身免遭砸毁但碑额下落不明，2023年入选《第一批古代名碑名刻文物名录》。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "7aa489c9-6efc-54da-8486-914cbab0267b",
-      "key": "huagang-fish-viewing",
-      "name": "花港观鱼与园林观鱼",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "花港观鱼把曲池、鱼影、水草与岸边回廊编成连续观看。观鱼介于凝视与游走之间：人停步时鱼游动，人移动时倒影变形，池水的清澈程度决定画面的疏密。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/huagang-fish-viewing.jpg",
-            "caption": "Huagang Guan Yu"
-          },
-          {
-            "type": "paragraph",
-            "text": "花港观鱼的核心是一池数千尾红鲤，游人以喂食红鲤为一乐；公园中心是牡丹亭，侧旁种植了大量牡丹。鱼与花并置，说明这里的设计有意让『看水里的』与『看岸上的』交替进行。"
-          },
-          {
-            "type": "paragraph",
-            "text": "地名本身容易被误读：『港』是北部吴语中对（断头）河流的通称，如河港、紫金港、蒋村港、十字港，并非『港口』的意思；花港又称花溪，是从花家山上流下的小河，起初也与鲜花无关。理解了这两个字，地名里的诗意反而更清楚——它本来只是一条溪沟。"
-          },
-          {
-            "type": "paragraph",
-            "text": "花港观鱼在西湖十景中属于亲近的、低头观看的景：与雷峰夕照、双峰插云那种远望不同，这里的观看是向下的、移动的。池水的清澈程度决定画面疏密，人停步时鱼游动，人移动时倒影变形——这也是西湖十景中少有的以『注视』为核心的场景。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
-      "key": "liulang-wenying-soundscape",
-      "name": "柳浪闻莺与春景声景",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "柳浪闻莺提示西湖十景中也包含声音与季节。春日新柳成排，鸟鸣与行人、车流、湖浪连成一片；理解这处景名需要把植物、光线、鸟声与城市环境放在一起聆听，而不是只看垂枝。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/liulang-wenying-soundscape.jpg",
-            "caption": "Liu Lang Wen Ying"
-          },
-          {
-            "type": "paragraph",
-            "text": "柳浪闻莺位于西湖东南岸，南起清波门外，北至涌金门下，占地约21公顷。它前身是南宋的御花园聚景园——今天的开放式园林，曾经是南宋皇家的园囿。"
-          },
-          {
-            "type": "paragraph",
-            "text": "这片地方经历过身份的大起大落：曾改称『散景园』，后又改为迁居杭州回民的墓地，一度失去西湖十景的盛景；现在经过整修，成为一个开放式园林。从御花园到墓地再到公园，同一个地点的功能被完全改写。"
-          },
-          {
-            "type": "paragraph",
-            "text": "公园北部还有钱王祠，纪念吴越国王钱镠。园名里的『莺』与『柳』提示一种听觉加视觉的观看：春日新柳成排，鸟鸣与行人、车流、湖浪连成一片。理解柳浪闻莺，需要把植物、光线、鸟声与城市环境放在一起听，而不是只看垂枝。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "77347f66-53d0-5e01-a359-01bc66ca8330",
-      "key": "shuangfeng-cloud-peaks",
-      "name": "双峰插云与南北高峰",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "双峰插云看重云雾、高度与观看位置的关系。南北两峰在雨雪、晨昏、雾中忽隐忽现，可远观而不必登顶；其价值在于山、雾、天与想象之间的层次，而非一个固定的观景台。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/shuangfeng-cloud-peaks.jpg",
-            "caption": "​雙峰插雲"
-          },
-          {
-            "type": "paragraph",
-            "text": "双峰插云是南宋时期确立的西湖十景之一，指向南高峰与北高峰。两峰古时都为僧人所占，山顶建有佛塔（早已毁），遥相对峙、高于群峰之上。"
-          },
-          {
-            "type": "paragraph",
-            "text": "两峰的高度有精确数字：南高峰高257米，登上山巅向东俯瞰，西湖全景历历在目；北高峰海拔314米，著名的灵隐寺便位于其山脚下，山东侧现建有载人索道，上下山往返仅需六七分钟。"
-          },
-          {
-            "type": "paragraph",
-            "text": "景名里的『云』提醒你，这个景的观看方式与雾有关：清康熙帝为双峰插云题名，建景碑亭于洪春桥畔（并将『两峰插云』改为『双峰插云』）；南宋诗人王洧的《两峰插云》写道：『浮图对立晓崔巍，积翠浮空霁蔼迷。试向凤凰山上望，南高天近北烟低。』不必登顶，在洪春桥一带远眺，让云雾把两峰的轮廓藏一半露一半，才是这个景的标准打开方式。"
-          }
-        ]
-      },
-      "conceptKind": "审美",
-      "contentRole": "看点"
-    },
-    {
-      "id": "85ea281c-8741-505e-a7f0-62400f5b33ba",
-      "key": "lingyin-zen-grove",
-      "name": "灵隐的山林禅寺",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "灵隐寺以大殿、庭院、溪泉与古树把宗教空间与自然山林叠合。从山门进入，建筑逐层升高、林木逐渐围合。参访时注意中轴线的秩序与两侧溪泉、岩刻对空间的松动。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/lingyin-zen-grove.jpg",
-            "caption": "​灵隐寺大雄宝殿"
-          },
-          {
-            "type": "paragraph",
-            "text": "灵隐寺的源头可以追溯到东晋：咸和元年（326年），印度僧人慧理建立寺院并取名『灵隐』，距今已有1690多年。它位于飞来峰与北高峰之间的灵隐山山麓，被称为江南名刹、中国十大古刹之一，也是南宋高僧济公的修行地。"
-          },
-          {
-            "type": "paragraph",
-            "text": "寺院规模在吴越时期达到顶峰：五代时吴越国王钱俶笃信佛教，灵隐寺达到九楼、十八阁、七十七殿堂、僧众三千的规模，永明延寿、大慧宗杲、佛海慧远都曾担任住持。今天的殿宇是历代重建的结果——咸丰十年（1860年）太平军攻占杭州时灵隐寺遭焚毁，仅存天王殿和罗汉堂，大雄宝殿直到清宣统二年（1910年）才基本完工。"
-          },
-          {
-            "type": "paragraph",
-            "text": "走进大雄宝殿可以对照几个数字：殿为三层重檐构造，高33.6米；殿内释迦牟尼莲花坐像造于1956年，高19.6米、连座高24.8米，用香樟木仿唐代佛像雕刻，是目前中国国内最大的木雕佛像。天王殿上悬清康熙帝钦题『云林禅寺』御笔匾额——康熙赐名云林，但百姓始终仍称灵隐。看殿看匾，寺院的历史层次会一层层显现。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "e383a049-b7f3-53d5-96fb-301ea2297c49",
-      "key": "hupao-spring-tea",
-      "name": "虎跑泉与泉水",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "虎跑以泉亭、石崖和泉水泡茶的传统知名。泉水经岩层过滤、口感清冽，和茶形成“泉茶相配”的范例；春夏水位与口感不同，用于冲泡时的温度与器具变化也值得留意。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/hupao-spring-tea.jpg",
-            "caption": "​虎跑梦泉hyhhhthl"
-          },
-          {
-            "type": "paragraph",
-            "text": "虎跑泉是位于浙江省杭州的一处泉水，用虎跑泉水泡龙井茶被认为是最佳的搭配——西湖茶文化里最常听到的『泉茶相配』，源头就在这里。"
-          },
-          {
-            "type": "paragraph",
-            "text": "它在西湖十景体系里有自己的位置：『虎跑梦泉』被列为新西湖十景之一（1985年公布）。泉与梦并置，说明这处水景被赋予了想象色彩。"
-          },
-          {
-            "type": "paragraph",
-            "text": "虎跑泉周围还有济公道院和弘一法师纪念馆。弘一法师与济公的纪念场所都围绕泉而建，使这处水景同时带上了宗教与近现代文化记忆。看泉时不妨把『水』『茶』『寺』连成一条线：泉水如何被用来泡茶、又被寺院与文化人物环绕——这是理解西湖泉水文化的最小单位。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
-      "key": "liuhe-pagoda-river",
-      "name": "六和塔与钱塘江",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "钱塘江在六和塔一带折向开阔，塔、江、潮与地平线连成一体。塔身为高度标尺，江面为运动界面；重点观塔与观江相互生成，是理解塔如何对水域起作用的上佳点位。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/liuhe-pagoda-river.jpg",
-            "caption": "Liuhe Pagoda, view from the opposite side of the Qiantang River"
-          },
-          {
-            "type": "paragraph",
-            "text": "六和塔位于月轮山南坡，是砖木混筑的楼阁式塔，由吴越国国王钱俶命僧人修建，目的是镇伏钱塘江江潮——它从一开始就是水利景观的一部分。塔始建于北宋开宝三年（970年），因旁边原有六和寺而得名。"
-          },
-          {
-            "type": "paragraph",
-            "text": "塔身经历了完整的毁建史：宣和三年（1121年）在方腊起义中几乎全毁；南宋绍兴二十三年（1153年）在原址重建、隆兴元年（1163年）重建完毕，塔身改为七层；嘉靖十二年（1533年）被倭寇纵火，木质结构几乎全毁，现存外檐为清光绪二十六年（1900年）重建，但塔身仍为宋代所造。今天通高59.89米，塔刹为高3.55米的生铁塔刹。"
-          },
-          {
-            "type": "paragraph",
-            "text": "1961年，六和塔被列为第一批全国重点文物保护单位；2013年5月至2014年4月又经历一次大修，更换了霉烂的塔檐望板并重做塔外檐的62只屋脊。塔的每一层都有一块匾额，从第一层『初地坚固』到第七层『七宝庄严』，七块匾把登塔变成一次步步升高的观景仪轨。站在塔上俯瞰钱塘江，可以想见它作为『镇潮建筑』的古老身份——它与海宁的海神庙、占鳌塔一样，是古人修建以图镇压潮水的建筑。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
-      "key": "xiling-seal-art",
-      "name": "西泠印社与孤山篆刻",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "西泠印社以印学与孤山庭园亭阁相连，是西湖文人传统的方寸之地。印章把文字、石料与金石观念压缩在一方空间；在孤山上看印，山色与印的叙事互文并呈。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/xiling-seal-art.jpg",
-            "caption": "​西泠印社建社廿週年紀念社門，建於1923年。兩側題字為“石藏東漢名三老，社結西泠紀廿年。”"
-          },
-          {
-            "type": "paragraph",
-            "text": "西泠印社位于西湖孤山西南麓、西泠桥旁，是中国研究金石篆刻的百年学术团体，有『天下第一名社』之称，今为全国重点文物保护单位。1904年，由篆刻家丁仁、王禔、叶铭、厉良玉、吴隐等创建于杭州，篆刻大师吴昌硕为首任社长。"
-          },
-          {
-            "type": "paragraph",
-            "text": "它的印学传统与西湖文人生活密不可分：社内今存东汉《三老讳字忌日碑》和一批名家石刻、摩崖题记；金石篆刻技艺是国家级非物质文化遗产。1978年获批准成立西泠印社出版社；截至2024年12月31日，西泠印社成员共计516人，其中社员474人、名誉社员42人。"
-          },
-          {
-            "type": "paragraph",
-            "text": "历任社长名单本身就是一部近现代艺术史：吴昌硕（1913—1927）、马衡（1948—1955）、张宗祥（1963—1965）、沙孟海（1979—1992）、赵朴初（1993—2000）、启功（2002—2005）、饶宗颐（2011—2018），2018年至今空缺。在孤山上看印，印章把文字、石料与金石观念压缩在一方空间里，山色与印的叙事互文并呈。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "6836d943-c2ca-5696-8cd9-7ba71db683be",
-      "key": "huxinting-islet",
-      "name": "湖心亭与中国四大名亭",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "湖心亭位于杭州西湖之上，旧为湖心寺，是中国四大名亭之一。亭在外西湖的中心，四面环水，古人谓其“环岛皆水，环水皆山”，凭栏四望湖山尽收眼底；“湖心平眺”也因此被列为清代西湖十八景之一。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/huxinting-islet.jpg",
-            "caption": "湖心亭"
-          },
-          {
-            "type": "paragraph",
-            "text": "湖心亭与小瀛洲、阮公墩三个人工小岛鼎立于外西湖湖心，是西湖空间中标识湖心方位的一处定点。历史上清乾隆二十七年乾隆帝御书“光澈中边”额，1980年岛上又刻置“䖝二”太湖石碑以指“風月无边”，这些题咏让一座小亭与帝王的湖上审美连在一起。"
-          },
-          {
-            "type": "paragraph",
-            "text": "明人张岱曾在此写下《湖心亭看雪》，把湖心看雪的孤寂与山水的旷远写进西湖的文学记忆。2013年，西湖十景作为文化景观被国务院整体列入第七批全国重点文物保护单位名单，其中即包含湖心亭。"
-          },
-          {
-            "type": "paragraph",
-            "text": "对看湖而言，湖心亭把“湖心”变成可见的定点：从湖上游船向湖心望去，它是构图中心；若值冬日落雪，四面玉砌，张岱笔下“独往湖心亭看雪”的意境，恰让亭与雪、湖与人的关系重新被读出来。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
-      "key": "yang-gong-causeway",
-      "name": "杨公堤与明代西湖疏浚",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "杨公堤位于杭州西湖西侧、西里湖上，北起仁寿山，南至赤山埠，连接丁家山、眠牛山等西湖中的小岛，与苏堤、白堤并称“西湖三堤”。它原称西山路，因西湖西侧逐渐淤积成陆，现已与西湖西岸连为一体。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/yang-gong-causeway.jpg",
-            "caption": "​杭州西湖杨公堤"
-          },
-          {
-            "type": "paragraph",
-            "text": "杨公堤是明代疏浚西湖的产物。弘治十六年，知州杨孟瑛在巡按御史车梁支持下奏请疏浚西湖，由工部拨款，据明《西湖游览志》卷一所载“为佣一百五十二日，为夫六百七十万，为直银二万三千六百零七两，拆毁田荡三千四百八十一亩”；正德三年（1508年）堤在杭州知府杨孟瑛主持下修成，故以杨姓得名“杨公堤”。"
-          },
-          {
-            "type": "paragraph",
-            "text": "杨公堤走向基本平行于苏堤，在西湖西进工程中恢复了相对苏堤的“里六桥”，即环碧、流金、卧龙、隐秀、景行、浚源六桥。它与苏堤一样由疏浚出的葑泥堆筑而成，是“西湖堤岸首先是水利营造、其次才是风景”的又一例证。"
-          },
-          {
-            "type": "paragraph",
-            "text": "走在杨公堤上能把“堤是水利的副产品”这一层读厚：堤北为曲院风荷，南为花港观鱼，西岸串联湖中小岛，行走时平直堤面与“里六桥”桥面起伏交错，正是一条从明代治水走回今日西里湖的可见路径。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
-      "key": "baoshi-hill-cinnabar-glow",
-      "name": "宝石山与宝石流霞",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "宝石山是杭州西湖北侧的一座小山，南临西湖，东、北两面为繁华市区，西连葛岭，是俯瞰西湖美景的一处佳地，山高约二百米。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/baoshi-hill-cinnabar-glow.jpg",
-            "caption": "​黄龙洞至断桥一线：保俶塔和城市合影"
-          },
-          {
-            "type": "paragraph",
-            "text": "宝石山山体属火成岩中的流纹岩和凝灰岩，含氧化铁，因而山岩呈赭红色，在清晨朝阳升起或傍晚落日西下时尤为明显，“宝石流霞”由此被列为新西湖十景之一。"
-          },
-          {
-            "type": "paragraph",
-            "text": "山顶建有造型独特的古塔保俶塔，与对岸雷峰塔隔湖对望，是西湖风景区的标志之一。入冬时站在宝石山上向南眺望，断桥的石桥拱面无遮无拦，冰雪在阳光下消融而桥两端仍覆白雪，远望整座桥似断非断，这正是“断桥残雪”之名由来的传统视角。"
-          },
-          {
-            "type": "paragraph",
-            "text": "对看湖而言，宝石山是北岸最好的俯瞰点：登上可近观保俶塔、俯瞰湖面，初升朝阳或落日时分赭红的岩与塔影同入湖中，“宝石流霞”的景名便有了直接对应的直观图景。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "d0352861-3d2c-5301-a662-cd042e449e6a",
-      "key": "gushan-island",
-      "name": "孤山与“孤山不孤”",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "孤山位于西湖北侧外西湖中，海拔35米，面积约0.22平方公里，为栖霞岭的支脉，是西湖中最大的天然岛屿。南宋咸淳《临安志》载它“一屿耸立，旁无联附，为湖山胜绝处”。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/gushan-island.jpg",
-            "caption": "​杭州孤山公園"
-          },
-          {
-            "type": "paragraph",
-            "text": "孤山东西分别以白堤和西泠桥与湖岸相连，岛上名胜古迹众多，因此杭州人把“孤山不孤”与“断桥不断”、“长桥不长”并称“西湖三怪”。岛上汇集了中山公园、浙江省博物馆、文澜阁、西泠印社、放鹤亭、秋瑾墓、俞楼、慕才亭等地景与人文。"
-          },
-          {
-            "type": "paragraph",
-            "text": "中山公园原为清代行宫御花园，1927年为纪念孙中山先生而命名“中山公园”，公园进门石级上刻“孤山”二字，其中“孤”字少了一点，人们猜测其意在“孤山不孤”。林逋曾隐居于此，“梅妻鹤子”，为孤山留下咏梅名句。"
-          },
-          {
-            "type": "paragraph",
-            "text": "在湖上看孤山，它只是一座高出水面的岛；登岛后才发现处处是祠、馆、亭、阁，被人事与人文填满——“孤山不孤”就写在湖光与人文的交界处，也提醒你在湖心看山时，别遗漏这座西湖最大岛上层层叠叠的故事。"
-          }
-        ]
-      },
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
-      "key": "qianwang-temple-wuyue",
-      "name": "钱王祠与吴越国",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "钱王祠位于杭州西湖东岸、柳浪闻莺公园内，是纪念五代十国时期吴越国王的祠庙，原称“表忠观”。宋熙宁十年（1077年）于西湖东岸建“表忠观”以纪念吴越国王钱镠，清代以后通称“钱王祠”。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/qianwang-temple-wuyue.jpg",
-            "caption": "​中國杭州錢王祠。"
-          },
-          {
-            "type": "paragraph",
-            "text": "建表忠观时苏轼曾作《表忠观碑记》，以“有德于斯民厚”“有功于朝廷甚大”褒扬历代钱王功业，是宋代书法史上著名的碑刻；表忠观由龙山废佛寺妙音院改建并赐名。"
-          },
-          {
-            "type": "paragraph",
-            "text": "吴越国对西湖的营造有直接影响：吴越国王钱镠于宝正二年（927年）置撩湖兵千人，芟草浚泉，确保了西湖水体的存在。许多西湖寺院、佛塔亦与钱氏有关，如净慈寺、雷峰塔、六和塔皆为吴越钱氏所兴，表忠观遂成为西湖与吴越渊源的一种纪念。"
-          },
-          {
-            "type": "paragraph",
-            "text": "对看湖而言，钱王祠把人引向“西湖是吴越营建出来的”这一层：先有吴越的治水、兴佛，才有后来的湖山。从柳浪闻莺走到钱王祠，是行走中读懂吴越记忆、湖山源流的一环。"
-          }
-        ]
-      },
-      "conceptKind": "历史",
-      "contentRole": "看点"
-    },
-    {
-      "id": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
-      "key": "baochu-pagoda",
-      "name": "保俶塔",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "你眼前这座立在宝石山脊上的瘦高塔就是保俶塔。塔身实心、八面七级，高约45米，像一枚纤细的针立在湖北岸的山脊线上——与南岸雷峰塔的厚重正好相反。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/baochu-pagoda.jpg",
-            "caption": "Baochu Pagoda"
-          },
-          {
-            "type": "paragraph",
-            "text": "保俶塔相传始建于五代吴越国时期：钱弘俶入宋朝觐，舅舅吴延爽建塔祈他平安归来，『保俶』之名由此而来。今天看到的塔身是1933年按原样重修的。"
-          },
-          {
-            "type": "paragraph",
-            "text": "保俶塔最好看的看法是远眺：从断桥一带或湖上北望，塔影与宝石山的流霞构成西湖最经典的对景之一，与雷峰塔南北呼应，所谓『一湖映双塔』。"
-          }
-        ]
-      },
-      "sources": [
-        {
-          "title": "保俶塔",
-          "publisher": "维基百科",
-          "url": "https://zh.wikipedia.org/wiki/保俶塔"
-        }
-      ],
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "cccf0722-3380-5fe3-960a-5947bbb8104b",
-      "key": "jingci-temple",
-      "name": "净慈寺",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "你眼前的净慈寺是西湖南岸的千年古刹，依山而建，殿宇沿中轴线层层升高。进寺后留意听钟声——著名的『南屏晚钟』就出自这里。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/jingci-temple.jpg",
-            "caption": "​杭州净慈寺，西湖十景之一“南屏晚钟”，即指净慈寺传出的钟声。"
-          },
-          {
-            "type": "paragraph",
-            "text": "净慈寺始建于954年，由吴越国王钱弘俶为永明延寿禅师所建，原名慧日永明院。南宋时，高僧济公曾在此修行，运木古井等遗迹至今仍在，让这座寺院充满传说色彩。"
-          },
-          {
-            "type": "paragraph",
-            "text": "净慈寺与雷峰塔只隔一条马路：一边是新修的塔，一边是延续千年的寺院，二者共同构成西湖南岸的黄昏画面——夕照看塔，晚钟听寺。"
-          }
-        ]
-      },
-      "sources": [
-        {
-          "title": "净慈寺",
-          "publisher": "维基百科",
-          "url": "https://zh.wikipedia.org/wiki/净慈寺"
-        }
-      ],
-      "conceptKind": "基础知识",
-      "contentRole": "看点"
-    },
-    {
-      "id": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
-      "key": "longjing-village",
-      "name": "龙井村",
-      "introduction": {
-        "schemaVersion": 1,
-        "blocks": [
-          {
-            "type": "paragraph",
-            "text": "你眼前的龙井村是狮峰山下的茶村，也是『龙井茶』这个名字的源头。村里家家户户种茶、炒茶，清明前后整个村子都飘着茶香。"
-          },
-          {
-            "type": "image",
-            "url": "https://culturelens.goudaijun.top/images/west-lake/longjing-village.jpg",
-            "caption": "​杭州龙井村西湖龙井茶园"
-          },
-          {
-            "type": "paragraph",
-            "text": "龙井茶在乾隆南巡时声名大振：传说乾隆在村边胡公庙前品饮龙井，把庙前的十八棵茶树封为『御茶』，龙井从此稳居名茶之首。"
-          },
-          {
-            "type": "paragraph",
-            "text": "来龙井村要看三件事：春天的茶山梯垄、茶农手里的炒锅、以及一杯用虎跑泉水冲泡的新茶——『泉茶相配』是西湖喝茶的老讲究。"
-          }
-        ]
-      },
-      "sources": [
-        {
-          "title": "龙井茶",
-          "publisher": "维基百科",
-          "url": "https://zh.wikipedia.org/wiki/龙井茶"
-        }
-      ],
-      "conceptKind": "地域",
-      "contentRole": "看点"
-    }
-  ],
   "attractions": [
     {
-      "id": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
-      "key": "leifeng-pagoda-and-evening-glow",
-      "name": "雷峰塔"
-    },
-    {
-      "id": "d10ba550-da02-5864-b01a-d6430d8b587f",
-      "key": "baochu-pagoda",
-      "name": "保俶塔"
-    },
-    {
-      "id": "972bbaf8-1b55-5043-8d74-d40856ab6492",
-      "key": "jingci-temple",
-      "name": "净慈寺"
-    },
-    {
-      "id": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
-      "key": "yue-fei-memorial-culture",
-      "name": "岳王庙"
-    },
-    {
-      "id": "65265052-5508-57df-a81a-2c027576f5b7",
-      "key": "siku-quanshu-library",
-      "name": "文澜阁"
-    },
-    {
-      "id": "bad747f4-43a2-5202-8274-d549c7c45887",
-      "key": "su-causeway-spring-dawn",
-      "name": "苏堤"
+      "id": "562d57eb-4410-5aed-9742-4fef593dde73",
+      "key": "fuchun-shanju-tu",
+      "name": "《富春山居图》与剩山图"
     },
     {
       "id": "f4394af7-0206-5c20-a486-00d4d768e64a",
@@ -806,49 +11,29 @@
       "name": "三潭印月"
     },
     {
-      "id": "29584556-38e5-5478-b694-c4da40593c03",
-      "key": "west-lake-winter-snow",
-      "name": "断桥"
+      "id": "f0f5b61e-f773-5975-b59e-65a23d726ea6",
+      "key": "zhijiang-campus",
+      "name": "之江馆区与《浙江一万年》"
     },
     {
-      "id": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
-      "key": "pinghu-autumn-moon",
-      "name": "平湖秋月"
+      "id": "2ac5840a-ee1a-5a45-b60b-8f2621b58a94",
+      "key": "asoka-pagoda",
+      "name": "五代鎏金银阿育王塔"
     },
     {
-      "id": "660de823-9bec-50ac-a588-f5f5387dc225",
-      "key": "quyuan-lotus-summer",
-      "name": "曲院风荷"
+      "id": "5964012f-2efe-5a85-a99f-a9b5a2ad3341",
+      "key": "grand-canal",
+      "name": "京杭大运河"
     },
     {
-      "id": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
-      "key": "huagang-fish-viewing",
-      "name": "花港观鱼"
+      "id": "d10ba550-da02-5864-b01a-d6430d8b587f",
+      "key": "baochu-pagoda",
+      "name": "保俶塔"
     },
     {
-      "id": "98ea122d-7182-50df-952b-399961d1f0af",
-      "key": "liulang-wenying-soundscape",
-      "name": "柳浪闻莺"
-    },
-    {
-      "id": "adaf1aa2-a082-5e05-8c67-022a131da536",
-      "key": "shuangfeng-cloud-peaks",
-      "name": "双峰插云"
-    },
-    {
-      "id": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
-      "key": "lingyin-zen-grove",
-      "name": "灵隐寺·飞来峰"
-    },
-    {
-      "id": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
-      "key": "longjing-village",
-      "name": "龙井村"
-    },
-    {
-      "id": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
-      "key": "hupao-spring-tea",
-      "name": "虎跑公园"
+      "id": "68e7c909-3e8e-5b52-9933-b2c899c6afcf",
+      "key": "longquan-boat-drip",
+      "name": "元龙泉窑舟形砚滴"
     },
     {
       "id": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
@@ -856,24 +41,34 @@
       "name": "六和塔"
     },
     {
-      "id": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
-      "key": "xiling-seal-art",
-      "name": "西泠印社·孤山"
+      "id": "972bbaf8-1b55-5043-8d74-d40856ab6492",
+      "key": "jingci-temple",
+      "name": "净慈寺"
     },
     {
-      "id": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
-      "key": "huxinting-islet",
-      "name": "湖心亭"
+      "id": "e3f2a77b-d4ce-5c19-8d40-e39ee90b7078",
+      "key": "caisu-mud-bodhisattva",
+      "name": "北宋彩塑泥菩萨立像"
     },
     {
-      "id": "a9155563-096d-57ba-affb-4c0544a3f559",
-      "key": "yang-gong-causeway",
-      "name": "杨公堤"
+      "id": "adaf1aa2-a082-5e05-8c67-022a131da536",
+      "key": "shuangfeng-cloud-peaks",
+      "name": "双峰插云"
     },
     {
-      "id": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
-      "key": "baoshi-hill-cinnabar-glow",
-      "name": "宝石山"
+      "id": "64a8b3bf-f875-55fa-8f9b-5a618f4b0c1c",
+      "key": "hemudu-double-bird",
+      "name": "双鸟朝阳纹牙雕"
+    },
+    {
+      "id": "dd5d6d7b-2529-5301-8fac-5a6325df37a7",
+      "key": "fanshan-cemetery",
+      "name": "反山贵族墓地"
+    },
+    {
+      "id": "beb47b78-8d66-5e73-b740-aadc9bbaabbc",
+      "key": "cai-feng-ming-qi",
+      "name": "唐“彩凤鸣岐”七弦琴"
     },
     {
       "id": "efbadb98-a165-5a95-9b5b-fb7f22a91aec",
@@ -881,9 +76,1826 @@
       "name": "孤山"
     },
     {
+      "id": "49e6e5b7-7656-506e-966d-4889b903de31",
+      "key": "gushan-campus",
+      "name": "孤山馆区"
+    },
+    {
+      "id": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
+      "key": "baoshi-hill-cinnabar-glow",
+      "name": "宝石山"
+    },
+    {
+      "id": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
+      "key": "yue-fei-memorial-culture",
+      "name": "岳王庙"
+    },
+    {
+      "id": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
+      "key": "pinghu-autumn-moon",
+      "name": "平湖秋月"
+    },
+    {
+      "id": "b831e26f-5a8a-5a50-8ca1-2f80d7c74cb3",
+      "key": "zhang-cheng-red-lacquer",
+      "name": "张成剔红婴戏图盘"
+    },
+    {
+      "id": "65265052-5508-57df-a81a-2c027576f5b7",
+      "key": "siku-quanshu-library",
+      "name": "文澜阁"
+    },
+    {
+      "id": "29584556-38e5-5478-b694-c4da40593c03",
+      "key": "west-lake-winter-snow",
+      "name": "断桥"
+    },
+    {
+      "id": "b854e452-202c-5960-bcd9-6c873557535a",
+      "key": "jiyue-bronze-house",
+      "name": "春秋伎乐铜屋"
+    },
+    {
+      "id": "660de823-9bec-50ac-a588-f5f5387dc225",
+      "key": "quyuan-lotus-summer",
+      "name": "曲院风荷"
+    },
+    {
+      "id": "a9155563-096d-57ba-affb-4c0544a3f559",
+      "key": "yang-gong-causeway",
+      "name": "杨公堤"
+    },
+    {
+      "id": "98ea122d-7182-50df-952b-399961d1f0af",
+      "key": "liulang-wenying-soundscape",
+      "name": "柳浪闻莺"
+    },
+    {
+      "id": "c843da49-7cb4-5f6c-8a8c-5d21052d68fe",
+      "key": "wan-gong-jiao",
+      "name": "民国万工轿"
+    },
+    {
+      "id": "a2184653-deae-5b85-bc3e-3752107d82cf",
+      "key": "sha-menghai-residence",
+      "name": "沙孟海旧居"
+    },
+    {
+      "id": "398dfaf3-8b22-51f9-8fee-3f6412549aa4",
+      "key": "hemudu-painted-pottery",
+      "name": "河姆渡绘纹陶器"
+    },
+    {
+      "id": "a98b42ef-06e2-567d-9409-b20920f310a6",
+      "key": "hemudu-bone-plough",
+      "name": "河姆渡骨耜"
+    },
+    {
+      "id": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
+      "key": "huxinting-islet",
+      "name": "湖心亭"
+    },
+    {
+      "id": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
+      "key": "lingyin-zen-grove",
+      "name": "灵隐寺·飞来峰"
+    },
+    {
+      "id": "7dee0cc6-5e0f-56c6-af32-d5c52046847f",
+      "key": "jade-cong-wang",
+      "name": "玉琮王"
+    },
+    {
+      "id": "2214c758-79d5-58bc-963d-17178b204af5",
+      "key": "jade-bi",
+      "name": "玉璧"
+    },
+    {
+      "id": "fda7f090-f56b-5e48-a8a7-2916beb3c469",
+      "key": "jade-yue",
+      "name": "玉钺与军权王权"
+    },
+    {
+      "id": "0bc1bc7d-f299-5797-afab-371c8981906e",
+      "key": "jade-cong-ritual",
+      "name": "琮：沟通天地的礼器"
+    },
+    {
+      "id": "9bbf858d-b0c9-59ec-a34d-8cd4b1d2dc25",
+      "key": "yaoshan-altar",
+      "name": "瑶山遗址公园"
+    },
+    {
+      "id": "569034e5-d306-5605-b1d8-754c8e8041f7",
+      "key": "liangzhu-museum",
+      "name": "良渚博物院"
+    },
+    {
+      "id": "a0c85a81-92bb-51a4-8e99-4230136a5643",
+      "key": "site-park",
+      "name": "良渚古城遗址公园"
+    },
+    {
+      "id": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
+      "key": "huagang-fish-viewing",
+      "name": "花港观鱼"
+    },
+    {
+      "id": "bad747f4-43a2-5202-8274-d549c7c45887",
+      "key": "su-causeway-spring-dawn",
+      "name": "苏堤"
+    },
+    {
+      "id": "fa150bb0-7779-54e4-84dd-2e3dd817658a",
+      "key": "mojiaoshan-center",
+      "name": "莫角山：良渚的权力中心"
+    },
+    {
+      "id": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
+      "key": "hupao-spring-tea",
+      "name": "虎跑公园"
+    },
+    {
+      "id": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
+      "key": "xiling-seal-art",
+      "name": "西泠印社·孤山"
+    },
+    {
+      "id": "a84b4d12-e868-58c8-9220-f641c1e90255",
+      "key": "zhejiang-yue-sword",
+      "name": "越王者旨於睗剑"
+    },
+    {
       "id": "91998805-9ab0-5d8c-8a61-e59a5ef7a8cf",
       "key": "qianwang-temple-wuyue",
       "name": "钱王祠"
+    },
+    {
+      "id": "2d39c655-cd6f-5dc1-9931-5b1ca79c05ed",
+      "key": "great-wall",
+      "name": "长城"
+    },
+    {
+      "id": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
+      "key": "leifeng-pagoda-and-evening-glow",
+      "name": "雷峰塔"
+    },
+    {
+      "id": "3617c401-555e-5c3a-a818-7a2554886b0b",
+      "key": "huang-binhong-memorial",
+      "name": "黄宾虹纪念室"
+    },
+    {
+      "id": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
+      "key": "longjing-village",
+      "name": "龙井村"
+    }
+  ],
+  "elements": [
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "文澜阁属于为收藏《四库全书》而营建的藏书楼体系。它把典籍保存、皇家文化工程和江南园林空间叠合在一起，建筑本身也承担了知识秩序的象征。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​《四库全书》 编撰于清朝乾隆年间，是中国前现代最大的一部官修丛书，在中国文化教育和学术思想的历史上具有重要的历史地位。 文津阁版是乾隆年间创作的一本手抄本。 共包括 36,304 册，分 6,144 盒 128 个书架放置。 全书共 79,309 卷 （章节），最初保藏在热河（今承德）颐和园文津阁内。 1914 年，成为首都图书馆（今中国国家图书馆）藏品的一部分。 全片分为四个部分：经、史、子、集，分别以四季的颜色装订，以便浏览。 文津阁版基于故宫博物院保存的书籍、清朝编纂的书籍、四面八方进贡的书籍、以及根据 《永乐大典》重新编辑的书籍。中国国家图书馆馆藏的全套 《四库全书》 保存了大量的文",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/siku-quanshu-library.jpg"
+          },
+          {
+            "text": "文澜阁是清代为珍藏《四库全书》而建的七大藏书阁之一，也是南三阁中唯一幸存的一座。它始建于1782年（清乾隆四十七年），次年完工，由圣因寺后的玉兰堂改建而成，改建费用由浙江商人捐办——藏书楼的身份从一开始就与江南商人的文化捐赠绑在一起。",
+            "type": "paragraph"
+          },
+          {
+            "text": "建筑细节印证了它的皇家与藏书属性：文澜阁两层、重檐歇山顶，池塘格局仿宁波天一阁，池中有奇石『仙人峰』，池东为御碑亭。站在池边可以想见，水与石不只是园林装饰，更承担着藏书楼防火避险的功能性隐喻。",
+            "type": "paragraph"
+          },
+          {
+            "text": "这部《四库全书》的传奇远不止建阁：咸丰十一年（1861年）太平军攻占杭州时文澜阁倒塌，藏书散落民间，丁丙、丁申兄弟收集补抄又散尽家赀购书，1881年再度存入修复后的文澜阁；1937年抗战爆发后，阁书被装成139箱西迁，辗转富阳渔山、建德、龙泉、贵阳，1944年迁至重庆青木关，直到1946年7月5日才重回孤山。看这一座阁，其实是在读一部近代中国的藏书迁徙史。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "siku-quanshu-library",
+      "name": "《四库全书》与皇家藏书楼"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "03450361-df1d-50fc-89cc-848d880e1783",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "《富春山居图》是宋末元初画家黄公望的作品，创作于1347年至1350年，以浙江富春江为背景，是黄公望的代表作，获后世赞誉为“画中之兰亭”“山水画第一神品”，为中国十大传世名画之一。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "《富春山居图》与剩山图",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/fuchun-shanju-tu.jpg"
+          },
+          {
+            "text": "清初顺治年间，画传至吴洪裕；吴洪裕过世前决定把画作当作陪葬，画被丢进火炉时，侄子吴贞度从火堆中抢救出来，但画卷已被火烧成一大一小两段。原卷首小段经过修补后称为“剩山图”，横51.4公分，高31.8公分，占原画1/14；后段称为“无用师卷”，横636.9公分，高33公分，占原画12/14。",
+            "type": "paragraph"
+          },
+          {
+            "text": "浙江省博物馆珍藏的正是“剩山图”这一段，它也入选了浙博十大镇馆之宝；2011年6月2日，“剩山图”与台北故宫的“无用师卷”在台北故宫博物院展出，两幅真迹同陈列在长16公尺的柜子内。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看“剩山图”时，先想它的身世：一场火把长卷分为两段，一段留在杭州、一段去了台湾，你面前这一小段，就是那段故事的起点。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "fuchun-shanju-tu",
+      "name": "《富春山居图》与剩山图"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "eb3ca657-c536-5d43-b9a0-ec61c8a9a7f9",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "三潭映月把三座石塔、灯孔、水面、月色与倒影组织为一个可远观、可行走、可反复讲述的景名。它既指向具体水面标志，也指向西湖把人工构景转化为诗意观看的传统。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州西湖小瀛洲",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/three-pools-mirroring-moon.jpg"
+          },
+          {
+            "text": "三潭印月是西湖中最大的一个岛，面积6万平方米，又称小瀛洲。三座石塔立在岛南湖面上，塔高2.5米、露出水面2米，由基座、圆形塔身、宝盖、六边小亭、葫芦顶组成，塔身球形中空、周身开五个小圆孔，孔边饰浮雕花纹。",
+            "type": "paragraph"
+          },
+          {
+            "text": "石塔的来历分两层：最初为宋代苏轼疏浚西湖时在湖中立的界塔，『著令塔以内不许侵为菱荡』；苏轼所建三塔毁于元代，据清初文献记载现存三塔系清代康熙年间所建；另一说为明熹宗天启元年（1621年）重建，即『池外造小石塔三座，谓之三潭』。看塔时不妨记住：这是标界传统与景观塔传统的叠加。",
+            "type": "paragraph"
+          },
+          {
+            "text": "它还拥有一层现代身份：2004年发行的第五套人民币1元纸币背面采用了艺术处理后的三潭印月图景，而且现实中无法从这个角度拍到同样的画面。2013年7月29日晚，中南部的石塔曾被游船撞倒落入水中，经潜水员打捞后原位拼装，次日凌晨基本恢复原貌。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "three-pools-mirroring-moon",
+      "name": "三潭印月"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "f1967937-d54e-5f3a-8492-b74f2d81f6a9",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "之江馆区是浙江省博物馆的新主场，位于杭州之江文化中心，于2023年8月29日对外开放，占地面积约54400平方米，建筑面积10万平方米。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​之江文化中心（浙江省博物馆、浙江省文学馆、浙江省图书馆）",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhijiang-campus.jpg"
+          },
+          {
+            "text": "它的核心是常设展览“浙江一万年——浙江历史文化陈列”，位于馆区一至二层，分为“史前至隋唐”“吴越两宋”“元明清至近现代”三大展厅，展现浙江从旧石器时代到1921年的历史，展览于2023年8月开幕；入选禁止出国（境）展览的五件（组）文物均位于这一展览之中。",
+            "type": "paragraph"
+          },
+          {
+            "text": "之江馆区三层还有常设展览“向东是大海——浙江海洋文化陈列”，展示面积约1000平方米。三层以下各展厅按时间顺序排列，是与“浙江一万年”互为补充的另一条线索。",
+            "type": "paragraph"
+          },
+          {
+            "text": "对多数参观者而言，之江馆是读懂浙江全史最顺的入口：沿三大展厅从史前走到近现代，再回头细看那些镇馆之宝与禁止出境文物，一条万年时间的脉络就很清晰了。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "zhijiang-campus",
+      "name": "之江馆区与《浙江一万年》"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "d8cac2ce-ce89-5d8d-b041-07fd586c9fc7",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "五代·吴越鎏金银阿育王塔是浙江省博物馆十大镇馆之宝之一，是宝箧印式塔一类的小型塔式文物，出自雷峰塔遗址的发掘。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​吴越国银阿育王塔。杭州雷峰塔遗址出土，浙江省博物馆藏。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/asoka-pagoda.jpg"
+          },
+          {
+            "text": "2001年3月11日开启的雷峰塔地宫为砖砌竖穴式，地宫内正中为铁舍利函，周边为象征“七宝”的供养物及其它佛教文物；地宫中共出土51组文物，其中最重要的一件就是鎏金纯银阿育王塔，塔身内盛金质容器并用薄金片包卷成棺状，应内奉佛螺髻发舍利，与纯银阿育王塔一起被列为遗址内最重要的文物。",
+            "type": "paragraph"
+          },
+          {
+            "text": "两座阿育王塔均为方形，由塔座、塔身、四根蕉叶状山花和塔刹组成，塔身四面镂刻佛祖本生故事画面。2000年至2001年雷峰塔发掘出土的大量文物，现大部分收藏和展出在浙江省博物馆。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看这尊鎏金小塔时，先看四角蕉叶与塔身镂刻的画面，再回想它曾安放在雷峰塔地宫正中千年——它就是吴越佛国与杭州塔史最直接的一件物证。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "asoka-pagoda",
+      "name": "五代鎏金银阿育王塔"
+    },
+    {
+      "conceptKind": "功能",
+      "contentRole": "看点",
+      "id": "5221dd95-197e-5b13-904f-7b9f6a3c79a1",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "京杭大运河北起北京通州五河交汇处，南至杭州，流经北京、天津、河北、山东、江苏和浙江等地，沟通海河、黄河、淮河、长江和钱塘江五大水系，全长1794公里。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​京杭大运河杭州端起点，拱宸桥沿岸景观。画面上南下北，右侧为桥西历史文化景区。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/grand-canal.jpg"
+          },
+          {
+            "text": "大运河的源头可追溯到春秋末年：吴王夫差于前486年修筑邗城并开凿运河到末口，沟通长江与淮河，后世称为邗沟，是大运河中最早有确切纪年的一段河道。隋代统一南北后，开挖了以洛阳为航运中心的几段运河，史称南北大运河，长约2700多公里。",
+            "type": "paragraph"
+          },
+          {
+            "text": "元世祖忽必烈在隋唐大运河基础上改建，中间裁弯取直；元代天文学家郭守敬主持开凿通惠河，这几项重大工程完成后，便形成了今天的京杭大运河。2014年，京杭大运河作为大运河的一部分被列入世界遗产名录。",
+            "type": "paragraph"
+          },
+          {
+            "text": "1855年黄河改道后，运河山东段逐渐淤废；1911年津浦铁路全线通车，从此京杭大运河以及沿线城市的地位一落千丈。记大运河，记住北京通州到杭州、沟通五大水系、全长1794公里。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "grand-canal",
+      "name": "京杭大运河"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "f9f0e106-ccd8-5ad5-8e11-0a0416ee7ecd",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "你眼前这座立在宝石山脊上的瘦高塔就是保俶塔。塔身实心、八面七级，高约45米，像一枚纤细的针立在湖北岸的山脊线上——与南岸雷峰塔的厚重正好相反。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Baochu Pagoda",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/baochu-pagoda.jpg"
+          },
+          {
+            "text": "保俶塔相传始建于五代吴越国时期：钱弘俶入宋朝觐，舅舅吴延爽建塔祈他平安归来，『保俶』之名由此而来。今天看到的塔身是1933年按原样重修的。",
+            "type": "paragraph"
+          },
+          {
+            "text": "保俶塔最好看的看法是远眺：从断桥一带或湖上北望，塔影与宝石山的流霞构成西湖最经典的对景之一，与雷峰塔南北呼应，所谓『一湖映双塔』。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "baochu-pagoda",
+      "name": "保俶塔",
+      "sources": [
+        {
+          "publisher": "维基百科",
+          "title": "保俶塔",
+          "url": "https://zh.wikipedia.org/wiki/保俶塔"
+        }
+      ]
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "7a93901c-1ccc-51e6-ae5e-392a22bc1abe",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "元·龙泉窑舟形砚滴是浙江省博物馆十大镇馆之宝之一，是一件龙泉窑系的青瓷文房器，属于书斋里用来盛水研墨的小器皿。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Collected and exhibited in Zhejiang Provincial Museum.",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/longquan-boat-drip.jpg"
+          },
+          {
+            "text": "龙泉窑的鼎盛时期在南宋，改进釉料配方后创制出粉青、梅子青等品种；这件舟形砚滴以小舟为造型，正属于龙泉青瓷中文房用器的精品，既实用，也带着文人书斋的雅趣。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在陶瓷展厅里看过龙泉的大件盘碗之后，再遇到这样一件掌上小舟，会格外体会到龙泉窑不只有大器，也有这样精致轻盈的一面。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看它时不妨想：砚滴虽小，却要兼具储水与滴水的功能，是一件把“器物之美”和“书写日常”叠在一起的青瓷。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "longquan-boat-drip",
+      "name": "元龙泉窑舟形砚滴"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "钱塘江在六和塔一带折向开阔，塔、江、潮与地平线连成一体。塔身为高度标尺，江面为运动界面；重点观塔与观江相互生成，是理解塔如何对水域起作用的上佳点位。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Liuhe Pagoda, view from the opposite side of the Qiantang River",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/liuhe-pagoda-river.jpg"
+          },
+          {
+            "text": "六和塔位于月轮山南坡，是砖木混筑的楼阁式塔，由吴越国国王钱俶命僧人修建，目的是镇伏钱塘江江潮——它从一开始就是水利景观的一部分。塔始建于北宋开宝三年（970年），因旁边原有六和寺而得名。",
+            "type": "paragraph"
+          },
+          {
+            "text": "塔身经历了完整的毁建史：宣和三年（1121年）在方腊起义中几乎全毁；南宋绍兴二十三年（1153年）在原址重建、隆兴元年（1163年）重建完毕，塔身改为七层；嘉靖十二年（1533年）被倭寇纵火，木质结构几乎全毁，现存外檐为清光绪二十六年（1900年）重建，但塔身仍为宋代所造。今天通高59.89米，塔刹为高3.55米的生铁塔刹。",
+            "type": "paragraph"
+          },
+          {
+            "text": "1961年，六和塔被列为第一批全国重点文物保护单位；2013年5月至2014年4月又经历一次大修，更换了霉烂的塔檐望板并重做塔外檐的62只屋脊。塔的每一层都有一块匾额，从第一层『初地坚固』到第七层『七宝庄严』，七块匾把登塔变成一次步步升高的观景仪轨。站在塔上俯瞰钱塘江，可以想见它作为『镇潮建筑』的古老身份——它与海宁的海神庙、占鳌塔一样，是古人修建以图镇压潮水的建筑。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "liuhe-pagoda-river",
+      "name": "六和塔与钱塘江"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "cccf0722-3380-5fe3-960a-5947bbb8104b",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "你眼前的净慈寺是西湖南岸的千年古刹，依山而建，殿宇沿中轴线层层升高。进寺后留意听钟声——著名的『南屏晚钟』就出自这里。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州净慈寺，西湖十景之一“南屏晚钟”，即指净慈寺传出的钟声。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/jingci-temple.jpg"
+          },
+          {
+            "text": "净慈寺始建于954年，由吴越国王钱弘俶为永明延寿禅师所建，原名慧日永明院。南宋时，高僧济公曾在此修行，运木古井等遗迹至今仍在，让这座寺院充满传说色彩。",
+            "type": "paragraph"
+          },
+          {
+            "text": "净慈寺与雷峰塔只隔一条马路：一边是新修的塔，一边是延续千年的寺院，二者共同构成西湖南岸的黄昏画面——夕照看塔，晚钟听寺。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jingci-temple",
+      "name": "净慈寺",
+      "sources": [
+        {
+          "publisher": "维基百科",
+          "title": "净慈寺",
+          "url": "https://zh.wikipedia.org/wiki/净慈寺"
+        }
+      ]
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "bc5f2bd7-6d22-57f2-bf6d-a63c2b7f2272",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "北宋·彩塑泥菩萨立像是浙江省博物馆十大镇馆之宝之一，是一件宋代泥质彩塑的菩萨造像。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "彩塑泥菩萨立像 北宋(960-1127)  1965年温州白象塔出土",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/caisu-mud-bodhisattva.jpg"
+          },
+          {
+            "text": "比起青铜或瓷器，泥塑佛像更难保存；能有一件北宋的彩塑泥菩萨流传至今，本身就十分不易。它与五代吴越的佛教遗存一样，提醒你在浙博看造像时，注意宋代雕塑在材料与造型上的另一条路线。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "caisu-mud-bodhisattva",
+      "name": "北宋彩塑泥菩萨立像"
+    },
+    {
+      "conceptKind": "审美",
+      "contentRole": "看点",
+      "id": "77347f66-53d0-5e01-a359-01bc66ca8330",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "双峰插云看重云雾、高度与观看位置的关系。南北两峰在雨雪、晨昏、雾中忽隐忽现，可远观而不必登顶；其价值在于山、雾、天与想象之间的层次，而非一个固定的观景台。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​雙峰插雲",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/shuangfeng-cloud-peaks.jpg"
+          },
+          {
+            "text": "双峰插云是南宋时期确立的西湖十景之一，指向南高峰与北高峰。两峰古时都为僧人所占，山顶建有佛塔（早已毁），遥相对峙、高于群峰之上。",
+            "type": "paragraph"
+          },
+          {
+            "text": "两峰的高度有精确数字：南高峰高257米，登上山巅向东俯瞰，西湖全景历历在目；北高峰海拔314米，著名的灵隐寺便位于其山脚下，山东侧现建有载人索道，上下山往返仅需六七分钟。",
+            "type": "paragraph"
+          },
+          {
+            "text": "景名里的『云』提醒你，这个景的观看方式与雾有关：清康熙帝为双峰插云题名，建景碑亭于洪春桥畔（并将『两峰插云』改为『双峰插云』）；南宋诗人王洧的《两峰插云》写道：『浮图对立晓崔巍，积翠浮空霁蔼迷。试向凤凰山上望，南高天近北烟低。』不必登顶，在洪春桥一带远眺，让云雾把两峰的轮廓藏一半露一半，才是这个景的标准打开方式。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "shuangfeng-cloud-peaks",
+      "name": "双峰插云与南北高峰"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "7761fd8c-06f2-5e4a-8343-5144175672c2",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "双鸟朝阳纹牙雕是河姆渡文化线雕的代表作，也是浙江省博物馆十大镇馆之宝之一，属于新石器时代距今约6000至7000年的河姆渡先民之手。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​新石器时代河姆渡文化双鸟朝阳纹牙雕，1977年出土于余姚河姆渡遗址T226(3B):79，浙江省博物馆藏",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-double-bird.jpg"
+          },
+          {
+            "text": "这件牙雕长16.6厘米，残宽5.9厘米，厚1.2厘米，中心由五个同心圆组成太阳纹，圆外有火焰纹，两侧有钩喙昂首相望的双鸟；它是河姆渡遗址线雕技艺的最高代表。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在同一批河姆渡象牙制品中，还有以“双火鸟”纹雕刻最为知名的一类作品，可见鸟与太阳是河姆渡人反复书写的主题。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在展厅里看到这件牙雕，先看中心的同心圆太阳，再看两侧昂首相望的双鸟——一种七千年前关于光明与飞鸟的想象，就通过几道刻线保留到了今天。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "hemudu-double-bird",
+      "name": "双鸟朝阳纹牙雕"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "cceb0298-98aa-56e7-9b5b-cf975d971b61",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "反山贵族墓地位于良渚古城附近，是一座人工堆筑修整过的高台墓地，东西约100米、南北约30米，各墓均有墓坑，随葬品以玉器为主，总计有千件。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州良渚遗址公园——反山遗址大棚",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/fanshan-cemetery.jpg"
+          },
+          {
+            "text": "反山第20号墓随葬玉器总计达547件，应为最高首领的墓葬。反山第12号墓出土了重达3500克、刻有精致兽面纹的玉琮，被视为“琮王”，同时出土一件制作精良、被视为“钺王”的玉钺，木柄长70-80厘米、头尾两端安有玉件，是军权、王权的象征。",
+            "type": "paragraph"
+          },
+          {
+            "text": "反山、瑶山大墓出土的玉器都是真玉，与次一等墓地的用玉形成对比；严文明认为，反山和瑶山的贵族墓地可能就是良渚“王国”的王陵。反山遗址与瑶山遗址于1989年2月被评为“七五”期间全国十大考古新发现。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在遗址公园的反山保护区，可以沿一处百来米的台地来回走走，体会随葬玉器在这里的高度集中——一座台地之下，埋着一位位首领与他们的玉礼世界。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "fanshan-cemetery",
+      "name": "反山贵族墓地"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "b78c3e13-f4fd-5626-8150-4744854e50d8",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "唐·“彩凤鸣岐”七弦琴是浙江省博物馆十大镇馆之宝之一，是一张唐代制作的传世古琴，也是浙博古琴收藏中的代表性藏品。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Collected and exhibited in Zhejiang Provincial Museum.",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/cai-feng-ming-qi.jpg"
+          },
+          {
+            "text": "在传世的古琴中，年代最早且可信的即为唐代制作的古琴，唐代制琴近二十张流传至今，在历代都被视为稀世珍宝；“彩凤鸣岐”正属于这批流传至今的唐琴之列。",
+            "type": "paragraph"
+          },
+          {
+            "text": "古琴艺术于2003年11月7日被联合国教科文组织列入人类非物质文化遗产代表作名录，2006年5月20日列入第一批国家级非物质文化遗产名录，这批唐琴正是这一古老艺术至今仍可聆听的实物。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看到这张唐琴时，先看琴名与琴面，再想它已经安静了近一千四百年——一张琴把唐代的音响传统一路带到了今天的展柜里。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "cai-feng-ming-qi",
+      "name": "唐“彩凤鸣岐”七弦琴"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "孤山位于西湖北侧外西湖中，海拔35米，面积约0.22平方公里，为栖霞岭的支脉，是西湖中最大的天然岛屿。南宋咸淳《临安志》载它“一屿耸立，旁无联附，为湖山胜绝处”。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州孤山公園",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/gushan-island.jpg"
+          },
+          {
+            "text": "孤山东西分别以白堤和西泠桥与湖岸相连，岛上名胜古迹众多，因此杭州人把“孤山不孤”与“断桥不断”、“长桥不长”并称“西湖三怪”。岛上汇集了中山公园、浙江省博物馆、文澜阁、西泠印社、放鹤亭、秋瑾墓、俞楼、慕才亭等地景与人文。",
+            "type": "paragraph"
+          },
+          {
+            "text": "中山公园原为清代行宫御花园，1927年为纪念孙中山先生而命名“中山公园”，公园进门石级上刻“孤山”二字，其中“孤”字少了一点，人们猜测其意在“孤山不孤”。林逋曾隐居于此，“梅妻鹤子”，为孤山留下咏梅名句。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在湖上看孤山，它只是一座高出水面的岛；登岛后才发现处处是祠、馆、亭、阁，被人事与人文填满——“孤山不孤”就写在湖光与人文的交界处，也提醒你在湖心看山时，别遗漏这座西湖最大岛上层层叠叠的故事。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "gushan-island",
+      "name": "孤山与“孤山不孤”"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "917dfb28-49c6-5a13-975c-0901a3248fc5",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "孤山馆区是浙江省博物馆最早的馆区，位于杭州西湖孤山南麓，东衔白堤和平湖秋月，西接西泠印社，于1993年秋竣工，占地面积20400平方米，馆舍形成“园中馆、馆中园”的格局。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​大水法残迹",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/gushan-campus.jpg"
+          },
+          {
+            "text": "孤山馆区还包括浙江西湖美术馆和文澜阁。文澜阁位于孤山馆区西侧，建成于乾隆四十八年（1783年），为清代珍藏《四库全书》的七阁之一；咸丰十一年（1861年）遭焚毁，光绪六年（1880年）重建，是江南三阁中唯一幸存的一阁；2001年被国务院核定公布为全国重点文物保护单位，2006年经历建国后规模最大的一次修缮，2013年6月重新对外开放。",
+            "type": "paragraph"
+          },
+          {
+            "text": "1993年9月29日落成的主馆与孤山原有园林共同构成了这座“馆中园”。参观时可以把“园中馆、馆中园”当作路线：先看主馆展厅里的陶瓷与书画，再走到文澜阁前，体会馆舍与西湖山水的边界几乎重合。",
+            "type": "paragraph"
+          },
+          {
+            "text": "如今大部分新展览迁往之江馆区，但孤山仍是浙博的精神起点；你若想理解一座博物馆如何与一片湖山共生，孤山馆区是最直观的答案。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "gushan-campus",
+      "name": "孤山馆区与“园中馆、馆中园”"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "宝石山是杭州西湖北侧的一座小山，南临西湖，东、北两面为繁华市区，西连葛岭，是俯瞰西湖美景的一处佳地，山高约二百米。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​黄龙洞至断桥一线：保俶塔和城市合影",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/baoshi-hill-cinnabar-glow.jpg"
+          },
+          {
+            "text": "宝石山山体属火成岩中的流纹岩和凝灰岩，含氧化铁，因而山岩呈赭红色，在清晨朝阳升起或傍晚落日西下时尤为明显，“宝石流霞”由此被列为新西湖十景之一。",
+            "type": "paragraph"
+          },
+          {
+            "text": "山顶建有造型独特的古塔保俶塔，与对岸雷峰塔隔湖对望，是西湖风景区的标志之一。入冬时站在宝石山上向南眺望，断桥的石桥拱面无遮无拦，冰雪在阳光下消融而桥两端仍覆白雪，远望整座桥似断非断，这正是“断桥残雪”之名由来的传统视角。",
+            "type": "paragraph"
+          },
+          {
+            "text": "对看湖而言，宝石山是北岸最好的俯瞰点：登上可近观保俶塔、俯瞰湖面，初升朝阳或落日时分赭红的岩与塔影同入湖中，“宝石流霞”的景名便有了直接对应的直观图景。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "baoshi-hill-cinnabar-glow",
+      "name": "宝石山与宝石流霞"
+    },
+    {
+      "conceptKind": "人物",
+      "contentRole": "看点",
+      "id": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "岳飞墓庙把人物记忆、墓葬祭祀和公共价值表达放在同一空间中。后世不断重修与讲述，使这里成为理解忠诚观念如何进入地方文化记忆的重要现场。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​岳飛（1103年3月24日—1142年1月27日），字鵬舉，宋朝相州湯陰（今河南省安陽市湯陰縣）人，南宋抗金名將。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/yue-fei-memorial-culture.jpg"
+          },
+          {
+            "text": "岳王庙始建于南宋嘉定十四年（1221年），1961年被列为全国重点文物保护单位。庙前的事实链条尤其动人：岳飞于1142年被以莫须有的罪名处死后，遗体由狱卒隗顺盗出，葬于九曲丛祠旁，直到1162年宋孝宗下诏平反昭雪，才迁葬到今日所在。",
+            "type": "paragraph"
+          },
+          {
+            "text": "祠庙建筑讲述的是后世的态度：现今建筑样式为清康熙五十四年（1715年）所建，民国七年（1918年）大修，文化大革命期间（1966—1976年）遭到严重破坏，1979年全面重建。每一次重修都说明，祭祀岳飞不是一次性的仪式，而是一直在进行的文化行为。",
+            "type": "paragraph"
+          },
+          {
+            "text": "进入忠烈祠，殿中『心昭天日』横匾为叶剑英手书，『还我河山』匾额为岳飞手迹，岳飞彩色坐像高4.5米。读匾时不妨把碑刻文字与空间秩序放在一起看——从入口、祠庙到墓园，路线本身就在引导你从凭吊走向敬仰。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "yue-fei-memorial-culture",
+      "name": "岳飞纪念与忠烈祠祀"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "4f91e5eb-e1f0-5e73-869a-5280880c66e9",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "平湖秋月强调开阔湖面、秋夜月色和远山轮廓；三潭印月则更关注塔孔、灯影、月影和水波的多重叠加。二者展示了同一月题如何形成不同观看逻辑。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Pinghu Qiuyue",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/pinghu-autumn-moon.jpg"
+          },
+          {
+            "text": "平湖秋月位于西湖景区孤山东南角的滨湖地带、白堤西南侧起点，濒临外西湖。早在南宋，它就被视为十景之首：成书于嘉熙三年、被认为是最早记录西湖十景的《方舆胜览》将平湖秋月列为十景之首；清朝雍正《西湖志》更称此地『据全湖之胜』。",
+            "type": "paragraph"
+          },
+          {
+            "text": "这里的建筑史可以追溯到唐代：早在唐朝，此处就建有望湖亭，曾任杭州刺史的白居易在诗作《湖亭晚归》中也提到过此亭附近的白堤；南宋建皇家道观四圣延祥观时，望湖亭被迁往宝石山。今天你站立的湖岸，承载着唐代以来的层层选址。",
+            "type": "paragraph"
+          },
+          {
+            "text": "清康熙三十八年（1699年），康熙帝第三次南巡至西湖御题西湖十景，为立碑建亭，地方官将景址定为孤山东南角。据康熙五十七年（1718年）《钱塘县志》记载，当时将原有龙王堂『徙庙于亭后』作御书楼，楼前建有伸出湖面的石砌平台，旁构水轩，悬康熙御题『平湖秋月』匾额。这片伸向水面的平台，就是为赏月专门设计的观看设施。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "pinghu-autumn-moon",
+      "name": "平湖秋月"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "e50f9576-9d0d-506d-a71d-e893854c5e5f",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "张成剔红婴戏图盘是元代雕漆名家张成创作的漆器，堪称国宝级文物，是目前已知的4件“张成造”之一，也是浙江省博物馆漆器收藏中的顶级藏品。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​剔红牡丹纹盒 明永乐 香港嘉德2019秋",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhang-cheng-red-lacquer.jpg"
+          },
+          {
+            "text": "元代雕漆名家张成创作的剔红婴戏图盘堪称国宝级文物，是目前已知的4件“张成造”之一；2012年，香港著名浙籍实业家曹其镛先生夫妇将珍藏多年的160件（组）漆器捐赠给浙江省博物馆，这件剔红婴戏图盘正在其中。",
+            "type": "paragraph"
+          },
+          {
+            "text": "经鉴定，这批捐赠漆器中一级文物21件、二级文物118件、三级文物15件；捐赠中的宋元时期一色漆器、明早期剔犀漆器、明嘉靖万历戗金填漆漆器、以清代乾隆为代表的清中期漆器，都是极为珍贵的文物精品。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看这件剔红婴戏图盘时，先看层层髹漆后雕刻出的婴戏图案，再想一件雕漆从元代匠人之手流传到今天、又经曹氏捐赠入藏浙博的经历——工匠、藏家与博物馆，就这样被一件漆器连在了一起。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "zhang-cheng-red-lacquer",
+      "name": "张成剔红婴戏图盘"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "b1ddcee4-d6ab-5b03-bdf9-1e51d9e9a842",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "春秋·伎乐铜屋是浙江省博物馆十大镇馆之宝之一，是一件以房屋与乐人为主题的青铜器，出自越国所在的绍兴一带。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​伎乐铜屋 屋内",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/jiyue-bronze-house.jpg"
+          },
+          {
+            "text": "据史料记载，绍兴出土的伎乐铜屋内，有鼓师、琴师、瑟师和歌伎的陶俑，再现了当时越国人组合演唱的场景；它把一场两千多年前的“小型音乐会”凝固在青铜之中。",
+            "type": "paragraph"
+          },
+          {
+            "text": "越国是先秦金锡等冶炼原材料的主要产地之一，越人善治刀剑是西汉以前一般人公认的事实，青铜铸造传统深厚；伎乐铜屋正是这一传统中少见的表现音乐场景的作品。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看这间小铜屋时，先数一数屋里的乐人与乐器，再想它所在的越国青铜世界——原来两千多年前的浙江人，就已经把鼓、琴、瑟组合在一起合奏了。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jiyue-bronze-house",
+      "name": "春秋伎乐铜屋"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "曲院风荷以大片荷塘、临水廊桥与岸上亭台组织夏季湖景。风过荷叶时波光与深色叶片相互流动，观看的重点是塘面尺度、花影、风感与水下结构，而不只是识别单独一朵花。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Qu Yuan Feng He",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/quyuan-lotus-summer.jpg"
+          },
+          {
+            "text": "曲院风荷的得名经历过一次官方改名：南宋时此地有官家麯院制麯酿酒、荷花遍地，因称『麯院荷风』；清康熙三十八年（1699年），康熙帝改『麯院』为『曲院』、改『荷风』为『风荷』，从此称曲院风荷。",
+            "type": "paragraph"
+          },
+          {
+            "text": "它是中华人民共和国最大的荷花专类园，有200多个荷花品种，1983年整修后对外开放，占地28公顷。今天的规模说明，这片荷塘不是野生湿地，而是被精心经营为『最大』的专类园。",
+            "type": "paragraph"
+          },
+          {
+            "text": "这里也是现代杭州的国际舞台：2016年9月4日晚，G20杭州峰会文艺演出——水上情景表演交响音乐会《最忆是杭州》在此举行，这里也是《印象西湖》的举办地。景区内的『曲院风荷』御碑立于苏堤北侧跨虹桥畔，用太湖石制成，通高2.33米、宽1.12米、厚0.22米，正面为康熙帝1699年题写；1966年御碑被文物部门沉湖保存，碑身免遭砸毁但碑额下落不明，2023年入选《第一批古代名碑名刻文物名录》。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "quyuan-lotus-summer",
+      "name": "曲院风荷与荷塘夏日"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "杨公堤位于杭州西湖西侧、西里湖上，北起仁寿山，南至赤山埠，连接丁家山、眠牛山等西湖中的小岛，与苏堤、白堤并称“西湖三堤”。它原称西山路，因西湖西侧逐渐淤积成陆，现已与西湖西岸连为一体。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州西湖杨公堤",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/yang-gong-causeway.jpg"
+          },
+          {
+            "text": "杨公堤是明代疏浚西湖的产物。弘治十六年，知州杨孟瑛在巡按御史车梁支持下奏请疏浚西湖，由工部拨款，据明《西湖游览志》卷一所载“为佣一百五十二日，为夫六百七十万，为直银二万三千六百零七两，拆毁田荡三千四百八十一亩”；正德三年（1508年）堤在杭州知府杨孟瑛主持下修成，故以杨姓得名“杨公堤”。",
+            "type": "paragraph"
+          },
+          {
+            "text": "杨公堤走向基本平行于苏堤，在西湖西进工程中恢复了相对苏堤的“里六桥”，即环碧、流金、卧龙、隐秀、景行、浚源六桥。它与苏堤一样由疏浚出的葑泥堆筑而成，是“西湖堤岸首先是水利营造、其次才是风景”的又一例证。",
+            "type": "paragraph"
+          },
+          {
+            "text": "走在杨公堤上能把“堤是水利的副产品”这一层读厚：堤北为曲院风荷，南为花港观鱼，西岸串联湖中小岛，行走时平直堤面与“里六桥”桥面起伏交错，正是一条从明代治水走回今日西里湖的可见路径。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "yang-gong-causeway",
+      "name": "杨公堤与明代西湖疏浚"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "柳浪闻莺提示西湖十景中也包含声音与季节。春日新柳成排，鸟鸣与行人、车流、湖浪连成一片；理解这处景名需要把植物、光线、鸟声与城市环境放在一起聆听，而不是只看垂枝。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Liu Lang Wen Ying",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/liulang-wenying-soundscape.jpg"
+          },
+          {
+            "text": "柳浪闻莺位于西湖东南岸，南起清波门外，北至涌金门下，占地约21公顷。它前身是南宋的御花园聚景园——今天的开放式园林，曾经是南宋皇家的园囿。",
+            "type": "paragraph"
+          },
+          {
+            "text": "这片地方经历过身份的大起大落：曾改称『散景园』，后又改为迁居杭州回民的墓地，一度失去西湖十景的盛景；现在经过整修，成为一个开放式园林。从御花园到墓地再到公园，同一个地点的功能被完全改写。",
+            "type": "paragraph"
+          },
+          {
+            "text": "公园北部还有钱王祠，纪念吴越国王钱镠。园名里的『莺』与『柳』提示一种听觉加视觉的观看：春日新柳成排，鸟鸣与行人、车流、湖浪连成一片。理解柳浪闻莺，需要把植物、光线、鸟声与城市环境放在一起听，而不是只看垂枝。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "liulang-wenying-soundscape",
+      "name": "柳浪闻莺与春景声景"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "5429373a-0fd2-5912-b210-49ad3bcdc724",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "民国·万工轿是浙江省博物馆十大镇馆之宝之一，是宁绍“十里红妆”婚俗中最华重的一件嫁妆。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "litter in the Zhenjiang Provincial Museum",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/wan-gong-jiao.jpg"
+          },
+          {
+            "text": "宁海婚俗的嫁妆以朱金木雕为主，有“千工床、万工轿”之说；花轿常常采用梓木、香樟、银杏等木材制成，轻巧而有韧性，表面雕刻大量吉祥喜庆的图案，是朱金木雕工艺的代表作。",
+            "type": "paragraph"
+          },
+          {
+            "text": "“万工”是极言其用工之多。看这顶轿子时，可以凑近看轿身上密密层层的木雕人物与吉祥纹样，再退后看整顶轿子的轮廓，想象一支绵延十里的红妆队伍。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "wan-gong-jiao",
+      "name": "民国万工轿"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "beae431c-6816-5890-8ebe-39df230ebe3c",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "沙孟海旧居是书法篆刻大家沙孟海晚年在杭州的生活与创作场所。沙孟海曾任浙博历史部主任、名誉馆长，是连接书法、印学与博物馆事业的关键人物。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​沙孟海旧居，位于中国浙江省杭州市龙游路15号，是中国当代书法家沙孟海晚年居住的地方。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/sha-menghai-residence.jpg"
+          },
+          {
+            "text": "旧居陈列其书作、用印与生活遗物。沙孟海师承吴昌硕一脉，又与西泠印社渊源深厚——从旧居出发，可以把浙博、西泠印社与近代书法史串成一条线。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "sha-menghai-residence",
+      "name": "沙孟海旧居",
+      "sources": [
+        {
+          "publisher": "维基百科",
+          "title": "沙孟海",
+          "url": "https://zh.wikipedia.org/wiki/沙孟海"
+        }
+      ]
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "ac565d24-9a02-5a99-8acc-cb885f30883d",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "河姆渡绘纹陶器是河姆渡文化先民手工制作、并在表面绘刻纹样的陶器，是了解河姆渡人生活与信仰的重要实物。它们厚实、呈灰黑色，表面常有绳纹或动植物图案。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "河姆渡遗址发掘现场",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-painted-pottery.jpg"
+          },
+          {
+            "text": "河姆渡陶器为手工制作，十分厚实，呈灰黑色，表面常打磨，常有绳纹，或雕刻植物、动物图案。陶器上的绘画作品题材包括鸟、鱼、水稻、太阳、花草等，以鱼禾纹陶盆、稻穗纹陶盆、猪纹陶钵、五叶纹陶块为代表。",
+            "type": "paragraph"
+          },
+          {
+            "text": "河姆渡陶器制作有一定的水准，估计最高烧成温度达1000摄氏度；另一史料记载，河姆渡遗址第一期陶器烧制温度大约为850摄氏度，主要制作方法为泥条盘筑法。两次发掘共出土完整和复原陶器1695件以及数倍于此的陶片，出土陶器中以夹炭黑陶为多。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看这些绘纹陶器时，先认纹饰里的题材——鸟、鱼、水稻、太阳、花草，都是河姆渡人日复一日面对的水乡生活；再想那近千度（一说850摄氏度）的烧成温度，才知道这样一件陶器要费多大的火候才能成形。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "hemudu-painted-pottery",
+      "name": "河姆渡绘纹陶器"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "9abf276c-9bef-5142-8dda-d964bcdb8015",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "骨耜是河姆渡遗址出土的骨制翻地农具，是河姆渡人翻地种稻的得力工具，也是“耜耕农业”的标志性器物。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​河姆渡遗址还原区",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/hemudu-bone-plough.jpg"
+          },
+          {
+            "text": "河姆渡遗址两次正式发掘出土的骨耜达200件左右；第二次正式发掘出土的4670件文物中，骨器占到了48.6%，可见骨器在河姆渡遗存中的分量之重。",
+            "type": "paragraph"
+          },
+          {
+            "text": "浙江农业大学教授游修龄提出，骨耜为河姆渡人翻地的工具，并以其用具将当时的农业形态命名为“耜耕农业”，这一观点被学界普遍接受。遗址中还发掘出堆积厚达40至50厘米的大量人工栽培稻谷，轰动了学术界。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看骨耜时，把它和层层堆积的栽培稻谷放在一起想：正是靠这样的骨制农具翻地种稻，河姆渡人才在距今六七千年前的杭州湾水乡里站稳了脚跟。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "hemudu-bone-plough",
+      "name": "河姆渡骨耜"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "湖心亭位于杭州西湖之上，旧为湖心寺，是中国四大名亭之一。亭在外西湖的中心，四面环水，古人谓其“环岛皆水，环水皆山”，凭栏四望湖山尽收眼底；“湖心平眺”也因此被列为清代西湖十八景之一。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "湖心亭",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/huxinting-islet.jpg"
+          },
+          {
+            "text": "湖心亭与小瀛洲、阮公墩三个人工小岛鼎立于外西湖湖心，是西湖空间中标识湖心方位的一处定点。历史上清乾隆二十七年乾隆帝御书“光澈中边”额，1980年岛上又刻置“䖝二”太湖石碑以指“風月无边”，这些题咏让一座小亭与帝王的湖上审美连在一起。",
+            "type": "paragraph"
+          },
+          {
+            "text": "明人张岱曾在此写下《湖心亭看雪》，把湖心看雪的孤寂与山水的旷远写进西湖的文学记忆。2013年，西湖十景作为文化景观被国务院整体列入第七批全国重点文物保护单位名单，其中即包含湖心亭。",
+            "type": "paragraph"
+          },
+          {
+            "text": "对看湖而言，湖心亭把“湖心”变成可见的定点：从湖上游船向湖心望去，它是构图中心；若值冬日落雪，四面玉砌，张岱笔下“独往湖心亭看雪”的意境，恰让亭与雪、湖与人的关系重新被读出来。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "huxinting-islet",
+      "name": "湖心亭与中国四大名亭"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "灵隐寺以大殿、庭院、溪泉与古树把宗教空间与自然山林叠合。从山门进入，建筑逐层升高、林木逐渐围合。参访时注意中轴线的秩序与两侧溪泉、岩刻对空间的松动。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​灵隐寺大雄宝殿",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/lingyin-zen-grove.jpg"
+          },
+          {
+            "text": "灵隐寺的源头可以追溯到东晋：咸和元年（326年），印度僧人慧理建立寺院并取名『灵隐』，距今已有1690多年。它位于飞来峰与北高峰之间的灵隐山山麓，被称为江南名刹、中国十大古刹之一，也是南宋高僧济公的修行地。",
+            "type": "paragraph"
+          },
+          {
+            "text": "寺院规模在吴越时期达到顶峰：五代时吴越国王钱俶笃信佛教，灵隐寺达到九楼、十八阁、七十七殿堂、僧众三千的规模，永明延寿、大慧宗杲、佛海慧远都曾担任住持。今天的殿宇是历代重建的结果——咸丰十年（1860年）太平军攻占杭州时灵隐寺遭焚毁，仅存天王殿和罗汉堂，大雄宝殿直到清宣统二年（1910年）才基本完工。",
+            "type": "paragraph"
+          },
+          {
+            "text": "走进大雄宝殿可以对照几个数字：殿为三层重檐构造，高33.6米；殿内释迦牟尼莲花坐像造于1956年，高19.6米、连座高24.8米，用香樟木仿唐代佛像雕刻，是目前中国国内最大的木雕佛像。天王殿上悬清康熙帝钦题『云林禅寺』御笔匾额——康熙赐名云林，但百姓始终仍称灵隐。看殿看匾，寺院的历史层次会一层层显现。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "lingyin-zen-grove",
+      "name": "灵隐的山林禅寺"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "422ecaac-9557-58b5-973a-5c181d410c71",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "玉琮王出土于反山第12号墓，是一件重达3500克、刻有精致兽面纹的玉琮，因体量与工艺均为良渚玉器之冠而被视为“琮王”，是良渚博物院与浙江省博物馆共同呈现的重要国宝。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​良渚玉琮王",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-cong-wang.jpg"
+          },
+          {
+            "text": "琮是祭地的礼器，外型方内洞圆。玉琮王满布的精雕兽面纹，体现出良渚玉器“在一毫米的间隔中需通过三道阴线”的细致工艺；正因如此，这类玉器必定由脱离农业劳动生产的专职、甚至是世袭的工匠制作。",
+            "type": "paragraph"
+          },
+          {
+            "text": "玉琮王被列入禁止出国（境）展览文物名录，也曾在《浙江一万年》等陈列中展出；它是良渚玉礼体系与神权色彩的集中体现。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看玉琮王时，先看它整体的分量和外方内圆的形制，再看满布器面的兽面纹——它既是工艺的极致，也是一件首领墓里沟通天地的权力之物。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jade-cong-wang",
+      "name": "玉琮王"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "6c2ead86-fe0b-5842-a266-10ea8ecfac6c",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "玉璧是圆形、中有圆孔的扁玉器，与玉琮同为良渚最重要的礼器之一，常与玉琮配合出现在祭祀与随葬之中。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "玉璧",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-bi.jpg"
+          },
+          {
+            "text": "玉璧用于祭祀及驱邪，也是财富的象征；良渚墓葬中常与玉琮、玉钺并见，如江苏武进寺墩出土的大墓随葬品多达124件，其中有33件玉琮、24件玉璧。古人以圆璧祭天。",
+            "type": "paragraph"
+          },
+          {
+            "text": "良渚的玉璧有的光素无纹，有的刻有鸟纹，或刻有庄重而复杂、类似族徽的图案，反映出良渚玉器多样而制度化的用途。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看玉璧时，注意它与玉琮一圆一方的对比——“圆璧祭天、方琮祭地”，这套成对出现的玉礼器，就是良渚人宇宙观的一角。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jade-bi",
+      "name": "玉璧"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "484417c0-6068-54d5-9d51-97659064a65b",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "玉钺按武器石钺制成，在良渚是军权、王权的象征，是贵族墓葬中仅次于玉琮的权威玉器。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​玉钺 新石器时代 红山文化（约前4700年-前2900年）一级文物 辽宁朝阳11.26系列盗掘古文化遗址古墓葬案追缴",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-yue.jpg"
+          },
+          {
+            "text": "反山第12号墓出土的一件玉钺制作精良，被视为“钺王”，有70-80厘米长、镶嵌玉粒的木柄，木柄头尾两端安有玉件，玉钺横嵌入柄中，是军权、王权的象征。",
+            "type": "paragraph"
+          },
+          {
+            "text": "良渚的政治体为酋邦或早期国家，能动员大量劳动力；玉钺代表的军事权力，与玉琮所代表的神权并行，构成良渚权力体系的一对支柱。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在展厅找到玉钺时，先看它的刃部与孔眼特征，再想它原本嵌在镶玉的木柄上——这件玉器不只是权力的声明，也是持钺者地位的直接证明。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jade-yue",
+      "name": "玉钺与军权王权"
+    },
+    {
+      "conceptKind": "制度",
+      "contentRole": "看点",
+      "id": "e5ac2ef8-9095-57a6-808c-43df7159b392",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "琮是中国古代用于祭祀的玉质筒状物，外型状似笔筒，外型方内洞圆；最早的玉琮见于安徽潜山薛家岗第三期文化，距今约5100年。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​玉琮 良渚文化 1987年余杭瑶山出土  礼器",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/jade-cong-ritual.jpg"
+          },
+          {
+            "text": "在玉器中，琮是用于祭地的玉器，古人认为“天圆地方”，故以圆璧祭天、以方琮祭地；《周礼·春官·大宗伯》记载“以玉作六器，以礼天地四方：以苍璧礼天，以黄琮礼地”等。",
+            "type": "paragraph"
+          },
+          {
+            "text": "良渚的玉琮内侧为圆柱形中空，中空部分被认为是连通天神与地神的通道。林巳奈夫认为琮上兽面代表日神或火神，李学勤则认为兽面是龙；而对琮用途的认识，甚至到清代乾隆皇帝时期都尚未定论，乾隆曾把出土的琮当作搬运重物的配重品。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看馆中玉琮时，先记住“外方内圆”四个字：方为地、圆为天，一件琮就把古人对天地秩序的想象握在了手里。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "jade-cong-ritual",
+      "name": "琮：沟通天地的礼器"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "2af8cfef-b959-5152-8e81-c5f5a625e158",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "瑶山遗址位于良渚古城东北约5公里，占地约66.56公顷，有一座正南北方向、呈方形的祭坛，用于举行重大祭祀活动，祭坛废弃后成为一处高等级贵族墓地。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​大瑶山隧道广端，题字使用爨体。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/yaoshan-altar.jpg"
+          },
+          {
+            "text": "瑶山墓地原是一处20米见方、2米高的祭坛，从坛面上清理出12座殉玉墓。瑶山墓葬位于祭坛南侧，分两排排列，南排7座、北排6座，均为长方形竖穴土坑墓，头部朝向正南方；瑶山墓地亦与天文观象测年有关。",
+            "type": "paragraph"
+          },
+          {
+            "text": "良渚的兽面纹与这场祭坛有紧密联系：玉琮、兽面、祭坛一同彰示着良渚的神权性质。瑶山遗址与反山遗址一样，于1989年2月被评为“七五”期间全国十大考古新发现。",
+            "type": "paragraph"
+          },
+          {
+            "text": "走到瑶山祭坛，先看那方形的坛面与向南排列的墓坑，再想它从“祭坛到墓地”的身份转变，一处神权与权力交织的空间就浮现出来。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "yaoshan-altar",
+      "name": "瑶山祭坛与墓葬"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "88f77240-6a4c-57c9-9322-443456b25598",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "良渚博物院位于浙江省杭州市余杭区良渚街道美丽洲公园内，是一座展览、陈列、研究良渚文化的专题类博物馆，前身为1994年成立开馆的良渚文化博物馆。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​良渚博物院，第一二展厅之间的庭院。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/liangzhu-museum.jpg"
+          },
+          {
+            "text": "新馆于2005年3月动工、2008年10月对外开放，由英国建筑师戴卫·奇普菲尔德设计，设计理念为“一把玉锥散落地面”，建筑由四个不完全平行的长条形体块组成。新馆占地约4万平方米，建筑面积约1万平方米，展览面积4000多平方米，设有3个常规展厅、1个临时展厅及文物库房。",
+            "type": "paragraph"
+          },
+          {
+            "text": "基本陈列总主题为“良渚文化实证中华五千年文明”，分“发现求真”“良渚古国”“良渚文明”三部分，展出良渚文化玉器、陶器、漆器等珍贵文物1000余件；2009年，该陈列获第八届全国博物馆十大陈列展览精品奖。2017年8月，馆方根据最新考古成果对基本陈列改造升级，于2018年6月重新开放。",
+            "type": "paragraph"
+          },
+          {
+            "text": "参观时按“发现求真—良渚古国—良渚文明”的顺序走，三个部分正好对应“考古发现—古国复原—文明价值”，是最顺的阅读路线。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "liangzhu-museum",
+      "name": "良渚博物院"
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "fdb68b9b-f4ed-5637-9e3a-4c09f9f6d4ca",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "良渚古城遗址公园是以良渚古城遗址为中心的考古遗址公园，你可以在这一片被列入世界遗产的土地上，直接看到五千年前的城、墙、水利与王陵。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​良渚古城遗址公园",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/site-park.jpg"
+          },
+          {
+            "text": "公园依托良渚古城遗址修建，涵盖宫殿区莫角山台地、内城外城、外围水利系统以及反山贵族墓地等核心区域；良渚遗址于2010年10月9日由国家文物局公布为首批国家考古遗址公园。这里是实证中华五千多年文明史的集中现场。",
+            "type": "paragraph"
+          },
+          {
+            "text": "游览时，提前把莫角山台地（约30公顷）与反山王陵的位置标在地图上，一边走一边对照城内外水系与宫殿区的位置，就能避免只看零散的台地。",
+            "type": "paragraph"
+          },
+          {
+            "text": "走在这片原野上，试着把莫角山—外城—内城的台地高低看成一张肉眼可见的梯度：这恐怕是理解良渚“早期城市”最直观的方式。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "site-park",
+      "name": "良渚古城遗址公园"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "7aa489c9-6efc-54da-8486-914cbab0267b",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "花港观鱼把曲池、鱼影、水草与岸边回廊编成连续观看。观鱼介于凝视与游走之间：人停步时鱼游动，人移动时倒影变形，池水的清澈程度决定画面的疏密。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Huagang Guan Yu",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/huagang-fish-viewing.jpg"
+          },
+          {
+            "text": "花港观鱼的核心是一池数千尾红鲤，游人以喂食红鲤为一乐；公园中心是牡丹亭，侧旁种植了大量牡丹。鱼与花并置，说明这里的设计有意让『看水里的』与『看岸上的』交替进行。",
+            "type": "paragraph"
+          },
+          {
+            "text": "地名本身容易被误读：『港』是北部吴语中对（断头）河流的通称，如河港、紫金港、蒋村港、十字港，并非『港口』的意思；花港又称花溪，是从花家山上流下的小河，起初也与鲜花无关。理解了这两个字，地名里的诗意反而更清楚——它本来只是一条溪沟。",
+            "type": "paragraph"
+          },
+          {
+            "text": "花港观鱼在西湖十景中属于亲近的、低头观看的景：与雷峰夕照、双峰插云那种远望不同，这里的观看是向下的、移动的。池水的清澈程度决定画面疏密，人停步时鱼游动，人移动时倒影变形——这也是西湖十景中少有的以『注视』为核心的场景。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "huagang-fish-viewing",
+      "name": "花港观鱼与园林观鱼"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "7bcaf315-32a0-5dd8-8da8-296e604087f6",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "苏堤由治湖工程形成，六桥、堤岸和桃柳又让水利设施转化为春季游赏景观。“苏堤春晓”与三潭石塔可以放在同一条苏轼治湖故事线中理解。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "Sudi Chunxiao",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/su-causeway-spring-dawn.jpg"
+          },
+          {
+            "text": "苏堤的物理尺度很具体：南起南屏山下花港观鱼，北抵栖霞岭下曲院风荷和岳庙，全长2.797公里，把西里湖同外西湖分割开来；堤上六桥自南向北依次为映波、锁澜、望山、压堤、东浦、跨虹。走完六桥约等于读完半部西湖水利史。",
+            "type": "paragraph"
+          },
+          {
+            "text": "它的来历是北宋元祐五年（1090年）苏轼疏浚西湖时以淤泥和葑草筑成（另一说为1089年），后人为纪念他命名苏堤。民谣唱道：『西湖景致六条桥，一枝杨柳一枝桃。』堤上的柳与桃既护岸也造景，让水利设施长成了春天的模样。",
+            "type": "paragraph"
+          },
+          {
+            "text": "『苏堤春晓』在清康熙三十八年（1699年）获得御碑：碑立于苏堤压堤桥畔，正面为康熙帝题写的『蘇隄春曉』，背面及侧面为乾隆帝六次题诗。这块御碑1966年在文化大革命中被断为数截沉入湖中，文革后打捞出水修复，2023年入选《第一批古代名碑名刻文物名录》。站在碑前，能同时看见清代的皇家书写与当代的保护修复。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "su-causeway-spring-dawn",
+      "name": "苏堤春晓"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "893ee811-737d-54ca-a22a-d3a1fce35880",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "莫角山遗址是良渚文化的中心所在，东西长670米、南北宽450米，面积达30余万平方米，相对高度约8米，整个良渚遗址群以它为中心、围绕它而分布，可说是政治权力中心。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "The view of Mojiaoshan Relic Site of Liangzhu Culture, located at Yuhang Dist, Hangzhou, Zhejiang, China.",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/liangzhu/mojiaoshan-center.jpg"
+          },
+          {
+            "text": "莫角山台地整体呈长方形覆斗状，高9至15米，为人工堆砌而成；以平台的工程而言，30万平方米的平台估计须用50万立方米的土方，至少要动员60万人日工，若以100日完工计，即须动员6000人连续工作，加上组织和给养人员，共须使用约一万人。",
+            "type": "paragraph"
+          },
+          {
+            "text": "严文明指出，莫角山遗址可能是一国之首都；莫角山台地上发现超过1400平方米的大型夯土基址及柱洞，周围34平方公里范围内密集出现各类大小遗址至少50余处。",
+            "type": "paragraph"
+          },
+          {
+            "text": "在良渚古城遗址公园登上莫角山台地时，先看平台的大致范围，再对比它周围环绕的小遗址，就能体会这处由约一万人之力筑成的台地，为何被称为良渚的权力中心。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "mojiaoshan-center",
+      "name": "莫角山：良渚的权力中心"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "虎跑以泉亭、石崖和泉水泡茶的传统知名。泉水经岩层过滤、口感清冽，和茶形成“泉茶相配”的范例；春夏水位与口感不同，用于冲泡时的温度与器具变化也值得留意。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​虎跑梦泉hyhhhthl",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/hupao-spring-tea.jpg"
+          },
+          {
+            "text": "虎跑泉是位于浙江省杭州的一处泉水，用虎跑泉水泡龙井茶被认为是最佳的搭配——西湖茶文化里最常听到的『泉茶相配』，源头就在这里。",
+            "type": "paragraph"
+          },
+          {
+            "text": "它在西湖十景体系里有自己的位置：『虎跑梦泉』被列为新西湖十景之一（1985年公布）。泉与梦并置，说明这处水景被赋予了想象色彩。",
+            "type": "paragraph"
+          },
+          {
+            "text": "虎跑泉周围还有济公道院和弘一法师纪念馆。弘一法师与济公的纪念场所都围绕泉而建，使这处水景同时带上了宗教与近现代文化记忆。看泉时不妨把『水』『茶』『寺』连成一条线：泉水如何被用来泡茶、又被寺院与文化人物环绕——这是理解西湖泉水文化的最小单位。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "hupao-spring-tea",
+      "name": "虎跑泉与泉水"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "西泠印社以印学与孤山庭园亭阁相连，是西湖文人传统的方寸之地。印章把文字、石料与金石观念压缩在一方空间；在孤山上看印，山色与印的叙事互文并呈。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​西泠印社建社廿週年紀念社門，建於1923年。兩側題字為“石藏東漢名三老，社結西泠紀廿年。”",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/xiling-seal-art.jpg"
+          },
+          {
+            "text": "西泠印社位于西湖孤山西南麓、西泠桥旁，是中国研究金石篆刻的百年学术团体，有『天下第一名社』之称，今为全国重点文物保护单位。1904年，由篆刻家丁仁、王禔、叶铭、厉良玉、吴隐等创建于杭州，篆刻大师吴昌硕为首任社长。",
+            "type": "paragraph"
+          },
+          {
+            "text": "它的印学传统与西湖文人生活密不可分：社内今存东汉《三老讳字忌日碑》和一批名家石刻、摩崖题记；金石篆刻技艺是国家级非物质文化遗产。1978年获批准成立西泠印社出版社；截至2024年12月31日，西泠印社成员共计516人，其中社员474人、名誉社员42人。",
+            "type": "paragraph"
+          },
+          {
+            "text": "历任社长名单本身就是一部近现代艺术史：吴昌硕（1913—1927）、马衡（1948—1955）、张宗祥（1963—1965）、沙孟海（1979—1992）、赵朴初（1993—2000）、启功（2002—2005）、饶宗颐（2011—2018），2018年至今空缺。在孤山上看印，印章把文字、石料与金石观念压缩在一方空间里，山色与印的叙事互文并呈。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "xiling-seal-art",
+      "name": "西泠印社与孤山篆刻"
+    },
+    {
+      "conceptKind": "审美",
+      "contentRole": "看点",
+      "id": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "雪后的西湖常常变成黑白灰的平面：结冰的水面、未化的积雪与裸露的堤岸互相对照。断桥残雪的关键不在于把“断”当成破损，而是观察石桥阳面积雪先融、背阴残雪留存时，桥身在白色背景下若隐若现的视觉张力。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​断桥边的雪景 2018年12月09日摄于杭州西湖",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/west-lake-winter-snow.jpg"
+          },
+          {
+            "text": "断桥位于白堤东端，一端连着西湖北岸的北山路，一端沿白堤通往平湖秋月和孤山。它在南宋时又名宝祐桥，也称段家桥；现时桥梁为1921年重建。它与长桥、孤山并称『西湖三怪』——『长桥不长、孤山不孤、断桥不断』。",
+            "type": "paragraph"
+          },
+          {
+            "text": "『断桥残雪』的得名有明确说法：每当瑞雪初霁，站在宝石山上向南眺望，断桥的石桥拱面无遮无拦，冰雪在阳光下消融而桥的两端还在皑皑白雪覆盖下，远望去整座桥似断非断，故称断桥。关键不在桥真的断了，而在雪线造成的错觉。",
+            "type": "paragraph"
+          },
+          {
+            "text": "断桥还是《白蛇传》的叙事起点：白娘子和许仙在此最初邂逅，戏剧中称『断桥相会』。冬雪时走上桥，白堤的雪景与故事的记忆会同时叠加在桥面上——这座桥既是西湖三怪之一，也是中国最著名的爱情传说场景。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "west-lake-winter-snow",
+      "name": "西湖冬雪与断桥"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "c93861c2-1ccb-5cc1-a394-e3e67da38c5d",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "越王者旨於睗剑是春秋时期越国君主者旨於睗时期铸造的铜剑，也是浙江省博物馆十大镇馆之宝之一；者旨於睗虽在位仅六年，但曾大量铸造铜剑。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​正面（上）为“戉（越）王戉（越）王”；反面（下）为“者旨於睗” 苏州博物馆藏",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/zhejiang-yue-sword.png"
+          },
+          {
+            "text": "越王者旨於睗也就是《史记》中记载的越王勾践之子鼫与，其名在《越绝书》作“与夷”，《竹书纪年》作“鹿郢”；根据《竹书纪年》，鹿郢在位六年，其在位的年代按公元纪年为公元前464年至公元前459年。",
+            "type": "paragraph"
+          },
+          {
+            "text": "此类越王剑从多个方面反映出吴越地区的青铜冶炼及铸造技术；带有铭文的越王剑出土数量较少，多为制作精湛的精品，已发现的越王剑有句践、者旨於睗、不寿、州句、不光和丌北古等越王的。",
+            "type": "paragraph"
+          },
+          {
+            "text": "看这把剑，先认剑身或剑格上的铭文，再想它主人的身世——勾践之子、在位六年，却把剑大量铸到后世，一件兵器就这样连接起《史记》与实物。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "zhejiang-yue-sword",
+      "name": "越王者旨於睗剑"
+    },
+    {
+      "conceptKind": "历史",
+      "contentRole": "看点",
+      "id": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "钱王祠位于杭州西湖东岸、柳浪闻莺公园内，是纪念五代十国时期吴越国王的祠庙，原称“表忠观”。宋熙宁十年（1077年）于西湖东岸建“表忠观”以纪念吴越国王钱镠，清代以后通称“钱王祠”。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​中國杭州錢王祠。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/qianwang-temple-wuyue.jpg"
+          },
+          {
+            "text": "建表忠观时苏轼曾作《表忠观碑记》，以“有德于斯民厚”“有功于朝廷甚大”褒扬历代钱王功业，是宋代书法史上著名的碑刻；表忠观由龙山废佛寺妙音院改建并赐名。",
+            "type": "paragraph"
+          },
+          {
+            "text": "吴越国对西湖的营造有直接影响：吴越国王钱镠于宝正二年（927年）置撩湖兵千人，芟草浚泉，确保了西湖水体的存在。许多西湖寺院、佛塔亦与钱氏有关，如净慈寺、雷峰塔、六和塔皆为吴越钱氏所兴，表忠观遂成为西湖与吴越渊源的一种纪念。",
+            "type": "paragraph"
+          },
+          {
+            "text": "对看湖而言，钱王祠把人引向“西湖是吴越营建出来的”这一层：先有吴越的治水、兴佛，才有后来的湖山。从柳浪闻莺走到钱王祠，是行走中读懂吴越记忆、湖山源流的一环。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "qianwang-temple-wuyue",
+      "name": "钱王祠与吴越国"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "09d1daac-ed74-587b-aa70-1ce187d7c781",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "长城是在中国大陆华北一带历朝修筑的大规模军用隔离墙的统称，东西段与前后关卡加总起来可绵延上万华里（约4500公里至6000公里），因此又称作万里长城。长城在春秋战国时期即已修筑，齐长城是中原历史上建筑最早的长城。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "The Great Wall of China at Jinshanling",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/chinese-history/great-wall.jpg"
+          },
+          {
+            "text": "万里长城之名自秦始皇才开始：前221年秦始皇灭六国统一中原，公元前214年派将军蒙恬率领三十万人攻击匈奴、占据河套，并将秦、赵、燕各国修筑的旧城墙连接起来，从临洮到辽东绵延万里。西汉还筑成历史上最长的汉长城。",
+            "type": "paragraph"
+          },
+          {
+            "text": "现存的长城遗迹主要为始建于14世纪的明长城，西起嘉峪关、东至虎山长城；明朝经20次大规模修建，筑成一条西起甘肃嘉峪关、东至辽东虎山、全长8851.8公里的长城。长城体系主要由关隘、城墙与楼台、烽燧四部分组成。",
+            "type": "paragraph"
+          },
+          {
+            "text": "1987年，长城被联合国教科文组织列为世界文化遗产。唐朝时因突厥在唐太宗时已被平定，此后三百年未修长城；清朝直到灭亡也未修长城。记长城，记住春秋始筑、名由秦始皇、现存多为明长城。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "great-wall",
+      "name": "长城"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "23bd1809-9de0-5cba-b72c-c822987ed091",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "从三潭印月水域常可把雷峰塔纳入远景。今天的雷峰塔在保护并展示古塔遗址的基础上重建，既连接吴越国佛塔历史，也连接雷峰夕照的景名和后世民间叙事。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​晚霞下的雷峰塔",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/leifeng-pagoda-and-evening-glow.jpg"
+          },
+          {
+            "text": "雷峰塔原名皇妃塔，是五代吴越王钱俶所建、供养舍利的佛塔，建于972年至977年间；1924年9月25日，砖砌塔身坍塌，仅存遗址。今天我们看到的塔，是1999年浙江省委、省政府决定重建、2002年10月25日竣工的新塔，总高71.679米，五层八面，原址重建并覆盖了整个古塔遗址。",
+            "type": "paragraph"
+          },
+          {
+            "text": "『雷峰夕照』是南宋西湖十景之一，景目最早见于南宋《方舆胜览》卷一，称『雷峰落照』；清康熙三十八年（1699年），康熙帝御书十景时定名为『雷峰西照』，并立碑筑亭。名字从落照改成西照，说明景名本身经历过皇权的改写。",
+            "type": "paragraph"
+          },
+          {
+            "text": "这座塔还是文学叙事的坐标。《白蛇传》中，雷峰塔是法海镇压白娘子的地方，最早的成型故事即名《白娘子永镇雷峰塔》；塔塌之后，鲁迅以此为题材发表《论雷峰塔的倒掉》和《再论雷峰塔的倒掉》。从佛塔到夕照景名再到民间传说，它把宗教、景观与文学叠在同一座山上。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "leifeng-pagoda-and-evening-glow",
+      "name": "雷峰塔与雷峰夕照"
+    },
+    {
+      "conceptKind": "基础知识",
+      "contentRole": "看点",
+      "id": "e410b85f-5b01-5e0c-b1c1-d65e2f947a2e",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "黄宾虹纪念室位于杭州栖霞岭黄宾虹故居内，邻近浙博孤山馆区。画家晚年在此定居作画，窗外的西湖山水直接走进了他的画面。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​歙县黄宾虹故居，庭院。",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/zhejiang-museum/huang-binhong-memorial.jpg"
+          },
+          {
+            "text": "纪念室保存黄宾虹的画具、手稿与生活场景。他去世后，家属将五千余件作品与手稿捐赠浙博，成为馆藏书画的支柱——看懂这间纪念室，就看懂了浙博与这位画家的渊源。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "huang-binhong-memorial",
+      "name": "黄宾虹纪念室",
+      "sources": [
+        {
+          "publisher": "维基百科",
+          "title": "黄宾虹",
+          "url": "https://zh.wikipedia.org/wiki/黄宾虹"
+        }
+      ]
+    },
+    {
+      "conceptKind": "地域",
+      "contentRole": "看点",
+      "id": "024fb8dd-2ecc-50c1-947c-39b9af90e203",
+      "introduction": {
+        "blocks": [
+          {
+            "text": "你眼前的龙井村是狮峰山下的茶村，也是『龙井茶』这个名字的源头。村里家家户户种茶、炒茶，清明前后整个村子都飘着茶香。",
+            "type": "paragraph"
+          },
+          {
+            "caption": "​杭州龙井村西湖龙井茶园",
+            "type": "image",
+            "url": "https://culturelens.goudaijun.top/images/west-lake/longjing-village.jpg"
+          },
+          {
+            "text": "龙井茶在乾隆南巡时声名大振：传说乾隆在村边胡公庙前品饮龙井，把庙前的十八棵茶树封为『御茶』，龙井从此稳居名茶之首。",
+            "type": "paragraph"
+          },
+          {
+            "text": "来龙井村要看三件事：春天的茶山梯垄、茶农手里的炒锅、以及一杯用虎跑泉水冲泡的新茶——『泉茶相配』是西湖喝茶的老讲究。",
+            "type": "paragraph"
+          }
+        ],
+        "schemaVersion": 1
+      },
+      "key": "longjing-village",
+      "name": "龙井村",
+      "sources": [
+        {
+          "publisher": "维基百科",
+          "title": "龙井茶",
+          "url": "https://zh.wikipedia.org/wiki/龙井茶"
+        }
+      ]
     }
   ]
 }

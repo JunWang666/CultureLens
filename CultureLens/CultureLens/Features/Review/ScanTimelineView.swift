@@ -78,7 +78,7 @@ struct ScanHistoryTimelineRow: View {
             if showsTopRule { EditorialRule() }
             HStack(alignment: .top, spacing: 14) {
                 Text(record.createdAt, format: .dateTime.day().month())
-                    .font(.magazineDisplay(size: 22))
+                    .font(CultureTypography.display(size: 22))
                     .foregroundStyle(CultureTheme.inkPrimary.opacity(0.32))
                     .frame(width: 44, alignment: .leading)
                     .padding(.top, 2)
@@ -87,7 +87,7 @@ struct ScanHistoryTimelineRow: View {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline) {
                         Text(record.canonicalName)
-                            .font(.magazineDisplay(.headline))
+                            .font(CultureTypography.title(.headline))
                             .foregroundStyle(CultureTheme.inkPrimary)
                         Spacer(minLength: 8)
                         Text(record.confidence, format: .percent.precision(.fractionLength(0)))

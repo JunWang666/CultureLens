@@ -56,14 +56,14 @@ struct AttractionIntroductionsView: View {
         ProgressView()
         Text(existingSummary == nil ? "正在读取景点介绍…" : "正在读取更多现场知识…")
       }
-      .font(.subheadline)
+      .font(CultureTypography.body(.subheadline))
       .foregroundStyle(CultureTheme.inkSecondary)
 
     case .loaded:
       if !additionalIntroductions.isEmpty {
         VStack(alignment: .leading, spacing: 14) {
           Text("现场知识")
-            .font(.magazineDisplay(.title2))
+            .font(CultureTypography.title(.title2))
             .foregroundStyle(CultureTheme.inkPrimary)
 
           ForEach(Array(additionalIntroductions.enumerated()), id: \.element.id) { index, introduction in
@@ -92,7 +92,7 @@ struct AttractionIntroductionsView: View {
 
   private func contentUnavailableBody(_ label: some View) -> some View {
     label
-      .font(.subheadline)
+      .font(CultureTypography.body(.subheadline))
       .foregroundStyle(CultureTheme.inkSecondary)
       .padding(.vertical, 16)
       .frame(maxWidth: .infinity, alignment: .leading)
@@ -164,7 +164,7 @@ private struct LocalizedIntroductionCard: View {
       } else if let resolvedName, let resolvedText {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
           Text(resolvedName)
-            .font(.magazineDisplay(.headline))
+            .font(CultureTypography.title(.headline))
             .foregroundStyle(CultureTheme.inkPrimary)
             .frame(maxWidth: .infinity, alignment: .leading)
           SpeakTextButton(
@@ -190,7 +190,7 @@ private struct LocalizedIntroductionCard: View {
     VStack(alignment: .leading, spacing: 8) {
       HStack(alignment: .firstTextBaseline, spacing: 12) {
         Text(introduction.name)
-          .font(.magazineDisplay(.headline))
+          .font(CultureTypography.title(.headline))
           .foregroundStyle(CultureTheme.inkPrimary)
           .frame(maxWidth: .infinity, alignment: .leading)
         SpeakTextButton(

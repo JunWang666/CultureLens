@@ -892,7 +892,7 @@ struct CultureMapView: View {
                 .foregroundStyle(.secondary)
             }
         }
-        .font(.body)
+        .font(CultureTypography.body(.body))
         .padding(.horizontal, 16)
         .frame(height: 52)
     }

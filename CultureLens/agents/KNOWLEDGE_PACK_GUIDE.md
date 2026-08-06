@@ -283,9 +283,11 @@ EOF
 
 ## 六、v5 sidecar 基线（2026-08）
 
-四个包已按本指南拆成 sidecar，并给每条 element 打上 `contentRole`（西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4）。节点与边计数与上一轮实体化重构一致：
+四个源包已按本指南拆成 sidecar，并给每条 element 打上 `contentRole`（西湖 v5 / 良渚 v4 / 浙博 v5 / 历史 v4）。节点与边计数与上一轮实体化重构一致：
 
 - 节点：西湖 70（看点 23 / 文化历史 47）/ 良渚 25（9 / 16）/ 浙博 35（16 / 19）/ 历史 45（2 / 43）。
 - 边全部有 kind + explanation、单向、无对称对；跨包边统一指向历史包地基（朝代、文化概念）。
 - 玉琮王 canonical key 为良渚包 `jade-cong-wang`；河姆渡为浙博包 `hemudu-culture`；施昕更为良渚包 `shi-xingeng-discovery`。新内容引用这些 key，不要再建同义节点。
 - 浙博包对跨主题展品（如 `jade-cong-wang`）须自带同 key / 同 UUID 的看点元素与之江展陈介绍；合并时良渚正文优先，单装浙博时识别候选仍完整。西湖包 `locales.en` 目前只有名称级覆盖；补正文英译是已知的后续工作。
+
+**发行形态（2026-08 更新）**：App 只打一个 ODR 知识包 `Resources/KnowledgePack/`（tag `knowledge-base`，version `culturelens-v1`）。分源编辑目录在 `agents/knowledge-sources/`；改完后运行 `python3 scripts/merge_knowledge_packs.py` 再构建。

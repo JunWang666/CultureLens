@@ -50,17 +50,17 @@ struct ThemeDetailView: View {
 
               if progress.isComplete {
                 Label("文化系已点亮", systemImage: "seal.fill")
-                  .font(.headline)
+                  .font(CultureTypography.title(.headline))
                   .foregroundStyle(CultureTheme.antiqueGold)
                   .transition(.scale.combined(with: .opacity))
               }
 
               Text(theme.name)
-                .font(.magazineDisplay(.largeTitle))
+                .font(CultureTypography.title(.largeTitle))
                 .foregroundStyle(CultureTheme.inkPrimary)
 
               Text(theme.summary)
-                .font(.title3)
+                .font(CultureTypography.body(.title3))
                 .foregroundStyle(CultureTheme.inkSecondary)
                 .lineSpacing(5)
 
@@ -71,7 +71,7 @@ struct ThemeDetailView: View {
             VStack(alignment: .leading, spacing: 10) {
               HStack {
                 Text("进度")
-                  .font(.magazineDisplay(.headline))
+                  .font(CultureTypography.title(.headline))
                   .foregroundStyle(CultureTheme.inkPrimary)
                 Spacer()
                 Text("\(progress.contactedCount)/\(progress.requiredCount)")
@@ -134,7 +134,7 @@ struct ThemeDetailView: View {
 
           VStack(alignment: .leading, spacing: 4) {
             Text(name)
-              .font(.magazineDisplay(.headline))
+              .font(CultureTypography.title(.headline))
               .foregroundStyle(CultureTheme.inkPrimary)
             if !summary.isEmpty {
               Text(summary)

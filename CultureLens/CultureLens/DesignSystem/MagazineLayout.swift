@@ -62,7 +62,7 @@ struct MagazineDestinationRow: View {
     HStack(alignment: .top, spacing: 14) {
       if let systemImage {
         Image(systemName: systemImage)
-          .font(.body)
+          .font(CultureTypography.body(.body))
           .foregroundStyle(CultureTheme.antiqueGold)
           .frame(width: 22)
           .padding(.top, 2)
@@ -71,10 +71,10 @@ struct MagazineDestinationRow: View {
 
       VStack(alignment: .leading, spacing: 6) {
         Text(title)
-          .font(.magazineDisplay(.headline))
+          .font(CultureTypography.title(.headline))
           .foregroundStyle(CultureTheme.inkPrimary)
         Text(message)
-          .font(.caption)
+          .font(CultureTypography.body(.caption))
           .foregroundStyle(CultureTheme.inkSecondary)
           .fixedSize(horizontal: false, vertical: true)
       }

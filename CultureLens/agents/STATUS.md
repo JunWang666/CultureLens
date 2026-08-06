@@ -6,6 +6,11 @@
 
 ## 已完成
 
+- 2026-08-07 文化回顾：详情主图自动取介绍富文本第一张图；iPad 横屏改 `SplitDetailLayout`；支持整页分享（LLM 写介绍词 + 杂志风 PNG）；设置新增 Seedream 封面生成开关（默认关，仅无介绍主图时调用）。见 `design/0025-culture-review-hero-and-share.md`。
+- 2026-08-07 探索首页新增「你知道吗？」文化问答：从当前知识包可解析的已接触节点出发，通过 `dynamic/chat` 生成严格校验的三选一题目，答题后展示正误、解释并可回到来源节点；相同节点、语言与知识正文优先读取磁盘缓存，缓存纳入统一用量统计和清理。双栏布局固定在左栏「附近看点」下方，单栏紧随附近看点；无节点、加载、失败、重试与换题状态完整。新增 JSON 契约和缓存测试 4 项通过，iOS Simulator App build、`build-for-testing` 与定向测试均通过。见 `design/0023-did-you-know-quiz.md`。
+- 2026-08-07 探索页「点亮图鉴」完成视觉资产升级：为 16 条当前文化系、6 枚探索徽章及未知主题图像兜底生成海报感大图；统一采用朱砂/墨色对角色块、金色分界和放大文化剪影（`design/0024`），不再在文化系或徽章上回退 SF Symbol。保留进度环、未解锁去色状态、庆祝弹层和既有 VoiceOver 文本。
+- 2026-08-07 未匹配既有兴趣点时新增自由视觉标签兜底：`v5` 识别协议的 `visual_tags` 仅在 `cultural_element_key` / `attraction_key` 均为空时要求 3–6 个具体可见标签，命中任一既有兴趣点时必须为空；端侧校验其数量、长度与去重，不让它参与候选绑定或图谱归属。未绑定且有标签的实时扫描 / 历史记录改走独立 `FreeformVisualTagsResultView`（照片、标签、可见依据、补拍建议），不显示对象详情、讲解、图谱或附近推荐；旧历史快照缺字段时回退普通未绑定结果。新增映射互斥与历史兼容测试，通用 iOS Simulator `build-for-testing` 通过。见 `design/0022-freeform-visual-tags.md`。
+- 2026-08-06 四个知识包合成单一发行包：`Resources/KnowledgePack/`（`culturelens-v1`，ODR tag `knowledge-base`）；分源在 `agents/knowledge-sources/`，用 `scripts/merge_knowledge_packs.py` 再生。`project.pbxproj` 改为整夹 folder reference 打 tag（知识包 + 图片），去掉约千行逐文件 ODR 例外。initial-install tags 收为 `knowledge-base images`。
 - 2026-08-06 识别绑定收紧：删除空 `cultural_element_key` 的名称 / summary `fromText` 模糊回填与 catalog 名猜测；空 key 保持未绑定，有 key 仍经 `LLMIDSession` 短 ID→UUID。根因修复：浙博包补齐与景点同 key 的 `jade-cong-wang` / `jade-cong-ritual` 看点元素（v8），避免仅装浙博时 `nearbyIntroductions` 因缺元素丢弃之江展陈介绍。见 `design/0021-recognition-no-fuzzy-element-binding.md`。
 - 2026-08-06 知识配图整包 ODR：`Resources/images/`（约 180 张，路径对齐 R2）打成 tag `images`，列入 initial-install；`RemoteImageCache` 在内存/磁盘之后、网络之前拦截 `culturelens.goudaijun.top/images/...` 并读本地包；启动预加载与「资源包管理」可单独下载。见 `design/0020-image-pack-odr-and-remote-intercept.md`。
 - 2026-08-06 扫描识别新增 MapKit 地理上下文：围绕当前/照片坐标用 `MKLocalPointsOfInterestRequest` 搜索 1 km，二次按直线距离过滤、去重后只向模型发送最近 3 条 POI，并同时发送坐标精度/反向地理名称；MapKit 无网、失败或无结果时不阻断识别，POI 不会写入历史或成为知识库候选。通用 iOS App 与 unit-test target 编译通过，Simulator 运行受既有依赖宏插件阻断。见 `design/0019-recognition-mapkit-geographic-context.md`。

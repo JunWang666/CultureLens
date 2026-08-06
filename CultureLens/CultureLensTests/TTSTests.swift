@@ -69,4 +69,55 @@ struct TTSTests {
     )
     #expect(!empty.hasCredentials)
   }
+
+  @Test
+  func ttsAudioCacheStoresAndClears() async throws {
+    let directory = FileManager.default.temporaryDirectory
+      .appending(path: "CultureLens-tts-cache-tests-\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: directory) }
+
+    let cache = TTSAudioCache(directoryURL: directory)
+    let key = TTSAudioCache.cacheKey(
+      text: "西湖春来水如蓝",
+      language: .zhHans,
+      config: .default
+    )
+    let pcm = Data([0x01, 0x00, 0x02, 0x00, 0x03, 0x00])
+
+    #expect(await cache.pcm(forKey: key) == nil)
+    try await cache.store(pcm, forKey: key)
+    #expect(await cache.pcm(forKey: key) == pcm)
+    #expect(await cache.diskUsageBytes() == Int64(pcm.count))
+
+    try await cache.clear()
+    #expect(await cache.pcm(forKey: key) == nil)
+    #expect(await cache.diskUsageBytes() == 0)
+  }
+
+  @Test
+  func ttsCacheKeyStableForSameInput() {
+    let a = TTSAudioCache.cacheKey(text: "hello", language: .english, config: .default)
+    let b = TTSAudioCache.cacheKey(text: "hello", language: .english, config: .default)
+    let c = TTSAudioCache.cacheKey(text: "hello!", language: .english, config: .default)
+    #expect(a == b)
+    #expect(a != c)
+  }
+
+  @Test
+  func resolvedConfigUsesPreferredVoice() {
+    let speaker = "zh_female_xiaohe_uranus_bigtts"
+    let config = VolcengineTTSConfig.resolved(voiceID: speaker)
+    #expect(config.speaker(for: .zhHans) == speaker)
+    #expect(config.speaker(for: .english) == speaker)
+    #expect(config.hasCredentials)
+  }
+
+  @Test
+  func volcengineVoiceCatalogContainsDefault() {
+    #expect(
+      VolcengineVoiceOption.catalog.contains {
+        $0.speakerID == VolcengineVoiceOption.defaultSpeakerID
+      }
+    )
+  }
 }

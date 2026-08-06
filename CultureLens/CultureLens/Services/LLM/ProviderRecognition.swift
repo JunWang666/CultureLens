@@ -14,6 +14,7 @@ nonisolated struct ProviderRecognition: Decodable, Sendable {
   var uncertainty: String
   var timePeriod: String
   var region: String
+  var visualTags: [ProviderVisualTag]
   var alternatives: [ProviderCandidate]
 
   enum CodingKeys: String, CodingKey {
@@ -27,8 +28,16 @@ nonisolated struct ProviderRecognition: Decodable, Sendable {
     case uncertainty
     case timePeriod = "time_period"
     case region
+    case visualTags = "visual_tags"
     case alternatives
   }
+}
+
+/// Freeform visual fallback tags from the recognition schema. They remain
+/// separate from candidate IDs so they cannot affect knowledge resolution.
+nonisolated struct ProviderVisualTag: Decodable, Sendable {
+  var label: String
+  var evidence: String
 }
 
 nonisolated struct ProviderCandidate: Decodable, Sendable {

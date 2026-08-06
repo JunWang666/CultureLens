@@ -38,6 +38,13 @@ struct SplitDetailLayout<Leading: View, Trailing: View>: View {
                             // compress instead of pushing the trailing column off-screen.
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         }
+                        .overlay(alignment: .leading) {
+                            Rectangle()
+                                .fill(CultureTheme.hairline)
+                                .frame(width: 1)
+                                .frame(maxHeight: .infinity)
+                                .padding(.leading, leadingWidth + 15.5)
+                        }
                     } else {
                         VStack(alignment: .leading, spacing: 24) {
                             leading(false)

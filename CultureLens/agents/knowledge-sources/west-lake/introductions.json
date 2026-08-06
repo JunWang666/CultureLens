@@ -1,0 +1,1285 @@
+{
+  "introductions": [
+    {
+      "id": "3e6b47b2-a138-538e-971e-d6eebddc3a37",
+      "key": "leifeng-pagoda.lake-landscape",
+      "name": "雷峰塔的湖山位置",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "从西湖南岸看，雷峰塔以较厚重的塔身压住夕照山的轮廓。它适合从湖面和远岸辨认，重点不只是近看细部，而是观察塔、山与开阔水面的比例关系。"
+          }
+        ]
+      },
+      "culturalElementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "attractionId": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
+      "latitude": 30.233889,
+      "longitude": 120.145,
+      "coordinateSourceUrl": "https://fr.wikipedia.org/wiki/Pagode_de_Leifeng"
+    },
+    {
+      "id": "f36c5bce-648e-5bdd-b16d-fb5ff83be28b",
+      "key": "leifeng-pagoda.evening-glow",
+      "name": "雷峰夕照的观看提示",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "“雷峰夕照”把地点与傍晚光线绑定。理解这一名称时，可以留意低角度日光如何强调塔的剪影，以及湖面亮度变化怎样把塔从山体背景中分离出来。"
+          }
+        ]
+      },
+      "culturalElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "attractionId": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
+      "latitude": 30.233889,
+      "longitude": 120.145,
+      "coordinateSourceUrl": "https://fr.wikipedia.org/wiki/Pagode_de_Leifeng"
+    },
+    {
+      "id": "5eaa664d-d529-5651-8b2a-02e3e2582412",
+      "key": "baochu-pagoda.mountain-silhouette",
+      "name": "宝石山上的保俶塔",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "保俶塔塔身瘦削，位于宝石山脊线上。与雷峰塔相比，它更像一枚细长的方向标；从湖东和北岸远望时，塔的价值主要体现在清晰轮廓与山势的对照。"
+          }
+        ]
+      },
+      "culturalElementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "attractionId": "d10ba550-da02-5864-b01a-d6430d8b587f",
+      "latitude": 30.263333,
+      "longitude": 120.143611,
+      "coordinateSourceUrl": "https://www.wikidata.org/wiki/Q977249"
+    },
+    {
+      "id": "75829842-ff34-50a3-babe-1f8ac8f94c4f",
+      "key": "jingci-temple.temple-and-lake",
+      "name": "净慈寺与西湖南岸佛教空间",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "净慈寺位于西湖南岸山麓，寺院、山体与湖边道路距离很近。到这里可以观察宗教空间并非远离城市，而是与游湖路线和日常交通持续交叠。"
+          }
+        ]
+      },
+      "culturalElementId": "e2d63219-cc30-5605-8cb5-e3795f3bf2aa",
+      "attractionId": "972bbaf8-1b55-5043-8d74-d40856ab6492",
+      "latitude": 30.23113,
+      "longitude": 120.14434,
+      "coordinateSourceUrl": "https://mapcarta.com/N4427428610"
+    },
+    {
+      "id": "d525bc04-84b4-5d90-a14e-faa490e2fccf",
+      "key": "jingci-temple.evening-bell",
+      "name": "南屏晚钟的听觉景观",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "“南屏晚钟”把声音也纳入西湖景观。它提醒人们，传统游赏并不只靠视觉：钟声的传播距离、山体回响和傍晚环境的安静程度，都会改变对地点的感受。"
+          }
+        ]
+      },
+      "culturalElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "attractionId": "972bbaf8-1b55-5043-8d74-d40856ab6492",
+      "latitude": 30.23113,
+      "longitude": 120.14434,
+      "coordinateSourceUrl": "https://mapcarta.com/N4427428610"
+    },
+    {
+      "id": "d2caaf04-e4f5-5cae-8b08-24c3bcf4c936",
+      "key": "yue-fei-temple.memorial-space",
+      "name": "岳王庙的纪念空间",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳王庙的参观重点不仅是识别某一座殿或墓，而是理解入口、祠庙、碑刻与墓园怎样组织出逐步强化的纪念秩序。空间路线本身就在引导态度和情绪。"
+          }
+        ]
+      },
+      "culturalElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "attractionId": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://www.wikidata.org/wiki/Q579874"
+    },
+    {
+      "id": "07f4bf11-1afc-5954-8cb4-1d75d9663ab0",
+      "key": "wenlan-pavilion.imperial-library",
+      "name": "文澜阁的藏书楼身份",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "文澜阁位于孤山文化设施密集的环境中。它的意义不只在园林外观，还在于作为《四库全书》藏书楼，把国家编纂工程落实为具体的收藏、保管与阅读空间。"
+          }
+        ]
+      },
+      "culturalElementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "attractionId": "65265052-5508-57df-a81a-2c027576f5b7",
+      "latitude": 30.253303,
+      "longitude": 120.137856,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Wenlan_Pavilion"
+    },
+    {
+      "id": "d7e19168-bb22-57af-a18d-57564cd50d6d",
+      "key": "su-causeway.waterworks-and-walking",
+      "name": "苏堤的水利与步行尺度",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤把疏浚、水面分隔和跨湖交通结合在一起。步行时可以留意桥与堤的交替：平直堤面提供连续方向，桥面抬高视点，让两侧湖面重新展开。"
+          }
+        ]
+      },
+      "culturalElementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "attractionId": "bad747f4-43a2-5202-8274-d549c7c45887",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "id": "080c1e07-2f6c-5b32-9ea6-f098fb7f8ee9",
+      "key": "su-causeway.spring-dawn",
+      "name": "苏堤春晓的时间感",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "“苏堤春晓”强调早春与清晨，而不是固定建筑。堤上植物、薄雾、低亮度水面和逐渐苏醒的行人活动，共同构成这处景名的时间感。"
+          }
+        ]
+      },
+      "culturalElementId": "891c98ae-bf30-5e71-ade3-03555e4c56ab",
+      "attractionId": "bad747f4-43a2-5202-8274-d549c7c45887",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "id": "52618e4a-f5cf-59db-b3f7-91e0ebeee174",
+      "key": "three-pools-mirroring-moon.light-and-reflection",
+      "name": "三潭印月的光与倒影",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "三潭印月把小尺度塔形标志、灯光、水面和月色组合成夜间图像。理解它时可以区分实体、灯孔形成的亮点与水中倒影，体会景名如何让多层影像同时成立。"
+          }
+        ]
+      },
+      "culturalElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.wikidata.org/wiki/Q10866444"
+    },
+    {
+      "id": "e50ff459-e171-5a7e-992f-f7ba07c026f2",
+      "key": "three-pools-mirroring-moon.cultural-landscape",
+      "name": "三潭映月与西湖文化景观",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "从三潭映月出发，可以把西湖理解为一座持续营造的文化景观：水面、岛屿、石塔、桥岸、植物和题名共同决定观看方式。重点不只是寻找一处“古迹”，而是观察自然与人工如何长期叠合。"
+          }
+        ]
+      },
+      "culturalElementId": "1b9523ce-d3e9-54b6-ac90-672593292b5d",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://whc.unesco.org/en/list/1334/"
+    },
+    {
+      "id": "0fc4b65c-b063-59a7-9cfc-a5d766999852",
+      "key": "three-pools-mirroring-moon.northern-song",
+      "name": "三潭映月的北宋线索",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "三潭石塔的历史线索可追溯到北宋元祐年间的西湖疏浚。现场理解时，可以把三座石塔同时看作水深标志、治理遗存和后来诗意景观的起点，不把今天的岛上园林全部倒推为北宋原貌。"
+          }
+        ]
+      },
+      "culturalElementId": "619e3ad2-bd4b-5901-9c76-9ddb454a83d3",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.ehangzhou.gov.cn/2018-06/14/c_271616.htm"
+    },
+    {
+      "id": "e109c1c8-4547-5878-96c4-805a0ce75590",
+      "key": "three-pools-mirroring-moon.su-shi",
+      "name": "苏轼：从疏浚到诗意景观",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏轼在杭州任职期间主持西湖疏浚，并以诗文留下对湖山的观看。三潭映月与苏堤可以并读：一条是水利治理和公共工程，一条是诗人如何把治理后的空间转化为可记忆、可传诵的景观。"
+          }
+        ]
+      },
+      "culturalElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.ehangzhou.gov.cn/2018-06/14/c_271616.htm"
+    },
+    {
+      "id": "4984850e-31e7-5bbd-b809-e3c7ccc6dbba",
+      "key": "three-pools-mirroring-moon.bai-juyi",
+      "name": "白居易：西湖的唐代诗人传统",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "白居易留下的白堤传统提示我们，西湖的文化积累早于宋代。三潭映月虽然不是白居易营造的遗存，却可以沿着“诗人—水利—游赏”的线索，理解唐宋文人如何参与塑造西湖的文化记忆。"
+          }
+        ]
+      },
+      "culturalElementId": "a0a3e522-99bb-518b-9630-1d3e3f9dae16",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://whc.unesco.org/en/list/1334/"
+    },
+    {
+      "id": "eeee2d35-c105-5659-89ca-2fc12619c671",
+      "key": "three-pools-mirroring-moon.southern-song",
+      "name": "南宋临安的景名传统",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "“三潭印月”应放入南宋临安形成的西湖题名景观传统中阅读。四字景目把地点、季节、光线和情绪压缩为一句短语，使游湖从移动路线变成一组可吟咏、可绘画、可反复观看的场景。"
+          }
+        ]
+      },
+      "culturalElementId": "f097d527-52d8-568b-890c-1325f4b99a40",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.moj.gov.cn/pub/sfbgw/flfggz/flfggzdfzwgz/201006/t20100618_138397.html"
+    },
+    {
+      "id": "7895336c-7682-5f85-9353-4947ec3b80dd",
+      "key": "three-pools-mirroring-moon.song-aesthetics",
+      "name": "宋代山水审美中的虚实",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "三潭映月的魅力不在于“看见三个实体的月亮”，而在于实体石塔、灯孔亮点、月光和水中倒影之间的虚实转换。它提供了一个入口，理解宋代山水审美如何用有限景物生成更大的想象空间。"
+          }
+        ]
+      },
+      "culturalElementId": "c1d56f28-2b7d-5fa5-a66b-88b1a2288ee6",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://whc.unesco.org/en/list/1334/"
+    },
+    {
+      "id": "c31a2f1e-e4f4-5eee-9f6d-883e5d48ebeb",
+      "key": "three-pools-mirroring-moon.garden-framing",
+      "name": "桥岸与树影形成的园林取景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "在三潭映月行走时，桥洞、岸线、树木和亭台会不断改变视线边界。可以把这种经验理解为借景与框景：园林不只陈列对象，也通过路径和遮挡安排观看顺序，让湖山在不同位置呈现不同画面。"
+          }
+        ]
+      },
+      "culturalElementId": "3631f63f-a6de-5376-b4db-7e1128771edc",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://whc.unesco.org/en/list/1334/"
+    },
+    {
+      "id": "47615e36-b590-5442-833b-8ef84236feb6",
+      "key": "three-pools-mirroring-moon.xiaoyingzhou",
+      "name": "小瀛洲：湖中有岛、岛中有湖",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "小瀛洲把岛外三潭与岛内水面、桥岸和园林路径组合起来，形成“湖中有岛、岛中有湖”的空间层次。三潭映月因此不只是远观三座石塔，也是一段在水面与园林之间转换尺度的行走经验。"
+          }
+        ]
+      },
+      "culturalElementId": "48063a9d-c070-5a3d-bb30-4a4ee8ec2486",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.ehangzhou.gov.cn/2018-06/14/c_271616.htm"
+    },
+    {
+      "id": "fe59359f-1898-578c-9d21-86c3d081f320",
+      "key": "three-pools-mirroring-moon.reunion",
+      "name": "从赏月到团圆想象",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "赏月在传统文化中常与团圆和寄情相连。三潭映月把这一情感主题转成空间体验：人在岸上或船上观看，月色、灯影和倒影彼此分离又重新合成，使“月”既是天体，也是被文化命名的共同想象。"
+          }
+        ]
+      },
+      "culturalElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "attractionId": "f4394af7-0206-5c20-a486-00d4d768e64a",
+      "latitude": 30.240833,
+      "longitude": 120.140278,
+      "coordinateSourceUrl": "https://www.ehangzhou.gov.cn/2018-06/14/c_271616.htm"
+    },
+    {
+      "id": "d071a36b-0e30-561e-80f5-1eaf6219633c",
+      "key": "broken-bridge.snow",
+      "name": "断桥残雪的观看方式",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "断桥所在的观看不是看桥体本身，而是看雪后黑白灰的湖面：桥面部分融化、部分存留时，桥身像被切开的断面。站在白堤东端，石桥、残雪和北里湖、外西湖的空间层次同时进入画面。"
+          }
+        ]
+      },
+      "culturalElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "attractionId": "29584556-38e5-5478-b694-c4da40593c03",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥残雪"
+    },
+    {
+      "id": "def62c04-d9ad-505f-9268-f8ea872e3213",
+      "key": "broken-bridge.whitesnake",
+      "name": "断桥与《白蛇传》",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "《白蛇传》把断桥写成许仙与白娘子的相遇、相离与重逢的地点。故事与桥的石拱和湖水的呼应互相投射，使桥既是一座交通构筑，也成为戏曲游湖的舞台。"
+          }
+        ]
+      },
+      "culturalElementId": "4e92fdea-109e-5e69-b6bb-df6cb449ec01",
+      "attractionId": "29584556-38e5-5478-b694-c4da40593c03",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥"
+    },
+    {
+      "id": "152dc22d-3846-5650-9fdf-9ce57669f849",
+      "key": "pinghu-autumn-moon.moon",
+      "name": "平湖秋月的秋夜月色",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月位于白堤西端的孤山之塘，面向外湖展开。秋夜湖面平静时月亮倒影完整，湖面的尺度成为观看主题。到平台或步道边体会湖、月、倒影三者顺序。"
+          }
+        ]
+      },
+      "culturalElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "attractionId": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "id": "fc3921f7-8464-586e-baba-d466da8544a4",
+      "key": "quyuan-feng-he.lotus",
+      "name": "曲院风荷的夏日荷风",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "曲院风荷的荷塘沿湖面展开，盛夏时荷叶与游船同时运动。过曲廊、过桥，荷叶之间不断变换层次，风成为最重要的介质：先体会风，再看叶与光，最后才指认具体植物。"
+          }
+        ]
+      },
+      "culturalElementId": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
+      "attractionId": "660de823-9bec-50ac-a588-f5f5387dc225",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "id": "56ebd547-e455-56f9-94a6-cc3b0000b8ca",
+      "key": "huagang-guan-yu.fish",
+      "name": "花港观鱼的池边观看",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "花港观鱼看的是鱼与池、人行与倒影互相交织的关系。站在回廊上让鱼群在池中聚散，再沿池走一圈，体会水底、鱼影与步道的节奏同步，从而理解“观”字包含的活动性。"
+          }
+        ]
+      },
+      "culturalElementId": "7aa489c9-6efc-54da-8486-914cbab0267b",
+      "attractionId": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
+      "latitude": 30.230233,
+      "longitude": 120.139095,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "01ba5046-a3a1-55e7-86a2-c075103ec53e",
+      "key": "liulang-wen-ying.spring",
+      "name": "柳浪闻莺的春声",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "柳浪闻莺以排柳与鸟鸣闻名，是西湖少见的以听为主的景点。春天站在柳下听鸟鸣与湖浪，向西朝南山、北山两个方向辨认声音来源，把观察从视觉扩展到听觉与季节。"
+          }
+        ]
+      },
+      "culturalElementId": "dfeaf81b-a122-5690-a9ae-1c0c8c745c9b",
+      "attractionId": "98ea122d-7182-50df-952b-399961d1f0af",
+      "latitude": 30.240389,
+      "longitude": 120.156326,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "b8e95387-5b9d-537e-80fd-98661e4fa941",
+      "key": "shuang-feng-cha-yun.cloud",
+      "name": "双峰插云的远观方式",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双峰插云不宜近看，适合在洪春桥、苏堤等能同时看到南北两峰的远点。云薄薄遮住峰顶时，“插云”的形态最明显——先定方位，再看云雾变化，最后才找山峰的高度。"
+          }
+        ]
+      },
+      "culturalElementId": "77347f66-53d0-5e01-a359-01bc66ca8330",
+      "attractionId": "adaf1aa2-a082-5e05-8c67-022a131da536",
+      "latitude": 30.247511,
+      "longitude": 120.122581,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B025E0"
+    },
+    {
+      "id": "bfce9e4c-d355-5f65-a081-c3fc9f9b0c24",
+      "key": "ling-yin-temple.grove",
+      "name": "灵隐寺的山林法度",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "灵隐寺的观看不是第一眼看到大殿，而是从入口到殿前越来越静的过程。转崖壁与山泉，中轴建筑与古树交叠，寺院真正把山林当作背景与骨架，观寺需要顺着路径逐层而上。"
+          }
+        ]
+      },
+      "culturalElementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "attractionId": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0DA1F"
+    },
+    {
+      "id": "3d88bb2c-f79e-51a2-8a95-2c02f9859553",
+      "key": "ling-yin-temple.grotto",
+      "name": "飞来峰的摩崖造像",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "飞来峰在灵隐寺门前溪对岸，岩体上遍布宋元造像。造像是刻在天然岩面上的，沿着洞窟与山径走动，在各个角度仰望，比较岩、泉、寺、塔在视线里的配合，才能体会山体作为“经卷”的属性。"
+          }
+        ]
+      },
+      "culturalElementId": "3ff3b94d-b5d0-5baf-9b3b-cd0480e3d73b",
+      "attractionId": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0DA1F"
+    },
+    {
+      "id": "d2c09c13-c1e4-542d-ab3b-bf2e6e326da2",
+      "key": "longjing-village.tea",
+      "name": "龙井山村的茶山",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "龙井的泉水与茶相配，茶园与村舍沿坡展开。走到茶山上，体会茶树与山泉的对应，再把视线拉回村落——龙井既是地名也是一种制茶体系，茶山是山林与农事同时成立的场所。"
+          }
+        ]
+      },
+      "culturalElementId": "1b4ebb4a-6954-580a-bf6d-2fc054de0928",
+      "attractionId": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
+      "latitude": 30.218481,
+      "longitude": 120.106683,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "17cc31c5-dcdd-5f11-b8c7-ff95938b5928",
+      "key": "hupao-park.spring",
+      "name": "虎跑的泉水与茶",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "虎跑的泉池与石崖、亭廊结合，饮用传统让泉水被写进茶文化。看水时先感受流入泉池的节奏，再端杯于亭中试泡，能体会泉水与水的差别；它与龙井一侧共同构成“山水+茶”的连线。"
+          }
+        ]
+      },
+      "culturalElementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "attractionId": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
+      "latitude": 30.208087,
+      "longitude": 120.1299,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "45931617-e3ed-58f1-85b0-036bb40d22b3",
+      "key": "liu-he-pagoda.river",
+      "name": "六和塔与钱塘江",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "六和塔立在钱塘江岸边，塔、江、潮与地平线合成秩序。逐层向上时江面渐远，观塔与观江互证：塔是垂直的度量，江是水平的界面，二者在同一处高差下生成塔和江的关系。"
+          }
+        ]
+      },
+      "culturalElementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "attractionId": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "a0559c41-e08b-56cf-ac30-ab7afb8002bc",
+      "key": "liu-he-pagoda.tide",
+      "name": "六和塔下的观潮",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "钱塘江潮在农历八月前后最盛，江面能被一道高耸水线压过。在六和塔一带远观潮线，先听见声、再看见潮，潮、江、塔与风在彼此呼应；观潮要选择稳定观察点，不必贴近追逐。"
+          }
+        ]
+      },
+      "culturalElementId": "10d8faa1-921b-5786-93ff-dd9a6c00d5ba",
+      "attractionId": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "645df489-8732-5a9c-b30e-25e0cd460941",
+      "key": "xiling-seal.society",
+      "name": "西泠印社的孤山空间",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社把印章、金石与孤山庭园连成一体，是西湖文人传统的方寸之地。穿过亭廊看湖山，再回看石印与碑刻，体会“方寸之间见天地”的观看方式。"
+          }
+        ]
+      },
+      "culturalElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "attractionId": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
+    },
+    {
+      "id": "4bec0ed5-d50f-519c-adc5-5f8ce3170810",
+      "key": "wenlan-pavilion.manuscript-route",
+      "name": "文澜阁的四库故事",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "文澜阁是《四库全书》七大书阁之一，咸丰年间损毁后重修，书与阁的命运曲折。早晨光线平射入阁时，书架与叠布透出整个藏书楼的空间层次。"
+          }
+        ]
+      },
+      "culturalElementId": "078a4b3d-92f8-54db-97eb-1f7a681d0ca3",
+      "attractionId": "65265052-5508-57df-a81a-2c027576f5b7",
+      "latitude": 30.253303,
+      "longitude": 120.137856,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Wenlan_Pavilion"
+    },
+    {
+      "id": "28766f36-ba2d-5075-8525-9f68e9a2392e",
+      "key": "yue-fei-temple.apple-blossom",
+      "name": "岳庙里的祠与柏",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳王庙里古柏参天、铁铸秦桧跪像，正殿气场沉雄。从入园到正祠再到殿后墓园，叙事的尺度从纪念广场收进忠烈坟土。"
+          }
+        ]
+      },
+      "culturalElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "attractionId": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://www.wikidata.org/wiki/Q579874"
+    },
+    {
+      "id": "7eafad9b-0424-5607-8ef4-d5b55af5d903",
+      "key": "pinghu-autumn-moon.stone-terrace",
+      "name": "平湖秋月的平台与月光",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月有一块伸向湖面的石台，站在石台上，月色从湖面水平灌注进视野。平台把建筑与湖之间的距离压缩到一条石沿，是观看入湖月景的绝佳取景器。"
+          }
+        ]
+      },
+      "culturalElementId": "8ddba328-608b-57b4-81bb-f383b22c1310",
+      "attractionId": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "id": "7ee7a80c-af18-5aa4-af7b-5177bc4587ff",
+      "key": "quirrefeng-he.winter",
+      "name": "曲院荷塘的季节另一面",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "曲院风荷秋后荷枯、冬来残荷，看惯了满塘绿荷后转看瘦荷清影：荷塘不只在盛夏抢面，枯荷的线条与雪线同样构景。"
+          }
+        ]
+      },
+      "culturalElementId": "a725d8db-14fd-5f8a-9d7b-f2f18a5aeaec",
+      "attractionId": "660de823-9bec-50ac-a588-f5f5387dc225",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "id": "7caefd31-d362-5887-9fbc-0fafe1ee5068",
+      "key": "huagang-guan-yu.pond-edge-sit",
+      "name": "花港观鱼的池边观看",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "花港观鱼的重点在池与人的距离：池边石栏与曲桥让游鱼凑近脚边，重心既在人又在鱼。观察看与被看的视线交换，是一把理解园水关系的钥匙。"
+          }
+        ]
+      },
+      "culturalElementId": "7aa489c9-6efc-54da-8486-914cbab0267b",
+      "attractionId": "cb8e1614-8af5-5d75-af18-b490c0558dcd",
+      "latitude": 30.230233,
+      "longitude": 120.139095,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "6b00b7c8-bea9-5ca5-8d64-95d5b784653f",
+      "key": "liu-he-pagoda.landscape-score",
+      "name": "六和塔内外的层次",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "六和塔同时面向江、山与城市：中层看舟、上层见江天。塔内的螺旋扶梯把江岸风景切片成一级级的镜头，为登高者提供不断重组的画面。"
+          }
+        ]
+      },
+      "culturalElementId": "595dfab1-6ed3-5353-a07b-174e37f2f5d2",
+      "attractionId": "1196fa4a-fef1-565d-8859-236b2b1a02d4",
+      "latitude": 30.196338,
+      "longitude": 120.131487,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "1f70a910-ede2-5b09-8738-1ebe6b8d16ba",
+      "key": "su-causeway.iodine-bridges",
+      "name": "苏堤六桥与移步",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤由六桥（映波、锁澜、望山、压堤、东浦、跨虹）串起的六处停顿；每过一座桥，湖面与山影随桥孔切出一格新的画面。苏堤真正的『春晓』是一场沿堤而行的步移景异。"
+          }
+        ]
+      },
+      "culturalElementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "attractionId": "bad747f4-43a2-5202-8274-d549c7c45887",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "id": "66d77009-6c39-55f1-bf0a-c3b74da75910",
+      "key": "su-causeway.urn",
+      "name": "苏堤的水利与植柳",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "苏堤本来是苏轼挖湖泥筑成，堤上植柳与桃花，既挡浪又护岸，行人的行走与水的治理合而为一。水利营造与湖岸景观在苏堤上是同一条路线。"
+          }
+        ]
+      },
+      "culturalElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+      "attractionId": "bad747f4-43a2-5202-8274-d549c7c45887",
+      "latitude": 30.245833,
+      "longitude": 120.133472,
+      "coordinateSourceUrl": "https://commons.wikimedia.org/wiki/Category:Su_Causeway"
+    },
+    {
+      "id": "becf7b65-8484-566d-bb06-acc13b37aef7",
+      "key": "liulang-wen-ying.evening-feel",
+      "name": "柳浪闻莺的黄昏",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "傍晚的柳浪闻莺最懂行人：垂柳沿湖岸压低视线，黄黄昏光线穿过柳丝，把散步道染成一条金色河岸。柳浪与莺啼消歇后，湖面就交给夜月。"
+          }
+        ]
+      },
+      "culturalElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
+      "attractionId": "98ea122d-7182-50df-952b-399961d1f0af",
+      "latitude": 30.240389,
+      "longitude": 120.156326,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "e1e02bbf-b92f-5f0a-bff6-11f1826dda41",
+      "key": "shuang-feng-cha-yun.poetic",
+      "name": "双峰插云的诗意远望",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "双峰插云的看点不在登顶，而在从湖岸回望两峰时那种云端相加的意象。诗人们把南北高峰当成一对远山中的句子，一高一下、一深一浅，构出西湖东面的天际线。"
+          }
+        ]
+      },
+      "culturalElementId": "a6290195-a364-5dad-80c6-7def7178f806",
+      "attractionId": "adaf1aa2-a082-5e05-8c67-022a131da536",
+      "latitude": 30.247511,
+      "longitude": 120.122581,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B025E0"
+    },
+    {
+      "id": "32295a0b-614d-5bf6-94f2-aa1ecfd9a92c",
+      "key": "longjing-village.harvest",
+      "name": "龙井村的一场春采",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "清明春雨过后，龙井村的茶垄里满是弯腰身影。晴天的山布把茶田收拢成一小片青绿的收束，炒茶灶的烟火味从屋巷里飘出——产茶村落的日常即是这座西湖山的另一面。"
+          }
+        ]
+      },
+      "culturalElementId": "78a2e749-e5d9-5b12-a923-dbec8727f0b7",
+      "attractionId": "b146d6b3-112d-57a9-a4a8-174fa8396a3f",
+      "latitude": 30.218481,
+      "longitude": 120.106683,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "df024873-caec-597d-b852-eb193dc7b89f",
+      "key": "hupao-park.new-ten-scene",
+      "name": "虎跑梦泉的泉水与新十景",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "虎跑泉涌乌拉关系灵隐，泉水掬起来可泡龙井。1985年又把泉水定为‘虎跑梦泉’，进入新十景之名：泉水不再只是饮品，而是西湖山水记忆的一个短句。"
+          }
+        ]
+      },
+      "culturalElementId": "e383a049-b7f3-53d5-96fb-301ea2297c49",
+      "attractionId": "6c8d8dc6-6499-5aca-b7cf-7b65e8de9068",
+      "latitude": 30.208087,
+      "longitude": 120.1299,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "47971eeb-55c2-52c6-a9c5-b81d014e4cf0",
+      "key": "xiling-seal.studio-sign",
+      "name": "西泠印社的嵌印与篆刻",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社以研究金石篆刻闻名，社内摩崖与嵌印遍布孤山。从印谱到拓片，社里的观看方式是中式的‘认字’：把湖山读成一枚枚可刻的篆印。"
+          }
+        ]
+      },
+      "culturalElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "attractionId": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
+    },
+    {
+      "id": "b8c247e5-eb36-5997-a86c-386330ab3b1e",
+      "key": "jingci-temple.evening-bell-tone",
+      "name": "净慈寺的晚钟",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "净慈寺是南屏晚钟的所在地，寺内钟楼的大钟在黄昏敲响时，钟声贴着南屏山的崖壁滚向湖面。听钟的位置常选在湖心，钟在山与湖之间来回，是西湖最慢的一件声音景观。"
+          }
+        ]
+      },
+      "culturalElementId": "db6089df-2ae1-508c-b2bc-e8316c287306",
+      "attractionId": "972bbaf8-1b55-5043-8d74-d40856ab6492",
+      "latitude": 30.23113,
+      "longitude": 120.14434,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "6a5a14e5-0045-5175-820d-bdc0b4069dd4",
+      "key": "leifeng-pagoda.sunlight-and-shadow",
+      "name": "雷峰夕照的光线时刻",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "雷峰塔受两:一亮一暗。阳光贴塔身以西的斜光拉出长影，塔影一直伸进湖面，与湖水波光相叠，让夕照从塔身一路浸到对岸。色温转橙的那一刻，是观看这座塔的最佳窗口。"
+          }
+        ]
+      },
+      "culturalElementId": "359c601d-38fc-5368-ae98-929ad425dc77",
+      "attractionId": "4019a709-1d10-5c3c-80fa-b97ebf90dd50",
+      "latitude": 30.233889,
+      "longitude": 120.145,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/雷峰塔"
+    },
+    {
+      "id": "7b494238-abd6-57fd-b74a-66da3c92ecf0",
+      "key": "broken-bridge.snow-again",
+      "name": "断桥残雪与桥的名字",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "为什么叫断桥？雪后阳光先到桥面北坡，露出碧绿的青石与雪线忽断，或指向段家桥的谐音。两种解释都成立：文字与景色的偶然重叠，把一座普通的低桥写进修辞史。"
+          }
+        ]
+      },
+      "culturalElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "attractionId": "29584556-38e5-5478-b694-c4da40593c03",
+      "latitude": 30.260833,
+      "longitude": 120.146944,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/断桥"
+    },
+    {
+      "id": "0a828c91-bc8f-57f1-b609-8d660a19bf4c",
+      "key": "pinghu-autumn-moon.platform",
+      "name": "平湖秋月的平台与御碑",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "平湖秋月刻康熙题字与御碑耸立，面对湖心的平台让月光水平涌入。月到中秋最亮，平台的石栏正好把月光截成一个观众的框，人能进入的画面里。"
+          }
+        ]
+      },
+      "culturalElementId": "4b726f27-9a01-576f-b07f-0bf3ddca1a64",
+      "attractionId": "52e6eb90-2187-5be7-872a-41651bfc9bb4",
+      "latitude": 30.2545,
+      "longitude": 120.141306,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/平湖秋月"
+    },
+    {
+      "id": "e5fc3d65-d4b4-55b6-ab81-07e90644458a",
+      "key": "yue-fei-temple.entrance-border",
+      "name": "岳庙前广场的边界",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳庙前广场以两行松柏和石羊守望着外围，庙门朝西湖方向微微偏向，把祠的空间与湖岸的日常隔成两层：外面车马，里面凛冽。门与栏杆之间是忠烈祠礼仪感的起点。"
+          }
+        ]
+      },
+      "culturalElementId": "14e0dc6d-21b1-5512-ae11-f226f60b7d8d",
+      "attractionId": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://en.wikipedia.org/wiki/Yue_F%C3%A4ng_Tempel"
+    },
+    {
+      "id": "27813375-1a7e-59f0-98ed-af0264b7106c",
+      "key": "quyuan-fenghe.moon-of-summer",
+      "name": "曲院风荷的夏日纵深",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "盛夏曲院风荷里最凉快的不是水，而是荷影屏蔽的斜光线。沿着回廊走到池畔，荷花把湖面占全，风从鳞山入，把一阵阵荷香送过眼前的绿海。"
+          }
+        ]
+      },
+      "culturalElementId": "9144e185-d474-5c5d-a39b-0ab00af80c0d",
+      "attractionId": "660de823-9bec-50ac-a588-f5f5387dc225",
+      "latitude": 30.249287,
+      "longitude": 120.133333,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0F6FA"
+    },
+    {
+      "id": "a2d58182-ff1d-53f8-aca6-79bd0509eb4d",
+      "key": "yue-fei-temple.alley",
+      "name": "岳望着孤山的公共绿地",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "岳庙之东利用山脚斜坡铺了一片公共绿地，下班后孩子与老人混在一起放风筝。祠堂的庄严与公园的日常只隔一道院墙，是西湖边少有的古庙对人的拉近之处。"
+          }
+        ]
+      },
+      "culturalElementId": "680531f9-9b60-54b9-a615-9bbfd6d5260c",
+      "attractionId": "c89af010-e4a1-5d1c-a0df-54f116f748f5",
+      "latitude": 30.257778,
+      "longitude": 120.126111,
+      "coordinateSourceUrl": "https://zh.wikipedia.org/zh-cn/岳王庙"
+    },
+    {
+      "id": "51e11c6d-7782-5d5d-afcd-017d468cd0f9",
+      "key": "ling-yin-temple.kai-after-rain",
+      "name": "雨后的灵隐山气",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "灵隐寺在飞来峰与灵隐峰之间夹出一线，雨后雾从峰腰升起，寺瓦与香氛就埋进湿润的山气里。这一带的湿润与青苔使佛寺斯地显得古老而近山，是山中寺院的呼吸节奏。"
+          }
+        ]
+      },
+      "culturalElementId": "85ea281c-8741-505e-a7f0-62400f5b33ba",
+      "attractionId": "a15093b6-3b02-593b-8cf7-6edd42f243f9",
+      "latitude": 30.240826,
+      "longitude": 120.101406,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B0E7F4"
+    },
+    {
+      "id": "c82148e5-edd8-57a7-9c90-afa3c5571261",
+      "key": "xiling-seal.duan-po",
+      "name": "西泠印社的山石与摩崖",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "西泠印社以摩崖刻石布满孤山西麓，社名「西泠」来自冷泉与林社的旧名。沿着石阶上溯，摩崖像把篆刻史展开成一条立体的路，走完就到顶上的竹阁。"
+          }
+        ]
+      },
+      "culturalElementId": "e0f6d64b-c019-542c-a6fc-859f6f94ffd0",
+      "attractionId": "8bd79e27-bcb1-51b9-b97e-bc219ae6aea8",
+      "latitude": 30.250279,
+      "longitude": 120.139948,
+      "coordinateSourceUrl": "https://ditu.amap.com/place/B023B09LU0"
+    },
+    {
+      "id": "bd418a18-16b8-584f-a6f2-58aee0e90e5f",
+      "key": "huxinting.islet",
+      "name": "湖心亭的岛中亭",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "湖心亭浮于外西湖中心，四周环水、环水皆山。乘船或隔湖远望，亭子像是湖面上的中心标记；登上小岛环望，五片湖面与岸上青山同时展开，是把握西湖整体格局的枢纽。"
+          },
+          {
+            "type": "paragraph",
+            "text": "湖心亭位于杭州西湖之上，旧为湖心寺，是中国四大名亭之一；湖心亭环岛皆水，环水皆山。"
+          },
+          {
+            "type": "paragraph",
+            "text": "湖心平眺被列为清西湖十八景之一。"
+          }
+        ]
+      },
+      "culturalElementId": "6836d943-c2ca-5696-8cd9-7ba71db683be",
+      "attractionId": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
+      "latitude": 30.2475,
+      "longitude": 120.144
+    },
+    {
+      "id": "905b61f5-2ed8-578f-8462-fce221a9bc80",
+      "key": "huxinting.snow",
+      "name": "湖心亭看雪的冬日",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "雪后的湖心亭是最接近古代文人意境的位置。放眼四望，白雪覆盖的湖岸与黛色远山在水平面上相叠，亭中人的视野被推向极远的边界。"
+          },
+          {
+            "type": "paragraph",
+            "text": "明人张岱曾留下《湖心亭看雪》一文，这篇短文所写的孤亭、长堤与湖上影子的景象，正是从这处环水位置获得的观察。"
+          }
+        ]
+      },
+      "culturalElementId": "7f3f6526-7e2a-5d1e-a8bd-a68fcc2ce405",
+      "attractionId": "284e682e-bc9a-53d7-9bff-2d9599d90ac5",
+      "latitude": 30.2475,
+      "longitude": 120.144
+    },
+    {
+      "id": "a0c8fcfa-142a-5c33-b47e-f7c16f34e297",
+      "key": "yang-gong-causeway.history",
+      "name": "杨公堤的明代疏浚",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "杨公堤在西里湖西侧，路面平缓、桥洞低矮，堤两侧水面开阔却比外西湖幽静。步行时可以对比它和苏堤的节奏差别，体会一条由疏浚泥土堆筑的长堤如何在水中显出边界。"
+          },
+          {
+            "type": "paragraph",
+            "text": "杨公堤与苏堤、白堤并称为“西湖三堤”，原称作西山路，位于西湖西侧西里湖上，北起仁寿山、南至赤山埠。"
+          },
+          {
+            "type": "paragraph",
+            "text": "杨公堤为明朝正德三年（1508年）在杭州知府杨孟瑛的主持下修成，故而得名。"
+          }
+        ]
+      },
+      "culturalElementId": "9600a3eb-78a4-5bd0-bb33-fc2578bb724b",
+      "attractionId": "a9155563-096d-57ba-affb-4c0544a3f559",
+      "latitude": 30.232,
+      "longitude": 120.129
+    },
+    {
+      "id": "d52916cf-0016-5499-9005-61fce2cca353",
+      "key": "yang-gong-causeway.six-bridges",
+      "name": "杨公堤的里六桥",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "杨公堤原与苏堤平行，西进工程后恢复的“里六桥”对应苏堤六桥。走桥过水时留意桥名与桥位的呼应，体会两堤六桥相互对应的格局。"
+          },
+          {
+            "type": "paragraph",
+            "text": "杨公堤走向基本平行于苏堤；在西湖西进工程中恢复了相对于苏堤的“里六桥”：环碧、流金、卧龙、隐秀、景行和浚源。"
+          }
+        ]
+      },
+      "culturalElementId": "085b790e-08f7-5811-8073-8c996202b225",
+      "attractionId": "a9155563-096d-57ba-affb-4c0544a3f559",
+      "latitude": 30.232,
+      "longitude": 120.129
+    },
+    {
+      "id": "e995aeb0-b06a-50bb-b604-13d50c24d252",
+      "key": "baoshi-hill.cinnabar-glow",
+      "name": "宝石山的赭色霞光",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "清晨朝阳或傍晚落日的时分，站在北山一带看宝石山，山岩会在光线下显出赭红色，这就是“宝石流霞”。颜色来自山体本身，适合选择逆光或侧光的角度观察。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宝石山山体属火成岩中的流纹岩和凝灰岩，含氧化铁，因而山岩呈赭红色，尤其在清晨朝阳升起或傍晚落日西下时更为明显，因而被称为宝石山；“宝石流霞”被列为新西湖十景之一。"
+          }
+        ]
+      },
+      "culturalElementId": "5fc1ab91-dc4c-5d3c-b9d0-ebf7a90bce6e",
+      "attractionId": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
+      "latitude": 30.2635,
+      "longitude": 120.1435
+    },
+    {
+      "id": "0da91cb6-0dc0-5638-a1dd-1fd0283a3a4e",
+      "key": "baoshi-hill.twin-tower-view",
+      "name": "宝石山上的保俶塔视点",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "宝石山是观看西湖全景与双塔对景的位置：南临西湖，山顶立保俶塔，隔湖与南岸雷峰塔相望。登顶回望，一湖映双塔的南北构图尽收眼底。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宝石山是杭州西湖北侧的一座小山，南临西湖，西面是葛岭，是观看西湖美景的佳处；山顶建有造型独特的古塔保俶塔，是西湖风景区的标志之一。"
+          },
+          {
+            "type": "paragraph",
+            "text": "保俶塔位于宝石山山顶，为西湖风景区标志之一，2013年成为全国重点文物保护单位。"
+          }
+        ]
+      },
+      "culturalElementId": "5288e0c4-1ac5-5312-a416-38c9df3405d1",
+      "attractionId": "1634f4e0-c8df-5ffb-98af-d7e44e3e0b0e",
+      "latitude": 30.2635,
+      "longitude": 120.1435
+    },
+    {
+      "id": "e93d185d-373e-5403-97ad-646543632d79",
+      "key": "gushan-island.not-alone",
+      "name": "孤山不孤",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "孤山是外西湖中的一座天然岛，东西分别以白堤和西泠桥与湖岸相连。从断桥沿白堤向西走，或自西泠桥上回望，可以同时看到岛、桥、湖三者如何连成一体。"
+          },
+          {
+            "type": "paragraph",
+            "text": "孤山位于北侧外西湖中，海拔35米，面积约0.22平方公里，为栖霞岭的支脉，也是西湖中最大的天然岛屿；“孤山不孤”与“断桥不断”“长桥不长”并称西湖三怪。"
+          }
+        ]
+      },
+      "culturalElementId": "d0352861-3d2c-5301-a662-cd042e449e6a",
+      "attractionId": "efbadb98-a165-5a95-9b5b-fb7f22a91aec",
+      "latitude": 30.254,
+      "longitude": 120.139
+    },
+    {
+      "id": "995cf02a-62f4-5818-b118-f3c830bcc44a",
+      "key": "gushan-island.hermitage",
+      "name": "孤山的林逋与隐逸",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "孤山东北角的放鹤亭是纪念林逋的位置，亭子面向湖面，是体会“梅妻鹤子”生活方式的安静角落。亭前看梅、亭上望湖，孤山的文人气息由此展开。"
+          },
+          {
+            "type": "paragraph",
+            "text": "放鹤亭在孤山东北角，为纪念宋代以“梅妻鹤子”闻名的林逋而建；宋代在孤山隐居的林逋留下了“疏影横斜水清浅，暗香浮动月黄昏”的名句，灵峰、孤山和西溪是古来杭州赏梅的三大胜地。"
+          }
+        ]
+      },
+      "culturalElementId": "95eb4f3a-7a95-570d-bae0-a0987c334967",
+      "attractionId": "efbadb98-a165-5a95-9b5b-fb7f22a91aec",
+      "latitude": 30.254,
+      "longitude": 120.139
+    },
+    {
+      "id": "be91e8f9-6185-5c69-929d-601af26c788c",
+      "key": "qianwang-temple.wuyue",
+      "name": "钱王祠与吴越国",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "钱王祠位于西湖东岸柳浪闻莺公园内。从湖滨一侧步入，殿宇、献殿、碑亭层层展开，是理解吴越国与西湖渊源的核心空间，适合在祠内外对照湖山来看。"
+          },
+          {
+            "type": "paragraph",
+            "text": "钱王祠供奉吴越国三世五代国王，原称表忠观，清代以后通称为钱王祠。"
+          },
+          {
+            "type": "paragraph",
+            "text": "宋熙宁十年（1077年）十月，于西湖东岸建“表忠观”以纪念吴越国王钱镠，苏轼并作《表忠观碑记》。"
+          }
+        ]
+      },
+      "culturalElementId": "d4218a8d-f8be-5b37-bf25-a4e32d7c28cf",
+      "attractionId": "91998805-9ab0-5d8c-8a61-e59a5ef7a8cf",
+      "latitude": 30.245,
+      "longitude": 120.15305556
+    },
+    {
+      "id": "a6d50f08-b33b-5d85-a445-9286e120f362",
+      "key": "qianwang-temple.steles",
+      "name": "表忠观碑与御题",
+      "introduction": {
+        "schemaVersion": 1,
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "祠内碑刻是参观重点。细读《表忠观碑记》的书法与文辞，再看清康熙、乾隆两代的御题匾额，可以感受到吴越国功业在后世文字中的两种呈现。"
+          },
+          {
+            "type": "paragraph",
+            "text": "苏轼撰书的《表忠观碑记》是宋代书法史上的名碑；清代康熙帝、乾隆帝在此留有“保障江山”和“忠顺遗庥”等御题。"
+          }
+        ]
+      },
+      "culturalElementId": "89a21706-5676-56aa-ab3c-6ab2b48991d8",
+      "attractionId": "91998805-9ab0-5d8c-8a61-e59a5ef7a8cf",
+      "latitude": 30.245,
+      "longitude": 120.15305556
+    }
+  ]
+}

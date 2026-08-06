@@ -71,7 +71,7 @@ struct AbstractionLadderView: View {
     if !rungs.isEmpty {
       VStack(alignment: .leading, spacing: 12) {
         Label("文化脉络", systemImage: "list.bullet.indent")
-          .font(.cultureSerif(.title3))
+          .font(CultureTypography.title(.title3))
           .foregroundStyle(CultureTheme.inkPrimary)
 
         VStack(alignment: .leading, spacing: 0) {

@@ -15,7 +15,7 @@ struct PackEditorHomeView: View {
       List {
         Section {
           Text("在设备上编辑知识包 sidecar，校验后导出为 zip，可拷回仓库的 Resources/KnowledgePack* 目录。")
-            .font(.footnote)
+            .font(CultureTypography.body(.footnote))
             .foregroundStyle(CultureTheme.inkSecondary)
             .listRowBackground(Color.clear)
         }
@@ -23,7 +23,7 @@ struct PackEditorHomeView: View {
         Section("草稿") {
           if store.drafts.isEmpty {
             Text("还没有草稿。可新建空白包，或从内置包复制。")
-              .font(.subheadline)
+              .font(CultureTypography.body(.subheadline))
               .foregroundStyle(CultureTheme.inkSecondary)
           } else {
             ForEach(store.drafts) { draft in

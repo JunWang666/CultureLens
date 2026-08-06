@@ -60,7 +60,7 @@ struct VisitTripRow: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text(trip.title)
-                    .font(.magazineDisplay(.title3))
+                    .font(CultureTypography.title(.title3))
                     .foregroundStyle(CultureTheme.inkPrimary)
                 Spacer()
                 Text("\(trip.scanCount) 次识别")

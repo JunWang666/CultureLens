@@ -22,13 +22,11 @@ nonisolated func bundledResourceURL(
 }
 
 /// Known knowledge-pack resource directories, in merge priority order.
-/// Earlier packs win on id collision. Every production directory is assigned
-/// its own ODR tag; ordinary bundle discovery remains available for tests.
+/// Shipping currently uses a single unified pack under `KnowledgePack`.
+/// Earlier packs win on id collision when multiple directories are present
+/// (tests / local tooling). Ordinary bundle discovery remains available for tests.
 nonisolated enum KnowledgePackDirectory: String, CaseIterable, Sendable {
-  case westLake = "KnowledgePack"
-  case chineseHistory = "KnowledgePackChineseHistory"
-  case liangzhu = "KnowledgePackLiangzhu"
-  case zhejiangMuseum = "KnowledgePackZhejiangMuseum"
+  case unified = "KnowledgePack"
 
   var subdirectoryCandidates: [String] {
     [rawValue, "Resources/\(rawValue)"]

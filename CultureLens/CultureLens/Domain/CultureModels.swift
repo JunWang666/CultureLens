@@ -436,10 +436,23 @@ nonisolated struct LocationInfluence: Codable, Hashable, Sendable {
   var summary: String
 }
 
+/// A model-generated observation used only when no existing cultural point is
+/// a suitable match for the current photo. It intentionally has no knowledge
+/// pack ID or taxonomy: the words describe what is visible, not what is known.
+nonisolated struct VisualTag: Identifiable, Codable, Hashable, Sendable {
+  var label: String
+  var evidence: String
+
+  var id: String { label }
+}
+
 nonisolated struct RecognitionResult: Identifiable, Codable, Hashable, Sendable {
   let id: UUID
   var object: CultureObject
   var alternatives: [RecognitionCandidate]
+  /// Present only for the freeform visual fallback, never for a pack-backed
+  /// object or attraction result.
+  var visualTags: [VisualTag] = []
   var rationale: String
   var uncertainty: String?
   var modelIdentifier: String
@@ -448,6 +461,12 @@ nonisolated struct RecognitionResult: Identifiable, Codable, Hashable, Sendable 
   var resolutionStatus: String? = nil
   var catalogVersion: String? = nil
   var catalogCandidateCount: Int? = nil
+
+  /// Routes unbound results with model observations to their own UI instead of
+  /// presenting a guessed object as a normal culture-detail result.
+  var isFreeformVisualResult: Bool {
+    resolutionStatus == "unresolved" && !visualTags.isEmpty
+  }
 
   /// Nearby place candidates derived from GPS / introductions (not model guesses).
   var displayAttractionCandidates: [RecognitionCandidate] {
@@ -469,6 +488,57 @@ nonisolated struct RecognitionResult: Identifiable, Codable, Hashable, Sendable 
 
   private static func normalizedName(_ value: String) -> String {
     value.filter { !$0.isWhitespace }.lowercased()
+  }
+}
+
+/// `visualTags` was introduced after scan-history snapshots had already
+/// shipped. Old snapshots intentionally decode to a regular unresolved result.
+extension RecognitionResult {
+  enum CodingKeys: String, CodingKey {
+    case id
+    case object
+    case alternatives
+    case visualTags
+    case rationale
+    case uncertainty
+    case modelIdentifier
+    case usedPlaceContext
+    case locationInfluence
+    case resolutionStatus
+    case catalogVersion
+    case catalogCandidateCount
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(UUID.self, forKey: .id)
+    object = try container.decode(CultureObject.self, forKey: .object)
+    alternatives = try container.decode([RecognitionCandidate].self, forKey: .alternatives)
+    visualTags = try container.decodeIfPresent([VisualTag].self, forKey: .visualTags) ?? []
+    rationale = try container.decode(String.self, forKey: .rationale)
+    uncertainty = try container.decodeIfPresent(String.self, forKey: .uncertainty)
+    modelIdentifier = try container.decode(String.self, forKey: .modelIdentifier)
+    usedPlaceContext = try container.decode(Bool.self, forKey: .usedPlaceContext)
+    locationInfluence = try container.decodeIfPresent(LocationInfluence.self, forKey: .locationInfluence)
+    resolutionStatus = try container.decodeIfPresent(String.self, forKey: .resolutionStatus)
+    catalogVersion = try container.decodeIfPresent(String.self, forKey: .catalogVersion)
+    catalogCandidateCount = try container.decodeIfPresent(Int.self, forKey: .catalogCandidateCount)
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(id, forKey: .id)
+    try container.encode(object, forKey: .object)
+    try container.encode(alternatives, forKey: .alternatives)
+    try container.encode(visualTags, forKey: .visualTags)
+    try container.encode(rationale, forKey: .rationale)
+    try container.encodeIfPresent(uncertainty, forKey: .uncertainty)
+    try container.encode(modelIdentifier, forKey: .modelIdentifier)
+    try container.encode(usedPlaceContext, forKey: .usedPlaceContext)
+    try container.encodeIfPresent(locationInfluence, forKey: .locationInfluence)
+    try container.encodeIfPresent(resolutionStatus, forKey: .resolutionStatus)
+    try container.encodeIfPresent(catalogVersion, forKey: .catalogVersion)
+    try container.encodeIfPresent(catalogCandidateCount, forKey: .catalogCandidateCount)
   }
 }
 

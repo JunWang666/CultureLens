@@ -30,7 +30,7 @@ struct CultureObjectCard: View {
           cacheKey: object.culturalElementID.map { $0.uuidString.lowercased() }
             ?? KnowledgeStore.shared?.elementKey(for: object.id)
         )
-        .font(.cultureSerif(.title3))
+        .font(CultureTypography.title(.title3))
         .foregroundStyle(CultureTheme.inkPrimary)
 
         Text(
@@ -43,7 +43,7 @@ struct CultureObjectCard: View {
         .lineLimit(1)
 
         Text(object.summary)
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
           .lineLimit(3)
       }

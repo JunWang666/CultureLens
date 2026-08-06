@@ -1,6 +1,6 @@
 import Foundation
 
-/// A fresh, view-facing snapshot of one shipped knowledge resource pack.
+/// A fresh, view-facing snapshot of the shipped knowledge resource pack.
 /// Snapshots are intentionally not persisted so an app update cannot leave
 /// stale version or availability information behind.
 nonisolated struct KnowledgePackResource: Identifiable, Sendable, Equatable {
@@ -47,10 +47,7 @@ nonisolated struct KnowledgePackResource: Identifiable, Sendable, Equatable {
 nonisolated extension KnowledgePackDirectory {
   var odrTag: String {
     switch self {
-    case .westLake: "knowledge-base"
-    case .chineseHistory: "knowledge-chinese-history"
-    case .liangzhu: "knowledge-liangzhu"
-    case .zhejiangMuseum: "knowledge-zhejiang-museum"
+    case .unified: "knowledge-base"
     }
   }
 }

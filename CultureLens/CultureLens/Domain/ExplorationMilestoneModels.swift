@@ -38,16 +38,6 @@ nonisolated enum ExplorationBadgeKind: String, CaseIterable, Identifiable, Senda
     }
   }
 
-  var systemImage: String {
-    switch self {
-    case .firstLight: "sparkle"
-    case .seriesBearer: "point.3.connected.trianglepath.dotted"
-    case .cityLantern: "building.2.crop.circle"
-    case .fieldNotes: "book.pages"
-    case .constellation: "sparkles"
-    case .cultureKeeper: "seal.fill"
-    }
-  }
 }
 
 nonisolated struct ExplorationBadge: Identifiable, Hashable, Sendable {

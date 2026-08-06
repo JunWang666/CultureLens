@@ -31,15 +31,15 @@ struct MagazineSectionHeader: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 6) {
       Text(verbatim: eyebrow)
-        .font(.caption2.weight(.semibold))
+        .font(CultureTypography.eyebrow())
         .tracking(1.8)
         .foregroundStyle(CultureTheme.cinnabar)
       Text(title)
-        .font(.magazineDisplay(.title2))
+        .font(CultureTypography.title(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
       if let subtitle {
         Text(subtitle)
-          .font(.subheadline)
+          .font(CultureTypography.body(.subheadline))
           .foregroundStyle(CultureTheme.inkSecondary)
       }
       EditorialRule()
@@ -59,16 +59,16 @@ struct MagazinePageHeader: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
       Text(verbatim: eyebrow)
-        .font(.caption.weight(.semibold))
+        .font(CultureTypography.eyebrow(.caption))
         .tracking(2)
         .foregroundStyle(CultureTheme.cinnabar)
 
       Text(title)
-        .font(.magazineDisplay(.largeTitle))
+        .font(CultureTypography.title(.largeTitle))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(message)
-        .font(.subheadline)
+        .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineSpacing(3)
 
@@ -87,7 +87,7 @@ struct SealBadge: View {
 
   var body: some View {
     Text(verbatim: character)
-      .font(.magazineDisplay(size: size * 0.58))
+      .font(CultureTypography.display(size: size * 0.58))
       .foregroundStyle(CultureTheme.canvas)
       .frame(width: size, height: size)
       .background(

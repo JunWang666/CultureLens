@@ -88,6 +88,7 @@ struct RecognitionService: Sendable {
           resolutionStatus: "visual"
         )
       ],
+      visualTags: [],
       rationale: input.place == nil
         ? "样例根据木构件的层叠、出跳和柱梁连接特征给出结果。"
         : "样例结合木构件视觉特征与附近地点上下文给出结果；位置仅作为辅助。",

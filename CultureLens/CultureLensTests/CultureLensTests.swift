@@ -265,6 +265,11 @@ struct CultureLensTests {
     let encoded = try JSONEncoder().encode(result)
     let decoded = try JSONDecoder().decode(RecognitionResult.self, from: encoded)
 
+    var legacyPayload = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
+    legacyPayload.removeValue(forKey: "visualTags")
+    let legacyData = try JSONSerialization.data(withJSONObject: legacyPayload)
+    let legacyDecoded = try JSONDecoder().decode(RecognitionResult.self, from: legacyData)
+
     #expect(decoded.object.canonicalName == "斗拱")
     #expect(decoded.usedPlaceContext)
     #expect(decoded.locationInfluence?.effect == LocationInfluence.Effect.none)
@@ -273,6 +278,8 @@ struct CultureLensTests {
     #expect(decoded.alternatives.first?.resolutionStatus == "visual")
     #expect(decoded.displayVisualAlternatives.count == 1)
     #expect(decoded.displayAttractionCandidates.isEmpty)
+    #expect(decoded.visualTags.isEmpty)
+    #expect(legacyDecoded.visualTags.isEmpty)
     let alternativeSources = try #require(decoded.alternatives.first?.sources)
     #expect(!alternativeSources.isEmpty)
     #expect(!decoded.object.concepts.isEmpty)
@@ -1238,6 +1245,13 @@ struct CultureLensTests {
       uncertainty: "",
       timePeriod: "",
       region: "",
+      visualTags: elementID.isEmpty && attractionID.isEmpty
+        ? [
+          ProviderVisualTag(label: "层叠构件", evidence: "木构件向外多层延伸。"),
+          ProviderVisualTag(label: "深色木材", evidence: "主体表面呈连续深色木纹。"),
+          ProviderVisualTag(label: "屋檐阴影", evidence: "构件下方形成连续阴影。"),
+        ]
+        : [],
       alternatives: [
         ProviderCandidate(
           culturalElementKey: "",
@@ -1514,6 +1528,44 @@ struct CultureLensTests {
       ),
     ]
     #expect(VisitTripBuilder.cluster(split).count == 2)
+  }
+
+  @Test func visitTripShareCopyDecodesJSONAndFallsBack() throws {
+    let trip = VisitTrip(
+      id: UUID(),
+      recordIDs: [UUID()],
+      startedAt: .now,
+      endedAt: .now,
+      title: "西湖",
+      placeNames: ["西湖"],
+      litNodeCount: 2,
+      attractionNames: ["三潭印月"],
+      newRelationCount: 1,
+      objects: []
+    )
+
+    let decoded = try VisitTripShareCopyService.decodeProviderOutput(
+      #"{"blurb":"湖上留了一段短短的文化路径。"}"#,
+      trip: trip,
+      language: .zhHans,
+      modelIdentifier: "test"
+    )
+    #expect(decoded.blurb.contains("文化路径"))
+
+    let plain = try VisitTripShareCopyService.decodeProviderOutput(
+      "湖光与塔影在这一次识别里连成线。",
+      trip: trip,
+      language: .zhHans,
+      modelIdentifier: "test"
+    )
+    #expect(plain.blurb.hasPrefix("湖光"))
+
+    let fallback = VisitTripShareCopyService.fallbackCopy(for: trip, language: .zhHans)
+    #expect(fallback.blurb.contains("西湖"))
+    #expect(fallback.modelIdentifier == "fallback")
+
+    UserDefaults.standard.removeObject(forKey: ImageGenerationPreferenceStore.enabledKey)
+    #expect(ImageGenerationPreferenceStore.loadEnabled() == false)
   }
 
   @Test func themeProgressUsesMinContactedThreshold() {

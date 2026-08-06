@@ -89,7 +89,7 @@ struct ScanExplanationSectionView: View {
           }
         )
         Label("连接中断，已保留收到的内容。\(message)", systemImage: "wifi.exclamationmark")
-          .font(.footnote)
+          .font(CultureTypography.body(.footnote))
           .foregroundStyle(CultureTheme.cinnabar)
       }
     case .failed(let message):
@@ -98,7 +98,7 @@ struct ScanExplanationSectionView: View {
           .font(.headline)
           .foregroundStyle(CultureTheme.cinnabar)
         Text(message)
-          .font(.footnote)
+          .font(CultureTypography.body(.footnote))
           .foregroundStyle(CultureTheme.inkSecondary)
         Button("重试") {
           Task { await loadExplanation(forceRefresh: false) }

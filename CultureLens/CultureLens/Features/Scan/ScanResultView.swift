@@ -99,6 +99,12 @@ struct ScanResultView: View {
     case .english:
       explanation =
         "The culture content library records an explicit link between this object and the concept; the relation type is not yet refined."
+    case .japanese:
+      explanation =
+        "文化コンテンツ庫はこの対象とその概念の明示的な関連を記録していますが、関係の種類はまだ細分化されていません。"
+    case .russian:
+      explanation =
+        "Библиотека культурного контента фиксирует явную связь между этим объектом и понятием; тип отношения пока не уточнён."
     case .zhHans:
       explanation = "文化内容库记录了当前对象与该概念的显式关联；关系类型尚未细分。"
     }

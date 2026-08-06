@@ -68,7 +68,7 @@ nonisolated struct VolcengineVoiceOption: Identifiable, Hashable, Sendable {
 
   func displayName(for language: AppLanguage) -> String {
     switch language {
-    case .english: nameEn
+    case .english, .japanese, .russian: nameEn
     case .zhHans: nameZh
     }
   }
@@ -239,6 +239,8 @@ final class TTSPreferenceStore {
     switch language {
     case .zhHans: code = "zh-CN"
     case .english: code = "en-US"
+    case .japanese: code = "ja-JP"
+    case .russian: code = "ru-RU"
     }
     return AVSpeechSynthesisVoice.speechVoices()
       .filter { $0.language.hasPrefix(code.prefix(2)) }

@@ -5,6 +5,8 @@ import SwiftUI
 nonisolated enum AppLanguage: String, CaseIterable, Identifiable, Codable, Sendable {
   case zhHans = "zh-Hans"
   case english = "en"
+  case japanese = "ja"
+  case russian = "ru"
 
   var id: String { rawValue }
 
@@ -19,6 +21,10 @@ nonisolated enum AppLanguage: String, CaseIterable, Identifiable, Codable, Senda
       String(localized: "简体中文")
     case .english:
       String(localized: "English")
+    case .japanese:
+      String(localized: "日本語")
+    case .russian:
+      String(localized: "Русский")
     }
   }
 
@@ -27,6 +33,8 @@ nonisolated enum AppLanguage: String, CaseIterable, Identifiable, Codable, Senda
     switch self {
     case .zhHans: "简体中文"
     case .english: "English"
+    case .japanese: "日本語"
+    case .russian: "Русский"
     }
   }
 
@@ -40,6 +48,8 @@ nonisolated enum AppLanguage: String, CaseIterable, Identifiable, Codable, Senda
     switch self {
     case .zhHans: "Simplified Chinese"
     case .english: "English"
+    case .japanese: "Japanese"
+    case .russian: "Russian"
     }
   }
 }
@@ -49,6 +59,8 @@ nonisolated enum AppLanguagePreference: String, CaseIterable, Identifiable, Coda
   case system
   case zhHans = "zh-Hans"
   case english = "en"
+  case japanese = "ja"
+  case russian = "ru"
 
   var id: String { rawValue }
 
@@ -58,19 +70,35 @@ nonisolated enum AppLanguagePreference: String, CaseIterable, Identifiable, Coda
       return .zhHans
     case .english:
       return .english
+    case .japanese:
+      return .japanese
+    case .russian:
+      return .russian
     case .system:
-      if let code = deviceLocale.language.languageCode?.identifier.lowercased(),
-        code.hasPrefix("zh")
-      {
-        return .zhHans
-      }
-      let identifier = deviceLocale.identifier.lowercased()
-      if identifier.hasPrefix("zh") || identifier.contains("-zh") || identifier.contains("_zh")
-      {
-        return .zhHans
-      }
-      return .english
+      return Self.resolveSystem(deviceLocale: deviceLocale)
     }
+  }
+
+  /// Maps a device locale to a supported app language.
+  nonisolated static func resolveSystem(deviceLocale: Locale) -> AppLanguage {
+    if let code = deviceLocale.language.languageCode?.identifier.lowercased() {
+      if code.hasPrefix("zh") { return .zhHans }
+      if code.hasPrefix("ja") { return .japanese }
+      if code.hasPrefix("ru") { return .russian }
+      if code.hasPrefix("en") { return .english }
+    }
+    let identifier = deviceLocale.identifier.lowercased()
+      .replacingOccurrences(of: "_", with: "-")
+    if identifier.hasPrefix("zh") || identifier.contains("-zh") {
+      return .zhHans
+    }
+    if identifier.hasPrefix("ja") || identifier.contains("-ja") {
+      return .japanese
+    }
+    if identifier.hasPrefix("ru") || identifier.contains("-ru") {
+      return .russian
+    }
+    return .english
   }
 }
 

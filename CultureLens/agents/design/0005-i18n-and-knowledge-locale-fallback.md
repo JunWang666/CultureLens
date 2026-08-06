@@ -15,9 +15,9 @@ CultureLens 原为简体中文单语：UI 字符串硬编码、知识包仅为�
 
 ### UI 固化文案
 
-- `Localizable.xcstrings`（`sourceLanguage = zh-Hans`，含 `en`）
+- UI 文案：`Localizable.xcstrings`（`sourceLanguage = zh-Hans`，含 `en` / `ja` / `ru`）
 - SwiftUI `Text("…")` / `String(localized:)` 随 `\.locale` 切换
-- 「我的」页增加语言偏好：`跟随系统` / `简体中文` / `English`（`AppLanguageStore`）
+- 「我的」页增加语言偏好：`跟随系统` / `简体中文` / `English` / `日本語` / `Русский`（`AppLanguageStore`）
 
 ### LLM 直接输出目标语言
 
@@ -56,7 +56,7 @@ CultureLens 原为简体中文单语：UI 字符串硬编码、知识包仅为�
 
 - 不把 enum `rawValue` 改成英文（避免破坏已存 SwiftData / 历史快照）
 - 不在流式 Markdown 中途做二次全文翻译
-- 本期不提供完整英文知识包内容
+- 本期不提供完整英文 / 日语 / 俄语知识包内容（日俄走即时翻译；英文 overlay 区域包已部分提供）
 
 ## 验证
 

@@ -85,6 +85,16 @@ actor VisitTripShareCopyService {
       let siteClause = sites.isEmpty ? "" : "Visiting \(sites), "
       blurb =
         "\(siteClause)this CultureLens review of \(trip.title) lit \(trip.litNodeCount) cultural nodes across \(trip.scanCount) scans."
+    case .japanese:
+      let sites = trip.attractionNames.prefix(3).joined(separator: "、")
+      let siteClause = sites.isEmpty ? "" : "\(sites)を訪れ、"
+      blurb =
+        "\(trip.title)の見学で、\(siteClause)\(trip.litNodeCount) 個の文化ノードを点灯し、\(trip.scanCount) 回の認識を残しました。"
+    case .russian:
+      let sites = trip.attractionNames.prefix(3).joined(separator: ", ")
+      let siteClause = sites.isEmpty ? "" : "Посетив \(sites), "
+      blurb =
+        "\(siteClause)этот обзор CultureLens «\(trip.title)» зажёг \(trip.litNodeCount) культурных узлов за \(trip.scanCount) сканирований."
     }
     return VisitTripShareCopy(
       tripID: trip.id,

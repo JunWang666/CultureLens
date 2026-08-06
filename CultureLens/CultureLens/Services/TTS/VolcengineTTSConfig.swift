@@ -27,7 +27,7 @@ nonisolated struct VolcengineTTSConfig: Sendable {
 
   func speaker(for language: AppLanguage) -> String {
     switch language {
-    case .english: englishSpeaker
+    case .english, .japanese, .russian: englishSpeaker
     case .zhHans: chineseSpeaker
     }
   }

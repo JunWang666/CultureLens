@@ -131,6 +131,21 @@ struct ShareVisitTripButton: View {
         Related subjects: \(objects.isEmpty ? "heritage site" : objects). \
         No text, no watermark, no logo.
         """
+    case .japanese:
+      return """
+        文化旅行の雑誌表紙、縦構図、抑制された余白、暖かい宣紙の色調と朱砂のアクセント。\
+        テーマ：\(trip.title)。場所：\(places.isEmpty ? trip.title : places)。\
+        関連対象：\(objects.isEmpty ? "文化現場" : objects)。\
+        文字・透かし・ロゴなし。写真と平面ポスターのあいだの雰囲気。
+        """
+    case .russian:
+      return """
+        Обложка культурного travel-журнала, вертикальная композиция, тёплые бумажные тона \
+        с акцентами киновари, спокойное пустое пространство. Тема: \(trip.title). \
+        Места: \(places.isEmpty ? trip.title : places). \
+        Связанные объекты: \(objects.isEmpty ? "культурный объект" : objects). \
+        Без текста, водяных знаков и логотипов.
+        """
     }
   }
 }

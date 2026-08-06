@@ -329,6 +329,10 @@ nonisolated struct RecognitionCandidate: Identifiable, Hashable, Sendable {
     switch AppLanguageStore.currentLanguage() {
     case .english:
       "No attraction introduction available."
+    case .japanese:
+      "名所の紹介はありません。"
+    case .russian:
+      "Нет доступного описания достопримечательности."
     case .zhHans:
       "暂无可展示的景点介绍。"
     }

@@ -358,6 +358,67 @@ struct OnDeviceRecognitionTests {
     #expect(set.attractionCandidates.count > KnowledgeStore.introductionOmissionAttractionThreshold)
   }
 
+  @Test func recognitionKnowledgeIncludesCrossPackExhibitWhenElementIsLocal() throws {
+    // Reproduces the Zhijiang / 玉琮王 miss: intro + attraction exist, but
+    // nearbyIntroductions drops records whose culturalElementId is absent.
+    let empty = RichTextDocument(schemaVersion: 1, blocks: [])
+    let zhijiangLat = 30.16277778
+    let zhijiangLon = 120.0975
+    let orphanPack = KnowledgePack(
+      version: "zj-orphan",
+      elements: [
+        KnowledgePack.Element(key: "zhijiang-campus", name: "之江馆区", introduction: empty)
+      ],
+      attractions: [
+        KnowledgePack.Attraction(key: "zhijiang-campus", name: "之江馆区"),
+        KnowledgePack.Attraction(key: "jade-cong-wang", name: "良渚玉琮王"),
+      ],
+      relations: [],
+      introductions: [
+        KnowledgePack.IntroductionRecord(
+          key: "campus.visit",
+          name: "馆区",
+          introduction: empty,
+          culturalElementKey: "zhijiang-campus",
+          attractionKey: "zhijiang-campus",
+          latitude: zhijiangLat,
+          longitude: zhijiangLon
+        ),
+        KnowledgePack.IntroductionRecord(
+          key: "cong.on-display",
+          name: "玉琮王展陈",
+          introduction: empty,
+          culturalElementKey: "jade-cong-wang",
+          attractionKey: "jade-cong-wang",
+          latitude: zhijiangLat,
+          longitude: zhijiangLon
+        ),
+      ]
+    )
+    let orphanStore = KnowledgeStore(pack: orphanPack)
+    let orphanSet = try orphanStore.recognitionKnowledge(
+      latitude: zhijiangLat, longitude: zhijiangLon, limit: 12)
+    #expect(orphanSet.attractionCandidates.map(\.key) == ["zhijiang-campus"])
+    #expect(!orphanSet.elements.contains { $0.key == "jade-cong-wang" })
+
+    let fixedPack = KnowledgePack(
+      version: "zj-fixed",
+      elements: [
+        KnowledgePack.Element(key: "zhijiang-campus", name: "之江馆区", introduction: empty),
+        KnowledgePack.Element(key: "jade-cong-wang", name: "良渚玉琮王", introduction: empty),
+      ],
+      attractions: orphanPack.attractions,
+      relations: [],
+      introductions: orphanPack.introductions
+    )
+    let fixedStore = KnowledgeStore(pack: fixedPack)
+    let fixedSet = try fixedStore.recognitionKnowledge(
+      latitude: zhijiangLat, longitude: zhijiangLon, limit: 12)
+    #expect(Set(fixedSet.attractionCandidates.compactMap(\.key))
+      == Set(["zhijiang-campus", "jade-cong-wang"]))
+    #expect(fixedSet.elements.contains { $0.key == "jade-cong-wang" })
+  }
+
   @Test func knowledgeCandidateContextOmitsIntroductionBodiesWhenAsked() throws {
     let candidate = KnowledgeCandidateContext(
       id: "1",
@@ -477,33 +538,84 @@ struct OnDeviceRecognitionTests {
     #expect(RecognitionResponseMapper.normalizeEntityName(" West Lake ") == "westlake")
   }
 
-  @Test func resolveKnowledgeReferencesFillsKeyFromNormalizedName() throws {
-    var value = decision(canonicalName: " 西湖 十景的观看方式 ")
-    RecognitionResponseMapper.resolveKnowledgeReferences(&value, candidates: candidates)
-
-    #expect(value.culturalElementKey == "west-lake-ten-scenes")
-    try RecognitionResponseMapper.validate(value, candidates: candidates, attractions: [])
-  }
-
-  @Test func resolveKnowledgeReferencesBindsFuzzySubstringName() throws {
+  @Test func emptyCulturalElementKeyStaysUnboundDespiteMatchingNameOrSummary() throws {
     let congCandidates = [
       KnowledgeCandidateContext(
-        id: "jade-cong-wang",
+        id: DeterministicID.culturalElement("jade-cong-wang").uuidString,
         name: "玉琮王",
         introduction: RichTextDocument(schemaVersion: 1, blocks: []),
         nearbyContexts: []
       ),
       KnowledgeCandidateContext(
-        id: "jade-cong-ritual",
-        name: "琮：沟通天地的礼器",
+        id: DeterministicID.culturalElement("hemudu-culture").uuidString,
+        name: "河姆渡文化",
         introduction: RichTextDocument(schemaVersion: 1, blocks: []),
         nearbyContexts: []
       ),
     ]
-    var value = decision(canonicalName: "玉琮")
-    RecognitionResponseMapper.resolveKnowledgeReferences(&value, candidates: congCandidates)
-    #expect(value.culturalElementKey == "jade-cong-wang")
+    // Name matches a candidate, but empty key must not be filled by name matching.
+    var byName = decision(canonicalName: "玉琮王")
+    byName.summary = "画面中的玉琮王展品。"
+    #expect(byName.culturalElementKey.isEmpty)
+    try RecognitionResponseMapper.validate(byName, candidates: congCandidates, attractions: [])
+    #expect(byName.culturalElementKey.isEmpty)
+
+    // Summary / rationale mention a catalog name; still must not bind when key is empty.
+    var byText = decision(canonicalName: "其他")
+    byText.summary = "这件展品属于河姆渡文化陶器一系。"
+    byText.rationale = "纹饰与河姆渡遗址出土器物相近。"
+    byText.alternatives = [
+      ProviderCandidate(
+        culturalElementKey: "",
+        canonicalName: "玉琮王",
+        category: "展品",
+        confidence: 0.2,
+        rationale: "外形接近玉琮王。"
+      ),
+      ProviderCandidate(
+        culturalElementKey: "",
+        canonicalName: "备选二",
+        category: "其他",
+        confidence: 0.1,
+        rationale: "次要猜测。"
+      ),
+    ]
+    try RecognitionResponseMapper.validate(byText, candidates: congCandidates, attractions: [])
+    #expect(byText.culturalElementKey.isEmpty)
+    #expect(byText.alternatives.allSatisfy { $0.culturalElementKey.isEmpty })
+  }
+
+  @Test func validCulturalElementKeyBindsWithoutNameGuessing() throws {
+    let congID = DeterministicID.culturalElement("jade-cong-wang").uuidString
+    let congCandidates = [
+      KnowledgeCandidateContext(
+        id: congID,
+        name: "玉琮王",
+        introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+        nearbyContexts: []
+      )
+    ]
+    let value = decision(
+      culturalElementKey: congID,
+      canonicalName: "玉琮王"
+    )
     try RecognitionResponseMapper.validate(value, candidates: congCandidates, attractions: [])
+    #expect(value.culturalElementKey == congID)
+
+    // Short id → UUID rewrite still binds when the model returned a prompt short id.
+    var session = LLMIDSession()
+    let shorts = session.registerElements([DeterministicID.culturalElement("jade-cong-wang")])
+    #expect(shorts == ["1"])
+    var shortDecision = decision(
+      culturalElementKey: "1",
+      canonicalName: "玉琮王"
+    )
+    if let uuid = session.resolveElement(shortDecision.culturalElementKey) {
+      shortDecision.culturalElementKey = uuid.uuidString
+    }
+    #expect(shortDecision.culturalElementKey == congID)
+    try RecognitionResponseMapper.validate(
+      shortDecision, candidates: congCandidates, attractions: [])
   }
 
   @Test func validateRejectsMismatchedKeyNameAndDuplicates() {
@@ -1154,28 +1266,42 @@ struct OnDeviceRecognitionTests {
     #expect(attractionResult.catalogCandidateCount == 1)
     #expect(attractionResult.id == DeterministicID.v5(name: "req-1:result"))
 
-    // Exhibit inside a museum must not collapse into the attraction root.
-    var exhibitDecision = decision(
-      attractionKey: "att",
+    // Exhibit inside a museum: empty key stays unbound even if summary mentions 玉琮.
+    var unboundExhibit = decision(
+      attractionKey: DeterministicID.attraction("att").uuidString,
       canonicalName: "其他"
     )
-    exhibitDecision.category = "展品"
-    exhibitDecision.summary = "这件展品是良渚文化的标志性玉器——玉琮，立于展柜中。"
-    exhibitDecision.uncertainty = "具体器名未在候选中。"
-    let catalog = [
-      KnowledgeCandidateContext(
-        id: "jade-cong-wang",
-        name: "玉琮王",
-        introduction: RichTextDocument(schemaVersion: 1, blocks: []),
-        nearbyContexts: []
-      )
-    ]
-    RecognitionResponseMapper.resolveKnowledgeReferences(&exhibitDecision, candidates: catalog)
-    #expect(exhibitDecision.culturalElementKey == "jade-cong-wang")
-    #expect(exhibitDecision.canonicalName == "玉琮王")
-    // mapResponse expects pack UUID strings (post short-ID rewrite contract).
-    exhibitDecision.culturalElementKey = DeterministicID.culturalElement("jade-cong-wang").uuidString
-    exhibitDecision.attractionKey = DeterministicID.attraction("att").uuidString
+    unboundExhibit.category = "展品"
+    unboundExhibit.summary = "这件展品是良渚文化的标志性玉器——玉琮，立于展柜中。"
+    unboundExhibit.uncertainty = "具体器名未在候选中。"
+    try RecognitionResponseMapper.validate(
+      unboundExhibit, candidates: contexts, attractions: attractions)
+    #expect(unboundExhibit.culturalElementKey.isEmpty)
+    let unboundResult = RecognitionResponseMapper.mapResponse(
+      requestID: "req-exhibit-unbound",
+      usedPlaceContext: true,
+      decision: unboundExhibit,
+      modelIdentifier: "dynamic/culturelens",
+      knowledge: knowledge
+    )
+    #expect(unboundResult.resolutionStatus == "unresolved")
+
+    // Same exhibit with an explicit cultural_element_key binds to the catalog node.
+    var exhibitDecision = unboundExhibit
+    exhibitDecision.culturalElementKey =
+      DeterministicID.culturalElement("jade-cong-wang").uuidString
+    exhibitDecision.canonicalName = "玉琮王"
+    let congContext = KnowledgeCandidateContext(
+      id: DeterministicID.culturalElement("jade-cong-wang").uuidString,
+      name: "玉琮王",
+      introduction: RichTextDocument(schemaVersion: 1, blocks: []),
+      nearbyContexts: []
+    )
+    try RecognitionResponseMapper.validate(
+      exhibitDecision,
+      candidates: contexts + [congContext],
+      attractions: attractions
+    )
     let knowledgeWithCong = knowledge.ensuringElement(
       RecognitionElement(
         key: "jade-cong-wang",
@@ -1202,8 +1328,10 @@ struct OnDeviceRecognitionTests {
     #expect(exhibitResult.object.culturalElementID == DeterministicID.culturalElement("jade-cong-wang"))
 
     // Entity-as-attraction: shared key resolves as attraction (not a separate history node).
-    var resolved = decision(canonicalName: "三潭印月")
-    RecognitionResponseMapper.resolveKnowledgeReferences(&resolved, candidates: contexts)
+    let resolved = decision(
+      culturalElementKey: DeterministicID.culturalElement("att").uuidString,
+      canonicalName: "三潭印月"
+    )
     try RecognitionResponseMapper.validate(resolved, candidates: contexts, attractions: attractions)
     let resolvedResult = RecognitionResponseMapper.mapResponse(
       requestID: "req-2",
@@ -1427,7 +1555,8 @@ struct OnDeviceRecognitionTests {
     let store = await KnowledgePackLoader.shared.store()
     #expect(store != nil)
     guard let store else { return }
-    #expect(store.pack.version.contains("hangzhou-west-lake-v6"))
+    #expect(store.pack.version.contains("hangzhou-west-lake-v"))
+    #expect(store.element(key: "jade-cong-wang") != nil)
     #expect(!store.pack.elements.isEmpty)
     for element in store.pack.elements {
       #expect(store.element(id: element.id)?.id == element.id)

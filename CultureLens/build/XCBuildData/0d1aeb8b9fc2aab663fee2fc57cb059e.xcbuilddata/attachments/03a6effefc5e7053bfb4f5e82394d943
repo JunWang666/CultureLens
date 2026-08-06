@@ -1,0 +1,96 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacros-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Closure.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/Closure.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/Closure.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/Closure.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredMacro.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredMacro.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredMacro.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredUnsafeClosureMacro.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredUnsafeClosureMacro.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredUnsafeClosureMacro.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableIgnoredUnsafeClosureMacro.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableMacro.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatablePlugin.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatablePlugin.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatablePlugin.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatablePlugin.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+Diagnostic.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Diagnostic.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Diagnostic.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Diagnostic.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+Equatable.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Equatable.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Equatable.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Equatable.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+Hashable.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Hashable.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Hashable.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Hashable.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+Helpers.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Helpers.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Helpers.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Helpers.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+Isolation.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Isolation.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Isolation.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+Isolation.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/EquatableMacro/EquatableMacro+TypeComplexity.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+TypeComplexity.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+TypeComplexity.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/EquatableMacro+TypeComplexity.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/IdentifierTypeSyntax+Extensions.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/IdentifierTypeSyntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/IdentifierTypeSyntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/IdentifierTypeSyntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/MemberTypeSyntax+Extensions.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/MemberTypeSyntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/MemberTypeSyntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/MemberTypeSyntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/StructDeclSyntax+Extensions.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/StructDeclSyntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/StructDeclSyntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/StructDeclSyntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/TypeSyntax+Extensions.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/TypeSyntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/TypeSyntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/TypeSyntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Extensions/VariableDeclSyntax+Extensions.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/VariableDeclSyntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/VariableDeclSyntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/VariableDeclSyntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/EquatableMacros/SimpleFixItMessage.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/SimpleFixItMessage.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/SimpleFixItMessage.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/EquatableMacros.build/Objects-normal/arm64/SimpleFixItMessage.o"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SwiftBasicFormat-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/BasicFormat.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/BasicFormat.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/BasicFormat.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/BasicFormat.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/Indenter.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Indenter.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Indenter.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Indenter.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/InferIndentation.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/InferIndentation.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/InferIndentation.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/InferIndentation.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/Syntax+Extensions.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Syntax+Extensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Syntax+Extensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Syntax+Extensions.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/SyntaxProtocol+Formatted.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SyntaxProtocol+Formatted.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SyntaxProtocol+Formatted.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/SyntaxProtocol+Formatted.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftBasicFormat/Trivia+FormatExtensions.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Trivia+FormatExtensions.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Trivia+FormatExtensions.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftBasicFormat.build/Objects-normal/arm64/Trivia+FormatExtensions.o"
+  }
+}

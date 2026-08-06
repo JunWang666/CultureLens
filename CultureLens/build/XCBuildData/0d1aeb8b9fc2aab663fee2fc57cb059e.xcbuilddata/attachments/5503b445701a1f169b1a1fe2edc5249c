@@ -1,0 +1,4 @@
+module SwiftStreamingMarkdown {
+header "SwiftStreamingMarkdown-Swift.h"
+export *
+}

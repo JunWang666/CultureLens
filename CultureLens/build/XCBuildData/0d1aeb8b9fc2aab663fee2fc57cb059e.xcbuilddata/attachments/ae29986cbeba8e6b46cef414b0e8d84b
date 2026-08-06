@@ -1,0 +1,106 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightSwift-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeText.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeText.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeText.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeText.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeTextCardView.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextCardView.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextCardView.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextCardView.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeTextColors.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextColors.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextColors.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextColors.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeTextModifiers.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextModifiers.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextModifiers.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextModifiers.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeTextStyle.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextStyle.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextStyle.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextStyle.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/CodeText/CodeTextView.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextView.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextView.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/CodeTextView.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/HLJS/HLJS.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJS.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJS.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJS.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/HLJS/HLJSError.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSError.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSError.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSError.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/HLJS/HLJSResult.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSResult.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSResult.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HLJSResult.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/Highlight.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/Highlight.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/Highlight.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/Highlight.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightBackground.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightBackground.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightBackground.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightBackground.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightCSS.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightCSS.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightCSS.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightCSS.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightColors.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightColors.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightColors.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightColors.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightEntry.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightEntry.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightEntry.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightEntry.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightLanguage.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightLanguage.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightLanguage.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightLanguage.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightMode.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightMode.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightMode.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightMode.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightResult.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightResult.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightResult.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightResult.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/Sources/HighlightSwift/Highlight/HighlightTheme.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightTheme.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightTheme.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/HighlightTheme.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/DerivedSources/resource_bundle_accessor.swift" : {
+    "index-unit-output-path" : "/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/resource_bundle_accessor.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/resource_bundle_accessor.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/highlightswift/build/HighlightSwift.build/Release-iphoneos/HighlightSwift.build/Objects-normal/arm64/resource_bundle_accessor.o"
+  }
+}

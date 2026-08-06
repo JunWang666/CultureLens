@@ -1,0 +1,16 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/Sources/Shimmer/Shimmer.swift" : {
+    "index-unit-output-path" : "/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/SwiftUI-Shimmer/build/SwiftUI-Shimmer.build/Release-iphoneos/Shimmer.build/Objects-normal/arm64/Shimmer.o"
+  }
+}

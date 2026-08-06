@@ -9,50 +9,42 @@ struct SettingsView: View {
       CulturePageBackground()
 
       ScrollView {
-        LazyVStack(alignment: .leading, spacing: 16) {
+        LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
+          MagazinePageHeader(
+            eyebrow: "SETTINGS",
+            title: "设置",
+            message: "语言、缓存与资源包工具。"
+          )
+
           LanguageSettingsSection()
 
           CacheSettingsSection()
 
-          NavigationLink {
-            KnowledgePackManagerView()
-          } label: {
-            HStack(spacing: 16) {
-              Image(systemName: "shippingbox")
-                .font(.title3)
-                .foregroundStyle(CultureTheme.antiqueGold)
-                .frame(width: 36)
+          VStack(alignment: .leading, spacing: 0) {
+            MagazineSectionHeader(eyebrow: "PACKS", "资源包")
+              .padding(.bottom, 4)
 
-              VStack(alignment: .leading, spacing: 4) {
-                Text("资源包管理")
-                  .font(.headline)
-                  .foregroundStyle(CultureTheme.inkPrimary)
-                Text("查看知识包状态、版本与内容，并重新下载缺失资源。")
-                  .font(.caption)
-                  .foregroundStyle(CultureTheme.inkSecondary)
-                  .fixedSize(horizontal: false, vertical: true)
-              }
-
-              Spacer(minLength: 8)
-
-              Image(systemName: "chevron.right")
-                .font(.body.weight(.semibold))
-                .foregroundStyle(CultureTheme.inkSecondary)
-                .accessibilityHidden(true)
+            NavigationLink {
+              KnowledgePackManagerView()
+            } label: {
+              MagazineDestinationRow(
+                title: "资源包管理",
+                message: "查看知识包状态、版本与内容，并重新下载缺失资源。",
+                systemImage: "shippingbox"
+              )
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-              CultureTheme.surface.opacity(0.72),
-              in: RoundedRectangle(cornerRadius: 16))
-          }
-          .buttonStyle(.plain)
-          .accessibilityIdentifier("settings.openKnowledgePacks")
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("settings.openKnowledgePacks")
 
-          PackEditorSettingsSection()
+            EditorialRule()
+
+            PackEditorSettingsSection()
+          }
+
+          MagazineFooterOrnament()
         }
         .padding(.horizontal, CultureTheme.pagePadding)
-        .padding(.top, 16)
+        .padding(.top, 20)
         .padding(.bottom, 40)
       }
     }
@@ -60,49 +52,26 @@ struct SettingsView: View {
   }
 }
 
-/// Entry card into the on-device knowledge-pack editor / exporter.
+/// Entry row into the on-device knowledge-pack editor / exporter.
 private struct PackEditorSettingsSection: View {
   var body: some View {
-    VStack(alignment: .leading, spacing: 12) {
-      Text("工具")
-        .font(.headline)
-        .foregroundStyle(CultureTheme.inkPrimary)
-
+    VStack(alignment: .leading, spacing: 8) {
       Text("制作或编辑知识包 sidecar，校验后导出 zip，便于更新 Resources/KnowledgePack*。")
-        .font(.footnote)
+        .font(.caption)
         .foregroundStyle(CultureTheme.inkSecondary)
         .fixedSize(horizontal: false, vertical: true)
+        .padding(.top, 4)
 
       NavigationLink(value: AppRoute.packEditor) {
-        HStack(spacing: 12) {
-          Image(systemName: "shippingbox.and.arrow.backward")
-            .foregroundStyle(CultureTheme.antiqueGold)
-            .frame(width: 28)
-          VStack(alignment: .leading, spacing: 2) {
-            Text("资源包制作 / 编辑器")
-              .font(.body.weight(.semibold))
-              .foregroundStyle(CultureTheme.inkPrimary)
-            Text("新建、从内置包复制、导入与导出")
-              .font(.caption)
-              .foregroundStyle(CultureTheme.inkSecondary)
-          }
-          Spacer(minLength: 8)
-          Image(systemName: "chevron.right")
-            .font(.body.weight(.semibold))
-            .foregroundStyle(CultureTheme.inkSecondary)
-        }
-        .padding(14)
-        .background(
-          CultureTheme.surface.opacity(0.9),
-          in: RoundedRectangle(cornerRadius: 14, style: .continuous)
+        MagazineDestinationRow(
+          title: "资源包制作 / 编辑器",
+          message: "新建、从内置包复制、导入与导出",
+          systemImage: "shippingbox.and.arrow.backward"
         )
       }
       .buttonStyle(.plain)
       .accessibilityIdentifier("settings.openPackEditor")
     }
-    .padding(16)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(CultureTheme.surface.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
   }
 }
 

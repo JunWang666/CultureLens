@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-06 识别绑定收紧：删除空 `cultural_element_key` 的名称 / summary `fromText` 模糊回填与 catalog 名猜测；空 key 保持未绑定，有 key 仍经 `LLMIDSession` 短 ID→UUID。根因修复：浙博包补齐与景点同 key 的 `jade-cong-wang` / `jade-cong-ritual` 看点元素（v8），避免仅装浙博时 `nearbyIntroductions` 因缺元素丢弃之江展陈介绍。见 `design/0021-recognition-no-fuzzy-element-binding.md`。
 - 2026-08-06 知识配图整包 ODR：`Resources/images/`（约 180 张，路径对齐 R2）打成 tag `images`，列入 initial-install；`RemoteImageCache` 在内存/磁盘之后、网络之前拦截 `culturelens.goudaijun.top/images/...` 并读本地包；启动预加载与「资源包管理」可单独下载。见 `design/0020-image-pack-odr-and-remote-intercept.md`。
 - 2026-08-06 扫描识别新增 MapKit 地理上下文：围绕当前/照片坐标用 `MKLocalPointsOfInterestRequest` 搜索 1 km，二次按直线距离过滤、去重后只向模型发送最近 3 条 POI，并同时发送坐标精度/反向地理名称；MapKit 无网、失败或无结果时不阻断识别，POI 不会写入历史或成为知识库候选。通用 iOS App 与 unit-test target 编译通过，Simulator 运行受既有依赖宏插件阻断。见 `design/0019-recognition-mapkit-geographic-context.md`。
 - 2026-08-06 AI 文化讲解从 Caches 缓存升级为 Application Support 正式持久记录：同一对象 / 扫描结果按地点与语言稳定读取，不因知识进度、模型或 prompt 变化自动消失，也不受“清理缓存”影响；讲解组件右上角新增重新生成按钮，生成期间保留旧内容，成功后覆盖保存，失败则保留原讲解。见 `design/0018-durable-explanation-storage-and-regeneration.md`。
@@ -29,7 +30,7 @@
 - 2026-08-06 足迹地图完善：右上角三段式模式选择器改为单个原生工具栏菜单，菜单内直接内联地图足迹 / 时间线足迹 / 兴趣点、标准 / 混合 / 卫星底图、足迹照片标记与 3D 俯视选项，消除重复玻璃和二级弹层；接入左下角 Liquid Glass 地点搜索，当前位置按钮移入系统 toolbar（定位后显示约 2 km 范围）；足迹与兴趣点按当前缩放范围合并为 stack 聚合点，点击后在搜索框上方选择具体项目再进入详情，并解除聚合标记与组内首条记录 ID 的隐式绑定；照片标记通过 ImageIO 下采样为 128px 本地预览；修复兴趣点系统标题与自定义标题重复；无带位置足迹时地图仍可搜索和定位。
 - 2026-08-05 足迹升级为三模式地图（地图足迹 / 时间线足迹 / 兴趣点，`KnowledgeStore.attractionPoints()` 聚合知识包景点坐标，已到访景点朱砂标记可跳详情）；用户图谱支持多高亮中心（多源 BFS，空选择默认全部已加入节点，`RadialGraphLayout` 多中心内圈簇布局），扫描已记录节点加显眼朱砂徽章；中英词条同步。
 - 2026-08-05 浙博 / 良渚包按「有实体即景点」改数据：玉琮王等可拍文物升为 `attractions` 并带展陈坐标；馆区景点保留但不独占附近候选。
-- 2026-08-05 多知识包：良渚 / 浙博 / 中国历史打进 App，`KnowledgeStore.mergePacks` + `KnowledgePackLoader` 与西湖 ODR 合并；识别名允许子串绑定（如「玉琮」→「玉琮王」）。
+- 2026-08-05 多知识包：良渚 / 浙博 / 中国历史打进 App，`KnowledgeStore.mergePacks` + `KnowledgePackLoader` 与西湖 ODR 合并（空 key 模糊名绑定已于 2026-08-06 移除，见 `design/0021`）。
 - 2026-08-04 统一文化问答系统提示词结构，强化正文行内引用与文末来源列表的一一对应、编码和原文摘录规则；面向用户的回答改用“现有资料”等自然表述，不再暴露内部资料系统称谓。
 - 2026-08-04 修复文化问答作曲器：恢复系统原生多行 `TextField` 以避免中文输入法候选态丢失焦点；去掉底部整条材质背景和闲置副标题，输入区改为 Liquid Glass 容器（旧系统回退材质），附件缩略图收进同一容器并在有图时向上扩展，关闭键紧贴图片，添加菜单锚定在 `+` 按钮。
 - 2026-08-03 文化问答增强：SwiftData 持久化历史会话（首页 / 对象追问分作用域）、工具栏新对话与历史列表、相册图片上传（归一化 JPEG + 多模态 `image_url`）；历史轮用文字标注避免重复传图。见 `agents/design/0005-chat-history-and-image-upload.md`。

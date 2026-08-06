@@ -23,19 +23,25 @@ struct VisitTripListView: View {
                 }
             } else {
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 16) {
+                    LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
                         MagazinePageHeader(
                             eyebrow: "JOURNAL",
                             title: "文化回顾",
                             message: "把一次参观里点亮的节点、走过的景点与新认识的关系收成可回看的行程。"
                         )
 
-                        ForEach(trips) { trip in
-                            NavigationLink(value: AppRoute.visitTrip(trip.id)) {
-                                VisitTripRow(trip: trip)
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(trips.enumerated()), id: \.element.id) { index, trip in
+                                if index > 0 { EditorialRule() }
+                                NavigationLink(value: AppRoute.visitTrip(trip.id)) {
+                                    VisitTripRow(trip: trip)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
+                            EditorialRule()
                         }
+
+                        MagazineFooterOrnament()
                     }
                     .padding(.horizontal, CultureTheme.pagePadding)
                     .padding(.top, 20)
@@ -54,7 +60,7 @@ struct VisitTripRow: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text(trip.title)
-                    .font(.cultureSerif(.title3))
+                    .font(.magazineDisplay(.title3))
                     .foregroundStyle(CultureTheme.inkPrimary)
                 Spacer()
                 Text("\(trip.scanCount) 次识别")
@@ -74,16 +80,9 @@ struct VisitTripRow: View {
             .font(.caption)
             .foregroundStyle(CultureTheme.inkSecondary)
         }
-        .padding(18)
+        .padding(.vertical, CultureTheme.rowPadding)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            CultureTheme.surface,
-            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-        )
-        .overlay {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityHint("打开本次参观回顾")
     }

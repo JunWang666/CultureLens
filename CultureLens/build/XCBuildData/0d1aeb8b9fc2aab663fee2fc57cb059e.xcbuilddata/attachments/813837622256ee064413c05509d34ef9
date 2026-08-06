@@ -1,0 +1,4 @@
+module Shimmer {
+header "Shimmer-Swift.h"
+export *
+}

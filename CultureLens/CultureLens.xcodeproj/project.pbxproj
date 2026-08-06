@@ -264,9 +264,6 @@
 		C12E0D300000000000000025 /* themes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themes.json; sourceTree = "<group>"; };
 		C12E0D300000000000000026 /* locales-en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locales-en.json"; sourceTree = "<group>"; };
 		C12E0D300000000000000027 /* pack-manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pack-manifest.json"; sourceTree = "<group>"; };
-		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C12E0D4F0000000000000001 /* an-lushan-rebellion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "an-lushan-rebellion.png"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000002 /* chinese-buddhism.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-buddhism.jpg"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000003 /* chinese-calligraphy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-calligraphy.jpg"; sourceTree = "<group>"; };
@@ -284,7 +281,7 @@
 		C12E0D4F0000000000000015 /* jin-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jin-dynasty.png"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000016 /* jingkang-incident.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jingkang-incident.jpg"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000017 /* kaiyuan-flourishing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaiyuan-flourishing.jpg"; sourceTree = "<group>"; };
-		C12E0D4F0000000000000018 /* kangxi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kangxi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000018 /* kangxi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kangxi.jpg; sourceTree = "<group>"; };
 		C12E0D4F0000000000000019 /* laozi-and-taoism.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "laozi-and-taoism.jpg"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000020 /* mid-autumn-festival.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mid-autumn-festival.jpg"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000021 /* ming-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ming-dynasty.png"; sourceTree = "<group>"; };
@@ -447,40 +444,15 @@
 		C12E0D4F0000000000000178 /* zhejiang-museum-history.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhejiang-museum-history.jpg"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000179 /* zhejiang-yue-sword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhejiang-yue-sword.png"; sourceTree = "<group>"; };
 		C12E0D4F0000000000000180 /* zhijiang-campus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhijiang-campus.jpg"; sourceTree = "<group>"; };
+		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		C12E0D000000000000000005 /* Exceptions for "CultureLens" folder in "CultureLens" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Resources/KnowledgePack/elements-history.json",
-				"Resources/KnowledgePack/elements-sight.json",
-				Resources/KnowledgePack/introductions.json,
-				"Resources/KnowledgePack/knowledge-pack.json",
-				"Resources/KnowledgePack/locales-en.json",
-				"Resources/KnowledgePack/pack-manifest.json",
-				Resources/KnowledgePack/themes.json,
-				"Resources/KnowledgePackChineseHistory/elements-history.json",
-				"Resources/KnowledgePackChineseHistory/elements-sight.json",
-				Resources/KnowledgePackChineseHistory/introductions.json,
-				"Resources/KnowledgePackChineseHistory/knowledge-pack.json",
-				"Resources/KnowledgePackChineseHistory/locales-en.json",
-				"Resources/KnowledgePackChineseHistory/pack-manifest.json",
-				Resources/KnowledgePackChineseHistory/themes.json,
-				"Resources/KnowledgePackLiangzhu/elements-history.json",
-				"Resources/KnowledgePackLiangzhu/elements-sight.json",
-				Resources/KnowledgePackLiangzhu/introductions.json,
-				"Resources/KnowledgePackLiangzhu/knowledge-pack.json",
-				"Resources/KnowledgePackLiangzhu/locales-en.json",
-				"Resources/KnowledgePackLiangzhu/pack-manifest.json",
-				Resources/KnowledgePackLiangzhu/themes.json,
-				"Resources/KnowledgePackZhejiangMuseum/elements-history.json",
-				"Resources/KnowledgePackZhejiangMuseum/elements-sight.json",
-				Resources/KnowledgePackZhejiangMuseum/introductions.json,
-				"Resources/KnowledgePackZhejiangMuseum/knowledge-pack.json",
-				"Resources/KnowledgePackZhejiangMuseum/locales-en.json",
-				"Resources/KnowledgePackZhejiangMuseum/pack-manifest.json",
-				Resources/KnowledgePackZhejiangMuseum/themes.json,
 				"Resources/images/chinese-history/an-lushan-rebellion.png",
 				"Resources/images/chinese-history/chinese-buddhism.jpg",
 				"Resources/images/chinese-history/chinese-calligraphy.jpg",
@@ -661,6 +633,34 @@
 				"Resources/images/zhejiang-museum/zhejiang-museum-history.jpg",
 				"Resources/images/zhejiang-museum/zhejiang-yue-sword.png",
 				"Resources/images/zhejiang-museum/zhijiang-campus.jpg",
+				"Resources/KnowledgePack/elements-history.json",
+				"Resources/KnowledgePack/elements-sight.json",
+				Resources/KnowledgePack/introductions.json,
+				"Resources/KnowledgePack/knowledge-pack.json",
+				"Resources/KnowledgePack/locales-en.json",
+				"Resources/KnowledgePack/pack-manifest.json",
+				Resources/KnowledgePack/themes.json,
+				"Resources/KnowledgePackChineseHistory/elements-history.json",
+				"Resources/KnowledgePackChineseHistory/elements-sight.json",
+				Resources/KnowledgePackChineseHistory/introductions.json,
+				"Resources/KnowledgePackChineseHistory/knowledge-pack.json",
+				"Resources/KnowledgePackChineseHistory/locales-en.json",
+				"Resources/KnowledgePackChineseHistory/pack-manifest.json",
+				Resources/KnowledgePackChineseHistory/themes.json,
+				"Resources/KnowledgePackLiangzhu/elements-history.json",
+				"Resources/KnowledgePackLiangzhu/elements-sight.json",
+				Resources/KnowledgePackLiangzhu/introductions.json,
+				"Resources/KnowledgePackLiangzhu/knowledge-pack.json",
+				"Resources/KnowledgePackLiangzhu/locales-en.json",
+				"Resources/KnowledgePackLiangzhu/pack-manifest.json",
+				Resources/KnowledgePackLiangzhu/themes.json,
+				"Resources/KnowledgePackZhejiangMuseum/elements-history.json",
+				"Resources/KnowledgePackZhejiangMuseum/elements-sight.json",
+				Resources/KnowledgePackZhejiangMuseum/introductions.json,
+				"Resources/KnowledgePackZhejiangMuseum/knowledge-pack.json",
+				"Resources/KnowledgePackZhejiangMuseum/locales-en.json",
+				"Resources/KnowledgePackZhejiangMuseum/pack-manifest.json",
+				Resources/KnowledgePackZhejiangMuseum/themes.json,
 			);
 			target = E9464E5F3017572B00B357C5 /* CultureLens */;
 		};
@@ -773,29 +773,16 @@
 			path = CultureLens/Resources/KnowledgePackZhejiangMuseum;
 			sourceTree = "<group>";
 		};
-		E9464E573017572B00B357C5 = {
+		C12E0D4A0000000000000001 /* Images ODR */ = {
 			isa = PBXGroup;
 			children = (
-				E9464E623017572B00B357C5 /* CultureLens */,
-				C12E0D000000000000000006 /* KnowledgePack ODR */,
-				C12E0D100000000000000008 /* Chinese History ODR */,
-				C12E0D200000000000000008 /* Liangzhu ODR */,
-				C12E0D300000000000000008 /* Zhejiang Museum ODR */,
-				C12E0D4A0000000000000001 /* Images ODR */,
-				E9464E723017572C00B357C5 /* CultureLensTests */,
-				E9464E7C3017572C00B357C5 /* CultureLensUITests */,
-				E9464E613017572B00B357C5 /* Products */,
+				C12E0D4A0000000000000002 /* chinese-history */,
+				C12E0D4A0000000000000003 /* liangzhu */,
+				C12E0D4A0000000000000004 /* west-lake */,
+				C12E0D4A0000000000000005 /* zhejiang-museum */,
 			);
-			sourceTree = "<group>";
-		};
-		E9464E613017572B00B357C5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E9464E603017572B00B357C5 /* CultureLens.app */,
-				E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */,
-				E9464E793017572C00B357C5 /* CultureLensUITests.xctest */,
-			);
-			name = Products;
+			name = "Images ODR";
+			path = CultureLens/Resources/images;
 			sourceTree = "<group>";
 		};
 		C12E0D4A0000000000000002 /* chinese-history */ = {
@@ -882,7 +869,7 @@
 				C12E0D4F0000000000000072 /* world-heritage-status.jpg */,
 				C12E0D4F0000000000000073 /* yaoshan-altar.jpg */,
 			);
-			path = "liangzhu";
+			path = liangzhu;
 			sourceTree = "<group>";
 		};
 		C12E0D4A0000000000000004 /* west-lake */ = {
@@ -1006,16 +993,29 @@
 			path = "zhejiang-museum";
 			sourceTree = "<group>";
 		};
-		C12E0D4A0000000000000001 /* Images ODR */ = {
+		E9464E573017572B00B357C5 = {
 			isa = PBXGroup;
 			children = (
-				C12E0D4A0000000000000002 /* chinese-history */,
-				C12E0D4A0000000000000003 /* liangzhu */,
-				C12E0D4A0000000000000004 /* west-lake */,
-				C12E0D4A0000000000000005 /* zhejiang-museum */,
+				E9464E623017572B00B357C5 /* CultureLens */,
+				C12E0D000000000000000006 /* KnowledgePack ODR */,
+				C12E0D100000000000000008 /* Chinese History ODR */,
+				C12E0D200000000000000008 /* Liangzhu ODR */,
+				C12E0D300000000000000008 /* Zhejiang Museum ODR */,
+				C12E0D4A0000000000000001 /* Images ODR */,
+				E9464E723017572C00B357C5 /* CultureLensTests */,
+				E9464E7C3017572C00B357C5 /* CultureLensUITests */,
+				E9464E613017572B00B357C5 /* Products */,
 			);
-			name = "Images ODR";
-			path = CultureLens/Resources/images;
+			sourceTree = "<group>";
+		};
+		E9464E613017572B00B357C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9464E603017572B00B357C5 /* CultureLens.app */,
+				E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */,
+				E9464E793017572C00B357C5 /* CultureLensUITests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

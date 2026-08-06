@@ -98,9 +98,12 @@ struct ReviewHomeView: View {
                     action: startScan
                 )
             } else {
-                ForEach(previewRecords) { record in
+                ForEach(Array(previewRecords.enumerated()), id: \.element.recordID) { index, record in
                     NavigationLink(value: AppRoute.history(record.recordID)) {
-                        ScanHistoryTimelineRow(record: record)
+                        ScanHistoryTimelineRow(
+                            record: record,
+                            showsTopRule: index == 0
+                        )
                     }
                     .buttonStyle(.plain)
                     .contextMenu {
@@ -133,11 +136,15 @@ struct ReviewHomeView: View {
                     message: "完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。"
                 )
             } else {
-                ForEach(previewTrips) { trip in
-                    NavigationLink(value: AppRoute.visitTrip(trip.id)) {
-                        VisitTripRow(trip: trip)
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(Array(previewTrips.enumerated()), id: \.element.id) { index, trip in
+                        if index > 0 { EditorialRule() }
+                        NavigationLink(value: AppRoute.visitTrip(trip.id)) {
+                            VisitTripRow(trip: trip)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
+                    EditorialRule()
                 }
 
                 if !trips.isEmpty {
@@ -158,16 +165,8 @@ struct ReviewHomeView: View {
                     .font(.caption.weight(.semibold))
             }
             .foregroundStyle(CultureTheme.cinnabar)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .background(
-                CultureTheme.surface,
-                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-            )
-            .overlay {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(CultureTheme.hairline, lineWidth: 1)
-            }
+            .padding(.vertical, CultureTheme.rowPadding)
+            .overlay(alignment: .bottom) { EditorialRule() }
         }
         .buttonStyle(.plain)
         .accessibilityHint(accessibilityHint)
@@ -196,15 +195,9 @@ struct ReviewHomeView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .background(
-            CultureTheme.surface,
-            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-        )
-        .overlay {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
+        .padding(.vertical, CultureTheme.rowPadding)
+        .overlay(alignment: .top) { EditorialRule() }
+        .overlay(alignment: .bottom) { EditorialRule() }
     }
 
     private func delete(_ record: ScanHistoryRecord) {

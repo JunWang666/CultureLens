@@ -288,4 +288,4 @@ EOF
 - 节点：西湖 70（看点 23 / 文化历史 47）/ 良渚 25（9 / 16）/ 浙博 35（16 / 19）/ 历史 45（2 / 43）。
 - 边全部有 kind + explanation、单向、无对称对；跨包边统一指向历史包地基（朝代、文化概念）。
 - 玉琮王 canonical key 为良渚包 `jade-cong-wang`；河姆渡为浙博包 `hemudu-culture`；施昕更为良渚包 `shi-xingeng-discovery`。新内容引用这些 key，不要再建同义节点。
-- 浙博包 `attractions` 含跨包景点 key（如 `jade-cong-wang`），元素正文仍落在良渚包，靠合并宇宙校验。- 西湖包 `locales.en` 目前只有名称级覆盖；补正文英译是已知的后续工作。
+- 浙博包对跨主题展品（如 `jade-cong-wang`）须自带同 key / 同 UUID 的看点元素与之江展陈介绍；合并时良渚正文优先，单装浙博时识别候选仍完整。西湖包 `locales.en` 目前只有名称级覆盖；补正文英译是已知的后续工作。

@@ -36,6 +36,14 @@ struct LocalizedKnowledgeBlocksView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
       if let document, !document.blocks.isEmpty {
+        HStack(alignment: .center, spacing: 12) {
+          Spacer(minLength: 0)
+          SpeakTextButton(
+            utteranceID: "knowledge.\(elementID?.uuidString ?? elementKey ?? fallbackName)",
+            text: KnowledgeStore.richTextPlainText(document),
+            accessibilityLabelKey: "朗读介绍"
+          )
+        }
         RichTextBlocksView(
           document: document,
           textFont: textFont,
@@ -44,10 +52,20 @@ struct LocalizedKnowledgeBlocksView: View {
       } else if isLoading {
         SkeletonTextBlock()
       } else {
-        Text(fallbackSummary)
-          .font(textFont)
-          .foregroundStyle(textColor)
-          .lineSpacing(6)
+        HStack(alignment: .top, spacing: 12) {
+          Text(fallbackSummary)
+            .font(textFont)
+            .foregroundStyle(textColor)
+            .lineSpacing(6)
+            .frame(maxWidth: .infinity, alignment: .leading)
+          if !fallbackSummary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            SpeakTextButton(
+              utteranceID: "knowledge.fallback.\(elementID?.uuidString ?? elementKey ?? fallbackName)",
+              text: fallbackSummary,
+              accessibilityLabelKey: "朗读介绍"
+            )
+          }
+        }
       }
     }
     .task(

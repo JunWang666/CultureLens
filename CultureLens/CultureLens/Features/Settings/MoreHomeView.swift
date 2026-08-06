@@ -1,62 +1,43 @@
 import SwiftUI
 
-/// Compact overflow hub: card rows that push secondary destinations.
+/// Compact overflow hub: magazine rows that push secondary destinations.
 struct MoreHomeView: View {
   var body: some View {
     ZStack {
       CulturePageBackground()
 
       ScrollView {
-        VStack(alignment: .leading, spacing: 12) {
-          ForEach(Self.destinations) { item in
-            NavigationLink(value: item.route) {
-              moreCard(item)
+        VStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
+          MagazinePageHeader(
+            eyebrow: "MORE",
+            title: "更多",
+            message: "足迹、回顾与设置——探索之外的工具页。"
+          )
+
+          VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(Self.destinations.enumerated()), id: \.element.id) { index, item in
+              if index > 0 { EditorialRule() }
+              NavigationLink(value: item.route) {
+                MagazineDestinationRow(
+                  title: item.title,
+                  message: item.message,
+                  systemImage: item.systemImage
+                )
+              }
+              .buttonStyle(.plain)
+              .accessibilityIdentifier(item.accessibilityID)
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier(item.accessibilityID)
+            EditorialRule()
           }
+
+          MagazineFooterOrnament()
         }
         .padding(.horizontal, CultureTheme.pagePadding)
-        .padding(.top, 16)
+        .padding(.top, 20)
         .padding(.bottom, 40)
       }
     }
     .cultureNavigationTitle("更多", showsBackButton: false)
-  }
-
-  private func moreCard(_ item: Destination) -> some View {
-    HStack(alignment: .center, spacing: 16) {
-      Image(systemName: item.systemImage)
-        .font(.title3)
-        .foregroundStyle(CultureTheme.antiqueGold)
-        .frame(width: 36)
-
-      VStack(alignment: .leading, spacing: 4) {
-        Text(item.title)
-          .font(.headline)
-          .foregroundStyle(CultureTheme.inkPrimary)
-        Text(item.message)
-          .font(.caption)
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .fixedSize(horizontal: false, vertical: true)
-      }
-
-      Spacer(minLength: 8)
-
-      Image(systemName: "chevron.right")
-        .font(.body.weight(.semibold))
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .accessibilityHidden(true)
-    }
-    .padding(18)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 12, style: .continuous)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
   }
 }
 

@@ -6,25 +6,17 @@ struct CacheSettingsSection: View {
   @State private var statusMessage: LocalizedStringKey?
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 12) {
-      HStack(alignment: .top, spacing: 16) {
-        Image(systemName: "internaldrive")
-          .font(.title3)
-          .foregroundStyle(CultureTheme.antiqueGold)
-          .frame(width: 36)
+    VStack(alignment: .leading, spacing: 0) {
+      MagazineSectionHeader(eyebrow: "CACHE", "网络缓存")
+        .padding(.bottom, 8)
 
-        VStack(alignment: .leading, spacing: 4) {
-          Text("网络缓存")
-            .font(.headline)
-            .foregroundStyle(CultureTheme.inkPrimary)
-          Text("在线图片和即时译文会缓存在本地；AI 文化讲解会作为内容持久保存。")
-            .font(.caption)
-            .foregroundStyle(CultureTheme.inkSecondary)
-            .fixedSize(horizontal: false, vertical: true)
-        }
-      }
+      Text("在线图片和即时译文会缓存在本地；AI 文化讲解会作为内容持久保存。")
+        .font(.caption)
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.bottom, CultureTheme.rowPadding)
 
-      Divider()
+      EditorialRule()
 
       HStack {
         if let statusMessage {
@@ -46,10 +38,11 @@ struct CacheSettingsSection: View {
             .controlSize(.small)
         }
       }
+      .padding(.vertical, CultureTheme.rowPadding)
+
+      EditorialRule()
     }
-    .padding(16)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(CultureTheme.surface.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
     .alert("清理网络缓存？", isPresented: $showsConfirmation) {
       Button("取消", role: .cancel) {}
       Button("清理", role: .destructive) {

@@ -6,9 +6,7 @@ struct LanguageSettingsSection: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
-      Text("语言")
-        .font(.headline)
-        .foregroundStyle(CultureTheme.inkPrimary)
+      MagazineSectionHeader(eyebrow: "LANGUAGE", "语言")
 
       Text("界面文案随语言切换；识别、讲解与问答由模型直接用目标语言回答。知识库译文尚未打包时，会通过聊天模型即时翻译。")
         .font(.footnote)
@@ -23,9 +21,7 @@ struct LanguageSettingsSection: View {
       .pickerStyle(.segmented)
       .accessibilityIdentifier("languagePreferencePicker")
     }
-    .padding(16)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(CultureTheme.surface.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
   }
 
   /// Only "跟随系统" localizes; language names stay in their native form.

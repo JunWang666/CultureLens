@@ -46,9 +46,6 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     var idSession = LLMIDSession()
     idSession.registerElements(knowledge.elements.map(\.id))
     idSession.registerAttractions(knowledge.attractionCandidates.map(\.id))
-    // Catalog may be used for name backfill — register so short↔UUID stays coherent
-    // if a catalog-only hit is later rewritten through the same session.
-    idSession.registerElements(store.sightElements.map(\.id))
 
     let omitIntroductions =
       knowledge.attractionCandidates.count
@@ -79,23 +76,8 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     )
 
     var decision = rawDecision
+    // Empty cultural_element_key stays unbound — no name / summary text guessing.
     Self.rewriteDecisionKeys(&decision, session: idSession)
-
-    // Prefer ids from the prompt candidates (what the model was allowed to cite).
-    RecognitionResponseMapper.resolveKnowledgeReferences(
-      &decision,
-      candidates: knowledgeCandidates
-    )
-    // Attraction-first prompts often omit distant exhibit nodes; backfill from
-    // the full merged catalog by name so "良渚文化玉琮王" still binds to an id.
-    if decision.culturalElementKey.isEmpty
-      || decision.alternatives.contains(where: { $0.culturalElementKey.isEmpty })
-    {
-      RecognitionResponseMapper.resolveKnowledgeReferences(
-        &decision,
-        candidates: catalogCandidates
-      )
-    }
 
     var validationCandidates = knowledgeCandidates
     Self.appendValidationCandidate(
@@ -145,7 +127,7 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
     } else if !decision.culturalElementKey.trimmingCharacters(in: .whitespacesAndNewlines)
       .isEmpty
     {
-      // Unknown / invented id — clear so name backfill can run.
+      // Unknown / invented id — clear; leave unbound rather than guess by name.
       decision.culturalElementKey = ""
     }
 

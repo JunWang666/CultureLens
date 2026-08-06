@@ -1,0 +1,71 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary.d",
+    "diagnostics" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/AbstractionAxisTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/AbstractionAxisTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/AbstractionAxisTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/AbstractionAxisTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/CultureLensTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/CultureLensTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/ExplorationMilestoneTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ExplorationMilestoneTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ExplorationMilestoneTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ExplorationMilestoneTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/ImportedTrackStoreTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ImportedTrackStoreTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ImportedTrackStoreTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/ImportedTrackStoreTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/InternationalizationTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/InternationalizationTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/InternationalizationTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/InternationalizationTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/KnowledgePackEditorTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackEditorTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackEditorTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackEditorTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/KnowledgePackResourceTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackResourceTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackResourceTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/KnowledgePackResourceTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/LLMIDSessionTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/LLMIDSessionTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/LLMIDSessionTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/LLMIDSessionTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/NetworkCacheTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/NetworkCacheTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/NetworkCacheTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/NetworkCacheTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/OnDeviceRecognitionE2ETests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionE2ETests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionE2ETests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionE2ETests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/OnDeviceRecognitionTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/OnDeviceRecognitionTests.o"
+  },
+  "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/CultureLensTests/RadialGraphLayoutTests.swift" : {
+    "index-unit-output-path" : "/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/RadialGraphLayoutTests.o",
+    "llvm-bc" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/RadialGraphLayoutTests.bc",
+    "object" : "/Users/goudaijun/Code/Xcode/CuntureLens/CultureLens/build/CultureLens.build/Release-iphoneos/CultureLensTests.build/Objects-normal/arm64/RadialGraphLayoutTests.o"
+  }
+}

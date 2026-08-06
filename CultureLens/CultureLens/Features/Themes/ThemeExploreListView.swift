@@ -35,19 +35,25 @@ struct ThemeExploreListView: View {
         }
       } else {
         ScrollView {
-          LazyVStack(alignment: .leading, spacing: 16) {
+          LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
             MagazinePageHeader(
               eyebrow: "SERIES",
               title: "文化系",
               message: "沿着一条文化线索连续点亮节点。每完成一系，就为你的文化图鉴盖下一枚印章。"
             )
 
-            ForEach(progressList, id: \.theme.id) { progress in
-              NavigationLink(value: AppRoute.theme(progress.theme.sortKey)) {
-                themeRow(progress)
+            VStack(alignment: .leading, spacing: 0) {
+              ForEach(Array(progressList.enumerated()), id: \.element.theme.id) { index, progress in
+                if index > 0 { EditorialRule() }
+                NavigationLink(value: AppRoute.theme(progress.theme.sortKey)) {
+                  themeRow(progress)
+                }
+                .buttonStyle(.plain)
               }
-              .buttonStyle(.plain)
+              EditorialRule()
             }
+
+            MagazineFooterOrnament()
           }
           .padding(.horizontal, CultureTheme.pagePadding)
           .padding(.top, 20)
@@ -62,7 +68,7 @@ struct ThemeExploreListView: View {
     VStack(alignment: .leading, spacing: 12) {
       HStack(alignment: .firstTextBaseline) {
         Text(progress.theme.name)
-          .font(.cultureSerif(.title3))
+          .font(.magazineDisplay(.title3))
           .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(progress.statusText)
@@ -77,23 +83,15 @@ struct ThemeExploreListView: View {
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineLimit(3)
 
-      ProgressView(value: progress.fractionComplete)
-        .tint(CultureTheme.cinnabar)
+      ThinProgressRule(fraction: progress.fractionComplete)
 
       Text("\(progress.totalCount) 个相关节点 · 点亮本系需收集 \(progress.requiredCount) 个")
         .font(.caption)
         .foregroundStyle(CultureTheme.inkSecondary)
     }
-    .padding(18)
+    .padding(.vertical, CultureTheme.rowPadding)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 12, style: .continuous)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .contentShape(Rectangle())
     .accessibilityElement(children: .combine)
   }
 }

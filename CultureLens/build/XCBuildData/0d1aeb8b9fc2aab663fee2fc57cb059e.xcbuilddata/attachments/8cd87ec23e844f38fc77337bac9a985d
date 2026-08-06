@@ -1,0 +1,61 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/SwiftDiagnostics-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/Convenience.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Convenience.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Convenience.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Convenience.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/Diagnostic.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Diagnostic.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Diagnostic.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Diagnostic.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/DiagnosticDecorators/ANSIDiagnosticDecorator.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/ANSIDiagnosticDecorator.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/ANSIDiagnosticDecorator.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/ANSIDiagnosticDecorator.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/DiagnosticDecorators/BasicDiagnosticDecorator.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/BasicDiagnosticDecorator.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/BasicDiagnosticDecorator.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/BasicDiagnosticDecorator.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/DiagnosticDecorators/DiagnosticDecorator.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticDecorator.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticDecorator.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticDecorator.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/DiagnosticsFormatter.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticsFormatter.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticsFormatter.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/DiagnosticsFormatter.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/FixIt.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/FixIt.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/FixIt.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/FixIt.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/GroupedDiagnostics.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/GroupedDiagnostics.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/GroupedDiagnostics.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/GroupedDiagnostics.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/Message.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Message.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Message.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Message.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftDiagnostics/Note.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Note.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Note.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftDiagnostics.build/Objects-normal/arm64/Note.o"
+  }
+}

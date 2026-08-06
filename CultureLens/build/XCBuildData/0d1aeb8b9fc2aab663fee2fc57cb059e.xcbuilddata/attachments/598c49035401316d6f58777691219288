@@ -1,0 +1,56 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/SwiftSyntaxMacroExpansion-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/BasicMacroExpansionContext.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/BasicMacroExpansionContext.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/BasicMacroExpansionContext.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/BasicMacroExpansionContext.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/FunctionParameterUtils.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/FunctionParameterUtils.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/FunctionParameterUtils.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/FunctionParameterUtils.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/IndentationUtils.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/IndentationUtils.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/IndentationUtils.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/IndentationUtils.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroArgument.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroArgument.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroArgument.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroArgument.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroExpansion.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansion.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansion.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansion.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroExpansionDiagnosticMessages.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansionDiagnosticMessages.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansionDiagnosticMessages.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroExpansionDiagnosticMessages.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroReplacement.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroReplacement.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroReplacement.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroReplacement.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroSpec.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSpec.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSpec.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSpec.o"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntaxMacroExpansion/MacroSystem.swift" : {
+    "index-unit-output-path" : "/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSystem.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSystem.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/swift-syntax/build/swift-syntax.build/Release-iphoneos/SwiftSyntaxMacroExpansion.build/Objects-normal/arm64/MacroSystem.o"
+  }
+}

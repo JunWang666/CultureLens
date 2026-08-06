@@ -1,0 +1,16 @@
+{
+  "" : {
+    "const-values" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary.swiftconstvalues",
+    "dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary.d",
+    "diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary.dia",
+    "emit-module-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary-emit-module.dia",
+    "pch" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable-primary.swiftdeps"
+  },
+  "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/Sources/Equatable/Equatable.swift" : {
+    "index-unit-output-path" : "/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable.o",
+    "llvm-bc" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable.bc",
+    "object" : "/Users/goudaijun/Library/Developer/Xcode/DerivedData/CultureLens-gjkevzdioaeqlodbuhdhpbeqwwgv/SourcePackages/checkouts/equatable/build/Equatable.build/Release-iphoneos/Equatable.build/Objects-normal/arm64/Equatable.o"
+  }
+}

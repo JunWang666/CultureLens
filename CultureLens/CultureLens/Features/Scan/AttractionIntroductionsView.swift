@@ -63,12 +63,14 @@ struct AttractionIntroductionsView: View {
       if !additionalIntroductions.isEmpty {
         VStack(alignment: .leading, spacing: 14) {
           Text("现场知识")
-            .font(.cultureSerif(.title2))
+            .font(.magazineDisplay(.title2))
             .foregroundStyle(CultureTheme.inkPrimary)
 
-          ForEach(additionalIntroductions) { introduction in
+          ForEach(Array(additionalIntroductions.enumerated()), id: \.element.id) { index, introduction in
+            if index > 0 { EditorialRule() }
             LocalizedIntroductionCard(introduction: introduction)
           }
+          EditorialRule()
         }
       } else if existingSummary == nil {
         contentUnavailable("数据库中没有匹配到这个景点的现场介绍。")
@@ -92,12 +94,10 @@ struct AttractionIntroductionsView: View {
     label
       .font(.subheadline)
       .foregroundStyle(CultureTheme.inkSecondary)
-      .padding(16)
+      .padding(.vertical, 16)
       .frame(maxWidth: .infinity, alignment: .leading)
-      .background(
-        CultureTheme.surface,
-        in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-      )
+      .overlay(alignment: .top) { EditorialRule() }
+      .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   @MainActor
@@ -162,25 +162,25 @@ private struct LocalizedIntroductionCard: View {
       if showsSourceDirectly {
         sourceContent
       } else if let resolvedName, let resolvedText {
-        Text(resolvedName)
-          .font(.headline)
-          .foregroundStyle(CultureTheme.inkPrimary)
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+          Text(resolvedName)
+            .font(.magazineDisplay(.headline))
+            .foregroundStyle(CultureTheme.inkPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+          SpeakTextButton(
+            utteranceID: "introduction.\(introduction.key)",
+            text: resolvedText,
+            accessibilityLabelKey: "朗读介绍"
+          )
+        }
         RichTextBlocksView(document: .plain(resolvedText))
       } else {
         SkeletonLine(height: 14, widthFraction: 0.45)
         SkeletonTextBlock(widthFractions: [1.0, 0.9])
       }
     }
-    .padding(18)
+    .padding(.vertical, CultureTheme.rowPadding)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
     .task(id: "\(introduction.key)|\(languageStore.language.rawValue)") {
       await reload()
     }
@@ -188,9 +188,17 @@ private struct LocalizedIntroductionCard: View {
 
   private var sourceContent: some View {
     VStack(alignment: .leading, spacing: 8) {
-      Text(introduction.name)
-        .font(.headline)
-        .foregroundStyle(CultureTheme.inkPrimary)
+      HStack(alignment: .firstTextBaseline, spacing: 12) {
+        Text(introduction.name)
+          .font(.magazineDisplay(.headline))
+          .foregroundStyle(CultureTheme.inkPrimary)
+          .frame(maxWidth: .infinity, alignment: .leading)
+        SpeakTextButton(
+          utteranceID: "introduction.\(introduction.key)",
+          text: introduction.introduction.plainText,
+          accessibilityLabelKey: "朗读介绍"
+        )
+      }
       RichTextBlocksView(document: introduction.introduction)
     }
   }

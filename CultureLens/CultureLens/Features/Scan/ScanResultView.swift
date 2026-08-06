@@ -349,12 +349,10 @@ struct ScanResultView: View {
     )
     .font(.subheadline)
     .foregroundStyle(CultureTheme.inkSecondary)
-    .padding(16)
+    .padding(.vertical, 16)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-    )
+    .overlay(alignment: .top) { EditorialRule() }
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   /// 视觉备选的说明卡：模型的判断依据。
@@ -365,18 +363,21 @@ struct ScanResultView: View {
     }
     .font(.subheadline)
     .foregroundStyle(CultureTheme.inkSecondary)
-    .padding(16)
+    .padding(.vertical, 16)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-    )
+    .overlay(alignment: .top) { EditorialRule() }
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   private var evidenceCard: some View {
     VStack(alignment: .leading, spacing: 14) {
-      Label("判断依据", systemImage: "eye")
-        .font(.headline)
+      Text(verbatim: "EVIDENCE")
+        .font(.caption2.weight(.semibold))
+        .tracking(1.8)
+        .foregroundStyle(CultureTheme.cinnabar)
+
+      Text("判断依据")
+        .font(.magazineDisplay(.title3))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(rationale)
@@ -385,7 +386,7 @@ struct ScanResultView: View {
         .lineSpacing(5)
 
       if candidate == nil, let uncertainty = session.result.uncertainty {
-        Divider()
+        EditorialRule()
         Label("仍需确认", systemImage: "questionmark.circle")
           .font(.headline)
           .foregroundStyle(CultureTheme.cinnabar)
@@ -394,7 +395,7 @@ struct ScanResultView: View {
           .foregroundStyle(CultureTheme.inkSecondary)
       }
 
-      Divider()
+      EditorialRule()
 
       HStack {
         Label(
@@ -410,28 +411,25 @@ struct ScanResultView: View {
       .font(.caption)
       .foregroundStyle(CultureTheme.inkSecondary)
     }
-    .padding(20)
-    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
-    .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, 20)
+    .overlay(alignment: .top) { EditorialRule() }
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   /// 景点推荐：视觉模型的备选猜测（在前，只保留命中景点 key 的）与附近景点候选。
   @ViewBuilder
   private var recommendations: some View {
     if !attractionCandidates.isEmpty || !visualAlternatives.isEmpty {
-      VStack(alignment: .leading, spacing: 12) {
-        Text("景点推荐")
-          .font(.cultureSerif(.title2))
-          .foregroundStyle(CultureTheme.inkPrimary)
+      VStack(alignment: .leading, spacing: 0) {
+        MagazineSectionHeader(
+          eyebrow: "NEARBY",
+          "景点推荐",
+          subtitle: "识别模型的备选判断与附近可确认的景点。"
+        )
+        .padding(.bottom, 4)
 
-        Text("识别模型的备选判断与附近可确认的景点。")
-          .font(.caption)
-          .foregroundStyle(CultureTheme.inkSecondary)
-
-        ForEach(visualAlternatives) { candidate in
+        ForEach(Array(visualAlternatives.enumerated()), id: \.element.id) { index, candidate in
+          if index > 0 { EditorialRule() }
           NavigationLink(
             value: AppRoute.scanCandidate(
               sessionID: session.id,
@@ -443,7 +441,8 @@ struct ScanResultView: View {
           .buttonStyle(.plain)
         }
 
-        ForEach(attractionCandidates) { candidate in
+        ForEach(Array(attractionCandidates.enumerated()), id: \.element.id) { index, candidate in
+          if index > 0 || !visualAlternatives.isEmpty { EditorialRule() }
           NavigationLink(
             value: AppRoute.scanCandidate(
               sessionID: session.id,
@@ -454,6 +453,7 @@ struct ScanResultView: View {
           }
           .buttonStyle(.plain)
         }
+        EditorialRule()
       }
     }
   }
@@ -467,7 +467,7 @@ struct ScanResultView: View {
           cacheKey: candidate.culturalElementID.map { $0.uuidString.lowercased() }
             ?? KnowledgeStore.shared?.elementKey(for: candidate.id)
         )
-        .font(.headline)
+        .font(.magazineDisplay(.headline))
         .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(
@@ -499,15 +499,9 @@ struct ScanResultView: View {
         .font(.caption.weight(.semibold))
         .foregroundStyle(CultureTheme.inkSecondary)
     }
-    .padding(16)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 18)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 18)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, CultureTheme.rowPadding)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .contentShape(Rectangle())
     .accessibilityElement(children: .combine)
   }
 
@@ -520,7 +514,7 @@ struct ScanResultView: View {
           cacheKey: candidate.attractionID.map { $0.uuidString.lowercased() }
           ?? KnowledgeStore.shared?.attraction(id: candidate.id).flatMap(\.key)
         )
-        .font(.headline)
+        .font(.magazineDisplay(.headline))
         .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Image(systemName: "chevron.right")
@@ -540,15 +534,9 @@ struct ScanResultView: View {
         .lineLimit(3)
       }
     }
-    .padding(16)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 18)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 18)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, CultureTheme.rowPadding)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .contentShape(Rectangle())
   }
 
   private var actionButtons: some View {

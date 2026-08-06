@@ -54,8 +54,9 @@ struct ScanExplanationSectionView: View {
         SkeletonTextBlock()
       }
       .frame(maxWidth: .infinity, alignment: .leading)
-      .padding(16)
-      .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
+      .padding(.vertical, 16)
+      .overlay(alignment: .top) { EditorialRule() }
+      .overlay(alignment: .bottom) { EditorialRule() }
     case .streaming:
       if let explanationStreamSource {
         StreamingPersonalizedExplanationView(
@@ -104,8 +105,9 @@ struct ScanExplanationSectionView: View {
         }
         .buttonStyle(.bordered)
       }
-      .padding(16)
-      .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
+      .padding(.vertical, 16)
+      .overlay(alignment: .top) { EditorialRule() }
+      .overlay(alignment: .bottom) { EditorialRule() }
     }
   }
 

@@ -175,15 +175,7 @@ struct ExploreHomeView: View {
               nextDiscoveriesSection
             }
 
-            // 页脚：细线 + 饰花收版
-            HStack(spacing: 14) {
-              Rectangle().fill(CultureTheme.hairline).frame(height: 1)
-              Text(verbatim: "❖")
-                .font(.caption)
-                .foregroundStyle(CultureTheme.cinnabar)
-              Rectangle().fill(CultureTheme.hairline).frame(height: 1)
-            }
-            .accessibilityHidden(true)
+            MagazineFooterOrnament()
           }
           .padding(.horizontal, CultureTheme.pagePadding)
           .padding(.top, 28)
@@ -920,35 +912,6 @@ private struct BadgeCelebrationOverlay: View {
     }
     .allowsHitTesting(false)
     .accessibilityHidden(true)
-  }
-}
-
-// MARK: - 版面零件
-
-/// 分栏细线：杂志用线而不是盒子分隔条目。
-private struct EditorialRule: View {
-  var body: some View {
-    Rectangle()
-      .fill(CultureTheme.hairline)
-      .frame(height: 1)
-  }
-}
-
-/// 1.5pt 细线进度条，替代系统 ProgressView 的「设置页」感。
-private struct ThinProgressRule: View {
-  let fraction: Double
-  let tint: Color
-
-  var body: some View {
-    GeometryReader { proxy in
-      ZStack(alignment: .leading) {
-        Rectangle().fill(CultureTheme.hairline)
-        Rectangle()
-          .fill(tint)
-          .frame(width: proxy.size.width * min(max(fraction, 0), 1))
-      }
-    }
-    .frame(height: 1.5)
   }
 }
 

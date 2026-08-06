@@ -217,18 +217,31 @@ struct AskCultureView: View {
             }
           case .assistant:
             if assistantHasVisibleBody(message) {
-              assistantContent(message)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                  CultureTheme.surface,
-                  in: RoundedRectangle(cornerRadius: 18, style: .continuous)
-                )
-                .overlay {
-                  RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(CultureTheme.hairline, lineWidth: 1)
+              VStack(alignment: .trailing, spacing: 6) {
+                assistantContent(message)
+                  .padding(.horizontal, 14)
+                  .padding(.vertical, 10)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                  .background(
+                    CultureTheme.surface,
+                    in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+                  )
+                  .overlay {
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                      .stroke(CultureTheme.hairline, lineWidth: 1)
+                  }
+
+                if !message.isStreaming,
+                  !message.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                {
+                  SpeakTextButton(
+                    utteranceID: "chat.\(message.id.uuidString)",
+                    text: message.text,
+                    accessibilityLabelKey: "朗读回答"
+                  )
+                  .padding(.trailing, 4)
                 }
+              }
             }
           }
         }

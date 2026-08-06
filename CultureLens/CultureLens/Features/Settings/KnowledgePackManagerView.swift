@@ -15,7 +15,7 @@ struct KnowledgePackManagerView: View {
       CulturePageBackground()
 
       ScrollView {
-        LazyVStack(alignment: .leading, spacing: 14) {
+        LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
           introduction
 
           if isLoading && resources.isEmpty && imagePack == nil {
@@ -23,11 +23,19 @@ struct KnowledgePackManagerView: View {
               .frame(maxWidth: .infinity)
               .padding(.vertical, 48)
           } else {
-            ForEach(resources) { resource in
-              resourceCard(resource)
+            VStack(alignment: .leading, spacing: 0) {
+          ForEach(resources) { resource in
+            if resource.id == resources.first?.id {
+              EditorialRule()
             }
-            if let imagePack {
-              imagePackCard(imagePack)
+            resourceCard(resource)
+          }
+          if let imagePack {
+            if resources.isEmpty {
+              EditorialRule()
+            }
+            imagePackCard(imagePack)
+          }
             }
           }
 
@@ -38,6 +46,8 @@ struct KnowledgePackManagerView: View {
               .fixedSize(horizontal: false, vertical: true)
               .padding(.horizontal, 4)
           }
+
+          MagazineFooterOrnament()
         }
         .padding(.horizontal, CultureTheme.pagePadding)
         .padding(.top, 16)
@@ -62,31 +72,19 @@ struct KnowledgePackManagerView: View {
   }
 
   private var introduction: some View {
-    VStack(alignment: .leading, spacing: 7) {
-      Text("知识与图片资源包")
-        .font(.headline)
-        .foregroundStyle(CultureTheme.inkPrimary)
-      Text("知识包与图片包首次安装时默认随 App 交付；若系统清理了按需资源，可在这里单独重新下载。图片包会拦截对应的远程图片请求，优先读本地文件。")
-        .font(.footnote)
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .fixedSize(horizontal: false, vertical: true)
-    }
-    .padding(.horizontal, 4)
-    .padding(.bottom, 2)
+    MagazinePageHeader(
+      eyebrow: "PACKS",
+      title: "知识与图片资源包",
+      message: "知识包与图片包首次安装时默认随 App 交付；若系统清理了按需资源，可在这里单独重新下载。图片包会拦截对应的远程图片请求，优先读本地文件。"
+    )
   }
 
   private func resourceCard(_ resource: KnowledgePackResource) -> some View {
     VStack(alignment: .leading, spacing: 14) {
       HStack(alignment: .top, spacing: 14) {
-        Image(systemName: resource.directory.systemImage)
-          .font(.title3)
-          .foregroundStyle(CultureTheme.antiqueGold)
-          .frame(width: 34, height: 34)
-          .background(CultureTheme.antiqueGold.opacity(0.12), in: Circle())
-
         VStack(alignment: .leading, spacing: 4) {
           Text(resource.directory.title)
-            .font(.headline)
+            .font(.magazineDisplay(.headline))
             .foregroundStyle(CultureTheme.inkPrimary)
           if let version = resource.version {
             Text(version)
@@ -102,9 +100,9 @@ struct KnowledgePackManagerView: View {
       if resource.availability == .available {
         HStack(spacing: 0) {
           metric(value: resource.elementCount, label: "知识节点")
-          Divider().frame(height: 30)
+          Rectangle().fill(CultureTheme.hairline).frame(width: 1, height: 30)
           metric(value: resource.attractionCount, label: "景点")
-          Divider().frame(height: 30)
+          Rectangle().fill(CultureTheme.hairline).frame(width: 1, height: 30)
           metric(value: resource.relationCount, label: "关系")
         }
       } else {
@@ -113,7 +111,7 @@ struct KnowledgePackManagerView: View {
           .foregroundStyle(CultureTheme.inkSecondary)
       }
 
-      Divider()
+      EditorialRule()
 
       HStack(spacing: 10) {
         Label("按需资源 · 默认安装", systemImage: "shippingbox")
@@ -140,26 +138,16 @@ struct KnowledgePackManagerView: View {
         }
       }
     }
-    .padding(16)
-    .background(CultureTheme.surface.opacity(0.78), in: RoundedRectangle(cornerRadius: 16))
-    .overlay {
-      RoundedRectangle(cornerRadius: 16)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, CultureTheme.rowPadding)
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   private func imagePackCard(_ resource: ImagePackResource) -> some View {
     VStack(alignment: .leading, spacing: 14) {
       HStack(alignment: .top, spacing: 14) {
-        Image(systemName: "photo.on.rectangle.angled")
-          .font(.title3)
-          .foregroundStyle(CultureTheme.antiqueGold)
-          .frame(width: 34, height: 34)
-          .background(CultureTheme.antiqueGold.opacity(0.12), in: Circle())
-
         VStack(alignment: .leading, spacing: 4) {
           Text("知识配图")
-            .font(.headline)
+            .font(.magazineDisplay(.headline))
             .foregroundStyle(CultureTheme.inkPrimary)
           Text(ImagePackLoader.odrTag)
             .font(.caption.monospaced())
@@ -180,7 +168,7 @@ struct KnowledgePackManagerView: View {
           .foregroundStyle(CultureTheme.inkSecondary)
       }
 
-      Divider()
+      EditorialRule()
 
       HStack(spacing: 10) {
         Label("按需资源 · 默认安装", systemImage: "shippingbox")
@@ -207,18 +195,14 @@ struct KnowledgePackManagerView: View {
         }
       }
     }
-    .padding(16)
-    .background(CultureTheme.surface.opacity(0.78), in: RoundedRectangle(cornerRadius: 16))
-    .overlay {
-      RoundedRectangle(cornerRadius: 16)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, CultureTheme.rowPadding)
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   private func metric(value: Int, label: LocalizedStringKey) -> some View {
     VStack(spacing: 2) {
       Text(value, format: .number)
-        .font(.subheadline.weight(.semibold))
+        .font(.magazineDisplay(.title3))
         .foregroundStyle(CultureTheme.inkPrimary)
       Text(label)
         .font(.caption2)

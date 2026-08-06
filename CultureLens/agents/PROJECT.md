@@ -58,7 +58,8 @@ Go BFF（`CultureLensBackend/`）已从仓库删除。识别与知识检索均�
 ## 杂志化视觉语言（2026-08）
 
 - 版面组件：`DesignSystem/MagazineHeader.swift`（`MagazineSectionHeader` 栏目头 / `MagazinePageHeader` 页头；英文 eyebrow 是版面装饰，`Text(verbatim:)` 不进本地化目录）；远程照片统一暖调用 `View.magazinePhoto()`。
+- 版面零件：`DesignSystem/MagazineLayout.swift`（`EditorialRule` 分栏细线、`ThinProgressRule` 细线进度、`MagazineDoubleRule` 刊头双线、`MagazineDestinationRow` 导航行、`MagazineFooterOrnament` 页脚饰花）。探索页是参考实现；主题 / 回顾 / 更多 / 设置 / 扫描结果等列表页共用同一套零件。
 - 标题宋体：`Font.magazineDisplay(...)`。内置子集化思源宋体 `Resources/Fonts/CultureLensSerif-SemiBold.ttf`（GB2312 字符集子集 ≈3MB；OFL 的 Reserved Font Name 约束要求改名，许可见同目录 `OFL.txt`），`CultureThemeFonts` 运行时注册并探测，回退链：内置宋体 → Songti SC → 系统衬线。
 - 页面背景：`CulturePageBackground` 用运行时生成的纸纹颗粒平铺，不再用光斑。
-- 版面原则：分栏细线（hairline rule）与大留白代替圆角卡片盒；刊头不放品牌字标。探索页（刊头 + NEARBY / COLLECTION / COVER STORY / UP NEXT 栏目）是参考实现。
+- 版面原则：分栏细线（hairline rule）与大留白代替圆角卡片盒；刊头不放品牌字标。圆角 surface 盒仅保留给分享卡、对话气泡、墨色封面等确需盒子的交互块。
 - ODR 注意：asset pack 内文件为扁平布局，`KnowledgePackLoader.loadPack` 需从包根目录读取（子目录候选仅为 bundle 内旧布局保留）。

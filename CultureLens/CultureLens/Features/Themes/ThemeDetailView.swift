@@ -35,7 +35,7 @@ struct ThemeDetailView: View {
 
       if let theme, let progress, !progress.elementIds.isEmpty {
         ScrollView {
-          LazyVStack(alignment: .leading, spacing: 22) {
+          LazyVStack(alignment: .leading, spacing: CultureTheme.sectionSpacing) {
             VStack(alignment: .leading, spacing: 10) {
               Text(verbatim: "SERIES")
                 .font(.caption.weight(.semibold))
@@ -56,7 +56,7 @@ struct ThemeDetailView: View {
               }
 
               Text(theme.name)
-                .font(.cultureSerif(.largeTitle))
+                .font(.magazineDisplay(.largeTitle))
                 .foregroundStyle(CultureTheme.inkPrimary)
 
               Text(theme.summary)
@@ -64,24 +64,21 @@ struct ThemeDetailView: View {
                 .foregroundStyle(CultureTheme.inkSecondary)
                 .lineSpacing(5)
 
-              VStack(spacing: 3) {
-                Rectangle().fill(CultureTheme.inkPrimary).frame(height: 2)
-                Rectangle().fill(CultureTheme.inkPrimary.opacity(0.35)).frame(height: 0.5)
-              }
-              .padding(.top, 6)
+              MagazineDoubleRule()
+                .padding(.top, 6)
             }
 
             VStack(alignment: .leading, spacing: 10) {
               HStack {
                 Text("进度")
-                  .font(.headline)
+                  .font(.magazineDisplay(.headline))
+                  .foregroundStyle(CultureTheme.inkPrimary)
                 Spacer()
                 Text("\(progress.contactedCount)/\(progress.requiredCount)")
                   .font(.subheadline.monospacedDigit())
                   .foregroundStyle(CultureTheme.inkSecondary)
               }
-              ProgressView(value: progress.fractionComplete)
-                .tint(CultureTheme.cinnabar)
+              ThinProgressRule(fraction: progress.fractionComplete)
               Text(
                 progress.isComplete
                   ? LocalizedStringKey("这条文化系已经点亮。继续收集其余节点，可以让脉络更完整。")
@@ -90,20 +87,22 @@ struct ThemeDetailView: View {
               .font(.caption)
               .foregroundStyle(CultureTheme.inkSecondary)
             }
-            .padding(18)
-            .background(
-              CultureTheme.surface,
-              in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-            )
 
-            MagazineSectionHeader(eyebrow: "NODES", "主题节点")
+            VStack(alignment: .leading, spacing: 0) {
+              MagazineSectionHeader(eyebrow: "NODES", "主题节点")
+                .padding(.bottom, 4)
 
-            ForEach(progress.elementIds, id: \.self) { id in
-              elementRow(
-                id: id,
-                isContacted: progress.contactedIds.contains(id)
-              )
+              ForEach(Array(progress.elementIds.enumerated()), id: \.element) { index, id in
+                if index > 0 { EditorialRule() }
+                elementRow(
+                  id: id,
+                  isContacted: progress.contactedIds.contains(id)
+                )
+              }
+              EditorialRule()
             }
+
+            MagazineFooterOrnament()
           }
           .padding(.horizontal, CultureTheme.pagePadding)
           .padding(.top, 20)
@@ -124,15 +123,18 @@ struct ThemeDetailView: View {
 
       NavigationLink(value: AppRoute.knowledgeElement(element.id)) {
         HStack(alignment: .top, spacing: 14) {
-          Image(systemName: isContacted ? "checkmark.circle.fill" : "circle")
-            .foregroundStyle(
-              isContacted ? CultureTheme.antiqueGold : CultureTheme.inkSecondary
-            )
-            .font(.title3)
+          if isContacted {
+            SealBadge(character: "访", size: 22)
+          } else {
+            Image(systemName: "circle")
+              .foregroundStyle(CultureTheme.inkSecondary)
+              .font(.title3)
+              .frame(width: 22, height: 22)
+          }
 
           VStack(alignment: .leading, spacing: 4) {
             Text(name)
-              .font(.headline)
+              .font(.magazineDisplay(.headline))
               .foregroundStyle(CultureTheme.inkPrimary)
             if !summary.isEmpty {
               Text(summary)
@@ -146,17 +148,10 @@ struct ThemeDetailView: View {
 
           Image(systemName: "chevron.right")
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(CultureTheme.inkSecondary.opacity(0.7))
         }
-        .padding(16)
-        .background(
-          CultureTheme.surface,
-          in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-        )
-        .overlay {
-          RoundedRectangle(cornerRadius: 12, style: .continuous)
-            .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
+        .padding(.vertical, CultureTheme.rowPadding)
+        .contentShape(Rectangle())
       }
       .buttonStyle(.plain)
     }

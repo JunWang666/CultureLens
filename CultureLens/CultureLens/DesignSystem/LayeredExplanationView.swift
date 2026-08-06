@@ -19,12 +19,9 @@ struct PersonalizedExplanationView: View {
         KnowledgeCitationCardsView(citations: explanation.citations)
       }
     }
-    .padding(20)
-    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
-    .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, 20)
+    .overlay(alignment: .top) { EditorialRule() }
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   private var explanationHeader: some View {
@@ -36,17 +33,25 @@ struct PersonalizedExplanationView: View {
 
       Spacer(minLength: 8)
 
-      if isRegenerating {
-        ProgressView()
-          .controlSize(.small)
-          .accessibilityLabel("正在重新生成讲解")
-      } else if let onRegenerate {
-        Button("重新生成", systemImage: "arrow.clockwise", action: onRegenerate)
-          .labelStyle(.iconOnly)
-          .buttonStyle(.plain)
-          .foregroundStyle(CultureTheme.cinnabar)
-          .accessibilityHint("使用最新文化图谱重新生成并替换当前讲解")
-          .accessibilityIdentifier("explanation.regenerate")
+      HStack(spacing: 14) {
+        SpeakTextButton(
+          utteranceID: "explanation",
+          text: explanation.markdown,
+          accessibilityLabelKey: "朗读讲解"
+        )
+
+        if isRegenerating {
+          ProgressView()
+            .controlSize(.small)
+            .accessibilityLabel("正在重新生成讲解")
+        } else if let onRegenerate {
+          Button("重新生成", systemImage: "arrow.clockwise", action: onRegenerate)
+            .labelStyle(.iconOnly)
+            .buttonStyle(.plain)
+            .foregroundStyle(CultureTheme.cinnabar)
+            .accessibilityHint("使用最新文化图谱重新生成并替换当前讲解")
+            .accessibilityIdentifier("explanation.regenerate")
+        }
       }
     }
   }
@@ -71,12 +76,9 @@ struct StreamingPersonalizedExplanationView: View {
       StreamedMarkdownView(source: source, config: Self.markdownConfig)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    .padding(20)
-    .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: CultureTheme.cardRadius))
-    .overlay {
-      RoundedRectangle(cornerRadius: CultureTheme.cardRadius)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
+    .padding(.vertical, 20)
+    .overlay(alignment: .top) { EditorialRule() }
+    .overlay(alignment: .bottom) { EditorialRule() }
   }
 
   private static var markdownConfig: MarkdownRenderConfig {

@@ -18,10 +18,13 @@ struct ScanTimelineView: View {
                 emptyState
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 14) {
-                        ForEach(records) { record in
+                    LazyVStack(spacing: 0) {
+                        ForEach(Array(records.enumerated()), id: \.element.recordID) { index, record in
                             NavigationLink(value: AppRoute.history(record.recordID)) {
-                                ScanHistoryTimelineRow(record: record)
+                                ScanHistoryTimelineRow(
+                                    record: record,
+                                    showsTopRule: index == 0
+                                )
                             }
                             .buttonStyle(.plain)
                             .contextMenu {
@@ -67,48 +70,52 @@ struct ScanTimelineView: View {
 
 struct ScanHistoryTimelineRow: View {
     let record: ScanHistoryRecord
+    /// 列表首行是否画顶线；连续条目只画底线避免双线。
+    var showsTopRule: Bool = false
 
     var body: some View {
-        HStack(spacing: 14) {
-            Image(systemName: symbol)
-                .font(.title2)
-                .foregroundStyle(CultureTheme.antiqueGold)
-                .frame(width: 54, height: 54)
-                .background(CultureTheme.inkPrimary, in: RoundedRectangle(cornerRadius: 16))
+        VStack(alignment: .leading, spacing: 0) {
+            if showsTopRule { EditorialRule() }
+            HStack(alignment: .top, spacing: 14) {
+                Text(record.createdAt, format: .dateTime.day().month())
+                    .font(.magazineDisplay(size: 22))
+                    .foregroundStyle(CultureTheme.inkPrimary.opacity(0.32))
+                    .frame(width: 44, alignment: .leading)
+                    .padding(.top, 2)
+                    .accessibilityHidden(true)
 
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    Text(record.canonicalName)
-                        .font(.headline)
-                        .foregroundStyle(CultureTheme.inkPrimary)
-                    Spacer()
-                    Text(record.confidence, format: .percent.precision(.fractionLength(0)))
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(CultureTheme.cinnabar)
-                }
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(record.canonicalName)
+                            .font(.magazineDisplay(.headline))
+                            .foregroundStyle(CultureTheme.inkPrimary)
+                        Spacer(minLength: 8)
+                        Text(record.confidence, format: .percent.precision(.fractionLength(0)))
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(CultureTheme.cinnabar)
+                    }
 
-                Text(record.createdAt, format: .dateTime.year().month().day().hour().minute())
+                    Text(record.createdAt, format: .dateTime.year().month().day().hour().minute())
+                        .font(.caption)
+                        .foregroundStyle(CultureTheme.inkSecondary)
+
+                    Label(
+                        locationText,
+                        systemImage: record.place == nil ? "location.slash" : "location"
+                    )
                     .font(.caption)
                     .foregroundStyle(CultureTheme.inkSecondary)
+                }
 
-                Label(
-                    locationText,
-                    systemImage: record.place == nil ? "location.slash" : "location"
-                )
-                .font(.caption)
-                .foregroundStyle(CultureTheme.inkSecondary)
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(CultureTheme.inkSecondary.opacity(0.7))
+                    .padding(.top, 4)
             }
-
-            Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            .padding(.vertical, CultureTheme.rowPadding)
+            EditorialRule()
         }
-        .padding(16)
-        .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 20))
-        .overlay {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(CultureTheme.hairline, lineWidth: 1)
-        }
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityHint("打开历史扫描详情")
     }
@@ -123,17 +130,6 @@ struct ScanHistoryTimelineRow: View {
                 + String(format: " %.3f, %.3f", latitude, longitude)
         }
         return String(localized: "未记录位置")
-    }
-
-    private var symbol: String {
-        switch ObjectCategory(rawValue: record.categoryRawValue) {
-        case .architecture: "building.columns"
-        case .artifact: "seal"
-        case .pattern: "camera.macro"
-        case .exhibit: "photo.artframe"
-        case .space: "square.3.layers.3d"
-        case .other, nil: "sparkles"
-        }
     }
 }
 

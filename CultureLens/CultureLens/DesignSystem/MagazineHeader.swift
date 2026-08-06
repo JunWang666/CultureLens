@@ -35,16 +35,14 @@ struct MagazineSectionHeader: View {
         .tracking(1.8)
         .foregroundStyle(CultureTheme.cinnabar)
       Text(title)
-        .font(.cultureSerif(.title2))
+        .font(.magazineDisplay(.title2))
         .foregroundStyle(CultureTheme.inkPrimary)
       if let subtitle {
         Text(subtitle)
           .font(.subheadline)
           .foregroundStyle(CultureTheme.inkSecondary)
       }
-      Rectangle()
-        .fill(CultureTheme.hairline)
-        .frame(height: 1)
+      EditorialRule()
         .padding(.top, 6)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -66,7 +64,7 @@ struct MagazinePageHeader: View {
         .foregroundStyle(CultureTheme.cinnabar)
 
       Text(title)
-        .font(.cultureSerif(.largeTitle))
+        .font(.magazineDisplay(.largeTitle))
         .foregroundStyle(CultureTheme.inkPrimary)
 
       Text(message)
@@ -74,10 +72,7 @@ struct MagazinePageHeader: View {
         .foregroundStyle(CultureTheme.inkSecondary)
         .lineSpacing(3)
 
-      VStack(spacing: 3) {
-        Rectangle().fill(CultureTheme.inkPrimary).frame(height: 2)
-        Rectangle().fill(CultureTheme.inkPrimary.opacity(0.35)).frame(height: 0.5)
-      }
+      MagazineDoubleRule()
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .accessibilityElement(children: .combine)

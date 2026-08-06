@@ -38,10 +38,10 @@ final class ScanCoordinator {
 
     init(
         locationProvider: LocationContextProvider? = nil,
-        nearbyMapPlaceProvider: any NearbyMapPlaceProviding = NearbyMapPlaceProvider()
+        nearbyMapPlaceProvider: (any NearbyMapPlaceProviding)? = nil
     ) {
         self.locationProvider = locationProvider ?? LocationContextProvider()
-        self.nearbyMapPlaceProvider = nearbyMapPlaceProvider
+        self.nearbyMapPlaceProvider = nearbyMapPlaceProvider ?? NearbyMapPlaceProvider()
     }
 
     func begin(
@@ -93,10 +93,9 @@ final class ScanCoordinator {
                 }
 
                 try Task.checkCancellation()
-                let nearbyMapPlaces = if let place {
-                    await nearbyMapPlaceProvider.nearbyPlaces(around: place)
-                } else {
-                    []
+                var nearbyMapPlaces: [NearbyMapPlaceContext] = []
+                if let place {
+                    nearbyMapPlaces = await nearbyMapPlaceProvider.nearbyPlaces(around: place)
                 }
 
                 try Task.checkCancellation()

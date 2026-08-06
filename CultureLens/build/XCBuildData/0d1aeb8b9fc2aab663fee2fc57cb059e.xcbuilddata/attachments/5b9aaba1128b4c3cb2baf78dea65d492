@@ -1,0 +1,4 @@
+module Equatable {
+header "Equatable-Swift.h"
+export *
+}

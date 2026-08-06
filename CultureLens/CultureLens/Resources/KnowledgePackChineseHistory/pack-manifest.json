@@ -1,22 +1,22 @@
 {
-  "packVersion": "chinese-history-v4",
-  "generatedAt": "2026-08-06T07:05:38Z",
-  "recordCounts": {
-    "elements": 45,
-    "elementsSight": 2,
-    "elementsHistory": 43,
-    "relations": 73,
-    "introductions": 4,
-    "attractions": 2,
-    "themes": 4
-  },
-  "sha256": "ade326ca0aa652755239de0a7d2b672798b09717c49e57d2316447923912cdad",
-  "files": [
-    "knowledge-pack.json",
-    "elements-sight.json",
-    "elements-history.json",
-    "introductions.json",
-    "themes.json",
-    "locales-en.json"
-  ]
+ "packVersion": "chinese-history-v6",
+ "generatedAt": "2026-08-06T07:05:38Z",
+ "recordCounts": {
+  "elements": 45,
+  "elementsSight": 2,
+  "elementsHistory": 43,
+  "relations": 73,
+  "introductions": 4,
+  "attractions": 2,
+  "themes": 4
+ },
+ "sha256": "a034f58248cab3c6b6580d7a50053b968f684f7a08ba33bb2bb2f190090027c3",
+ "files": [
+  "elements-history.json",
+  "elements-sight.json",
+  "introductions.json",
+  "knowledge-pack.json",
+  "locales-en.json",
+  "themes.json"
+ ]
 }

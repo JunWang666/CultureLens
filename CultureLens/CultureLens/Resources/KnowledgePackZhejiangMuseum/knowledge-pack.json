@@ -1,348 +1,348 @@
 {
-  "version": "zhejiang-museum-v5",
-  "source_language": "zh-Hans",
-  "relations": [
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "zhejiang-museum-history",
-      "kind": "体现",
-      "explanation": "孤山馆区是浙博最早落成的馆区，见证从西湖博物馆起步的馆史。"
-    },
-    {
-      "elementKey": "zhijiang-campus",
-      "relatedElementKey": "zhejiang-museum-history",
-      "kind": "体现",
-      "explanation": "之江馆区是浙博馆史在新世纪的延续，2023年作为新主场开放。"
-    },
-    {
-      "elementKey": "gushan-campus",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "相似于",
-      "explanation": "孤山与之江两大馆区一老一新，共同承载浙博馆藏。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "museum-collection-system",
-      "kind": "体现",
-      "explanation": "十大镇馆之宝从十余万件馆藏中评选产生，体现收藏体系的最高水准。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "jade-cong-wang",
-      "kind": "组成",
-      "explanation": "良渚玉琮王是十大镇馆之宝之首，代表史前玉礼文明。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "hemudu-double-bird",
-      "kind": "组成",
-      "explanation": "双鸟朝阳纹牙雕代表河姆渡工艺的最高成就。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "zhejiang-yue-sword",
-      "kind": "组成",
-      "explanation": "越王者旨於睗剑是青铜兵器门类的代表。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "asoka-pagoda",
-      "kind": "组成",
-      "explanation": "鎏金银阿育王塔是吴越佛教文物的代表。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "cai-feng-ming-qi",
-      "kind": "组成",
-      "explanation": "彩凤鸣岐是传世唐琴的代表。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "longquan-boat-drip",
-      "kind": "组成",
-      "explanation": "舟形砚滴代表龙泉青瓷文房器的最高水准。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "fuchun-shanju-tu",
-      "kind": "组成",
-      "explanation": "剩山图代表馆藏书画的最高水准。"
-    },
-    {
-      "elementKey": "top-ten-treasures",
-      "relatedElementKey": "wan-gong-jiao",
-      "kind": "组成",
-      "explanation": "万工轿代表清末民初朱金木雕工艺的巅峰。"
-    },
-    {
-      "elementKey": "no-overseas-treasures",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "位于",
-      "explanation": "禁止出国（境）展览的五件（组）文物全部位于之江馆区。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "huang-binhong",
-      "kind": "组成",
-      "explanation": "黄宾虹家属捐赠的五千余件作品与手稿，是书画收藏的重要支柱。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "组成",
-      "explanation": "曹其镛夫妇捐赠的160件漆器，是馆藏漆器门类的支柱。"
-    },
-    {
-      "elementKey": "museum-collection-system",
-      "relatedElementKey": "wu-changshuo",
-      "kind": "组成",
-      "explanation": "吴昌硕遗属捐赠的文物，是书画印收藏的重要组成。"
-    },
-    {
-      "elementKey": "zhejiang-museum-history",
-      "relatedElementKey": "sha-menghai",
-      "kind": "组成",
-      "explanation": "沙孟海曾任历史部主任与名誉馆长，是浙博馆史的重要组成。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-double-bird",
-      "kind": "组成",
-      "explanation": "双鸟朝阳纹牙雕是河姆渡线雕工艺与鸟日崇拜的代表遗物。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-painted-pottery",
-      "kind": "组成",
-      "explanation": "绘纹陶器的绳纹与动植物图案，是河姆渡陶器传统的代表。"
-    },
-    {
-      "elementKey": "hemudu-culture",
-      "relatedElementKey": "hemudu-bone-plough",
-      "kind": "组成",
-      "explanation": "骨耜是河姆渡『耜耕农业』的标志性农具。"
-    },
-    {
-      "elementKey": "hemudu-double-bird",
-      "relatedElementKey": "gushan-campus",
-      "kind": "位于",
-      "explanation": "双鸟朝阳纹牙雕作为镇馆之宝，长期于孤山馆区展陈。"
-    },
-    {
-      "elementKey": "hemudu-bone-plough",
-      "relatedElementKey": "rice-agriculture",
-      "kind": "体现",
-      "explanation": "骨耜翻地种稻，体现江南稻作农业七千年的悠久源头。"
-    },
-    {
-      "elementKey": "zhonghua-civilization",
-      "relatedElementKey": "hemudu-culture",
-      "kind": "组成",
-      "explanation": "河姆渡七千年的稻作遗存，是中华文明多元源头之一。"
-    },
-    {
-      "elementKey": "zhejiang-yue-sword",
-      "relatedElementKey": "yue-bronze-swords",
-      "kind": "体现",
-      "explanation": "者旨於睗剑的精湛铸工与鸟篆铭文，体现越国青铜剑传统的最高水准。"
-    },
-    {
-      "elementKey": "jiyue-bronze-house",
-      "relatedElementKey": "yue-bronze-swords",
-      "kind": "制作采用",
-      "explanation": "伎乐铜屋采用越国高超的青铜铸造技术，与越剑一脉相承。"
-    },
-    {
-      "elementKey": "zhejiang-yue-sword",
-      "relatedElementKey": "spring-autumn-warring-states",
-      "kind": "产生于",
-      "explanation": "越国崛起于春秋末期，越王剑产生于诸侯争霸的时代。"
-    },
-    {
-      "elementKey": "five-dynasties-ten-kingdoms",
-      "relatedElementKey": "wuyue-state",
-      "kind": "组成",
-      "explanation": "吴越国是十国之一，以保境安民、纳土归宋著称。"
-    },
-    {
-      "elementKey": "wuyue-state",
-      "relatedElementKey": "zhejiang-yue-sword",
-      "kind": "解释",
-      "explanation": "吴越国的『越』字国号与尚武风气，要从越王剑代表的古越传统理解。"
-    },
-    {
-      "elementKey": "wuyue-buddhist-art",
-      "relatedElementKey": "wuyue-state",
-      "kind": "产生于",
-      "explanation": "吴越佛教的兴盛，产生于钱氏国王崇佛造塔的国策。"
-    },
-    {
-      "elementKey": "chinese-buddhism",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "理解前先懂",
-      "explanation": "先了解佛教中国化的脉络，再看吴越如何把崇佛变成国策。"
-    },
-    {
-      "elementKey": "asoka-pagoda",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "体现",
-      "explanation": "鎏金银阿育王塔出自雷峰塔地宫，是吴越宝箧印式塔传统的代表作。"
-    },
-    {
-      "elementKey": "caisu-mud-bodhisattva",
-      "relatedElementKey": "wuyue-buddhist-art",
-      "kind": "受到影响",
-      "explanation": "北宋彩塑泥菩萨承续吴越崇佛造像的传统。"
-    },
-    {
-      "elementKey": "longquan-kiln",
-      "relatedElementKey": "yue-kiln",
-      "kind": "解释",
-      "explanation": "越窑是浙江青瓷的源头，解释了龙泉窑粉青、梅子青釉色的来路。"
-    },
-    {
-      "elementKey": "southern-song-guan-ware",
-      "relatedElementKey": "yue-kiln",
-      "kind": "受到影响",
-      "explanation": "南宋官窑的青瓷技艺深受越窑传统影响。"
-    },
-    {
-      "elementKey": "longquan-boat-drip",
-      "relatedElementKey": "longquan-kiln",
-      "kind": "体现",
-      "explanation": "龙泉窑粉青、梅子青的温润釉色，在小巧的舟形砚滴上集中体现。"
-    },
-    {
-      "elementKey": "southern-song-guan-ware",
-      "relatedElementKey": "song-dynasty",
-      "kind": "产生于",
-      "explanation": "官窑随宋室南渡设于临安，产生于南宋宫廷用瓷的需求。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "huang-gongwang",
-      "kind": "解释",
-      "explanation": "黄公望五十岁学画、晚年入道的经历，解释了《富春山居图》沉静苍润的笔意。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "yuan-dynasty",
-      "kind": "产生于",
-      "explanation": "《富春山居图》成画于元代，是元四家山水画的高峰。"
-    },
-    {
-      "elementKey": "chinese-landscape-painting",
-      "relatedElementKey": "fuchun-shanju-tu",
-      "kind": "理解前先懂",
-      "explanation": "先了解中国山水画『可游可居』的传统，再看富春山居图的长卷叙事。"
-    },
-    {
-      "elementKey": "fuchun-shanju-tu",
-      "relatedElementKey": "zhijiang-campus",
-      "kind": "位于",
-      "explanation": "《富春山居图》的剩山图现藏于之江馆区。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "huang-gongwang",
-      "kind": "相似于",
-      "explanation": "黄宾虹与黄公望同为山水画大家，名作先后入藏浙博。"
-    },
-    {
-      "elementKey": "huang-binhong",
-      "relatedElementKey": "gushan-campus",
-      "kind": "受到影响",
-      "explanation": "黄宾虹晚年定居栖霞岭，深受西湖山水与孤山文化氛围滋养。"
-    },
-    {
-      "elementKey": "huang-binhong-memorial",
-      "relatedElementKey": "huang-binhong",
-      "kind": "解释",
-      "explanation": "纪念室陈列的画具与手稿，帮助理解黄宾虹晚年的创作状态。"
-    },
-    {
-      "elementKey": "huang-binhong-memorial",
-      "relatedElementKey": "gushan-campus",
-      "kind": "位于",
-      "explanation": "黄宾虹纪念室位于栖霞岭故居，邻近孤山馆区。"
-    },
-    {
-      "elementKey": "sha-menghai",
-      "relatedElementKey": "wu-changshuo",
-      "kind": "相似于",
-      "explanation": "沙孟海与吴昌硕同以书法篆刻著称，是前后相承的两位大家。"
-    },
-    {
-      "elementKey": "sha-menghai-residence",
-      "relatedElementKey": "sha-menghai",
-      "kind": "解释",
-      "explanation": "旧居保存的书作与用印，帮助理解沙孟海晚年的艺术与生活。"
-    },
-    {
-      "elementKey": "wu-changshuo",
-      "relatedElementKey": "xiling-seal-art",
-      "kind": "解释",
-      "explanation": "吴昌硕首任西泠印社社长，其金石画风要从印学传统理解。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "guqin-world",
-      "kind": "体现",
-      "explanation": "彩凤鸣岐是古琴音韵世界流传至今的实物代表。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "tang-guqin-tradition",
-      "kind": "产生于",
-      "explanation": "彩凤鸣岐产生于唐代斫琴传统，是『唐圆』之说的实物印证。"
-    },
-    {
-      "elementKey": "tang-guqin-tradition",
-      "relatedElementKey": "tang-dynasty",
-      "kind": "产生于",
-      "explanation": "唐代是古琴艺术的成熟期，传世名琴多出于此时。"
-    },
-    {
-      "elementKey": "guqin-world",
-      "relatedElementKey": "tang-guqin-tradition",
-      "kind": "组成",
-      "explanation": "唐代斫琴传统是古琴发展史中的关键一环。"
-    },
-    {
-      "elementKey": "qi-lacquer-donation",
-      "relatedElementKey": "zhang-cheng-red-lacquer",
-      "kind": "组成",
-      "explanation": "张成剔红婴戏图盘是这批捐赠漆器中价值最高的国宝。"
-    },
-    {
-      "elementKey": "cai-feng-ming-qi",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "相似于",
-      "explanation": "唐琴的大漆髹涂与馆藏漆器同属髹漆工艺谱系。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "wan-gong-jiao",
-      "kind": "组成",
-      "explanation": "万工轿是十里红妆中最华重的嫁妆，集朱金木雕工艺之大成。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "qi-lacquer-donation",
-      "kind": "相似于",
-      "explanation": "十里红妆的泥金彩漆与捐赠漆器的剔红，同属浙江髹漆工艺。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "jiyue-bronze-house",
-      "kind": "相似于",
-      "explanation": "嫁妆排场与伎乐乐舞，都是浙江民间生活与仪式的写照。"
-    },
-    {
-      "elementKey": "shili-hongzhuang",
-      "relatedElementKey": "qing-dynasty",
-      "kind": "产生于",
-      "explanation": "十里红妆的婚俗排场成形于明清时期的宁绍地区。"
-    }
-  ]
+ "version": "zhejiang-museum-v7",
+ "source_language": "zh-Hans",
+ "relations": [
+  {
+   "elementKey": "gushan-campus",
+   "relatedElementKey": "zhejiang-museum-history",
+   "kind": "体现",
+   "explanation": "孤山馆区是浙博最早落成的馆区，见证从西湖博物馆起步的馆史。"
+  },
+  {
+   "elementKey": "zhijiang-campus",
+   "relatedElementKey": "zhejiang-museum-history",
+   "kind": "体现",
+   "explanation": "之江馆区是浙博馆史在新世纪的延续，2023年作为新主场开放。"
+  },
+  {
+   "elementKey": "gushan-campus",
+   "relatedElementKey": "zhijiang-campus",
+   "kind": "相似于",
+   "explanation": "孤山与之江两大馆区一老一新，共同承载浙博馆藏。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "museum-collection-system",
+   "kind": "体现",
+   "explanation": "十大镇馆之宝从十余万件馆藏中评选产生，体现收藏体系的最高水准。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "jade-cong-wang",
+   "kind": "组成",
+   "explanation": "良渚玉琮王是十大镇馆之宝之首，代表史前玉礼文明。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "hemudu-double-bird",
+   "kind": "组成",
+   "explanation": "双鸟朝阳纹牙雕代表河姆渡工艺的最高成就。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "zhejiang-yue-sword",
+   "kind": "组成",
+   "explanation": "越王者旨於睗剑是青铜兵器门类的代表。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "asoka-pagoda",
+   "kind": "组成",
+   "explanation": "鎏金银阿育王塔是吴越佛教文物的代表。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "cai-feng-ming-qi",
+   "kind": "组成",
+   "explanation": "彩凤鸣岐是传世唐琴的代表。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "longquan-boat-drip",
+   "kind": "组成",
+   "explanation": "舟形砚滴代表龙泉青瓷文房器的最高水准。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "fuchun-shanju-tu",
+   "kind": "组成",
+   "explanation": "剩山图代表馆藏书画的最高水准。"
+  },
+  {
+   "elementKey": "top-ten-treasures",
+   "relatedElementKey": "wan-gong-jiao",
+   "kind": "组成",
+   "explanation": "万工轿代表清末民初朱金木雕工艺的巅峰。"
+  },
+  {
+   "elementKey": "no-overseas-treasures",
+   "relatedElementKey": "zhijiang-campus",
+   "kind": "位于",
+   "explanation": "禁止出国（境）展览的五件（组）文物全部位于之江馆区。"
+  },
+  {
+   "elementKey": "museum-collection-system",
+   "relatedElementKey": "huang-binhong",
+   "kind": "组成",
+   "explanation": "黄宾虹家属捐赠的五千余件作品与手稿，是书画收藏的重要支柱。"
+  },
+  {
+   "elementKey": "museum-collection-system",
+   "relatedElementKey": "qi-lacquer-donation",
+   "kind": "组成",
+   "explanation": "曹其镛夫妇捐赠的160件漆器，是馆藏漆器门类的支柱。"
+  },
+  {
+   "elementKey": "museum-collection-system",
+   "relatedElementKey": "wu-changshuo",
+   "kind": "组成",
+   "explanation": "吴昌硕遗属捐赠的文物，是书画印收藏的重要组成。"
+  },
+  {
+   "elementKey": "zhejiang-museum-history",
+   "relatedElementKey": "sha-menghai",
+   "kind": "组成",
+   "explanation": "沙孟海曾任历史部主任与名誉馆长，是浙博馆史的重要组成。"
+  },
+  {
+   "elementKey": "hemudu-culture",
+   "relatedElementKey": "hemudu-double-bird",
+   "kind": "组成",
+   "explanation": "双鸟朝阳纹牙雕是河姆渡线雕工艺与鸟日崇拜的代表遗物。"
+  },
+  {
+   "elementKey": "hemudu-culture",
+   "relatedElementKey": "hemudu-painted-pottery",
+   "kind": "组成",
+   "explanation": "绘纹陶器的绳纹与动植物图案，是河姆渡陶器传统的代表。"
+  },
+  {
+   "elementKey": "hemudu-culture",
+   "relatedElementKey": "hemudu-bone-plough",
+   "kind": "组成",
+   "explanation": "骨耜是河姆渡『耜耕农业』的标志性农具。"
+  },
+  {
+   "elementKey": "hemudu-double-bird",
+   "relatedElementKey": "gushan-campus",
+   "kind": "位于",
+   "explanation": "双鸟朝阳纹牙雕作为镇馆之宝，长期于孤山馆区展陈。"
+  },
+  {
+   "elementKey": "hemudu-bone-plough",
+   "relatedElementKey": "rice-agriculture",
+   "kind": "体现",
+   "explanation": "骨耜翻地种稻，体现江南稻作农业七千年的悠久源头。"
+  },
+  {
+   "elementKey": "zhonghua-civilization",
+   "relatedElementKey": "hemudu-culture",
+   "kind": "组成",
+   "explanation": "河姆渡七千年的稻作遗存，是中华文明多元源头之一。"
+  },
+  {
+   "elementKey": "zhejiang-yue-sword",
+   "relatedElementKey": "yue-bronze-swords",
+   "kind": "体现",
+   "explanation": "者旨於睗剑的精湛铸工与鸟篆铭文，体现越国青铜剑传统的最高水准。"
+  },
+  {
+   "elementKey": "jiyue-bronze-house",
+   "relatedElementKey": "yue-bronze-swords",
+   "kind": "制作采用",
+   "explanation": "伎乐铜屋采用越国高超的青铜铸造技术，与越剑一脉相承。"
+  },
+  {
+   "elementKey": "zhejiang-yue-sword",
+   "relatedElementKey": "spring-autumn-warring-states",
+   "kind": "产生于",
+   "explanation": "越国崛起于春秋末期，越王剑产生于诸侯争霸的时代。"
+  },
+  {
+   "elementKey": "five-dynasties-ten-kingdoms",
+   "relatedElementKey": "wuyue-state",
+   "kind": "组成",
+   "explanation": "吴越国是十国之一，以保境安民、纳土归宋著称。"
+  },
+  {
+   "elementKey": "wuyue-state",
+   "relatedElementKey": "zhejiang-yue-sword",
+   "kind": "解释",
+   "explanation": "吴越国的『越』字国号与尚武风气，要从越王剑代表的古越传统理解。"
+  },
+  {
+   "elementKey": "wuyue-buddhist-art",
+   "relatedElementKey": "wuyue-state",
+   "kind": "产生于",
+   "explanation": "吴越佛教的兴盛，产生于钱氏国王崇佛造塔的国策。"
+  },
+  {
+   "elementKey": "chinese-buddhism",
+   "relatedElementKey": "wuyue-buddhist-art",
+   "kind": "理解前先懂",
+   "explanation": "先了解佛教中国化的脉络，再看吴越如何把崇佛变成国策。"
+  },
+  {
+   "elementKey": "asoka-pagoda",
+   "relatedElementKey": "wuyue-buddhist-art",
+   "kind": "体现",
+   "explanation": "鎏金银阿育王塔出自雷峰塔地宫，是吴越宝箧印式塔传统的代表作。"
+  },
+  {
+   "elementKey": "caisu-mud-bodhisattva",
+   "relatedElementKey": "wuyue-buddhist-art",
+   "kind": "受到影响",
+   "explanation": "北宋彩塑泥菩萨承续吴越崇佛造像的传统。"
+  },
+  {
+   "elementKey": "longquan-kiln",
+   "relatedElementKey": "yue-kiln",
+   "kind": "解释",
+   "explanation": "越窑是浙江青瓷的源头，解释了龙泉窑粉青、梅子青釉色的来路。"
+  },
+  {
+   "elementKey": "southern-song-guan-ware",
+   "relatedElementKey": "yue-kiln",
+   "kind": "受到影响",
+   "explanation": "南宋官窑的青瓷技艺深受越窑传统影响。"
+  },
+  {
+   "elementKey": "longquan-boat-drip",
+   "relatedElementKey": "longquan-kiln",
+   "kind": "体现",
+   "explanation": "龙泉窑粉青、梅子青的温润釉色，在小巧的舟形砚滴上集中体现。"
+  },
+  {
+   "elementKey": "southern-song-guan-ware",
+   "relatedElementKey": "song-dynasty",
+   "kind": "产生于",
+   "explanation": "官窑随宋室南渡设于临安，产生于南宋宫廷用瓷的需求。"
+  },
+  {
+   "elementKey": "fuchun-shanju-tu",
+   "relatedElementKey": "huang-gongwang",
+   "kind": "解释",
+   "explanation": "黄公望五十岁学画、晚年入道的经历，解释了《富春山居图》沉静苍润的笔意。"
+  },
+  {
+   "elementKey": "fuchun-shanju-tu",
+   "relatedElementKey": "yuan-dynasty",
+   "kind": "产生于",
+   "explanation": "《富春山居图》成画于元代，是元四家山水画的高峰。"
+  },
+  {
+   "elementKey": "chinese-landscape-painting",
+   "relatedElementKey": "fuchun-shanju-tu",
+   "kind": "理解前先懂",
+   "explanation": "先了解中国山水画『可游可居』的传统，再看富春山居图的长卷叙事。"
+  },
+  {
+   "elementKey": "fuchun-shanju-tu",
+   "relatedElementKey": "zhijiang-campus",
+   "kind": "位于",
+   "explanation": "《富春山居图》的剩山图现藏于之江馆区。"
+  },
+  {
+   "elementKey": "huang-binhong",
+   "relatedElementKey": "huang-gongwang",
+   "kind": "相似于",
+   "explanation": "黄宾虹与黄公望同为山水画大家，名作先后入藏浙博。"
+  },
+  {
+   "elementKey": "huang-binhong",
+   "relatedElementKey": "gushan-campus",
+   "kind": "受到影响",
+   "explanation": "黄宾虹晚年定居栖霞岭，深受西湖山水与孤山文化氛围滋养。"
+  },
+  {
+   "elementKey": "huang-binhong-memorial",
+   "relatedElementKey": "huang-binhong",
+   "kind": "解释",
+   "explanation": "纪念室陈列的画具与手稿，帮助理解黄宾虹晚年的创作状态。"
+  },
+  {
+   "elementKey": "huang-binhong-memorial",
+   "relatedElementKey": "gushan-campus",
+   "kind": "位于",
+   "explanation": "黄宾虹纪念室位于栖霞岭故居，邻近孤山馆区。"
+  },
+  {
+   "elementKey": "sha-menghai",
+   "relatedElementKey": "wu-changshuo",
+   "kind": "相似于",
+   "explanation": "沙孟海与吴昌硕同以书法篆刻著称，是前后相承的两位大家。"
+  },
+  {
+   "elementKey": "sha-menghai-residence",
+   "relatedElementKey": "sha-menghai",
+   "kind": "解释",
+   "explanation": "旧居保存的书作与用印，帮助理解沙孟海晚年的艺术与生活。"
+  },
+  {
+   "elementKey": "wu-changshuo",
+   "relatedElementKey": "xiling-seal-art",
+   "kind": "解释",
+   "explanation": "吴昌硕首任西泠印社社长，其金石画风要从印学传统理解。"
+  },
+  {
+   "elementKey": "cai-feng-ming-qi",
+   "relatedElementKey": "guqin-world",
+   "kind": "体现",
+   "explanation": "彩凤鸣岐是古琴音韵世界流传至今的实物代表。"
+  },
+  {
+   "elementKey": "cai-feng-ming-qi",
+   "relatedElementKey": "tang-guqin-tradition",
+   "kind": "产生于",
+   "explanation": "彩凤鸣岐产生于唐代斫琴传统，是『唐圆』之说的实物印证。"
+  },
+  {
+   "elementKey": "tang-guqin-tradition",
+   "relatedElementKey": "tang-dynasty",
+   "kind": "产生于",
+   "explanation": "唐代是古琴艺术的成熟期，传世名琴多出于此时。"
+  },
+  {
+   "elementKey": "guqin-world",
+   "relatedElementKey": "tang-guqin-tradition",
+   "kind": "组成",
+   "explanation": "唐代斫琴传统是古琴发展史中的关键一环。"
+  },
+  {
+   "elementKey": "qi-lacquer-donation",
+   "relatedElementKey": "zhang-cheng-red-lacquer",
+   "kind": "组成",
+   "explanation": "张成剔红婴戏图盘是这批捐赠漆器中价值最高的国宝。"
+  },
+  {
+   "elementKey": "cai-feng-ming-qi",
+   "relatedElementKey": "qi-lacquer-donation",
+   "kind": "相似于",
+   "explanation": "唐琴的大漆髹涂与馆藏漆器同属髹漆工艺谱系。"
+  },
+  {
+   "elementKey": "shili-hongzhuang",
+   "relatedElementKey": "wan-gong-jiao",
+   "kind": "组成",
+   "explanation": "万工轿是十里红妆中最华重的嫁妆，集朱金木雕工艺之大成。"
+  },
+  {
+   "elementKey": "shili-hongzhuang",
+   "relatedElementKey": "qi-lacquer-donation",
+   "kind": "相似于",
+   "explanation": "十里红妆的泥金彩漆与捐赠漆器的剔红，同属浙江髹漆工艺。"
+  },
+  {
+   "elementKey": "shili-hongzhuang",
+   "relatedElementKey": "jiyue-bronze-house",
+   "kind": "相似于",
+   "explanation": "嫁妆排场与伎乐乐舞，都是浙江民间生活与仪式的写照。"
+  },
+  {
+   "elementKey": "shili-hongzhuang",
+   "relatedElementKey": "qing-dynasty",
+   "kind": "产生于",
+   "explanation": "十里红妆的婚俗排场成形于明清时期的宁绍地区。"
+  }
+ ]
 }

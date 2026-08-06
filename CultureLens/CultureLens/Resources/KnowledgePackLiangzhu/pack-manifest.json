@@ -1,22 +1,22 @@
 {
-  "packVersion": "liangzhu-v4",
-  "generatedAt": "2026-08-06T07:05:38Z",
-  "recordCounts": {
-    "elements": 25,
-    "elementsSight": 9,
-    "elementsHistory": 16,
-    "relations": 43,
-    "introductions": 10,
-    "attractions": 9,
-    "themes": 4
-  },
-  "sha256": "88c783c90a5e2ce118ee3995c537f7650c729e5d03cc0769d96f35c095095312",
-  "files": [
-    "knowledge-pack.json",
-    "elements-sight.json",
-    "elements-history.json",
-    "introductions.json",
-    "themes.json",
-    "locales-en.json"
-  ]
+ "packVersion": "liangzhu-v6",
+ "generatedAt": "2026-08-06T07:05:38Z",
+ "recordCounts": {
+  "elements": 25,
+  "elementsSight": 9,
+  "elementsHistory": 16,
+  "relations": 43,
+  "introductions": 10,
+  "attractions": 9,
+  "themes": 4
+ },
+ "sha256": "e13e4fb6547469c023c6dd36b2ddc23d588c6891226ce91cebbc11b4414c0218",
+ "files": [
+  "elements-history.json",
+  "elements-sight.json",
+  "introductions.json",
+  "knowledge-pack.json",
+  "locales-en.json",
+  "themes.json"
+ ]
 }

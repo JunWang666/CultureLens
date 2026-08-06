@@ -6,7 +6,7 @@ extension KnowledgePack {
   /// pack's source-language fields (today: Simplified Chinese). Content may be
   /// absent until packs ship translations; the App then uses
   /// `KnowledgeTranslationService`.
-  nonisolated struct LocaleOverlay: Decodable, Sendable {
+  nonisolated struct LocaleOverlay: Codable, Sendable {
     var elements: [String: LocalizedElementText]
     var attractions: [String: LocalizedAttractionText]
     var introductions: [String: LocalizedIntroductionText]
@@ -34,6 +34,19 @@ extension KnowledgePack {
         ) ?? [:]
     }
 
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      if !elements.isEmpty {
+        try container.encode(elements, forKey: .elements)
+      }
+      if !attractions.isEmpty {
+        try container.encode(attractions, forKey: .attractions)
+      }
+      if !introductions.isEmpty {
+        try container.encode(introductions, forKey: .introductions)
+      }
+    }
+
     enum CodingKeys: String, CodingKey {
       case elements
       case attractions
@@ -41,18 +54,32 @@ extension KnowledgePack {
     }
   }
 
-  nonisolated struct LocalizedElementText: Decodable, Sendable {
+  nonisolated struct LocalizedElementText: Codable, Sendable {
     let name: String?
     let introduction: RichTextDocument?
+
+    init(name: String? = nil, introduction: RichTextDocument? = nil) {
+      self.name = name
+      self.introduction = introduction
+    }
   }
 
-  nonisolated struct LocalizedAttractionText: Decodable, Sendable {
+  nonisolated struct LocalizedAttractionText: Codable, Sendable {
     let name: String?
+
+    init(name: String? = nil) {
+      self.name = name
+    }
   }
 
-  nonisolated struct LocalizedIntroductionText: Decodable, Sendable {
+  nonisolated struct LocalizedIntroductionText: Codable, Sendable {
     let name: String?
     let introduction: RichTextDocument?
+
+    init(name: String? = nil, introduction: RichTextDocument? = nil) {
+      self.name = name
+      self.introduction = introduction
+    }
   }
 }
 

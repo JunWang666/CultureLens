@@ -42,8 +42,6 @@ struct ThemeDetailView: View {
                 .tracking(2)
                 .foregroundStyle(CultureTheme.cinnabar)
 
-              ThemeSeriesHero(theme: theme)
-
               Text(progress.statusText)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(
@@ -57,9 +55,14 @@ struct ThemeDetailView: View {
                   .transition(.scale.combined(with: .opacity))
               }
 
-              Text(theme.name)
-                .font(CultureTypography.title(.largeTitle))
-                .foregroundStyle(CultureTheme.inkPrimary)
+              HStack(alignment: .top, spacing: 14) {
+                ThemeSeriesThumbnail(theme: theme)
+
+                Text(theme.name)
+                  .font(CultureTypography.title(.largeTitle))
+                  .foregroundStyle(CultureTheme.inkPrimary)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+              }
 
               Text(theme.summary)
                 .font(CultureTypography.body(.title3))
@@ -160,22 +163,19 @@ struct ThemeDetailView: View {
   }
 }
 
-private struct ThemeSeriesHero: View {
+private struct ThemeSeriesThumbnail: View {
   let theme: KnowledgePack.Theme
 
   var body: some View {
     Image(ExplorationArtwork.seriesImageName(for: theme))
       .resizable()
       .scaledToFill()
-      .frame(maxWidth: .infinity)
-      .frame(height: 210)
+      .frame(width: 68, height: 68)
       .clipped()
-      .overlay(alignment: .bottomTrailing) {
-        Text(verbatim: "CULTURAL SERIES")
-          .font(.caption2.weight(.bold))
-          .tracking(1.4)
-          .foregroundStyle(CultureTheme.canvas.opacity(0.86))
-          .padding(12)
+      .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+      .overlay {
+        RoundedRectangle(cornerRadius: 12, style: .continuous)
+          .stroke(CultureTheme.antiqueGold.opacity(0.75), lineWidth: 1)
       }
       .accessibilityLabel("\(theme.name)主题海报")
   }

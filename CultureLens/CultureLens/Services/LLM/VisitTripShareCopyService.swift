@@ -24,26 +24,39 @@ enum VisitTripShareCopyError: LocalizedError {
 }
 
 /// Writes a short journal-style share blurb for a cultural review via `dynamic/chat`.
+/// Validated results are cached under Library/Caches so the detail page and share
+/// button can reuse the same copy without regenerating on every open.
 actor VisitTripShareCopyService {
   static let shared = VisitTripShareCopyService()
+
+  private static let schemaVersion = 1
 
   typealias Generator =
     @Sendable (_ trip: VisitTrip, _ language: AppLanguage) async throws -> VisitTripShareCopy
 
   private let gatewayClient: LLMGatewayClient?
   private let generator: Generator?
+  private let fileManager: FileManager
+  private let directoryURL: URL
   private var inFlight: [String: Task<VisitTripShareCopy, Error>] = [:]
 
   init(
     gatewayClient: LLMGatewayClient? = try? LLMGatewayClient(),
+    fileManager: FileManager = .default,
+    directoryURL: URL? = nil,
     generator: Generator? = nil
   ) {
     self.gatewayClient = gatewayClient
     self.generator = generator
+    self.fileManager = fileManager
+    self.directoryURL = directoryURL ?? Self.defaultDirectory(fileManager: fileManager)
   }
 
   func copy(for trip: VisitTrip, language: AppLanguage) async throws -> VisitTripShareCopy {
-    let key = cacheKey(for: trip, language: language)
+    let key = Self.cacheKey(for: trip, language: language)
+    if let cached = cachedCopy(forKey: key, tripID: trip.id, language: language) {
+      return cached
+    }
     if let task = inFlight[key] {
       return try await task.value
     }
@@ -60,12 +73,39 @@ actor VisitTripShareCopyService {
 
     do {
       let value = try await task.value
+      try? store(value, forKey: key)
       inFlight[key] = nil
       return value
     } catch {
       inFlight[key] = nil
       throw error
     }
+  }
+
+  func clear() throws {
+    for task in inFlight.values {
+      task.cancel()
+    }
+    inFlight.removeAll()
+    guard fileManager.fileExists(atPath: directoryURL.path) else { return }
+    try fileManager.removeItem(at: directoryURL)
+  }
+
+  func diskUsageBytes() -> Int64 {
+    guard
+      let enumerator = fileManager.enumerator(
+        at: directoryURL,
+        includingPropertiesForKeys: [.fileSizeKey],
+        options: [.skipsHiddenFiles]
+      )
+    else { return 0 }
+
+    var total: Int64 = 0
+    for case let url as URL in enumerator {
+      let values = try? url.resourceValues(forKeys: [.fileSizeKey])
+      total += Int64(values?.fileSize ?? 0)
+    }
+    return total
   }
 
   /// Local template used when the gateway is unavailable or generation fails.
@@ -149,9 +189,41 @@ actor VisitTripShareCopyService {
     )
   }
 
-  private func cacheKey(for trip: VisitTrip, language: AppLanguage) -> String {
+  nonisolated static func cacheKey(for trip: VisitTrip, language: AppLanguage) -> String {
     let objectDigest = trip.objects.map(\.canonicalName).joined(separator: "|")
-    return "\(language.rawValue)|\(trip.id.uuidString)|\(trip.scanCount)|\(objectDigest)"
+    return CacheKeyDigest.sha256(
+      "\(schemaVersion)|\(language.rawValue)|\(trip.id.uuidString)|\(trip.scanCount)|\(objectDigest)"
+    )
+  }
+
+  private func cachedCopy(
+    forKey key: String,
+    tripID: UUID,
+    language: AppLanguage
+  ) -> VisitTripShareCopy? {
+    let url = fileURL(forKey: key)
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    guard let data = try? Data(contentsOf: url),
+      let copy = try? decoder.decode(VisitTripShareCopy.self, from: data),
+      copy.tripID == tripID,
+      copy.language == language,
+      !copy.blurb.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    else { return nil }
+    return copy
+  }
+
+  private func store(_ copy: VisitTripShareCopy, forKey key: String) throws {
+    try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys]
+    encoder.dateEncodingStrategy = .iso8601
+    let data = try encoder.encode(copy)
+    try data.write(to: fileURL(forKey: key), options: .atomic)
+  }
+
+  private func fileURL(forKey key: String) -> URL {
+    directoryURL.appending(path: "\(key).json")
   }
 
   private nonisolated static func generate(
@@ -208,6 +280,21 @@ actor VisitTripShareCopyService {
       start < end
     else { return nil }
     return String(text[start...end])
+  }
+
+  private nonisolated static func defaultDirectory(fileManager: FileManager) -> URL {
+    let caches =
+      (try? fileManager.url(
+        for: .cachesDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+      ))
+      ?? fileManager.temporaryDirectory
+    return
+      caches
+      .appending(path: "CultureLens", directoryHint: .isDirectory)
+      .appending(path: "VisitTripShareCopy", directoryHint: .isDirectory)
   }
 
   private nonisolated struct ProviderPayload: Decodable {

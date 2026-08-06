@@ -22,7 +22,7 @@
       "type": "number",
       "minimum": 0,
       "maximum": 1,
-      "description": "当前可见证据对主候选的支持程度。"
+      "description": "仅凭当前画面可见证据排除其他合理解释的把握；必须偏保守。无充分排除证据时通常不超过 0.75；禁止把普通猜测写成 0.9+。"
     },
     "summary": {
       "type": "string",
@@ -34,7 +34,7 @@
     },
     "uncertainty": {
       "type": "string",
-      "description": "仍缺少的证据和建议补拍内容。"
+      "description": "仍缺少的证据和建议补拍内容；主结果 confidence 低于 0.8 时必须写具体缺口，勿留空话。"
     },
     "time_period": {
       "type": "string",
@@ -93,7 +93,8 @@
           "confidence": {
             "type": "number",
             "minimum": 0,
-            "maximum": 1
+            "maximum": 1,
+            "description": "该备选相对主结果的真实可能性，必须低于主结果，勿灌水。"
           },
           "rationale": {
             "type": "string",

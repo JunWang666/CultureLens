@@ -1568,6 +1568,58 @@ struct CultureLensTests {
     #expect(ImageGenerationPreferenceStore.loadEnabled() == false)
   }
 
+  @Test func visitTripShareCopyCachesGeneratedBlurb() async throws {
+    let directory = FileManager.default.temporaryDirectory
+      .appending(path: "VisitTripShareCopy-\(UUID().uuidString)", directoryHint: .isDirectory)
+    defer { try? FileManager.default.removeItem(at: directory) }
+
+    let trip = VisitTrip(
+      id: UUID(),
+      recordIDs: [UUID()],
+      startedAt: .now,
+      endedAt: .now,
+      title: "西湖",
+      placeNames: ["西湖"],
+      litNodeCount: 2,
+      attractionNames: ["三潭印月"],
+      newRelationCount: 1,
+      objects: []
+    )
+
+    actor Counter {
+      var value = 0
+      func increment() { value += 1 }
+    }
+    let counter = Counter()
+    let service = VisitTripShareCopyService(
+      gatewayClient: nil,
+      directoryURL: directory,
+      generator: { trip, language in
+        await counter.increment()
+        return VisitTripShareCopy(
+          tripID: trip.id,
+          title: trip.title,
+          blurb: "湖上留了一段短短的文化路径。",
+          language: language,
+          modelIdentifier: "test",
+          generatedAt: .now
+        )
+      }
+    )
+
+    let first = try await service.copy(for: trip, language: .zhHans)
+    let second = try await service.copy(for: trip, language: .zhHans)
+    let generationCount = await counter.value
+
+    #expect(first.blurb == second.blurb)
+    #expect(generationCount == 1)
+    #expect(await service.diskUsageBytes() > 0)
+    #expect(
+      VisitTripShareCopyService.cacheKey(for: trip, language: .zhHans)
+        != VisitTripShareCopyService.cacheKey(for: trip, language: .english)
+    )
+  }
+
   @Test func themeProgressUsesMinContactedThreshold() {
     let theme = KnowledgePack.Theme(
       key: "demo",

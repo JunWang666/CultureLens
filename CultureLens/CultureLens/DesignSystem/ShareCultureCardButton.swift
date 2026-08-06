@@ -31,7 +31,13 @@ struct ShareCultureCardButton: View {
       }
     }
     .task(id: object.id) {
-      let image = CultureCardShareRenderer.image(for: object)
+      var hero: UIImage?
+      if let url = CultureObjectImage.introductionURL(for: object),
+        let data = try? await RemoteImageCache.shared.data(for: url)
+      {
+        hero = UIImage(data: data)
+      }
+      let image = CultureCardShareRenderer.image(for: object, heroImage: hero)
       shareItem = CultureCardShareItem(object: object, image: image)
     }
   }

@@ -6,11 +6,16 @@ struct CultureObjectCard: View {
   let object: CultureObject
   var showsBrandMark: Bool = false
   var artworkHeight: CGFloat = 132
+  var preloadedHeroImage: UIImage? = nil
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
       ZStack(alignment: .topTrailing) {
-        ObjectArtwork(object: object, height: artworkHeight)
+        CultureObjectHeroImage(
+          object: object,
+          height: artworkHeight,
+          preloadedImage: preloadedHeroImage
+        )
 
         if showsBrandMark {
           Text("CultureLens")
@@ -64,8 +69,17 @@ struct CultureObjectCard: View {
 /// Renders `CultureObjectCard` for the system share sheet.
 enum CultureCardShareRenderer {
   @MainActor
-  static func image(for object: CultureObject, width: CGFloat = 360) -> UIImage? {
-    let card = CultureObjectCard(object: object, showsBrandMark: true, artworkHeight: 160)
+  static func image(
+    for object: CultureObject,
+    width: CGFloat = 360,
+    heroImage: UIImage? = nil
+  ) -> UIImage? {
+    let card = CultureObjectCard(
+      object: object,
+      showsBrandMark: true,
+      artworkHeight: 160,
+      preloadedHeroImage: heroImage
+    )
       .frame(width: width)
       .environment(\.colorScheme, .light)
       .environment(AppLanguageStore())

@@ -552,6 +552,8 @@ private enum RecommendationState {
 private struct ExplorationIlluminationView: View {
   let snapshot: ExplorationMilestoneSnapshot
 
+  @State private var selectedDetail: ExplorationIlluminationDetail?
+
   private let badgeColumns = [
     GridItem(.adaptive(minimum: 92), spacing: 12, alignment: .top)
   ]
@@ -572,15 +574,20 @@ private struct ExplorationIlluminationView: View {
       RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous)
         .fill(CultureTheme.inkPrimary)
         .overlay(alignment: .topTrailing) {
-          Image(systemName: "sparkles")
-            .font(.system(size: 110, weight: .thin))
-            .foregroundStyle(CultureTheme.antiqueGold.opacity(0.08))
+          CelebrationSparkle()
+            .stroke(CultureTheme.antiqueGold.opacity(0.1), lineWidth: 1)
+            .frame(width: 112, height: 112)
             .offset(x: 22, y: -18)
             .accessibilityHidden(true)
         }
     }
     .clipShape(RoundedRectangle(cornerRadius: CultureTheme.cardRadius, style: .continuous))
     .accessibilityIdentifier("explore.illumination")
+    .sheet(item: $selectedDetail) { detail in
+      ExplorationIlluminationDetailSheet(detail: detail, snapshot: snapshot)
+        .presentationDetents([.medium])
+        .presentationDragIndicator(.visible)
+    }
   }
 
   private var illuminationSummary: some View {
@@ -656,37 +663,24 @@ private struct ExplorationIlluminationView: View {
 
   private var illuminatedCities: some View {
     VStack(alignment: .leading, spacing: 12) {
-      illuminationLabel("点亮城市", systemImage: "building.2")
+      illuminationLabel("点亮城市")
 
       if snapshot.cities.isEmpty {
-        HStack(spacing: 10) {
-          Image(systemName: "lightbulb.min")
-            .foregroundStyle(CultureTheme.antiqueGold)
-          Text("带着镜头去现场，点亮你的第一座城市。")
-            .font(.caption)
-            .foregroundStyle(Color.white.opacity(0.68))
-        }
+        Text("带着镜头去现场，点亮你的第一座城市。")
+          .font(.caption)
+          .foregroundStyle(Color.white.opacity(0.68))
       } else {
         ScrollView(.horizontal) {
           HStack(spacing: 10) {
             ForEach(snapshot.cities) { city in
-              HStack(spacing: 7) {
-                Circle()
-                  .fill(CultureTheme.antiqueGold)
-                  .frame(width: 7, height: 7)
-                  .shadow(color: CultureTheme.antiqueGold.opacity(0.8), radius: 5)
-                Text(city.name)
-                  .font(.subheadline.weight(.semibold))
-                Text("\(city.scanCount)")
-                  .font(.caption2.monospacedDigit())
-                  .foregroundStyle(Color.white.opacity(0.55))
+              Button {
+                selectedDetail = .city(city)
+              } label: {
+                IlluminatedCityPill(city: city)
               }
-              .foregroundStyle(Color.white)
-              .padding(.horizontal, 12)
-              .padding(.vertical, 9)
-              .background(Color.white.opacity(0.09), in: Capsule())
-              .accessibilityElement(children: .combine)
+              .buttonStyle(.plain)
               .accessibilityLabel("已点亮城市 \(city.name)，\(city.scanCount) 次足迹")
+              .accessibilityHint("查看城市足迹详情")
             }
           }
         }
@@ -701,23 +695,25 @@ private struct ExplorationIlluminationView: View {
 
       LazyVGrid(columns: badgeColumns, alignment: .leading, spacing: 16) {
         ForEach(snapshot.badges) { badge in
-          ExplorationBadgeMedallion(badge: badge)
+          Button {
+            selectedDetail = .badge(badge)
+          } label: {
+            ExplorationBadgeMedallion(badge: badge)
+          }
+          .buttonStyle(.plain)
+          .accessibilityLabel(
+            badge.isUnlocked
+              ? "已获得徽章 \(badge.kind.title)，\(badge.kind.detail)"
+              : "未获得徽章 \(badge.kind.title)，目标：\(badge.kind.detail)"
+          )
+          .accessibilityHint("查看徽章详情")
         }
       }
     }
   }
 
-  private func illuminationLabel(
-    _ title: LocalizedStringKey,
-    systemImage: String? = nil
-  ) -> some View {
-    Group {
-      if let systemImage {
-        Label(title, systemImage: systemImage)
-      } else {
-        Text(title)
-      }
-    }
+  private func illuminationLabel(_ title: LocalizedStringKey) -> some View {
+    Text(title)
       .font(.caption.weight(.semibold))
       .tracking(0.8)
       .foregroundStyle(Color.white.opacity(0.82))

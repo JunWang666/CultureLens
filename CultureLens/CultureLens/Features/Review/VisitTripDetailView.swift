@@ -4,12 +4,21 @@ import SwiftUI
 struct VisitTripDetailView: View {
   let tripID: UUID
 
+  @Environment(AppLanguageStore.self) private var languageStore
   @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
   private var records: [ScanHistoryRecord]
+
+  @State private var journalBlurb: String?
 
   private var trip: VisitTrip? {
     VisitTripBuilder.cluster(records.map(\.tripSnapshot))
       .first { $0.id == tripID }
+  }
+
+  private var journalLoadID: String {
+    guard let trip else { return "empty|\(languageStore.language.rawValue)" }
+    let objectDigest = trip.objects.map(\.canonicalName).joined(separator: "|")
+    return "\(trip.id.uuidString)|\(languageStore.language.rawValue)|\(trip.scanCount)|\(objectDigest)"
   }
 
   var body: some View {
@@ -33,6 +42,13 @@ struct VisitTripDetailView: View {
           ShareVisitTripButton(trip: trip, label: .icon)
         }
       }
+    }
+    .task(id: journalLoadID) {
+      guard let trip else {
+        journalBlurb = nil
+        return
+      }
+      await loadJournalBlurb(for: trip)
     }
   }
 
@@ -154,12 +170,32 @@ struct VisitTripDetailView: View {
           .foregroundStyle(CultureTheme.inkPrimary)
       }
 
-      Text("一次参观里，识别被聚合成可回看的文化路径。")
+      Text(journalBlurb ?? placeholderBlurb)
         .font(CultureTypography.body(.subheadline))
         .foregroundStyle(CultureTheme.inkSecondary)
+        .lineSpacing(3)
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityLabel(journalBlurb ?? String(localized: "正在撰写回顾介绍"))
 
       MagazineDoubleRule()
         .padding(.top, 4)
+    }
+  }
+
+  private var placeholderBlurb: String {
+    String(localized: "一次参观里，识别被聚合成可回看的文化路径。")
+  }
+
+  @MainActor
+  private func loadJournalBlurb(for trip: VisitTrip) async {
+    let language = languageStore.language
+    // Instant concrete copy while the editorial blurb loads / reuses cache.
+    journalBlurb = VisitTripShareCopyService.fallbackCopy(for: trip, language: language).blurb
+    do {
+      let copy = try await VisitTripShareCopyService.shared.copy(for: trip, language: language)
+      journalBlurb = copy.blurb
+    } catch {
+      journalBlurb = VisitTripShareCopyService.fallbackCopy(for: trip, language: language).blurb
     }
   }
 

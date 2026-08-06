@@ -24,6 +24,12 @@ nonisolated enum AppCacheManager {
       firstError = firstError ?? error
     }
 
+    do {
+      try await VisitTripShareCopyService.shared.clear()
+    } catch {
+      firstError = firstError ?? error
+    }
+
     await KnowledgeTranslationService.shared.clearCache()
 
     if let firstError {
@@ -31,13 +37,14 @@ nonisolated enum AppCacheManager {
     }
   }
 
-  /// Sum of remote-image, TTS audio, quiz, and translation caches that `clearAll` removes.
+  /// Sum of remote-image, TTS audio, quiz, share-copy, and translation caches that `clearAll` removes.
   static func usageBytes() async -> Int64 {
     let images = await RemoteImageCache.shared.diskUsageBytes()
     let tts = await TTSAudioCache.shared.diskUsageBytes()
     let quizzes = await DidYouKnowQuizService.shared.diskUsageBytes()
+    let shareCopy = await VisitTripShareCopyService.shared.diskUsageBytes()
     let translations = await KnowledgeTranslationService.shared.diskUsageBytes()
-    return images + tts + quizzes + translations
+    return images + tts + quizzes + shareCopy + translations
   }
 
   static func formattedUsage(_ bytes: Int64) -> String {

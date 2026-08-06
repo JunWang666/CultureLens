@@ -3,20 +3,11 @@ import SwiftUI
 /// Resolves the first introduction image among a trip's lit objects for use as
 /// the cultural-review hero (detail page + share card).
 enum VisitTripHero {
-  /// Walks trip objects in visit order and returns the first HTTPS image URL
-  /// from each object's knowledge-pack introduction.
   static func imageURL(
     for trip: VisitTrip,
     store: KnowledgeStore? = KnowledgeStore.shared
   ) -> URL? {
-    guard let store else { return nil }
-    for object in trip.objects {
-      let elementID = object.culturalElementID ?? object.id
-      if let url = store.introductionDocument(elementID: elementID)?.imageBlocks.first?.imageURL {
-        return url
-      }
-    }
-    return nil
+    CultureObjectImage.introductionURL(for: trip, store: store)
   }
 
   /// Fallback object used for poster-style artwork when no intro image exists.
@@ -49,9 +40,7 @@ struct VisitTripHeroView: View {
   var height: CGFloat = 240
   var imageURL: URL? = nil
 
-  private var resolvedURL: URL? {
-    imageURL ?? VisitTripHero.imageURL(for: trip)
-  }
+  @State private var resolvedURL: URL?
 
   var body: some View {
     Color.clear
@@ -61,6 +50,13 @@ struct VisitTripHeroView: View {
         heroContent
       }
       .clipped()
+      .task(id: trip.id) {
+        resolvedURL = imageURL ?? VisitTripHero.imageURL(for: trip)
+        if resolvedURL == nil {
+          _ = await KnowledgePackLoader.shared.store()
+          resolvedURL = imageURL ?? VisitTripHero.imageURL(for: trip)
+        }
+      }
       .accessibilityLabel("\(trip.title)主图")
   }
 

@@ -228,9 +228,30 @@ nonisolated struct PlaceContext: Codable, Hashable, Sendable {
   var displayName: String?
 }
 
+/// A nearby point of interest returned by MapKit for one recognition request.
+/// It is intentionally request-scoped: scan history continues to persist only
+/// the captured/photo coordinate in `PlaceContext`.
+nonisolated struct NearbyMapPlaceContext: Codable, Hashable, Sendable {
+  var name: String
+  var latitude: Double
+  var longitude: Double
+  var distanceMeters: Double
+  var address: String?
+
+  enum CodingKeys: String, CodingKey {
+    case name
+    case latitude
+    case longitude
+    case distanceMeters = "distance_meters"
+    case address
+  }
+}
+
 nonisolated struct RecognitionInput: Sendable {
   let imageBase64: String
   var place: PlaceContext?
+  /// Apple Maps points of interest near `place`, ordered by distance.
+  var nearbyMapPlaces: [NearbyMapPlaceContext]
   var contextNote: String?
   var localeIdentifier: String
   var userKnowledgeStates: [UserKnowledgeStateContext]
@@ -238,12 +259,14 @@ nonisolated struct RecognitionInput: Sendable {
   init(
     imageData: Data,
     place: PlaceContext?,
+    nearbyMapPlaces: [NearbyMapPlaceContext] = [],
     contextNote: String?,
     localeIdentifier: String,
     userKnowledgeStates: [UserKnowledgeStateContext] = []
   ) {
     imageBase64 = imageData.base64EncodedString()
     self.place = place
+    self.nearbyMapPlaces = nearbyMapPlaces
     self.contextNote = contextNote
     self.localeIdentifier = localeIdentifier
     self.userKnowledgeStates = userKnowledgeStates

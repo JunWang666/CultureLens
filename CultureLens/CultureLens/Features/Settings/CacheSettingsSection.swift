@@ -56,7 +56,7 @@ struct CacheSettingsSection: View {
         clearCaches()
       }
     } message: {
-      Text("在线图片和即时译文缓存会被删除；AI 讲解、扫描历史、问答记录、文化图谱和资源包不会受影响。")
+      Text("在线图片和即时译文缓存会被删除；AI 讲解、扫描历史、问答记录、文化图谱和资源包（含图片 ODR）不会受影响。")
     }
   }
 

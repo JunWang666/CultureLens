@@ -12,8 +12,12 @@ nonisolated enum AppRoute: Hashable {
     case history(UUID)
     /// Scan footprint map (pushed from「更多」on compact).
     case footprint
-    /// Review hub: timeline + visit trips (pushed from「更多」on compact).
+    /// Review hub: timeline + visit-trip previews (pushed from「更多」on compact).
     case visitTrips
+    /// Full chronological scan timeline.
+    case scanTimeline
+    /// Full clustered visit-trip list.
+    case visitTripList
     case visitTrip(UUID)
     case themes
     case theme(String)

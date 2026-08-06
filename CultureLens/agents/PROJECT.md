@@ -36,7 +36,8 @@
   - `Resources/KnowledgePackLiangzhu/`（良渚）→ `knowledge-liangzhu`。
   - `Resources/KnowledgePackZhejiangMuseum/`（浙博）→ `knowledge-zhejiang-museum`。
 - 四个 tag 当前均列入 **initial-install**（`ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS`），默认随 App 首装交付，但仍可被系统清理并在「设置 → 资源包管理」中逐包重新下载。
-- 运行时：`KnowledgePackLoader` 持有每个 tag 的 `NSBundleResourceRequest`，按西湖 / 中国历史 / 良渚 / 浙博顺序加载并由 `KnowledgeStore.mergePacks` 合并；ID 冲突时先到先得。
+- 配图整包：`Resources/images/` → ODR tag `images`（同属 initial-install）。知识 JSON 仍只存 HTTPS URL；`RemoteImageCache` 优先用本地包拦截 `culturelens.goudaijun.top/images/...`，miss 再回源 R2。见 `design/0020`。
+- 运行时：`KnowledgePackLoader` 持有每个 tag 的 `NSBundleResourceRequest`，按西湖 / 中国历史 / 良渚 / 浙博顺序加载并由 `KnowledgeStore.mergePacks` 合并；ID 冲突时先到先得。`ImagePackLoader` 独立管理图片 tag。
 - 知识包当前以仓库内 sidecar JSON 为源；需要更新时编辑对应目录并同步 `pack-manifest.json`。
 
 ## 抽象轴与图谱渲染（0006 / 0007）
@@ -47,7 +48,7 @@
 - 关联脉络：讲解契约再增 `relation_dimensions`（`KnowledgeStore.edges(key:kinds:)` 按 kind 取边、方向不解释，每维上限 2 条），覆盖五个固定维度——历史时期（产生于）、地域文化（位于）、使用功能（用于）、审美观念（体现/象征/受到影响）、相似对象（相似于）；维度邻居的 introduction 并入 `knowledge_fragments` 供引用。输出在「文化背景」后新增「关联脉络」节，仅写有数据的维度；注意输出骨架由 `PromptLanguagePolicy.explainMarkdownSkeleton` 在运行时重写（英文为「Connections」），`explain.txt` 文末模板仅作同步文档。
 - 抽象阶梯：`DesignSystem/AbstractionLadderView`（纵向祖先链 + 同级 chips），曾接入扫描结果页（对象/概念详情复用该页）；因展示价值有限当前已在 `ScanResultView` 隐藏，组件保留，恢复时还原该处调用即可。
 - 图谱渲染：`RadialGraphLayout` 共享内核（重心排序 + 方向分层偏置，确定性 O(V+E)），对象图谱与用户图谱共用，内核支持多中心（中心簇均布内圈小圆，各自向外发散）；边按 5 个语义族着色/线型/图标，图例可点选筛选；用户图谱接入捏合缩放、搜索筛选、列表模式、可搜索多选中心（默认全部已加入节点为中心）、截断提示、前置未掌握标记与扫描已记录朱砂徽章。
-- 足迹双模式：`CultureMapView` 切换「地图足迹 / 兴趣点」；兴趣点来自 `KnowledgeStore.attractionPoints()`（按 knowledge pack 现场介绍聚合坐标），已到访（命中扫描记录的 `culturalElementID`）用朱砂 checkmark 标记，可跳转知识节点详情。时间线足迹改在回顾 Tab（`ReviewHomeView`：时间线足迹 / 文化回顾）。
+- 足迹双模式：`CultureMapView` 切换「地图足迹 / 兴趣点」；兴趣点来自 `KnowledgeStore.attractionPoints()`（按 knowledge pack 现场介绍聚合坐标），已到访（命中扫描记录的 `culturalElementID`）用朱砂 checkmark 标记，可跳转知识节点详情。时间线足迹改在回顾 Tab：`ReviewHomeView` 分栏预览时间线与文化回顾（各 10 条 +「更多」；iPad 左右、iPhone 上下）。
 - 内容重构（2026-08 完成）：四包边已按统一方向语义重写（kind / conceptKind / 前置边覆盖、`产生于` 取向审计、跨包重复实体合并、跨包前置边接入历史包地基），规范见 `agents/KNOWLEDGE_PACK_GUIDE.md`。**UUID 主键迁移已完成**（pack `id` + 跨引用 UUID；LLM 用 per-request 短 ID）；西湖包 en 正文翻译待补。
 
 ## 已移除的后端

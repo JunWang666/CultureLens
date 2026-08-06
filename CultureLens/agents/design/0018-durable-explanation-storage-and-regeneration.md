@@ -1,5 +1,7 @@
 # 0018 AI 讲解持久存储与显式重新生成
 
+- 状态：已实现并验证（2026-08-06）
+
 ## 背景
 
 `design/0014` 将 AI 文化讲解放入 `Library/Caches`，并把用户知识状态、模型与 prompt schema 纳入缓存键。这适合可再生成的缓存，但不符合“讲解是用户已经获得的内容”这一产品语义：
@@ -50,4 +52,5 @@
 - Store 跨实例读取测试，确认落盘后可在新 actor 实例恢复。
 - 稳定键测试，确认同一对象输入得到相同键、不同语言得到不同键。
 - 图片缓存落盘/清理测试继续保留。
-- Simulator 定向运行 `NetworkCacheTests`，并完成通用 iOS build / `build-for-testing`。
+- iOS 18.6 Simulator 定向运行 `NetworkCacheTests`：3 项全部通过。
+- 通用 iOS Debug build 与 Simulator `build-for-testing` 均通过；本地化 catalog 通过 JSON 与 `xcstringstool compile` 校验。

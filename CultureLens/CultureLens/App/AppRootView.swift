@@ -108,9 +108,12 @@ struct AppRootView: View {
         }
         .task {
             knowledgeProgressStore.configure(modelContext: modelContext)
-            if await KnowledgePackLoader.shared.store(fallback: nil) != nil {
+            async let knowledgeReady = KnowledgePackLoader.shared.store(fallback: nil) != nil
+            async let imagesReady: Bool = ImagePackLoader.shared.ensureAvailable()
+            if await knowledgeReady {
                 knowledgeResourcesReady = true
             }
+            _ = await imagesReady
         }
     }
 
@@ -241,6 +244,12 @@ struct AppRootView: View {
             ReviewHomeView(showsBackButton: true) {
                 selectedTab = .scan
             }
+        case .scanTimeline:
+            ScanTimelineView(showsBackButton: true) {
+                selectedTab = .scan
+            }
+        case .visitTripList:
+            VisitTripListView(showsBackButton: true)
         case .visitTrip(let id):
             VisitTripDetailView(tripID: id)
         case .themes:

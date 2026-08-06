@@ -7,6 +7,7 @@
 
 import Foundation
 import ImageIO
+import MapKit
 import SwiftData
 import Testing
 import UniformTypeIdentifiers
@@ -24,6 +25,33 @@ struct CultureLensTests {
         #expect(SampleCultureData.concept(id: concept.id) == concept)
       }
     }
+  }
+
+  @Test func nearbyMapPlacesKeepOnlyClosestThreeWithinOneKilometer() {
+    func mapItem(name: String, latitude: Double, longitude: Double) -> MKMapItem {
+      let item = MKMapItem(
+        placemark: MKPlacemark(
+          coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        )
+      )
+      item.name = name
+      return item
+    }
+
+    // At the equator, each 0.001 degrees of longitude is about 111 m.
+    let places = NearbyMapPlaceProvider.contexts(
+      from: [
+        mapItem(name: "远处", latitude: 0, longitude: 0.010),
+        mapItem(name: "第三近", latitude: 0, longitude: 0.007),
+        mapItem(name: "最近", latitude: 0, longitude: 0.001),
+        mapItem(name: "第二近", latitude: 0, longitude: 0.004),
+        mapItem(name: "第四近", latitude: 0, longitude: 0.008),
+      ],
+      origin: CLLocation(latitude: 0, longitude: 0)
+    )
+
+    #expect(places.map(\.name) == ["最近", "第二近", "第三近"])
+    #expect(places.allSatisfy { $0.distanceMeters <= 1_000 })
   }
 
   @Test func sampleObjectsContainTrustSignals() {

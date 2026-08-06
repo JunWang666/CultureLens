@@ -67,6 +67,8 @@ nonisolated struct OnDeviceRecognitionService: Sendable {
       contextNote: input.contextNote,
       knowledgeCandidates: promptKnowledge,
       attractionCandidates: promptAttractions,
+      place: input.place,
+      nearbyMapPlaces: input.nearbyMapPlaces,
       userKnowledgeStates: input.userKnowledgeStates
     )
 

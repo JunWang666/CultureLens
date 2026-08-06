@@ -1,9 +1,11 @@
 import SwiftUI
 
-/// Lists the independently tagged knowledge ODR packs and lets users retry a
-/// missing initial-install resource without changing pack merge semantics.
+/// Lists the independently tagged knowledge ODR packs and the image pack, and
+/// lets users retry a missing initial-install resource without changing pack
+/// merge semantics.
 struct KnowledgePackManagerView: View {
   @State private var resources: [KnowledgePackResource] = []
+  @State private var imagePack: ImagePackResource?
   @State private var isLoading = true
   @State private var downloadingIDs = Set<String>()
   @State private var errorMessage: String?
@@ -16,13 +18,16 @@ struct KnowledgePackManagerView: View {
         LazyVStack(alignment: .leading, spacing: 14) {
           introduction
 
-          if isLoading && resources.isEmpty {
+          if isLoading && resources.isEmpty && imagePack == nil {
             ProgressView("正在检查资源包…")
               .frame(maxWidth: .infinity)
               .padding(.vertical, 48)
           } else {
             ForEach(resources) { resource in
               resourceCard(resource)
+            }
+            if let imagePack {
+              imagePackCard(imagePack)
             }
           }
 
@@ -58,10 +63,10 @@ struct KnowledgePackManagerView: View {
 
   private var introduction: some View {
     VStack(alignment: .leading, spacing: 7) {
-      Text("知识资源包")
+      Text("知识与图片资源包")
         .font(.headline)
         .foregroundStyle(CultureTheme.inkPrimary)
-      Text("资源包首次安装时默认随 App 交付；若系统清理了按需资源，可在这里单独重新下载。")
+      Text("知识包与图片包首次安装时默认随 App 交付；若系统清理了按需资源，可在这里单独重新下载。图片包会拦截对应的远程图片请求，优先读本地文件。")
         .font(.footnote)
         .foregroundStyle(CultureTheme.inkSecondary)
         .fixedSize(horizontal: false, vertical: true)
@@ -143,6 +148,73 @@ struct KnowledgePackManagerView: View {
     }
   }
 
+  private func imagePackCard(_ resource: ImagePackResource) -> some View {
+    VStack(alignment: .leading, spacing: 14) {
+      HStack(alignment: .top, spacing: 14) {
+        Image(systemName: "photo.on.rectangle.angled")
+          .font(.title3)
+          .foregroundStyle(CultureTheme.antiqueGold)
+          .frame(width: 34, height: 34)
+          .background(CultureTheme.antiqueGold.opacity(0.12), in: Circle())
+
+        VStack(alignment: .leading, spacing: 4) {
+          Text("知识配图")
+            .font(.headline)
+            .foregroundStyle(CultureTheme.inkPrimary)
+          Text(ImagePackLoader.odrTag)
+            .font(.caption.monospaced())
+            .foregroundStyle(CultureTheme.inkSecondary)
+        }
+
+        Spacer(minLength: 8)
+        statusBadge(resource.availability)
+      }
+
+      if resource.availability == .available {
+        HStack(spacing: 0) {
+          metric(value: resource.imageCount, label: "配图")
+        }
+      } else {
+        Text(resource.availability == .notDownloaded ? "此图片包当前不在设备上。" : "图片包文件无法读取，请重试。")
+          .font(.footnote)
+          .foregroundStyle(CultureTheme.inkSecondary)
+      }
+
+      Divider()
+
+      HStack(spacing: 10) {
+        Label("按需资源 · 默认安装", systemImage: "shippingbox")
+          .font(.caption)
+          .foregroundStyle(CultureTheme.inkSecondary)
+
+        Spacer(minLength: 8)
+
+        if resource.availability != .available {
+          Button {
+            Task { await downloadImagePack(resource) }
+          } label: {
+            if downloadingIDs.contains(resource.id) {
+              ProgressView()
+                .controlSize(.small)
+            } else {
+              Text(resource.availability == .notDownloaded ? "下载" : "重试")
+            }
+          }
+          .buttonStyle(.borderedProminent)
+          .tint(CultureTheme.cinnabar)
+          .disabled(downloadingIDs.contains(resource.id))
+          .accessibilityIdentifier("knowledgePacks.download.images")
+        }
+      }
+    }
+    .padding(16)
+    .background(CultureTheme.surface.opacity(0.78), in: RoundedRectangle(cornerRadius: 16))
+    .overlay {
+      RoundedRectangle(cornerRadius: 16)
+        .stroke(CultureTheme.hairline, lineWidth: 1)
+    }
+  }
+
   private func metric(value: Int, label: LocalizedStringKey) -> some View {
     VStack(spacing: 2) {
       Text(value, format: .number)
@@ -164,11 +236,23 @@ struct KnowledgePackManagerView: View {
       .background(availability.backgroundStyle, in: Capsule())
   }
 
+  private func statusBadge(_ availability: ImagePackResource.Availability) -> some View {
+    Text(availability.title)
+      .font(.caption.weight(.semibold))
+      .foregroundStyle(availability.foregroundStyle)
+      .padding(.horizontal, 9)
+      .padding(.vertical, 5)
+      .background(availability.backgroundStyle, in: Capsule())
+  }
+
   @MainActor
   private func refresh() async {
     isLoading = true
     errorMessage = nil
-    resources = await KnowledgePackLoader.shared.resourceStatuses()
+    async let knowledge = KnowledgePackLoader.shared.resourceStatuses()
+    async let images = ImagePackLoader.shared.resourceStatus()
+    resources = await knowledge
+    imagePack = await images
     isLoading = false
   }
 
@@ -184,6 +268,21 @@ struct KnowledgePackManagerView: View {
     } catch {
       errorMessage = error.localizedDescription
       resources = await KnowledgePackLoader.shared.resourceStatuses()
+    }
+  }
+
+  @MainActor
+  private func downloadImagePack(_ resource: ImagePackResource) async {
+    guard downloadingIDs.insert(resource.id).inserted else { return }
+    errorMessage = nil
+    defer { downloadingIDs.remove(resource.id) }
+
+    do {
+      try await ImagePackLoader.shared.downloadOnDemandPack()
+      imagePack = await ImagePackLoader.shared.resourceStatus()
+    } catch {
+      errorMessage = error.localizedDescription
+      imagePack = await ImagePackLoader.shared.resourceStatus()
     }
   }
 }
@@ -209,6 +308,28 @@ extension KnowledgePackDirectory {
 }
 
 extension KnowledgePackResource.Availability {
+  fileprivate var title: LocalizedStringKey {
+    switch self {
+    case .available: "可用"
+    case .notDownloaded: "未下载"
+    case .unavailable: "异常"
+    }
+  }
+
+  fileprivate var foregroundStyle: Color {
+    switch self {
+    case .available: .green
+    case .notDownloaded: CultureTheme.antiqueGold
+    case .unavailable: .red
+    }
+  }
+
+  fileprivate var backgroundStyle: Color {
+    foregroundStyle.opacity(0.12)
+  }
+}
+
+extension ImagePackResource.Availability {
   fileprivate var title: LocalizedStringKey {
     switch self {
     case .available: "可用"

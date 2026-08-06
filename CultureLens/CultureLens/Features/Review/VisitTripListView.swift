@@ -2,106 +2,96 @@ import SwiftData
 import SwiftUI
 
 struct VisitTripListView: View {
-  var showsBackButton: Bool = true
-  /// When true, omit page chrome already provided by `ReviewHomeView`.
-  var embedsInReviewHub: Bool = false
+    var showsBackButton: Bool = true
 
-  @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
-  private var records: [ScanHistoryRecord]
+    @Query(sort: \ScanHistoryRecord.createdAt, order: .reverse)
+    private var records: [ScanHistoryRecord]
 
-  private var trips: [VisitTrip] {
-    VisitTripBuilder.cluster(records.map(\.tripSnapshot))
-  }
+    private var trips: [VisitTrip] {
+        VisitTripBuilder.cluster(records.map(\.tripSnapshot))
+    }
 
-  var body: some View {
-    Group {
-      if embedsInReviewHub {
-        tripContent
-      } else {
+    var body: some View {
         ZStack {
-          CulturePageBackground()
-          tripContent
+            CulturePageBackground()
+
+            if trips.isEmpty {
+                ContentUnavailableView {
+                    Label("还没有文化回顾", systemImage: "book.closed")
+                } description: {
+                    Text("完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。")
+                }
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 16) {
+                        MagazinePageHeader(
+                            eyebrow: "JOURNAL",
+                            title: "文化回顾",
+                            message: "把一次参观里点亮的节点、走过的景点与新认识的关系收成可回看的行程。"
+                        )
+
+                        ForEach(trips) { trip in
+                            NavigationLink(value: AppRoute.visitTrip(trip.id)) {
+                                VisitTripRow(trip: trip)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, CultureTheme.pagePadding)
+                    .padding(.top, 20)
+                    .padding(.bottom, 40)
+                }
+            }
         }
         .cultureNavigationTitle("文化回顾", showsBackButton: showsBackButton)
-      }
     }
-  }
+}
 
-  @ViewBuilder
-  private var tripContent: some View {
-    if trips.isEmpty {
-      ContentUnavailableView {
-        Label("还没有文化回顾", systemImage: "book.closed")
-      } description: {
-        Text("完成一次扫描并保存后，相近时间与地点的识别会聚成一次参观回顾。")
-      }
-    } else {
-      ScrollView {
-        LazyVStack(alignment: .leading, spacing: 16) {
-          if !embedsInReviewHub {
-            MagazinePageHeader(
-              eyebrow: "JOURNAL",
-              title: "文化回顾",
-              message: "把一次参观里点亮的节点、走过的景点与新认识的关系收成可回看的行程。"
-            )
-          }
+struct VisitTripRow: View {
+    let trip: VisitTrip
 
-          ForEach(trips) { trip in
-            NavigationLink(value: AppRoute.visitTrip(trip.id)) {
-              tripRow(trip)
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(trip.title)
+                    .font(.cultureSerif(.title3))
+                    .foregroundStyle(CultureTheme.inkPrimary)
+                Spacer()
+                Text("\(trip.scanCount) 次识别")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(CultureTheme.cinnabar)
             }
-            .buttonStyle(.plain)
-          }
+
+            Text(trip.durationText)
+                .font(.caption)
+                .foregroundStyle(CultureTheme.inkSecondary)
+
+            HStack(spacing: 16) {
+                Label("\(trip.litNodeCount) 节点", systemImage: "sparkles")
+                Label("\(trip.attractionNames.count) 景点", systemImage: "mappin.and.ellipse")
+                Label("\(trip.newRelationCount) 关系", systemImage: "point.3.connected.trianglepath.dotted")
+            }
+            .font(.caption)
+            .foregroundStyle(CultureTheme.inkSecondary)
         }
-        .padding(.horizontal, CultureTheme.pagePadding)
-        .padding(.top, embedsInReviewHub ? 8 : 20)
-        .padding(.bottom, 40)
-      }
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            CultureTheme.surface,
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(CultureTheme.hairline, lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("打开本次参观回顾")
     }
-  }
-
-  private func tripRow(_ trip: VisitTrip) -> some View {
-    VStack(alignment: .leading, spacing: 12) {
-      HStack(alignment: .firstTextBaseline) {
-        Text(trip.title)
-          .font(.cultureSerif(.title3))
-          .foregroundStyle(CultureTheme.inkPrimary)
-        Spacer()
-        Text("\(trip.scanCount) 次识别")
-          .font(.caption.monospacedDigit())
-          .foregroundStyle(CultureTheme.cinnabar)
-      }
-
-      Text(trip.durationText)
-        .font(.caption)
-        .foregroundStyle(CultureTheme.inkSecondary)
-
-      HStack(spacing: 16) {
-        Label("\(trip.litNodeCount) 节点", systemImage: "sparkles")
-        Label("\(trip.attractionNames.count) 景点", systemImage: "mappin.and.ellipse")
-        Label("\(trip.newRelationCount) 关系", systemImage: "point.3.connected.trianglepath.dotted")
-      }
-      .font(.caption)
-      .foregroundStyle(CultureTheme.inkSecondary)
-    }
-    .padding(18)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      CultureTheme.surface,
-      in: RoundedRectangle(cornerRadius: 12, style: .continuous)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 12, style: .continuous)
-        .stroke(CultureTheme.hairline, lineWidth: 1)
-    }
-    .accessibilityElement(children: .combine)
-    .accessibilityHint("打开本次参观回顾")
-  }
 }
 
 #Preview {
-  NavigationStack {
-    VisitTripListView()
-  }
-  .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
+    NavigationStack {
+        VisitTripListView()
+    }
+    .modelContainer(for: ScanHistoryRecord.self, inMemory: true)
 }

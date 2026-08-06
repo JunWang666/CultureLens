@@ -5331,6 +5331,70 @@
         }
       }
     },
+    "按时间回看每一次扫描。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Browse every scan in chronological order."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按时间回看每一次扫描。"
+          }
+        }
+      }
+    },
+    "相近时间与地点的识别收成参观汇总。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognitions close in time and place become a visit summary."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "相近时间与地点的识别收成参观汇总。"
+          }
+        }
+      }
+    },
+    "查看全部时间线足迹": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See all timeline footprints"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看全部时间线足迹"
+          }
+        }
+      }
+    },
+    "查看全部文化回顾": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See all culture reviews"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看全部文化回顾"
+          }
+        }
+      }
+    },
     "按需资源 · 默认安装": {
       "localizations": {
         "en": {

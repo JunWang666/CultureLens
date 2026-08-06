@@ -1314,6 +1314,35 @@ struct OnDeviceRecognitionTests {
     #expect(text.contains("馆内展品/器物即使能判断所在馆区，attraction_key 也必须为空"))
     #expect(text.contains("不得把景点 name 写进 canonical_name。"))
 
+    let withGeography = try assembler.userText(
+      contextNote: nil,
+      knowledgeCandidates: [],
+      attractionCandidates: [],
+      place: PlaceContext(
+        latitude: 30.234567,
+        longitude: 120.123456,
+        accuracyMeters: 12,
+        cityName: "杭州市",
+        regionName: "中国",
+        regionCode: "CN-ZJ",
+        displayName: "杭州市，中国"
+      ),
+      nearbyMapPlaces: [
+        NearbyMapPlaceContext(
+          name: "断桥残雪",
+          latitude: 30.259,
+          longitude: 120.145,
+          distanceMeters: 240,
+          address: "浙江省杭州市西湖区"
+        )
+      ]
+    )
+    #expect(withGeography.contains("拍摄地理上下文 JSON："))
+    #expect(withGeography.contains("\"nearby_map_places\":[{"))
+    #expect(withGeography.contains("\"name\":\"断桥残雪\""))
+    #expect(withGeography.contains("\"distance_meters\":240"))
+    #expect(withGeography.contains("不能替代图片中的可见证据"))
+
     let bare = try assembler.userText(
       contextNote: nil,
       knowledgeCandidates: [],

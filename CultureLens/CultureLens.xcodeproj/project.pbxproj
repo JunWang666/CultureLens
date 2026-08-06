@@ -36,6 +36,186 @@
 		C12E0D300000000000000005 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000025 /* themes.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
 		C12E0D300000000000000006 /* locales-en.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000026 /* locales-en.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
 		C12E0D300000000000000007 /* pack-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D300000000000000027 /* pack-manifest.json */; settings = {ASSET_TAGS = ("knowledge-zhejiang-museum", ); }; };
+		C12E0D4B0000000000000001 /* an-lushan-rebellion.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000001 /* an-lushan-rebellion.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000002 /* chinese-buddhism.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000002 /* chinese-buddhism.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000003 /* chinese-calligraphy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000003 /* chinese-calligraphy.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000004 /* chinese-dynasty-overview.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000004 /* chinese-dynasty-overview.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000005 /* chinese-landscape-painting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000005 /* chinese-landscape-painting.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000006 /* confucius-and-confucianism.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000006 /* confucius-and-confucianism.jpeg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000007 /* five-dynasties-ten-kingdoms.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000007 /* five-dynasties-ten-kingdoms.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000008 /* four-great-inventions.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000008 /* four-great-inventions.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000009 /* grand-canal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000009 /* grand-canal.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000010 /* great-wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000010 /* great-wall.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000011 /* han-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000011 /* han-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000012 /* han-wudi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000012 /* han-wudi.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000013 /* hundred-schools.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000013 /* hundred-schools.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000014 /* imperial-examination.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000014 /* imperial-examination.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000015 /* jin-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000015 /* jin-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000016 /* jingkang-incident.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000016 /* jingkang-incident.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000017 /* kaiyuan-flourishing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000017 /* kaiyuan-flourishing.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000018 /* kangxi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000018 /* kangxi.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000019 /* laozi-and-taoism.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000019 /* laozi-and-taoism.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000020 /* mid-autumn-festival.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000020 /* mid-autumn-festival.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000021 /* ming-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000021 /* ming-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000022 /* opium-war.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000022 /* opium-war.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000023 /* qin-dynasty.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000023 /* qin-dynasty.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000024 /* qin-shi-huang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000024 /* qin-shi-huang.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000025 /* qing-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000025 /* qing-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000026 /* shang-dynasty.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000026 /* shang-dynasty.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000027 /* shang-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000027 /* shang-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000028 /* silk-road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000028 /* silk-road.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000029 /* song-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000029 /* song-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000030 /* southern-northern-dynasties.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000030 /* southern-northern-dynasties.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000031 /* spring-autumn-warring-states.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000031 /* spring-autumn-warring-states.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000032 /* sui-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000032 /* sui-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000033 /* tang-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000033 /* tang-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000034 /* tang-taizong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000034 /* tang-taizong.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000035 /* tea-culture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000035 /* tea-culture.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000036 /* three-kingdoms.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000036 /* three-kingdoms.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000037 /* twenty-four-histories.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000037 /* twenty-four-histories.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000038 /* wang-anshi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000038 /* wang-anshi.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000039 /* wenjing-prosperity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000039 /* wenjing-prosperity.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000040 /* xia-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000040 /* xia-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000041 /* yuan-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000041 /* yuan-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000042 /* yue-fei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000042 /* yue-fei.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000043 /* zheng-he.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000043 /* zheng-he.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000044 /* zhenguan-rule.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000044 /* zhenguan-rule.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000045 /* zhonghua-civilization.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000045 /* zhonghua-civilization.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000046 /* zhou-dynasty.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000046 /* zhou-dynasty.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000047 /* contemporary-cultures.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000047 /* contemporary-cultures.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000048 /* fanshan-cemetery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000048 /* fanshan-cemetery.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000049 /* god-man-beast-mask.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000049 /* god-man-beast-mask.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000050 /* jade-bi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000050 /* jade-bi.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000051 /* jade-cong-ritual.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000051 /* jade-cong-ritual.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000052 /* jade-cong-wang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000052 /* jade-cong-wang.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000053 /* jade-crafting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000053 /* jade-crafting.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000054 /* jade-crafting.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000054 /* jade-crafting.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000055 /* jade-yue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000055 /* jade-yue.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000056 /* liangzhu-ancient-city.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000056 /* liangzhu-ancient-city.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000057 /* liangzhu-chronology.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000057 /* liangzhu-chronology.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000058 /* liangzhu-culture-overview.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000058 /* liangzhu-culture-overview.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000059 /* liangzhu-distribution.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000059 /* liangzhu-distribution.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000060 /* liangzhu-in-zhejiang-museum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000060 /* liangzhu-in-zhejiang-museum.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000061 /* liangzhu-museum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000061 /* liangzhu-museum.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000062 /* liangzhu-pottery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000062 /* liangzhu-pottery.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000063 /* liangzhu-pottery.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000063 /* liangzhu-pottery.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000064 /* liangzhu-society.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000064 /* liangzhu-society.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000065 /* liangzhu-symbols.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000065 /* liangzhu-symbols.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000066 /* liangzhu-water-system.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000066 /* liangzhu-water-system.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000067 /* mojiaoshan-center.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000067 /* mojiaoshan-center.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000068 /* rice-agriculture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000068 /* rice-agriculture.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000069 /* shi-xingeng-discovery.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000069 /* shi-xingeng-discovery.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000070 /* silk-and-weaving.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000070 /* silk-and-weaving.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000071 /* site-park.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000071 /* site-park.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000072 /* world-heritage-status.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000072 /* world-heritage-status.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000073 /* yaoshan-altar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000073 /* yaoshan-altar.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000074 /* bai-juyi-and-west-lake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000074 /* bai-juyi-and-west-lake.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000075 /* baochu-leifeng-twin-tower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000075 /* baochu-leifeng-twin-tower.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000076 /* baochu-pagoda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000076 /* baochu-pagoda.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000077 /* baoshi-hill-cinnabar-glow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000077 /* baoshi-hill-cinnabar-glow.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000078 /* causeway-willow-peach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000078 /* causeway-willow-peach.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000079 /* chinese-zodiac-city-gate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000079 /* chinese-zodiac-city-gate.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000080 /* feilai-grotto-carving.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000080 /* feilai-grotto-carving.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000081 /* gushan-island.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000081 /* gushan-island.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000082 /* hongyi-master-and-hupao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000082 /* hongyi-master-and-hupao.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000083 /* huagang-fish-viewing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000083 /* huagang-fish-viewing.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000084 /* hupao-spring-tea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000084 /* hupao-spring-tea.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000085 /* huxinting-islet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000085 /* huxinting-islet.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000086 /* jigong-and-jingci-temple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000086 /* jigong-and-jingci-temple.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000087 /* jingci-temple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000087 /* jingci-temple.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000088 /* kangxi-southern-tours.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000088 /* kangxi-southern-tours.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000089 /* lakeside-old-city-interface.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000089 /* lakeside-old-city-interface.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000090 /* legend-of-the-white-snake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000090 /* legend-of-the-white-snake.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000091 /* leifeng-pagoda-and-evening-glow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000091 /* leifeng-pagoda-and-evening-glow.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000092 /* linbu-recluse-gushan.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000092 /* linbu-recluse-gushan.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000093 /* lingyin-zen-grove.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000093 /* lingyin-zen-grove.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000094 /* liuhe-pagoda-river.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000094 /* liuhe-pagoda-river.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000095 /* liulang-wenying-soundscape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000095 /* liulang-wenying-soundscape.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000096 /* longjing-tea-terrace.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000096 /* longjing-tea-terrace.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000097 /* longjing-village.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000097 /* longjing-village.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000098 /* longjing-village.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000098 /* longjing-village.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000099 /* meijiawu-tea-village.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000099 /* meijiawu-tea-village.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000100 /* meijiawu-tea-village.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000100 /* meijiawu-tea-village.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000101 /* mid-autumn-west-lake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000101 /* mid-autumn-west-lake.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000102 /* misty-rain-lake-scape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000102 /* misty-rain-lake-scape.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000103 /* moving-view-changing-scenery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000103 /* moving-view-changing-scenery.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000104 /* nanping-evening-bell.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000104 /* nanping-evening-bell.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000105 /* nested-chinese-garden.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000105 /* nested-chinese-garden.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000106 /* northern-song-three-pools.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000106 /* northern-song-three-pools.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000107 /* one-yuan-three-pools-symbol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000107 /* one-yuan-three-pools-symbol.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000108 /* osmanthus-autumn-fragrance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000108 /* osmanthus-autumn-fragrance.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000109 /* pinghu-autumn-moon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000109 /* pinghu-autumn-moon.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000110 /* poetic-landscape-naming.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000110 /* poetic-landscape-naming.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000111 /* qianlong-and-west-lake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000111 /* qianlong-and-west-lake.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000112 /* qiantang-tide.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000112 /* qiantang-tide.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000113 /* qianwang-temple-wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000113 /* qianwang-temple-wuyue.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000114 /* quyuan-lotus-summer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000114 /* quyuan-lotus-summer.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000115 /* ruangong-mound.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000115 /* ruangong-mound.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000116 /* shuangfeng-cloud-peaks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000116 /* shuangfeng-cloud-peaks.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000117 /* siku-quanshu-library.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000117 /* siku-quanshu-library.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000118 /* song-landscape-aesthetics.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000118 /* song-landscape-aesthetics.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000119 /* southern-song-linan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000119 /* southern-song-linan.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000120 /* su-causeway-spring-dawn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000120 /* su-causeway-spring-dawn.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000121 /* su-shi-and-west-lake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000121 /* su-shi-and-west-lake.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000122 /* three-immortal-islands.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000122 /* three-immortal-islands.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000123 /* three-pools-light-mechanism.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000123 /* three-pools-light-mechanism.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000124 /* three-pools-mirroring-moon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000124 /* three-pools-mirroring-moon.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000125 /* three-pools-round-openings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000125 /* three-pools-round-openings.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000126 /* three-pools-stone-pagodas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000126 /* three-pools-stone-pagodas.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000127 /* west-lake-buddhist-culture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000127 /* west-lake-buddhist-culture.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000128 /* west-lake-causeway-waterworks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000128 /* west-lake-causeway-waterworks.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000129 /* west-lake-cultural-landscape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000129 /* west-lake-cultural-landscape.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000130 /* west-lake-garden-framing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000130 /* west-lake-garden-framing.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000131 /* west-lake-moon-viewing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000131 /* west-lake-moon-viewing.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000132 /* west-lake-new-ten-scenes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000132 /* west-lake-new-ten-scenes.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000133 /* west-lake-pagoda-landscape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000133 /* west-lake-pagoda-landscape.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000134 /* west-lake-spatial-structure.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000134 /* west-lake-spatial-structure.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000135 /* west-lake-ten-scenes-system.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000135 /* west-lake-ten-scenes-system.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000136 /* west-lake-ten-scenes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000136 /* west-lake-ten-scenes.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000137 /* west-lake-three-heroes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000137 /* west-lake-three-heroes.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000138 /* west-lake-winter-snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000138 /* west-lake-winter-snow.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000139 /* west-lake-world-heritage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000139 /* west-lake-world-heritage.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000140 /* westlake-revalued-scenes-2007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000140 /* westlake-revalued-scenes-2007.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000141 /* xiaoyingzhou-lake-garden.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000141 /* xiaoyingzhou-lake-garden.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000142 /* xiling-seal-art.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000142 /* xiling-seal-art.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000143 /* yang-gong-causeway.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000143 /* yang-gong-causeway.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000144 /* yuan-qiantang-scenes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000144 /* yuan-qiantang-scenes.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000145 /* yue-fei-memorial-culture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000145 /* yue-fei-memorial-culture.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000146 /* asoka-pagoda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000146 /* asoka-pagoda.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000147 /* cai-feng-ming-qi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000147 /* cai-feng-ming-qi.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000148 /* caisu-mud-bodhisattva.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000148 /* caisu-mud-bodhisattva.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000149 /* fuchun-shanju-tu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000149 /* fuchun-shanju-tu.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000150 /* guqin-world.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000150 /* guqin-world.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000151 /* gushan-campus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000151 /* gushan-campus.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000152 /* hemudu-bone-plough.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000152 /* hemudu-bone-plough.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000153 /* hemudu-culture.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000153 /* hemudu-culture.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000154 /* hemudu-double-bird.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000154 /* hemudu-double-bird.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000155 /* hemudu-painted-pottery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000155 /* hemudu-painted-pottery.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000156 /* huang-binhong-memorial.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000156 /* huang-binhong-memorial.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000157 /* huang-binhong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000157 /* huang-binhong.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000158 /* huang-gongwang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000158 /* huang-gongwang.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000159 /* jiyue-bronze-house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000159 /* jiyue-bronze-house.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000160 /* longquan-boat-drip.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000160 /* longquan-boat-drip.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000161 /* longquan-kiln.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000161 /* longquan-kiln.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000162 /* museum-collection-system.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000162 /* museum-collection-system.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000163 /* no-overseas-treasures.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000163 /* no-overseas-treasures.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000164 /* qi-lacquer-donation.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000164 /* qi-lacquer-donation.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000165 /* sha-menghai-residence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000165 /* sha-menghai-residence.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000166 /* sha-menghai.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000166 /* sha-menghai.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000167 /* shili-hongzhuang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000167 /* shili-hongzhuang.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000168 /* southern-song-guan-ware.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000168 /* southern-song-guan-ware.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000169 /* tang-guqin-tradition.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000169 /* tang-guqin-tradition.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000170 /* top-ten-treasures.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000170 /* top-ten-treasures.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000171 /* wan-gong-jiao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000171 /* wan-gong-jiao.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000172 /* wu-changshuo.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000172 /* wu-changshuo.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000173 /* wuyue-buddhist-art.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000173 /* wuyue-buddhist-art.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000174 /* wuyue-state.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000174 /* wuyue-state.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000175 /* yue-bronze-swords.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000175 /* yue-bronze-swords.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000176 /* yue-kiln.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000176 /* yue-kiln.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000177 /* zhang-cheng-red-lacquer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000177 /* zhang-cheng-red-lacquer.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000178 /* zhejiang-museum-history.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000178 /* zhejiang-museum-history.jpg */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000179 /* zhejiang-yue-sword.png in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000179 /* zhejiang-yue-sword.png */; settings = {ASSET_TAGS = (images, ); }; };
+		C12E0D4B0000000000000180 /* zhijiang-campus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C12E0D4F0000000000000180 /* zhijiang-campus.jpg */; settings = {ASSET_TAGS = (images, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +267,186 @@
 		E9464E603017572B00B357C5 /* CultureLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CultureLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E6F3017572C00B357C5 /* CultureLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9464E793017572C00B357C5 /* CultureLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CultureLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C12E0D4F0000000000000001 /* an-lushan-rebellion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "an-lushan-rebellion.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000002 /* chinese-buddhism.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-buddhism.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000003 /* chinese-calligraphy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-calligraphy.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000004 /* chinese-dynasty-overview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chinese-dynasty-overview.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000005 /* chinese-landscape-painting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-landscape-painting.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000006 /* confucius-and-confucianism.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "confucius-and-confucianism.jpeg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000007 /* five-dynasties-ten-kingdoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "five-dynasties-ten-kingdoms.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000008 /* four-great-inventions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "four-great-inventions.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000009 /* grand-canal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "grand-canal.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000010 /* great-wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "great-wall.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000011 /* han-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "han-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000012 /* han-wudi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "han-wudi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000013 /* hundred-schools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hundred-schools.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000014 /* imperial-examination.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "imperial-examination.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000015 /* jin-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jin-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000016 /* jingkang-incident.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jingkang-incident.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000017 /* kaiyuan-flourishing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaiyuan-flourishing.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000018 /* kangxi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kangxi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000019 /* laozi-and-taoism.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "laozi-and-taoism.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000020 /* mid-autumn-festival.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mid-autumn-festival.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000021 /* ming-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ming-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000022 /* opium-war.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "opium-war.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000023 /* qin-dynasty.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qin-dynasty.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000024 /* qin-shi-huang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qin-shi-huang.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000025 /* qing-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qing-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000026 /* shang-dynasty.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "shang-dynasty.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000027 /* shang-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shang-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000028 /* silk-road.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "silk-road.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000029 /* song-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "song-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000030 /* southern-northern-dynasties.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "southern-northern-dynasties.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000031 /* spring-autumn-warring-states.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spring-autumn-warring-states.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000032 /* sui-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sui-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000033 /* tang-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tang-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000034 /* tang-taizong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tang-taizong.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000035 /* tea-culture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tea-culture.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000036 /* three-kingdoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three-kingdoms.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000037 /* twenty-four-histories.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "twenty-four-histories.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000038 /* wang-anshi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wang-anshi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000039 /* wenjing-prosperity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wenjing-prosperity.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000040 /* xia-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xia-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000041 /* yuan-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000042 /* yue-fei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yue-fei.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000043 /* zheng-he.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zheng-he.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000044 /* zhenguan-rule.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhenguan-rule.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000045 /* zhonghua-civilization.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhonghua-civilization.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000046 /* zhou-dynasty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhou-dynasty.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000047 /* contemporary-cultures.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "contemporary-cultures.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000048 /* fanshan-cemetery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fanshan-cemetery.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000049 /* god-man-beast-mask.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "god-man-beast-mask.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000050 /* jade-bi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jade-bi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000051 /* jade-cong-ritual.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jade-cong-ritual.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000052 /* jade-cong-wang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jade-cong-wang.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000053 /* jade-crafting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jade-crafting.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000054 /* jade-crafting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jade-crafting.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000055 /* jade-yue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jade-yue.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000056 /* liangzhu-ancient-city.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-ancient-city.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000057 /* liangzhu-chronology.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-chronology.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000058 /* liangzhu-culture-overview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liangzhu-culture-overview.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000059 /* liangzhu-distribution.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-distribution.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000060 /* liangzhu-in-zhejiang-museum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-in-zhejiang-museum.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000061 /* liangzhu-museum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-museum.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000062 /* liangzhu-pottery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-pottery.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000063 /* liangzhu-pottery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liangzhu-pottery.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000064 /* liangzhu-society.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liangzhu-society.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000065 /* liangzhu-symbols.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liangzhu-symbols.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000066 /* liangzhu-water-system.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liangzhu-water-system.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000067 /* mojiaoshan-center.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mojiaoshan-center.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000068 /* rice-agriculture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "rice-agriculture.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000069 /* shi-xingeng-discovery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shi-xingeng-discovery.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000070 /* silk-and-weaving.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "silk-and-weaving.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000071 /* site-park.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "site-park.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000072 /* world-heritage-status.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "world-heritage-status.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000073 /* yaoshan-altar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yaoshan-altar.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000074 /* bai-juyi-and-west-lake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bai-juyi-and-west-lake.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000075 /* baochu-leifeng-twin-tower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "baochu-leifeng-twin-tower.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000076 /* baochu-pagoda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "baochu-pagoda.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000077 /* baoshi-hill-cinnabar-glow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "baoshi-hill-cinnabar-glow.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000078 /* causeway-willow-peach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "causeway-willow-peach.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000079 /* chinese-zodiac-city-gate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "chinese-zodiac-city-gate.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000080 /* feilai-grotto-carving.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "feilai-grotto-carving.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000081 /* gushan-island.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gushan-island.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000082 /* hongyi-master-and-hupao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hongyi-master-and-hupao.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000083 /* huagang-fish-viewing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "huagang-fish-viewing.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000084 /* hupao-spring-tea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hupao-spring-tea.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000085 /* huxinting-islet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "huxinting-islet.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000086 /* jigong-and-jingci-temple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jigong-and-jingci-temple.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000087 /* jingci-temple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jingci-temple.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000088 /* kangxi-southern-tours.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kangxi-southern-tours.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000089 /* lakeside-old-city-interface.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lakeside-old-city-interface.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000090 /* legend-of-the-white-snake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "legend-of-the-white-snake.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000091 /* leifeng-pagoda-and-evening-glow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "leifeng-pagoda-and-evening-glow.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000092 /* linbu-recluse-gushan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linbu-recluse-gushan.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000093 /* lingyin-zen-grove.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lingyin-zen-grove.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000094 /* liuhe-pagoda-river.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liuhe-pagoda-river.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000095 /* liulang-wenying-soundscape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "liulang-wenying-soundscape.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000096 /* longjing-tea-terrace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "longjing-tea-terrace.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000097 /* longjing-village.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "longjing-village.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000098 /* longjing-village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "longjing-village.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000099 /* meijiawu-tea-village.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "meijiawu-tea-village.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000100 /* meijiawu-tea-village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meijiawu-tea-village.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000101 /* mid-autumn-west-lake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mid-autumn-west-lake.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000102 /* misty-rain-lake-scape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "misty-rain-lake-scape.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000103 /* moving-view-changing-scenery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "moving-view-changing-scenery.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000104 /* nanping-evening-bell.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "nanping-evening-bell.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000105 /* nested-chinese-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "nested-chinese-garden.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000106 /* northern-song-three-pools.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "northern-song-three-pools.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000107 /* one-yuan-three-pools-symbol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "one-yuan-three-pools-symbol.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000108 /* osmanthus-autumn-fragrance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "osmanthus-autumn-fragrance.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000109 /* pinghu-autumn-moon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pinghu-autumn-moon.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000110 /* poetic-landscape-naming.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "poetic-landscape-naming.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000111 /* qianlong-and-west-lake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qianlong-and-west-lake.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000112 /* qiantang-tide.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qiantang-tide.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000113 /* qianwang-temple-wuyue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qianwang-temple-wuyue.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000114 /* quyuan-lotus-summer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "quyuan-lotus-summer.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000115 /* ruangong-mound.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ruangong-mound.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000116 /* shuangfeng-cloud-peaks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "shuangfeng-cloud-peaks.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000117 /* siku-quanshu-library.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "siku-quanshu-library.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000118 /* song-landscape-aesthetics.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "song-landscape-aesthetics.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000119 /* southern-song-linan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "southern-song-linan.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000120 /* su-causeway-spring-dawn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "su-causeway-spring-dawn.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000121 /* su-shi-and-west-lake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "su-shi-and-west-lake.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000122 /* three-immortal-islands.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "three-immortal-islands.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000123 /* three-pools-light-mechanism.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "three-pools-light-mechanism.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000124 /* three-pools-mirroring-moon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "three-pools-mirroring-moon.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000125 /* three-pools-round-openings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "three-pools-round-openings.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000126 /* three-pools-stone-pagodas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "three-pools-stone-pagodas.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000127 /* west-lake-buddhist-culture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-buddhist-culture.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000128 /* west-lake-causeway-waterworks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-causeway-waterworks.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000129 /* west-lake-cultural-landscape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-cultural-landscape.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000130 /* west-lake-garden-framing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-garden-framing.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000131 /* west-lake-moon-viewing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-moon-viewing.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000132 /* west-lake-new-ten-scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-new-ten-scenes.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000133 /* west-lake-pagoda-landscape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-pagoda-landscape.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000134 /* west-lake-spatial-structure.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-spatial-structure.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000135 /* west-lake-ten-scenes-system.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-ten-scenes-system.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000136 /* west-lake-ten-scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-ten-scenes.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000137 /* west-lake-three-heroes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-three-heroes.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000138 /* west-lake-winter-snow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-winter-snow.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000139 /* west-lake-world-heritage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "west-lake-world-heritage.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000140 /* westlake-revalued-scenes-2007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "westlake-revalued-scenes-2007.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000141 /* xiaoyingzhou-lake-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "xiaoyingzhou-lake-garden.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000142 /* xiling-seal-art.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "xiling-seal-art.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000143 /* yang-gong-causeway.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yang-gong-causeway.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000144 /* yuan-qiantang-scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yuan-qiantang-scenes.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000145 /* yue-fei-memorial-culture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yue-fei-memorial-culture.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000146 /* asoka-pagoda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "asoka-pagoda.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000147 /* cai-feng-ming-qi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cai-feng-ming-qi.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000148 /* caisu-mud-bodhisattva.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "caisu-mud-bodhisattva.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000149 /* fuchun-shanju-tu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fuchun-shanju-tu.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000150 /* guqin-world.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "guqin-world.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000151 /* gushan-campus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gushan-campus.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000152 /* hemudu-bone-plough.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hemudu-bone-plough.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000153 /* hemudu-culture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hemudu-culture.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000154 /* hemudu-double-bird.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hemudu-double-bird.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000155 /* hemudu-painted-pottery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hemudu-painted-pottery.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000156 /* huang-binhong-memorial.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "huang-binhong-memorial.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000157 /* huang-binhong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "huang-binhong.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000158 /* huang-gongwang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "huang-gongwang.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000159 /* jiyue-bronze-house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jiyue-bronze-house.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000160 /* longquan-boat-drip.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "longquan-boat-drip.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000161 /* longquan-kiln.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "longquan-kiln.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000162 /* museum-collection-system.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "museum-collection-system.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000163 /* no-overseas-treasures.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "no-overseas-treasures.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000164 /* qi-lacquer-donation.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "qi-lacquer-donation.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000165 /* sha-menghai-residence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sha-menghai-residence.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000166 /* sha-menghai.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sha-menghai.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000167 /* shili-hongzhuang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "shili-hongzhuang.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000168 /* southern-song-guan-ware.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "southern-song-guan-ware.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000169 /* tang-guqin-tradition.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tang-guqin-tradition.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000170 /* top-ten-treasures.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "top-ten-treasures.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000171 /* wan-gong-jiao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wan-gong-jiao.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000172 /* wu-changshuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wu-changshuo.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000173 /* wuyue-buddhist-art.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wuyue-buddhist-art.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000174 /* wuyue-state.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wuyue-state.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000175 /* yue-bronze-swords.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yue-bronze-swords.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000176 /* yue-kiln.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yue-kiln.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000177 /* zhang-cheng-red-lacquer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhang-cheng-red-lacquer.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000178 /* zhejiang-museum-history.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhejiang-museum-history.jpg"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000179 /* zhejiang-yue-sword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhejiang-yue-sword.png"; sourceTree = "<group>"; };
+		C12E0D4F0000000000000180 /* zhijiang-campus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "zhijiang-campus.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -121,6 +481,186 @@
 				"Resources/KnowledgePackZhejiangMuseum/locales-en.json",
 				"Resources/KnowledgePackZhejiangMuseum/pack-manifest.json",
 				Resources/KnowledgePackZhejiangMuseum/themes.json,
+				"Resources/images/chinese-history/an-lushan-rebellion.png",
+				"Resources/images/chinese-history/chinese-buddhism.jpg",
+				"Resources/images/chinese-history/chinese-calligraphy.jpg",
+				"Resources/images/chinese-history/chinese-dynasty-overview.png",
+				"Resources/images/chinese-history/chinese-landscape-painting.jpg",
+				"Resources/images/chinese-history/confucius-and-confucianism.jpeg",
+				"Resources/images/chinese-history/five-dynasties-ten-kingdoms.png",
+				"Resources/images/chinese-history/four-great-inventions.png",
+				"Resources/images/chinese-history/grand-canal.jpg",
+				"Resources/images/chinese-history/great-wall.jpg",
+				"Resources/images/chinese-history/han-dynasty.png",
+				"Resources/images/chinese-history/han-wudi.jpg",
+				"Resources/images/chinese-history/hundred-schools.png",
+				"Resources/images/chinese-history/imperial-examination.jpg",
+				"Resources/images/chinese-history/jin-dynasty.png",
+				"Resources/images/chinese-history/jingkang-incident.jpg",
+				"Resources/images/chinese-history/kaiyuan-flourishing.jpg",
+				"Resources/images/chinese-history/kangxi.jpg",
+				"Resources/images/chinese-history/laozi-and-taoism.jpg",
+				"Resources/images/chinese-history/mid-autumn-festival.jpg",
+				"Resources/images/chinese-history/ming-dynasty.png",
+				"Resources/images/chinese-history/opium-war.jpg",
+				"Resources/images/chinese-history/qin-dynasty.jpg",
+				"Resources/images/chinese-history/qin-shi-huang.jpg",
+				"Resources/images/chinese-history/qing-dynasty.png",
+				"Resources/images/chinese-history/shang-dynasty.jpg",
+				"Resources/images/chinese-history/shang-dynasty.png",
+				"Resources/images/chinese-history/silk-road.jpg",
+				"Resources/images/chinese-history/song-dynasty.png",
+				"Resources/images/chinese-history/southern-northern-dynasties.png",
+				"Resources/images/chinese-history/spring-autumn-warring-states.png",
+				"Resources/images/chinese-history/sui-dynasty.png",
+				"Resources/images/chinese-history/tang-dynasty.png",
+				"Resources/images/chinese-history/tang-taizong.jpg",
+				"Resources/images/chinese-history/tea-culture.jpg",
+				"Resources/images/chinese-history/three-kingdoms.png",
+				"Resources/images/chinese-history/twenty-four-histories.jpg",
+				"Resources/images/chinese-history/wang-anshi.jpg",
+				"Resources/images/chinese-history/wenjing-prosperity.jpg",
+				"Resources/images/chinese-history/xia-dynasty.png",
+				"Resources/images/chinese-history/yuan-dynasty.png",
+				"Resources/images/chinese-history/yue-fei.jpg",
+				"Resources/images/chinese-history/zheng-he.jpg",
+				"Resources/images/chinese-history/zhenguan-rule.jpg",
+				"Resources/images/chinese-history/zhonghua-civilization.jpg",
+				"Resources/images/chinese-history/zhou-dynasty.png",
+				"Resources/images/liangzhu/contemporary-cultures.jpg",
+				"Resources/images/liangzhu/fanshan-cemetery.jpg",
+				"Resources/images/liangzhu/god-man-beast-mask.jpg",
+				"Resources/images/liangzhu/jade-bi.jpg",
+				"Resources/images/liangzhu/jade-cong-ritual.jpg",
+				"Resources/images/liangzhu/jade-cong-wang.jpg",
+				"Resources/images/liangzhu/jade-crafting.jpg",
+				"Resources/images/liangzhu/jade-crafting.png",
+				"Resources/images/liangzhu/jade-yue.jpg",
+				"Resources/images/liangzhu/liangzhu-ancient-city.jpg",
+				"Resources/images/liangzhu/liangzhu-chronology.jpg",
+				"Resources/images/liangzhu/liangzhu-culture-overview.png",
+				"Resources/images/liangzhu/liangzhu-distribution.jpg",
+				"Resources/images/liangzhu/liangzhu-in-zhejiang-museum.jpg",
+				"Resources/images/liangzhu/liangzhu-museum.jpg",
+				"Resources/images/liangzhu/liangzhu-pottery.jpg",
+				"Resources/images/liangzhu/liangzhu-pottery.png",
+				"Resources/images/liangzhu/liangzhu-society.png",
+				"Resources/images/liangzhu/liangzhu-symbols.png",
+				"Resources/images/liangzhu/liangzhu-water-system.jpg",
+				"Resources/images/liangzhu/mojiaoshan-center.jpg",
+				"Resources/images/liangzhu/rice-agriculture.jpg",
+				"Resources/images/liangzhu/shi-xingeng-discovery.png",
+				"Resources/images/liangzhu/silk-and-weaving.jpg",
+				"Resources/images/liangzhu/site-park.jpg",
+				"Resources/images/liangzhu/world-heritage-status.jpg",
+				"Resources/images/liangzhu/yaoshan-altar.jpg",
+				"Resources/images/west-lake/bai-juyi-and-west-lake.jpg",
+				"Resources/images/west-lake/baochu-leifeng-twin-tower.jpg",
+				"Resources/images/west-lake/baochu-pagoda.jpg",
+				"Resources/images/west-lake/baoshi-hill-cinnabar-glow.jpg",
+				"Resources/images/west-lake/causeway-willow-peach.jpg",
+				"Resources/images/west-lake/chinese-zodiac-city-gate.jpg",
+				"Resources/images/west-lake/feilai-grotto-carving.jpg",
+				"Resources/images/west-lake/gushan-island.jpg",
+				"Resources/images/west-lake/hongyi-master-and-hupao.jpg",
+				"Resources/images/west-lake/huagang-fish-viewing.jpg",
+				"Resources/images/west-lake/hupao-spring-tea.jpg",
+				"Resources/images/west-lake/huxinting-islet.jpg",
+				"Resources/images/west-lake/jigong-and-jingci-temple.jpg",
+				"Resources/images/west-lake/jingci-temple.jpg",
+				"Resources/images/west-lake/kangxi-southern-tours.jpg",
+				"Resources/images/west-lake/lakeside-old-city-interface.jpg",
+				"Resources/images/west-lake/legend-of-the-white-snake.jpg",
+				"Resources/images/west-lake/leifeng-pagoda-and-evening-glow.jpg",
+				"Resources/images/west-lake/linbu-recluse-gushan.png",
+				"Resources/images/west-lake/lingyin-zen-grove.jpg",
+				"Resources/images/west-lake/liuhe-pagoda-river.jpg",
+				"Resources/images/west-lake/liulang-wenying-soundscape.jpg",
+				"Resources/images/west-lake/longjing-tea-terrace.png",
+				"Resources/images/west-lake/longjing-village.jpg",
+				"Resources/images/west-lake/longjing-village.png",
+				"Resources/images/west-lake/meijiawu-tea-village.jpg",
+				"Resources/images/west-lake/meijiawu-tea-village.png",
+				"Resources/images/west-lake/mid-autumn-west-lake.jpg",
+				"Resources/images/west-lake/misty-rain-lake-scape.jpg",
+				"Resources/images/west-lake/moving-view-changing-scenery.jpg",
+				"Resources/images/west-lake/nanping-evening-bell.jpg",
+				"Resources/images/west-lake/nested-chinese-garden.jpg",
+				"Resources/images/west-lake/northern-song-three-pools.jpg",
+				"Resources/images/west-lake/one-yuan-three-pools-symbol.jpg",
+				"Resources/images/west-lake/osmanthus-autumn-fragrance.jpg",
+				"Resources/images/west-lake/pinghu-autumn-moon.jpg",
+				"Resources/images/west-lake/poetic-landscape-naming.jpg",
+				"Resources/images/west-lake/qianlong-and-west-lake.jpg",
+				"Resources/images/west-lake/qiantang-tide.jpg",
+				"Resources/images/west-lake/qianwang-temple-wuyue.jpg",
+				"Resources/images/west-lake/quyuan-lotus-summer.jpg",
+				"Resources/images/west-lake/ruangong-mound.jpg",
+				"Resources/images/west-lake/shuangfeng-cloud-peaks.jpg",
+				"Resources/images/west-lake/siku-quanshu-library.jpg",
+				"Resources/images/west-lake/song-landscape-aesthetics.jpg",
+				"Resources/images/west-lake/southern-song-linan.jpg",
+				"Resources/images/west-lake/su-causeway-spring-dawn.jpg",
+				"Resources/images/west-lake/su-shi-and-west-lake.jpg",
+				"Resources/images/west-lake/three-immortal-islands.jpg",
+				"Resources/images/west-lake/three-pools-light-mechanism.jpg",
+				"Resources/images/west-lake/three-pools-mirroring-moon.jpg",
+				"Resources/images/west-lake/three-pools-round-openings.jpg",
+				"Resources/images/west-lake/three-pools-stone-pagodas.jpg",
+				"Resources/images/west-lake/west-lake-buddhist-culture.jpg",
+				"Resources/images/west-lake/west-lake-causeway-waterworks.jpg",
+				"Resources/images/west-lake/west-lake-cultural-landscape.jpg",
+				"Resources/images/west-lake/west-lake-garden-framing.jpg",
+				"Resources/images/west-lake/west-lake-moon-viewing.jpg",
+				"Resources/images/west-lake/west-lake-new-ten-scenes.jpg",
+				"Resources/images/west-lake/west-lake-pagoda-landscape.jpg",
+				"Resources/images/west-lake/west-lake-spatial-structure.jpg",
+				"Resources/images/west-lake/west-lake-ten-scenes-system.jpg",
+				"Resources/images/west-lake/west-lake-ten-scenes.jpg",
+				"Resources/images/west-lake/west-lake-three-heroes.jpg",
+				"Resources/images/west-lake/west-lake-winter-snow.jpg",
+				"Resources/images/west-lake/west-lake-world-heritage.jpg",
+				"Resources/images/west-lake/westlake-revalued-scenes-2007.jpg",
+				"Resources/images/west-lake/xiaoyingzhou-lake-garden.jpg",
+				"Resources/images/west-lake/xiling-seal-art.jpg",
+				"Resources/images/west-lake/yang-gong-causeway.jpg",
+				"Resources/images/west-lake/yuan-qiantang-scenes.jpg",
+				"Resources/images/west-lake/yue-fei-memorial-culture.jpg",
+				"Resources/images/zhejiang-museum/asoka-pagoda.jpg",
+				"Resources/images/zhejiang-museum/cai-feng-ming-qi.jpg",
+				"Resources/images/zhejiang-museum/caisu-mud-bodhisattva.jpg",
+				"Resources/images/zhejiang-museum/fuchun-shanju-tu.jpg",
+				"Resources/images/zhejiang-museum/guqin-world.jpg",
+				"Resources/images/zhejiang-museum/gushan-campus.jpg",
+				"Resources/images/zhejiang-museum/hemudu-bone-plough.jpg",
+				"Resources/images/zhejiang-museum/hemudu-culture.png",
+				"Resources/images/zhejiang-museum/hemudu-double-bird.jpg",
+				"Resources/images/zhejiang-museum/hemudu-painted-pottery.jpg",
+				"Resources/images/zhejiang-museum/huang-binhong-memorial.jpg",
+				"Resources/images/zhejiang-museum/huang-binhong.jpg",
+				"Resources/images/zhejiang-museum/huang-gongwang.jpg",
+				"Resources/images/zhejiang-museum/jiyue-bronze-house.jpg",
+				"Resources/images/zhejiang-museum/longquan-boat-drip.jpg",
+				"Resources/images/zhejiang-museum/longquan-kiln.jpg",
+				"Resources/images/zhejiang-museum/museum-collection-system.jpg",
+				"Resources/images/zhejiang-museum/no-overseas-treasures.jpg",
+				"Resources/images/zhejiang-museum/qi-lacquer-donation.jpg",
+				"Resources/images/zhejiang-museum/sha-menghai-residence.jpg",
+				"Resources/images/zhejiang-museum/sha-menghai.jpg",
+				"Resources/images/zhejiang-museum/shili-hongzhuang.jpg",
+				"Resources/images/zhejiang-museum/southern-song-guan-ware.jpg",
+				"Resources/images/zhejiang-museum/tang-guqin-tradition.jpg",
+				"Resources/images/zhejiang-museum/top-ten-treasures.jpg",
+				"Resources/images/zhejiang-museum/wan-gong-jiao.jpg",
+				"Resources/images/zhejiang-museum/wu-changshuo.png",
+				"Resources/images/zhejiang-museum/wuyue-buddhist-art.jpg",
+				"Resources/images/zhejiang-museum/wuyue-state.png",
+				"Resources/images/zhejiang-museum/yue-bronze-swords.jpg",
+				"Resources/images/zhejiang-museum/yue-kiln.jpg",
+				"Resources/images/zhejiang-museum/zhang-cheng-red-lacquer.jpg",
+				"Resources/images/zhejiang-museum/zhejiang-museum-history.jpg",
+				"Resources/images/zhejiang-museum/zhejiang-yue-sword.png",
+				"Resources/images/zhejiang-museum/zhijiang-campus.jpg",
 			);
 			target = E9464E5F3017572B00B357C5 /* CultureLens */;
 		};
@@ -241,6 +781,7 @@
 				C12E0D100000000000000008 /* Chinese History ODR */,
 				C12E0D200000000000000008 /* Liangzhu ODR */,
 				C12E0D300000000000000008 /* Zhejiang Museum ODR */,
+				C12E0D4A0000000000000001 /* Images ODR */,
 				E9464E723017572C00B357C5 /* CultureLensTests */,
 				E9464E7C3017572C00B357C5 /* CultureLensUITests */,
 				E9464E613017572B00B357C5 /* Products */,
@@ -255,6 +796,226 @@
 				E9464E793017572C00B357C5 /* CultureLensUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C12E0D4A0000000000000002 /* chinese-history */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D4F0000000000000001 /* an-lushan-rebellion.png */,
+				C12E0D4F0000000000000002 /* chinese-buddhism.jpg */,
+				C12E0D4F0000000000000003 /* chinese-calligraphy.jpg */,
+				C12E0D4F0000000000000004 /* chinese-dynasty-overview.png */,
+				C12E0D4F0000000000000005 /* chinese-landscape-painting.jpg */,
+				C12E0D4F0000000000000006 /* confucius-and-confucianism.jpeg */,
+				C12E0D4F0000000000000007 /* five-dynasties-ten-kingdoms.png */,
+				C12E0D4F0000000000000008 /* four-great-inventions.png */,
+				C12E0D4F0000000000000009 /* grand-canal.jpg */,
+				C12E0D4F0000000000000010 /* great-wall.jpg */,
+				C12E0D4F0000000000000011 /* han-dynasty.png */,
+				C12E0D4F0000000000000012 /* han-wudi.jpg */,
+				C12E0D4F0000000000000013 /* hundred-schools.png */,
+				C12E0D4F0000000000000014 /* imperial-examination.jpg */,
+				C12E0D4F0000000000000015 /* jin-dynasty.png */,
+				C12E0D4F0000000000000016 /* jingkang-incident.jpg */,
+				C12E0D4F0000000000000017 /* kaiyuan-flourishing.jpg */,
+				C12E0D4F0000000000000018 /* kangxi.jpg */,
+				C12E0D4F0000000000000019 /* laozi-and-taoism.jpg */,
+				C12E0D4F0000000000000020 /* mid-autumn-festival.jpg */,
+				C12E0D4F0000000000000021 /* ming-dynasty.png */,
+				C12E0D4F0000000000000022 /* opium-war.jpg */,
+				C12E0D4F0000000000000023 /* qin-dynasty.jpg */,
+				C12E0D4F0000000000000024 /* qin-shi-huang.jpg */,
+				C12E0D4F0000000000000025 /* qing-dynasty.png */,
+				C12E0D4F0000000000000026 /* shang-dynasty.jpg */,
+				C12E0D4F0000000000000027 /* shang-dynasty.png */,
+				C12E0D4F0000000000000028 /* silk-road.jpg */,
+				C12E0D4F0000000000000029 /* song-dynasty.png */,
+				C12E0D4F0000000000000030 /* southern-northern-dynasties.png */,
+				C12E0D4F0000000000000031 /* spring-autumn-warring-states.png */,
+				C12E0D4F0000000000000032 /* sui-dynasty.png */,
+				C12E0D4F0000000000000033 /* tang-dynasty.png */,
+				C12E0D4F0000000000000034 /* tang-taizong.jpg */,
+				C12E0D4F0000000000000035 /* tea-culture.jpg */,
+				C12E0D4F0000000000000036 /* three-kingdoms.png */,
+				C12E0D4F0000000000000037 /* twenty-four-histories.jpg */,
+				C12E0D4F0000000000000038 /* wang-anshi.jpg */,
+				C12E0D4F0000000000000039 /* wenjing-prosperity.jpg */,
+				C12E0D4F0000000000000040 /* xia-dynasty.png */,
+				C12E0D4F0000000000000041 /* yuan-dynasty.png */,
+				C12E0D4F0000000000000042 /* yue-fei.jpg */,
+				C12E0D4F0000000000000043 /* zheng-he.jpg */,
+				C12E0D4F0000000000000044 /* zhenguan-rule.jpg */,
+				C12E0D4F0000000000000045 /* zhonghua-civilization.jpg */,
+				C12E0D4F0000000000000046 /* zhou-dynasty.png */,
+			);
+			path = "chinese-history";
+			sourceTree = "<group>";
+		};
+		C12E0D4A0000000000000003 /* liangzhu */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D4F0000000000000047 /* contemporary-cultures.jpg */,
+				C12E0D4F0000000000000048 /* fanshan-cemetery.jpg */,
+				C12E0D4F0000000000000049 /* god-man-beast-mask.jpg */,
+				C12E0D4F0000000000000050 /* jade-bi.jpg */,
+				C12E0D4F0000000000000051 /* jade-cong-ritual.jpg */,
+				C12E0D4F0000000000000052 /* jade-cong-wang.jpg */,
+				C12E0D4F0000000000000053 /* jade-crafting.jpg */,
+				C12E0D4F0000000000000054 /* jade-crafting.png */,
+				C12E0D4F0000000000000055 /* jade-yue.jpg */,
+				C12E0D4F0000000000000056 /* liangzhu-ancient-city.jpg */,
+				C12E0D4F0000000000000057 /* liangzhu-chronology.jpg */,
+				C12E0D4F0000000000000058 /* liangzhu-culture-overview.png */,
+				C12E0D4F0000000000000059 /* liangzhu-distribution.jpg */,
+				C12E0D4F0000000000000060 /* liangzhu-in-zhejiang-museum.jpg */,
+				C12E0D4F0000000000000061 /* liangzhu-museum.jpg */,
+				C12E0D4F0000000000000062 /* liangzhu-pottery.jpg */,
+				C12E0D4F0000000000000063 /* liangzhu-pottery.png */,
+				C12E0D4F0000000000000064 /* liangzhu-society.png */,
+				C12E0D4F0000000000000065 /* liangzhu-symbols.png */,
+				C12E0D4F0000000000000066 /* liangzhu-water-system.jpg */,
+				C12E0D4F0000000000000067 /* mojiaoshan-center.jpg */,
+				C12E0D4F0000000000000068 /* rice-agriculture.jpg */,
+				C12E0D4F0000000000000069 /* shi-xingeng-discovery.png */,
+				C12E0D4F0000000000000070 /* silk-and-weaving.jpg */,
+				C12E0D4F0000000000000071 /* site-park.jpg */,
+				C12E0D4F0000000000000072 /* world-heritage-status.jpg */,
+				C12E0D4F0000000000000073 /* yaoshan-altar.jpg */,
+			);
+			path = "liangzhu";
+			sourceTree = "<group>";
+		};
+		C12E0D4A0000000000000004 /* west-lake */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D4F0000000000000074 /* bai-juyi-and-west-lake.jpg */,
+				C12E0D4F0000000000000075 /* baochu-leifeng-twin-tower.jpg */,
+				C12E0D4F0000000000000076 /* baochu-pagoda.jpg */,
+				C12E0D4F0000000000000077 /* baoshi-hill-cinnabar-glow.jpg */,
+				C12E0D4F0000000000000078 /* causeway-willow-peach.jpg */,
+				C12E0D4F0000000000000079 /* chinese-zodiac-city-gate.jpg */,
+				C12E0D4F0000000000000080 /* feilai-grotto-carving.jpg */,
+				C12E0D4F0000000000000081 /* gushan-island.jpg */,
+				C12E0D4F0000000000000082 /* hongyi-master-and-hupao.jpg */,
+				C12E0D4F0000000000000083 /* huagang-fish-viewing.jpg */,
+				C12E0D4F0000000000000084 /* hupao-spring-tea.jpg */,
+				C12E0D4F0000000000000085 /* huxinting-islet.jpg */,
+				C12E0D4F0000000000000086 /* jigong-and-jingci-temple.jpg */,
+				C12E0D4F0000000000000087 /* jingci-temple.jpg */,
+				C12E0D4F0000000000000088 /* kangxi-southern-tours.jpg */,
+				C12E0D4F0000000000000089 /* lakeside-old-city-interface.jpg */,
+				C12E0D4F0000000000000090 /* legend-of-the-white-snake.jpg */,
+				C12E0D4F0000000000000091 /* leifeng-pagoda-and-evening-glow.jpg */,
+				C12E0D4F0000000000000092 /* linbu-recluse-gushan.png */,
+				C12E0D4F0000000000000093 /* lingyin-zen-grove.jpg */,
+				C12E0D4F0000000000000094 /* liuhe-pagoda-river.jpg */,
+				C12E0D4F0000000000000095 /* liulang-wenying-soundscape.jpg */,
+				C12E0D4F0000000000000096 /* longjing-tea-terrace.png */,
+				C12E0D4F0000000000000097 /* longjing-village.jpg */,
+				C12E0D4F0000000000000098 /* longjing-village.png */,
+				C12E0D4F0000000000000099 /* meijiawu-tea-village.jpg */,
+				C12E0D4F0000000000000100 /* meijiawu-tea-village.png */,
+				C12E0D4F0000000000000101 /* mid-autumn-west-lake.jpg */,
+				C12E0D4F0000000000000102 /* misty-rain-lake-scape.jpg */,
+				C12E0D4F0000000000000103 /* moving-view-changing-scenery.jpg */,
+				C12E0D4F0000000000000104 /* nanping-evening-bell.jpg */,
+				C12E0D4F0000000000000105 /* nested-chinese-garden.jpg */,
+				C12E0D4F0000000000000106 /* northern-song-three-pools.jpg */,
+				C12E0D4F0000000000000107 /* one-yuan-three-pools-symbol.jpg */,
+				C12E0D4F0000000000000108 /* osmanthus-autumn-fragrance.jpg */,
+				C12E0D4F0000000000000109 /* pinghu-autumn-moon.jpg */,
+				C12E0D4F0000000000000110 /* poetic-landscape-naming.jpg */,
+				C12E0D4F0000000000000111 /* qianlong-and-west-lake.jpg */,
+				C12E0D4F0000000000000112 /* qiantang-tide.jpg */,
+				C12E0D4F0000000000000113 /* qianwang-temple-wuyue.jpg */,
+				C12E0D4F0000000000000114 /* quyuan-lotus-summer.jpg */,
+				C12E0D4F0000000000000115 /* ruangong-mound.jpg */,
+				C12E0D4F0000000000000116 /* shuangfeng-cloud-peaks.jpg */,
+				C12E0D4F0000000000000117 /* siku-quanshu-library.jpg */,
+				C12E0D4F0000000000000118 /* song-landscape-aesthetics.jpg */,
+				C12E0D4F0000000000000119 /* southern-song-linan.jpg */,
+				C12E0D4F0000000000000120 /* su-causeway-spring-dawn.jpg */,
+				C12E0D4F0000000000000121 /* su-shi-and-west-lake.jpg */,
+				C12E0D4F0000000000000122 /* three-immortal-islands.jpg */,
+				C12E0D4F0000000000000123 /* three-pools-light-mechanism.jpg */,
+				C12E0D4F0000000000000124 /* three-pools-mirroring-moon.jpg */,
+				C12E0D4F0000000000000125 /* three-pools-round-openings.jpg */,
+				C12E0D4F0000000000000126 /* three-pools-stone-pagodas.jpg */,
+				C12E0D4F0000000000000127 /* west-lake-buddhist-culture.jpg */,
+				C12E0D4F0000000000000128 /* west-lake-causeway-waterworks.jpg */,
+				C12E0D4F0000000000000129 /* west-lake-cultural-landscape.jpg */,
+				C12E0D4F0000000000000130 /* west-lake-garden-framing.jpg */,
+				C12E0D4F0000000000000131 /* west-lake-moon-viewing.jpg */,
+				C12E0D4F0000000000000132 /* west-lake-new-ten-scenes.jpg */,
+				C12E0D4F0000000000000133 /* west-lake-pagoda-landscape.jpg */,
+				C12E0D4F0000000000000134 /* west-lake-spatial-structure.jpg */,
+				C12E0D4F0000000000000135 /* west-lake-ten-scenes-system.jpg */,
+				C12E0D4F0000000000000136 /* west-lake-ten-scenes.jpg */,
+				C12E0D4F0000000000000137 /* west-lake-three-heroes.jpg */,
+				C12E0D4F0000000000000138 /* west-lake-winter-snow.jpg */,
+				C12E0D4F0000000000000139 /* west-lake-world-heritage.jpg */,
+				C12E0D4F0000000000000140 /* westlake-revalued-scenes-2007.jpg */,
+				C12E0D4F0000000000000141 /* xiaoyingzhou-lake-garden.jpg */,
+				C12E0D4F0000000000000142 /* xiling-seal-art.jpg */,
+				C12E0D4F0000000000000143 /* yang-gong-causeway.jpg */,
+				C12E0D4F0000000000000144 /* yuan-qiantang-scenes.jpg */,
+				C12E0D4F0000000000000145 /* yue-fei-memorial-culture.jpg */,
+			);
+			path = "west-lake";
+			sourceTree = "<group>";
+		};
+		C12E0D4A0000000000000005 /* zhejiang-museum */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D4F0000000000000146 /* asoka-pagoda.jpg */,
+				C12E0D4F0000000000000147 /* cai-feng-ming-qi.jpg */,
+				C12E0D4F0000000000000148 /* caisu-mud-bodhisattva.jpg */,
+				C12E0D4F0000000000000149 /* fuchun-shanju-tu.jpg */,
+				C12E0D4F0000000000000150 /* guqin-world.jpg */,
+				C12E0D4F0000000000000151 /* gushan-campus.jpg */,
+				C12E0D4F0000000000000152 /* hemudu-bone-plough.jpg */,
+				C12E0D4F0000000000000153 /* hemudu-culture.png */,
+				C12E0D4F0000000000000154 /* hemudu-double-bird.jpg */,
+				C12E0D4F0000000000000155 /* hemudu-painted-pottery.jpg */,
+				C12E0D4F0000000000000156 /* huang-binhong-memorial.jpg */,
+				C12E0D4F0000000000000157 /* huang-binhong.jpg */,
+				C12E0D4F0000000000000158 /* huang-gongwang.jpg */,
+				C12E0D4F0000000000000159 /* jiyue-bronze-house.jpg */,
+				C12E0D4F0000000000000160 /* longquan-boat-drip.jpg */,
+				C12E0D4F0000000000000161 /* longquan-kiln.jpg */,
+				C12E0D4F0000000000000162 /* museum-collection-system.jpg */,
+				C12E0D4F0000000000000163 /* no-overseas-treasures.jpg */,
+				C12E0D4F0000000000000164 /* qi-lacquer-donation.jpg */,
+				C12E0D4F0000000000000165 /* sha-menghai-residence.jpg */,
+				C12E0D4F0000000000000166 /* sha-menghai.jpg */,
+				C12E0D4F0000000000000167 /* shili-hongzhuang.jpg */,
+				C12E0D4F0000000000000168 /* southern-song-guan-ware.jpg */,
+				C12E0D4F0000000000000169 /* tang-guqin-tradition.jpg */,
+				C12E0D4F0000000000000170 /* top-ten-treasures.jpg */,
+				C12E0D4F0000000000000171 /* wan-gong-jiao.jpg */,
+				C12E0D4F0000000000000172 /* wu-changshuo.png */,
+				C12E0D4F0000000000000173 /* wuyue-buddhist-art.jpg */,
+				C12E0D4F0000000000000174 /* wuyue-state.png */,
+				C12E0D4F0000000000000175 /* yue-bronze-swords.jpg */,
+				C12E0D4F0000000000000176 /* yue-kiln.jpg */,
+				C12E0D4F0000000000000177 /* zhang-cheng-red-lacquer.jpg */,
+				C12E0D4F0000000000000178 /* zhejiang-museum-history.jpg */,
+				C12E0D4F0000000000000179 /* zhejiang-yue-sword.png */,
+				C12E0D4F0000000000000180 /* zhijiang-campus.jpg */,
+			);
+			path = "zhejiang-museum";
+			sourceTree = "<group>";
+		};
+		C12E0D4A0000000000000001 /* Images ODR */ = {
+			isa = PBXGroup;
+			children = (
+				C12E0D4A0000000000000002 /* chinese-history */,
+				C12E0D4A0000000000000003 /* liangzhu */,
+				C12E0D4A0000000000000004 /* west-lake */,
+				C12E0D4A0000000000000005 /* zhejiang-museum */,
+			);
+			name = "Images ODR";
+			path = CultureLens/Resources/images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +1176,186 @@
 				C12E0D300000000000000005 /* themes.json in Resources */,
 				C12E0D300000000000000006 /* locales-en.json in Resources */,
 				C12E0D300000000000000007 /* pack-manifest.json in Resources */,
+				C12E0D4B0000000000000001 /* an-lushan-rebellion.png in Resources */,
+				C12E0D4B0000000000000002 /* chinese-buddhism.jpg in Resources */,
+				C12E0D4B0000000000000003 /* chinese-calligraphy.jpg in Resources */,
+				C12E0D4B0000000000000004 /* chinese-dynasty-overview.png in Resources */,
+				C12E0D4B0000000000000005 /* chinese-landscape-painting.jpg in Resources */,
+				C12E0D4B0000000000000006 /* confucius-and-confucianism.jpeg in Resources */,
+				C12E0D4B0000000000000007 /* five-dynasties-ten-kingdoms.png in Resources */,
+				C12E0D4B0000000000000008 /* four-great-inventions.png in Resources */,
+				C12E0D4B0000000000000009 /* grand-canal.jpg in Resources */,
+				C12E0D4B0000000000000010 /* great-wall.jpg in Resources */,
+				C12E0D4B0000000000000011 /* han-dynasty.png in Resources */,
+				C12E0D4B0000000000000012 /* han-wudi.jpg in Resources */,
+				C12E0D4B0000000000000013 /* hundred-schools.png in Resources */,
+				C12E0D4B0000000000000014 /* imperial-examination.jpg in Resources */,
+				C12E0D4B0000000000000015 /* jin-dynasty.png in Resources */,
+				C12E0D4B0000000000000016 /* jingkang-incident.jpg in Resources */,
+				C12E0D4B0000000000000017 /* kaiyuan-flourishing.jpg in Resources */,
+				C12E0D4B0000000000000018 /* kangxi.jpg in Resources */,
+				C12E0D4B0000000000000019 /* laozi-and-taoism.jpg in Resources */,
+				C12E0D4B0000000000000020 /* mid-autumn-festival.jpg in Resources */,
+				C12E0D4B0000000000000021 /* ming-dynasty.png in Resources */,
+				C12E0D4B0000000000000022 /* opium-war.jpg in Resources */,
+				C12E0D4B0000000000000023 /* qin-dynasty.jpg in Resources */,
+				C12E0D4B0000000000000024 /* qin-shi-huang.jpg in Resources */,
+				C12E0D4B0000000000000025 /* qing-dynasty.png in Resources */,
+				C12E0D4B0000000000000026 /* shang-dynasty.jpg in Resources */,
+				C12E0D4B0000000000000027 /* shang-dynasty.png in Resources */,
+				C12E0D4B0000000000000028 /* silk-road.jpg in Resources */,
+				C12E0D4B0000000000000029 /* song-dynasty.png in Resources */,
+				C12E0D4B0000000000000030 /* southern-northern-dynasties.png in Resources */,
+				C12E0D4B0000000000000031 /* spring-autumn-warring-states.png in Resources */,
+				C12E0D4B0000000000000032 /* sui-dynasty.png in Resources */,
+				C12E0D4B0000000000000033 /* tang-dynasty.png in Resources */,
+				C12E0D4B0000000000000034 /* tang-taizong.jpg in Resources */,
+				C12E0D4B0000000000000035 /* tea-culture.jpg in Resources */,
+				C12E0D4B0000000000000036 /* three-kingdoms.png in Resources */,
+				C12E0D4B0000000000000037 /* twenty-four-histories.jpg in Resources */,
+				C12E0D4B0000000000000038 /* wang-anshi.jpg in Resources */,
+				C12E0D4B0000000000000039 /* wenjing-prosperity.jpg in Resources */,
+				C12E0D4B0000000000000040 /* xia-dynasty.png in Resources */,
+				C12E0D4B0000000000000041 /* yuan-dynasty.png in Resources */,
+				C12E0D4B0000000000000042 /* yue-fei.jpg in Resources */,
+				C12E0D4B0000000000000043 /* zheng-he.jpg in Resources */,
+				C12E0D4B0000000000000044 /* zhenguan-rule.jpg in Resources */,
+				C12E0D4B0000000000000045 /* zhonghua-civilization.jpg in Resources */,
+				C12E0D4B0000000000000046 /* zhou-dynasty.png in Resources */,
+				C12E0D4B0000000000000047 /* contemporary-cultures.jpg in Resources */,
+				C12E0D4B0000000000000048 /* fanshan-cemetery.jpg in Resources */,
+				C12E0D4B0000000000000049 /* god-man-beast-mask.jpg in Resources */,
+				C12E0D4B0000000000000050 /* jade-bi.jpg in Resources */,
+				C12E0D4B0000000000000051 /* jade-cong-ritual.jpg in Resources */,
+				C12E0D4B0000000000000052 /* jade-cong-wang.jpg in Resources */,
+				C12E0D4B0000000000000053 /* jade-crafting.jpg in Resources */,
+				C12E0D4B0000000000000054 /* jade-crafting.png in Resources */,
+				C12E0D4B0000000000000055 /* jade-yue.jpg in Resources */,
+				C12E0D4B0000000000000056 /* liangzhu-ancient-city.jpg in Resources */,
+				C12E0D4B0000000000000057 /* liangzhu-chronology.jpg in Resources */,
+				C12E0D4B0000000000000058 /* liangzhu-culture-overview.png in Resources */,
+				C12E0D4B0000000000000059 /* liangzhu-distribution.jpg in Resources */,
+				C12E0D4B0000000000000060 /* liangzhu-in-zhejiang-museum.jpg in Resources */,
+				C12E0D4B0000000000000061 /* liangzhu-museum.jpg in Resources */,
+				C12E0D4B0000000000000062 /* liangzhu-pottery.jpg in Resources */,
+				C12E0D4B0000000000000063 /* liangzhu-pottery.png in Resources */,
+				C12E0D4B0000000000000064 /* liangzhu-society.png in Resources */,
+				C12E0D4B0000000000000065 /* liangzhu-symbols.png in Resources */,
+				C12E0D4B0000000000000066 /* liangzhu-water-system.jpg in Resources */,
+				C12E0D4B0000000000000067 /* mojiaoshan-center.jpg in Resources */,
+				C12E0D4B0000000000000068 /* rice-agriculture.jpg in Resources */,
+				C12E0D4B0000000000000069 /* shi-xingeng-discovery.png in Resources */,
+				C12E0D4B0000000000000070 /* silk-and-weaving.jpg in Resources */,
+				C12E0D4B0000000000000071 /* site-park.jpg in Resources */,
+				C12E0D4B0000000000000072 /* world-heritage-status.jpg in Resources */,
+				C12E0D4B0000000000000073 /* yaoshan-altar.jpg in Resources */,
+				C12E0D4B0000000000000074 /* bai-juyi-and-west-lake.jpg in Resources */,
+				C12E0D4B0000000000000075 /* baochu-leifeng-twin-tower.jpg in Resources */,
+				C12E0D4B0000000000000076 /* baochu-pagoda.jpg in Resources */,
+				C12E0D4B0000000000000077 /* baoshi-hill-cinnabar-glow.jpg in Resources */,
+				C12E0D4B0000000000000078 /* causeway-willow-peach.jpg in Resources */,
+				C12E0D4B0000000000000079 /* chinese-zodiac-city-gate.jpg in Resources */,
+				C12E0D4B0000000000000080 /* feilai-grotto-carving.jpg in Resources */,
+				C12E0D4B0000000000000081 /* gushan-island.jpg in Resources */,
+				C12E0D4B0000000000000082 /* hongyi-master-and-hupao.jpg in Resources */,
+				C12E0D4B0000000000000083 /* huagang-fish-viewing.jpg in Resources */,
+				C12E0D4B0000000000000084 /* hupao-spring-tea.jpg in Resources */,
+				C12E0D4B0000000000000085 /* huxinting-islet.jpg in Resources */,
+				C12E0D4B0000000000000086 /* jigong-and-jingci-temple.jpg in Resources */,
+				C12E0D4B0000000000000087 /* jingci-temple.jpg in Resources */,
+				C12E0D4B0000000000000088 /* kangxi-southern-tours.jpg in Resources */,
+				C12E0D4B0000000000000089 /* lakeside-old-city-interface.jpg in Resources */,
+				C12E0D4B0000000000000090 /* legend-of-the-white-snake.jpg in Resources */,
+				C12E0D4B0000000000000091 /* leifeng-pagoda-and-evening-glow.jpg in Resources */,
+				C12E0D4B0000000000000092 /* linbu-recluse-gushan.png in Resources */,
+				C12E0D4B0000000000000093 /* lingyin-zen-grove.jpg in Resources */,
+				C12E0D4B0000000000000094 /* liuhe-pagoda-river.jpg in Resources */,
+				C12E0D4B0000000000000095 /* liulang-wenying-soundscape.jpg in Resources */,
+				C12E0D4B0000000000000096 /* longjing-tea-terrace.png in Resources */,
+				C12E0D4B0000000000000097 /* longjing-village.jpg in Resources */,
+				C12E0D4B0000000000000098 /* longjing-village.png in Resources */,
+				C12E0D4B0000000000000099 /* meijiawu-tea-village.jpg in Resources */,
+				C12E0D4B0000000000000100 /* meijiawu-tea-village.png in Resources */,
+				C12E0D4B0000000000000101 /* mid-autumn-west-lake.jpg in Resources */,
+				C12E0D4B0000000000000102 /* misty-rain-lake-scape.jpg in Resources */,
+				C12E0D4B0000000000000103 /* moving-view-changing-scenery.jpg in Resources */,
+				C12E0D4B0000000000000104 /* nanping-evening-bell.jpg in Resources */,
+				C12E0D4B0000000000000105 /* nested-chinese-garden.jpg in Resources */,
+				C12E0D4B0000000000000106 /* northern-song-three-pools.jpg in Resources */,
+				C12E0D4B0000000000000107 /* one-yuan-three-pools-symbol.jpg in Resources */,
+				C12E0D4B0000000000000108 /* osmanthus-autumn-fragrance.jpg in Resources */,
+				C12E0D4B0000000000000109 /* pinghu-autumn-moon.jpg in Resources */,
+				C12E0D4B0000000000000110 /* poetic-landscape-naming.jpg in Resources */,
+				C12E0D4B0000000000000111 /* qianlong-and-west-lake.jpg in Resources */,
+				C12E0D4B0000000000000112 /* qiantang-tide.jpg in Resources */,
+				C12E0D4B0000000000000113 /* qianwang-temple-wuyue.jpg in Resources */,
+				C12E0D4B0000000000000114 /* quyuan-lotus-summer.jpg in Resources */,
+				C12E0D4B0000000000000115 /* ruangong-mound.jpg in Resources */,
+				C12E0D4B0000000000000116 /* shuangfeng-cloud-peaks.jpg in Resources */,
+				C12E0D4B0000000000000117 /* siku-quanshu-library.jpg in Resources */,
+				C12E0D4B0000000000000118 /* song-landscape-aesthetics.jpg in Resources */,
+				C12E0D4B0000000000000119 /* southern-song-linan.jpg in Resources */,
+				C12E0D4B0000000000000120 /* su-causeway-spring-dawn.jpg in Resources */,
+				C12E0D4B0000000000000121 /* su-shi-and-west-lake.jpg in Resources */,
+				C12E0D4B0000000000000122 /* three-immortal-islands.jpg in Resources */,
+				C12E0D4B0000000000000123 /* three-pools-light-mechanism.jpg in Resources */,
+				C12E0D4B0000000000000124 /* three-pools-mirroring-moon.jpg in Resources */,
+				C12E0D4B0000000000000125 /* three-pools-round-openings.jpg in Resources */,
+				C12E0D4B0000000000000126 /* three-pools-stone-pagodas.jpg in Resources */,
+				C12E0D4B0000000000000127 /* west-lake-buddhist-culture.jpg in Resources */,
+				C12E0D4B0000000000000128 /* west-lake-causeway-waterworks.jpg in Resources */,
+				C12E0D4B0000000000000129 /* west-lake-cultural-landscape.jpg in Resources */,
+				C12E0D4B0000000000000130 /* west-lake-garden-framing.jpg in Resources */,
+				C12E0D4B0000000000000131 /* west-lake-moon-viewing.jpg in Resources */,
+				C12E0D4B0000000000000132 /* west-lake-new-ten-scenes.jpg in Resources */,
+				C12E0D4B0000000000000133 /* west-lake-pagoda-landscape.jpg in Resources */,
+				C12E0D4B0000000000000134 /* west-lake-spatial-structure.jpg in Resources */,
+				C12E0D4B0000000000000135 /* west-lake-ten-scenes-system.jpg in Resources */,
+				C12E0D4B0000000000000136 /* west-lake-ten-scenes.jpg in Resources */,
+				C12E0D4B0000000000000137 /* west-lake-three-heroes.jpg in Resources */,
+				C12E0D4B0000000000000138 /* west-lake-winter-snow.jpg in Resources */,
+				C12E0D4B0000000000000139 /* west-lake-world-heritage.jpg in Resources */,
+				C12E0D4B0000000000000140 /* westlake-revalued-scenes-2007.jpg in Resources */,
+				C12E0D4B0000000000000141 /* xiaoyingzhou-lake-garden.jpg in Resources */,
+				C12E0D4B0000000000000142 /* xiling-seal-art.jpg in Resources */,
+				C12E0D4B0000000000000143 /* yang-gong-causeway.jpg in Resources */,
+				C12E0D4B0000000000000144 /* yuan-qiantang-scenes.jpg in Resources */,
+				C12E0D4B0000000000000145 /* yue-fei-memorial-culture.jpg in Resources */,
+				C12E0D4B0000000000000146 /* asoka-pagoda.jpg in Resources */,
+				C12E0D4B0000000000000147 /* cai-feng-ming-qi.jpg in Resources */,
+				C12E0D4B0000000000000148 /* caisu-mud-bodhisattva.jpg in Resources */,
+				C12E0D4B0000000000000149 /* fuchun-shanju-tu.jpg in Resources */,
+				C12E0D4B0000000000000150 /* guqin-world.jpg in Resources */,
+				C12E0D4B0000000000000151 /* gushan-campus.jpg in Resources */,
+				C12E0D4B0000000000000152 /* hemudu-bone-plough.jpg in Resources */,
+				C12E0D4B0000000000000153 /* hemudu-culture.png in Resources */,
+				C12E0D4B0000000000000154 /* hemudu-double-bird.jpg in Resources */,
+				C12E0D4B0000000000000155 /* hemudu-painted-pottery.jpg in Resources */,
+				C12E0D4B0000000000000156 /* huang-binhong-memorial.jpg in Resources */,
+				C12E0D4B0000000000000157 /* huang-binhong.jpg in Resources */,
+				C12E0D4B0000000000000158 /* huang-gongwang.jpg in Resources */,
+				C12E0D4B0000000000000159 /* jiyue-bronze-house.jpg in Resources */,
+				C12E0D4B0000000000000160 /* longquan-boat-drip.jpg in Resources */,
+				C12E0D4B0000000000000161 /* longquan-kiln.jpg in Resources */,
+				C12E0D4B0000000000000162 /* museum-collection-system.jpg in Resources */,
+				C12E0D4B0000000000000163 /* no-overseas-treasures.jpg in Resources */,
+				C12E0D4B0000000000000164 /* qi-lacquer-donation.jpg in Resources */,
+				C12E0D4B0000000000000165 /* sha-menghai-residence.jpg in Resources */,
+				C12E0D4B0000000000000166 /* sha-menghai.jpg in Resources */,
+				C12E0D4B0000000000000167 /* shili-hongzhuang.jpg in Resources */,
+				C12E0D4B0000000000000168 /* southern-song-guan-ware.jpg in Resources */,
+				C12E0D4B0000000000000169 /* tang-guqin-tradition.jpg in Resources */,
+				C12E0D4B0000000000000170 /* top-ten-treasures.jpg in Resources */,
+				C12E0D4B0000000000000171 /* wan-gong-jiao.jpg in Resources */,
+				C12E0D4B0000000000000172 /* wu-changshuo.png in Resources */,
+				C12E0D4B0000000000000173 /* wuyue-buddhist-art.jpg in Resources */,
+				C12E0D4B0000000000000174 /* wuyue-state.png in Resources */,
+				C12E0D4B0000000000000175 /* yue-bronze-swords.jpg in Resources */,
+				C12E0D4B0000000000000176 /* yue-kiln.jpg in Resources */,
+				C12E0D4B0000000000000177 /* zhang-cheng-red-lacquer.jpg in Resources */,
+				C12E0D4B0000000000000178 /* zhejiang-museum-history.jpg in Resources */,
+				C12E0D4B0000000000000179 /* zhejiang-yue-sword.png in Resources */,
+				C12E0D4B0000000000000180 /* zhijiang-campus.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +1563,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum images";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junwei.CultureLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -672,7 +1613,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "knowledge-base knowledge-chinese-history knowledge-liangzhu knowledge-zhejiang-museum images";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junwei.CultureLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;

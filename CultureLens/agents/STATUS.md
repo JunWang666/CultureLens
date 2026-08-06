@@ -6,11 +6,13 @@
 
 ## 已完成
 
+- 2026-08-06 知识配图整包 ODR：`Resources/images/`（约 180 张，路径对齐 R2）打成 tag `images`，列入 initial-install；`RemoteImageCache` 在内存/磁盘之后、网络之前拦截 `culturelens.goudaijun.top/images/...` 并读本地包；启动预加载与「资源包管理」可单独下载。见 `design/0020-image-pack-odr-and-remote-intercept.md`。
+- 2026-08-06 扫描识别新增 MapKit 地理上下文：围绕当前/照片坐标用 `MKLocalPointsOfInterestRequest` 搜索 1 km，二次按直线距离过滤、去重后只向模型发送最近 3 条 POI，并同时发送坐标精度/反向地理名称；MapKit 无网、失败或无结果时不阻断识别，POI 不会写入历史或成为知识库候选。通用 iOS App 与 unit-test target 编译通过，Simulator 运行受既有依赖宏插件阻断。见 `design/0019-recognition-mapkit-geographic-context.md`。
 - 2026-08-06 AI 文化讲解从 Caches 缓存升级为 Application Support 正式持久记录：同一对象 / 扫描结果按地点与语言稳定读取，不因知识进度、模型或 prompt 变化自动消失，也不受“清理缓存”影响；讲解组件右上角新增重新生成按钮，生成期间保留旧内容，成功后覆盖保存，失败则保留原讲解。见 `design/0018-durable-explanation-storage-and-regeneration.md`。
-- 2026-08-06 时间线足迹从足迹地图模式挪到回顾 Tab：`ReviewHomeView` 用工具栏菜单切换「时间线足迹 / 文化回顾」；足迹页仅保留地图足迹与兴趣点。更多页文案同步更新。
-- 2026-08-06 AI 文化讲解改为更有现场感的个性化同伴语气：从资料中确实存在的线索或观看角度切入，以自然的引导与节奏展开；优先衔接用户已理解 / 掌握节点，并借已有兴趣重心选择补充角度，不暴露画像或猜测用户偏好。事实来源与引用约束不放宽；讲解缓存升级至 v2，旧文案不再命中。设计见 `design/0017-lively-personalized-explanation-voice.md`。
+- 2026-08-06 时间线足迹从足迹地图模式挪到回顾 Tab：`ReviewHomeView` 分栏同时展示时间线足迹与文化回顾（各预览 10 条，超出后进「更多」全列表；iPad 左右分栏、iPhone 上下堆叠）；足迹页仅保留地图足迹与兴趣点。
+- 2026-08-06 AI 文化讲解改为更有现场感的个性化同伴语气：从资料中确实存在的线索或观看角度切入，以自然的引导与节奏展开；优先衔接用户已理解 / 掌握节点，并借已有兴趣重心选择补充角度，不暴露画像或猜测用户偏好。事实来源与引用约束不放宽；其存储生命周期随后由 `design/0018` 升级为正式持久记录。设计见 `design/0017-lively-personalized-explanation-voice.md`。
 - 2026-08-06 识别候选改为 1 km 内全量景点：取消最多 8 个景点截断，对应看点根全部进入文化内容候选；附近景点超过 10 个时 prompt 只保留 id/name、省略 introduction 与 nearby_contexts。探索页附近推荐半径不变。新增相关单测 2 项通过；顺手修复探索页 `NearbyEditorialRow` 缺 `number` 参数导致的编译错误。设计见 `design/0015-recognition-1km-all-attractions.md`。
-- 2026-08-06 网络产物统一缓存：在线知识图片改为内存 + Caches 磁盘缓存并复用于 Quick Look；个性化 AI 文化讲解按识别输入、地点、用户知识状态、语言和模型持久化，页面重建优先命中缓存且提供显式「刷新讲解」；设置新增统一清理图片 / 讲解 / 即时译文缓存，不影响历史、聊天图片、图谱、轨迹与知识资源包。新增 3 项缓存单测全部通过，并通过通用 iOS 真机 Debug build 与 `build-for-testing`。见 `design/0014-network-image-and-llm-result-caching.md`。
+- 2026-08-06 网络产物缓存初版：在线知识图片改为内存 + Caches 磁盘缓存并复用于 Quick Look，即时译文纳入统一清理；AI 讲解最初按可清理缓存实现，随后由 `design/0018` 改为 Application Support 正式持久记录。相关缓存单测、通用 iOS 真机 Debug build 与 `build-for-testing` 均通过。见 `design/0014-network-image-and-llm-result-caching.md`。
 - 2026-08-06 足迹支持直接从 Apple Fitness / 健康导入运动路线：只读申请 `HKWorkout` 与 `HKWorkoutRoute`，仅展示实际含 GPS 路线的最近记录，支持多选、按 Workout UUID 幂等导入、独立路线分段和 App 内持久化；删除只影响本地副本。工程已启用 HealthKit capability / entitlement 与读取用途说明，旧 GPX JSON 保持兼容；存储 smoke test、iOS SDK 类型检查、通用 iOS 真机 Debug 构建及 `build-for-testing` 均通过，真实 Fitness 授权和历史数据读取待真机验证。设计见 `design/0013-fitness-workout-route-import.md`。
 - 2026-08-06 知识详情在线图片支持点击后用系统 Quick Look（`QLPreviewController`）全屏放大查看：成功加载的 HTTPS 图可点，下载到临时文件后预览，关闭清理；复用既有加载 / 失败 / 重试链路。见 `design/0008-knowledge-detail-remote-images.md`。
 - 2026-08-06 Debug / Release 暂时均启用 `EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE`，使四个 ODR 知识包在 Xcode 侧载与无资源服务器的安装方式中随 App 一起交付；ODR tag、initial-install 与资源包管理器保留。

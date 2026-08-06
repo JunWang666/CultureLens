@@ -1,8 +1,9 @@
 import SwiftData
 import SwiftUI
 
-/// Chronological scan footprint list (formerly a mode inside `CultureMapView`).
+/// Chronological scan footprint list.
 struct ScanTimelineView: View {
+    var showsBackButton: Bool = true
     var startScan: (() -> Void)?
 
     @Environment(\.modelContext) private var modelContext
@@ -10,29 +11,33 @@ struct ScanTimelineView: View {
     private var records: [ScanHistoryRecord]
 
     var body: some View {
-        if records.isEmpty {
-            emptyState
-        } else {
-            ScrollView {
-                LazyVStack(spacing: 14) {
-                    ForEach(records) { record in
-                        NavigationLink(value: AppRoute.history(record.recordID)) {
-                            historyCard(record)
-                        }
-                        .buttonStyle(.plain)
-                        .contextMenu {
-                            Button("删除记录", role: .destructive) {
-                                delete(record)
+        ZStack {
+            CulturePageBackground()
+
+            if records.isEmpty {
+                emptyState
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 14) {
+                        ForEach(records) { record in
+                            NavigationLink(value: AppRoute.history(record.recordID)) {
+                                ScanHistoryTimelineRow(record: record)
+                            }
+                            .buttonStyle(.plain)
+                            .contextMenu {
+                                Button("删除记录", role: .destructive) {
+                                    delete(record)
+                                }
                             }
                         }
                     }
+                    .padding(.horizontal, CultureTheme.pagePadding)
+                    .padding(.top, 8)
+                    .padding(.bottom, 40)
                 }
-                .padding(.horizontal, CultureTheme.pagePadding)
-                .padding(.top, 8)
-                .padding(.bottom, 40)
             }
-            .safeAreaPadding(.top, 4)
         }
+        .cultureNavigationTitle("时间线足迹", showsBackButton: showsBackButton)
     }
 
     private var emptyState: some View {
@@ -50,9 +55,22 @@ struct ScanTimelineView: View {
         .padding(CultureTheme.pagePadding)
     }
 
-    private func historyCard(_ record: ScanHistoryRecord) -> some View {
+    private func delete(_ record: ScanHistoryRecord) {
+        let path = record.imageRelativePath
+        modelContext.delete(record)
+        try? modelContext.save()
+        Task {
+            try? await ScanMediaStore.shared.delete(relativePath: path)
+        }
+    }
+}
+
+struct ScanHistoryTimelineRow: View {
+    let record: ScanHistoryRecord
+
+    var body: some View {
         HStack(spacing: 14) {
-            Image(systemName: symbol(for: record))
+            Image(systemName: symbol)
                 .font(.title2)
                 .foregroundStyle(CultureTheme.antiqueGold)
                 .frame(width: 54, height: 54)
@@ -74,7 +92,7 @@ struct ScanTimelineView: View {
                     .foregroundStyle(CultureTheme.inkSecondary)
 
                 Label(
-                    locationText(for: record),
+                    locationText,
                     systemImage: record.place == nil ? "location.slash" : "location"
                 )
                 .font(.caption)
@@ -96,7 +114,7 @@ struct ScanTimelineView: View {
     }
 
     /// 坐标已记录但地名缺失时（如照片 EXIF 定位、逆地理编码失败）显示坐标兜底。
-    private func locationText(for record: ScanHistoryRecord) -> String {
+    private var locationText: String {
         if let placeName = record.placeName, !placeName.isEmpty {
             return placeName
         }
@@ -107,7 +125,7 @@ struct ScanTimelineView: View {
         return String(localized: "未记录位置")
     }
 
-    private func symbol(for record: ScanHistoryRecord) -> String {
+    private var symbol: String {
         switch ObjectCategory(rawValue: record.categoryRawValue) {
         case .architecture: "building.columns"
         case .artifact: "seal"
@@ -115,15 +133,6 @@ struct ScanTimelineView: View {
         case .exhibit: "photo.artframe"
         case .space: "square.3.layers.3d"
         case .other, nil: "sparkles"
-        }
-    }
-
-    private func delete(_ record: ScanHistoryRecord) {
-        let path = record.imageRelativePath
-        modelContext.delete(record)
-        try? modelContext.save()
-        Task {
-            try? await ScanMediaStore.shared.delete(relativePath: path)
         }
     }
 }

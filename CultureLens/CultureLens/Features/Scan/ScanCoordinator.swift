@@ -34,9 +34,14 @@ final class ScanCoordinator {
     private(set) var locationNotice: String?
     private var task: Task<Void, Never>?
     private let locationProvider: LocationContextProvider
+    private let nearbyMapPlaceProvider: any NearbyMapPlaceProviding
 
-    init(locationProvider: LocationContextProvider? = nil) {
+    init(
+        locationProvider: LocationContextProvider? = nil,
+        nearbyMapPlaceProvider: any NearbyMapPlaceProviding = NearbyMapPlaceProvider()
+    ) {
         self.locationProvider = locationProvider ?? LocationContextProvider()
+        self.nearbyMapPlaceProvider = nearbyMapPlaceProvider
     }
 
     func begin(
@@ -88,11 +93,19 @@ final class ScanCoordinator {
                 }
 
                 try Task.checkCancellation()
+                let nearbyMapPlaces = if let place {
+                    await nearbyMapPlaceProvider.nearbyPlaces(around: place)
+                } else {
+                    []
+                }
+
+                try Task.checkCancellation()
                 phase = .recognizing
 
                 let input = RecognitionInput(
                     imageData: recognitionImageData,
                     place: place,
+                    nearbyMapPlaces: nearbyMapPlaces,
                     contextNote: recognitionContextNote(
                         contextNote,
                         hasFocusAnnotation: focusRegion != nil

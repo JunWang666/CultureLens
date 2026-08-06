@@ -13,7 +13,7 @@
 ### 在线图片
 
 - 新增 `RemoteImageCache` actor，使用 URL 的 SHA-256 作为不泄露原始地址的文件名。
-- 查找顺序为内存 `NSCache` → `Library/Caches/CultureLens/RemoteImages` → 网络；同 URL 的并发请求共享进行中的 Task。
+- 查找顺序为内存 `NSCache` → `Library/Caches/CultureLens/RemoteImages` → **本地 `images` ODR 包**（见 `0020`）→ 网络；同 URL 的并发请求共享进行中的 Task。
 - `CachedAsyncImage` 保留 `AsyncImagePhase` 风格的 SwiftUI 接口，统一替换知识详情、附近看点缩略图和封面故事图片。
 - Quick Look 预览先从 `RemoteImageCache` 取数据，再生成带扩展名的临时文件，避免点击已显示图片时第二次下载。
 

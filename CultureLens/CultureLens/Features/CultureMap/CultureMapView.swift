@@ -486,11 +486,27 @@ struct CultureMapView: View {
             }
 
             if displayMode == .map, showsImportedTracks {
+                // Draw every outline first so later tracks cannot cover another
+                // track's orange center line at intersections.
                 ForEach(importedTracks) { track in
                     ForEach(track.segments) { segment in
                         MapPolyline(coordinates: segment.sampledPoints().map(\.coordinate))
                             .stroke(
-                                trackColor(for: track),
+                                .black.opacity(0.9),
+                                style: StrokeStyle(
+                                    lineWidth: 7,
+                                    lineCap: .round,
+                                    lineJoin: .round
+                                )
+                            )
+                    }
+                }
+
+                ForEach(importedTracks) { track in
+                    ForEach(track.segments) { segment in
+                        MapPolyline(coordinates: segment.sampledPoints().map(\.coordinate))
+                            .stroke(
+                                .orange,
                                 style: StrokeStyle(
                                     lineWidth: 4,
                                     lineCap: .round,
@@ -812,17 +828,6 @@ struct CultureMapView: View {
                 )
             }
         }
-    }
-
-    private func trackColor(for track: ImportedTrack) -> Color {
-        let seed = track.id.uuidString.utf8.reduce(UInt64(0)) {
-            ($0 &* 31 &+ UInt64($1)) % 360
-        }
-        return Color(
-            hue: Double(seed) / 360,
-            saturation: 0.78,
-            brightness: 0.76
-        )
     }
 
     @ViewBuilder

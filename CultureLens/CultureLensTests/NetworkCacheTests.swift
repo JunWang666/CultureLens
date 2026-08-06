@@ -24,9 +24,49 @@ struct NetworkCacheTests {
   }
 
   @Test
+  func remoteImageCachePrefersLocalPackBeforeNetwork() async throws {
+    let directory = FileManager.default.temporaryDirectory
+      .appending(path: "CultureLens-image-local-tests-\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: directory) }
+
+    let url = try #require(
+      URL(string: "https://culturelens.goudaijun.top/images/west-lake/pinghu-autumn-moon.jpg")
+    )
+    let expected = Data([0x89, 0x50, 0x4E, 0x47, 0x01])
+    let cache = RemoteImageCache(
+      directoryURL: directory,
+      localDataProvider: { candidate in
+        candidate == url ? expected : nil
+      }
+    )
+
+    #expect(try await cache.data(for: url) == expected)
+    #expect(await cache.diskUsageBytes() == Int64(expected.count))
+  }
+
+  @Test
+  func imagePackPathMappingParsesHostedURLs() throws {
+    let url = try #require(
+      URL(string: "https://culturelens.goudaijun.top/images/liangzhu/jade-cong-wang.jpg")
+    )
+    let components = try #require(ImagePackPathMapping.resourceComponents(for: url))
+    #expect(components.subdirectory == "liangzhu")
+    #expect(components.name == "jade-cong-wang")
+    #expect(components.ext == "jpg")
+
+    let unrelated = try #require(URL(string: "https://example.com/images/west-lake/a.jpg"))
+    #expect(ImagePackPathMapping.resourceComponents(for: unrelated) == nil)
+  }
+
+  @Test
+  func imagePackUsesDedicatedODRTag() {
+    #expect(ImagePackLoader.odrTag == "images")
+  }
+
+  @Test
   func explanationStorePersistsAcrossInstances() async throws {
     let directory = FileManager.default.temporaryDirectory
-      .appending(path: "CultureLens-explanation-cache-tests-\(UUID().uuidString)")
+      .appending(path: "CultureLens-explanation-store-tests-\(UUID().uuidString)")
     let fileURL = directory.appending(path: "explanations.json")
     defer { try? FileManager.default.removeItem(at: directory) }
 

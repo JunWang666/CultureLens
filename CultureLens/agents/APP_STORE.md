@@ -9,10 +9,11 @@
 ## ODR（On-Demand Resources）
 
 - 四个独立 tag：西湖 `knowledge-base`、中国历史 `knowledge-chinese-history`、良渚 `knowledge-liangzhu`、浙博 `knowledge-zhejiang-museum`。每包内容均为 `knowledge-pack.json` + `elements-sight.json` + `elements-history.json` + `introductions.json` + `themes.json` + `locales-en.json` + `pack-manifest.json`。
-- 工程配置：四个目录的文件均以显式 file reference 加入 Resources phase，并分别配置 `ASSET_TAGS`；同步 group 的 `membershipExceptions` 排除这些路径，避免主 bundle 重复打包和同名 JSON 冲突。
-- `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS` 当前包含全部四个 tag：四个 asset pack **随 App 首装一起下发**，同时保留逐包状态检查和重新下载能力。
+- 图片包 tag `images`：`Resources/images/{west-lake,chinese-history,liangzhu,zhejiang-museum}/` 下全部配图；运行时经 `RemoteImageCache` 拦截同路径远程 URL。
+- 工程配置：知识 JSON 与图片文件均以显式 file reference 加入 Resources phase，并分别配置 `ASSET_TAGS`；同步 group 的 `membershipExceptions` 排除这些路径，避免主 bundle 重复打包和同名冲突。
+- `ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS` 当前包含五个 tag（四个知识包 + `images`）：asset pack **随 App 首装一起下发**，同时保留状态检查和重新下载能力。
 - 上传：Xcode 归档上传时 asset pack 自动随构建上传到 App Store Connect，无需额外操作。
-- 验证：归档后确认 `Products/OnDemandResources/` 存在四个 asset pack，`OnDemandResources.plist` 含四个 tag；主 App bundle 不应再包含这些知识 JSON。2026-08-06 已用通用 iOS Simulator build 验证四包拆分与 initial-install manifest。
+- 验证：归档后确认 `Products/OnDemandResources/` 存在对应 asset pack，`OnDemandResources.plist` 含上述 tag；主 App bundle 不应再包含这些知识 JSON / 配图。2026-08-06 已用通用 iOS Simulator build 验证四知识包拆分与 initial-install manifest；图片包接线后需再确认 `images` pack。
 - 注意：ODR 内容随 App 版本发布，不能独立热更新；`pack-manifest.json` 的 `packVersion`/`sha256` 为将来多包或自托管下发预留。
 
 ## LLM Key

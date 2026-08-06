@@ -2,6 +2,7 @@ import Foundation
 
 /// App-owned memory + disk cache for public remote images.
 ///
+/// Lookup order: memory → disk → local ODR image pack → network.
 /// `URLCache` remains enabled at the transport layer, but this store provides a
 /// deterministic local copy that survives SwiftUI view recreation and app relaunches.
 actor RemoteImageCache {
@@ -24,17 +25,20 @@ actor RemoteImageCache {
   private let session: URLSession
   private let fileManager: FileManager
   private let directoryURL: URL
+  private let localDataProvider: (@Sendable (URL) async -> Data?)?
   private let memoryCache = NSCache<NSURL, NSData>()
   private var inFlight: [URL: Task<Data, Error>] = [:]
 
   init(
     session: URLSession = .shared,
     fileManager: FileManager = .default,
-    directoryURL: URL? = nil
+    directoryURL: URL? = nil,
+    localDataProvider: (@Sendable (URL) async -> Data?)? = nil
   ) {
     self.session = session
     self.fileManager = fileManager
     self.directoryURL = directoryURL ?? Self.defaultDirectory(fileManager: fileManager)
+    self.localDataProvider = localDataProvider
     memoryCache.countLimit = 80
     memoryCache.totalCostLimit = 96 * 1_024 * 1_024
   }
@@ -48,6 +52,11 @@ actor RemoteImageCache {
     if let data = try? Data(contentsOf: fileURL), !data.isEmpty {
       memoryCache.setObject(data as NSData, forKey: url as NSURL, cost: data.count)
       return data
+    }
+
+    if let local = await resolveLocalData(for: url), !local.isEmpty {
+      try? store(local, for: url)
+      return local
     }
 
     if let task = inFlight[url] {
@@ -113,6 +122,13 @@ actor RemoteImageCache {
       total += Int64(values?.fileSize ?? 0)
     }
     return total
+  }
+
+  private func resolveLocalData(for url: URL) async -> Data? {
+    if let localDataProvider {
+      return await localDataProvider(url)
+    }
+    return await ImagePackLoader.shared.dataIfAvailable(for: url)
   }
 
   private func cacheFileURL(for url: URL) -> URL {

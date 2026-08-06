@@ -1,6 +1,6 @@
 {
-  "packVersion": "zhejiang-museum-v6",
-  "generatedAt": "2026-08-06T08:18:33Z",
+  "packVersion": "zhejiang-museum-v7",
+  "generatedAt": "2026-08-06T12:02:28Z",
   "recordCounts": {
     "elements": 35,
     "elementsSight": 16,
@@ -10,7 +10,7 @@
     "attractions": 18,
     "themes": 4
   },
-  "sha256": "cead3ba221de77e6872bb3a8792094567571a7fd149970ac9cd7363e2f141bf4",
+  "sha256": "78928919984110fbc6176f4ff706c7cba0425d90fd99aebf27f0e03895e7cd02",
   "files": [
     "knowledge-pack.json",
     "elements-sight.json",

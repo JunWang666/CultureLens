@@ -8471,6 +8471,636 @@
           }
         }
       }
+    },
+    "工具": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tools"
+          }
+        }
+      }
+    },
+    "制作或编辑知识包 sidecar，校验后导出 zip，便于更新 Resources/KnowledgePack*。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create or edit knowledge-pack sidecars, validate, and export a zip for Resources/KnowledgePack*."
+          }
+        }
+      }
+    },
+    "资源包制作 / 编辑器": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack builder / editor"
+          }
+        }
+      }
+    },
+    "新建、从内置包复制、导入与导出": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create, copy from bundled packs, import, and export"
+          }
+        }
+      }
+    },
+    "资源包编辑器": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack editor"
+          }
+        }
+      }
+    },
+    "在设备上编辑知识包 sidecar，校验后导出为 zip，可拷回仓库的 Resources/KnowledgePack* 目录。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit knowledge-pack sidecars on device, validate, and export a zip you can copy into Resources/KnowledgePack*."
+          }
+        }
+      }
+    },
+    "草稿": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drafts"
+          }
+        }
+      }
+    },
+    "还没有草稿。可新建空白包，或从内置包复制。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No drafts yet. Create a blank pack or copy a bundled one."
+          }
+        }
+      }
+    },
+    "操作": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions"
+          }
+        }
+      }
+    },
+    "新建空白资源包": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New blank pack"
+          }
+        }
+      }
+    },
+    "从内置包复制": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy from bundled pack"
+          }
+        }
+      }
+    },
+    "导入 JSON / 包目录": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import JSON / pack folder"
+          }
+        }
+      }
+    },
+    "无法完成操作": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t complete action"
+          }
+        }
+      }
+    },
+    "选择内置包": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose bundled pack"
+          }
+        }
+      }
+    },
+    "保存": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "导出": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        }
+      }
+    },
+    "概览": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overview"
+          }
+        }
+      }
+    },
+    "显示名称": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display name"
+          }
+        }
+      }
+    },
+    "版本 version": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
+          }
+        }
+      }
+    },
+    "源语言 source_language": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source language"
+          }
+        }
+      }
+    },
+    "元素": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elements"
+          }
+        }
+      }
+    },
+    "添加元素": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add element"
+          }
+        }
+      }
+    },
+    "看点会自动同步到 attractions；介绍可用空行分段，图片用 ![图注](https://…)。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sight elements sync into attractions. Use blank lines for paragraphs; images as ![caption](https://…)."
+          }
+        }
+      }
+    },
+    "添加关系": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add relation"
+          }
+        }
+      }
+    },
+    "现场介绍": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-site introductions"
+          }
+        }
+      }
+    },
+    "添加介绍": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add introduction"
+          }
+        }
+      }
+    },
+    "添加主题": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add theme"
+          }
+        }
+      }
+    },
+    "英文 locales-en": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English locales-en"
+          }
+        }
+      }
+    },
+    "添加英文覆盖": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add English overlay"
+          }
+        }
+      }
+    },
+    "校验": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Validation"
+          }
+        }
+      }
+    },
+    "重新校验": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-validate"
+          }
+        }
+      }
+    },
+    "未发现问题": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No issues found"
+          }
+        }
+      }
+    },
+    "草稿已保存。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draft saved."
+          }
+        }
+      }
+    },
+    "已导出 sidecar zip。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sidecar zip exported."
+          }
+        }
+      }
+    },
+    "存在错误级问题，请先修复再导出。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fix error-level issues before exporting."
+          }
+        }
+      }
+    },
+    "提示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notice"
+          }
+        }
+      }
+    },
+    "草稿不存在": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draft not found"
+          }
+        }
+      }
+    },
+    "编辑元素": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit element"
+          }
+        }
+      }
+    },
+    "身份": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identity"
+          }
+        }
+      }
+    },
+    "key（kebab-case）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "key (kebab-case)"
+          }
+        }
+      }
+    },
+    "名称": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "介绍": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduction"
+          }
+        }
+      }
+    },
+    "空行分段；图片块：![图注](https://…)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blank lines split paragraphs; images: ![caption](https://…)"
+          }
+        }
+      }
+    },
+    "标题": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Title"
+          }
+        }
+      }
+    },
+    "出版方": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publisher"
+          }
+        }
+      }
+    },
+    "添加来源": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add source"
+          }
+        }
+      }
+    },
+    "编辑关系": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit relation"
+          }
+        }
+      }
+    },
+    "边": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edge"
+          }
+        }
+      }
+    },
+    "起点 elementKey": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source elementKey"
+          }
+        }
+      }
+    },
+    "终点 relatedElementKey": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target relatedElementKey"
+          }
+        }
+      }
+    },
+    "编辑介绍": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit introduction"
+          }
+        }
+      }
+    },
+    "绑定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Binding"
+          }
+        }
+      }
+    },
+    "纬度": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latitude"
+          }
+        }
+      }
+    },
+    "经度": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Longitude"
+          }
+        }
+      }
+    },
+    "坐标来源 URL": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coordinate source URL"
+          }
+        }
+      }
+    },
+    "介绍正文": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduction body"
+          }
+        }
+      }
+    },
+    "编辑主题": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit theme"
+          }
+        }
+      }
+    },
+    "摘要": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary"
+          }
+        }
+      }
+    },
+    "elementKeys（逗号分隔）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "elementKeys (comma-separated)"
+          }
+        }
+      }
+    },
+    "英文覆盖": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English overlay"
+          }
+        }
+      }
+    },
+    "语言偏好、资源包工具与其他选项。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language preference, pack tools, and other options."
+          }
+        }
+      }
+    },
+    "包版本号不能为空。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack version cannot be empty."
+          }
+        }
+      }
+    },
+    "存在空的元素 key。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An element key is empty."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -90,7 +90,7 @@ private extension MoreHomeView {
     Destination(
       id: "settings",
       title: "设置",
-      message: "语言偏好与其他选项。",
+      message: "语言偏好、资源包工具与其他选项。",
       systemImage: "gearshape",
       route: .settings,
       accessibilityID: "more.openSettings"

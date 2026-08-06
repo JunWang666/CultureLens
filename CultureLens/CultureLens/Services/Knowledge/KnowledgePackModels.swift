@@ -4,7 +4,7 @@ import Foundation
 /// `Resources/KnowledgePack*/` (sidecar layout: slim `knowledge-pack.json`
 /// plus `elements-sight` / `elements-history` / `introductions` / `themes` /
 /// `locales-<lang>`). Assembled at load time by `KnowledgeStore.loadPack`.
-nonisolated struct KnowledgePack: Decodable, Sendable {
+nonisolated struct KnowledgePack: Codable, Sendable {
   let version: String
   /// BCP-47 tag for the primary text fields (name / introduction). Defaults to zh-Hans.
   let sourceLanguage: String?
@@ -87,7 +87,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
-  nonisolated struct Element: Decodable, Sendable {
+  nonisolated struct Element: Codable, Sendable {
     let key: String
     let name: String
     let introduction: RichTextDocument
@@ -128,6 +128,18 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
       contentRole = try container.decodeIfPresent(String.self, forKey: .contentRole)
     }
 
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(key, forKey: .key)
+      try container.encode(name, forKey: .name)
+      try container.encode(introduction, forKey: .introduction)
+      if !sources.isEmpty {
+        try container.encode(sources, forKey: .sources)
+      }
+      try container.encodeIfPresent(conceptKind, forKey: .conceptKind)
+      try container.encodeIfPresent(contentRole, forKey: .contentRole)
+    }
+
     /// Resolved role: explicit `contentRole`, else infer from attraction keys.
     func resolvedContentRole(attractionKeys: Set<String> = []) -> ContentRole {
       if let contentRole, let role = ContentRole(rawValue: contentRole) {
@@ -148,7 +160,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
-  nonisolated struct Attraction: Decodable, Sendable {
+  nonisolated struct Attraction: Codable, Sendable {
     let key: String
     let name: String
 
@@ -158,7 +170,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
-  nonisolated struct Relation: Decodable, Sendable {
+  nonisolated struct Relation: Codable, Sendable {
     let elementKey: String
     let relatedElementKey: String
     /// Optional `RelationKind.rawValue`; omitted in older packs.
@@ -179,7 +191,7 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     }
   }
 
-  nonisolated struct IntroductionRecord: Decodable, Sendable {
+  nonisolated struct IntroductionRecord: Codable, Sendable {
     let key: String
     let name: String
     let introduction: RichTextDocument
@@ -244,11 +256,26 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
         sources = decodedSources
       }
     }
+
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(key, forKey: .key)
+      try container.encode(name, forKey: .name)
+      try container.encode(introduction, forKey: .introduction)
+      try container.encode(culturalElementKey, forKey: .culturalElementKey)
+      try container.encode(attractionKey, forKey: .attractionKey)
+      try container.encode(latitude, forKey: .latitude)
+      try container.encode(longitude, forKey: .longitude)
+      try container.encodeIfPresent(coordinateSourceUrl, forKey: .coordinateSourceUrl)
+      if !sources.isEmpty {
+        try container.encode(sources, forKey: .sources)
+      }
+    }
   }
 
   /// A curated exploration path that binds a set of cultural element keys
   /// and a completion threshold (`minContacted`).
-  nonisolated struct Theme: Decodable, Sendable, Identifiable, Hashable {
+  nonisolated struct Theme: Codable, Sendable, Identifiable, Hashable {
     var id: String { key }
 
     let key: String
@@ -319,6 +346,18 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
     locales = try container.decodeIfPresent([String: LocaleOverlay].self, forKey: .locales)
   }
 
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(version, forKey: .version)
+    try container.encodeIfPresent(sourceLanguage, forKey: .sourceLanguage)
+    try container.encode(elements, forKey: .elements)
+    try container.encode(attractions, forKey: .attractions)
+    try container.encode(relations, forKey: .relations)
+    try container.encode(introductions, forKey: .introductions)
+    try container.encode(themes, forKey: .themes)
+    try container.encodeIfPresent(locales, forKey: .locales)
+  }
+
   /// Stamps `contentRole` from attractions membership when the field is absent.
   func withStampedContentRoles() -> KnowledgePack {
     let attractionKeys = Set(attractions.map(\.key))
@@ -342,12 +381,17 @@ nonisolated struct KnowledgePack: Decodable, Sendable {
 // MARK: - Sidecar file shapes
 
 /// Sight elements + scannable attraction registry (`elements-sight.json`).
-nonisolated struct KnowledgePackSightSidecar: Decodable, Sendable {
+nonisolated struct KnowledgePackSightSidecar: Codable, Sendable {
   let elements: [KnowledgePack.Element]
   let attractions: [KnowledgePack.Attraction]
 
   enum CodingKeys: String, CodingKey {
     case elements, attractions
+  }
+
+  init(elements: [KnowledgePack.Element], attractions: [KnowledgePack.Attraction]) {
+    self.elements = elements
+    self.attractions = attractions
   }
 
   init(from decoder: Decoder) throws {
@@ -359,8 +403,12 @@ nonisolated struct KnowledgePackSightSidecar: Decodable, Sendable {
 }
 
 /// Abstract cultural-history elements (`elements-history.json`).
-nonisolated struct KnowledgePackHistorySidecar: Decodable, Sendable {
+nonisolated struct KnowledgePackHistorySidecar: Codable, Sendable {
   let elements: [KnowledgePack.Element]
+
+  init(elements: [KnowledgePack.Element]) {
+    self.elements = elements
+  }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -372,8 +420,12 @@ nonisolated struct KnowledgePackHistorySidecar: Decodable, Sendable {
   }
 }
 
-nonisolated struct KnowledgePackIntroductionsSidecar: Decodable, Sendable {
+nonisolated struct KnowledgePackIntroductionsSidecar: Codable, Sendable {
   let introductions: [KnowledgePack.IntroductionRecord]
+
+  init(introductions: [KnowledgePack.IntroductionRecord]) {
+    self.introductions = introductions
+  }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -387,8 +439,12 @@ nonisolated struct KnowledgePackIntroductionsSidecar: Decodable, Sendable {
   }
 }
 
-nonisolated struct KnowledgePackThemesSidecar: Decodable, Sendable {
+nonisolated struct KnowledgePackThemesSidecar: Codable, Sendable {
   let themes: [KnowledgePack.Theme]
+
+  init(themes: [KnowledgePack.Theme]) {
+    self.themes = themes
+  }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)

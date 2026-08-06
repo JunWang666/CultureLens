@@ -245,6 +245,14 @@ struct AppRootView: View {
             ThemeDetailView(themeKey: key)
         case .settings:
             SettingsView(showsBackButton: true)
+        case .packEditor:
+            PackEditorHomeView()
+        case .packEditorDraft(let id):
+            if let draft = KnowledgePackDraftStore.shared.draft(id: id) {
+                PackEditorWorkspaceView(draft: draft)
+            } else {
+                ContentUnavailableView("草稿不存在", systemImage: "doc.badge.ellipsis")
+            }
         }
     }
 

@@ -489,8 +489,8 @@ final class PCMStreamPlayer {
     }
 
     pendingBuffers += 1
-    playerNode.scheduleBuffer(buffer) { [weak self] in
-      Task { @MainActor in
+    playerNode.scheduleBuffer(buffer) {
+      Task { @MainActor [weak self] in
         self?.bufferDidComplete()
       }
     }

@@ -118,7 +118,7 @@ struct UserKnowledgeGraphView: View {
             }
         }
         .sheet(isPresented: $isCenterPickerPresented) {
-            if let renderState {
+            if renderState != nil {
                 CenterPickerSheet(
                     snapshot: liveSnapshotBinding,
                     selectedCenterIDs: $selectedCenterIDs,

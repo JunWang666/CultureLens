@@ -20,7 +20,7 @@ nonisolated struct ImagePackResource: Identifiable, Sendable, Equatable {
 }
 
 /// Maps public R2 image URLs onto files inside `Resources/images/`.
-enum ImagePackPathMapping {
+nonisolated enum ImagePackPathMapping {
   static let host = "culturelens.goudaijun.top"
   static let pathPrefix = "/images/"
 

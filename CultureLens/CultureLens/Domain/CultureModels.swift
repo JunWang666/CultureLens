@@ -89,7 +89,7 @@ nonisolated struct CultureObject: Identifiable, Hashable {
   var sources: [KnowledgeSource]
 }
 
-extension CultureObject: Codable {
+nonisolated extension CultureObject: Codable {
   enum CodingKeys: String, CodingKey {
     case id
     case culturalElementID
@@ -343,7 +343,7 @@ nonisolated struct RecognitionCandidate: Identifiable, Hashable, Sendable {
   }
 }
 
-extension RecognitionCandidate: Codable {
+nonisolated extension RecognitionCandidate: Codable {
   enum CodingKeys: String, CodingKey {
     case id
     case attractionID
@@ -497,7 +497,7 @@ nonisolated struct RecognitionResult: Identifiable, Codable, Hashable, Sendable 
 
 /// `visualTags` was introduced after scan-history snapshots had already
 /// shipped. Old snapshots intentionally decode to a regular unresolved result.
-extension RecognitionResult {
+nonisolated extension RecognitionResult {
   enum CodingKeys: String, CodingKey {
     case id
     case object

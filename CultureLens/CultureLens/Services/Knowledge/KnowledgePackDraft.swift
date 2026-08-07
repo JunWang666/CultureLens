@@ -175,7 +175,7 @@ final class KnowledgePackDraft: Identifiable {
 
 // MARK: - Editable rows
 
-struct EditableElement: Identifiable, Hashable, Sendable {
+nonisolated struct EditableElement: Identifiable, Hashable, Sendable {
   var id: UUID
   var key: String
   var name: String
@@ -226,7 +226,7 @@ struct EditableElement: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableAttraction: Identifiable, Hashable, Sendable {
+nonisolated struct EditableAttraction: Identifiable, Hashable, Sendable {
   var id: UUID
   var key: String
   var name: String
@@ -249,7 +249,7 @@ struct EditableAttraction: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableRelation: Identifiable, Hashable, Sendable {
+nonisolated struct EditableRelation: Identifiable, Hashable, Sendable {
   var id: UUID
   var elementKey: String
   var relatedElementKey: String
@@ -290,7 +290,7 @@ struct EditableRelation: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableIntroduction: Identifiable, Hashable, Sendable {
+nonisolated struct EditableIntroduction: Identifiable, Hashable, Sendable {
   var id: UUID
   var key: String
   var name: String
@@ -357,7 +357,7 @@ struct EditableIntroduction: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableTheme: Identifiable, Hashable, Sendable {
+nonisolated struct EditableTheme: Identifiable, Hashable, Sendable {
   var id: UUID
   var key: String
   var name: String
@@ -408,7 +408,7 @@ struct EditableTheme: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableSource: Identifiable, Hashable, Sendable {
+nonisolated struct EditableSource: Identifiable, Hashable, Sendable {
   var id: UUID
   var title: String
   var publisher: String
@@ -437,7 +437,7 @@ struct EditableSource: Identifiable, Hashable, Sendable {
   }
 }
 
-struct EditableLocaleElement: Identifiable, Hashable, Sendable {
+nonisolated struct EditableLocaleElement: Identifiable, Hashable, Sendable {
   var id: UUID
   var key: String
   var name: String
@@ -453,9 +453,9 @@ struct EditableLocaleElement: Identifiable, Hashable, Sendable {
 
 // MARK: - Rich text helpers for the editor
 
-enum RichTextEditing {
+nonisolated enum RichTextEditing {
   /// Paragraphs separated by blank lines; lines starting with `![](` become image blocks.
-  nonisolated static func document(fromPlainText text: String) -> RichTextDocument {
+  static func document(fromPlainText text: String) -> RichTextDocument {
     let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
     guard !trimmed.isEmpty else {
       return RichTextDocument(schemaVersion: 1, blocks: [])
@@ -474,7 +474,7 @@ enum RichTextEditing {
     return RichTextDocument(schemaVersion: 1, blocks: blocks)
   }
 
-  nonisolated static func plainText(from document: RichTextDocument) -> String {
+  static func plainText(from document: RichTextDocument) -> String {
     document.blocks.compactMap { block -> String? in
       switch block.type {
       case "image":
@@ -490,7 +490,7 @@ enum RichTextEditing {
     .joined(separator: "\n\n")
   }
 
-  nonisolated private static func parseImageMarkdown(_ line: String) -> RichTextDocument.Block? {
+  private static func parseImageMarkdown(_ line: String) -> RichTextDocument.Block? {
     // ![caption](https://...)
     guard line.hasPrefix("!["), let closeBracket = line.firstIndex(of: "]"),
       line[line.index(after: closeBracket)...].hasPrefix("("),

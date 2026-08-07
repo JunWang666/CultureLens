@@ -1,3 +1,4 @@
+import MapKit
 import SwiftUI
 
 struct PackElementEditorView: View {
@@ -105,6 +106,7 @@ struct PackRelationEditorView: View {
 
 struct PackIntroductionEditorView: View {
   @Binding var introduction: EditableIntroduction
+  @State private var showsLocationPicker = false
 
   var body: some View {
     Form {
@@ -119,20 +121,110 @@ struct PackIntroductionEditorView: View {
         TextField("culturalElementKey", text: $introduction.culturalElementKey)
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
+      }
+
+      Section {
+        if let coordinate = previewCoordinate {
+          PackIntroductionCoordinatePreview(coordinate: coordinate, title: previewTitle)
+            .id("\(coordinate.latitude),\(coordinate.longitude)")
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .listRowBackground(Color.clear)
+        }
+
         TextField("纬度", text: $introduction.latitude)
-          .keyboardType(.decimalPad)
+          .keyboardType(.numbersAndPunctuation)
+          .textInputAutocapitalization(.never)
+          .autocorrectionDisabled()
         TextField("经度", text: $introduction.longitude)
-          .keyboardType(.decimalPad)
+          .keyboardType(.numbersAndPunctuation)
+          .textInputAutocapitalization(.never)
+          .autocorrectionDisabled()
         TextField("坐标来源 URL", text: $introduction.coordinateSourceUrl)
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
+
+        Button {
+          showsLocationPicker = true
+        } label: {
+          Label("在地图上选择", systemImage: "map")
+        }
+        .accessibilityIdentifier("packEditor.introduction.pickLocation")
+      } header: {
+        Text("位置")
+      } footer: {
+        Text("可在地图上搜索或拖动选点；确认后写入经纬度。若坐标来源为空，会填入 Apple 地图链接。")
       }
+
       Section("介绍正文") {
         TextEditor(text: $introduction.introductionText)
           .frame(minHeight: 160)
       }
     }
     .cultureNavigationTitle("编辑介绍")
+    .sheet(isPresented: $showsLocationPicker) {
+      PackLocationPickerView(
+        initialLatitudeText: introduction.latitude,
+        initialLongitudeText: introduction.longitude
+      ) { latitude, longitude, appleMapsURL in
+        introduction.latitude = latitude
+        introduction.longitude = longitude
+        if introduction.coordinateSourceUrl
+          .trimmingCharacters(in: .whitespacesAndNewlines)
+          .isEmpty
+        {
+          introduction.coordinateSourceUrl = appleMapsURL
+        }
+      }
+    }
+  }
+
+  private var previewCoordinate: CLLocationCoordinate2D? {
+    guard let coordinate = PackCoordinateFormatting.coordinate(
+      latitudeText: introduction.latitude,
+      longitudeText: introduction.longitude
+    ), !PackCoordinateFormatting.isUnsetOrigin(
+      latitude: coordinate.latitude,
+      longitude: coordinate.longitude
+    ) else { return nil }
+    return coordinate
+  }
+
+  private var previewTitle: String {
+    let name = introduction.name.trimmingCharacters(in: .whitespacesAndNewlines)
+    return name.isEmpty ? String(localized: "现场位置") : name
+  }
+}
+
+private struct PackIntroductionCoordinatePreview: View {
+  let coordinate: CLLocationCoordinate2D
+  let title: String
+
+  @State private var mapPosition: MapCameraPosition
+
+  init(coordinate: CLLocationCoordinate2D, title: String) {
+    self.coordinate = coordinate
+    self.title = title
+    _mapPosition = State(
+      initialValue: .region(
+        MKCoordinateRegion(
+          center: coordinate,
+          latitudinalMeters: 800,
+          longitudinalMeters: 800
+        )
+      )
+    )
+  }
+
+  var body: some View {
+    Map(position: $mapPosition) {
+      Marker(title, systemImage: "mappin.circle.fill", coordinate: coordinate)
+        .tint(CultureTheme.cinnabar)
+    }
+    .mapStyle(.standard(elevation: .realistic))
+    .frame(height: 160)
+    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+    .allowsHitTesting(false)
+    .accessibilityLabel(Text("位置预览：\(title)"))
   }
 }
 

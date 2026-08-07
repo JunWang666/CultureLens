@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 2026-08-07 知识包编辑器介绍表单接入 MapKit 选位置：中心钉拖图选点、地点搜索、定位到我；确认后写回经纬度，空 `coordinateSourceUrl` 自动填 Apple Maps 链接；有效坐标显示只读预览。设计见 `design/0026-pack-editor-mapkit-location-picker.md`；坐标解析单测已补。
 - 2026-08-06 多语言扩展日语 / 俄语：`AppLanguage` 与设置语言偏好增加 `ja` / `ru`；`Localizable.xcstrings` 补齐静态 UI 译文；`PromptLanguagePolicy` / 引用解析 / TTS 语音 / 枚举展示名支持目标语言；知识包正文仍不打包日俄译文，详情与缺 overlay 文案继续走 `KnowledgeTranslationService` 即时翻译。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
 - 2026-08-06 补齐知识库即时翻译漏网：附近看点、文化系列表/详情、地图兴趣点、图谱摘要/中心选择、分享卡摘要、抽象阶梯、关系说明与知识节点导航标题等原先直接展示中文包文案的位置，统一接入 `LocalizedPackText` / `KnowledgeTranslationService`；`localizedName`/`localizedText`/`localizedNameAndText` 优先读 pack locale overlay，避免英文区域包已有译文仍走 LLM。见 `design/0005-i18n-and-knowledge-locale-fallback.md`。
 - 2026-08-07 文化回顾：详情主图自动取介绍富文本第一张图；iPad 横屏改 `SplitDetailLayout`；支持整页分享（LLM 写介绍词 + 杂志风 PNG）；详情刊头同步展示同一介绍词（本地模板先占位，缓存命中或生成后替换）；设置新增 Seedream 封面生成开关（默认关，仅无介绍主图时调用）。见 `design/0025-culture-review-hero-and-share.md`。

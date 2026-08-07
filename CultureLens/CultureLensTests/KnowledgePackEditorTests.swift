@@ -1,3 +1,4 @@
+import CoreLocation
 import Foundation
 import Testing
 @testable import CultureLens
@@ -140,6 +141,42 @@ struct KnowledgePackEditorTests {
     #expect(pack.attractions.compactMap(\.key) == ["tower"])
     #expect(pack.attractions.first?.name == "塔")
     #expect(pack.elements.count == 2)
+  }
+
+  @Test func coordinateFormattingParsesAndFormats() {
+    #expect(PackCoordinateFormatting.parse(" 30.242500 ") == 30.2425)
+    #expect(PackCoordinateFormatting.parse("") == nil)
+    #expect(PackCoordinateFormatting.parse("abc") == nil)
+    #expect(PackCoordinateFormatting.format(30.2425) == "30.242500")
+    #expect(PackCoordinateFormatting.isValid(latitude: 30.24, longitude: 120.14))
+    #expect(!PackCoordinateFormatting.isValid(latitude: 91, longitude: 120))
+    #expect(PackCoordinateFormatting.isUnsetOrigin(latitude: 0, longitude: 0))
+    #expect(!PackCoordinateFormatting.isUnsetOrigin(latitude: 30.24, longitude: 120.14))
+  }
+
+  @Test func coordinateFormattingInitialAndAppleMapsURL() {
+    let fromDraft = PackCoordinateFormatting.initialCoordinate(
+      latitudeText: "30.25",
+      longitudeText: "120.15"
+    )
+    #expect(abs(fromDraft.latitude - 30.25) < 0.000_001)
+    #expect(abs(fromDraft.longitude - 120.15) < 0.000_001)
+
+    let unset = PackCoordinateFormatting.initialCoordinate(
+      latitudeText: "0",
+      longitudeText: "0"
+    )
+    #expect(abs(unset.latitude - PackCoordinateFormatting.defaultEditorCoordinate.latitude) < 0.000_001)
+    #expect(abs(unset.longitude - PackCoordinateFormatting.defaultEditorCoordinate.longitude) < 0.000_001)
+
+    #expect(
+      PackCoordinateFormatting.coordinate(latitudeText: "bad", longitudeText: "120") == nil
+    )
+
+    #expect(
+      PackCoordinateFormatting.appleMapsURL(latitude: 30.2425, longitude: 120.1483)
+        == "https://maps.apple.com/?ll=30.242500,120.148300"
+    )
   }
 
   private func samplePack() -> KnowledgePack {

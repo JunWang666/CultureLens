@@ -566,11 +566,16 @@ struct UserKnowledgeGraphView: View {
             }
 
             if !node.summary.isEmpty {
-                Text(node.summary)
-                    .font(CultureTypography.body(.subheadline))
-                    .foregroundStyle(CultureTheme.inkSecondary)
-                    .lineLimit(4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                LocalizedPackText(
+                    source: node.summary,
+                    cacheNamespace: "element",
+                    cacheKey: node.elementKey,
+                    kind: .fragment
+                )
+                .font(CultureTypography.body(.subheadline))
+                .foregroundStyle(CultureTheme.inkSecondary)
+                .lineLimit(4)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             HStack(spacing: 10) {
@@ -1092,7 +1097,12 @@ private struct CenterPickerSheet: View {
             onToggle(node.id)
         } label: {
             HStack {
-                Label(node.name, systemImage: node.kind.systemImage)
+                Image(systemName: node.kind.systemImage)
+                LocalizedPackText(
+                    source: node.name,
+                    cacheNamespace: "element",
+                    cacheKey: node.elementKey
+                )
                 Spacer()
                 if effectiveCenterIDs.contains(node.id) {
                     Image(systemName: "checkmark.circle.fill")

@@ -65,11 +65,16 @@ struct ThemeExploreListView: View {
   }
 
   private func themeRow(_ progress: ThemeProgress) -> some View {
-    VStack(alignment: .leading, spacing: 12) {
+    let themeKey = progress.theme.key ?? progress.theme.id.uuidString.lowercased()
+    return VStack(alignment: .leading, spacing: 12) {
       HStack(alignment: .firstTextBaseline) {
-        Text(progress.theme.name)
-          .font(CultureTypography.title(.title3))
-          .foregroundStyle(CultureTheme.inkPrimary)
+        LocalizedPackText(
+          source: progress.theme.name,
+          cacheNamespace: "theme",
+          cacheKey: themeKey
+        )
+        .font(CultureTypography.title(.title3))
+        .foregroundStyle(CultureTheme.inkPrimary)
         Spacer()
         Text(progress.statusText)
           .font(.caption.weight(.semibold))
@@ -78,10 +83,15 @@ struct ThemeExploreListView: View {
           )
       }
 
-      Text(progress.theme.summary)
-        .font(CultureTypography.body(.subheadline))
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .lineLimit(3)
+      LocalizedPackText(
+        source: progress.theme.summary,
+        cacheNamespace: "theme",
+        cacheKey: themeKey,
+        kind: .fragment
+      )
+      .font(CultureTypography.body(.subheadline))
+      .foregroundStyle(CultureTheme.inkSecondary)
+      .lineLimit(3)
 
       ThinProgressRule(fraction: progress.fractionComplete)
 
@@ -101,4 +111,5 @@ struct ThemeExploreListView: View {
     ThemeExploreListView()
   }
   .environment(KnowledgeProgressStore())
+  .environment(AppLanguageStore())
 }

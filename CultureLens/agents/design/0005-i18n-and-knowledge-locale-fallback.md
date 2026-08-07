@@ -52,6 +52,8 @@ CultureLens 原为简体中文单语：UI 字符串硬编码、知识包仅为�
 
 `LocalizedKnowledgeBlocksView` 在对象 / 概念详情中按上述顺序加载介绍；翻译中显示轻量状态。
 
+列表与其它知识展示入口（附近看点、文化系、地图兴趣点、用户图谱摘要、分享卡摘要等）经 `LocalizedPackText` 走同一服务；`KnowledgeTranslationService.localizedName` / `localizedText` / `localizedNameAndText` 在发起 `dynamic/chat` 前先查 pack overlay。
+
 ## 非目标
 
 - 不把 enum `rawValue` 改成英文（避免破坏已存 SwiftData / 历史快照）

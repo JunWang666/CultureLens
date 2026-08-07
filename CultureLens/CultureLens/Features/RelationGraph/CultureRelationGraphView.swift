@@ -650,10 +650,15 @@ struct CultureRelationGraphView: View {
       }
       .foregroundStyle(CultureTheme.inkPrimary)
 
-      Text(relation.explanation)
-        .font(CultureTypography.body(.subheadline))
-        .foregroundStyle(CultureTheme.inkSecondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
+      LocalizedPackText(
+        source: relation.explanation,
+        cacheNamespace: "relation.explanation",
+        cacheKey: relation.id.uuidString.lowercased(),
+        kind: .fragment
+      )
+      .font(CultureTypography.body(.subheadline))
+      .foregroundStyle(CultureTheme.inkSecondary)
+      .frame(maxWidth: .infinity, alignment: .leading)
     }
     .padding(16)
     .background(CultureTheme.surface, in: RoundedRectangle(cornerRadius: 18))

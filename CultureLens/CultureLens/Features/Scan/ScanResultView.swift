@@ -17,6 +17,8 @@ struct ScanResultView: View {
 
   @Environment(\.modelContext) private var modelContext
   @Environment(KnowledgeProgressStore.self) private var knowledgeProgressStore
+  @Environment(AppLanguageStore.self) private var languageStore
+  @State private var resolvedKnowledgeTitle: String?
 
   private var isAttractionCandidate: Bool {
     candidate?.resolutionStatus == "attraction"
@@ -253,6 +255,11 @@ struct ScanResultView: View {
     .task(id: session.id) {
       autoSaveIfNeeded()
     }
+    .task(
+      id: "knowledgeTitle|\(objectElementKey ?? "")|\(languageStore.language.rawValue)|\(presentation)"
+    ) {
+      await reloadKnowledgeNavigationTitle()
+    }
   }
 
   private var navigationTitle: LocalizedStringKey {
@@ -260,10 +267,30 @@ struct ScanResultView: View {
     if showsFreeformVisualTags { return "画面观察" }
     switch presentation {
     case .knowledge:
-      return LocalizedStringKey(object.canonicalName)
+      return LocalizedStringKey(resolvedKnowledgeTitle ?? object.canonicalName)
     case .scan, .history:
       return "扫描结果"
     }
+  }
+
+  @MainActor
+  private func reloadKnowledgeNavigationTitle() async {
+    resolvedKnowledgeTitle = nil
+    guard presentation == .knowledge else { return }
+    if languageStore.language.isKnowledgeSource {
+      resolvedKnowledgeTitle = object.canonicalName
+      return
+    }
+    guard let cacheKey = objectElementKey else {
+      resolvedKnowledgeTitle = object.canonicalName
+      return
+    }
+    resolvedKnowledgeTitle = await KnowledgeTranslationService.shared.localizedName(
+      cacheNamespace: "element",
+      key: cacheKey,
+      sourceName: object.canonicalName,
+      language: languageStore.language
+    )
   }
 
   /// 只固定高度时 scaledToFill 会把图片撑得比栏宽更宽（frame 跟随图片实际

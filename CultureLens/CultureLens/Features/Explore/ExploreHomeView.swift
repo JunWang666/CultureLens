@@ -513,10 +513,14 @@ struct ExploreHomeView: View {
           NavigationLink(value: AppRoute.theme(progress.theme.sortKey)) {
             VStack(alignment: .leading, spacing: 8) {
               HStack(alignment: .firstTextBaseline) {
-                Text(progress.theme.name)
-                  .font(CultureTypography.title(.headline))
-                  .foregroundStyle(CultureTheme.inkPrimary)
-                  .lineLimit(1)
+                LocalizedPackText(
+                  source: progress.theme.name,
+                  cacheNamespace: "theme",
+                  cacheKey: progress.theme.key ?? progress.theme.id.uuidString.lowercased()
+                )
+                .font(CultureTypography.title(.headline))
+                .foregroundStyle(CultureTheme.inkPrimary)
+                .lineLimit(1)
                 Spacer(minLength: 8)
                 Text(progress.statusText)
                   .font(.caption.monospacedDigit())
@@ -745,11 +749,15 @@ private struct CulturalSeriesSeal: View {
       }
       .frame(width: 54, height: 54)
 
-      Text(progress.theme.name)
-        .font(CultureTypography.body(.subheadline))
-        .foregroundStyle(Color.white)
-        .lineLimit(2)
-        .frame(height: 38, alignment: .topLeading)
+      LocalizedPackText(
+        source: progress.theme.name,
+        cacheNamespace: "theme",
+        cacheKey: progress.theme.key ?? progress.theme.id.uuidString.lowercased()
+      )
+      .font(CultureTypography.body(.subheadline))
+      .foregroundStyle(Color.white)
+      .lineLimit(2)
+      .frame(height: 38, alignment: .topLeading)
 
       Text(progress.isComplete ? "已点亮" : "\(progress.contactedCount)/\(progress.requiredCount)")
         .font(.caption2.monospacedDigit().weight(.semibold))
@@ -989,9 +997,13 @@ private struct NearbyEditorialRow: View {
         HStack(alignment: .top, spacing: 14) {
           VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
-              Text(recommendation.name)
-                .font(CultureTypography.title(.title3))
-                .foregroundStyle(CultureTheme.inkPrimary)
+              LocalizedPackText(
+                source: recommendation.name,
+                cacheNamespace: "introduction",
+                cacheKey: recommendation.key
+              )
+              .font(CultureTypography.title(.title3))
+              .foregroundStyle(CultureTheme.inkPrimary)
               Spacer(minLength: 12)
               if isVisited {
                 SealBadge(character: "访", size: 22)
@@ -1002,9 +1014,22 @@ private struct NearbyEditorialRow: View {
                 .foregroundStyle(CultureTheme.cinnabar)
             }
 
-            Text("\(recommendation.attraction.name) · \(recommendation.culturalElement.name)")
-              .font(.caption)
-              .foregroundStyle(CultureTheme.inkSecondary)
+            HStack(spacing: 4) {
+              LocalizedPackText(
+                source: recommendation.attraction.name,
+                cacheNamespace: "attraction",
+                cacheKey: recommendation.attraction.key
+              )
+              Text(verbatim: "·")
+                .accessibilityHidden(true)
+              LocalizedPackText(
+                source: recommendation.culturalElement.name,
+                cacheNamespace: "element",
+                cacheKey: recommendation.culturalElement.key
+              )
+            }
+            .font(.caption)
+            .foregroundStyle(CultureTheme.inkSecondary)
           }
 
           if let thumbnailURL {
@@ -1021,11 +1046,16 @@ private struct NearbyEditorialRow: View {
           }
         }
 
-        Text(recommendation.introduction.plainText)
-          .font(CultureTypography.body(.subheadline))
-          .foregroundStyle(CultureTheme.inkSecondary)
-          .lineSpacing(3)
-          .lineLimit(3)
+        LocalizedPackText(
+          source: recommendation.introduction.plainText,
+          cacheNamespace: "introduction",
+          cacheKey: recommendation.key,
+          kind: .fragment
+        )
+        .font(CultureTypography.body(.subheadline))
+        .foregroundStyle(CultureTheme.inkSecondary)
+        .lineSpacing(3)
+        .lineLimit(3)
       }
     }
     .padding(.vertical, 14)

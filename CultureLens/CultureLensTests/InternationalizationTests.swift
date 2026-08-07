@@ -234,6 +234,120 @@ struct InternationalizationTests {
       localization.attractionName(key: "a1", language: .english)?.name == "Attraction One")
   }
 
+  @Test func translationServicePrefersBundledOverlayOverLiveTranslate() async throws {
+    let json = """
+      {
+        "version": "test-overlay-v1",
+        "source_language": "zh-Hans",
+        "elements": [
+          {
+            "key": "e1",
+            "name": "元素一",
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "中文介绍" }]
+            }
+          }
+        ],
+        "attractions": [{ "key": "a1", "name": "景点一" }],
+        "relations": [],
+        "introductions": [
+          {
+            "key": "i1",
+            "name": "现场介绍",
+            "culturalElementKey": "e1",
+            "attractionKey": "a1",
+            "latitude": 30.2,
+            "longitude": 120.1,
+            "introduction": {
+              "schemaVersion": 1,
+              "blocks": [{ "type": "paragraph", "text": "现场正文" }]
+            }
+          }
+        ],
+        "locales": {
+          "en": {
+            "elements": {
+              "e1": {
+                "name": "Element One",
+                "introduction": {
+                  "schemaVersion": 1,
+                  "blocks": [{ "type": "paragraph", "text": "English intro" }]
+                }
+              }
+            },
+            "attractions": {
+              "a1": { "name": "Attraction One" }
+            },
+            "introductions": {
+              "i1": {
+                "name": "On-site Intro",
+                "introduction": {
+                  "schemaVersion": 1,
+                  "blocks": [{ "type": "paragraph", "text": "On-site body" }]
+                }
+              }
+            }
+          }
+        }
+      }
+      """.data(using: .utf8)!
+    let pack = try JSONDecoder().decode(KnowledgePack.self, from: json)
+    let previous = KnowledgeStore.shared
+    KnowledgeStore.installShared(KnowledgeStore(pack: pack))
+    defer {
+      if let previous {
+        KnowledgeStore.installShared(previous)
+      }
+    }
+
+    // nil gateway: overlay must satisfy the lookup without a network call.
+    let service = KnowledgeTranslationService(gatewayClient: nil)
+    let elementName = await service.localizedName(
+      cacheNamespace: "element",
+      key: "e1",
+      sourceName: "元素一",
+      language: .english
+    )
+    #expect(elementName == "Element One")
+
+    let elementText = await service.localizedText(
+      cacheNamespace: "element",
+      key: "e1",
+      sourceText: "中文介绍",
+      language: .english
+    )
+    #expect(elementText == "English intro")
+
+    let attractionName = await service.localizedName(
+      cacheNamespace: "attraction",
+      key: "a1",
+      sourceName: "景点一",
+      language: .english
+    )
+    #expect(attractionName == "Attraction One")
+
+    let intro = await service.localizedNameAndText(
+      cacheNamespace: "introduction",
+      key: "i1",
+      sourceName: "现场介绍",
+      sourceText: "现场正文",
+      language: .english
+    )
+    #expect(intro.name == "On-site Intro")
+    #expect(intro.text == "On-site body")
+
+    // Theme / recognition namespaces have no pack overlay; without a gateway
+    // they must fall back to the source rather than inventing a translation.
+    let themeName = await service.localizedName(
+      cacheNamespace: "theme",
+      key: "moon",
+      sourceName: "月影系列",
+      language: .english
+    )
+    #expect(themeName == "月影系列")
+  }
+
   @Test func bundledKnowledgePackExposesMultilingualSchema() async throws {
     let store = try #require(await KnowledgePackLoader.shared.store(fallback: nil))
     #expect(store.pack.sourceLanguage == "zh-Hans" || store.pack.sourceLanguage == nil)
